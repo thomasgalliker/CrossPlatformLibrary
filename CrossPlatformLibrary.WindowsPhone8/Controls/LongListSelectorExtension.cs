@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 using Microsoft.Phone.Controls;
 
-namespace CrossPlatformLibrary.Microsoft.Phone.Controls
+namespace CrossPlatformLibrary.Controls
 {
     public static class LongListSelectorExtension
     {
