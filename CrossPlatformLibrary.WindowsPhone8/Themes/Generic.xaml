@@ -1,0 +1,31 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:Xamarin.Converters">
+
+    <converters:VisibilityInverter x:Key="VisibilityInverter" />
+
+    <!--These styles can be overriden by using CustomStylesInitilizer.OverrideStyles method-->
+    <SolidColorBrush x:Key="PhoneAccentBrushBright" Color="{StaticResource PhoneAccentColor}"/>
+    <SolidColorBrush x:Key="PhoneAccentBrushBrighter" Color="{StaticResource PhoneAccentColor}"/>
+    <SolidColorBrush x:Key="PhoneAccentBrushDark" Color="{StaticResource PhoneAccentColor}"/>
+    <SolidColorBrush x:Key="PhoneAccentBrushDarker" Color="{StaticResource PhoneAccentColor}"/>
+    
+    <!-- List divider style -->
+    <Style x:Key="ListDivider" TargetType="Rectangle">
+        <Setter Property="Height" Value="1" />
+        <Setter Property="Margin" Value="0,3,0,3" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Fill">
+            <Setter.Value>
+                <RadialGradientBrush>
+                    <GradientStopCollection>
+                        <GradientStop Color="Transparent" Offset="1.1" />
+                        <GradientStop Color="{StaticResource PhoneAccentColor}" Offset="0.5" />
+                    </GradientStopCollection>
+                </RadialGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
