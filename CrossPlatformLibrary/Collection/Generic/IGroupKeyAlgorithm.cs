@@ -1,5 +1,5 @@
 ﻿
-namespace CrossPlatformLibrary.System.Collection.Generic
+namespace CrossPlatformLibrary.Collection.Generic
 {
     public interface IGroupKeyAlgorithm
     {

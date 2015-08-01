@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-using CrossPlatformLibrary.Collection.Generic;
-
 using Microsoft.Phone.Globalization;
 
-namespace CrossPlatformLibrary.System.Collection.Generic
+namespace CrossPlatformLibrary.Collection.Generic
 {
     /// <summary>
     /// The group.

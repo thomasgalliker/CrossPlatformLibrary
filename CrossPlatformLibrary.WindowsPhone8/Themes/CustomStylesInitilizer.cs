@@ -4,7 +4,7 @@ using System.Windows.Media;
 using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Media;
 
-namespace Xamarin.Themes
+namespace CrossPlatformLibrary.Themes
 {
     public static class CustomStylesInitilizer
     {

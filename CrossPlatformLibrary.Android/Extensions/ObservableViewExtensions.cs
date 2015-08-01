@@ -1,10 +1,12 @@
+using System;
 using System.Collections.Generic;
 
 using Android.Views;
 
+using CrossPlatformLibrary.Adapters;
 using CrossPlatformLibrary.Collection.Generic;
 
-namespace System.Collection.Generic
+namespace CrossPlatformLibrary.Extensions
 {
     public static class ObservableViewExtensions
     {

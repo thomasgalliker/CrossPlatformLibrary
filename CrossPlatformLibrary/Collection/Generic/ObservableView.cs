@@ -8,9 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-using CrossPlatformLibrary.System;
-using CrossPlatformLibrary.System.Collection.Generic;
-using CrossPlatformLibrary.System.Linq;
+using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Tracing;
 
 namespace CrossPlatformLibrary.Collection.Generic

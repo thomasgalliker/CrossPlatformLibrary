@@ -35,14 +35,14 @@
     <DocumentationFile>bin\iPhone\Release\CrossPlatformLibrary.Platform.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\CrossPlatformLibrary.iOS\Controls\ObservableViewTableViewController.cs">
+      <Link>Controls\ObservableViewTableViewController.cs</Link>
+    </Compile>
     <Compile Include="..\CrossPlatformLibrary.iOS\Dispatching\DispatcherService.cs">
       <Link>Dispatching\DispatcherService.cs</Link>
     </Compile>
     <Compile Include="..\CrossPlatformLibrary.iOS\ExceptionHandling\PlatformSpecificExceptionHandler.cs">
       <Link>ExceptionHandling\PlatformSpecificExceptionHandler.cs</Link>
-    </Compile>
-    <Compile Include="..\CrossPlatformLibrary.iOS\System\ObservableViewTableViewController.cs">
-      <Link>System\ObservableViewTableViewController.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

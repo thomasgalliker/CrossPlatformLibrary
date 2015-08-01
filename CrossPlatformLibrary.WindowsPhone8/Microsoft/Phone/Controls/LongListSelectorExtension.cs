@@ -3,7 +3,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Microsoft.Phone.Controls
+using Microsoft.Phone.Controls;
+
+namespace CrossPlatformLibrary.Microsoft.Phone.Controls
 {
     public static class LongListSelectorExtension
     {

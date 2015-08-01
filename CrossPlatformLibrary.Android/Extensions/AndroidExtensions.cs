@@ -1,4 +1,3 @@
-
 using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
@@ -6,8 +5,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 
-
-namespace CrossPlatformLibrary.Droid.Extensions
+namespace CrossPlatformLibrary.Extensions
 {
     public static class AndroidExtensions
     {

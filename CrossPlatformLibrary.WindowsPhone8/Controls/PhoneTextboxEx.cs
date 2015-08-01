@@ -1,10 +1,11 @@
-﻿using System.Windows.Data;
+﻿using System;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
 
 using Microsoft.Phone.Controls;
 
-namespace System.Windows.Controls
+namespace CrossPlatformLibrary.Controls
 {
     /// <summary>
     ///     The delay text box.

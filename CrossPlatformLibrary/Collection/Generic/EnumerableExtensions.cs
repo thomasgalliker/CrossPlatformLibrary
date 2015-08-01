@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace CrossPlatformLibrary.System.Collection.Generic
+namespace CrossPlatformLibrary.Collection.Generic
 {
     public static class EnumerableExtensions
     {

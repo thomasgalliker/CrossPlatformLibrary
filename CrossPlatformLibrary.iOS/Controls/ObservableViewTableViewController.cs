@@ -1,11 +1,12 @@
-using CrossPlatformLibrary.Collection.Generic;
-
+using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
+
+using CrossPlatformLibrary.Collection.Generic;
 
 #if __UNIFIED__
 using Foundation;
@@ -15,7 +16,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 #endif
 
-namespace System.Collection.Generic
+namespace CrossPlatformLibrary.Controls
 {
     public class ObservableViewTableViewController<T> : UITableViewController, INotifyPropertyChanged
     {

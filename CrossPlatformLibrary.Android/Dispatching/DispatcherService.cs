@@ -2,10 +2,9 @@
 
 using Android.App;
 
-using CrossPlatformLibrary.Dispatching;
 using CrossPlatformLibrary.Utils;
 
-namespace Xamarin.Dispatching
+namespace CrossPlatformLibrary.Dispatching
 {
     public class DispatcherService : IDispatcherService
     {

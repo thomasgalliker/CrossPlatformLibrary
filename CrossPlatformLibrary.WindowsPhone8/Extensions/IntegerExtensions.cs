@@ -1,4 +1,4 @@
-﻿namespace System
+﻿namespace CrossPlatformLibrary.Extensions
 {
     public static class IntegerExtensions
     {

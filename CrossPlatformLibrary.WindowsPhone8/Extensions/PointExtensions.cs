@@ -1,4 +1,7 @@
-﻿namespace System.Windows
+﻿using System;
+using System.Windows;
+
+namespace CrossPlatformLibrary.Extensions
 {
     public static class PointExtensions
     {

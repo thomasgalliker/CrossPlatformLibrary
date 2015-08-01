@@ -1,9 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Threading;
 
-using CrossPlatformLibrary.Dispatching;
 using CrossPlatformLibrary.Utils;
 
 #if NETFX_CORE
@@ -16,7 +14,7 @@ using Windows.Foundation;
 #endif
 #endif
 
-namespace Xamarin.Dispatching
+namespace CrossPlatformLibrary.Dispatching
 {
     public class DispatcherService : IDispatcherService
     {

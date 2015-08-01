@@ -38,7 +38,7 @@
     <Compile Include="Dispatching\DispatcherService.cs" />
     <Compile Include="ExceptionHandling\PlatformSpecificExceptionHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="System\ObservableViewTableViewController.cs" />
+    <Compile Include="Controls\ObservableViewTableViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

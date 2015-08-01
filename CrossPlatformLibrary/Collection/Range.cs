@@ -2,7 +2,7 @@
 
 using System;
 
-namespace CrossPlatformLibrary.System.Collection
+namespace CrossPlatformLibrary.Collection
 {
     public class Range
     {

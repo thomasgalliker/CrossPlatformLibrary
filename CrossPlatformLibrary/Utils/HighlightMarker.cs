@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using CrossPlatformLibrary.System.Collection;
-using CrossPlatformLibrary.System.Collection.Generic;
+using CrossPlatformLibrary.Collection;
+using CrossPlatformLibrary.Collection.Generic;
+using CrossPlatformLibrary.Extensions;
 
-namespace CrossPlatformLibrary.System.Text
+namespace CrossPlatformLibrary.Utils
 {
     public class HighlightIndex
     {

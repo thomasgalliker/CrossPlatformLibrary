@@ -1,5 +1,7 @@
 ﻿
-namespace CrossPlatformLibrary.System.Collection.Generic
+using CrossPlatformLibrary.Extensions;
+
+namespace CrossPlatformLibrary.Collection.Generic
 {
     public class AlphaGroupKeyAlgorithm : IGroupKeyAlgorithm
     {

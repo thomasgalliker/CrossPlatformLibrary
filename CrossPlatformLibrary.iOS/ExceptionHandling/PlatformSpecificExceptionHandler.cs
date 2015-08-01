@@ -3,15 +3,15 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-using CrossPlatformLibrary.ExceptionHandling;
 using CrossPlatformLibrary.Utils;
+
 #if __UNIFIED__
 using Foundation;
 #else
 using MonoTouch.Foundation;
 #endif
 
-namespace Xamarin.ExceptionHandling
+namespace CrossPlatformLibrary.ExceptionHandling
 {
     public class PlatformSpecificExceptionHandler : IPlatformSpecificExceptionHandler
     {

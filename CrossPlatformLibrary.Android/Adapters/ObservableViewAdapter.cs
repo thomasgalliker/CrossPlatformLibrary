@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -8,7 +9,7 @@ using Android.Widget;
 
 using CrossPlatformLibrary.Collection.Generic;
 
-namespace System.Collection.Generic
+namespace CrossPlatformLibrary.Adapters
 {
     public class ObservableViewAdapter<T> : BaseAdapter<T>, ISectionIndexer
         where T : class

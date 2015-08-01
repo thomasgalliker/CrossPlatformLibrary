@@ -61,9 +61,9 @@
     <Compile Include="Collection\Generic\IGroupKeyAlgorithm.cs" />
     <Compile Include="Collection\Generic\ObservableView.cs" />
     <Compile Include="Collection\Range.cs" />
-    <Compile Include="System\Linq\ExpressionExtensions.cs" />
-    <Compile Include="System\StringExtensions.cs" />
-    <Compile Include="System\Text\HighlightMarker.cs" />
+    <Compile Include="Extensions\ExpressionExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Utils\HighlightMarker.cs" />
     <Compile Include="Tools\PlatformSpecific\IAdapterResolver.cs" />
     <Compile Include="Tools\PlatformSpecific\PlatformAdapter.cs" />
     <Compile Include="Tools\PlatformSpecific\ProbingAdapterResolver.cs" />

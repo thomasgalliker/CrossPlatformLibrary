@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace Xamarin.Converters
+namespace CrossPlatformLibrary.Converters
 {
     public class BoolToValueConverter<T> : IValueConverter
     {

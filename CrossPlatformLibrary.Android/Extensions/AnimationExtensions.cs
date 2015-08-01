@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Android.Animation;
 using Android.Views;
 
-namespace Xamarin.Extensions
+namespace CrossPlatformLibrary.Extensions
 {
     public static class AnimationExtensions
     {

@@ -1,14 +1,11 @@
-
-
-
 using Android.Graphics;
 using Android.Text;
 using Android.Text.Style;
 using Android.Widget;
 
-using CrossPlatformLibrary.System.Text;
+using CrossPlatformLibrary.Utils;
 
-namespace CrossPlatformLibrary.Droid.Extensions
+namespace CrossPlatformLibrary.Extensions
 {
     public static class TextViewExtensions
     {

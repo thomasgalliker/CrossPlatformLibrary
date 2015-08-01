@@ -1,16 +1,14 @@
-﻿
+﻿using System;
 
-using System;
-
-using CrossPlatformLibrary.Dispatching;
 using CrossPlatformLibrary.Utils;
+
 #if __UNIFIED__
 using Foundation;
 #else
 using MonoTouch.Foundation;
 #endif
 
-namespace Xamarin.Dispatching
+namespace CrossPlatformLibrary.Dispatching
 {
     public class DispatcherService : IDispatcherService
     {

@@ -3,10 +3,9 @@ using System.Threading;
 
 using Android.Runtime;
 
-using CrossPlatformLibrary.ExceptionHandling;
 using CrossPlatformLibrary.Utils;
 
-namespace Xamarin.ExceptionHandling
+namespace CrossPlatformLibrary.ExceptionHandling
 {
     public class PlatformSpecificExceptionHandler : IPlatformSpecificExceptionHandler
     {

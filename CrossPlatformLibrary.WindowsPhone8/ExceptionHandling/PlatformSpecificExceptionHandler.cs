@@ -1,10 +1,9 @@
 ﻿using System.Threading;
 using System.Windows;
 
-using CrossPlatformLibrary.ExceptionHandling;
 using CrossPlatformLibrary.Utils;
 
-namespace Xamarin.ExceptionHandling
+namespace CrossPlatformLibrary.ExceptionHandling
 {
     public class PlatformSpecificExceptionHandler : IPlatformSpecificExceptionHandler
     {

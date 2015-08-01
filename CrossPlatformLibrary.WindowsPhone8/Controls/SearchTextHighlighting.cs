@@ -1,10 +1,11 @@
-﻿using System.Text;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 
-using CrossPlatformLibrary.System.Text;
+using CrossPlatformLibrary.Utils;
 
-namespace System.Windows.Controls.Extensions
+namespace CrossPlatformLibrary.Controls
 {
     /// <summary>
     ///     The search hit highlighting.

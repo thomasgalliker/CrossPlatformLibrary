@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace CrossPlatformLibrary.System.Linq
+namespace CrossPlatformLibrary.Extensions
 {
     public static class ExpressionExtensions
     {
