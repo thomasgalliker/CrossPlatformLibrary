@@ -75,9 +75,9 @@ namespace CrossPlatformLibrary.Tools.PlatformSpecific
 
         private static string MakeAdapterTypeName(Type interfaceType) // TODO GATH: Refactor: Find types which implement interfaceType
         {
-            Debug.Assert(interfaceType.GetTypeInfo().IsInterface);
-            Debug.Assert(interfaceType.DeclaringType == null);
-            Debug.Assert(interfaceType.Name.StartsWith("I", StringComparison.Ordinal));
+            Guard.ArgumentIsTrue(() => interfaceType.GetTypeInfo().IsInterface);
+            Guard.ArgumentIsTrue(() => interfaceType.DeclaringType == null);
+            Guard.ArgumentIsTrue(() => interfaceType.Name.StartsWith("I", StringComparison.Ordinal));
 
             // For example, if we're looking for an implementation of System.Security.Cryptography.ICryptographyFactory, 
             // then we'll look for System.Security.Cryptography.CryptographyFactory

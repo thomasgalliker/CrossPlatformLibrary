@@ -7,7 +7,8 @@ namespace CrossPlatformLibrary.Tools.PlatformSpecific
     /// <summary>
     ///     Enables types within PclContrib to use platform-specific features in a platform-agnostic way
     /// </summary>
-    public static class PlatformAdapter // TODO GATH: Change to singleton! Make it more configurable
+    // TODO GATH: Extract to another PCL-nuget project and reuse in MetroLog project
+    public static class PlatformAdapter 
     {
         private static readonly ITracer tracer = Tracer.Create(typeof(PlatformAdapter));
         private static IAdapterResolver adapterResolver = new ProbingAdapterResolver();
@@ -19,8 +20,9 @@ namespace CrossPlatformLibrary.Tools.PlatformSpecific
 
             if (value == null && throwIfNotFound)
             {
-                tracer.Error("PlatformNotSupportedException: Type {0} not found", typeof(T).FullName);
-                throw new PlatformNotSupportedException("AdapterNotSupported");
+                string errorMessage = string.Format("PlatformNotSupportedException: Type {0} could not be resolved.", typeof(T).FullName);
+                tracer.Error(errorMessage);
+                throw new PlatformNotSupportedException(errorMessage);
             }
 
             return value;

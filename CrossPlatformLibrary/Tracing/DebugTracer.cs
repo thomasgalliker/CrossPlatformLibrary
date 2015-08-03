@@ -3,6 +3,10 @@ using System.Diagnostics;
 
 namespace CrossPlatformLibrary.Tracing
 {
+    /// <summary>
+    /// DebugTracer is a tracer instance which writes trace entries to the
+    /// trace listeners in the <see cref="P:System.Diagnostics.Debug.Listeners"/> collection.
+    /// </summary>
     public class DebugTracer : TracerBase
     {
         protected override void WriteCore(TraceEntry entry)

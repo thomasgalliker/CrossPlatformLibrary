@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>CrossPlatformLibrary</id>
-    <version>1.0.13-alpha</version>
+    <version>1.0.15-alpha</version>
     <title>CrossPlatformLibrary</title>
     <authors>Thomas Galliker</authors>
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
@@ -10,7 +10,13 @@
     <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>CrossPlatformLibrary is an extensible toolkit which provides a basic set of functionality used in most mobile apps.</summary>
-    <description>CrossPlatformLibrary is an extensible toolkit which provides a basic set of functionality used in most mobile apps such as bootstrapping, exception handling, tracing and UI dispatching.</description>
+    <description>
+      CrossPlatformLibrary is an extensible toolkit which provides a basic set of functionality used in most mobile apps such as bootstrapping, exception handling, tracing and UI dispatching.
+      
+      - Added ActionTracer to forward trace writes to an action
+      - Added new Guard.ArgumentIsTrue
+    
+    </description>
     <tags>
       xamarin pcl CrossPlatformLibrary cross-platform library bootstrapping dispatching tracing exception handling mobile
       windows phone winphone wp8 windowsphone android xamarin.forms xamarin.ios ios monoandroid monodroid monotouch mvvmcross mvvmlight

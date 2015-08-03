@@ -29,11 +29,13 @@ namespace CrossPlatformLibrary.Utils
             }
         }
 
-        public static void NotNull<T>(T value, string message)
+        public static void ArgumentIsTrue(Expression<Func<bool>> expression)
         {
-            if (Equals(value, null))
+            Guard.ArgumentNotNull(() => expression);
+
+            if (expression.Compile().Invoke() == false)
             {
-                throw new ArgumentNullException(message);
+                throw new ArgumentException(((MemberExpression)expression.Body).Member.Name);
             }
         }
 

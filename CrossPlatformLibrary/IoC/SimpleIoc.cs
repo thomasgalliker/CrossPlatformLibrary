@@ -512,7 +512,19 @@ namespace CrossPlatformLibrary.IoC
                 {
                     if (!this._interfaceToClassMap.ContainsKey(serviceType))
                     {
-                        throw new ActivationException(string.Format(CultureInfo.InvariantCulture, "Type not found in cache: {0}.", serviceType.FullName));
+                        if (parentType != null)
+                        {
+                            throw new ActivationException(
+                                string.Format(CultureInfo.InvariantCulture, "Could not construct type {0} because one of its dependencies could not be resolved: {1}.", 
+                                parentType.FullName, 
+                                serviceType.FullName));
+                        }
+                        else
+                        {
+                            throw new ActivationException(
+                                string.Format(CultureInfo.InvariantCulture, "Type not found in cache: {0}.", 
+                                serviceType.FullName));
+                        }
                     }
 
                     if (cache)

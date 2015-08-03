@@ -63,6 +63,8 @@
     <Compile Include="Collection\Range.cs" />
     <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Tracing\ActionTracer.cs" />
+    <Compile Include="Tracing\ActionTracerFactory.cs" />
     <Compile Include="Utils\HighlightMarker.cs" />
     <Compile Include="Tools\PlatformSpecific\IAdapterResolver.cs" />
     <Compile Include="Tools\PlatformSpecific\PlatformAdapter.cs" />
