@@ -15,7 +15,6 @@
 // ****************************************************************************
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.Practices.ServiceLocation;
 
@@ -28,8 +27,6 @@ namespace CrossPlatformLibrary.IoC
     ///     The inspiration for this class is at https://gist.github.com/716137 but it has
     ///     been extended with additional features.
     /// </summary>
-    //// [ClassInfo(typeof(SimpleIoc))]
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ioc")]
     public interface ISimpleIoc : IServiceLocator
     {
         /// <summary>
@@ -37,7 +34,6 @@ namespace CrossPlatformLibrary.IoC
         /// </summary>
         /// <typeparam name="TClass">The class that is queried.</typeparam>
         /// <returns>True if at least on instance of the class is already created, false otherwise.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "This syntax is more convenient than the alternatives.")]
         bool ContainsCreated<TClass>();
 
         /// <summary>
@@ -50,7 +46,6 @@ namespace CrossPlatformLibrary.IoC
         ///     True if the instance with the given key is already registered for the given class,
         ///     false otherwise.
         /// </returns>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "This syntax is more convenient than the alternatives.")]
         bool ContainsCreated<TClass>(string key);
 
         /// <summary>
@@ -58,8 +53,9 @@ namespace CrossPlatformLibrary.IoC
         /// </summary>
         /// <typeparam name="T">The type that the method checks for.</typeparam>
         /// <returns>True if the type is registered, false otherwise.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "This syntax is more convenient than the alternatives.")]
         bool IsRegistered<T>();
+
+        bool IsRegistered(Type classType);
 
         /// <summary>
         ///     Gets a value indicating whether a given type T and a give key
@@ -68,7 +64,6 @@ namespace CrossPlatformLibrary.IoC
         /// <typeparam name="T">The type that the method checks for.</typeparam>
         /// <param name="key">The key that the method checks for.</param>
         /// <returns>True if the type and key are registered, false otherwise.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "This syntax is more convenient than the alternatives.")]
         bool IsRegistered<T>(string key);
 
         /// <summary>
@@ -76,8 +71,14 @@ namespace CrossPlatformLibrary.IoC
         /// </summary>
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
         /// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "This syntax is more convenient than the alternatives.")]
         void Register<TInterface, TClass>() where TClass : class where TInterface : class;
+
+        /// <summary>
+        ///     Registers a given type for a given interface.
+        /// </summary>
+        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
+        /// <param name="classType">The type that must be used to create instances.</param>
+        void Register<TInterface>(Type classType, string key, bool createInstanceImmediately) where TInterface : class;
 
         /// <summary>
         ///     Registers a given type for a given interface with the possibility for immediate
@@ -89,14 +90,14 @@ namespace CrossPlatformLibrary.IoC
         ///     If true, forces the creation of the default
         ///     instance of the provided class.
         /// </param>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "This syntax is more convenient than the alternatives.")]
         void Register<TInterface, TClass>(bool createInstanceImmediately) where TClass : class where TInterface : class;
+
+        void Register<TInterface, TClass>(string key, bool createInstanceImmediately) where TClass : class where TInterface : class;
 
         /// <summary>
         ///     Registers a given type.
         /// </summary>
         /// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "This syntax is more convenient than the alternatives.")]
         void Register<TClass>() where TClass : class;
 
         /// <summary>
@@ -108,8 +109,15 @@ namespace CrossPlatformLibrary.IoC
         ///     If true, forces the creation of the default
         ///     instance of the provided class.
         /// </param>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "This syntax is more convenient than the alternatives.")]
         void Register<TClass>(bool createInstanceImmediately) where TClass : class;
+
+        void Register<TClass>(string key, bool createInstanceImmediately) where TClass : class;
+
+        void Register(Type classType, string key, bool createInstanceImmediately);
+
+        void Register<TInterface>(Type classType) where TInterface : class;
+
+        void Register<TInterface>(Type classType, bool createInstanceImmediately) where TInterface : class;
 
         /// <summary>
         ///     Registers a given instance for a given type.
@@ -178,8 +186,9 @@ namespace CrossPlatformLibrary.IoC
         ///     created instances.
         /// </summary>
         /// <typeparam name="TClass">The class that must be removed.</typeparam>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "This syntax is more convenient than the alternatives.")]
         void Unregister<TClass>() where TClass : class;
+
+        void Unregister(Type serviceType);
 
         /// <summary>
         ///     Removes the given instance from the cache. The class itself remains
@@ -195,7 +204,8 @@ namespace CrossPlatformLibrary.IoC
         /// </summary>
         /// <typeparam name="TClass">The type of the instance to be removed.</typeparam>
         /// <param name="key">The key corresponding to the instance that must be removed.</param>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "This syntax is more convenient than the alternatives.")]
         void Unregister<TClass>(string key) where TClass : class;
+
+        void Unregister(Type classType, string key);
     }
 }

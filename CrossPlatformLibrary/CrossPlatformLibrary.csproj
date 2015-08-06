@@ -38,6 +38,8 @@
     <Compile Include="Bootstrapping\BoostrappingException.cs" />
     <Compile Include="Bootstrapping\BootstrapperBase.cs" />
     <Compile Include="Bootstrapping\IBootstrapper.cs" />
+    <Compile Include="Bootstrapping\IContainerExtension.cs" />
+    <Compile Include="Dispatching\ContainerExtension.cs" />
     <Compile Include="Dispatching\DispatcherExtensions.cs" />
     <Compile Include="Dispatching\IDispatcherService.cs" />
     <Compile Include="ExceptionHandling\AsyncSynchronizationContext.cs" />
@@ -47,6 +49,7 @@
     <Compile Include="ExceptionHandling\RethrowExceptionHandler.cs" />
     <Compile Include="ExceptionHandling\TracingExceptionHandler.cs" />
     <Compile Include="IoC\ISimpleIoc.cs" />
+    <Compile Include="IoC\ISimpleIocExtensions.cs" />
     <Compile Include="IoC\PreferredConstructor.cs" />
     <Compile Include="IoC\SimpleIoc.cs" />
     <Compile Include="IoC\UseCacheAttribute.cs" />
@@ -63,6 +66,7 @@
     <Compile Include="Collection\Range.cs" />
     <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Tools\PlatformServices.cs" />
     <Compile Include="Tracing\ActionTracer.cs" />
     <Compile Include="Tracing\ActionTracerFactory.cs" />
     <Compile Include="Utils\HighlightMarker.cs" />

@@ -1,9 +1,10 @@
 using System;
+using System.Linq;
+using System.Reflection;
 
-using CrossPlatformLibrary.Dispatching;
 using CrossPlatformLibrary.ExceptionHandling;
 using CrossPlatformLibrary.IoC;
-using CrossPlatformLibrary.Tools.PlatformSpecific;
+using CrossPlatformLibrary.Tools;
 using CrossPlatformLibrary.Tracing;
 
 using Microsoft.Practices.ServiceLocation;
@@ -22,7 +23,7 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// Gets the IOC/DI container of the application, which is being
         /// created as part of the application initialization process.
         /// </summary>
-        private ISimpleIoc container;
+        private SimpleIoc simpleIoc;
 
         protected BootstrapperBase()
         {
@@ -37,22 +38,67 @@ namespace CrossPlatformLibrary.Bootstrapping
         {
             this.tracer.Debug("Startup");
 
-            this.container = SimpleIoc.Default;
-            
-            // The Service container is a service locator too. To be backwards
-            // compatible set the ServiceLocator property.
+            this.simpleIoc = SimpleIoc.Default;
+
+            // The Service container is a service locator too. To be backwards compatible set the ServiceLocator property.
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             // Register the default exception handler
             var exceptionHandler = this.CreateExceptionHandler();
-            this.container.Register<IExceptionHandler>(() => exceptionHandler);
+            this.simpleIoc.Register<IExceptionHandler>(() => exceptionHandler);
 
-            // Register services delivered in base library
-            var dispatcherService = PlatformAdapter.Resolve<IDispatcherService>();
-            this.container.Register<IDispatcherService>(() => dispatcherService);
-            
-            this.container.Register<ITracer>((Type parentType) => Tracer.Create(parentType));
+            this.simpleIoc.Register<ITracer>((Type parentType) => Tracer.Create(parentType));
 
+            this.ConfigureExtensions();
+
+            this.ConfigureContainer(this.simpleIoc);
+
+            this.RunCustomStartup();
+        }
+
+
+        /// <summary>
+        /// Configures all extension which implement the IContainerExtension interface
+        /// </summary>
+        private void ConfigureExtensions()
+        {
+            try
+            {
+                this.tracer.Debug("Calling ConfigureExtensions procedure");
+
+                var containerExtensionInterface = typeof(IContainerExtension);
+                var containerExtensionTypes = PlatformServices.GetAssemblies().SelectMany(s => s.ExportedTypes)
+                    .Where(p => containerExtensionInterface.GetTypeInfo().IsAssignableFrom(p.GetTypeInfo()))
+                    .Where(p => p != containerExtensionInterface)
+                    .ToList();
+
+                foreach (var containerExtensionType in containerExtensionTypes)
+                {
+                    string containerExtensionIdentifier = containerExtensionType.FullName;
+
+                    this.simpleIoc.Register(containerExtensionType, containerExtensionIdentifier, false);
+                    var containerExtension = (IContainerExtension)this.simpleIoc.GetInstanceWithoutCaching(containerExtensionType, containerExtensionIdentifier);
+
+                    this.tracer.Debug("Initializing container extension {0}.", containerExtension.GetType().FullName);
+                    containerExtension.Initialize(this.simpleIoc);
+
+                    this.simpleIoc.Unregister(containerExtensionType, containerExtensionIdentifier);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (!this.HandleBootstrappingException(ex))
+                {
+                    throw new BootstrappingException("Bootstrapping failed during ConfigureExtensions sequence.", ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Runs the custom OnStartup sequence.
+        /// </summary>
+        private void RunCustomStartup()
+        {
             try
             {
                 this.tracer.Debug("Calling custom OnStartup procedure");
@@ -60,10 +106,9 @@ namespace CrossPlatformLibrary.Bootstrapping
             }
             catch (Exception ex)
             {
-                this.tracer.Debug("Custom OnStartup procedure failed");
                 if (!this.HandleBootstrappingException(ex))
                 {
-                    throw new BootstrappingException("Failed during custom OnStratup sequence.", ex);
+                    throw new BootstrappingException("Bootstrapping failed during custom OnStratup sequence.", ex);
                 }
             }
         }
@@ -77,12 +122,12 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// </returns>
         protected virtual bool HandleBootstrappingException(Exception ex)
         {
-            var exceptionHandler = this.container.GetInstance<IExceptionHandler>();
+            var exceptionHandler = this.simpleIoc.GetInstance<IExceptionHandler>();
 
             var isExceptionHandled = exceptionHandler != null && exceptionHandler.HandleException(ex);
             if (!isExceptionHandled)
             {
-                this.tracer.Exception(ex, "BootstrapperUnhandledExceptionStartup");
+                this.tracer.Exception(ex, "BootstrapperUnhandledException");
             }
 
             return isExceptionHandled;
@@ -108,10 +153,10 @@ namespace CrossPlatformLibrary.Bootstrapping
             }
             finally
             {
-                if (this.container != null)
+                if (this.simpleIoc != null)
                 {
-                    this.container.Reset();
-                    this.container = null;
+                    this.simpleIoc.Reset();
+                    this.simpleIoc = null;
                 }
             }
         }
@@ -132,6 +177,10 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// </summary>
         /// <remarks>When implemented by inheriting classes, this method will show the shell form of the application or start the service.</remarks>
         protected abstract void OnStartup();
+
+        protected virtual void ConfigureContainer(ISimpleIoc container)
+        {
+        }
 
         /// <summary>
         /// Does the actual shutdown procedure for the application or service.

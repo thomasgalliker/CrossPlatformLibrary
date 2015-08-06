@@ -121,6 +121,16 @@ namespace CrossPlatformLibrary.IoC
         }
 
         /// <summary>
+        ///     Gets a value indicating whether a given type T is already registered.
+        /// </summary>
+        /// <typeparam name="T">The type that the method checks for.</typeparam>
+        /// <returns>True if the type is registered, false otherwise.</returns>
+        public bool IsRegistered(Type classType)
+        {
+            return this._interfaceToClassMap.ContainsKey(classType);
+        }
+
+        /// <summary>
         ///     Gets a value indicating whether a given type T and a give key
         ///     are already registered.
         /// </summary>
@@ -131,12 +141,12 @@ namespace CrossPlatformLibrary.IoC
         {
             var classType = typeof(T);
 
-            if (!this._interfaceToClassMap.ContainsKey(classType) || !this._factories.ContainsKey(classType))
+            if (!this.IsRegistered(classType) || !this._factories.ContainsKey(classType))
             {
                 return false;
             }
 
-            return this._factories[classType].ContainsKey(key);
+            return this._factories[classType].ContainsKey(key); // TODO GATH: Add lock (because of threading issues)
         }
 
         /// <summary>
@@ -144,10 +154,55 @@ namespace CrossPlatformLibrary.IoC
         /// </summary>
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
         /// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
-        [SuppressMessage("Microsoft.Design", "CA1004", Justification = "This syntax is better than the alternatives.")]
-        public void Register<TInterface, TClass>() where TClass : class where TInterface : class
+        public void Register<TInterface, TClass>()
+            where TClass : class
+            where TInterface : class
         {
-            this.Register<TInterface, TClass>(false);
+            this.Register<TInterface, TClass>(null, false);
+        }
+
+        /// <summary>
+        ///     Registers a given type for a given interface.
+        /// </summary>
+        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
+        /// <param name="classType">The type that must be used to create instances.</param>
+        public void Register<TInterface>(Type classType) where TInterface : class
+        {
+            this.Register<TInterface>(classType, createInstanceImmediately: false);
+        }
+
+        /// <summary>
+        ///     Registers a given type for a given interface.
+        /// </summary>
+        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
+        /// <param name="classType">The type that must be used to create instances.</param>
+        public void Register<TInterface>(Type classType, bool createInstanceImmediately) where TInterface : class
+        {
+            this.Register<TInterface>(classType, null, createInstanceImmediately);
+        }
+
+        /// <summary>
+        ///     Registers a given type for a given interface.
+        /// </summary>
+        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
+        /// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
+        public void Register<TInterface, TClass>(bool createInstanceImmediately)
+            where TInterface : class
+            where TClass : class
+        {
+            this.Register<TInterface>(typeof(TClass), null, createInstanceImmediately);
+        }
+
+        /// <summary>
+        ///     Registers a given type for a given interface.
+        /// </summary>
+        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
+        /// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
+        public void Register<TInterface, TClass>(string key, bool createInstanceImmediately)
+            where TClass : class
+            where TInterface : class
+        {
+            this.Register<TInterface>(typeof(TClass), key, createInstanceImmediately);
         }
 
         /// <summary>
@@ -155,18 +210,22 @@ namespace CrossPlatformLibrary.IoC
         ///     creation of the instance.
         /// </summary>
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
-        /// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
+        /// <param name="classType">The type that must be used to create instances.</param>
+        /// <param name="key">The key that the method checks for.</param>
         /// <param name="createInstanceImmediately">
         ///     If true, forces the creation of the default
         ///     instance of the provided class.
         /// </param>
-        [SuppressMessage("Microsoft.Design", "CA1004", Justification = "This syntax is better than the alternatives.")]
-        public void Register<TInterface, TClass>(bool createInstanceImmediately) where TClass : class where TInterface : class
+        public void Register<TInterface>(Type classType, string key, bool createInstanceImmediately) where TInterface : class
         {
             lock (this._syncLock)
             {
+                if (string.IsNullOrEmpty(key))
+                {
+                    key = this._defaultKey;
+                }
+
                 var interfaceType = typeof(TInterface);
-                var classType = typeof(TClass);
 
                 if (this._interfaceToClassMap.ContainsKey(interfaceType))
                 {
@@ -181,8 +240,9 @@ namespace CrossPlatformLibrary.IoC
                     this._constructorInfos.Add(classType, this.GetConstructorInfo(classType));
                 }
 
-                Func<TClass> factory = () => this.MakeInstance<TClass>(classType);
-                this.DoRegister(interfaceType, factory, this._defaultKey);
+
+                Func<object> factory = () => this.MakeInstance(classType);
+                this.DoRegister(interfaceType, factory, key); // TODO GATH: interfaceType or classType?
 
                 if (createInstanceImmediately)
                 {
@@ -195,10 +255,9 @@ namespace CrossPlatformLibrary.IoC
         ///     Registers a given type.
         /// </summary>
         /// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
-        [SuppressMessage("Microsoft.Design", "CA1004", Justification = "This syntax is better than the alternatives.")]
         public void Register<TClass>() where TClass : class
         {
-            this.Register<TClass>(false);
+            this.Register<TClass>(key: null, createInstanceImmediately: false);
         }
 
         /// <summary>
@@ -210,10 +269,30 @@ namespace CrossPlatformLibrary.IoC
         ///     If true, forces the creation of the default
         ///     instance of the provided class.
         /// </param>
-        [SuppressMessage("Microsoft.Design", "CA1004", Justification = "This syntax is better than the alternatives.")]
         public void Register<TClass>(bool createInstanceImmediately) where TClass : class
         {
+            this.Register<TClass>(key: null, createInstanceImmediately: createInstanceImmediately);
+        }
+
+        public void Register<TClass>(string key, bool createInstanceImmediately) where TClass : class
+        {
             var classType = typeof(TClass);
+            this.Register(classType, key, createInstanceImmediately);
+        }
+
+        /// <summary>
+        ///     Registers a given type with the possibility for immediate
+        ///     creation of the instance.
+        /// </summary>
+        /// <param name="classType"></param>
+        /// <param name="key">The key for which the given instance is registered.</param>
+        /// <param name="createInstanceImmediately">
+        ///     If true, forces the creation of the default
+        ///     instance of the provided class.
+        /// </param>
+        public void Register(Type classType, string key, bool createInstanceImmediately)
+        {
+            
 #if NETFX_CORE
             if (classType.GetTypeInfo().IsInterface)
 #else
@@ -225,7 +304,12 @@ namespace CrossPlatformLibrary.IoC
 
             lock (this._syncLock)
             {
-                if (this._factories.ContainsKey(classType) && this._factories[classType].ContainsKey(this._defaultKey))
+                if (string.IsNullOrEmpty(key))
+                {
+                    key = this._defaultKey;
+                }
+
+                if (this._factories.ContainsKey(classType) && this._factories[classType].ContainsKey(key))
                 {
                     if (!this._constructorInfos.ContainsKey(classType))
                     {
@@ -244,12 +328,12 @@ namespace CrossPlatformLibrary.IoC
                 }
 
                 this._constructorInfos.Add(classType, this.GetConstructorInfo(classType));
-                Func<TClass> factory = () => this.MakeInstance<TClass>(classType);
-                this.DoRegister(classType, factory, this._defaultKey);
+                Func<object> factory = () => this.MakeInstance(classType);
+                this.DoRegister(classType, factory, key);
 
                 if (createInstanceImmediately)
                 {
-                    this.GetInstance<TClass>();
+                    this.GetInstance(classType);
                 }
             }
         }
@@ -397,12 +481,19 @@ namespace CrossPlatformLibrary.IoC
         ///     created instances.
         /// </summary>
         /// <typeparam name="TClass">The class that must be removed.</typeparam>
-        [SuppressMessage("Microsoft.Design", "CA1004", Justification = "This syntax is better than the alternatives.")]
         public void Unregister<TClass>() where TClass : class
+        {
+            this.Unregister(typeof(TClass));
+        }
+
+        /// <summary>
+        ///     Unregisters a class from the cache and removes all the previously
+        ///     created instances.
+        /// </summary>
+        public void Unregister(Type serviceType)
         {
             lock (this._syncLock)
             {
-                var serviceType = typeof(TClass);
                 Type resolveTo;
 
                 if (this._interfaceToClassMap.ContainsKey(serviceType))
@@ -450,17 +541,20 @@ namespace CrossPlatformLibrary.IoC
 
                 if (this._instancesRegistry.ContainsKey(classType))
                 {
-                    var list = this._instancesRegistry[classType];
+                    var instances = this._instancesRegistry[classType];
 
-                    var pairs = list.Where(pair => pair.Value == instance).ToList();
+                    var pairs = instances.Where(pair => pair.Value == instance).ToList();
                     for (var index = 0; index < pairs.Count(); index++)
                     {
-                        var key = pairs[index].Key;
-
-                        list.Remove(key);
+                        instances.Remove(pairs[index].Key);
                     }
                 }
             }
+        }
+
+        public void Unregister<TClass>(string key) where TClass : class
+        {
+            this.Unregister(typeof(TClass), key);
         }
 
         /// <summary>
@@ -468,22 +562,25 @@ namespace CrossPlatformLibrary.IoC
         ///     registered and can be used to create other instances.
         /// </summary>
         /// <typeparam name="TClass">The type of the instance to be removed.</typeparam>
+        /// <param name="classType"></param>
         /// <param name="key">The key corresponding to the instance that must be removed.</param>
-        [SuppressMessage("Microsoft.Design", "CA1004", Justification = "This syntax is better than the alternatives.")]
-        public void Unregister<TClass>(string key) where TClass : class
+        public void Unregister(Type classType, string key)
         {
             lock (this._syncLock)
             {
-                var classType = typeof(TClass);
+                if (string.IsNullOrEmpty(key))
+                {
+                    key = this._defaultKey;
+                }
 
                 if (this._instancesRegistry.ContainsKey(classType))
                 {
-                    var list = this._instancesRegistry[classType];
+                    var instances = this._instancesRegistry[classType];
 
-                    var pairs = list.Where(pair => pair.Key == key).ToList();
+                    var pairs = instances.Where(pair => pair.Key == key).ToList();
                     for (var index = 0; index < pairs.Count(); index++)
                     {
-                        list.Remove(pairs[index].Key);
+                        instances.Remove(pairs[index].Key);
                     }
                 }
 
@@ -510,19 +607,19 @@ namespace CrossPlatformLibrary.IoC
 
                 if (!this._instancesRegistry.ContainsKey(serviceType))
                 {
-                    if (!this._interfaceToClassMap.ContainsKey(serviceType))
+                    if (!this.IsRegistered(serviceType))
                     {
                         if (parentType != null)
                         {
                             throw new ActivationException(
-                                string.Format(CultureInfo.InvariantCulture, "Could not construct type {0} because one of its dependencies could not be resolved: {1}.", 
-                                parentType.FullName, 
+                                string.Format(CultureInfo.InvariantCulture, "Could not construct type {0} because one of its dependencies could not be resolved: {1}.",
+                                parentType.FullName,
                                 serviceType.FullName));
                         }
                         else
                         {
                             throw new ActivationException(
-                                string.Format(CultureInfo.InvariantCulture, "Type not found in cache: {0}.", 
+                                string.Format(CultureInfo.InvariantCulture, "Type not found in cache: {0}.",
                                 serviceType.FullName));
                         }
                     }
@@ -596,9 +693,8 @@ namespace CrossPlatformLibrary.IoC
             }
             else
             {
-                var list = new Dictionary<string, Delegate> { { key, factory } };
-
-                this._factories.Add(classType, list);
+                var keyToFactoryMapping = new Dictionary<string, Delegate> { { key, factory } };
+                this._factories.Add(classType, keyToFactoryMapping);
             }
         }
 
@@ -684,7 +780,7 @@ namespace CrossPlatformLibrary.IoC
             return UseCache;
         }
 
-        private TClass MakeInstance<TClass>(Type serviceType)
+        private object MakeInstance(Type serviceType)
         {
             var constructor = this._constructorInfos.ContainsKey(serviceType) ? this._constructorInfos[serviceType] : this.GetConstructorInfo(serviceType);
 
@@ -692,7 +788,7 @@ namespace CrossPlatformLibrary.IoC
 
             if (parameterInfos.Length == 0)
             {
-                return (TClass)constructor.Invoke(this._emptyArguments);
+                return constructor.Invoke(this._emptyArguments);
             }
 
             var parameters = new object[parameterInfos.Length];
@@ -703,7 +799,7 @@ namespace CrossPlatformLibrary.IoC
                 parameters[parameterInfo.Position] = this.DoGetService(parameterInfo.ParameterType, serviceType, null, useCache);
             }
 
-            return (TClass)constructor.Invoke(parameters);
+            return constructor.Invoke(parameters);
         }
 
         /// <summary>

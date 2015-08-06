@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>CrossPlatformLibrary</id>
-    <version>1.0.15-alpha</version>
+    <version>1.0.21-alpha</version>
     <title>CrossPlatformLibrary</title>
     <authors>Thomas Galliker</authors>
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
@@ -12,10 +12,12 @@
     <summary>CrossPlatformLibrary is an extensible toolkit which provides a basic set of functionality used in most mobile apps.</summary>
     <description>
       CrossPlatformLibrary is an extensible toolkit which provides a basic set of functionality used in most mobile apps such as bootstrapping, exception handling, tracing and UI dispatching.
-      
-      - Added ActionTracer to forward trace writes to an action
-      - Added new Guard.ArgumentIsTrue
-    
+
+      Changes in this version:
+      - Added IContainerExtension which allows to initialize the IoC container in library projects
+      - BootstrapperBase exposes virtual ConfigureContainer method to allow inheritors to configure plugin services
+      - Extension method RegisterPlatformSpecific for ISimpleIoc in order to enable platform-specific dependency registration
+
     </description>
     <tags>
       xamarin pcl CrossPlatformLibrary cross-platform library bootstrapping dispatching tracing exception handling mobile

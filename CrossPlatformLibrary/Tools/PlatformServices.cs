@@ -3,13 +3,13 @@ using System.Reflection;
 
 namespace CrossPlatformLibrary.Tools
 {
-    public class PlatformServices : IPlatformServices
+    public static class PlatformServices
     {
         ///   <summary> 
         /// Returns all assemblies currently loaded in current AppDomain.
         /// Source: https://forums.xamarin.com/discussion/21255/device-getassemblies
         /// </summary>
-        public Assembly[] GetAssemblies()
+        public static Assembly[] GetAssemblies()
         {
             var currentdomain = typeof(string).GetTypeInfo().Assembly.GetType("System.AppDomain").GetRuntimeProperty("CurrentDomain").GetMethod.Invoke(null, new object[] { });
             var getAssembliesMethodInfo = currentdomain.GetType().GetRuntimeMethod("GetAssemblies", new Type[] { });
