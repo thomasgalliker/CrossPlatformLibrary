@@ -66,12 +66,15 @@ namespace CrossPlatformLibrary.Bootstrapping
             {
                 this.tracer.Debug("Calling ConfigureExtensions procedure");
 
+                // Try to find all known types which implement the IContainerExtension interface
                 var containerExtensionInterface = typeof(IContainerExtension);
-                var containerExtensionTypes = PlatformServices.GetAssemblies().SelectMany(s => s.ExportedTypes)
-                    .Where(p => containerExtensionInterface.GetTypeInfo().IsAssignableFrom(p.GetTypeInfo()))
-                    .Where(p => p != containerExtensionInterface)
+                var containerExtensionTypes = PlatformServices.GetAssemblies().SelectMany(a => a.ExportedTypes)
+                    .Where(t => containerExtensionInterface.GetTypeInfo().IsAssignableFrom(t.GetTypeInfo()))
+                    .Where(t => t != containerExtensionInterface)
                     .ToList();
 
+                // Use the dependency service to create IContainerExtension-based objects
+                // and call Initialize in order to hand-over the dependency service to the modules
                 foreach (var containerExtensionType in containerExtensionTypes)
                 {
                     string containerExtensionIdentifier = containerExtensionType.FullName;

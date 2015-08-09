@@ -38,7 +38,7 @@
     <Compile Include="Bootstrapping\BoostrappingException.cs" />
     <Compile Include="Bootstrapping\BootstrapperBase.cs" />
     <Compile Include="Bootstrapping\IBootstrapper.cs" />
-    <Compile Include="Bootstrapping\IContainerExtension.cs" />
+    <Compile Include="IoC\IContainerExtension.cs" />
     <Compile Include="Dispatching\ContainerExtension.cs" />
     <Compile Include="Dispatching\DispatcherExtensions.cs" />
     <Compile Include="Dispatching\IDispatcherService.cs" />

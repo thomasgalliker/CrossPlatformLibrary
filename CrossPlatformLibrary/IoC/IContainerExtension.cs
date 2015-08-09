@@ -1,7 +1,9 @@
-﻿using CrossPlatformLibrary.IoC;
-
-namespace CrossPlatformLibrary.Bootstrapping
+﻿namespace CrossPlatformLibrary.IoC
 {
+    /// <summary>
+    /// Instances of IContainerExtension are detected via reflection at bootstrapping time.
+    /// This interface is intended to set-up the IoC container of library projects.
+    /// </summary>
     public interface IContainerExtension
     {
         /// <summary>
