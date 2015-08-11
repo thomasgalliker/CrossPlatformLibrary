@@ -21,6 +21,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
+using CrossPlatformLibrary.Tools.PlatformSpecific;
 using CrossPlatformLibrary.Utils;
 
 using Microsoft.Practices.ServiceLocation;
@@ -48,8 +49,6 @@ namespace CrossPlatformLibrary.IoC
         private readonly Dictionary<Type, ConstructorInfo> _constructorInfos = new Dictionary<Type, ConstructorInfo>();
 
         private readonly string _defaultKey = Guid.NewGuid().ToString();
-
-        private readonly object[] _emptyArguments = new object[0];
 
         private readonly Dictionary<Type, Dictionary<string, Delegate>> _factories = new Dictionary<Type, Dictionary<string, Delegate>>();
 
@@ -149,6 +148,37 @@ namespace CrossPlatformLibrary.IoC
             return this._factories[classType].ContainsKey(key); // TODO GATH: Add lock (because of threading issues)
         }
 
+
+        /// <summary>
+        ///     Registers a given type for a given interface using the default registration convention.
+        /// </summary>
+        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
+        public void RegisterWithConvention<TInterface>() where TInterface : class
+        {
+            var convention = new DefaultRegistrationConvention();
+            this.RegisterWithConvention<TInterface>(convention);
+        }
+
+        /// <summary>
+        ///     Registers a given type for a given interface using a specified registration convention.
+        /// </summary>
+        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
+        /// <param name="registrationConvention">The convention used to convert between the given interface type and the class.</param>
+        public void RegisterWithConvention<TInterface>(IRegistrationConvention registrationConvention) where TInterface : class
+        {
+            Guard.ArgumentNotNull(() => registrationConvention);
+
+            IAdapterResolver adapterResolver = new ProbingAdapterResolver(registrationConvention);
+            var classType = adapterResolver.ResolveClassType(typeof(TInterface));
+            this.Register<TInterface>(classType);
+        }
+
+        // Unit testing helper
+        ////internal static void SetResolver(IAdapterResolver resolver)
+        ////{
+        ////    adapterResolver = resolver;
+        ////}
+
         /// <summary>
         ///     Registers a given type for a given interface.
         /// </summary>
@@ -242,7 +272,7 @@ namespace CrossPlatformLibrary.IoC
 
 
                 Func<object> factory = () => this.MakeInstance(classType);
-                this.DoRegister(interfaceType, factory, key); // TODO GATH: interfaceType or classType?
+                this.DoRegister(interfaceType, factory, key);
 
                 if (createInstanceImmediately)
                 {
@@ -788,7 +818,7 @@ namespace CrossPlatformLibrary.IoC
 
             if (parameterInfos.Length == 0)
             {
-                return constructor.Invoke(this._emptyArguments);
+                return constructor.Invoke(new object[0]);
             }
 
             var parameters = new object[parameterInfos.Length];

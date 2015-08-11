@@ -1,5 +1,4 @@
-﻿using CrossPlatformLibrary.Bootstrapping;
-using CrossPlatformLibrary.IoC;
+﻿using CrossPlatformLibrary.IoC;
 
 namespace CrossPlatformLibrary.Dispatching
 {
@@ -7,7 +6,7 @@ namespace CrossPlatformLibrary.Dispatching
     {
         public void Initialize(ISimpleIoc container)
         {
-            container.RegisterPlatformSpecific<IDispatcherService>();
+            container.RegisterWithConvention<IDispatcherService>();
         }
     }
 }

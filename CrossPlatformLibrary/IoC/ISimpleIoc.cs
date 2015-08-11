@@ -118,6 +118,10 @@ namespace CrossPlatformLibrary.IoC
         void Register<TInterface>(Type classType) where TInterface : class;
 
         void Register<TInterface>(Type classType, bool createInstanceImmediately) where TInterface : class;
+       
+        void RegisterWithConvention<TInterface>() where TInterface : class;
+
+        void RegisterWithConvention<TInterface>(IRegistrationConvention registrationConvention) where TInterface : class;
 
         /// <summary>
         ///     Registers a given instance for a given type.

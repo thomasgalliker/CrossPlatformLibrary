@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection;
 
+using CrossPlatformLibrary.IoC;
 using CrossPlatformLibrary.Utils;
 
 namespace CrossPlatformLibrary.Tools.PlatformSpecific
@@ -13,73 +12,100 @@ namespace CrossPlatformLibrary.Tools.PlatformSpecific
     {
         private readonly Func<AssemblyName, Assembly> assemblyLoader;
         private readonly object lockObject = new object();
-        private readonly Dictionary<Type, object> adapters = new Dictionary<Type, object>();
-        private readonly Func<AssemblyName, string> convertToPlatformSpecificAssemblyName;
-        private readonly Func<Type, string> convertInterfaceToClassName;
+        private readonly IRegistrationConvention registrationConvention;
 
-        public ProbingAdapterResolver(Func<AssemblyName, string> platformNamingConvention, Func<Type, string> interfaceToClassNamingConvention)
-            : this(platformNamingConvention, interfaceToClassNamingConvention, Assembly.Load)
+        public ProbingAdapterResolver(IRegistrationConvention registrationConvention)
+            : this(registrationConvention, Assembly.Load)
         {
         }
 
-        public ProbingAdapterResolver(Func<AssemblyName, string> platformNamingConvention, Func<Type, string> interfaceToClassNamingConvention, Func<AssemblyName, Assembly> assemblyLoader)
+        public ProbingAdapterResolver(IRegistrationConvention registrationConvention, Func<AssemblyName, Assembly> assemblyLoader)
         {
-            Guard.ArgumentNotNull(() => platformNamingConvention);
-            Guard.ArgumentNotNull(() => interfaceToClassNamingConvention);
+            Guard.ArgumentNotNull(() => registrationConvention);
             Guard.ArgumentNotNull(() => assemblyLoader);
 
-            this.convertToPlatformSpecificAssemblyName = platformNamingConvention;
-            this.convertInterfaceToClassName = interfaceToClassNamingConvention;
+            this.registrationConvention = registrationConvention;
             this.assemblyLoader = assemblyLoader;
         }
 
-        public object Resolve(Type type, object[] args)
+        public object Resolve(Type interfaceType, object[] args)
         {
-            Debug.Assert(type != null);
+            Guard.ArgumentNotNull(() => interfaceType);
 
             lock (this.lockObject)
             {
-                object instance;
-                if (!this.adapters.TryGetValue(type, out instance))
-                {
-                    Assembly platformSpecificAssembly = this.GetPlatformSpecificAssembly(type);
-                    instance = this.CreateInstance(platformSpecificAssembly, type, args);
-                    this.adapters.Add(type, instance);
-                }
+                var platformSpecificAssembly = this.GetPlatformSpecificAssembly(interfaceType);
+                var classType = this.TryConvertInterfaceTypeToClassType(platformSpecificAssembly, interfaceType);
+                var instance = this.CreateInstance(classType, args);
 
                 return instance;
             }
         }
 
-        private object CreateInstance(Assembly assembly, Type interfaceType, object[] args)
+        public Type ResolveClassType(Type interfaceType, bool throwIfNotFound = true)
         {
-            string typeName = this.convertInterfaceToClassName(interfaceType);
+            Guard.ArgumentNotNull(() => interfaceType);
+
+            lock (this.lockObject)
+            {
+                var platformSpecificAssembly = this.GetPlatformSpecificAssembly(interfaceType);
+                var classType = this.TryConvertInterfaceTypeToClassType(platformSpecificAssembly, interfaceType);
+
+                if (classType == null && throwIfNotFound)
+                {
+                    string errorMessage = string.Format("PlatformNotSupportedException: Type {0} could not be resolved.", interfaceType.FullName);
+                    ////tracer.Error(errorMessage);
+                    throw new PlatformNotSupportedException(errorMessage);
+                }
+
+                return classType;
+            }
+        }
+
+        private Type TryConvertInterfaceTypeToClassType(Assembly assembly, Type interfaceType)
+        {
+            string typeName = this.registrationConvention.InterfaceToClassNamingConvention(interfaceType);
+            try
+            {
+                 return assembly.GetType(typeName);
+            }
+            catch(Exception ex)
+            {
+                //TODO GATH: Trace
+            }
 
             try
             {
-                Type type = assembly.GetType(typeName);
-                if (type != null)
-                {
-                    return Activator.CreateInstance(type);
-                }
-
-                // Fallback to looking in this assembly for a default
-                type = typeof(ProbingAdapterResolver).GetTypeInfo().Assembly.GetType(typeName);
-                if (type != null)
-                {
-                    return Activator.CreateInstance(type, args);
-                }
+                return this.GetType().GetTypeInfo().Assembly.GetType(typeName);
             }
-            catch
+            catch(Exception ex)
             {
+                //TODO GATH: Trace
             }
 
             return null;
         }
 
-        private Assembly GetPlatformSpecificAssembly(Type type)
+        private object CreateInstance(Type type, object[] args)
         {
-            var platformSpecificAssembly = this.ProbeForPlatformSpecificAssembly(type);
+            if (type != null)
+            {
+                try
+                {
+                    return Activator.CreateInstance(type, args);
+                }
+                catch(Exception ex)
+                {
+                    //TODO GATH: Trace
+                }
+            }
+
+            return null;
+        }
+
+        private Assembly GetPlatformSpecificAssembly(Type interfaceType)
+        {
+            var platformSpecificAssembly = this.ProbeForPlatformSpecificAssembly(interfaceType);
             if (platformSpecificAssembly == null)
             {
                 throw new InvalidOperationException("AssemblyNotSupported");
@@ -87,10 +113,10 @@ namespace CrossPlatformLibrary.Tools.PlatformSpecific
             return platformSpecificAssembly;
         }
 
-        private Assembly ProbeForPlatformSpecificAssembly(Type type)
+        private Assembly ProbeForPlatformSpecificAssembly(Type interfaceType)
         {
-            AssemblyName assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
-            assemblyName.Name = this.convertToPlatformSpecificAssemblyName(assemblyName);
+            AssemblyName assemblyName = new AssemblyName(interfaceType.GetTypeInfo().Assembly.FullName);
+            assemblyName.Name = this.registrationConvention.PlatformNamingConvention(assemblyName);
 
             Assembly assm = null;
             try

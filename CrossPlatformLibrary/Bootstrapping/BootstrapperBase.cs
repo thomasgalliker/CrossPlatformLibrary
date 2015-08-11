@@ -25,9 +25,9 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// </summary>
         private SimpleIoc simpleIoc;
 
-        protected BootstrapperBase()
+        protected BootstrapperBase(ITracer tracer = null)
         {
-            this.tracer = Tracer.Create(this);
+            this.tracer = tracer ?? Tracer.Create(this);
         }
 
         /// <summary>
@@ -68,7 +68,8 @@ namespace CrossPlatformLibrary.Bootstrapping
 
                 // Try to find all known types which implement the IContainerExtension interface
                 var containerExtensionInterface = typeof(IContainerExtension);
-                var containerExtensionTypes = PlatformServices.GetAssemblies().SelectMany(a => a.ExportedTypes)
+                var allAssemblies = PlatformServices.GetAssemblies();
+                var containerExtensionTypes = allAssemblies.SelectMany(a => a.ExportedTypes)
                     .Where(t => containerExtensionInterface.GetTypeInfo().IsAssignableFrom(t.GetTypeInfo()))
                     .Where(t => t != containerExtensionInterface)
                     .ToList();

@@ -38,6 +38,7 @@
     <Compile Include="Bootstrapping\BoostrappingException.cs" />
     <Compile Include="Bootstrapping\BootstrapperBase.cs" />
     <Compile Include="Bootstrapping\IBootstrapper.cs" />
+    <Compile Include="IoC\DefaultRegistrationConvention.cs" />
     <Compile Include="IoC\IContainerExtension.cs" />
     <Compile Include="Dispatching\ContainerExtension.cs" />
     <Compile Include="Dispatching\DispatcherExtensions.cs" />
@@ -48,8 +49,8 @@
     <Compile Include="ExceptionHandling\IPlatformSpecificExceptionHandler.cs" />
     <Compile Include="ExceptionHandling\RethrowExceptionHandler.cs" />
     <Compile Include="ExceptionHandling\TracingExceptionHandler.cs" />
+    <Compile Include="IoC\IRegistrationConvention.cs" />
     <Compile Include="IoC\ISimpleIoc.cs" />
-    <Compile Include="IoC\ISimpleIocExtensions.cs" />
     <Compile Include="IoC\PreferredConstructor.cs" />
     <Compile Include="IoC\SimpleIoc.cs" />
     <Compile Include="IoC\UseCacheAttribute.cs" />
