@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq.Expressions;
 
 namespace CrossPlatformLibrary.Utils
@@ -10,6 +11,7 @@ namespace CrossPlatformLibrary.Utils
         /// </summary>
         /// <typeparam name="T">The type of the parameter, inferred from the Expression</typeparam>
         /// <param name="expression">An expression containing a single parameter e.g. () => param</param>
+        [DebuggerStepThrough] 
         public static void ArgumentNotNull<T>(Expression<Func<T>> expression) where T : class
         {
             ArgumentNotNull(expression, "expression");
@@ -21,6 +23,7 @@ namespace CrossPlatformLibrary.Utils
             }
         }
 
+        [DebuggerStepThrough] 
         public static void ArgumentNotNull<T>(T value, string name)
         {
             if (Equals(value, null))
@@ -29,6 +32,7 @@ namespace CrossPlatformLibrary.Utils
             }
         }
 
+        [DebuggerStepThrough] 
         public static void ArgumentIsTrue(Expression<Func<bool>> expression)
         {
             Guard.ArgumentNotNull(() => expression);
@@ -43,6 +47,7 @@ namespace CrossPlatformLibrary.Utils
         ///     Only pass single parameters through to this call via the expression, e.g. Guard.ArgumentNotNull(() => stringParam)
         /// </summary>
         /// <param name="expression">An expression containing a single string parameter e.g. () => stringParam</param>
+        [DebuggerStepThrough] 
         public static void ArgumentNotNullOrEmpty(Expression<Func<string>> expression)
         {
             if (string.IsNullOrEmpty(expression.Compile()()))
@@ -51,6 +56,7 @@ namespace CrossPlatformLibrary.Utils
             }
         }
 
+        [DebuggerStepThrough] 
         public static void ArgumentNotNullOrEmpty(string value, string name)
         {
             if (string.IsNullOrEmpty(value))
@@ -59,6 +65,7 @@ namespace CrossPlatformLibrary.Utils
             }
         }
 
+        [DebuggerStepThrough] 
         public static void True(Func<bool> func, Action action)
         {
             if (!func())

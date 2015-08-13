@@ -17,8 +17,6 @@ namespace CrossPlatformLibrary.ExceptionHandling
 
             Interlocked.Exchange(ref this.exceptionHandler, handler);
 
-            this.Detach();
-
             AppDomain.CurrentDomain.UnhandledException += this.CurrentDomainUnhandledException;
             AndroidEnvironment.UnhandledExceptionRaiser += this.AndroidEnvironmentUnhandledExceptionRaiser;
 

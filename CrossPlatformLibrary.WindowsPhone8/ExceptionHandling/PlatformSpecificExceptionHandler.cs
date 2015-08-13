@@ -20,8 +20,6 @@ namespace CrossPlatformLibrary.ExceptionHandling
 
             Interlocked.Exchange(ref this.exceptionHandler, handler);
 
-            this.Detach();
-
             if (Application.Current != null)
             {
                 Application.Current.UnhandledException += this.OnCurrentApplicationUnhandledException;

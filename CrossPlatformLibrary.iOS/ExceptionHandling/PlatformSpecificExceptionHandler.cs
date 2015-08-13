@@ -33,8 +33,6 @@ namespace CrossPlatformLibrary.ExceptionHandling
 
             Interlocked.Exchange(ref this.exceptionHandler, handler);
 
-            this.Detach();
-
             AppDomain.CurrentDomain.UnhandledException += this.CurrentDomainUnhandledException;
 
             this.AttachToNativeExceptions(true, true);

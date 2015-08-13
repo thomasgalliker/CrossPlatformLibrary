@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CrossPlatformLibrary.ExceptionHandling
+namespace CrossPlatformLibrary.ExceptionHandling.Handlers
 {
     /// <summary>
     /// Provides an <see cref="IExceptionHandler"/> that always returns <c>false</c>.

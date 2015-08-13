@@ -1,20 +1,24 @@
 ﻿using System;
 
 using CrossPlatformLibrary.Tracing;
+using CrossPlatformLibrary.Utils;
 
-namespace CrossPlatformLibrary.ExceptionHandling
+namespace CrossPlatformLibrary.ExceptionHandling.Handlers
 {
     /// <summary>
-    /// Provides a <see cref="IExceptionHandler"/> that traces the exception to an <see cref="ITracer"/>.
+    /// Provides a <see cref="IExceptionHandler"/> that traces the exception as FatalError to an <see cref="ITracer"/>.
     /// Exceptions are always rethrown. 
     /// </summary>
     public class TracingExceptionHandler : ExceptionHandlerBase
     {
         private readonly ITracer tracer;
 
-        public TracingExceptionHandler()
+        public TracingExceptionHandler(ITracer tracer, IPlatformSpecificExceptionHandler platformSpecificExceptionHandler)
+            : base(platformSpecificExceptionHandler)
         {
-            this.tracer = Tracer.Create(this);
+            Guard.ArgumentNotNull(() => tracer);
+
+            this.tracer = tracer;
         }
 
         public override bool HandleException(Exception exception)
