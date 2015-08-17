@@ -44,7 +44,7 @@ namespace CrossPlatformLibrary.IoC
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ioc")]
     public class SimpleIoc : ISimpleIoc
     {
-        private const bool UseCache = true;
+        private const bool DefaultCacheUsage = true;
 
         private readonly Dictionary<Type, ConstructorInfo> _constructorInfos = new Dictionary<Type, ConstructorInfo>();
 
@@ -269,7 +269,6 @@ namespace CrossPlatformLibrary.IoC
                     this._interfaceToClassMap.Add(interfaceType, classType);
                     this._constructorInfos.Add(classType, this.GetConstructorInfo(classType));
                 }
-
 
                 Func<object> factory = () => this.MakeInstance(classType);
                 this.DoRegister(interfaceType, factory, key);
@@ -624,7 +623,7 @@ namespace CrossPlatformLibrary.IoC
             }
         }
 
-        private object DoGetService(Type serviceType, Type parentType, string key, bool cache = UseCache)
+        private object DoGetService(Type serviceType, Type parentType, string key, bool cache = DefaultCacheUsage, bool throwIfNotFound = true)
         {
             lock (this._syncLock)
             {
@@ -639,19 +638,22 @@ namespace CrossPlatformLibrary.IoC
                 {
                     if (!this.IsRegistered(serviceType))
                     {
-                        if (parentType != null)
+                        if (throwIfNotFound)
                         {
-                            throw new ActivationException(
-                                string.Format(CultureInfo.InvariantCulture, "Could not construct type {0} because one of its dependencies could not be resolved: {1}.",
-                                parentType.FullName,
-                                serviceType.FullName));
+                            if (parentType != null)
+                            {
+                                throw new ActivationException(
+                                    string.Format(
+                                        CultureInfo.InvariantCulture,
+                                        "Could not construct type {0} because one of its dependencies could not be resolved: {1}.",
+                                        parentType.FullName,
+                                        serviceType.FullName));
+                            }
+                            
+                            throw new ActivationException(string.Format(CultureInfo.InvariantCulture, "Type not found in cache: {0}.", serviceType.FullName));
                         }
-                        else
-                        {
-                            throw new ActivationException(
-                                string.Format(CultureInfo.InvariantCulture, "Type not found in cache: {0}.",
-                                serviceType.FullName));
-                        }
+                        
+                        return null;
                     }
 
                     if (cache)
@@ -807,7 +809,7 @@ namespace CrossPlatformLibrary.IoC
                 return attribute.UseCache;
             }
 
-            return UseCache;
+            return DefaultCacheUsage;
         }
 
         private object MakeInstance(Type serviceType)
@@ -1006,7 +1008,6 @@ namespace CrossPlatformLibrary.IoC
         public object GetInstance(Type serviceType, string key)
         {
             Guard.ArgumentNotNull(() => serviceType);
-            Guard.ArgumentNotNullOrEmpty(() => key);
 
             return this.DoGetService(serviceType, null, key);
         }
@@ -1025,7 +1026,6 @@ namespace CrossPlatformLibrary.IoC
         public object GetInstanceWithoutCaching(Type serviceType, string key)
         {
             Guard.ArgumentNotNull(() => serviceType);
-            Guard.ArgumentNotNullOrEmpty(() => key);
 
             return this.DoGetService(serviceType, null, key, false);
         }
@@ -1047,6 +1047,16 @@ namespace CrossPlatformLibrary.IoC
         public TService GetInstance<TService>()
         {
             return (TService)this.DoGetService(typeof(TService), null, this._defaultKey);
+        }
+
+        public TService TryGetInstance<TService>()
+        {
+            return (TService)this.DoGetService(
+                serviceType: typeof(TService),
+                parentType: null, 
+                key: this._defaultKey,
+                cache: DefaultCacheUsage, 
+                throwIfNotFound: false);
         }
 
         /// <summary>
@@ -1082,8 +1092,6 @@ namespace CrossPlatformLibrary.IoC
         /// <returns>An instance corresponding to the given type and key.</returns>
         public TService GetInstance<TService>(string key)
         {
-            Guard.ArgumentNotNullOrEmpty(() => key);
-
             return (TService)this.DoGetService(typeof(TService), null, key);
         }
 
@@ -1100,8 +1108,6 @@ namespace CrossPlatformLibrary.IoC
         /// <returns>An instance corresponding to the given type and key.</returns>
         public TService GetInstanceWithoutCaching<TService>(string key)
         {
-            Guard.ArgumentNotNullOrEmpty(() => key);
-
             return (TService)this.DoGetService(typeof(TService), null, key, false);
         }
 

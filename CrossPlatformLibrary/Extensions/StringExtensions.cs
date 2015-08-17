@@ -252,7 +252,6 @@ namespace CrossPlatformLibrary.Extensions
         /// <summary>
         ///     To the unique identifier.
         /// </summary>
-        /// <param name="src">The source.</param>
         /// <returns>Guid.</returns>
         ////public static Guid ToGuid(this string src)
         ////{
@@ -261,23 +260,28 @@ namespace CrossPlatformLibrary.Extensions
         ////    Array.Resize(ref hashedBytes, 16);
         ////    return new Guid(hashedBytes);
         ////}
-        public static bool Contains(this string text, IEnumerable<string> searchTexts)
-        {
-            foreach (var searchText in searchTexts)
-            {
-                if (text.Contains(searchText))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
+        
         public static bool Like(this string toSearch, string toFind)
         {
             return
                 new Regex(@"\A" + new Regex(@"\.|\$|\^|\{|\[|\(|\||\)|\*|\+|\?|\\").Replace(toFind, ch => @"\" + ch).Replace('_', '.').Replace("%", ".*") + @"\z", RegexOptions.Singleline).IsMatch(
                     toSearch);
+        }
+
+        /// <summary>
+        /// Checks if any of the given strings is contained in source string.
+        /// </summary>
+        /// <param name="source">The source string.</param>
+        /// <param name="strings">The enumeration of strings to be compared against the source string.</param>
+        /// <returns></returns>
+        public static bool ContainsAny(this string source, IEnumerable<string> strings)
+        {
+            return strings.Any(s => source.Contains(s));
+        }
+
+        public static bool StartsWithAny(this string source, IEnumerable<string> strings)
+        {
+            return strings.Any(s => source.StartsWith(s));
         }
     }
 }

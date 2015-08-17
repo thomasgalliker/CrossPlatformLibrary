@@ -1,9 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Threading;
 
-using CrossPlatformLibrary.Utils;
+
 
 #if __UNIFIED__
 using Foundation;
@@ -13,10 +12,9 @@ using MonoTouch.Foundation;
 
 namespace CrossPlatformLibrary.ExceptionHandling
 {
-    public class PlatformSpecificExceptionHandler : IPlatformSpecificExceptionHandler
+    public class PlatformSpecificExceptionHandler : ExceptionHandlerBase
     {
         private const string StackTraceDirectory = "stacktraces";
-        private IExceptionHandler exceptionHandler;
 
         [DllImport("libc")]
         private static extern int sigaction(Signal sig, IntPtr act, IntPtr oact);
@@ -27,12 +25,8 @@ namespace CrossPlatformLibrary.ExceptionHandling
             SIGSEGV = 11
         }
 
-        public void Attach(IExceptionHandler handler)
+        protected override void Attach()
         {
-            Guard.ArgumentNotNull(() => handler);
-
-            Interlocked.Exchange(ref this.exceptionHandler, handler);
-
             AppDomain.CurrentDomain.UnhandledException += this.CurrentDomainUnhandledException;
 
             this.AttachToNativeExceptions(true, true);
@@ -85,7 +79,7 @@ namespace CrossPlatformLibrary.ExceptionHandling
             }
         }
 
-        public void Detach()
+        protected override void Detach()
         {
             AppDomain.CurrentDomain.UnhandledException -= this.CurrentDomainUnhandledException;
         }
@@ -95,7 +89,7 @@ namespace CrossPlatformLibrary.ExceptionHandling
             var exception = e.ExceptionObject as Exception;
             if (exception != null)
             {
-                this.exceptionHandler.HandleException(exception);
+                this.ExceptionHandler.HandleException(exception);
             }
         }
     }

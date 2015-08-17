@@ -9,19 +9,18 @@ namespace CrossPlatformLibrary.ExceptionHandling.Handlers
     /// Provides a <see cref="IExceptionHandler"/> that traces the exception as FatalError to an <see cref="ITracer"/>.
     /// Exceptions are always rethrown. 
     /// </summary>
-    public class TracingExceptionHandler : ExceptionHandlerBase
+    public class TracingExceptionHandler : IExceptionHandler
     {
         private readonly ITracer tracer;
 
-        public TracingExceptionHandler(ITracer tracer, IPlatformSpecificExceptionHandler platformSpecificExceptionHandler)
-            : base(platformSpecificExceptionHandler)
+        public TracingExceptionHandler(ITracer tracer)
         {
             Guard.ArgumentNotNull(() => tracer);
 
             this.tracer = tracer;
         }
 
-        public override bool HandleException(Exception exception)
+        public bool HandleException(Exception exception)
         {
             // Write exception to tracer
             this.tracer.FatalError(exception);

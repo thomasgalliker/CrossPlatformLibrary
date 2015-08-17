@@ -44,6 +44,9 @@
     <Compile Include="..\CrossPlatformLibrary.iOS\ExceptionHandling\PlatformSpecificExceptionHandler.cs">
       <Link>ExceptionHandling\PlatformSpecificExceptionHandler.cs</Link>
     </Compile>
+    <Compile Include="..\CrossPlatformLibrary.iOS\Tools\PlatformServices.cs">
+      <Link>Tools\PlatformServices.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

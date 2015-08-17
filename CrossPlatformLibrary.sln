@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary", "Cro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{82600A24-8220-4C54-9EE6-EFF590F0104F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.Tests", "Tests\CrossPlatformLibrary.Tests\CrossPlatformLibrary.Tests.csproj", "{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,12 +131,23 @@ Global
 		{A6FCEF44-D2BA-42C7-B3CB-13667BCD7B54}.Release|ARM.ActiveCfg = Release|Any CPU
 		{A6FCEF44-D2BA-42C7-B3CB-13667BCD7B54}.Release|x64.ActiveCfg = Release|Any CPU
 		{A6FCEF44-D2BA-42C7-B3CB-13667BCD7B54}.Release|x86.ActiveCfg = Release|Any CPU
+		{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE}.Release|ARM.ActiveCfg = Release|Any CPU
+		{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE}.Release|x64.ActiveCfg = Release|Any CPU
+		{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE} = {B5AEA046-0E87-4A7B-8F11-80B6BDDA1F2A}
+		{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE} = {82600A24-8220-4C54-9EE6-EFF590F0104F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		VisualSVNWorkingCopyRoot = .

@@ -30,6 +30,13 @@ namespace CrossPlatformLibrary.Tracing
             tracer.Write(Category.Error, message, arguments);
         }
 
+
+        [DebuggerStepThrough]
+        public static void Exception(this ITracer tracer, Exception exception, string message = null, params object[] arguments)
+        {
+            tracer.Write(Category.Error, exception, message, arguments);
+        }
+
         [DebuggerStepThrough]
         public static void Exception(this ITracer tracer, Exception exception, string message = null, [CallerMemberName]string callerMemberName = "")
         {

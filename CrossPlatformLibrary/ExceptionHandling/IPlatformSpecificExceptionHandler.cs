@@ -2,8 +2,6 @@
 {
     public interface IPlatformSpecificExceptionHandler
     {
-        void Attach(IExceptionHandler exceptionHandler);
-
-        void Detach();
+        void RegisterExceptionHandler(IExceptionHandler exceptionHandler);
     }
 }

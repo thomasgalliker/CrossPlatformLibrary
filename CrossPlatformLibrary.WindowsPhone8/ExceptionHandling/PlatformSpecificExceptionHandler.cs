@@ -1,25 +1,17 @@
-﻿using System.Threading;
-using System.Windows;
+﻿using System.Windows;
 
-using CrossPlatformLibrary.Utils;
 
 namespace CrossPlatformLibrary.ExceptionHandling
 {
-    public class PlatformSpecificExceptionHandler : IPlatformSpecificExceptionHandler
+    public class PlatformSpecificExceptionHandler : ExceptionHandlerBase
     {
-        private IExceptionHandler exceptionHandler;
-
         private void OnCurrentApplicationUnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
-            e.Handled = this.exceptionHandler.HandleException(e.ExceptionObject);
+            e.Handled = this.ExceptionHandler.HandleException(e.ExceptionObject);
         }
 
-        public void Attach(IExceptionHandler handler)
+        protected override void Attach()
         {
-            Guard.ArgumentNotNull(() => handler);
-
-            Interlocked.Exchange(ref this.exceptionHandler, handler);
-
             if (Application.Current != null)
             {
                 Application.Current.UnhandledException += this.OnCurrentApplicationUnhandledException;
@@ -31,10 +23,10 @@ namespace CrossPlatformLibrary.ExceptionHandling
             // {
             //    throw new Exception("TestException");
             // }
-            AsyncSynchronizationContext.Register(this.exceptionHandler);
+            AsyncSynchronizationContext.Register(this.ExceptionHandler); // TODO GATH: Move to ExceptionHandlerBase?
         }
 
-        public void Detach()
+        protected override void Detach()
         {
             if (Application.Current != null)
             {

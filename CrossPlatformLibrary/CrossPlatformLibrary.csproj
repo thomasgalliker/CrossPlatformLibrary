@@ -38,7 +38,7 @@
     <Compile Include="Bootstrapping\BoostrappingException.cs" />
     <Compile Include="Bootstrapping\BootstrapperBase.cs" />
     <Compile Include="Bootstrapping\IBootstrapper.cs" />
-    <Compile Include="ExceptionHandling\ContainerExtension.cs" />
+    <Compile Include="CrossPlatformLibrary.cs" />
     <Compile Include="IoC\DefaultRegistrationConvention.cs" />
     <Compile Include="IoC\IContainerExtension.cs" />
     <Compile Include="Dispatching\ContainerExtension.cs" />
@@ -68,12 +68,12 @@
     <Compile Include="Collection\Range.cs" />
     <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Tools\PlatformServices.cs" />
+    <Compile Include="Tools\IPlatformServices.cs" />
+    <Compile Include="Tools\PlatformServicesBase.cs" />
     <Compile Include="Tracing\ActionTracer.cs" />
     <Compile Include="Tracing\ActionTracerFactory.cs" />
     <Compile Include="Utils\HighlightMarker.cs" />
     <Compile Include="Tools\PlatformSpecific\IAdapterResolver.cs" />
-    <Compile Include="Tools\PlatformSpecific\PlatformAdapter.cs" />
     <Compile Include="Tools\PlatformSpecific\ProbingAdapterResolver.cs" />
     <Compile Include="Tracing\Category.cs" />
     <Compile Include="Tracing\DebugTracer.cs" />
@@ -90,6 +90,7 @@
     <Compile Include="Utils\ByteConverter.cs" />
     <Compile Include="Utils\Guard.cs" />
     <Compile Include="Utils\HashCodeHelper.cs" />
+    <Compile Include="Utils\AsyncInline.cs" />
     <Compile Include="Utils\SerializerHelper.cs" />
   </ItemGroup>
   <ItemGroup>
