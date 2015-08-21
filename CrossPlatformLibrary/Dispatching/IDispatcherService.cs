@@ -4,6 +4,8 @@ namespace CrossPlatformLibrary.Dispatching
 {
     public interface IDispatcherService
     {
+        ////void BeginInvokeOnUI(Action action); //TODO GATH: Implement non-checking version of beginInvoke
+
         /// <summary>
         ///     Executes an action on the UI thread. If this method is called
         ///     from the UI thread, the action is executed immendiately. If the

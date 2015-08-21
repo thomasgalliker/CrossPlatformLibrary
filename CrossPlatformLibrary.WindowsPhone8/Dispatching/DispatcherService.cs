@@ -1,16 +1,17 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Threading;
+﻿using CrossPlatformLibrary.Utils;
 
-using CrossPlatformLibrary.Utils;
+using System;
+
 
 #if NETFX_CORE
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.Foundation;
 #else
-#if SILVERLIGHT
+using System.Windows.Threading;
 
+#if SILVERLIGHT
+using System.Windows;
 #endif
 #endif
 
@@ -28,11 +29,11 @@ namespace CrossPlatformLibrary.Dispatching
         ///     <see cref="Initialize" /> method has been called on the UI thread.
         /// </summary>
 #if NETFX_CORE
-        public CoreDispatcher UIDispatcher
+        private CoreDispatcher UIDispatcher
 #else
-        public Dispatcher UIDispatcher
+        private Dispatcher UIDispatcher
 #endif
-        { get; private set; }
+        { get; set; }
 
         /// <summary>
         ///     Executes an action on the UI thread. If this method is called
@@ -55,7 +56,7 @@ namespace CrossPlatformLibrary.Dispatching
             Guard.ArgumentNotNull(() => action);
 
 #if NETFX_CORE
-            if (UIDispatcher.HasThreadAccess)
+            if (this.UIDispatcher.HasThreadAccess)
 #else
             if (this.UIDispatcher.CheckAccess())
 #endif
@@ -65,7 +66,7 @@ namespace CrossPlatformLibrary.Dispatching
             else
             {
 #if NETFX_CORE
-                UIDispatcher.RunAsync(CoreDispatcherPriority.Normal,  () => action());
+                this.UIDispatcher.RunAsync(CoreDispatcherPriority.Normal,  () => action());
 #else
                 this.UIDispatcher.BeginInvoke(action);
 #endif
@@ -78,7 +79,7 @@ namespace CrossPlatformLibrary.Dispatching
     /// </summary>
     /// <param name="action">The action that must be executed.</param>
     /// <returns>The object that provides handlers for the completed async event dispatch.</returns>
-        public static IAsyncAction RunAsync(Action action)
+        public IAsyncAction RunAsync(Action action)
 #else
         /// <summary>
         ///     Invokes an action asynchronously on the UI thread.
@@ -92,7 +93,7 @@ namespace CrossPlatformLibrary.Dispatching
 #endif
         {
 #if NETFX_CORE
-            return UIDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action());
+            return this.UIDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action());
 #else
             return this.UIDispatcher.BeginInvoke(action);
 #endif
@@ -113,7 +114,7 @@ namespace CrossPlatformLibrary.Dispatching
             if (this.UIDispatcher != null)
 #else
 #if NETFX_CORE
-            if (UIDispatcher != null)
+            if (this.UIDispatcher != null)
 #else
             if (UIDispatcher != null
                 && UIDispatcher.Thread.IsAlive)
@@ -124,7 +125,7 @@ namespace CrossPlatformLibrary.Dispatching
             }
 
 #if NETFX_CORE
-            UIDispatcher = Window.Current.Dispatcher;
+            this.UIDispatcher = Window.Current.Dispatcher;
 #else
 #if SILVERLIGHT
             this.UIDispatcher = Deployment.Current.Dispatcher;

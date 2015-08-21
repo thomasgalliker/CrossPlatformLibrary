@@ -17,7 +17,7 @@ namespace CrossPlatformLibrary.ExceptionHandling
             var currentSyncContext = Current;
             if (currentSyncContext == null)
             {
-                throw new InvalidOperationException("Ensure a synchronization context exists before calling this method.");
+                throw new InvalidOperationException("Ensure a synchronization context exists before calling this method. A synchronization context usually exists after the UI has been initialized.");
             }
 
             var customSynchronizationContext = currentSyncContext as AsyncSynchronizationContext;

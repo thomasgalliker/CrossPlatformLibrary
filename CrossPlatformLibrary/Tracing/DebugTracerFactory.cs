@@ -1,4 +1,5 @@
-﻿namespace CrossPlatformLibrary.Tracing
+﻿
+namespace CrossPlatformLibrary.Tracing
 {
     public class DebugTracerFactory : TracerFactoryBase
     {

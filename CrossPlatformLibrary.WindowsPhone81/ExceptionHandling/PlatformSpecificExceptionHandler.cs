@@ -1,12 +1,12 @@
-﻿using System.Windows;
+﻿using Windows.UI.Xaml;
 
 namespace CrossPlatformLibrary.ExceptionHandling
 {
     public class PlatformSpecificExceptionHandler : ExceptionHandlerBase
     {
-        private void OnCurrentApplicationUnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
+        private void OnCurrentApplicationUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            e.Handled = this.ExceptionHandler.HandleException(e.ExceptionObject);
+            e.Handled = this.ExceptionHandler.HandleException(e.Exception);
         }
 
         protected override void Attach()

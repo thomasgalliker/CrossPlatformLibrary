@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -19,8 +20,12 @@ namespace CrossPlatformLibrary.Tools
 
         public override Assembly[] GetAssemblies()
         {
+#if NETFX_CORE
+            return AsyncInline.Run(this.LoadInternal).ToArray();
+#else
             // Overriding GetAssemblies with a more efficient and less error-prone implementation
             return AppDomain.CurrentDomain.GetAssemblies();
+#endif
         }
 
         public override void LoadAssemblies()
@@ -28,24 +33,37 @@ namespace CrossPlatformLibrary.Tools
             AsyncInline.Run(this.LoadInternal);
         }
 
-        private async Task LoadInternal()
+
+        private async Task<IEnumerable<Assembly>> LoadInternal()
+        {
+            var dllFiles = await this.GetAssemblyFiles();
+
+            return dllFiles.Select(this.LoadAssembly);
+        }
+
+        private async Task<IEnumerable<StorageFile>> GetAssemblyFiles()
         {
             var folder = await StorageFolder.GetFolderFromPathAsync(Windows.ApplicationModel.Package.Current.InstalledLocation.Path);
             var files = await folder.GetFilesAsync();
-            var dllFiles = files.Where(f => f.Name.StartsWithAny(CrossPlatformLibrary.AssemblyNamespaces) && f.Name.EndsWith(DllFileExtension)).ToList();
+            return files.Where(f => f.Name.StartsWithAny(CrossPlatformLibrary.AssemblyNamespaces) && f.Name.EndsWith(DllFileExtension));
+        }
 
-            foreach (var dllFile in dllFiles)
+        private Assembly LoadAssembly(IStorageFile dllFile)
+        {
+            var assemblyName = dllFile.Name.Replace(DllFileExtension, "");
+            try
             {
-                var assemblyName = dllFile.Name.Replace(DllFileExtension, "");
-                try
-                {
-                    this.tracer.Debug("Calling Assembly.Load({0})", assemblyName);
-                    Assembly.Load(assemblyName);
-                }
-                catch (Exception ex)
-                {
-                    this.tracer.Exception(ex, "Assembly.Load({0}) failed. Exception: {1}", assemblyName, ex.Message);
-                }
+                this.tracer.Debug("Calling Assembly.Load({0})", assemblyName);
+#if NETFX_CORE
+                return Assembly.Load(new AssemblyName(assemblyName));
+#else
+                return Assembly.Load(assemblyName);
+#endif
+            }
+            catch (Exception ex)
+            {
+                this.tracer.Exception(ex, "Assembly.Load({0}) failed. Exception: {1}", assemblyName, ex.Message);
+                throw;
             }
         }
     }

@@ -6,7 +6,7 @@ using CrossPlatformLibrary.Utils;
 
 namespace CrossPlatformLibrary.Tools
 {
-    public abstract class PlatformServicesBase : IPlatformServices
+    public abstract class PlatformServicesBase : IPlatformServices // TODO GATH: Think of new inheritance hierarchy!
     {
         protected readonly ITracer tracer;
 

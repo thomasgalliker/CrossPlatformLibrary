@@ -19,7 +19,6 @@ namespace CrossPlatformLibrary.Tools
 
         public override void LoadAssemblies()
         {
-            ////throw new NotImplementedException("Is it really possible/necessary on Android?");
         }
     }
 }
