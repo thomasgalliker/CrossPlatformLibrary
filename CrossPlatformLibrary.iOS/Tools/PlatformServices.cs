@@ -16,9 +16,5 @@ namespace CrossPlatformLibrary.Tools
             // Overriding GetAssemblies with a more efficient and less error-prone implementation
             return AppDomain.CurrentDomain.GetAssemblies();
         }
-
-        public override void LoadAssemblies()
-        {
-        }
     }
 }

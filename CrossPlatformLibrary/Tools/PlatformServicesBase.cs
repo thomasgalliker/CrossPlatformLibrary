@@ -6,7 +6,7 @@ using CrossPlatformLibrary.Utils;
 
 namespace CrossPlatformLibrary.Tools
 {
-    public abstract class PlatformServicesBase : IPlatformServices // TODO GATH: Think of new inheritance hierarchy!
+    public abstract class PlatformServicesBase : IPlatformServices 
     {
         protected readonly ITracer tracer;
 
@@ -35,6 +35,9 @@ namespace CrossPlatformLibrary.Tools
             return assemblies;
         }
 
-        public abstract void LoadAssemblies();
+        public virtual void LoadReferencedAssemblies()
+        {
+            // This function cannot be used on some platforms
+        }
     }
 }

@@ -15,10 +15,11 @@ using Microsoft.Practices.ServiceLocation;
 namespace CrossPlatformLibrary.Bootstrapping
 {
     /// <summary>
-    /// Provides an abstract base implementation of <see cref="IBootstrapper"/> 
-    /// that will use an <see cref="IServiceLocator"/> as its configuration container.
+    /// Provides an base implementation of <see cref="IBootstrapper"/> which has to be used to startup and shutdown
+    /// your application. The startup sequence contains some virtual method calls which can be overriden by your own
+    /// implementation of  <see cref="Bootstrapper"/>.
     /// </summary>
-    public abstract partial class BootstrapperBase : IBootstrapper
+    public class Bootstrapper : IBootstrapper
     {
         private readonly ITracer tracer;
 
@@ -28,7 +29,7 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// </summary>
         private SimpleIoc simpleIoc;
 
-        protected BootstrapperBase(ITracer tracer = null)
+        protected Bootstrapper(ITracer tracer = null)
         {
             this.tracer = tracer ?? Tracer.Create(this);
         }
@@ -97,7 +98,7 @@ namespace CrossPlatformLibrary.Bootstrapping
 
                 this.simpleIoc.RegisterWithConvention<IPlatformServices>();
                 var platformServices = this.simpleIoc.GetInstance<IPlatformServices>();
-                platformServices.LoadAssemblies();
+                platformServices.LoadReferencedAssemblies();
 
                 this.ConfigureExtensions(platformServices);
 
@@ -226,7 +227,9 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// Does the actual start procedure for the application or service.
         /// </summary>
         /// <remarks>When implemented by inheriting classes, this method will show the shell form of the application or start the service.</remarks>
-        protected abstract void OnStartup();
+        protected virtual void OnStartup()
+        {
+        }
 
         private void InternalConfigureContainer()
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace CrossPlatformLibrary.Utils
 {
@@ -71,6 +72,28 @@ namespace CrossPlatformLibrary.Utils
             if (!func())
             {
                 action();
+            }
+        }
+
+        public static void ArgumentMustBeInterface(Type classType)
+        {
+            CheckIfTypeIsInterface(classType, false, "Type must be an interface.");
+        }
+
+        public static void ArgumentMustNotBeInterface(Type classType)
+        {
+            CheckIfTypeIsInterface(classType, true, "Type must not be an interface.");
+        }
+
+        private static void CheckIfTypeIsInterface(Type classType, bool throwIfItIsAnInterface, string exceptionMessage)
+        {
+#if NETFX_CORE
+            if (classType.GetTypeInfo().IsInterface == throwIfItIsAnInterface)
+#else
+            if (classType.IsInterface == throwIfItIsAnInterface)
+#endif
+            {
+                throw new ArgumentException(exceptionMessage);
             }
         }
     }

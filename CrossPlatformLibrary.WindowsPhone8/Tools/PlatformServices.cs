@@ -28,17 +28,16 @@ namespace CrossPlatformLibrary.Tools
 #endif
         }
 
-        public override void LoadAssemblies()
+        public override void LoadReferencedAssemblies()
         {
             AsyncInline.Run(this.LoadInternal);
         }
-
 
         private async Task<IEnumerable<Assembly>> LoadInternal()
         {
             var dllFiles = await this.GetAssemblyFiles();
 
-            return dllFiles.Select(this.LoadAssembly);
+            return dllFiles.Select(this.LoadAssembly).ToList();
         }
 
         private async Task<IEnumerable<StorageFile>> GetAssemblyFiles()

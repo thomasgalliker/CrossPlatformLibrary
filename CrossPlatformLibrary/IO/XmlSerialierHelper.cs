@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -10,10 +11,7 @@ namespace CrossPlatformLibrary.IO
     {
         public static string SerializeToXml(this object objToSerialize)
         {
-            if (objToSerialize == null)
-            {
-                return null;
-            }
+            Guard.ArgumentNotNull(() => objToSerialize);
 
             var memoryStream = new MemoryStream();
             var serializer = new XmlSerializer(objToSerialize.GetType());
@@ -23,10 +21,14 @@ namespace CrossPlatformLibrary.IO
             return ByteConverter.Utf8ByteArrayToString(memoryStream.ToArray());
         }
 
-        public static T DeserializeFromXml<T>(this string xml)
+        public static T DeserializeFromXml<T>(this string xmlString)
         {
-            var serializer = new XmlSerializer(typeof(T));
-            var memoryStream = new MemoryStream(ByteConverter.StringToUtf8ByteArray(xml));
+            Guard.ArgumentNotNullOrEmpty(() => xmlString);
+            Type type = typeof(T);
+            Guard.ArgumentMustNotBeInterface(type);
+
+            var serializer = new XmlSerializer(type);
+            var memoryStream = new MemoryStream(ByteConverter.StringToUtf8ByteArray(xmlString));
             return (T)serializer.Deserialize(memoryStream);
         }
     }
