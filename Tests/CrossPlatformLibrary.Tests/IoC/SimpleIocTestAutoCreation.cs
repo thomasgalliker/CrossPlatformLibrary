@@ -1,13 +1,12 @@
-﻿using CrossPlatformLibrary.Tests.Stubs;
-
-using System.Linq;
-
+﻿using System.Linq;
 using CrossPlatformLibrary.IoC;
-
+using CrossPlatformLibrary.Tests.Stubs;
+using FluentAssertions;
 using Xunit;
 
 namespace CrossPlatformLibrary.Tests.IoC
 {
+    [Collection("IoC Test Collection")]
     public class SimpleIocTestAutoCreation
     {
         [Fact]
@@ -17,10 +16,10 @@ namespace CrossPlatformLibrary.Tests.IoC
             SimpleIoc.Default.Register<TestClass1>(true);
 
             var instances = SimpleIoc.Default.GetAllInstances<TestClass1>();
-            Assert.Equal(1, instances.Count());
+            instances.Should().HaveCount(1);
 
             var defaultInstance = SimpleIoc.Default.GetInstance<TestClass1>();
-            Assert.Same(defaultInstance, instances.ElementAt(0));
+            defaultInstance.ShouldBeEquivalentTo(instances.ElementAt(0));
         }
 
         [Fact]
@@ -32,7 +31,7 @@ namespace CrossPlatformLibrary.Tests.IoC
                 true);
 
             var instances = SimpleIoc.Default.GetAllInstances<TestClass1>();
-            Assert.Equal(1, instances.Count());
+            instances.Should().HaveCount(1);
 
             var defaultInstance = SimpleIoc.Default.GetInstance<TestClass1>();
             Assert.Same(defaultInstance, instances.ElementAt(0));
@@ -49,7 +48,7 @@ namespace CrossPlatformLibrary.Tests.IoC
                 true);
 
             var instances = SimpleIoc.Default.GetAllInstances<TestClass1>();
-            Assert.Equal(1, instances.Count());
+            instances.Should().HaveCount(1);
 
             var defaultInstance = SimpleIoc.Default.GetInstance<TestClass1>(key1);
             Assert.Same(defaultInstance, instances.ElementAt(0));
@@ -64,7 +63,7 @@ namespace CrossPlatformLibrary.Tests.IoC
                 true);
 
             var instances = SimpleIoc.Default.GetAllInstances<ITestClass>();
-            Assert.Equal(1, instances.Count());
+            instances.Should().HaveCount(1);
 
             var defaultInstance = SimpleIoc.Default.GetInstance<ITestClass>();
             Assert.Same(defaultInstance, instances.ElementAt(0));
@@ -81,7 +80,7 @@ namespace CrossPlatformLibrary.Tests.IoC
                 true);
 
             var instances = SimpleIoc.Default.GetAllInstances<ITestClass>();
-            Assert.Equal(1, instances.Count());
+            instances.Should().HaveCount(1);
 
             var defaultInstance = SimpleIoc.Default.GetInstance<ITestClass>(key1);
             Assert.Same(defaultInstance, instances.ElementAt(0));
@@ -94,7 +93,7 @@ namespace CrossPlatformLibrary.Tests.IoC
             SimpleIoc.Default.Register<ITestClass, TestClass1>(true);
 
             var instances = SimpleIoc.Default.GetAllInstances<ITestClass>();
-            Assert.Equal(1, instances.Count());
+            instances.Should().HaveCount(1);
 
             var defaultInstance = SimpleIoc.Default.GetInstance<ITestClass>();
             Assert.Same(defaultInstance, instances.ElementAt(0));

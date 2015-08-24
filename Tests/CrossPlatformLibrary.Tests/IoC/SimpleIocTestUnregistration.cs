@@ -6,6 +6,7 @@ using Xunit;
 
 namespace CrossPlatformLibrary.Tests.IoC
 {
+    [Collection("IoC Test Collection")]
     public class SimpleIocTestUnregistration
     {
         [Fact]

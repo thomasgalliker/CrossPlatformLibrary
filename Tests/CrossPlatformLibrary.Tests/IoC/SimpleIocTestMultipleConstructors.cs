@@ -1,14 +1,12 @@
-﻿using CrossPlatformLibrary.Tests.Stubs;
-
-using System.Diagnostics;
-
+﻿using System.Diagnostics;
 using CrossPlatformLibrary.IoC;
-
+using CrossPlatformLibrary.Tests.Stubs;
 using Microsoft.Practices.ServiceLocation;
 using Xunit;
 
 namespace CrossPlatformLibrary.Tests.IoC
 {
+    [Collection("IoC Test Collection")]
     public class SimpleIocTestMultipleOrPrivateConstructors
     {
         [Fact]

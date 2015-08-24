@@ -5,11 +5,14 @@ using System.Linq;
 
 using CrossPlatformLibrary.IoC;
 
+using FluentAssertions;
+
 using Microsoft.Practices.ServiceLocation;
 using Xunit;
 
 namespace CrossPlatformLibrary.Tests.IoC
 {
+    [Collection("IoC Test Collection")]
     public class SimpleIocTestMultipleInstances
     {
         [Fact]
@@ -152,12 +155,12 @@ namespace CrossPlatformLibrary.Tests.IoC
             Assert.Equal(4, TestClass1.InstancesCount);
 
             var instances = SimpleIoc.Default.GetAllCreatedInstances<TestClass1>();
-            Assert.Equal(3, instances.Count());
+            instances.Should().HaveCount(3);
 
             instances = SimpleIoc.Default.GetAllCreatedInstances<TestClass1>();
             SimpleIoc.Default.GetInstance<TestClass1>(key3);
 
-            Assert.Equal(4, instances.Count());
+            instances.Should().HaveCount(4);
 
             var list = instances.ToList();
 
@@ -1008,12 +1011,12 @@ namespace CrossPlatformLibrary.Tests.IoC
             SimpleIoc.Default.Register(() => instance);
 
             var instances = SimpleIoc.Default.GetAllInstances<TestClass1>();
-            Assert.Equal(1, instances.Count());
+            instances.Should().HaveCount(1);
 
             SimpleIoc.Default.GetInstance<TestClass1>("key1");
 
             instances = SimpleIoc.Default.GetAllInstances<TestClass1>();
-            Assert.Equal(2, instances.Count());
+            instances.Should().HaveCount(2);
         }
 
         [Fact]
@@ -1026,7 +1029,7 @@ namespace CrossPlatformLibrary.Tests.IoC
             SimpleIoc.Default.Register<ITestClass>(() => new TestClass1(), "key2");
 
             var instances = SimpleIoc.Default.GetAllInstances<ITestClass>();
-            Assert.Equal(3, instances.Count());
+            instances.Should().HaveCount(3);
         }
 
         [Fact]
@@ -1039,7 +1042,7 @@ namespace CrossPlatformLibrary.Tests.IoC
             SimpleIoc.Default.Register<ITestClass>(() => new TestClass1(), "key2");
 
             var instances = SimpleIoc.Default.GetAllInstances<ITestClass>();
-            Assert.Equal(3, instances.Count());
+            instances.Should().HaveCount(3);
         }
 
         [Fact]
@@ -1082,12 +1085,12 @@ namespace CrossPlatformLibrary.Tests.IoC
             SimpleIoc.Default.Register(() => instance);
 
             var instances = SimpleIoc.Default.GetAllInstances<TestClass1>();
-            Assert.Equal(1, instances.Count());
+            instances.Should().HaveCount(1);
 
             SimpleIoc.Default.GetInstance<TestClass1>("key1");
 
             instances = SimpleIoc.Default.GetAllInstances<TestClass1>();
-            Assert.Equal(2, instances.Count());
+            instances.Should().HaveCount(2);
         }
 
         [Fact]
@@ -1100,7 +1103,7 @@ namespace CrossPlatformLibrary.Tests.IoC
             SimpleIoc.Default.Register<ITestClass>(() => new TestClass1(), "key2");
 
             var instances = SimpleIoc.Default.GetAllInstances<ITestClass>();
-            Assert.Equal(3, instances.Count());
+            instances.Should().HaveCount(3);
         }
 
         [Fact]
@@ -1113,7 +1116,7 @@ namespace CrossPlatformLibrary.Tests.IoC
             SimpleIoc.Default.Register<ITestClass>(() => new TestClass1(), "key2");
 
             var instances = SimpleIoc.Default.GetAllInstances<ITestClass>();
-            Assert.Equal(3, instances.Count());
+            instances.Should().HaveCount(3);
         }
     }
 }
