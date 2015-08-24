@@ -105,7 +105,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="DispatcherServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -212,9 +211,9 @@
       <Project>{a6fcef44-d2ba-42c7-b3cb-13667bcd7b54}</Project>
       <Name>CrossPlatformLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CrossPlatformLibrary.Tests\CrossPlatformLibrary.Tests.csproj">
-      <Project>{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE}</Project>
-      <Name>CrossPlatformLibrary.Tests</Name>
+    <ProjectReference Include="..\CrossPlatformLibrary.IntegrationTests\CrossPlatformLibrary.IntegrationTests.csproj">
+      <Project>{26c644f0-fd3a-4807-8c1b-ca3bad52a5ca}</Project>
+      <Name>CrossPlatformLibrary.IntegrationTests</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

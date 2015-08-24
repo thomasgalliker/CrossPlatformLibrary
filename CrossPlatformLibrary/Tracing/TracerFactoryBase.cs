@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Reflection;
 
 using CrossPlatformLibrary.Utils;
@@ -45,14 +44,13 @@ namespace CrossPlatformLibrary.Tracing
         private static string GetTypeNameAndAssemblyVersion(Type type)
         {
             var fileVersion = string.Empty;
-            var customAttributes = type.GetTypeInfo().GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false).ToArray();
-            if (customAttributes != null && customAttributes.Any())
+
+            var assembly = type.GetTypeInfo().Assembly;
+
+            var assemblyFileVersionAttribute = assembly.GetCustomAttribute(typeof(AssemblyFileVersionAttribute)) as AssemblyFileVersionAttribute;
+            if (assemblyFileVersionAttribute != null)
             {
-                var fileVersionAttribute = customAttributes[0] as AssemblyFileVersionAttribute;
-                if (fileVersionAttribute != null)
-                {
-                    fileVersion = fileVersionAttribute.Version;
-                }
+                fileVersion = assemblyFileVersionAttribute.Version;
             }
 
             if (string.IsNullOrEmpty(fileVersion))

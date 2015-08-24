@@ -4,7 +4,7 @@ using Xunit;
 
 namespace CrossPlatformLibrary.Tests.IoC
 {
-    [Collection("IoC Test Collection")]
+    [Collection("IoC")]
     public class SimpleIocTestContains
     {
         [Fact]

@@ -10,7 +10,7 @@ namespace CrossPlatformLibrary.Tracing
     /// </summary>
     public static class Tracer
     {
-        private static ITracerFactory internalFactory = Tracer.CreateDefaultFactory();
+        private static ITracerFactory internalFactory;
 
         /// <summary>
         /// Gets the currently active <see cref="ITracerFactory"/>.
@@ -20,7 +20,7 @@ namespace CrossPlatformLibrary.Tracing
         {
             get
             {
-                return internalFactory;
+                return internalFactory ?? Tracer.CreateDefaultFactory();
             }
         }
 
@@ -30,8 +30,6 @@ namespace CrossPlatformLibrary.Tracing
         /// <param name="factory">The <see cref="ITracerFactory"/> to use within the <see cref="Tracer"/>.</param>
         public static void SetFactory(ITracerFactory factory)
         {
-            Guard.ArgumentNotNull(() => factory);
-
             Interlocked.Exchange(ref internalFactory, factory);
         }
 

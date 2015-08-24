@@ -1,28 +1,35 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Text;
 using System.Xml.Serialization;
+
+using CrossPlatformLibrary.Utils;
 
 namespace CrossPlatformLibrary.IO
 {
     public static class XmlSerializerHelper
     {
-        public static string Serialize<T>(T obj)
+        public static string SerializeToXml(this object objToSerialize)
         {
-            var outStream = new StringWriter();
-            var ser = new XmlSerializer(typeof(T));
-            ser.Serialize(outStream, obj);
-            return outStream.ToString();
+            Guard.ArgumentNotNull(() => objToSerialize);
+
+            var memoryStream = new MemoryStream();
+            var serializer = new XmlSerializer(objToSerialize.GetType());
+            var streamWriter = new StreamWriter(memoryStream, Encoding.UTF8);
+            serializer.Serialize(streamWriter, objToSerialize);
+            memoryStream = (MemoryStream)streamWriter.BaseStream;
+            return ByteConverter.Utf8ByteArrayToString(memoryStream.ToArray());
         }
 
-        public static T Deserialize<T>(string serialized)
+        public static T DeserializeFromXml<T>(this string xmlString)
         {
-            if (string.IsNullOrEmpty(serialized))
-            {
-                return default(T);
-            }
+            Guard.ArgumentNotNullOrEmpty(() => xmlString);
+            Type type = typeof(T);
+            Guard.ArgumentMustNotBeInterface(type);
 
-            var inStream = new StringReader(serialized);
-            var ser = new XmlSerializer(typeof(T));
-            return (T)ser.Deserialize(inStream);
+            var serializer = new XmlSerializer(type);
+            var memoryStream = new MemoryStream(ByteConverter.StringToUtf8ByteArray(xmlString));
+            return (T)serializer.Deserialize(memoryStream);
         }
     }
 }

@@ -25,7 +25,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{82600A24
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.Tests", "Tests\CrossPlatformLibrary.Tests\CrossPlatformLibrary.Tests.csproj", "{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.WindowsPhone8.Tests", "Tests\CrossPlatformLibrary.WindowsPhone8.Tests\CrossPlatformLibrary.WindowsPhone8.Tests.csproj", "{2843DF3E-6B90-4D8F-9B92-A9A909005428}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.IntegrationTests.WindowsPhone8", "Tests\CrossPlatformLibrary.WindowsPhone8.Tests\CrossPlatformLibrary.IntegrationTests.WindowsPhone8.csproj", "{2843DF3E-6B90-4D8F-9B92-A9A909005428}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.IntegrationTests", "Tests\CrossPlatformLibrary.IntegrationTests\CrossPlatformLibrary.IntegrationTests.csproj", "{26C644F0-FD3A-4807-8C1B-CA3BAD52A5CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -163,6 +165,16 @@ Global
 		{2843DF3E-6B90-4D8F-9B92-A9A909005428}.Release|x86.ActiveCfg = Release|x86
 		{2843DF3E-6B90-4D8F-9B92-A9A909005428}.Release|x86.Build.0 = Release|x86
 		{2843DF3E-6B90-4D8F-9B92-A9A909005428}.Release|x86.Deploy.0 = Release|x86
+		{26C644F0-FD3A-4807-8C1B-CA3BAD52A5CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26C644F0-FD3A-4807-8C1B-CA3BAD52A5CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26C644F0-FD3A-4807-8C1B-CA3BAD52A5CA}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{26C644F0-FD3A-4807-8C1B-CA3BAD52A5CA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{26C644F0-FD3A-4807-8C1B-CA3BAD52A5CA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{26C644F0-FD3A-4807-8C1B-CA3BAD52A5CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26C644F0-FD3A-4807-8C1B-CA3BAD52A5CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26C644F0-FD3A-4807-8C1B-CA3BAD52A5CA}.Release|ARM.ActiveCfg = Release|Any CPU
+		{26C644F0-FD3A-4807-8C1B-CA3BAD52A5CA}.Release|x64.ActiveCfg = Release|Any CPU
+		{26C644F0-FD3A-4807-8C1B-CA3BAD52A5CA}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -171,6 +183,7 @@ Global
 		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE} = {B5AEA046-0E87-4A7B-8F11-80B6BDDA1F2A}
 		{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE} = {82600A24-8220-4C54-9EE6-EFF590F0104F}
 		{2843DF3E-6B90-4D8F-9B92-A9A909005428} = {82600A24-8220-4C54-9EE6-EFF590F0104F}
+		{26C644F0-FD3A-4807-8C1B-CA3BAD52A5CA} = {82600A24-8220-4C54-9EE6-EFF590F0104F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		VisualSVNWorkingCopyRoot = .
