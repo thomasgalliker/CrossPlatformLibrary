@@ -10,7 +10,7 @@ namespace CrossPlatformLibrary.Tracing
     /// </summary>
     public static class Tracer
     {
-        private static ITracerFactory internalFactory;
+        private static ITracerFactory internalFactory = Tracer.CreateDefaultFactory();
 
         /// <summary>
         /// Gets the currently active <see cref="ITracerFactory"/>.
