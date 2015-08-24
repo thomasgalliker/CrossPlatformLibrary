@@ -2,23 +2,16 @@
 using System.Collections.Generic;
 
 using CrossPlatformLibrary.IO;
-using CrossPlatformLibrary.Tests.UnitTesting;
 
 using FluentAssertions;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#if NEWUNITTEST
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-#else
-#endif
+using Xunit;
 
 namespace CrossPlatformLibrary.Tests.IO
 {
-    [TestClass]
     public class XmlSerializerHelperTests
     {
-        [TestMethod]
+        [Fact]
         public void ShouldSerializeAnEmptyObject()
         {
             // Arrange
@@ -29,11 +22,11 @@ namespace CrossPlatformLibrary.Tests.IO
             var deserializedObject = serializedString.DeserializeFromXml<object>();
 
             // Assert
-            Assert.IsNotNull(serializedString);
-            Assert.IsNotNull(deserializedObject);
+            Assert.NotNull(serializedString);
+            Assert.NotNull(deserializedObject);
         }
 
-        [TestMethod]
+        [Fact]
         public void ShouldSerializeAList()
         {
             // Arrange
@@ -44,15 +37,15 @@ namespace CrossPlatformLibrary.Tests.IO
             var deserializedList = serializedString.DeserializeFromXml<List<string>>();
 
             // Assert
-            Assert.IsNotNull(serializedString);
-            Assert.IsNotNull(deserializedList);
-            Assert.IsTrue(deserializedList.Count == 3);
-            Assert.IsTrue(deserializedList[0] == "a");
-            Assert.IsTrue(deserializedList[1] == "b");
-            Assert.IsTrue(deserializedList[2] == "c");
+            Assert.NotNull(serializedString);
+            Assert.NotNull(deserializedList);
+            Assert.True(deserializedList.Count == 3);
+            Assert.True(deserializedList[0] == "a");
+            Assert.True(deserializedList[1] == "b");
+            Assert.True(deserializedList[2] == "c");
         }
 
-        [TestMethod]
+        [Fact]
         public void ShouldNotDeserializeAnInterfaceType()
         {
             // Arrange
@@ -60,7 +53,7 @@ namespace CrossPlatformLibrary.Tests.IO
 
             // Act
             var serializedString = list.SerializeToXml();
-            ExceptionAssert.IsThrown<ArgumentException>(() => serializedString.DeserializeFromXml<IList<string>>());
+            Assert.Throws<ArgumentException>(() => serializedString.DeserializeFromXml<IList<string>>());
 
             // Assert
             serializedString.Should().NotBeNullOrEmpty();

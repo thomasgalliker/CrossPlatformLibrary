@@ -5,18 +5,13 @@ using System.Diagnostics;
 using CrossPlatformLibrary.IoC;
 
 using Microsoft.Practices.ServiceLocation;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-#if NEWUNITTEST
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-#else
-#endif
+using Xunit;
 
 namespace CrossPlatformLibrary.Tests.IoC
 {
-    [TestClass]
     public class SimpleIocTestMultipleOrPrivateConstructors
     {
-        [TestMethod]
+        [Fact]
         public void TestBuildInstanceWithMultipleConstructorsNotMarkedWithAttribute()
         {
             var property = new TestClass1();
@@ -25,16 +20,16 @@ namespace CrossPlatformLibrary.Tests.IoC
             SimpleIoc.Default.Register(() => new TestClass6(property));
 
             var instance1 = new TestClass6();
-            Assert.IsNotNull(instance1);
-            Assert.IsNull(instance1.MyProperty);
+            Assert.NotNull(instance1);
+            Assert.Null(instance1.MyProperty);
 
             var instance2 = SimpleIoc.Default.GetInstance<TestClass6>();
-            Assert.IsNotNull(instance2);
-            Assert.IsNotNull(instance2.MyProperty);
-            Assert.AreSame(property, instance2.MyProperty);
+            Assert.NotNull(instance2);
+            Assert.NotNull(instance2.MyProperty);
+            Assert.Same(property, instance2.MyProperty);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestBuildWithMultipleConstructors()
         {
             var property = new TestClass1();
@@ -44,16 +39,16 @@ namespace CrossPlatformLibrary.Tests.IoC
             SimpleIoc.Default.Register<TestClass5>();
 
             var instance1 = new TestClass5();
-            Assert.IsNotNull(instance1);
-            Assert.IsNull(instance1.MyProperty);
+            Assert.NotNull(instance1);
+            Assert.Null(instance1.MyProperty);
 
             var instance2 = SimpleIoc.Default.GetInstance<TestClass5>();
-            Assert.IsNotNull(instance2);
-            Assert.IsNotNull(instance2.MyProperty);
-            Assert.AreSame(property, instance2.MyProperty);
+            Assert.NotNull(instance2);
+            Assert.NotNull(instance2.MyProperty);
+            Assert.Same(property, instance2.MyProperty);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestBuildWithMultipleConstructorsNotMarkedWithAttribute()
         {
             var property = new TestClass1();
@@ -64,7 +59,7 @@ namespace CrossPlatformLibrary.Tests.IoC
             try
             {
                 SimpleIoc.Default.Register<TestClass6>();
-                Assert.Fail("ActivationException was expected");
+                Assert.True(false, "ActivationException was expected");
             }
             catch (ActivationException ex)
             {
@@ -72,7 +67,7 @@ namespace CrossPlatformLibrary.Tests.IoC
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestBuildWithPrivateConstructor()
         {
             SimpleIoc.Default.Reset();
@@ -80,7 +75,7 @@ namespace CrossPlatformLibrary.Tests.IoC
             try
             {
                 SimpleIoc.Default.Register<TestClass7>();
-                Assert.Fail("ActivationException was expected");
+                Assert.True(false, "ActivationException was expected");
             }
             catch (ActivationException ex)
             {
@@ -88,14 +83,14 @@ namespace CrossPlatformLibrary.Tests.IoC
             }
         }
         
-        [TestMethod]
+        [Fact]
         public void TestBuildWithStaticConstructor()
         {
             SimpleIoc.Default.Reset();
             SimpleIoc.Default.Register<TestClass8>();
         }
 
-        [TestMethod]
+        [Fact]
         public void TestPublicAndInternalConstructor()
         {
             SimpleIoc.Default.Reset();

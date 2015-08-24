@@ -4,19 +4,13 @@ using CrossPlatformLibrary.IoC;
 using CrossPlatformLibrary.Tests.Stubs;
 
 using Microsoft.Practices.ServiceLocation;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#if NEWUNITTEST
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-#else
-#endif
+using Xunit;
 
 namespace CrossPlatformLibrary.Tests.IoC
 {
-    [TestClass]
     public class SimpleIocTestSingleInstance
     {
-        [TestMethod]
+        [Fact]
         public void TestConstructWithProperty()
         {
             var property = new TestClass1();
@@ -25,16 +19,16 @@ namespace CrossPlatformLibrary.Tests.IoC
             SimpleIoc.Default.Register(() => new TestClass6 { MyProperty = property });
 
             var instance1 = new TestClass6();
-            Assert.IsNotNull(instance1);
-            Assert.IsNull(instance1.MyProperty);
+            Assert.NotNull(instance1);
+            Assert.Null(instance1.MyProperty);
 
             var instance2 = SimpleIoc.Default.GetInstance<TestClass6>();
-            Assert.IsNotNull(instance2);
-            Assert.IsNotNull(instance2.MyProperty);
-            Assert.AreSame(property, instance2.MyProperty);
+            Assert.NotNull(instance2);
+            Assert.NotNull(instance2.MyProperty);
+            Assert.Same(property, instance2.MyProperty);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestDefaultClassCreation()
         {
             SimpleIoc.Default.Reset();
@@ -45,13 +39,13 @@ namespace CrossPlatformLibrary.Tests.IoC
             var instance1 = SimpleIoc.Default.GetInstance<TestClass1>();
             var instance2 = SimpleIoc.Default.GetInstance<TestClass2>();
 
-            Assert.IsInstanceOfType(instance1, typeof(TestClass1));
-            Assert.IsNotNull(instance1);
-            Assert.IsInstanceOfType(instance2, typeof(TestClass2));
-            Assert.IsNotNull(instance2);
+            Assert.IsType<TestClass1>(instance1);
+            Assert.NotNull(instance1);
+            Assert.IsType<TestClass2>(instance2);
+            Assert.NotNull(instance2);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetInstanceWithGenericInterface()
         {
             SimpleIoc.Default.Reset();
@@ -60,12 +54,12 @@ namespace CrossPlatformLibrary.Tests.IoC
 
             var instance = SimpleIoc.Default.GetInstance<ITestClass>();
 
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, typeof(TestClass1));
-            Assert.AreSame(instanceOriginal, instance);
+            Assert.NotNull(instance);
+            Assert.IsType<TestClass1>(instance);
+            Assert.Same(instanceOriginal, instance);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetInstanceWithGenericType()
         {
             SimpleIoc.Default.Reset();
@@ -73,11 +67,11 @@ namespace CrossPlatformLibrary.Tests.IoC
 
             var instance = SimpleIoc.Default.GetInstance<TestClass1>();
 
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, typeof(TestClass1));
+            Assert.NotNull(instance);
+            Assert.IsType<TestClass1>(instance);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetInstanceWithInterface()
         {
             SimpleIoc.Default.Reset();
@@ -86,12 +80,12 @@ namespace CrossPlatformLibrary.Tests.IoC
 
             var instance = SimpleIoc.Default.GetInstance(typeof(ITestClass));
 
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, typeof(TestClass1));
-            Assert.AreSame(instanceOriginal, instance);
+            Assert.NotNull(instance);
+            Assert.IsType<TestClass1>(instance);
+            Assert.Same(instanceOriginal, instance);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetInstanceWithParameters()
         {
             SimpleIoc.Default.Reset();
@@ -101,14 +95,14 @@ namespace CrossPlatformLibrary.Tests.IoC
             var instance = SimpleIoc.Default.GetInstance<TestClass3>();
             var property = SimpleIoc.Default.GetInstance<ITestClass>();
 
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, typeof(TestClass3));
+            Assert.NotNull(instance);
+            Assert.IsType<TestClass3>(instance);
 
-            Assert.IsNotNull(instance.SavedProperty);
-            Assert.AreSame(instance.SavedProperty, property);
+            Assert.NotNull(instance.SavedProperty);
+            Assert.Same(instance.SavedProperty, property);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetInstanceWithParametersRegisterByType()
         {
             SimpleIoc.Default.Reset();
@@ -116,11 +110,11 @@ namespace CrossPlatformLibrary.Tests.IoC
 
             var instance = SimpleIoc.Default.GetInstance<ITestClass>();
 
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, typeof(TestClass1));
+            Assert.NotNull(instance);
+            Assert.IsType<TestClass1>(instance);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetInstanceWithType()
         {
             SimpleIoc.Default.Reset();
@@ -128,11 +122,11 @@ namespace CrossPlatformLibrary.Tests.IoC
 
             var instance = SimpleIoc.Default.GetInstance(typeof(TestClass1));
 
-            Assert.IsNotNull(instance);
-            Assert.IsInstanceOfType(instance, typeof(TestClass1));
+            Assert.NotNull(instance);
+            Assert.IsType<TestClass1>(instance);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetInstanceWithUnregisteredClass()
         {
             SimpleIoc.Default.Reset();
@@ -140,14 +134,14 @@ namespace CrossPlatformLibrary.Tests.IoC
             try
             {
                 SimpleIoc.Default.GetInstance<SimpleIocTestSingleInstance>();
-                Assert.Fail("ActivationException was expected");
+                Assert.True(false, "ActivationException was expected");
             }
             catch (ActivationException)
             {
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestRegisterInstanceWithMultiConstructors()
         {
             SimpleIoc.Default.Reset();
@@ -155,48 +149,48 @@ namespace CrossPlatformLibrary.Tests.IoC
             try
             {
                 SimpleIoc.Default.Register<TestClassWithMultiConstructors>();
-                Assert.Fail("ActivationException was expected");
+                Assert.True(false, "ActivationException was expected");
             }
             catch (ActivationException)
             {
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestRegisterInterfaceOnly()
         {
             try
             {
                 SimpleIoc.Default.Register<ITestClass>();
-                Assert.Fail("ArgumentException was expected");
+                Assert.True(false, "ArgumentException was expected");
             }
             catch (ArgumentException)
             {
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestReset()
         {
             SimpleIoc.Default.Reset();
             var instanceOriginal = new TestClass1();
             SimpleIoc.Default.Register<ITestClass>(() => instanceOriginal);
             var instance = SimpleIoc.Default.GetInstance<ITestClass>();
-            Assert.IsNotNull(instance);
+            Assert.NotNull(instance);
 
             SimpleIoc.Default.Reset();
 
             try
             {
                 SimpleIoc.Default.GetInstance<ITestClass>();
-                Assert.Fail("ActivationException was expected");
+                Assert.True(false, "ActivationException was expected");
             }
             catch (ActivationException)
             {
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetDefaultWithoutCaching()
         {
             SimpleIoc.Default.Reset();
@@ -205,12 +199,12 @@ namespace CrossPlatformLibrary.Tests.IoC
             var instance1 = SimpleIoc.Default.GetInstanceWithoutCaching<TestClass1>();
             var instance2 = SimpleIoc.Default.GetInstanceWithoutCaching<TestClass1>();
 
-            Assert.IsTrue(SimpleIoc.Default.IsRegistered<TestClass1>());
-            Assert.IsFalse(SimpleIoc.Default.ContainsCreated<TestClass1>());
-            Assert.AreNotSame(instance1, instance2);
+            Assert.True(SimpleIoc.Default.IsRegistered<TestClass1>());
+            Assert.False(SimpleIoc.Default.ContainsCreated<TestClass1>());
+            Assert.NotSame(instance1, instance2);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetFromFactoryWithoutCaching()
         {
             SimpleIoc.Default.Reset();
@@ -219,12 +213,12 @@ namespace CrossPlatformLibrary.Tests.IoC
             var instance1 = SimpleIoc.Default.GetInstanceWithoutCaching<TestClass1>();
             var instance2 = SimpleIoc.Default.GetInstanceWithoutCaching<TestClass1>();
 
-            Assert.IsTrue(SimpleIoc.Default.IsRegistered<TestClass1>());
-            Assert.IsFalse(SimpleIoc.Default.ContainsCreated<TestClass1>());
-            Assert.AreNotSame(instance1, instance2);
+            Assert.True(SimpleIoc.Default.IsRegistered<TestClass1>());
+            Assert.False(SimpleIoc.Default.ContainsCreated<TestClass1>());
+            Assert.NotSame(instance1, instance2);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGetWithKeyWithoutCaching()
         {
             SimpleIoc.Default.Reset();
@@ -235,25 +229,25 @@ namespace CrossPlatformLibrary.Tests.IoC
             var instance1 = SimpleIoc.Default.GetInstanceWithoutCaching<TestClass1>(key);
             var instance2 = SimpleIoc.Default.GetInstanceWithoutCaching<TestClass1>(key);
 
-            Assert.IsTrue(SimpleIoc.Default.IsRegistered<TestClass1>());
-            Assert.IsFalse(SimpleIoc.Default.ContainsCreated<TestClass1>());
-            Assert.AreNotSame(instance1, instance2);
+            Assert.True(SimpleIoc.Default.IsRegistered<TestClass1>());
+            Assert.False(SimpleIoc.Default.ContainsCreated<TestClass1>());
+            Assert.NotSame(instance1, instance2);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestMixCacheAndNoCache()
         {
             SimpleIoc.Default.Reset();
             SimpleIoc.Default.Register<TestClass1>();
 
             var instance1 = SimpleIoc.Default.GetInstanceWithoutCaching<TestClass1>();
-            Assert.IsTrue(SimpleIoc.Default.IsRegistered<TestClass1>());
-            Assert.IsFalse(SimpleIoc.Default.ContainsCreated<TestClass1>());
+            Assert.True(SimpleIoc.Default.IsRegistered<TestClass1>());
+            Assert.False(SimpleIoc.Default.ContainsCreated<TestClass1>());
 
             var instance2 = SimpleIoc.Default.GetInstance<TestClass1>();
-            Assert.IsTrue(SimpleIoc.Default.IsRegistered<TestClass1>());
-            Assert.IsTrue(SimpleIoc.Default.ContainsCreated<TestClass1>());
-            Assert.AreNotSame(instance1, instance2);
+            Assert.True(SimpleIoc.Default.IsRegistered<TestClass1>());
+            Assert.True(SimpleIoc.Default.ContainsCreated<TestClass1>());
+            Assert.NotSame(instance1, instance2);
         }
     }
 }

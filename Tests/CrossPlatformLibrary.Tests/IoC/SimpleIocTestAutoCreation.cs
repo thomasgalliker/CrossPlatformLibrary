@@ -4,31 +4,26 @@ using System.Linq;
 
 using CrossPlatformLibrary.IoC;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-#if NEWUNITTEST
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-#else
-#endif
+using Xunit;
 
 namespace CrossPlatformLibrary.Tests.IoC
 {
-    [TestClass]
     public class SimpleIocTestAutoCreation
     {
-        [TestMethod]
+        [Fact]
         public void TestAutoCreationWithDefaultClass()
         {
             SimpleIoc.Default.Reset();
             SimpleIoc.Default.Register<TestClass1>(true);
 
             var instances = SimpleIoc.Default.GetAllInstances<TestClass1>();
-            Assert.AreEqual(1, instances.Count());
+            Assert.Equal(1, instances.Count());
 
             var defaultInstance = SimpleIoc.Default.GetInstance<TestClass1>();
-            Assert.AreSame(defaultInstance, instances.ElementAt(0));
+            Assert.Same(defaultInstance, instances.ElementAt(0));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestAutoCreationWithFactory()
         {
             SimpleIoc.Default.Reset();
@@ -37,13 +32,13 @@ namespace CrossPlatformLibrary.Tests.IoC
                 true);
 
             var instances = SimpleIoc.Default.GetAllInstances<TestClass1>();
-            Assert.AreEqual(1, instances.Count());
+            Assert.Equal(1, instances.Count());
 
             var defaultInstance = SimpleIoc.Default.GetInstance<TestClass1>();
-            Assert.AreSame(defaultInstance, instances.ElementAt(0));
+            Assert.Same(defaultInstance, instances.ElementAt(0));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestAutoCreationWithFactoryAndKey()
         {
             SimpleIoc.Default.Reset();
@@ -54,13 +49,13 @@ namespace CrossPlatformLibrary.Tests.IoC
                 true);
 
             var instances = SimpleIoc.Default.GetAllInstances<TestClass1>();
-            Assert.AreEqual(1, instances.Count());
+            Assert.Equal(1, instances.Count());
 
             var defaultInstance = SimpleIoc.Default.GetInstance<TestClass1>(key1);
-            Assert.AreSame(defaultInstance, instances.ElementAt(0));
+            Assert.Same(defaultInstance, instances.ElementAt(0));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestAutoCreationWithFactoryForInterface()
         {
             SimpleIoc.Default.Reset();
@@ -69,13 +64,13 @@ namespace CrossPlatformLibrary.Tests.IoC
                 true);
 
             var instances = SimpleIoc.Default.GetAllInstances<ITestClass>();
-            Assert.AreEqual(1, instances.Count());
+            Assert.Equal(1, instances.Count());
 
             var defaultInstance = SimpleIoc.Default.GetInstance<ITestClass>();
-            Assert.AreSame(defaultInstance, instances.ElementAt(0));
+            Assert.Same(defaultInstance, instances.ElementAt(0));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestAutoCreationWithFactoryForInterfaceAndKey()
         {
             SimpleIoc.Default.Reset();
@@ -86,26 +81,26 @@ namespace CrossPlatformLibrary.Tests.IoC
                 true);
 
             var instances = SimpleIoc.Default.GetAllInstances<ITestClass>();
-            Assert.AreEqual(1, instances.Count());
+            Assert.Equal(1, instances.Count());
 
             var defaultInstance = SimpleIoc.Default.GetInstance<ITestClass>(key1);
-            Assert.AreSame(defaultInstance, instances.ElementAt(0));
+            Assert.Same(defaultInstance, instances.ElementAt(0));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestAutoCreationWithInterface()
         {
             SimpleIoc.Default.Reset();
             SimpleIoc.Default.Register<ITestClass, TestClass1>(true);
 
             var instances = SimpleIoc.Default.GetAllInstances<ITestClass>();
-            Assert.AreEqual(1, instances.Count());
+            Assert.Equal(1, instances.Count());
 
             var defaultInstance = SimpleIoc.Default.GetInstance<ITestClass>();
-            Assert.AreSame(defaultInstance, instances.ElementAt(0));
+            Assert.Same(defaultInstance, instances.ElementAt(0));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestDelayedCreationWithDefaultClass()
         {
             SimpleIoc.Default.Reset();
@@ -113,38 +108,38 @@ namespace CrossPlatformLibrary.Tests.IoC
             TestClass1.Reset();
 
             SimpleIoc.Default.Register<TestClass1>();
-            Assert.AreEqual(0, TestClass1.InstancesCount);
+            Assert.Equal(0, TestClass1.InstancesCount);
 
             SimpleIoc.Default.GetInstance<TestClass1>();
 
-            Assert.AreEqual(1, TestClass1.InstancesCount);
+            Assert.Equal(1, TestClass1.InstancesCount);
 
             var instances = SimpleIoc.Default.GetAllInstances<TestClass1>();
 
             var instance = SimpleIoc.Default.GetInstance<TestClass1>();
-            Assert.AreSame(instance, instances.ElementAt(0));
+            Assert.Same(instance, instances.ElementAt(0));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestDelayedCreationWithFactory()
         {
             SimpleIoc.Default.Reset();
             TestClass1.Reset();
             SimpleIoc.Default.Register(() => new TestClass1());
 
-            Assert.AreEqual(0, TestClass1.InstancesCount);
+            Assert.Equal(0, TestClass1.InstancesCount);
 
             SimpleIoc.Default.GetInstance<TestClass1>();
 
-            Assert.AreEqual(1, TestClass1.InstancesCount);
+            Assert.Equal(1, TestClass1.InstancesCount);
 
             var instances = SimpleIoc.Default.GetAllInstances<TestClass1>();
 
             var instance = SimpleIoc.Default.GetInstance<TestClass1>();
-            Assert.AreSame(instance, instances.ElementAt(0));
+            Assert.Same(instance, instances.ElementAt(0));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestDelayedCreationWithFactoryAndKey()
         {
             SimpleIoc.Default.Reset();
@@ -155,34 +150,34 @@ namespace CrossPlatformLibrary.Tests.IoC
                 () => new TestClass1(),
                 key1);
 
-            Assert.AreEqual(0, TestClass1.InstancesCount);
+            Assert.Equal(0, TestClass1.InstancesCount);
 
             var instance = SimpleIoc.Default.GetInstance<TestClass1>(key1);
 
-            Assert.AreEqual(1, TestClass1.InstancesCount);
+            Assert.Equal(1, TestClass1.InstancesCount);
 
             var instances = SimpleIoc.Default.GetAllInstances<TestClass1>();
-            Assert.AreSame(instance, instances.ElementAt(0));
+            Assert.Same(instance, instances.ElementAt(0));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestDelayedCreationWithFactoryForInterface()
         {
             SimpleIoc.Default.Reset();
             TestClass1.Reset();
             SimpleIoc.Default.Register<ITestClass>(() => new TestClass1());
 
-            Assert.AreEqual(0, TestClass1.InstancesCount);
+            Assert.Equal(0, TestClass1.InstancesCount);
 
             var instance = SimpleIoc.Default.GetInstance<ITestClass>();
 
-            Assert.AreEqual(1, TestClass1.InstancesCount);
+            Assert.Equal(1, TestClass1.InstancesCount);
 
             var instances = SimpleIoc.Default.GetAllInstances<ITestClass>();
-            Assert.AreSame(instance, instances.ElementAt(0));
+            Assert.Same(instance, instances.ElementAt(0));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestDelayedCreationWithFactoryForInterfaceAndKey()
         {
             SimpleIoc.Default.Reset();
@@ -193,31 +188,31 @@ namespace CrossPlatformLibrary.Tests.IoC
                 () => new TestClass1(),
                 key1);
 
-            Assert.AreEqual(0, TestClass1.InstancesCount);
+            Assert.Equal(0, TestClass1.InstancesCount);
 
             var instance = SimpleIoc.Default.GetInstance<ITestClass>(key1);
 
-            Assert.AreEqual(1, TestClass1.InstancesCount);
+            Assert.Equal(1, TestClass1.InstancesCount);
 
             var instances = SimpleIoc.Default.GetAllInstances<ITestClass>();
-            Assert.AreSame(instance, instances.ElementAt(0));
+            Assert.Same(instance, instances.ElementAt(0));
         }
 
-        [TestMethod]
+        [Fact]
         public void TestDelayedCreationWithInterface()
         {
             SimpleIoc.Default.Reset();
             TestClass1.Reset();
             SimpleIoc.Default.Register<ITestClass, TestClass1>();
 
-            Assert.AreEqual(0, TestClass1.InstancesCount);
+            Assert.Equal(0, TestClass1.InstancesCount);
 
             var instance = SimpleIoc.Default.GetInstance<ITestClass>();
 
-            Assert.AreEqual(1, TestClass1.InstancesCount);
+            Assert.Equal(1, TestClass1.InstancesCount);
 
             var instances = SimpleIoc.Default.GetAllInstances<ITestClass>();
-            Assert.AreSame(instance, instances.ElementAt(0));
+            Assert.Same(instance, instances.ElementAt(0));
         }
     }
 }

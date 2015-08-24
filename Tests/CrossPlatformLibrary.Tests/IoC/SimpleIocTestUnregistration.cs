@@ -2,39 +2,34 @@
 using CrossPlatformLibrary.IoC;
 
 using Microsoft.Practices.ServiceLocation;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-#if NEWUNITTEST
-using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-#else
-#endif
+using Xunit;
 
 namespace CrossPlatformLibrary.Tests.IoC
 {
-    [TestClass]
     public class SimpleIocTestUnregistration
     {
-        [TestMethod]
+        [Fact]
         public void TestUnregisterClass()
         {
             SimpleIoc.Default.Reset();
             SimpleIoc.Default.Register<TestClass1>();
 
             var instance1 = SimpleIoc.Default.GetInstance<TestClass1>();
-            Assert.IsNotNull(instance1);
+            Assert.NotNull(instance1);
 
             SimpleIoc.Default.Unregister<TestClass1>();
 
             try
             {
                 SimpleIoc.Default.GetInstance<TestClass1>();
-                Assert.Fail("ActivationException was expected");
+                Assert.True(false, "ActivationException was expected");
             }
             catch (ActivationException)
             {
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestUnregisterInstance()
         {
             var instanceOriginal1 = new TestClass1();
@@ -43,22 +38,22 @@ namespace CrossPlatformLibrary.Tests.IoC
             SimpleIoc.Default.Register(() => instanceOriginal1);
 
             var instance1 = SimpleIoc.Default.GetInstance<TestClass1>();
-            Assert.AreSame(instanceOriginal1, instance1);
+            Assert.Same(instanceOriginal1, instance1);
 
             SimpleIoc.Default.Unregister(instanceOriginal1);
 
             try
             {
                 var instance2 = SimpleIoc.Default.GetInstance<TestClass1>();
-                Assert.AreSame(instance1, instance2);
+                Assert.Same(instance1, instance2);
             }
             catch (ActivationException)
             {
-                Assert.Fail("ActivationException was thrown");
+                Assert.True(false, "ActivationException was thrown");
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestUnregisterInstanceWithKey()
         {
             var instanceOriginal1 = new TestClass1();
@@ -71,35 +66,35 @@ namespace CrossPlatformLibrary.Tests.IoC
             SimpleIoc.Default.Register(() => instanceOriginal2, key2);
 
             var instance1 = SimpleIoc.Default.GetInstance<TestClass1>(key1);
-            Assert.AreSame(instanceOriginal1, instance1);
+            Assert.Same(instanceOriginal1, instance1);
             var instance2 = SimpleIoc.Default.GetInstance<TestClass1>(key2);
-            Assert.AreSame(instanceOriginal2, instance2);
+            Assert.Same(instanceOriginal2, instance2);
 
             SimpleIoc.Default.Unregister<TestClass1>(key1);
 
             try
             {
                 SimpleIoc.Default.GetInstance<TestClass1>(key1);
-                Assert.Fail("ActivationException was expected");
+                Assert.True(false, "ActivationException was expected");
             }
             catch (ActivationException)
             {
             }
         }
 
-        [TestMethod]
+        [Fact]
         public void TestUnregisterAndImmediateRegisterWithInterface()
         {
             SimpleIoc.Default.Reset();
 
             SimpleIoc.Default.Register<ITestClass, TestClass1>();
-            Assert.IsTrue(SimpleIoc.Default.IsRegistered<ITestClass>());
+            Assert.True(SimpleIoc.Default.IsRegistered<ITestClass>());
 
             SimpleIoc.Default.Unregister<ITestClass>();
-            Assert.IsFalse(SimpleIoc.Default.IsRegistered<ITestClass>());
+            Assert.False(SimpleIoc.Default.IsRegistered<ITestClass>());
 
             SimpleIoc.Default.Register<ITestClass, TestClass1>();
-            Assert.IsTrue(SimpleIoc.Default.IsRegistered<ITestClass>());
+            Assert.True(SimpleIoc.Default.IsRegistered<ITestClass>());
         }
 
         public void TestUnregisterInstanceAndGetNewInstance()
@@ -113,10 +108,10 @@ namespace CrossPlatformLibrary.Tests.IoC
 
             var instance2 = SimpleIoc.Default.GetInstance<TestClass1>();
 
-            Assert.AreNotEqual(instance1.Identifier, instance2.Identifier);
+            Assert.NotEqual(instance1.Identifier, instance2.Identifier);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestUnregisterFactoryInstance()
         {
             SimpleIoc.Default.Reset();
@@ -125,78 +120,78 @@ namespace CrossPlatformLibrary.Tests.IoC
 
             SimpleIoc.Default.Register(() => instance0);
 
-            Assert.IsTrue(SimpleIoc.Default.IsRegistered<TestClass1>());
-            Assert.IsFalse(SimpleIoc.Default.ContainsCreated<TestClass1>());
+            Assert.True(SimpleIoc.Default.IsRegistered<TestClass1>());
+            Assert.False(SimpleIoc.Default.ContainsCreated<TestClass1>());
 
             var instance1 = SimpleIoc.Default.GetInstance<TestClass1>();
-            Assert.AreSame(instance0, instance1);
+            Assert.Same(instance0, instance1);
 
-            Assert.IsTrue(SimpleIoc.Default.IsRegistered<TestClass1>());
-            Assert.IsTrue(SimpleIoc.Default.ContainsCreated<TestClass1>());
+            Assert.True(SimpleIoc.Default.IsRegistered<TestClass1>());
+            Assert.True(SimpleIoc.Default.ContainsCreated<TestClass1>());
 
             var instance2 = SimpleIoc.Default.GetInstance<TestClass1>();
-            Assert.AreSame(instance0, instance2);
+            Assert.Same(instance0, instance2);
 
             SimpleIoc.Default.Unregister(instance0);
 
-            Assert.IsTrue(SimpleIoc.Default.IsRegistered<TestClass1>());
-            Assert.IsFalse(SimpleIoc.Default.ContainsCreated<TestClass1>());
+            Assert.True(SimpleIoc.Default.IsRegistered<TestClass1>());
+            Assert.False(SimpleIoc.Default.ContainsCreated<TestClass1>());
 
             var instance3 = SimpleIoc.Default.GetInstance<TestClass1>();
-            Assert.AreSame(instance0, instance3);
+            Assert.Same(instance0, instance3);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestUnregisterDefaultInstance()
         {
             SimpleIoc.Default.Reset();
             SimpleIoc.Default.Register<TestClass1>();
 
-            Assert.IsTrue(SimpleIoc.Default.IsRegistered<TestClass1>());
-            Assert.IsFalse(SimpleIoc.Default.ContainsCreated<TestClass1>());
+            Assert.True(SimpleIoc.Default.IsRegistered<TestClass1>());
+            Assert.False(SimpleIoc.Default.ContainsCreated<TestClass1>());
 
             var instance1 = SimpleIoc.Default.GetInstance<TestClass1>();
 
-            Assert.IsTrue(SimpleIoc.Default.IsRegistered<TestClass1>());
-            Assert.IsTrue(SimpleIoc.Default.ContainsCreated<TestClass1>());
+            Assert.True(SimpleIoc.Default.IsRegistered<TestClass1>());
+            Assert.True(SimpleIoc.Default.ContainsCreated<TestClass1>());
 
             var instance2 = SimpleIoc.Default.GetInstance<TestClass1>();
-            Assert.AreSame(instance1, instance2);
+            Assert.Same(instance1, instance2);
 
             SimpleIoc.Default.Unregister(instance1);
 
-            Assert.IsTrue(SimpleIoc.Default.IsRegistered<TestClass1>());
-            Assert.IsFalse(SimpleIoc.Default.ContainsCreated<TestClass1>());
+            Assert.True(SimpleIoc.Default.IsRegistered<TestClass1>());
+            Assert.False(SimpleIoc.Default.ContainsCreated<TestClass1>());
 
             var instance3 = SimpleIoc.Default.GetInstance<TestClass1>();
-            Assert.AreNotSame(instance1, instance3);
+            Assert.NotSame(instance1, instance3);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestUnregisterKeyedInstance()
         {
             SimpleIoc.Default.Reset();
             SimpleIoc.Default.Register<TestClass1>();
 
-            Assert.IsTrue(SimpleIoc.Default.IsRegistered<TestClass1>());
-            Assert.IsFalse(SimpleIoc.Default.ContainsCreated<TestClass1>());
+            Assert.True(SimpleIoc.Default.IsRegistered<TestClass1>());
+            Assert.False(SimpleIoc.Default.ContainsCreated<TestClass1>());
 
             const string key = "key1";
             var instance1 = SimpleIoc.Default.GetInstance<TestClass1>(key);
 
-            Assert.IsTrue(SimpleIoc.Default.IsRegistered<TestClass1>());
-            Assert.IsTrue(SimpleIoc.Default.ContainsCreated<TestClass1>());
+            Assert.True(SimpleIoc.Default.IsRegistered<TestClass1>());
+            Assert.True(SimpleIoc.Default.ContainsCreated<TestClass1>());
 
             var instance2 = SimpleIoc.Default.GetInstance<TestClass1>(key);
-            Assert.AreSame(instance1, instance2);
+            Assert.Same(instance1, instance2);
 
             SimpleIoc.Default.Unregister(instance1);
 
-            Assert.IsTrue(SimpleIoc.Default.IsRegistered<TestClass1>());
-            Assert.IsFalse(SimpleIoc.Default.ContainsCreated<TestClass1>());
+            Assert.True(SimpleIoc.Default.IsRegistered<TestClass1>());
+            Assert.False(SimpleIoc.Default.ContainsCreated<TestClass1>());
 
             var instance3 = SimpleIoc.Default.GetInstance<TestClass1>(key);
-            Assert.AreNotSame(instance1, instance3);
+            Assert.NotSame(instance1, instance3);
         }
     }
 }

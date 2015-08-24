@@ -29,7 +29,7 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// </summary>
         private SimpleIoc simpleIoc;
 
-        protected Bootstrapper(ITracer tracer = null)
+        public Bootstrapper(ITracer tracer = null)
         {
             this.tracer = tracer ?? Tracer.Create(this);
         }

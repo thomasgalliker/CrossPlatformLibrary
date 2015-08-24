@@ -1,9 +1,9 @@
 ﻿using System.IO;
 using System.Xml.Serialization;
 
-namespace CrossPlatformLibrary.Utils
+namespace CrossPlatformLibrary.IO
 {
-    public static class SerializationHelper
+    public static class XmlSerializerHelper
     {
         public static string Serialize<T>(T obj)
         {
