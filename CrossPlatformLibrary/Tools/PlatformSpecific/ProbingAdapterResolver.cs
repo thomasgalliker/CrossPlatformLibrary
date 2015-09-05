@@ -34,7 +34,7 @@ namespace CrossPlatformLibrary.Tools.PlatformSpecific
 
             lock (this.lockObject)
             {
-                var platformSpecificAssembly = this.GetPlatformSpecificAssembly(interfaceType);
+                var platformSpecificAssembly = this.ProbeForPlatformSpecificAssembly(interfaceType);
                 var classType = this.TryConvertInterfaceTypeToClassType(platformSpecificAssembly, interfaceType);
                 var instance = this.CreateInstance(classType, args);
 
@@ -48,13 +48,18 @@ namespace CrossPlatformLibrary.Tools.PlatformSpecific
 
             lock (this.lockObject)
             {
-                var platformSpecificAssembly = this.GetPlatformSpecificAssembly(interfaceType);
+                var platformSpecificAssembly = this.ProbeForPlatformSpecificAssembly(interfaceType);
+                if (platformSpecificAssembly == null)
+                {
+                    string errorMessage = string.Format("PlatformNotSupportedException: Platform-specific assembly which implements interface {0} could not be found. Make sure your project references all necessary platform-specific assemblies.", interfaceType.FullName);
+                    throw new PlatformNotSupportedException(errorMessage);
+                }
+
                 var classType = this.TryConvertInterfaceTypeToClassType(platformSpecificAssembly, interfaceType);
 
                 if (classType == null && throwIfNotFound)
                 {
                     string errorMessage = string.Format("PlatformNotSupportedException: Type {0} could not be resolved.", interfaceType.FullName);
-                    ////tracer.Error(errorMessage);
                     throw new PlatformNotSupportedException(errorMessage);
                 }
 
@@ -101,16 +106,6 @@ namespace CrossPlatformLibrary.Tools.PlatformSpecific
             }
 
             return null;
-        }
-
-        private Assembly GetPlatformSpecificAssembly(Type interfaceType)
-        {
-            var platformSpecificAssembly = this.ProbeForPlatformSpecificAssembly(interfaceType);
-            if (platformSpecificAssembly == null)
-            {
-                throw new InvalidOperationException("AssemblyNotSupported");
-            }
-            return platformSpecificAssembly;
         }
 
         private Assembly ProbeForPlatformSpecificAssembly(Type interfaceType)

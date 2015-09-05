@@ -46,6 +46,8 @@ namespace CrossPlatformLibrary.IoC
     {
         private const bool DefaultCacheUsage = true;
 
+        private IRegistrationConvention registrationConvention = new DefaultRegistrationConvention();
+
         private readonly Dictionary<Type, ConstructorInfo> _constructorInfos = new Dictionary<Type, ConstructorInfo>();
 
         private readonly string _defaultKey = Guid.NewGuid().ToString();
@@ -69,6 +71,13 @@ namespace CrossPlatformLibrary.IoC
             {
                 return _default ?? (_default = new SimpleIoc());
             }
+        }
+
+        public void SetRegistrationConvention(IRegistrationConvention convention)
+        {
+            Guard.ArgumentNotNull(() => convention);
+
+            this.registrationConvention = convention;
         }
 
         /// <summary>
@@ -155,8 +164,7 @@ namespace CrossPlatformLibrary.IoC
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
         public void RegisterWithConvention<TInterface>() where TInterface : class
         {
-            var convention = new DefaultRegistrationConvention();
-            this.RegisterWithConvention<TInterface>(convention);
+            this.RegisterWithConvention<TInterface>(this.registrationConvention);
         }
 
         /// <summary>

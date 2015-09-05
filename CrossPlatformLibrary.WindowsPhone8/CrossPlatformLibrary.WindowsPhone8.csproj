@@ -84,6 +84,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="IO\FileSystem.cs" />
     <Compile Include="Tools\PlatformServices.cs" />
     <Compile Include="Controls\PhoneTextboxEx.cs" />
     <Compile Include="Converters\BoolToValueConverter.cs" />
@@ -94,8 +95,6 @@
     <Compile Include="Controls\LongListSelectorExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Collection\Generic\GroupedObservableView.cs" />
-    <Compile Include="Extensions\IntegerExtensions.cs" />
-    <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Controls\SearchTextHighlighting.cs" />
     <Compile Include="Extensions\PointExtensions.cs" />
     <Compile Include="Themes\CustomStylesInitilizer.cs" />

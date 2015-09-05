@@ -10,6 +10,7 @@ using System.Reflection;
 
 using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Tracing;
+using CrossPlatformLibrary.Utils;
 
 namespace CrossPlatformLibrary.Collection.Generic
 {
@@ -122,6 +123,7 @@ namespace CrossPlatformLibrary.Collection.Generic
         Descending
     }
 
+    [DebuggerDisplay("Key = {Key}, Count = {this.Items.Count}")]
     public class Grouping<TV> : ObservableCollection<TV>
     {
         public string Key { get; private set; }
@@ -155,14 +157,9 @@ namespace CrossPlatformLibrary.Collection.Generic
     /// <typeparam name="T">Generic type T.</typeparam>
     public class ObservableView<T> : INotifyPropertyChanged
     {
-        #region Static Fields
-
         private static readonly object FilterHandlerEventLock = new object();
-
-        #endregion
-
-        #region Fields
-
+        
+        private readonly List<OrderSpecification<T>> orderSpecifications;
         private readonly ITracer tracer;
         private ObservableCollection<T> sourceCollection;
 
@@ -173,40 +170,23 @@ namespace CrossPlatformLibrary.Collection.Generic
         private Func<T, string> groupKey;
         private IGroupKeyAlgorithm groupKeyAlogrithm;
 
-        #endregion
-
-        #region Constructors and Destructors
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ObservableView{T}" /> class.
-        /// </summary>
-        /// <param name="collection">The collection.</param>
         public ObservableView(ObservableCollection<T> collection)
         {
             this.tracer = Tracer.Create(this);
             this.Source = collection;
-            this.OrderSpecifications = new List<OrderSpecification<T>>();
-            this.GroupKeyAlogrithm = new AlphaGroupKeyAlgorithm(); // Initialize the GroupKeyAlgorithm property with an example of an algorithm
+            this.orderSpecifications = new List<OrderSpecification<T>>();
+            this.GroupKeyAlogrithm = new AlphaGroupKeyAlgorithm();
         }
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ObservableView{T}" /> class.
-        /// </summary>
         public ObservableView()
             : this(new ObservableCollection<T>())
         {
         }
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ObservableView{T}" /> class.
-        /// </summary>
-        /// <param name="list">The list.</param>
         public ObservableView(IEnumerable<T> list)
             : this(list.ToObservableCollection())
         {
         }
-
-        #endregion
 
         #region Public Events
 
@@ -306,12 +286,6 @@ namespace CrossPlatformLibrary.Collection.Generic
             }
         }
 
-        /// <summary>
-        ///     Gets the order specifications.
-        /// </summary>
-        /// <value>The order specifications.</value>
-        public List<OrderSpecification<T>> OrderSpecifications { get; private set; }
-
         public event EventHandler<NotifyCollectionChangedEventArgs> SourceCollectionChanged;
 
         public ObservableCollection<T> Source
@@ -371,9 +345,9 @@ namespace CrossPlatformLibrary.Collection.Generic
                         viewCollection = this.GetFilteredCollection(viewCollection);
                     }
 
-                    if (this.OrderSpecifications != null && this.OrderSpecifications.Any())
+                    if (this.orderSpecifications != null && this.orderSpecifications.Any())
                     {
-                        viewCollection = this.PerformOrdering(viewCollection);
+                        viewCollection = ExpressionExtensions.PerformOrdering(viewCollection, this.orderSpecifications).ToObservableCollection();
                     }
                 }
 
@@ -388,32 +362,20 @@ namespace CrossPlatformLibrary.Collection.Generic
 
         public void AddOrderSpecification(params OrderSpecification<T>[] orderSpecifications)
         {
-            if (orderSpecifications == null)
-            {
-                throw new ArgumentException("Parameter <orderSpecifications> cannot be null");
-            }
+            Guard.ArgumentNotNull(() => orderSpecifications);
 
-            lock (this.OrderSpecifications)
-            {
-                this.OrderSpecifications.AddRange(orderSpecifications);
-            }
+            this.orderSpecifications.AddRange(orderSpecifications);
 
             this.Refresh();
         }
 
         public void AddOrderSpecification(OrderSpecification<T> orderSpecification)
         {
-            if (orderSpecification == null)
-            {
-                throw new ArgumentException("Parameter <orderSpecification> cannot be null");
-            }
+            Guard.ArgumentNotNull(() => orderSpecification);
 
-            lock (this.OrderSpecifications)
-            {
-                this.OrderSpecifications.Add(orderSpecification);
-            }
+            this.orderSpecifications.Add(orderSpecification);
 
-            this.OnPropertyChanged(() => this.View);
+            this.Refresh();
         }
 
         /// <summary>
@@ -494,11 +456,11 @@ namespace CrossPlatformLibrary.Collection.Generic
             return returnExpression;
         }
 
-        private Expression CreateToLowerContainsExpression(Expression leftExpression, Expression rightExpression)
-        {
-            Expression leftToLower = Expression.Call(leftExpression, typeof(string).GetRuntimeMethod("ToLower", new Type[] { }));
-            return Expression.Call(leftToLower, typeof(string).GetRuntimeMethod("Contains", new[] { typeof(string) }), rightExpression);
-        }
+        ////private Expression CreateToLowerContainsExpression(Expression leftExpression, Expression rightExpression)
+        ////{
+        ////    Expression leftToLower = Expression.Call(leftExpression, typeof(string).GetRuntimeMethod("ToLower", new Type[] { }));
+        ////    return Expression.Call(leftToLower, typeof(string).GetRuntimeMethod("Contains", new[] { typeof(string) }), rightExpression);
+        ////}
 
         private ObservableCollection<T> GetFilteredCollection(IEnumerable<T> viewCollection)
         {
@@ -523,11 +485,9 @@ namespace CrossPlatformLibrary.Collection.Generic
 
         private IEnumerable<PropertyInfo> GetSearchableAttributes()
         {
-            ////return typeof(T).GetProperties(BindingFlags.Instance | BindingFlags.Public)
-            ////        .Where(propertyInfo => Attribute.IsDefined(propertyInfo, typeof(SearchableAttribute)))
-            ////        .ToList();
-
-            return typeof(T).GetRuntimeProperties().Where(propertyInfo => propertyInfo.CustomAttributes.Any(at => at.AttributeType == typeof(SearchableAttribute))).ToList();
+            return typeof(T).GetRuntimeProperties().Where(propertyInfo => 
+                propertyInfo.CustomAttributes.Any(attr =>
+                    attr.AttributeType == typeof(SearchableAttribute))).ToList();
         }
 
         private ObservableCollection<T> Search(IEnumerable<T> viewCollection, string pattern)
@@ -602,38 +562,38 @@ namespace CrossPlatformLibrary.Collection.Generic
             return queryableDtos.Provider.CreateQuery<T>(whereCallExpression).ToObservableCollection();
         }
 
-        private ObservableCollection<T> PerformOrdering(IEnumerable<T> viewCollection)
-        {
-            lock (this.OrderSpecifications)
-            {
-                IQueryable<T> query = viewCollection.AsQueryable();
+        ////private ObservableCollection<T> PerformOrdering(IEnumerable<T> viewCollection)
+        ////{
+        ////    lock (this.orderSpecifications)
+        ////    {
+        ////        IQueryable<T> query = viewCollection.AsQueryable();
 
-                OrderSpecification<T> firstSpecification = this.OrderSpecifications.First();
-                IOrderedEnumerable<T> orderedQuery;
-                if (firstSpecification.OrderDirection == OrderDirection.Ascending)
-                {
-                    orderedQuery = query.OrderBy(firstSpecification.KeySelector);
-                }
-                else
-                {
-                    orderedQuery = query.OrderByDescending(firstSpecification.KeySelector);
-                }
+        ////        OrderSpecification<T> firstSpecification = this.orderSpecifications.First();
+        ////        IOrderedEnumerable<T> orderedQuery;
+        ////        if (firstSpecification.OrderDirection == OrderDirection.Ascending)
+        ////        {
+        ////            orderedQuery = query.OrderBy(firstSpecification.KeySelector);
+        ////        }
+        ////        else
+        ////        {
+        ////            orderedQuery = query.OrderByDescending(firstSpecification.KeySelector);
+        ////        }
 
-                foreach (var orderSpecification in this.OrderSpecifications.Skip(1))
-                {
-                    if (orderSpecification.OrderDirection == OrderDirection.Ascending)
-                    {
-                        orderedQuery = orderedQuery.ThenBy(orderSpecification.KeySelector);
-                    }
-                    else
-                    {
-                        orderedQuery = orderedQuery.ThenByDescending(orderSpecification.KeySelector);
-                    }
-                }
+        ////        foreach (var orderSpecification in this.orderSpecifications.Skip(1))
+        ////        {
+        ////            if (orderSpecification.OrderDirection == OrderDirection.Ascending)
+        ////            {
+        ////                orderedQuery = orderedQuery.ThenBy(orderSpecification.KeySelector);
+        ////            }
+        ////            else
+        ////            {
+        ////                orderedQuery = orderedQuery.ThenByDescending(orderSpecification.KeySelector);
+        ////            }
+        ////        }
 
-                return orderedQuery.ToObservableCollection();
-            }
-        }
+        ////        return orderedQuery.ToObservableCollection();
+        ////    }
+        ////}
 
         #endregion
     }

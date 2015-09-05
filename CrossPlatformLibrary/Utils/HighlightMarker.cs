@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 using CrossPlatformLibrary.Collection;
-using CrossPlatformLibrary.Collection.Generic;
 using CrossPlatformLibrary.Extensions;
 
 namespace CrossPlatformLibrary.Utils
 {
+    [DebuggerDisplay("FromIndex = {FromIndex}, Length = {Length}, IsHighlighted = {IsHighlighted}")]
     public class HighlightIndex
     {
-        #region Constructors and Destructors
-
         /// <summary>
         ///     Initializes a new instance of the <see cref="HighlightIndex" /> class.
         /// </summary>
@@ -24,10 +23,6 @@ namespace CrossPlatformLibrary.Utils
             this.Length = length;
             this.IsHighlighted = isHighlighted;
         }
-
-        #endregion
-
-        #region Public Properties
 
         /// <summary>
         ///     Gets the from index.
@@ -46,8 +41,6 @@ namespace CrossPlatformLibrary.Utils
         /// </summary>
         /// <value>The length.</value>
         public int Length { get; private set; }
-
-        #endregion
     }
 
     public class HighlightMarker
@@ -61,7 +54,6 @@ namespace CrossPlatformLibrary.Utils
             this.FullText = fullText;
             this.SearchText = searchText;
         }
-
         public string FullText { get; private set; }
 
         public IList<Range> Index { get; private set; }

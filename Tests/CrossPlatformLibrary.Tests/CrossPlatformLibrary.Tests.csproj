@@ -79,6 +79,15 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Bootstrapping\BootstrapperTests.cs" />
+    <Compile Include="Tools\PlatformServicesStub.cs" />
+    <Compile Include="ExceptionHandling\PlatformSpecificExceptionHandlerStub.cs" />
+    <Compile Include="Collection\Generic\ObservableViewTests.cs" />
+    <Compile Include="Collection\RangeTests.cs" />
+    <Compile Include="Extensions\ExpressionExtensionsTests.cs" />
+    <Compile Include="Extensions\IntegerExtensionsTests.cs" />
+    <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
+    <Compile Include="___TestTemplate___.cs" />
     <Compile Include="IoC\SimpleIocTestAutoCreation.cs" />
     <Compile Include="IoC\SimpleIocTestContains.cs" />
     <Compile Include="IoC\SimpleIocTestCreationTime.cs" />
@@ -116,6 +125,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tracing\TracerTests.cs" />
+    <Compile Include="Utils\HighlightMarkerTests.cs" />
     <Compile Include="Utils\GuardTests.cs" />
     <Compile Include="Utils\GuardTests.partial.cs" />
   </ItemGroup>
@@ -128,6 +138,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

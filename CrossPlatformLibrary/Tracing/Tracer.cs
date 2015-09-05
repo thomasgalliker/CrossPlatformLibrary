@@ -44,7 +44,7 @@ namespace CrossPlatformLibrary.Tracing
         {
             Guard.ArgumentNotNullOrEmpty(() => name);
 
-            return internalFactory.Create(name);
+            return Factory.Create(name);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace CrossPlatformLibrary.Tracing
         {
             Guard.ArgumentNotNull(() => type);
 
-            return internalFactory.Create(type);
+            return Factory.Create(type);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace CrossPlatformLibrary.Tracing
         /// <returns>A new <see cref="ITracer"/> instance.</returns>
         public static ITracer Create<T>(T ignoredObject = default(T))
         {
-            return internalFactory.Create<T>();
+            return Factory.Create<T>();
         }
 
         private static ITracerFactory CreateDefaultFactory()

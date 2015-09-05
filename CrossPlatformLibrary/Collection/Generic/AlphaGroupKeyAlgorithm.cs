@@ -12,6 +12,7 @@ namespace CrossPlatformLibrary.Collection.Generic
             {
                 return "#";
             }
+
             return firstChar.ToString()
                             .RemoveDiacritics()
                             .ToLower();
