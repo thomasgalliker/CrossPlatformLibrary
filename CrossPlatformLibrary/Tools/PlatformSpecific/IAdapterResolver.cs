@@ -1,11 +1,15 @@
 ﻿using System;
 
+using CrossPlatformLibrary.IoC;
+
 namespace CrossPlatformLibrary.Tools.PlatformSpecific
 {
     internal interface IAdapterResolver
     {
-        ////object Resolve(Type interfaceType, object[] args); TODO GATH: Can be removed in code
+        object Resolve(Type interfaceType, bool throwIfNotFound, object[] args);
 
         Type ResolveClassType(Type interfaceType, bool throwIfNotFound = true);
+
+        IRegistrationConvention RegistrationConvention { get; set; }
     }
 }

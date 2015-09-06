@@ -80,6 +80,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Bootstrapping\BootstrapperTests.cs" />
+    <Compile Include="Bootstrapping\TestableBootstrapper.cs" />
+    <Compile Include="Stubs\IServiceWithNoImplementation.cs" />
+    <Compile Include="Stubs\TestRegistrationConvention.cs" />
     <Compile Include="Tools\PlatformServicesStub.cs" />
     <Compile Include="ExceptionHandling\PlatformSpecificExceptionHandlerStub.cs" />
     <Compile Include="Collection\Generic\ObservableViewTests.cs" />
@@ -87,6 +90,7 @@
     <Compile Include="Extensions\ExpressionExtensionsTests.cs" />
     <Compile Include="Extensions\IntegerExtensionsTests.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
+    <Compile Include="Tools\PlatformSpecific\ProbingAdapterResolverTests.cs" />
     <Compile Include="___TestTemplate___.cs" />
     <Compile Include="IoC\SimpleIocTestAutoCreation.cs" />
     <Compile Include="IoC\SimpleIocTestContains.cs" />

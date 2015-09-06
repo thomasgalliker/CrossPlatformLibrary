@@ -16,6 +16,8 @@
 
 using System;
 
+using CrossPlatformLibrary.Tools.PlatformSpecific;
+
 using Microsoft.Practices.ServiceLocation;
 
 namespace CrossPlatformLibrary.IoC

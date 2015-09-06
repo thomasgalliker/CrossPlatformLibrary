@@ -44,9 +44,9 @@ namespace CrossPlatformLibrary.IoC
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ioc")]
     public class SimpleIoc : ISimpleIoc
     {
-        private const bool DefaultCacheUsage = true;
+        private static SimpleIoc instance;
 
-        private IRegistrationConvention registrationConvention = new DefaultRegistrationConvention();
+        private const bool DefaultCacheUsage = true;
 
         private readonly Dictionary<Type, ConstructorInfo> _constructorInfos = new Dictionary<Type, ConstructorInfo>();
 
@@ -60,7 +60,7 @@ namespace CrossPlatformLibrary.IoC
 
         private readonly object _syncLock = new object();
 
-        private static SimpleIoc _default;
+        private IAdapterResolver adapterResolver;
 
         /// <summary>
         ///     This class' default instance.
@@ -69,15 +69,15 @@ namespace CrossPlatformLibrary.IoC
         {
             get
             {
-                return _default ?? (_default = new SimpleIoc());
+                return instance ?? (instance = new SimpleIoc());
             }
         }
 
-        public void SetRegistrationConvention(IRegistrationConvention convention)
+        private SimpleIoc()
         {
-            Guard.ArgumentNotNull(() => convention);
-
-            this.registrationConvention = convention;
+            var defaultRegistrationConvention = new DefaultRegistrationConvention();
+            this.adapterResolver = new ProbingAdapterResolver(defaultRegistrationConvention);
+            
         }
 
         /// <summary>
@@ -164,28 +164,29 @@ namespace CrossPlatformLibrary.IoC
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
         public void RegisterWithConvention<TInterface>() where TInterface : class
         {
-            this.RegisterWithConvention<TInterface>(this.registrationConvention);
+            this.RegisterWithConvention<TInterface>(this.adapterResolver.RegistrationConvention);
         }
 
         /// <summary>
         ///     Registers a given type for a given interface using a specified registration convention.
         /// </summary>
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
-        /// <param name="registrationConvention">The convention used to convert between the given interface type and the class.</param>
-        public void RegisterWithConvention<TInterface>(IRegistrationConvention registrationConvention) where TInterface : class
+        /// <param name="convention">The convention used to convert between the given interface type and the class.</param>
+        public void RegisterWithConvention<TInterface>(IRegistrationConvention convention) where TInterface : class
         {
-            Guard.ArgumentNotNull(() => registrationConvention);
+            Guard.ArgumentNotNull(() => convention);
 
-            IAdapterResolver adapterResolver = new ProbingAdapterResolver(registrationConvention);
-            var classType = adapterResolver.ResolveClassType(typeof(TInterface));
+            this.adapterResolver.RegistrationConvention = convention;
+            var classType = this.adapterResolver.ResolveClassType(typeof(TInterface));
             this.Register<TInterface>(classType);
         }
 
-        // Unit testing helper
-        ////internal static void SetResolver(IAdapterResolver resolver)
-        ////{
-        ////    adapterResolver = resolver;
-        ////}
+        internal void SetAdapterResolver(IAdapterResolver resolver)
+        {
+            Guard.ArgumentNotNull(() => resolver);
+
+            this.adapterResolver = resolver;
+        }
 
         /// <summary>
         ///     Registers a given type for a given interface.

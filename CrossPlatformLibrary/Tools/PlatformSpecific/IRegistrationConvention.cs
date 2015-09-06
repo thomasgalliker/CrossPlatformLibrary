@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace CrossPlatformLibrary.IoC
+namespace CrossPlatformLibrary.Tools.PlatformSpecific
 {
     /// <summary>
     /// IRegistrationConvention interface is used to define conversion rules

@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Reflection;
 using System.Threading;
 
 using CrossPlatformLibrary.Bootstrapping;
 using CrossPlatformLibrary.ExceptionHandling;
 using CrossPlatformLibrary.IoC;
+using CrossPlatformLibrary.Tests.Stubs;
+using CrossPlatformLibrary.Tools.PlatformSpecific;
+
 
 using Xunit;
 
@@ -12,35 +14,28 @@ namespace CrossPlatformLibrary.Tests.Bootstrapping
 {
     public class BootstrapperTests
     {
-        private class TestRegistrationConvention : DefaultRegistrationConvention
-        {
-            public override string PlatformNamingConvention(AssemblyName assemblyName)
-            {
-                return string.Format("{0}.{1}", assemblyName.Name, "Tests"); // The currently executing test assembly
-            }
-
-            public override string InterfaceToClassNamingConvention(Type interfaceType)
-            {
-                var defaultNamingConvention = base.InterfaceToClassNamingConvention(interfaceType);
-                var testNamingConvention = defaultNamingConvention.Replace("CrossPlatformLibrary.", "CrossPlatformLibrary.Tests.");
-                return string.Format("{0}{1}", testNamingConvention, "Stub");
-            }
-        }
-
         [Fact]
         public void ShouldStartupBootstrapper()
         {
             // Arrange
             var testRegistrationConvention = new TestRegistrationConvention();
-            SimpleIoc.Default.SetRegistrationConvention(testRegistrationConvention);
+            SimpleIoc.Default.SetAdapterResolver(new ProbingAdapterResolver(testRegistrationConvention));
             var bootstrapper = new Bootstrapper();
 
             // Act
             bootstrapper.Startup();
 
             // Assert
+        }
 
-            // TODO GATH: Assert! 
+        [Fact]
+        public void ShouldConfigureExtensionAssemblyFilter()
+        {
+            ////var bootstrapperMock = new Mock<Bootstrapper>();
+            
+            ////bootstrapperMock.Protected().Setup<IEnumerable<string>>("ConfigureExtensionAssemblyFilter").Returns(() => new List<string> { "abdbdbd" });
+            ////bootstrapperMock.CallBase = true;
+            ////bootstrapperMock.Object.Startup();
         }
 
         //[Fact]

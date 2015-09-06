@@ -9,6 +9,7 @@ using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.IoC;
 using CrossPlatformLibrary.Tools;
 using CrossPlatformLibrary.Tracing;
+using CrossPlatformLibrary.Utils;
 
 using Microsoft.Practices.ServiceLocation;
 
@@ -29,9 +30,16 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// </summary>
         private SimpleIoc simpleIoc;
 
-        public Bootstrapper(ITracer tracer = null)
+        public Bootstrapper()
         {
-            this.tracer = tracer ?? Tracer.Create(this);
+            this.tracer = Tracer.Create(this);
+        }
+
+        public Bootstrapper(ITracer tracer)
+        {
+            Guard.ArgumentNotNull(() => tracer);
+
+            this.tracer = tracer;
         }
 
         /// <summary>

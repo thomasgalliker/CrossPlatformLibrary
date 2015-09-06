@@ -41,7 +41,7 @@
     <Compile Include="CrossPlatformLibrary.cs" />
     <Compile Include="Extensions\EnumeratorExtensions.cs" />
     <Compile Include="Extensions\IntegerExtensions.cs" />
-    <Compile Include="IoC\DefaultRegistrationConvention.cs" />
+    <Compile Include="Tools\PlatformSpecific\DefaultRegistrationConvention.cs" />
     <Compile Include="IoC\IContainerExtension.cs" />
     <Compile Include="Dispatching\ContainerExtension.cs" />
     <Compile Include="Dispatching\DispatcherExtensions.cs" />
@@ -52,7 +52,9 @@
     <Compile Include="ExceptionHandling\IPlatformSpecificExceptionHandler.cs" />
     <Compile Include="ExceptionHandling\Handlers\RethrowExceptionHandler.cs" />
     <Compile Include="ExceptionHandling\Handlers\TracingExceptionHandler.cs" />
-    <Compile Include="IoC\IRegistrationConvention.cs" />
+    <Compile Include="Tools\PlatformSpecific\Exceptions\PlatformSpecificTypeNotFoundException.cs" />
+    <Compile Include="Tools\PlatformSpecific\Exceptions\PlatformSpecificAssemblyNotFoundException.cs" />
+    <Compile Include="Tools\PlatformSpecific\IRegistrationConvention.cs" />
     <Compile Include="IoC\ISimpleIoc.cs" />
     <Compile Include="IoC\PreferredConstructor.cs" />
     <Compile Include="IoC\SimpleIoc.cs" />

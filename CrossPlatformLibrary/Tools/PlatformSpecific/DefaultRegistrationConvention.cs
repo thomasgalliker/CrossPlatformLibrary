@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Reflection;
 
+using CrossPlatformLibrary.IoC;
 using CrossPlatformLibrary.Utils;
 
-namespace CrossPlatformLibrary.IoC
+namespace CrossPlatformLibrary.Tools.PlatformSpecific
 {
     /// <summary>
     /// DefaultRegistrationConvention is a registration convention which adds the string ".Platform"
