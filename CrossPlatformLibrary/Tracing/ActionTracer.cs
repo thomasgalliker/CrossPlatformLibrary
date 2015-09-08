@@ -10,18 +10,21 @@ namespace CrossPlatformLibrary.Tracing
     /// </summary>
     public class ActionTracer : TracerBase
     {
-        private readonly Action<TraceEntry> forwardingAction;
+        private readonly Action<string, TraceEntry> forwardingAction;
+        private readonly string name;
 
-        public ActionTracer(Action<TraceEntry> forwardingAction)
+        public ActionTracer(string name, Action<string, TraceEntry> forwardingAction)
         {
+            Guard.ArgumentNotNullOrEmpty(() => name);
             Guard.ArgumentNotNull(() => forwardingAction);
 
+            this.name = name;
             this.forwardingAction = forwardingAction;
         }
 
         protected override void WriteCore(TraceEntry entry)
         {
-            this.forwardingAction(entry);
+            this.forwardingAction(this.name, entry);
         }
 
         public override bool IsCategoryEnabled(Category category)

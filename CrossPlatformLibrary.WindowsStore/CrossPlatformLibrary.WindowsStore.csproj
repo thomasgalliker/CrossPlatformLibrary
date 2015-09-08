@@ -105,6 +105,9 @@
     <Compile Include="..\CrossPlatformLibrary.WindowsPhone81\ExceptionHandling\PlatformSpecificExceptionHandler.cs">
       <Link>ExceptionHandling\PlatformSpecificExceptionHandler.cs</Link>
     </Compile>
+    <Compile Include="..\CrossPlatformLibrary.WindowsPhone81\Tracing\TracerFactoryConfiguration.cs">
+      <Link>Tracing\TracerFactoryConfiguration.cs</Link>
+    </Compile>
     <Compile Include="..\CrossPlatformLibrary.WindowsPhone8\Dispatching\DispatcherService.cs">
       <Link>Dispatching\DispatcherService.cs</Link>
     </Compile>
@@ -118,6 +121,13 @@
       <Project>{A6FCEF44-D2BA-42C7-B3CB-13667BCD7B54}</Project>
       <Name>CrossPlatformLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

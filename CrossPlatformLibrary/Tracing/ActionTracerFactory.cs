@@ -4,16 +4,16 @@ namespace CrossPlatformLibrary.Tracing
 {
     public class ActionTracerFactory : TracerFactoryBase
     {
-        private readonly ITracer tracer;
+        private readonly Action<string, TraceEntry> forwardingAction;
 
-        public ActionTracerFactory(Action<TraceEntry> forwardingAction)
+        public ActionTracerFactory(Action<string, TraceEntry> forwardingAction)
         {
-            this.tracer = new ActionTracer(forwardingAction);
+            this.forwardingAction = forwardingAction;
         }
 
         public override ITracer Create(string name)
         {
-            return this.tracer;
+            return new ActionTracer(name, this.forwardingAction);
         }
     }
 }

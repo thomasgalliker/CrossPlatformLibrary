@@ -7,6 +7,5 @@ namespace CrossPlatformLibrary.Tracing
         Warning = 2,
         Error = 3,
         Fatal = 4,
-        Off = 5,
     }
 }

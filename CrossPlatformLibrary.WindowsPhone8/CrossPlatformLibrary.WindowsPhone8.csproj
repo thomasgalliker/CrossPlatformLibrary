@@ -84,6 +84,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\CrossPlatformLibrary.iOS\Tracing\ConsoleTracer.cs">
+      <Link>Tracing\ConsoleTracer.cs</Link>
+    </Compile>
+    <Compile Include="..\CrossPlatformLibrary.iOS\Tracing\ConsoleTracerFactory.cs">
+      <Link>Tracing\ConsoleTracerFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\CrossPlatformLibrary.iOS\Tracing\TracerFactoryConfiguration.cs">
+      <Link>Tracing\TracerFactoryConfiguration.cs</Link>
+    </Compile>
     <Compile Include="IO\FileSystem.cs" />
     <Compile Include="Tools\PlatformServices.cs" />
     <Compile Include="Controls\PhoneTextboxEx.cs" />
