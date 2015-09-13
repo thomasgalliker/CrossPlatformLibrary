@@ -35,6 +35,8 @@
     <DocumentationFile>bin\Release\CrossPlatformLibrary.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Bootstrapping\ApplicationLifecycle.cs" />
+    <Compile Include="Bootstrapping\ApplicationLifecycleException.cs" />
     <Compile Include="Bootstrapping\BootstrappingException.cs" />
     <Compile Include="Bootstrapping\Bootstrapper.cs" />
     <Compile Include="Bootstrapping\IBootstrapper.cs" />

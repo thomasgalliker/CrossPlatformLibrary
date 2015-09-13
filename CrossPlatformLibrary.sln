@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{B5AEA046-0E87-4A7B-8F11-80B6BDDA1F2A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.NuGet", "CrossPlatformLibrary.NuGet\CrossPlatformLibrary.NuGet.csproj", "{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.Android", "CrossPlatformLibrary.Android\CrossPlatformLibrary.Android.csproj", "{56A56F17-7DE1-4CA1-9617-BF32E971AC84}"
@@ -28,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.IntegrationTests.WindowsPhone8", "Tests\CrossPlatformLibrary.WindowsPhone8.Tests\CrossPlatformLibrary.IntegrationTests.WindowsPhone8.csproj", "{2843DF3E-6B90-4D8F-9B92-A9A909005428}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.IntegrationTests", "Tests\CrossPlatformLibrary.IntegrationTests\CrossPlatformLibrary.IntegrationTests.csproj", "{26C644F0-FD3A-4807-8C1B-CA3BAD52A5CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{7F4B9C1D-9A3B-4888-B884-F3EDFC1E785E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -180,7 +180,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE} = {B5AEA046-0E87-4A7B-8F11-80B6BDDA1F2A}
+		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE} = {7F4B9C1D-9A3B-4888-B884-F3EDFC1E785E}
 		{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE} = {82600A24-8220-4C54-9EE6-EFF590F0104F}
 		{2843DF3E-6B90-4D8F-9B92-A9A909005428} = {82600A24-8220-4C54-9EE6-EFF590F0104F}
 		{26C644F0-FD3A-4807-8C1B-CA3BAD52A5CA} = {82600A24-8220-4C54-9EE6-EFF590F0104F}

@@ -30,9 +30,10 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// </summary>
         private SimpleIoc simpleIoc;
 
-        public Bootstrapper()
+        private static ApplicationLifecycle applicationLifecycle = ApplicationLifecycle.Uninitialized;
+
+        public Bootstrapper() : this(Tracer.Create<Bootstrapper>())
         {
-            this.tracer = Tracer.Create(this);
         }
 
         public Bootstrapper(ITracer tracer)
@@ -42,29 +43,65 @@ namespace CrossPlatformLibrary.Bootstrapping
             this.tracer = tracer;
         }
 
+        public static ApplicationLifecycle ApplicationLifecycle
+        {
+            get
+            {
+                return applicationLifecycle;
+            }
+            internal set // Used for unit testing
+            {
+                applicationLifecycle = value;
+            }
+        }
+
+        ApplicationLifecycle IBootstrapper.ApplicationLifecycle
+        {
+            get
+            {
+                return ApplicationLifecycle;
+            }
+        }
+
         /// <summary>
         /// Runs the startup procedure of the bootstrapper.
         /// </summary>
         /// <exception cref="BootstrappingException">An unknown exception occurred during the startup process.</exception>
         public void Startup()
         {
-            this.tracer.Debug("Startup");
+            this.tracer.Debug("Bootstrapper.Startup() called");
 
             this.simpleIoc = SimpleIoc.Default;
 
             // The Service container is a service locator too. To be backwards compatible set the ServiceLocator property.
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            // Register ITracer with a factory that allows type-specific tracer creation
-            this.simpleIoc.Register<ITracer>((Type parentType) => Tracer.Create(parentType));
+            if (applicationLifecycle == ApplicationLifecycle.Uninitialized)
+            {
+                // Register ITracer with a factory that allows type-specific tracer creation
+                this.simpleIoc.Register<ITracer>((Type parentType) => Tracer.Create(parentType));
 
-            this.InternalConfigureExceptionHandling();
+                this.InternalConfigureExceptionHandling();
 
-            this.InternalConfigureExtensions();
+                this.InternalConfigureExtensions();
 
-            this.InternalConfigureContainer();
+                this.InternalConfigureContainer();
 
-            this.InternalOnStartup();
+                this.InternalOnStartup();
+            }
+            else if (applicationLifecycle == ApplicationLifecycle.Sleep)
+            {
+                this.InternalOnResume();
+            }
+            else if(applicationLifecycle == ApplicationLifecycle.Running)
+            {
+                throw ApplicationLifecycleException.InvalidStateTransition(applicationLifecycle, ApplicationLifecycle.Running);
+            }
+        }
+
+        public void Sleep()
+        {
+            applicationLifecycle = ApplicationLifecycle.Sleep;
         }
 
         private void InternalConfigureExceptionHandling()
@@ -179,22 +216,6 @@ namespace CrossPlatformLibrary.Bootstrapping
             return Enumerable.Empty<Type>();
         }
 
-        private void InternalOnStartup()
-        {
-            try
-            {
-                this.tracer.Debug("Calling custom OnStartup procedure");
-                this.OnStartup();
-            }
-            catch (Exception ex)
-            {
-                if (!this.HandleBootstrappingException(ex))
-                {
-                    throw new BootstrappingException("Bootstrapping failed during custom OnStratup sequence.", ex);
-                }
-            }
-        }
-
         /// <summary>
         /// A handler for bootstrapping errors occurring during startup and run.
         /// </summary>
@@ -228,7 +249,24 @@ namespace CrossPlatformLibrary.Bootstrapping
 
         private Type GetDefaultExceptionHandlerType()
         {
-            return typeof(RethrowExceptionHandler);
+            return typeof(TracingExceptionHandler);
+        }
+
+        private void InternalOnStartup()
+        {
+            try
+            {
+                this.tracer.Debug("Calling custom OnStartup procedure");
+                this.OnStartup();
+                applicationLifecycle = ApplicationLifecycle.Running;
+            }
+            catch (Exception ex)
+            {
+                if (!this.HandleBootstrappingException(ex))
+                {
+                    throw new BootstrappingException("Bootstrapping failed during custom OnStratup sequence.", ex);
+                }
+            }
         }
 
         /// <summary>
@@ -236,6 +274,32 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// </summary>
         /// <remarks>When implemented by inheriting classes, this method will show the shell form of the application or start the service.</remarks>
         protected virtual void OnStartup()
+        {
+        }
+
+        public void Resume()
+        {
+            this.InternalOnResume();
+        }
+
+        private void InternalOnResume()
+        {
+            try
+            {
+                this.tracer.Debug("Calling custom OnResume procedure");
+                this.OnResume();
+                applicationLifecycle = ApplicationLifecycle.Running;
+            }
+            catch (Exception ex)
+            {
+                if (!this.HandleBootstrappingException(ex))
+                {
+                    throw new BootstrappingException("Bootstrapping failed during custom OnResume sequence.", ex);
+                }
+            }
+        }
+
+        protected virtual void OnResume()
         {
         }
 
@@ -280,6 +344,7 @@ namespace CrossPlatformLibrary.Bootstrapping
             }
             finally
             {
+                applicationLifecycle = ApplicationLifecycle.Uninitialized;
                 if (this.simpleIoc != null)
                 {
                     this.simpleIoc.Reset();
@@ -294,6 +359,25 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// <remarks>When overridden by inheriting classes, this method will close the shell form of the application or stop the service.</remarks>
         protected virtual void OnShutdown()
         {
+        }
+
+        ~Bootstrapper()
+        {
+            this.Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool isDisposing)
+        {
+            if (isDisposing)
+            {
+                this.Shutdown();
+            }
         }
     }
 }

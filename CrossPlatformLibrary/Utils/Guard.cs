@@ -13,12 +13,14 @@ namespace CrossPlatformLibrary.Utils
         /// </summary>
         /// <typeparam name="T">The type of the parameter, inferred from the Expression</typeparam>
         /// <param name="expression">An expression containing a single parameter e.g. () => param</param>
-        public static void ArgumentNotNull<T>(Expression<Func<T>> expression) where T : class
+        public static void ArgumentNotNull<T>(Expression<Func<T>> expression)
         {
             ArgumentNotNull(expression, "expression");
 
             // As seen here: http://jonfuller.codingtomusic.com/2008/12/11/static-reflection-method-guards/
-            if (expression.Compile()() == default(T))
+            //var areEqual = EqualityComparer<T>.Default.Equals(expression.Compile()(), default(T));
+            var propertyValue = expression.Compile()();
+            if (propertyValue == null)
             {
                 throw new ArgumentNullException(((MemberExpression)expression.Body).Member.Name);
             }
@@ -71,6 +73,17 @@ namespace CrossPlatformLibrary.Utils
             if (!func())
             {
                 action();
+            }
+        }
+
+        public static void ArgumentMustNotExceed(Expression<Func<string>> expression, int maxLength = int.MaxValue)
+        {
+            var stringValue = expression.Compile()();
+            int length = stringValue.Length;
+            if (length > maxLength)
+            {
+                var memberName = ((MemberExpression)expression.Body).Member.Name;
+                throw new ArgumentException("Length must not exceed " + maxLength + " number of characters", memberName);
             }
         }
 

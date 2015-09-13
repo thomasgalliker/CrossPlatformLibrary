@@ -7,25 +7,83 @@ using CrossPlatformLibrary.IoC;
 using CrossPlatformLibrary.Tests.Stubs;
 using CrossPlatformLibrary.Tools.PlatformSpecific;
 
+using FluentAssertions;
 
 using Xunit;
 
 namespace CrossPlatformLibrary.Tests.Bootstrapping
 {
+    [Collection("Bootstrapping")]
     public class BootstrapperTests
     {
+        public BootstrapperTests()
+        {
+            SimpleIoc.Default.Reset();
+            Bootstrapper.ApplicationLifecycle = ApplicationLifecycle.Uninitialized;
+        }
+
         [Fact]
         public void ShouldStartupBootstrapper()
         {
             // Arrange
             var testRegistrationConvention = new TestRegistrationConvention();
             SimpleIoc.Default.SetAdapterResolver(new ProbingAdapterResolver(testRegistrationConvention));
-            var bootstrapper = new Bootstrapper();
+            IBootstrapper bootstrapper = new Bootstrapper();
 
             // Act
             bootstrapper.Startup();
 
             // Assert
+            bootstrapper.ApplicationLifecycle.Should().Be(ApplicationLifecycle.Running);
+        }
+
+        [Fact]
+        public void ShouldShutdownBootstrapper()
+        {
+            // Arrange
+            var testRegistrationConvention = new TestRegistrationConvention();
+            SimpleIoc.Default.SetAdapterResolver(new ProbingAdapterResolver(testRegistrationConvention));
+            IBootstrapper bootstrapper = new Bootstrapper();
+            bootstrapper.Startup();
+
+            // Act
+            bootstrapper.Shutdown();
+
+            // Assert
+            bootstrapper.ApplicationLifecycle.Should().Be(ApplicationLifecycle.Uninitialized);
+        }
+
+        [Fact]
+        public void ShouldSleepBootstrapper()
+        {
+            // Arrange
+            var testRegistrationConvention = new TestRegistrationConvention();
+            SimpleIoc.Default.SetAdapterResolver(new ProbingAdapterResolver(testRegistrationConvention));
+            IBootstrapper bootstrapper = new Bootstrapper();
+            bootstrapper.Startup();
+
+            // Act
+            bootstrapper.Sleep();
+
+            // Assert
+            bootstrapper.ApplicationLifecycle.Should().Be(ApplicationLifecycle.Sleep);
+        }
+
+        [Fact]
+        public void ShouldResumeBootstrapper()
+        {
+            // Arrange
+            var testRegistrationConvention = new TestRegistrationConvention();
+            SimpleIoc.Default.SetAdapterResolver(new ProbingAdapterResolver(testRegistrationConvention));
+            IBootstrapper bootstrapper = new Bootstrapper();
+            bootstrapper.Startup();
+            bootstrapper.Sleep();
+
+            // Act
+            bootstrapper.Resume();
+
+            // Assert
+            bootstrapper.ApplicationLifecycle.Should().Be(ApplicationLifecycle.Running);
         }
 
         [Fact]

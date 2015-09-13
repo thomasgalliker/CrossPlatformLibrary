@@ -30,3 +30,4 @@ using System.Runtime.CompilerServices;
 
 
 [assembly: InternalsVisibleTo("CrossPlatformLibrary.Tests")]
+[assembly: InternalsVisibleTo("CrossPlatformLibrary.Android")]

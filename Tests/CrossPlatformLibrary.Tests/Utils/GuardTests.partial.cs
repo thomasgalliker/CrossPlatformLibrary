@@ -9,6 +9,19 @@ namespace CrossPlatformLibrary.Tests.Utils
     public partial class GuardTests
     {
         [Fact]
+        public void ArgumentNotNullThrowsIfNullableArgumentIsNull()
+        {
+            // Arrange
+            bool? testProp = null;
+            
+            // Act
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => Guard.ArgumentNotNull(() => testProp));
+            
+            // Assert
+            Assert.Equal("testProp", ex.ParamName);
+        }
+
+        [Fact]
         public void ArgumentNotNullThrowsIfArgumentIsNull()
         {
             ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => Guard.ArgumentNotNull((string)null, "argument"));
@@ -18,14 +31,25 @@ namespace CrossPlatformLibrary.Tests.Utils
         [Fact]
         public void ArgumentNotNullNotThrowsIfArgumentNameIsNullOrEmpty()
         {
-            // TODO GATH: Remove?? Assert.IsNotThrown<Exception>(() => Guard.ArgumentNotNull(new object(), (string)null));
-            // TODO GATH: Remove?? Assert.IsNotThrown<Exception>(() => Guard.ArgumentNotNull(new object(), string.Empty));
-
             ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(() => Guard.ArgumentNotNull((object)null, (string)null));
             Assert.Null(ex1.ParamName);
 
             ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(() => Guard.ArgumentNotNull((object)null, string.Empty));
             Assert.Equal(string.Empty, ex2.ParamName);
+        }
+
+        [Fact]
+        public void ArgumentMustNotExceedThrowsArgumentExceptionTooLow()
+        {
+            // Arrange
+            const int MaxLength = 3;
+            string inputTest = "1234";
+
+            // Act
+            ArgumentException ex = Assert.Throws<ArgumentException>(() => Guard.ArgumentMustNotExceed(() => inputTest, MaxLength));
+
+            // Assert
+            Assert.Equal("inputTest", ex.ParamName);
         }
 
         [Fact]
