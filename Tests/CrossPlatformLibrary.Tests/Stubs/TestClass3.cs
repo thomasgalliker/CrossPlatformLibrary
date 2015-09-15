@@ -2,13 +2,13 @@
 {
     public class TestClass3
     {
-        public ITestClass SavedProperty
+        public ITestClass1 SavedProperty
         {
             get;
             set;
         }
 
-        public TestClass3(ITestClass parameter)
+        public TestClass3(ITestClass1 parameter)
         {
             this.SavedProperty = parameter;
         }

@@ -1,6 +1,6 @@
 ﻿namespace CrossPlatformLibrary.Tests.Stubs
 {
-    public interface ITestClass
+    public interface ITestClass2
     {
     }
 }

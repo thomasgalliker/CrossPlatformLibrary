@@ -2,7 +2,7 @@
 {
     public class TestClass6
     {
-        public ITestClass MyProperty
+        public ITestClass1 MyProperty
         {
             get;
             set;
@@ -13,7 +13,7 @@
             
         }
 
-        public TestClass6(ITestClass myProperty)
+        public TestClass6(ITestClass1 myProperty)
         {
             this.MyProperty = myProperty;
         }

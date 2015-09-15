@@ -82,11 +82,11 @@ namespace CrossPlatformLibrary.Tests.IoC
             SimpleIoc.Default.Reset();
             TestClassForCreationTime.Reset();
             Assert.Equal(0, TestClassForCreationTime.InstancesCreated);
-            SimpleIoc.Default.Register<ITestClass, TestClassForCreationTime>();
+            SimpleIoc.Default.Register<ITestClass1, TestClassForCreationTime>();
             Assert.Equal(0, TestClassForCreationTime.InstancesCreated);
-            SimpleIoc.Default.GetInstance<ITestClass>();
+            SimpleIoc.Default.GetInstance<ITestClass1>();
             Assert.Equal(1, TestClassForCreationTime.InstancesCreated);
-            SimpleIoc.Default.GetInstance<ITestClass>();
+            SimpleIoc.Default.GetInstance<ITestClass1>();
             Assert.Equal(1, TestClassForCreationTime.InstancesCreated);
         }
 
@@ -96,13 +96,13 @@ namespace CrossPlatformLibrary.Tests.IoC
             SimpleIoc.Default.Reset();
             TestClassForCreationTime.Reset();
             Assert.Equal(0, TestClassForCreationTime.InstancesCreated);
-            SimpleIoc.Default.Register<ITestClass, TestClassForCreationTime>();
+            SimpleIoc.Default.Register<ITestClass1, TestClassForCreationTime>();
             Assert.Equal(0, TestClassForCreationTime.InstancesCreated);
-            SimpleIoc.Default.GetInstance<ITestClass>("Key1");
+            SimpleIoc.Default.GetInstance<ITestClass1>("Key1");
             Assert.Equal(1, TestClassForCreationTime.InstancesCreated);
-            SimpleIoc.Default.GetInstance<ITestClass>("Key2");
+            SimpleIoc.Default.GetInstance<ITestClass1>("Key2");
             Assert.Equal(2, TestClassForCreationTime.InstancesCreated);
-            SimpleIoc.Default.GetInstance<ITestClass>("Key1");
+            SimpleIoc.Default.GetInstance<ITestClass1>("Key1");
             Assert.Equal(2, TestClassForCreationTime.InstancesCreated);
         }
     }

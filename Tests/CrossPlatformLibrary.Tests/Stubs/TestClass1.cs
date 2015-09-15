@@ -2,7 +2,7 @@
 
 namespace CrossPlatformLibrary.Tests.Stubs
 {
-    public class TestClass1 : ITestClass
+    public class TestClass1 : ITestClass1
     {
         public static int InstancesCount
         {

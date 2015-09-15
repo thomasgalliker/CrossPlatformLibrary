@@ -68,15 +68,15 @@ namespace CrossPlatformLibrary.Tests.IoC
         {
             SimpleIoc.Default.Reset();
 
-            Assert.False(SimpleIoc.Default.IsRegistered<ITestClass>());
-            SimpleIoc.Default.Register<ITestClass, TestClass1>();
-            Assert.True(SimpleIoc.Default.IsRegistered<ITestClass>());
+            Assert.False(SimpleIoc.Default.IsRegistered<ITestClass1>());
+            SimpleIoc.Default.Register<ITestClass1, TestClass1>();
+            Assert.True(SimpleIoc.Default.IsRegistered<ITestClass1>());
 
-            SimpleIoc.Default.GetInstance<ITestClass>();
-            Assert.True(SimpleIoc.Default.IsRegistered<ITestClass>());
+            SimpleIoc.Default.GetInstance<ITestClass1>();
+            Assert.True(SimpleIoc.Default.IsRegistered<ITestClass1>());
 
-            SimpleIoc.Default.Unregister<ITestClass>();
-            Assert.False(SimpleIoc.Default.IsRegistered<ITestClass>());
+            SimpleIoc.Default.Unregister<ITestClass1>();
+            Assert.False(SimpleIoc.Default.IsRegistered<ITestClass1>());
         }
 
         [Fact]
@@ -104,12 +104,12 @@ namespace CrossPlatformLibrary.Tests.IoC
         {
             SimpleIoc.Default.Reset();
 
-            SimpleIoc.Default.Register<ITestClass, TestClass1>();
+            SimpleIoc.Default.Register<ITestClass1, TestClass1>();
 
             // Previous versions of SimpleIoc would throw an exception. Instead
             // new versions just ignore and continue. This fixes issues with Expression Blend,
             // for instance.
-            SimpleIoc.Default.Register<ITestClass, TestClass1>();
+            SimpleIoc.Default.Register<ITestClass1, TestClass1>();
         }
     }
 }

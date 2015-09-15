@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 using CrossPlatformLibrary.IO;
 
@@ -12,7 +12,7 @@ namespace CrossPlatformLibrary.Tests.IO
     public class XmlSerializerHelperTests
     {
         [Fact]
-        public void ShouldSerializeAnEmptyObject()
+        public void ShouldSerializeEmptyObject()
         {
             // Arrange
             object obj = new object();
@@ -22,12 +22,29 @@ namespace CrossPlatformLibrary.Tests.IO
             var deserializedObject = serializedString.DeserializeFromXml<object>();
 
             // Assert
-            Assert.NotNull(serializedString);
-            Assert.NotNull(deserializedObject);
+            serializedString.Should().NotBeNullOrEmpty();
+            deserializedObject.Should().NotBeNull();
         }
 
         [Fact]
-        public void ShouldSerializeAList()
+        public void ShouldSerializeSimpleObject()
+        {
+            // Arrange
+            object obj = new SimpleSerializerClass { BoolProperty = true, StringProperty = "test" };
+
+            // Act
+            var serializedString = obj.SerializeToXml();
+            var deserializedObject = serializedString.DeserializeFromXml<SimpleSerializerClass>();
+
+            // Assert
+            serializedString.Should().NotBeNullOrEmpty();
+            deserializedObject.Should().NotBeNull();
+            deserializedObject.BoolProperty.Should().BeTrue();
+            deserializedObject.StringProperty.Should().Be("test");
+        }
+
+        [Fact]
+        public void ShouldSerializeConcreteList()
         {
             // Arrange
             List<string> list = new List<string> { "a", "b", "c" };
@@ -37,26 +54,38 @@ namespace CrossPlatformLibrary.Tests.IO
             var deserializedList = serializedString.DeserializeFromXml<List<string>>();
 
             // Assert
-            Assert.NotNull(serializedString);
-            Assert.NotNull(deserializedList);
-            Assert.True(deserializedList.Count == 3);
-            Assert.True(deserializedList[0] == "a");
-            Assert.True(deserializedList[1] == "b");
-            Assert.True(deserializedList[2] == "c");
+            serializedString.Should().NotBeNullOrEmpty();
+            deserializedList.Should().NotBeNullOrEmpty();
+            deserializedList.Should().HaveCount(list.Count);
+            deserializedList.ElementAt(0).Should().Be(list[0]);
+            deserializedList.ElementAt(1).Should().Be(list[1]);
+            deserializedList.ElementAt(2).Should().Be(list[2]);
         }
 
         [Fact]
-        public void ShouldNotDeserializeAnInterfaceType()
+        public void ShouldSerializeInterfaceList()
         {
             // Arrange
             IList<string> list = new List<string> { "a", "b", "c" };
 
             // Act
             var serializedString = list.SerializeToXml();
-            Assert.Throws<ArgumentException>(() => serializedString.DeserializeFromXml<IList<string>>());
+            var deserializedList = serializedString.DeserializeFromXml<IList<string>>();
 
             // Assert
             serializedString.Should().NotBeNullOrEmpty();
+            deserializedList.Should().NotBeNullOrEmpty();
+            deserializedList.Should().HaveCount(list.Count);
+            deserializedList.ElementAt(0).Should().Be(list[0]);
+            deserializedList.ElementAt(1).Should().Be(list[1]);
+            deserializedList.ElementAt(2).Should().Be(list[2]);
+        }
+
+        public class SimpleSerializerClass
+        {
+            public string StringProperty { get; set; }
+
+            public bool BoolProperty { get; set; }
         }
     }
 }

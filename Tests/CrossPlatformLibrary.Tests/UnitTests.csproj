@@ -80,8 +80,15 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Bootstrapping\BootstrapperTests.cs" />
-    <Compile Include="Bootstrapping\TestableBootstrapper.cs" />
+    <Compile Include="Extensions\TypeExtensionsTests.cs" />
+    <Compile Include="IoC\ResolvedParameterTests.cs" />
+    <Compile Include="IO\HashCodeHelperTests.cs" />
+    <Compile Include="Stubs\GenericClass1.cs" />
     <Compile Include="Stubs\IServiceWithNoImplementation.cs" />
+    <Compile Include="Stubs\ITestClass10.cs" />
+    <Compile Include="Stubs\ITestClass2.cs" />
+    <Compile Include="Stubs\Person.cs" />
+    <Compile Include="Stubs\TestClass10.cs" />
     <Compile Include="Stubs\TestRegistrationConvention.cs" />
     <Compile Include="Tools\PlatformServicesStub.cs" />
     <Compile Include="ExceptionHandling\PlatformSpecificExceptionHandlerStub.cs" />
@@ -91,6 +98,7 @@
     <Compile Include="Extensions\IntegerExtensionsTests.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
     <Compile Include="Tools\PlatformSpecific\ProbingAdapterResolverTests.cs" />
+    <Compile Include="Utils\RandomUtilsTests.cs" />
     <Compile Include="___TestTemplate___.cs" />
     <Compile Include="IoC\SimpleIocTestAutoCreation.cs" />
     <Compile Include="IoC\SimpleIocTestContains.cs" />
@@ -101,7 +109,7 @@
     <Compile Include="IoC\SimpleIocTestSingleInstance.cs" />
     <Compile Include="IoC\SimpleIocTestUnregistration.cs" />
     <Compile Include="IO\XmlSerializerHelperTests.cs" />
-    <Compile Include="Stubs\ITestClass.cs" />
+    <Compile Include="Stubs\ITestClass1.cs" />
     <Compile Include="Stubs\TestBaseClass.cs" />
     <Compile Include="Stubs\TestClass1.cs" />
     <Compile Include="Stubs\TestClass2.cs" />
@@ -131,7 +139,6 @@
     <Compile Include="Tracing\TracerTests.cs" />
     <Compile Include="Utils\HighlightMarkerTests.cs" />
     <Compile Include="Utils\GuardTests.cs" />
-    <Compile Include="Utils\GuardTests.partial.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossPlatformLibrary\CrossPlatformLibrary.csproj">

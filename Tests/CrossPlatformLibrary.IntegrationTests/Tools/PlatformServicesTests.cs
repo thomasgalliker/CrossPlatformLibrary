@@ -6,6 +6,7 @@ using Xunit;
 
 namespace CrossPlatformLibrary.IntegrationTests.Tools
 {
+    [Trait("Category", "IntegrationTests")]
     public class PlatformServicesTests
     {
         [Fact]

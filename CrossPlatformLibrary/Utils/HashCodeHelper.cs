@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace CrossPlatformLibrary.Utils
 {
@@ -35,15 +36,7 @@ namespace CrossPlatformLibrary.Utils
 
         public static int GetHashCode<T>(T[] list)
         {
-            unchecked
-            {
-                int hash = 0;
-                foreach (var item in list)
-                {
-                    hash = 31 * hash + item.GetHashCode();
-                }
-                return hash;
-            }
+            return GetHashCode(list.ToList());
         }
 
         public static int GetHashCode<T>(IEnumerable<T> list)

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>CrossPlatformLibrary</id>
-    <version>1.0.54-alpha</version>
+    <version>1.0.59-alpha</version>
     <title>CrossPlatformLibrary</title>
     <authors>Thomas Galliker</authors>
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
@@ -18,9 +18,9 @@
       windows phone winphone wp8 wpa81 win81 windowsphone android xamarin.forms xamarin.ios ios monoandroid monodroid monotouch mvvmcross mvvmlight
     </tags>
     <releaseNotes>
-      - Bootstrapper is now capable of handling app resume. If you call Startup() method it detects the current application state automatically.
-      - Guard.ArgumentNotNull is now also capable of dealing with value types.
-      - Bootstrapper.Resume method in order to continue from standby state.
+      - XmlSerializerHelper supports deserialization of interface types
+      - SimpleIoc supports constructor parameter overriding with named dependencies
+      - TypeExtensions.ToTypeName extension method to properly print generic types
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
     <language>en-US</language>

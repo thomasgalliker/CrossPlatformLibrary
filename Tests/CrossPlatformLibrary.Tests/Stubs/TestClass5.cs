@@ -5,7 +5,7 @@ namespace CrossPlatformLibrary.Tests.Stubs
 {
     public class TestClass5
     {
-        public ITestClass MyProperty
+        public ITestClass1 MyProperty
         {
             get;
             private set;
@@ -17,7 +17,7 @@ namespace CrossPlatformLibrary.Tests.Stubs
         }
 
         [PreferredConstructor]
-        public TestClass5(ITestClass myProperty)
+        public TestClass5(ITestClass1 myProperty)
         {
             this.MyProperty = myProperty;
         }

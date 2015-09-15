@@ -211,9 +211,9 @@
       <Project>{a6fcef44-d2ba-42c7-b3cb-13667bcd7b54}</Project>
       <Name>CrossPlatformLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CrossPlatformLibrary.IntegrationTests\CrossPlatformLibrary.IntegrationTests.csproj">
+    <ProjectReference Include="..\CrossPlatformLibrary.IntegrationTests\IntegrationTests.csproj">
       <Project>{26c644f0-fd3a-4807-8c1b-ca3bad52a5ca}</Project>
-      <Name>CrossPlatformLibrary.IntegrationTests</Name>
+      <Name>IntegrationTests</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

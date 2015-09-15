@@ -88,14 +88,14 @@ namespace CrossPlatformLibrary.Tests.IoC
         {
             SimpleIoc.Default.Reset();
 
-            SimpleIoc.Default.Register<ITestClass, TestClass1>();
-            Assert.True(SimpleIoc.Default.IsRegistered<ITestClass>());
+            SimpleIoc.Default.Register<ITestClass1, TestClass1>();
+            Assert.True(SimpleIoc.Default.IsRegistered<ITestClass1>());
 
-            SimpleIoc.Default.Unregister<ITestClass>();
-            Assert.False(SimpleIoc.Default.IsRegistered<ITestClass>());
+            SimpleIoc.Default.Unregister<ITestClass1>();
+            Assert.False(SimpleIoc.Default.IsRegistered<ITestClass1>());
 
-            SimpleIoc.Default.Register<ITestClass, TestClass1>();
-            Assert.True(SimpleIoc.Default.IsRegistered<ITestClass>());
+            SimpleIoc.Default.Register<ITestClass1, TestClass1>();
+            Assert.True(SimpleIoc.Default.IsRegistered<ITestClass1>());
         }
 
         public void TestUnregisterInstanceAndGetNewInstance()

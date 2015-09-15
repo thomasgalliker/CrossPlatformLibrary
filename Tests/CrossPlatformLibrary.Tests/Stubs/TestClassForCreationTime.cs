@@ -1,6 +1,6 @@
 ﻿namespace CrossPlatformLibrary.Tests.Stubs
 {
-    public class TestClassForCreationTime : ITestClass
+    public class TestClassForCreationTime : ITestClass1
     {
         public static int InstancesCreated
         {

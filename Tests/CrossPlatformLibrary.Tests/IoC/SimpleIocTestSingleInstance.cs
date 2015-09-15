@@ -3,6 +3,7 @@
 using CrossPlatformLibrary.IoC;
 using CrossPlatformLibrary.Tests.Stubs;
 
+
 using Microsoft.Practices.ServiceLocation;
 using Xunit;
 
@@ -11,6 +12,11 @@ namespace CrossPlatformLibrary.Tests.IoC
     [Collection("IoC")]
     public class SimpleIocTestSingleInstance
     {
+        ////public SimpleIocTestSingleInstance()
+        ////{
+        ////    SimpleIoc.Default.Reset();
+        ////}
+
         [Fact]
         public void TestConstructWithProperty()
         {
@@ -51,9 +57,9 @@ namespace CrossPlatformLibrary.Tests.IoC
         {
             SimpleIoc.Default.Reset();
             var instanceOriginal = new TestClass1();
-            SimpleIoc.Default.Register<ITestClass>(() => instanceOriginal);
+            SimpleIoc.Default.Register<ITestClass1>(() => instanceOriginal);
 
-            var instance = SimpleIoc.Default.GetInstance<ITestClass>();
+            var instance = SimpleIoc.Default.GetInstance<ITestClass1>();
 
             Assert.NotNull(instance);
             Assert.IsType<TestClass1>(instance);
@@ -77,9 +83,9 @@ namespace CrossPlatformLibrary.Tests.IoC
         {
             SimpleIoc.Default.Reset();
             var instanceOriginal = new TestClass1();
-            SimpleIoc.Default.Register<ITestClass>(() => instanceOriginal);
+            SimpleIoc.Default.Register<ITestClass1>(() => instanceOriginal);
 
-            var instance = SimpleIoc.Default.GetInstance(typeof(ITestClass));
+            var instance = SimpleIoc.Default.GetInstance(typeof(ITestClass1));
 
             Assert.NotNull(instance);
             Assert.IsType<TestClass1>(instance);
@@ -90,11 +96,11 @@ namespace CrossPlatformLibrary.Tests.IoC
         public void TestGetInstanceWithParameters()
         {
             SimpleIoc.Default.Reset();
-            SimpleIoc.Default.Register<ITestClass, TestClass1>();
+            SimpleIoc.Default.Register<ITestClass1, TestClass1>();
             SimpleIoc.Default.Register<TestClass3>();
 
             var instance = SimpleIoc.Default.GetInstance<TestClass3>();
-            var property = SimpleIoc.Default.GetInstance<ITestClass>();
+            var property = SimpleIoc.Default.GetInstance<ITestClass1>();
 
             Assert.NotNull(instance);
             Assert.IsType<TestClass3>(instance);
@@ -107,9 +113,9 @@ namespace CrossPlatformLibrary.Tests.IoC
         public void TestGetInstanceWithParametersRegisterByType()
         {
             SimpleIoc.Default.Reset();
-            SimpleIoc.Default.Register<ITestClass>(typeof(TestClass1));
+            SimpleIoc.Default.Register<ITestClass1>(typeof(TestClass1));
 
-            var instance = SimpleIoc.Default.GetInstance<ITestClass>();
+            var instance = SimpleIoc.Default.GetInstance<ITestClass1>();
 
             Assert.NotNull(instance);
             Assert.IsType<TestClass1>(instance);
@@ -162,7 +168,7 @@ namespace CrossPlatformLibrary.Tests.IoC
         {
             try
             {
-                SimpleIoc.Default.Register<ITestClass>();
+                SimpleIoc.Default.Register<ITestClass1>();
                 Assert.True(false, "ArgumentException was expected");
             }
             catch (ArgumentException)
@@ -175,15 +181,15 @@ namespace CrossPlatformLibrary.Tests.IoC
         {
             SimpleIoc.Default.Reset();
             var instanceOriginal = new TestClass1();
-            SimpleIoc.Default.Register<ITestClass>(() => instanceOriginal);
-            var instance = SimpleIoc.Default.GetInstance<ITestClass>();
+            SimpleIoc.Default.Register<ITestClass1>(() => instanceOriginal);
+            var instance = SimpleIoc.Default.GetInstance<ITestClass1>();
             Assert.NotNull(instance);
 
             SimpleIoc.Default.Reset();
 
             try
             {
-                SimpleIoc.Default.GetInstance<ITestClass>();
+                SimpleIoc.Default.GetInstance<ITestClass1>();
                 Assert.True(false, "ActivationException was expected");
             }
             catch (ActivationException)

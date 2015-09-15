@@ -9,6 +9,7 @@ using Xunit;
 
 namespace CrossPlatformLibrary.IntegrationTests.Dispatching
 {
+    [Trait("Category", "IntegrationTests")]
     public class DispatcherServiceTests
     {
         [Fact]
@@ -34,7 +35,6 @@ namespace CrossPlatformLibrary.IntegrationTests.Dispatching
             }
 
             // Assert
-            
             beginInvokeCalled.Should().BeTrue();
         }
     }

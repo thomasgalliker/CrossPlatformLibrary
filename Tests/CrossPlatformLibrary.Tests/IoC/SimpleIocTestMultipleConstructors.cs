@@ -33,7 +33,7 @@ namespace CrossPlatformLibrary.Tests.IoC
             var property = new TestClass1();
 
             SimpleIoc.Default.Reset();
-            SimpleIoc.Default.Register<ITestClass>(() => property);
+            SimpleIoc.Default.Register<ITestClass1>(() => property);
             SimpleIoc.Default.Register<TestClass5>();
 
             var instance1 = new TestClass5();
@@ -52,7 +52,7 @@ namespace CrossPlatformLibrary.Tests.IoC
             var property = new TestClass1();
 
             SimpleIoc.Default.Reset();
-            SimpleIoc.Default.Register<ITestClass>(() => property);
+            SimpleIoc.Default.Register<ITestClass1>(() => property);
 
             try
             {

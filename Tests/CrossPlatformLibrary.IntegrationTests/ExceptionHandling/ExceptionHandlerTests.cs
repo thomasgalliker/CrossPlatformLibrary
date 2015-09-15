@@ -8,6 +8,7 @@ using Xunit;
 
 namespace CrossPlatformLibrary.IntegrationTests.ExceptionHandling
 {
+    [Trait("Category", "IntegrationTests")]
     public class ExceptionHandlerTests
     {
         [Fact]

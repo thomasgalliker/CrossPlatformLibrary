@@ -35,36 +35,26 @@ namespace CrossPlatformLibrary.IoC
     ///     The inspiration for this class is at https://gist.github.com/716137 but it has
     ///     been extended with additional features.
     /// </summary>
-    //// [ClassInfo(typeof(SimpleIoc),
-    ////  VersionString = "5.1.9",
-    ////  DateString = "201502072030",
-    ////  Description = "A very simple IOC container.",
-    ////  UrlContacts = "http://www.galasoft.ch/contact_en.html",
-    ////  Email = "laurent@galasoft.ch")]
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Ioc")]
     public class SimpleIoc : ISimpleIoc
     {
         private static SimpleIoc instance;
 
         private const bool DefaultCacheUsage = true;
 
-        private readonly Dictionary<Type, ConstructorInfo> _constructorInfos = new Dictionary<Type, ConstructorInfo>();
+        private readonly Dictionary<Type, ConstructorInfo> constructorInfos = new Dictionary<Type, ConstructorInfo>();
 
-        private readonly string _defaultKey = Guid.NewGuid().ToString();
+        private readonly string defaultKey = Guid.NewGuid().ToString();
 
-        private readonly Dictionary<Type, Dictionary<string, Delegate>> _factories = new Dictionary<Type, Dictionary<string, Delegate>>();
+        private readonly Dictionary<Type, Dictionary<string, Delegate>> factories = new Dictionary<Type, Dictionary<string, Delegate>>();
 
-        private readonly Dictionary<Type, Dictionary<string, object>> _instancesRegistry = new Dictionary<Type, Dictionary<string, object>>();
+        private readonly Dictionary<Type, Dictionary<string, object>> instancesRegistry = new Dictionary<Type, Dictionary<string, object>>();
 
-        private readonly Dictionary<Type, Type> _interfaceToClassMap = new Dictionary<Type, Type>();
+        private readonly Dictionary<Type, Type> interfaceToClassMap = new Dictionary<Type, Type>();
 
-        private readonly object _syncLock = new object();
+        private readonly object syncLock = new object();
 
         private IAdapterResolver adapterResolver;
 
-        /// <summary>
-        ///     This class' default instance.
-        /// </summary>
         public static SimpleIoc Default
         {
             get
@@ -77,94 +67,65 @@ namespace CrossPlatformLibrary.IoC
         {
             var defaultRegistrationConvention = new DefaultRegistrationConvention();
             this.adapterResolver = new ProbingAdapterResolver(defaultRegistrationConvention);
-            
         }
 
-        /// <summary>
-        ///     Checks whether at least one instance of a given class is already created in the container.
-        /// </summary>
-        /// <typeparam name="TClass">The class that is queried.</typeparam>
-        /// <returns>True if at least on instance of the class is already created, false otherwise.</returns>
+        /// <inheritdoc />
         public bool ContainsCreated<TClass>()
         {
             return this.ContainsCreated<TClass>(null);
         }
 
-        /// <summary>
-        ///     Checks whether the instance with the given key is already created for a given class
-        ///     in the container.
-        /// </summary>
-        /// <typeparam name="TClass">The class that is queried.</typeparam>
-        /// <param name="key">The key that is queried.</param>
-        /// <returns>
-        ///     True if the instance with the given key is already registered for the given class,
-        ///     false otherwise.
-        /// </returns>
+        /// <inheritdoc />
         public bool ContainsCreated<TClass>(string key)
         {
             var classType = typeof(TClass);
 
-            if (!this._instancesRegistry.ContainsKey(classType))
+            if (!this.instancesRegistry.ContainsKey(classType))
             {
                 return false;
             }
 
             if (string.IsNullOrEmpty(key))
             {
-                return this._instancesRegistry[classType].Count > 0;
+                return this.instancesRegistry[classType].Count > 0;
             }
 
-            return this._instancesRegistry[classType].ContainsKey(key);
+            return this.instancesRegistry[classType].ContainsKey(key);
         }
 
-        /// <summary>
-        ///     Gets a value indicating whether a given type T is already registered.
-        /// </summary>
-        /// <typeparam name="T">The type that the method checks for.</typeparam>
-        /// <returns>True if the type is registered, false otherwise.</returns>
+        /// <inheritdoc />
         public bool IsRegistered<T>()
         {
             var classType = typeof(T);
-            return this._interfaceToClassMap.ContainsKey(classType);
+            return this.interfaceToClassMap.ContainsKey(classType);
         }
 
-        /// <summary>
-        ///     Gets a value indicating whether a given type T is already registered.
-        /// </summary>
-        /// <typeparam name="T">The type that the method checks for.</typeparam>
-        /// <returns>True if the type is registered, false otherwise.</returns>
+        /// <inheritdoc />
         public bool IsRegistered(Type classType)
         {
-            return this._interfaceToClassMap.ContainsKey(classType);
+            return this.interfaceToClassMap.ContainsKey(classType);
         }
 
-        /// <summary>
-        ///     Gets a value indicating whether a given type T and a give key
-        ///     are already registered.
-        /// </summary>
-        /// <typeparam name="T">The type that the method checks for.</typeparam>
-        /// <param name="key">The key that the method checks for.</param>
-        /// <returns>True if the type and key are registered, false otherwise.</returns>
+        /// <inheritdoc />
         public bool IsRegistered<T>(string key)
         {
-            var classType = typeof(T);
-
-            if (!this.IsRegistered(classType) || !this._factories.ContainsKey(classType))
+            lock (this.syncLock)
             {
-                return false;
-            }
+                var classType = typeof(T);
 
-            return this._factories[classType].ContainsKey(key); // TODO GATH: Add lock (because of threading issues)
+                if (!this.IsRegistered(classType) || !this.factories.ContainsKey(classType))
+                {
+                    return false;
+                }
+
+                return this.factories[classType].ContainsKey(key);
+            }
         }
 
-
-        /// <summary>
-        ///     Registers a given type for a given interface using the default registration convention.
-        /// </summary>
-        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
-        public void RegisterWithConvention<TInterface>() where TInterface : class
+        /// <inheritdoc />
+        public void RegisterWithConvention<TInterface>(params IResolvedParameter[] resolvedParameters) where TInterface : class
         {
-            this.RegisterWithConvention<TInterface>(this.adapterResolver.RegistrationConvention);
+            this.RegisterWithConvention<TInterface>(this.adapterResolver.RegistrationConvention, resolvedParameters);
         }
 
         /// <summary>
@@ -172,13 +133,16 @@ namespace CrossPlatformLibrary.IoC
         /// </summary>
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
         /// <param name="convention">The convention used to convert between the given interface type and the class.</param>
-        public void RegisterWithConvention<TInterface>(IRegistrationConvention convention) where TInterface : class
+        /// <param name="resolvedParameter"></param>
+        /// <inheritdoc />
+        public void RegisterWithConvention<TInterface>(IRegistrationConvention convention, params IResolvedParameter[] resolvedParameters) where TInterface : class
         {
             Guard.ArgumentNotNull(() => convention);
 
             this.adapterResolver.RegistrationConvention = convention;
             var classType = this.adapterResolver.ResolveClassType(typeof(TInterface));
-            this.Register<TInterface>(classType);
+
+            this.Register<TInterface>(classType, resolvedParameters);
         }
 
         internal void SetAdapterResolver(IAdapterResolver resolver)
@@ -193,11 +157,11 @@ namespace CrossPlatformLibrary.IoC
         /// </summary>
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
         /// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
-        public void Register<TInterface, TClass>()
+        public void Register<TInterface, TClass>(params IResolvedParameter[] resolvedParameters)
             where TClass : class
             where TInterface : class
         {
-            this.Register<TInterface, TClass>(null, false);
+            this.Register<TInterface, TClass>(null, false, resolvedParameters);
         }
 
         /// <summary>
@@ -205,9 +169,10 @@ namespace CrossPlatformLibrary.IoC
         /// </summary>
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
         /// <param name="classType">The type that must be used to create instances.</param>
-        public void Register<TInterface>(Type classType) where TInterface : class
+        /// <param name="resolvedParameter"></param>
+        public void Register<TInterface>(Type classType, params IResolvedParameter[] resolvedParameters) where TInterface : class
         {
-            this.Register<TInterface>(classType, createInstanceImmediately: false);
+            this.Register<TInterface>(classType, false, resolvedParameters);
         }
 
         /// <summary>
@@ -215,9 +180,13 @@ namespace CrossPlatformLibrary.IoC
         /// </summary>
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
         /// <param name="classType">The type that must be used to create instances.</param>
-        public void Register<TInterface>(Type classType, bool createInstanceImmediately) where TInterface : class
+        /// <param name="createInstanceImmediately">
+        ///     If true, forces the creation of the default
+        ///     instance of the provided class.
+        /// </param>
+        public void Register<TInterface>(Type classType, bool createInstanceImmediately, params IResolvedParameter[] resolvedParameters) where TInterface : class
         {
-            this.Register<TInterface>(classType, null, createInstanceImmediately);
+            this.Register<TInterface>(classType, null, createInstanceImmediately, resolvedParameters);
         }
 
         /// <summary>
@@ -225,11 +194,11 @@ namespace CrossPlatformLibrary.IoC
         /// </summary>
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
         /// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
-        public void Register<TInterface, TClass>(bool createInstanceImmediately)
+        public void Register<TInterface, TClass>(bool createInstanceImmediately, params IResolvedParameter[] resolvedParameters)
             where TInterface : class
             where TClass : class
         {
-            this.Register<TInterface>(typeof(TClass), null, createInstanceImmediately);
+            this.Register<TInterface>(typeof(TClass), null, createInstanceImmediately, resolvedParameters);
         }
 
         /// <summary>
@@ -237,11 +206,11 @@ namespace CrossPlatformLibrary.IoC
         /// </summary>
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
         /// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
-        public void Register<TInterface, TClass>(string key, bool createInstanceImmediately)
+        public void Register<TInterface, TClass>(string key, bool createInstanceImmediately, params IResolvedParameter[] resolvedParameters)
             where TClass : class
             where TInterface : class
         {
-            this.Register<TInterface>(typeof(TClass), key, createInstanceImmediately);
+            this.Register<TInterface>(typeof(TClass), key, createInstanceImmediately, resolvedParameters);
         }
 
         /// <summary>
@@ -255,31 +224,31 @@ namespace CrossPlatformLibrary.IoC
         ///     If true, forces the creation of the default
         ///     instance of the provided class.
         /// </param>
-        public void Register<TInterface>(Type classType, string key, bool createInstanceImmediately) where TInterface : class
+        public void Register<TInterface>(Type classType, string key, bool createInstanceImmediately, params IResolvedParameter[] resolvedParameters) where TInterface : class
         {
-            lock (this._syncLock)
+            lock (this.syncLock)
             {
                 if (string.IsNullOrEmpty(key))
                 {
-                    key = this._defaultKey;
+                    key = this.defaultKey;
                 }
 
                 var interfaceType = typeof(TInterface);
 
-                if (this._interfaceToClassMap.ContainsKey(interfaceType))
+                if (this.interfaceToClassMap.ContainsKey(interfaceType))
                 {
-                    if (this._interfaceToClassMap[interfaceType] != classType)
+                    if (this.interfaceToClassMap[interfaceType] != classType)
                     {
                         throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "There is already a class registered for {0}.", interfaceType.FullName));
                     }
                 }
                 else
                 {
-                    this._interfaceToClassMap.Add(interfaceType, classType);
-                    this._constructorInfos.Add(classType, this.GetConstructorInfo(classType));
+                    this.interfaceToClassMap.Add(interfaceType, classType);
+                    this.constructorInfos.Add(classType, this.GetConstructorInfo(classType));
                 }
 
-                Func<object> factory = () => this.MakeInstance(classType);
+                Func<object> factory = () => this.MakeInstance(classType, resolvedParameters);
                 this.DoRegister(interfaceType, factory, key);
 
                 if (createInstanceImmediately)
@@ -340,16 +309,16 @@ namespace CrossPlatformLibrary.IoC
                 throw new ArgumentException("An interface cannot be registered alone.");
             }
 
-            lock (this._syncLock)
+            lock (this.syncLock)
             {
                 if (string.IsNullOrEmpty(key))
                 {
-                    key = this._defaultKey;
+                    key = this.defaultKey;
                 }
 
-                if (this._factories.ContainsKey(classType) && this._factories[classType].ContainsKey(key))
+                if (this.factories.ContainsKey(classType) && this.factories[classType].ContainsKey(key))
                 {
-                    if (!this._constructorInfos.ContainsKey(classType))
+                    if (!this.constructorInfos.ContainsKey(classType))
                     {
                         // Throw only if constructorinfos have not been
                         // registered, which means there is a default factory
@@ -360,12 +329,12 @@ namespace CrossPlatformLibrary.IoC
                     return;
                 }
 
-                if (!this._interfaceToClassMap.ContainsKey(classType))
+                if (!this.interfaceToClassMap.ContainsKey(classType))
                 {
-                    this._interfaceToClassMap.Add(classType, null);
+                    this.interfaceToClassMap.Add(classType, null);
                 }
 
-                this._constructorInfos.Add(classType, this.GetConstructorInfo(classType));
+                this.constructorInfos.Add(classType, this.GetConstructorInfo(classType));
                 Func<object> factory = () => this.MakeInstance(classType);
                 this.DoRegister(classType, factory, key);
 
@@ -421,21 +390,21 @@ namespace CrossPlatformLibrary.IoC
         {
             Guard.ArgumentNotNull(() => factory);
 
-            lock (this._syncLock)
+            lock (this.syncLock)
             {
                 var classType = typeof(TClass);
 
-                if (this._factories.ContainsKey(classType) && this._factories[classType].ContainsKey(this._defaultKey))
+                if (this.factories.ContainsKey(classType) && this.factories[classType].ContainsKey(this.defaultKey))
                 {
                     throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "There is already a factory registered for {0}.", classType.FullName));
                 }
 
-                if (!this._interfaceToClassMap.ContainsKey(classType))
+                if (!this.interfaceToClassMap.ContainsKey(classType))
                 {
-                    this._interfaceToClassMap.Add(classType, null);
+                    this.interfaceToClassMap.Add(classType, null);
                 }
 
-                this.DoRegister(classType, factory, this._defaultKey);
+                this.DoRegister(classType, factory, this.defaultKey);
 
                 if (createInstanceImmediately)
                 {
@@ -474,23 +443,18 @@ namespace CrossPlatformLibrary.IoC
         /// </param>
         public void Register<TClass>(Func<TClass> factory, string key, bool createInstanceImmediately) where TClass : class
         {
-            this.Register<TClass>((Delegate)factory, key, createInstanceImmediately);
-        }
-
-        private void Register<TClass>(Delegate factory, string key, bool createInstanceImmediately) where TClass : class
-        {
-            lock (this._syncLock)
+            lock (this.syncLock)
             {
                 var classType = typeof(TClass);
 
-                if (this._factories.ContainsKey(classType) && this._factories[classType].ContainsKey(key))
+                if (this.factories.ContainsKey(classType) && this.factories[classType].ContainsKey(key))
                 {
                     throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "There is already a factory registered for {0} with key {1}.", classType.FullName, key));
                 }
 
-                if (!this._interfaceToClassMap.ContainsKey(classType))
+                if (!this.interfaceToClassMap.ContainsKey(classType))
                 {
-                    this._interfaceToClassMap.Add(classType, null);
+                    this.interfaceToClassMap.Add(classType, null);
                 }
 
                 this.DoRegister(classType, factory, key);
@@ -508,10 +472,13 @@ namespace CrossPlatformLibrary.IoC
         /// </summary>
         public void Reset()
         {
-            this._interfaceToClassMap.Clear();
-            this._instancesRegistry.Clear();
-            this._constructorInfos.Clear();
-            this._factories.Clear();
+            lock (this.syncLock)
+            {
+                this.interfaceToClassMap.Clear();
+                this.instancesRegistry.Clear();
+                this.constructorInfos.Clear();
+                this.factories.Clear();
+            }
         }
 
         /// <summary>
@@ -530,37 +497,37 @@ namespace CrossPlatformLibrary.IoC
         /// </summary>
         public void Unregister(Type serviceType)
         {
-            lock (this._syncLock)
+            lock (this.syncLock)
             {
                 Type resolveTo;
 
-                if (this._interfaceToClassMap.ContainsKey(serviceType))
+                if (this.interfaceToClassMap.ContainsKey(serviceType))
                 {
-                    resolveTo = this._interfaceToClassMap[serviceType] ?? serviceType;
+                    resolveTo = this.interfaceToClassMap[serviceType] ?? serviceType;
                 }
                 else
                 {
                     resolveTo = serviceType;
                 }
 
-                if (this._instancesRegistry.ContainsKey(serviceType))
+                if (this.instancesRegistry.ContainsKey(serviceType))
                 {
-                    this._instancesRegistry.Remove(serviceType);
+                    this.instancesRegistry.Remove(serviceType);
                 }
 
-                if (this._interfaceToClassMap.ContainsKey(serviceType))
+                if (this.interfaceToClassMap.ContainsKey(serviceType))
                 {
-                    this._interfaceToClassMap.Remove(serviceType);
+                    this.interfaceToClassMap.Remove(serviceType);
                 }
 
-                if (this._factories.ContainsKey(serviceType))
+                if (this.factories.ContainsKey(serviceType))
                 {
-                    this._factories.Remove(serviceType);
+                    this.factories.Remove(serviceType);
                 }
 
-                if (this._constructorInfos.ContainsKey(resolveTo))
+                if (this.constructorInfos.ContainsKey(resolveTo))
                 {
-                    this._constructorInfos.Remove(resolveTo);
+                    this.constructorInfos.Remove(resolveTo);
                 }
             }
         }
@@ -571,17 +538,17 @@ namespace CrossPlatformLibrary.IoC
         /// </summary>
         /// <typeparam name="TClass">The type of the instance to be removed.</typeparam>
         /// <param name="instance">The instance that must be removed.</param>
-        public void Unregister<TClass>(TClass instance) where TClass : class
+        public void Unregister<TClass>(TClass instanceToUnregister) where TClass : class
         {
-            lock (this._syncLock)
+            lock (this.syncLock)
             {
                 var classType = typeof(TClass);
 
-                if (this._instancesRegistry.ContainsKey(classType))
+                if (this.instancesRegistry.ContainsKey(classType))
                 {
-                    var instances = this._instancesRegistry[classType];
+                    var instances = this.instancesRegistry[classType];
 
-                    var pairs = instances.Where(pair => pair.Value == instance).ToList();
+                    var pairs = instances.Where(pair => pair.Value == instanceToUnregister).ToList();
                     for (var index = 0; index < pairs.Count(); index++)
                     {
                         instances.Remove(pairs[index].Key);
@@ -590,30 +557,25 @@ namespace CrossPlatformLibrary.IoC
             }
         }
 
+        /// <inheritdoc />
         public void Unregister<TClass>(string key) where TClass : class
         {
             this.Unregister(typeof(TClass), key);
         }
 
-        /// <summary>
-        ///     Removes the instance corresponding to the given key from the cache. The class itself remains
-        ///     registered and can be used to create other instances.
-        /// </summary>
-        /// <typeparam name="TClass">The type of the instance to be removed.</typeparam>
-        /// <param name="classType"></param>
-        /// <param name="key">The key corresponding to the instance that must be removed.</param>
+        /// <inheritdoc />
         public void Unregister(Type classType, string key)
         {
-            lock (this._syncLock)
+            lock (this.syncLock)
             {
                 if (string.IsNullOrEmpty(key))
                 {
-                    key = this._defaultKey;
+                    key = this.defaultKey;
                 }
 
-                if (this._instancesRegistry.ContainsKey(classType))
+                if (this.instancesRegistry.ContainsKey(classType))
                 {
-                    var instances = this._instancesRegistry[classType];
+                    var instances = this.instancesRegistry[classType];
 
                     var pairs = instances.Where(pair => pair.Key == key).ToList();
                     for (var index = 0; index < pairs.Count(); index++)
@@ -622,11 +584,11 @@ namespace CrossPlatformLibrary.IoC
                     }
                 }
 
-                if (this._factories.ContainsKey(classType))
+                if (this.factories.ContainsKey(classType))
                 {
-                    if (this._factories[classType].ContainsKey(key))
+                    if (this.factories[classType].ContainsKey(key))
                     {
-                        this._factories[classType].Remove(key);
+                        this.factories[classType].Remove(key);
                     }
                 }
             }
@@ -634,16 +596,16 @@ namespace CrossPlatformLibrary.IoC
 
         private object DoGetService(Type serviceType, Type parentType, string key, bool cache = DefaultCacheUsage, bool throwIfNotFound = true)
         {
-            lock (this._syncLock)
+            lock (this.syncLock)
             {
                 if (string.IsNullOrEmpty(key))
                 {
-                    key = this._defaultKey;
+                    key = this.defaultKey;
                 }
 
                 Dictionary<string, object> instances = null;
 
-                if (!this._instancesRegistry.ContainsKey(serviceType))
+                if (!this.instancesRegistry.ContainsKey(serviceType))
                 {
                     if (!this.IsRegistered(serviceType))
                     {
@@ -668,12 +630,12 @@ namespace CrossPlatformLibrary.IoC
                     if (cache)
                     {
                         instances = new Dictionary<string, object>();
-                        this._instancesRegistry.Add(serviceType, instances);
+                        this.instancesRegistry.Add(serviceType, instances);
                     }
                 }
                 else
                 {
-                    instances = this._instancesRegistry[serviceType];
+                    instances = this.instancesRegistry[serviceType];
                 }
 
                 if (instances != null && instances.ContainsKey(key))
@@ -683,12 +645,12 @@ namespace CrossPlatformLibrary.IoC
 
                 object instance = null;
 
-                if (this._factories.ContainsKey(serviceType))
+                if (this.factories.ContainsKey(serviceType))
                 {
-                    if (this._factories[serviceType].ContainsKey(key))
+                    if (this.factories[serviceType].ContainsKey(key))
                     {
-                        var del = this._factories[serviceType][key];
-                        if (del.GetType().GenericTypeArguments.Count() == 2 && del.GetType().GenericTypeArguments[0] == typeof(Type) && del.GetType().GenericTypeArguments[1] == serviceType)
+                        var del = this.factories[serviceType][key];
+                        if (del.GetType().GenericTypeArguments.Length == 2 && del.GetType().GenericTypeArguments[0] == typeof(Type) && del.GetType().GenericTypeArguments[1] == serviceType)
                         {
                             instance = del.DynamicInvoke(parentType);
                         }
@@ -699,9 +661,9 @@ namespace CrossPlatformLibrary.IoC
                     }
                     else
                     {
-                        if (this._factories[serviceType].ContainsKey(this._defaultKey))
+                        if (this.factories[serviceType].ContainsKey(this.defaultKey))
                         {
-                            var del = this._factories[serviceType][this._defaultKey];
+                            var del = this.factories[serviceType][this.defaultKey];
                             instance = del.DynamicInvoke(null);
                         }
                         else
@@ -720,22 +682,22 @@ namespace CrossPlatformLibrary.IoC
             }
         }
 
-        private void DoRegister(Type classType, Delegate factory, string key)
+        private void DoRegister(Type type, Delegate factory, string key)
         {
-            if (this._factories.ContainsKey(classType))
+            if (this.factories.ContainsKey(type))
             {
-                if (this._factories[classType].ContainsKey(key))
+                if (this.factories[type].ContainsKey(key))
                 {
                     // The class is already registered, ignore and continue.
                     return;
                 }
 
-                this._factories[classType].Add(key, factory);
+                this.factories[type].Add(key, factory);
             }
             else
             {
                 var keyToFactoryMapping = new Dictionary<string, Delegate> { { key, factory } };
-                this._factories.Add(classType, keyToFactoryMapping);
+                this.factories.Add(type, keyToFactoryMapping);
             }
         }
 
@@ -743,9 +705,9 @@ namespace CrossPlatformLibrary.IoC
         {
             Type resolveTo;
 
-            if (this._interfaceToClassMap.ContainsKey(serviceType))
+            if (this.interfaceToClassMap.ContainsKey(serviceType))
             {
-                resolveTo = this._interfaceToClassMap[serviceType] ?? serviceType;
+                resolveTo = this.interfaceToClassMap[serviceType] ?? serviceType;
             }
             else
             {
@@ -821,9 +783,9 @@ namespace CrossPlatformLibrary.IoC
             return DefaultCacheUsage;
         }
 
-        private object MakeInstance(Type serviceType)
+        private object MakeInstance(Type serviceType, params IResolvedParameter[] resolvedParameters)
         {
-            var constructor = this._constructorInfos.ContainsKey(serviceType) ? this._constructorInfos[serviceType] : this.GetConstructorInfo(serviceType);
+            var constructor = this.constructorInfos.ContainsKey(serviceType) ? this.constructorInfos[serviceType] : this.GetConstructorInfo(serviceType);
 
             var parameterInfos = constructor.GetParameters();
 
@@ -837,7 +799,15 @@ namespace CrossPlatformLibrary.IoC
             foreach (var parameterInfo in parameterInfos)
             {
                 bool useCache = GetUseCacheAnnotation(parameterInfo.ParameterType);
-                parameters[parameterInfo.Position] = this.DoGetService(parameterInfo.ParameterType, serviceType, null, useCache);
+                string key = null;
+
+                var resolvedParameter = resolvedParameters.FirstOrDefault(p => p.Type == parameterInfo.ParameterType);
+                if (resolvedParameter != null)
+                {
+                    key = resolvedParameter.Key;
+                }
+
+                parameters[parameterInfo.Position] = this.DoGetService(parameterInfo.ParameterType, serviceType, key, useCache);
             }
 
             return constructor.Invoke(parameters);
@@ -859,9 +829,9 @@ namespace CrossPlatformLibrary.IoC
         /// <returns>All the already created instances of the given type.</returns>
         public IEnumerable<object> GetAllCreatedInstances(Type serviceType)
         {
-            if (this._instancesRegistry.ContainsKey(serviceType))
+            if (this.instancesRegistry.ContainsKey(serviceType))
             {
-                return this._instancesRegistry[serviceType].Values;
+                return this.instancesRegistry[serviceType].Values;
             }
 
             return new List<object>();
@@ -884,7 +854,7 @@ namespace CrossPlatformLibrary.IoC
         public IEnumerable<TService> GetAllCreatedInstances<TService>()
         {
             var serviceType = typeof(TService);
-            return this.GetAllCreatedInstances(serviceType).Select(instance => (TService)instance);
+            return this.GetAllCreatedInstances(serviceType).Select(i => (TService)i);
         }
 
         #region Implementation of IServiceProvider
@@ -904,7 +874,7 @@ namespace CrossPlatformLibrary.IoC
         {
             Guard.ArgumentNotNull(() => serviceType);
 
-            return this.DoGetService(serviceType, null, this._defaultKey);
+            return this.DoGetService(serviceType, null, this.defaultKey);
         }
 
         #endregion
@@ -925,20 +895,20 @@ namespace CrossPlatformLibrary.IoC
         {
             Guard.ArgumentNotNull(() => serviceType);
 
-            lock (this._factories)
+            lock (this.factories)
             {
-                if (this._factories.ContainsKey(serviceType))
+                if (this.factories.ContainsKey(serviceType))
                 {
-                    foreach (var factory in this._factories[serviceType])
+                    foreach (var factory in this.factories[serviceType])
                     {
                         this.GetInstance(serviceType, factory.Key);
                     }
                 }
             }
 
-            if (this._instancesRegistry.ContainsKey(serviceType))
+            if (this.instancesRegistry.ContainsKey(serviceType))
             {
-                return this._instancesRegistry[serviceType].Values;
+                return this.instancesRegistry[serviceType].Values;
             }
 
             return new List<object>();
@@ -978,7 +948,7 @@ namespace CrossPlatformLibrary.IoC
         {
             Guard.ArgumentNotNull(() => serviceType);
 
-            return this.DoGetService(serviceType, null, this._defaultKey);
+            return this.DoGetService(serviceType, null, this.defaultKey);
         }
 
         /// <summary>
@@ -998,7 +968,7 @@ namespace CrossPlatformLibrary.IoC
         {
             Guard.ArgumentNotNull(() => serviceType);
 
-            return this.DoGetService(serviceType, null, this._defaultKey, false);
+            return this.DoGetService(serviceType, null, this.defaultKey, false);
         }
 
         /// <summary>
@@ -1055,7 +1025,7 @@ namespace CrossPlatformLibrary.IoC
         /// <returns>An instance of the given type.</returns>
         public TService GetInstance<TService>()
         {
-            return (TService)this.DoGetService(typeof(TService), null, this._defaultKey);
+            return (TService)this.DoGetService(typeof(TService), null, this.defaultKey);
         }
 
         public TService TryGetInstance<TService>()
@@ -1063,7 +1033,7 @@ namespace CrossPlatformLibrary.IoC
             return (TService)this.DoGetService(
                 serviceType: typeof(TService),
                 parentType: null, 
-                key: this._defaultKey,
+                key: this.defaultKey,
                 cache: DefaultCacheUsage, 
                 throwIfNotFound: false);
         }
@@ -1083,7 +1053,7 @@ namespace CrossPlatformLibrary.IoC
         /// <returns>An instance of the given type.</returns>
         public TService GetInstanceWithoutCaching<TService>()
         {
-            return (TService)this.DoGetService(typeof(TService), null, this._defaultKey, false);
+            return (TService)this.DoGetService(typeof(TService), null, this.defaultKey, false);
         }
 
         /// <summary>

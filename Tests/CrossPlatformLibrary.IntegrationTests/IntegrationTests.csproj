@@ -39,6 +39,7 @@
     <Compile Include="Dispatching\DispatcherServiceTests.cs" />
     <Compile Include="ExceptionHandling\ExceptionHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestStartup.cs" />
     <Compile Include="Tools\PlatformServicesTests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -19,6 +19,9 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// <exception cref="BootstrappingException">An unknown exception occurred during the startup process.</exception>
         void Startup();
 
+        /// <summary>
+        /// Runs all necessary actions to prepare the application for sleep mode.
+        /// </summary>
         void Sleep();
 
         /// <summary>

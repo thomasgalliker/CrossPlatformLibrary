@@ -57,6 +57,11 @@ namespace CrossPlatformLibrary.IoC
         /// <returns>True if the type is registered, false otherwise.</returns>
         bool IsRegistered<T>();
 
+        /// <summary>
+        ///      Gets a value indicating whether a given type T is already registered.
+        /// </summary>
+        /// <param name="classType">The type that the method checks for.</param>
+        /// <returns>True if the type is registered, false otherwise.</returns>
         bool IsRegistered(Type classType);
 
         /// <summary>
@@ -73,14 +78,16 @@ namespace CrossPlatformLibrary.IoC
         /// </summary>
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
         /// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
-        void Register<TInterface, TClass>() where TClass : class where TInterface : class;
+        void Register<TInterface, TClass>(params IResolvedParameter[] resolvedParameter)
+            where TClass : class
+            where TInterface : class;
 
         /// <summary>
         ///     Registers a given type for a given interface.
         /// </summary>
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
         /// <param name="classType">The type that must be used to create instances.</param>
-        void Register<TInterface>(Type classType, string key, bool createInstanceImmediately) where TInterface : class;
+        void Register<TInterface>(Type classType, string key, bool createInstanceImmediately, params IResolvedParameter[] resolvedParameter) where TInterface : class;
 
         /// <summary>
         ///     Registers a given type for a given interface with the possibility for immediate
@@ -92,9 +99,13 @@ namespace CrossPlatformLibrary.IoC
         ///     If true, forces the creation of the default
         ///     instance of the provided class.
         /// </param>
-        void Register<TInterface, TClass>(bool createInstanceImmediately) where TClass : class where TInterface : class;
+        void Register<TInterface, TClass>(bool createInstanceImmediately, params IResolvedParameter[] resolvedParameter)
+            where TClass : class
+            where TInterface : class;
 
-        void Register<TInterface, TClass>(string key, bool createInstanceImmediately) where TClass : class where TInterface : class;
+        void Register<TInterface, TClass>(string key, bool createInstanceImmediately, params IResolvedParameter[] resolvedParameter)
+            where TClass : class
+            where TInterface : class;
 
         /// <summary>
         ///     Registers a given type.
@@ -117,13 +128,24 @@ namespace CrossPlatformLibrary.IoC
 
         void Register(Type classType, string key, bool createInstanceImmediately);
 
-        void Register<TInterface>(Type classType) where TInterface : class;
+        void Register<TInterface>(Type classType, params IResolvedParameter[] resolvedParameter) where TInterface : class;
 
-        void Register<TInterface>(Type classType, bool createInstanceImmediately) where TInterface : class;
-       
-        void RegisterWithConvention<TInterface>() where TInterface : class;
+        void Register<TInterface>(Type classType, bool createInstanceImmediately, params IResolvedParameter[] resolvedParameter) where TInterface : class;
 
-        void RegisterWithConvention<TInterface>(IRegistrationConvention registrationConvention) where TInterface : class;
+        /// <summary>
+        ///     Registers an interface using the default registration convention which will be used to resolve the concrete type from the given interface.
+        /// </summary>
+        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
+        /// <param name="resolvedParameter">The resolve parameter which can be used to inject named dependencies.</param>
+        void RegisterWithConvention<TInterface>(params IResolvedParameter[] resolvedParameter) where TInterface : class;
+
+        /// <summary>
+        ///     Registers an interface using a custom registration convention which will be used to resolve the concrete type from the given interface.
+        /// </summary>
+        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
+        /// <param name="registrationConvention">The convention used to convert between the given interface type and the class.</param>
+        /// <param name="resolvedParameter">The resolve parameter which can be used to inject named dependencies.</param>
+        void RegisterWithConvention<TInterface>(IRegistrationConvention registrationConvention, params IResolvedParameter[] resolvedParameter) where TInterface : class;
 
         /// <summary>
         ///     Registers a given instance for a given type.
@@ -153,7 +175,7 @@ namespace CrossPlatformLibrary.IoC
         void Register<TClass>(Func<TClass> factory, bool createInstanceImmediately) where TClass : class;
 
         void Register<TClass>(Func<Type, TClass> factory, bool createInstanceImmediately) where TClass : class;
-        
+
         /// <summary>
         ///     Registers a given instance for a given type and a given key.
         /// </summary>
@@ -212,6 +234,12 @@ namespace CrossPlatformLibrary.IoC
         /// <param name="key">The key corresponding to the instance that must be removed.</param>
         void Unregister<TClass>(string key) where TClass : class;
 
+        /// <summary>
+        ///     Removes the instance corresponding to the given key from the cache. The class itself remains
+        ///     registered and can be used to create other instances.
+        /// </summary>
+        /// <param name="classType"></param>
+        /// <param name="key">The key corresponding to the instance that must be removed.</param>
         void Unregister(Type classType, string key);
     }
 }
