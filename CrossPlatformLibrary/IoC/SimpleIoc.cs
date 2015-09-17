@@ -21,8 +21,9 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-using CrossPlatformLibrary.Tools.PlatformSpecific;
-using CrossPlatformLibrary.Utils;
+using CrossPlatformAdapter;
+
+using Guards;
 
 using Microsoft.Practices.ServiceLocation;
 

@@ -9,7 +9,7 @@ using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.IoC;
 using CrossPlatformLibrary.Tools;
 using CrossPlatformLibrary.Tracing;
-using CrossPlatformLibrary.Utils;
+using Guards;
 
 using Microsoft.Practices.ServiceLocation;
 

@@ -10,7 +10,7 @@ using System.Reflection;
 
 using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Tracing;
-using CrossPlatformLibrary.Utils;
+using Guards;
 
 namespace CrossPlatformLibrary.Collection.Generic
 {

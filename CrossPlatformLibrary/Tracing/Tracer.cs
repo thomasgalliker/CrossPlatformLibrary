@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-using CrossPlatformLibrary.Utils;
+using Guards;
 
 namespace CrossPlatformLibrary.Tracing
 {

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-using CrossPlatformLibrary.Utils;
+using Guards;
 
 namespace CrossPlatformLibrary.Extensions
 {

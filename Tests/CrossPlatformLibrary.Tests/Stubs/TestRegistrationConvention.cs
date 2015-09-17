@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-using CrossPlatformLibrary.Tools.PlatformSpecific;
+using CrossPlatformAdapter;
 
 namespace CrossPlatformLibrary.Tests.Stubs
 {

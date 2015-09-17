@@ -2,7 +2,7 @@
 
 using Android.App;
 
-using CrossPlatformLibrary.Utils;
+using Guards;
 
 namespace CrossPlatformLibrary.Dispatching
 {

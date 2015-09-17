@@ -4,7 +4,7 @@ using System;
 
 using Android.Util;
 
-using CrossPlatformLibrary.Utils;
+using Guards;
 
 namespace CrossPlatformLibrary.Tracing
 {

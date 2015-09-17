@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Reflection;
 
-using CrossPlatformLibrary.Utils;
+using Guards;
 
 namespace CrossPlatformLibrary.Tracing
 {

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Threading;
 
+using CrossPlatformAdapter;
+
 using CrossPlatformLibrary.Bootstrapping;
 using CrossPlatformLibrary.ExceptionHandling;
 using CrossPlatformLibrary.IoC;
 using CrossPlatformLibrary.Tests.Stubs;
-using CrossPlatformLibrary.Tools.PlatformSpecific;
 
 using FluentAssertions;
 

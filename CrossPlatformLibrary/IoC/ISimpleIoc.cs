@@ -16,7 +16,7 @@
 
 using System;
 
-using CrossPlatformLibrary.Tools.PlatformSpecific;
+using CrossPlatformAdapter;
 
 using Microsoft.Practices.ServiceLocation;
 

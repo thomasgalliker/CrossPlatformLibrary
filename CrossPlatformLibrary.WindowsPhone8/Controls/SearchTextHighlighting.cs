@@ -5,6 +5,7 @@ using System.Windows.Media;
 
 using CrossPlatformLibrary.Utils;
 
+
 namespace CrossPlatformLibrary.Controls
 {
     /// <summary>

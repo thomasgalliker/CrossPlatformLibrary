@@ -1,7 +1,7 @@
 ﻿using System;
 
 using CrossPlatformLibrary.Tracing;
-using CrossPlatformLibrary.Utils;
+using Guards;
 
 namespace CrossPlatformLibrary.ExceptionHandling.Handlers
 {

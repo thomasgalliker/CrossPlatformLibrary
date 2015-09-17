@@ -7,7 +7,6 @@ namespace CrossPlatformLibrary.Tests.ExceptionHandling
     {
         public void RegisterExceptionHandler(IExceptionHandler exceptionHandler)
         {
-            
         }
     }
 }

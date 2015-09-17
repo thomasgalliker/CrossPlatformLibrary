@@ -6,6 +6,8 @@ using System.Xml.Serialization;
 
 using CrossPlatformLibrary.Utils;
 
+using Guards;
+
 namespace CrossPlatformLibrary.IO
 {
     public static class XmlSerializerHelper
