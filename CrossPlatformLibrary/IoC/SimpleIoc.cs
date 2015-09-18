@@ -22,7 +22,6 @@ using System.Linq;
 using System.Reflection;
 
 using CrossPlatformAdapter;
-using CrossPlatformAdapter.ProbingStrategies;
 
 using Guards;
 
@@ -67,8 +66,7 @@ namespace CrossPlatformLibrary.IoC
 
         private SimpleIoc()
         {
-            var defaultRegistrationConvention = new DefaultProbingStrategy();
-            this.adapterResolver = new ProbingAdapterResolver(defaultRegistrationConvention);
+            this.adapterResolver = new ProbingAdapterResolver();
         }
 
         /// <inheritdoc />
