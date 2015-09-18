@@ -83,10 +83,17 @@ namespace CrossPlatformLibrary.IoC
             where TInterface : class;
 
         /// <summary>
-        ///     Registers a given type for a given interface.
+        ///     Registers a given type for a given interface with the possibility for immediate
+        ///     creation of the instance.
         /// </summary>
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
         /// <param name="classType">The type that must be used to create instances.</param>
+        /// <param name="key">The key that the method checks for.</param>
+        /// <param name="createInstanceImmediately">
+        ///     If true, forces the creation of the default
+        ///     instance of the provided class.
+        /// </param>
+        /// <param name="resolvedParameter">The resolve parameter which can be used to inject named dependencies.</param>
         void Register<TInterface>(Type classType, string key, bool createInstanceImmediately, params IResolvedParameter[] resolvedParameter) where TInterface : class;
 
         /// <summary>
@@ -99,10 +106,23 @@ namespace CrossPlatformLibrary.IoC
         ///     If true, forces the creation of the default
         ///     instance of the provided class.
         /// </param>
+        /// <param name="resolvedParameter">The resolve parameter which can be used to inject named dependencies.</param>
         void Register<TInterface, TClass>(bool createInstanceImmediately, params IResolvedParameter[] resolvedParameter)
             where TClass : class
             where TInterface : class;
 
+        /// <summary>
+        ///     Registers a given type for a given interface with the possibility for immediate
+        ///     creation of the instance.
+        /// </summary>
+        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
+        /// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
+        /// <param name="key">The key for which the given instance is registered.</param>
+        /// <param name="createInstanceImmediately">
+        ///     If true, forces the creation of the default
+        ///     instance of the provided class.
+        /// </param>
+        /// <param name="resolvedParameter">The resolve parameter which can be used to inject named dependencies.</param>
         void Register<TInterface, TClass>(string key, bool createInstanceImmediately, params IResolvedParameter[] resolvedParameter)
             where TClass : class
             where TInterface : class;
@@ -130,22 +150,32 @@ namespace CrossPlatformLibrary.IoC
 
         void Register<TInterface>(Type classType, params IResolvedParameter[] resolvedParameter) where TInterface : class;
 
+        /// <summary>
+        ///     Registers a given type for a given interface.
+        /// </summary>
+        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
+        /// <param name="classType">The type that must be used to create instances.</param>
+        /// <param name="createInstanceImmediately">
+        ///     If true, forces the creation of the default
+        ///     instance of the provided class.
+        /// </param>
+        /// <param name="resolvedParameter">The resolve parameter which can be used to inject named dependencies.</param>
         void Register<TInterface>(Type classType, bool createInstanceImmediately, params IResolvedParameter[] resolvedParameter) where TInterface : class;
 
         /// <summary>
-        ///     Registers an interface using the default registration convention which will be used to resolve the concrete type from the given interface.
+        ///     Registers an interface using the default probing strategy which will be used to resolve the concrete type from the given interface.
         /// </summary>
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
         /// <param name="resolvedParameter">The resolve parameter which can be used to inject named dependencies.</param>
         void RegisterWithConvention<TInterface>(params IResolvedParameter[] resolvedParameter) where TInterface : class;
 
         /// <summary>
-        ///     Registers an interface using a custom registration convention which will be used to resolve the concrete type from the given interface.
+        ///     Registers an interface using a custom probing strategy which will be used to resolve the concrete type from the given interface.
         /// </summary>
         /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
-        /// <param name="registrationConvention">The convention used to convert between the given interface type and the class.</param>
+        /// <param name="strategy">The strategy used to convert between the given interface type and the class.</param>
         /// <param name="resolvedParameter">The resolve parameter which can be used to inject named dependencies.</param>
-        void RegisterWithConvention<TInterface>(IRegistrationConvention registrationConvention, params IResolvedParameter[] resolvedParameter) where TInterface : class;
+        void RegisterWithConvention<TInterface>(IProbingStrategy strategy, params IResolvedParameter[] resolvedParameter) where TInterface : class;
 
         /// <summary>
         ///     Registers a given instance for a given type.

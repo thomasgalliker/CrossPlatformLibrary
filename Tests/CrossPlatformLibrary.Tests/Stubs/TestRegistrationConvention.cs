@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Reflection;
 
-using CrossPlatformAdapter;
+using CrossPlatformAdapter.ProbingStrategies;
 
 namespace CrossPlatformLibrary.Tests.Stubs
 {
     /// <summary>
     /// This implementation of IRegistrationConvention allows to probe for stubs in the CrossPlatformLibrary.Tests assembly.
     /// </summary>
-    public class TestRegistrationConvention : DefaultRegistrationConvention
+    public class TestRegistrationConvention : DefaultProbingStrategy
     {
         public override string PlatformNamingConvention(AssemblyName assemblyName)
         {

@@ -22,6 +22,7 @@ using System.Linq;
 using System.Reflection;
 
 using CrossPlatformAdapter;
+using CrossPlatformAdapter.ProbingStrategies;
 
 using Guards;
 
@@ -66,7 +67,7 @@ namespace CrossPlatformLibrary.IoC
 
         private SimpleIoc()
         {
-            var defaultRegistrationConvention = new DefaultRegistrationConvention();
+            var defaultRegistrationConvention = new DefaultProbingStrategy();
             this.adapterResolver = new ProbingAdapterResolver(defaultRegistrationConvention);
         }
 
@@ -126,21 +127,17 @@ namespace CrossPlatformLibrary.IoC
         /// <inheritdoc />
         public void RegisterWithConvention<TInterface>(params IResolvedParameter[] resolvedParameters) where TInterface : class
         {
-            this.RegisterWithConvention<TInterface>(this.adapterResolver.RegistrationConvention, resolvedParameters);
+            var classType = this.adapterResolver.ResolveClassType(typeof(TInterface));
+
+            this.Register<TInterface>(classType, resolvedParameters);
         }
 
-        /// <summary>
-        ///     Registers a given type for a given interface using a specified registration convention.
-        /// </summary>
-        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
-        /// <param name="convention">The convention used to convert between the given interface type and the class.</param>
-        /// <param name="resolvedParameter"></param>
         /// <inheritdoc />
-        public void RegisterWithConvention<TInterface>(IRegistrationConvention convention, params IResolvedParameter[] resolvedParameters) where TInterface : class
+        public void RegisterWithConvention<TInterface>(IProbingStrategy strategy, params IResolvedParameter[] resolvedParameters) where TInterface : class
         {
-            Guard.ArgumentNotNull(() => convention);
+            Guard.ArgumentNotNull(() => strategy);
 
-            this.adapterResolver.RegistrationConvention = convention;
+            this.adapterResolver.AddProbingStrategy(strategy);
             var classType = this.adapterResolver.ResolveClassType(typeof(TInterface));
 
             this.Register<TInterface>(classType, resolvedParameters);
@@ -153,11 +150,7 @@ namespace CrossPlatformLibrary.IoC
             this.adapterResolver = resolver;
         }
 
-        /// <summary>
-        ///     Registers a given type for a given interface.
-        /// </summary>
-        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
-        /// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
+        /// <inheritdoc />
         public void Register<TInterface, TClass>(params IResolvedParameter[] resolvedParameters)
             where TClass : class
             where TInterface : class
@@ -165,36 +158,19 @@ namespace CrossPlatformLibrary.IoC
             this.Register<TInterface, TClass>(null, false, resolvedParameters);
         }
 
-        /// <summary>
-        ///     Registers a given type for a given interface.
-        /// </summary>
-        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
-        /// <param name="classType">The type that must be used to create instances.</param>
-        /// <param name="resolvedParameter"></param>
+        /// <inheritdoc />
         public void Register<TInterface>(Type classType, params IResolvedParameter[] resolvedParameters) where TInterface : class
         {
             this.Register<TInterface>(classType, false, resolvedParameters);
         }
 
-        /// <summary>
-        ///     Registers a given type for a given interface.
-        /// </summary>
-        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
-        /// <param name="classType">The type that must be used to create instances.</param>
-        /// <param name="createInstanceImmediately">
-        ///     If true, forces the creation of the default
-        ///     instance of the provided class.
-        /// </param>
+        /// <inheritdoc />
         public void Register<TInterface>(Type classType, bool createInstanceImmediately, params IResolvedParameter[] resolvedParameters) where TInterface : class
         {
             this.Register<TInterface>(classType, null, createInstanceImmediately, resolvedParameters);
         }
 
-        /// <summary>
-        ///     Registers a given type for a given interface.
-        /// </summary>
-        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
-        /// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
+        /// <inheritdoc />
         public void Register<TInterface, TClass>(bool createInstanceImmediately, params IResolvedParameter[] resolvedParameters)
             where TInterface : class
             where TClass : class
@@ -202,11 +178,7 @@ namespace CrossPlatformLibrary.IoC
             this.Register<TInterface>(typeof(TClass), null, createInstanceImmediately, resolvedParameters);
         }
 
-        /// <summary>
-        ///     Registers a given type for a given interface.
-        /// </summary>
-        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
-        /// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
+        /// <inheritdoc />
         public void Register<TInterface, TClass>(string key, bool createInstanceImmediately, params IResolvedParameter[] resolvedParameters)
             where TClass : class
             where TInterface : class
@@ -214,17 +186,7 @@ namespace CrossPlatformLibrary.IoC
             this.Register<TInterface>(typeof(TClass), key, createInstanceImmediately, resolvedParameters);
         }
 
-        /// <summary>
-        ///     Registers a given type for a given interface with the possibility for immediate
-        ///     creation of the instance.
-        /// </summary>
-        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
-        /// <param name="classType">The type that must be used to create instances.</param>
-        /// <param name="key">The key that the method checks for.</param>
-        /// <param name="createInstanceImmediately">
-        ///     If true, forces the creation of the default
-        ///     instance of the provided class.
-        /// </param>
+        /// <inheritdoc />
         public void Register<TInterface>(Type classType, string key, bool createInstanceImmediately, params IResolvedParameter[] resolvedParameters) where TInterface : class
         {
             lock (this.syncLock)
@@ -259,10 +221,7 @@ namespace CrossPlatformLibrary.IoC
             }
         }
 
-        /// <summary>
-        ///     Registers a given type.
-        /// </summary>
-        /// <typeparam name="TClass">The type that must be used to create instances.</typeparam>
+        /// <inheritdoc />
         public void Register<TClass>() where TClass : class
         {
             this.Register<TClass>(key: null, createInstanceImmediately: false);
