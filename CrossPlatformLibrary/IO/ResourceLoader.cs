@@ -8,6 +8,7 @@ namespace CrossPlatformLibrary.IO
     /// <summary>
     ///     Utility class that can be used to find and load embedded resources into memory.
     /// </summary>
+    // TODO GATH: https://github.com/MvvmCross/MvvmCross-Plugins/tree/master/ResourceLoader
     public static class ResourceLoader // TODO GATH: Introduce interface here and register in IoC
     {
         /// <summary>
