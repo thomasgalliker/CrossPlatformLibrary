@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>CrossPlatformLibrary</id>
-    <version>1.0.62-alpha</version>
+    <version>1.0.63-alpha</version>
     <title>CrossPlatformLibrary</title>
     <authors>Thomas Galliker</authors>
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
@@ -20,6 +20,7 @@
     <releaseNotes>
       - Guards extracted to new NuGet package with id Guards
       - Minor bug fixes
+      - XmlSerializerHelper update: Serialization allows to preserve type information
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
     <language>en-US</language>

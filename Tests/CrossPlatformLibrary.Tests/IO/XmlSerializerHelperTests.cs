@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 using CrossPlatformLibrary.IO;
+using CrossPlatformLibrary.Tests.IO.TestData;
 
 using FluentAssertions;
 
@@ -69,7 +71,7 @@ namespace CrossPlatformLibrary.Tests.IO
             IList<string> list = new List<string> { "a", "b", "c" };
 
             // Act
-            var serializedString = list.SerializeToXml();
+            var serializedString = list.SerializeToXml(preserveTypeInformation: true);
             var deserializedList = serializedString.DeserializeFromXml<IList<string>>();
 
             // Assert
@@ -79,6 +81,23 @@ namespace CrossPlatformLibrary.Tests.IO
             deserializedList.ElementAt(0).Should().Be(list[0]);
             deserializedList.ElementAt(1).Should().Be(list[1]);
             deserializedList.ElementAt(2).Should().Be(list[2]);
+        }
+
+        [Fact]
+        public void ShouldDeserializeListFromXmlFile()
+        {
+            // Arrange
+            var restaurantsXml = ResourceLoader.GetEmbeddedResourceString(this.GetType().Assembly, ".SerializedData.xml");
+            var stopwatch = new Stopwatch();
+
+            // Act
+            stopwatch.Start();
+            var listOfRestaurants = restaurantsXml.DeserializeFromXml<List<Restaurant>>();
+            stopwatch.Stop();
+
+            // Assert
+            listOfRestaurants.Should().HaveCount(4891);
+            stopwatch.Elapsed.TotalMilliseconds.Should().BeLessOrEqualTo(1500);
         }
 
         public class SimpleSerializerClass

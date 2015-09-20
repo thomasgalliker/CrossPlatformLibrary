@@ -16,13 +16,30 @@ namespace CrossPlatformLibrary.IO
         /// Serializes objects into XML strings.
         /// </summary>
         /// <param name="value">The object to be serialized.</param>
+        /// <param name="preserveTypeInformation">
+        /// Instructs the serializer to preserve the original type of the given value.
+        /// This flag must be set to <value>true</value> when you intend to deserialize to an interface type.
+        /// Default value is <value>false</value>..</param>
         /// <returns>The serialized XML string.</returns>
-        public static string SerializeToXml(this object value)
+        public static string SerializeToXml(this object value, bool preserveTypeInformation = false)
         {
             Guard.ArgumentNotNull(() => value);
 
             var sourceType = value.GetType();
-            var objectToSerialize = new ValueToTypeMapping { Value = value, TypeName = sourceType.FullName };
+
+            object objectToSerialize;
+            if (preserveTypeInformation)
+            {
+                objectToSerialize = new ValueToTypeMapping
+                {
+                    Value = value,
+                    TypeName = sourceType.FullName
+                };
+            }
+            else
+            {
+                objectToSerialize = value;
+            }
 
             var serializer = new XmlSerializer(objectToSerialize.GetType(), new[] { sourceType });
 
@@ -47,6 +64,20 @@ namespace CrossPlatformLibrary.IO
             Guard.ArgumentNotNullOrEmpty(() => xmlString);
 
             Type targetType = typeof(T);
+
+            if (!ValueToTypeMapping.CheckIfStringContainsTypeInformation(xmlString))
+            {
+                // If type information was not preserved, the targetType must not be an interface
+                Guard.ArgumentMustNotBeInterface(targetType);
+
+                var serializer = new XmlSerializer(targetType);
+                using (var memoryStream = new MemoryStream(ByteConverter.StringToUtf8ByteArray(xmlString)))
+                {
+                    var deserialized = (T)serializer.Deserialize(memoryStream);
+                    return deserialized;
+                }
+            }
+            
             bool isTargetTypeAnInterface = targetType.GetTypeInfo().IsInterface;
             Type[] extraTypes = { };
             if (!isTargetTypeAnInterface)
@@ -62,11 +93,10 @@ namespace CrossPlatformLibrary.IO
                 deserializedObject = (ValueToTypeMapping)serializerBefore.Deserialize(memoryStream);
             }
 
-            Type serializedType = Type.GetType(deserializedObject.TypeName);
-
             // If the target type is an interface, we need to deserialize again with more type information
             if (isTargetTypeAnInterface)
             {
+                Type serializedType = Type.GetType(deserializedObject.TypeName);
                 var serializerAfter = new XmlSerializer(typeof(ValueToTypeMapping), new[] { serializedType });
                 using (var memoryStream = new MemoryStream(ByteConverter.StringToUtf8ByteArray(xmlString)))
                 {
@@ -81,6 +111,24 @@ namespace CrossPlatformLibrary.IO
 
         public class ValueToTypeMapping
         {
+            private static readonly string Identifier = "ValueToTypeMapping_663FBB7F-9C0A-400C-A9C4-76ACADE8C741";
+
+            public string Id
+            {
+                get
+                {
+                    return Identifier;
+                }
+                set
+                {
+                }
+            }
+
+            public static bool CheckIfStringContainsTypeInformation(string xmlString)
+            {
+                return xmlString.Contains(Identifier);
+            }
+
             public string TypeName { get; set; }
 
             public object Value { get; set; }
