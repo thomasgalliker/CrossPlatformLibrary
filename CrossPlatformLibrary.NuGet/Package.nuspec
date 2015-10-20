@@ -20,7 +20,7 @@
     <releaseNotes>
       - New method Tracer.SetDefaultFactory added.
       - Replaced bulky AddOrderSpecification methods of ObservableView with a lightweight method
-      - Added RemoveOrderSpecifications 
+      - Added RemoveOrderSpecifications
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
     <language>en-US</language>

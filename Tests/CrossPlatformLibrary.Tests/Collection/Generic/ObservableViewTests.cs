@@ -340,6 +340,35 @@ namespace CrossPlatformLibrary.Tests.Collection.Generic
             orderedView[4].Model.Should().Be(this.carVwPolo.Model);
             orderedView[5].Model.Should().Be(this.carVwGolf.Model);
         }
+
+        [Fact]
+        public void ShouldRemoveOrderSpecifications()
+        {
+            // Arrange
+            var carsList = new ObservableCollection<Car>
+            {
+                this.carAudiA1, 
+                this.carAudiA3, 
+                this.carBmwM1, 
+                this.carBmwM3, 
+                this.carVwPolo,
+                this.carVwGolf
+            };
+
+            var observableCarsView = new ObservableView<Car>(carsList);
+            observableCarsView.AddOrderSpecification(x => x.Brand, OrderDirection.Descending);
+
+            // Act
+            observableCarsView.RemoveOrderSpecifications();
+
+            // Assert
+            var orderedView = observableCarsView.View;
+
+            orderedView.Should().NotBeNull();
+            orderedView.Should().HaveCount(carsList.Count);
+
+            orderedView.SequenceEqual(carsList).Should().BeTrue();
+        }
         #endregion
 
         #region Test Classes
