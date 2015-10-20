@@ -8,13 +8,6 @@ namespace CrossPlatformLibrary.Tracing
     public abstract class TracerBase : ITracer
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TracerBase"/> class.
-        /// </summary>
-        protected TracerBase()
-        {
-        }
-
-        /// <summary>
         /// Traces a new trace entry with the specified message.
         /// </summary>
         /// <param name="category">The category this trace entry belongs to.</param>

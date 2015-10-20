@@ -10,48 +10,52 @@ public static class AsyncInline
         var oldContext = SynchronizationContext.Current;
         var synch = new ExclusiveSynchronizationContext();
         SynchronizationContext.SetSynchronizationContext(synch);
-        synch.Post(async _ =>
-        {
-            try
-            {
-                await item();
-            }
-            catch (Exception e)
-            {
-                synch.InnerException = e;
-                throw;
-            }
-            finally
-            {
-                synch.EndMessageLoop();
-            }
-        }, null);
+        synch.Post(
+            async _ =>
+                {
+                    try
+                    {
+                        await item();
+                    }
+                    catch (Exception e)
+                    {
+                        synch.InnerException = e;
+                        throw;
+                    }
+                    finally
+                    {
+                        synch.EndMessageLoop();
+                    }
+                },
+            null);
         synch.BeginMessageLoop();
         SynchronizationContext.SetSynchronizationContext(oldContext);
     }
+
     public static T Run<T>(Func<Task<T>> item)
     {
         var oldContext = SynchronizationContext.Current;
         var synch = new ExclusiveSynchronizationContext();
         SynchronizationContext.SetSynchronizationContext(synch);
         T ret = default(T);
-        synch.Post(async _ =>
-        {
-            try
-            {
-                ret = await
-                item();
-            }
-            catch (Exception e)
-            {
-                synch.InnerException = e;
-                throw;
-            }
-            finally
-            {
-                synch.EndMessageLoop();
-            }
-        }, null);
+        synch.Post(
+            async _ =>
+                {
+                    try
+                    {
+                        ret = await item();
+                    }
+                    catch (Exception e)
+                    {
+                        synch.InnerException = e;
+                        throw;
+                    }
+                    finally
+                    {
+                        synch.EndMessageLoop();
+                    }
+                },
+            null);
         synch.BeginMessageLoop();
         SynchronizationContext.SetSynchronizationContext(oldContext);
         return ret;
@@ -60,54 +64,58 @@ public static class AsyncInline
     private class ExclusiveSynchronizationContext : SynchronizationContext
     {
         private bool done;
+
         public Exception InnerException { get; set; }
-        readonly AutoResetEvent workItemsWaiting = new AutoResetEvent(false);
-        readonly Queue<Tuple<SendOrPostCallback, object>> items =
-         new Queue<Tuple<SendOrPostCallback, object>>();
+
+        private readonly AutoResetEvent workItemsWaiting = new AutoResetEvent(false);
+        private readonly Queue<Tuple<SendOrPostCallback, object>> items = new Queue<Tuple<SendOrPostCallback, object>>();
 
         public override void Send(SendOrPostCallback d, object state)
         {
             throw new NotSupportedException("We cannot send to our same thread");
         }
+
         public override void Post(SendOrPostCallback d, object state)
         {
-            lock (items)
+            lock (this.items)
             {
-                items.Enqueue(Tuple.Create(d, state));
+                this.items.Enqueue(Tuple.Create(d, state));
             }
-            workItemsWaiting.Set();
+            this.workItemsWaiting.Set();
         }
+
         public void EndMessageLoop()
         {
-            Post(_ => done = true, null);
+            this.Post(_ => this.done = true, null);
         }
+
         public void BeginMessageLoop()
         {
-            while (!done)
+            while (!this.done)
             {
                 Tuple<SendOrPostCallback, object> task = null;
-                lock (items)
+                lock (this.items)
                 {
-                    if (items.Count > 0)
+                    if (this.items.Count > 0)
                     {
-                        task = items.Dequeue();
+                        task = this.items.Dequeue();
                     }
                 }
                 if (task != null)
                 {
                     task.Item1(task.Item2);
-                    if (InnerException != null) // the method threw an exeption
+                    if (this.InnerException != null) // the method threw an exeption
                     {
-                        throw new AggregateException("AsyncInline.Run method threw an exception.",
-                         InnerException);
+                        throw new AggregateException("AsyncInline.Run method threw an exception.", this.InnerException);
                     }
                 }
                 else
                 {
-                    workItemsWaiting.WaitOne();
+                    this.workItemsWaiting.WaitOne();
                 }
             }
         }
+
         public override SynchronizationContext CreateCopy()
         {
             return this;

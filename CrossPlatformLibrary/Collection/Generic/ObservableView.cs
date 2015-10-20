@@ -73,7 +73,7 @@ namespace CrossPlatformLibrary.Collection.Generic
     /// </summary>
     /// <typeparam name="T">
     /// </typeparam>
-    public class OrderSpecification<T>
+    internal class OrderSpecification<T>
     {
         #region Constructors and Destructors
 
@@ -107,19 +107,9 @@ namespace CrossPlatformLibrary.Collection.Generic
         #endregion
     }
 
-    /// <summary>
-    ///     The order direction.
-    /// </summary>
     public enum OrderDirection
     {
-        /// <summary>
-        ///     The ascending.
-        /// </summary>
         Ascending,
-
-        /// <summary>
-        ///     The descending.
-        /// </summary>
         Descending
     }
 
@@ -143,18 +133,12 @@ namespace CrossPlatformLibrary.Collection.Generic
         }
     }
 
-    /// <summary>
-    ///     The filter event handler.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="sender">The sender.</param>
-    /// <param name="e">The e.</param>
     public delegate void FilterEventHandler<T>(object sender, FilterEventArgs<T> e);
 
     /// <summary>
-    ///     The observable view.
+    ///     ObservableView is a class which adds sorting, filtering, searching and grouping
+    ///     on top of collections.
     /// </summary>
-    /// <typeparam name="T">Generic type T.</typeparam>
     public class ObservableView<T> : INotifyPropertyChanged
     {
         private static readonly object FilterHandlerEventLock = new object();
@@ -347,7 +331,7 @@ namespace CrossPlatformLibrary.Collection.Generic
 
                     if (this.orderSpecifications != null && this.orderSpecifications.Any())
                     {
-                        viewCollection = ExpressionExtensions.PerformOrdering(viewCollection, this.orderSpecifications).ToObservableCollection();
+                        viewCollection = PerformOrdering(viewCollection, this.orderSpecifications).ToObservableCollection();
                     }
                 }
 
@@ -360,20 +344,26 @@ namespace CrossPlatformLibrary.Collection.Generic
 
         #region Public Methods and Operators
 
-        public void AddOrderSpecification(params OrderSpecification<T>[] orderSpecifications)
+        /// <summary>
+        /// Adds a new order specification for a certain property of given type T.
+        /// </summary>
+        /// <param name="keySelector">Lambda expression to select the ordering property.</param>
+        /// <param name="orderDirection">Order direction in which the selected property shall be sorted.</param>
+        public void AddOrderSpecification(Func<T, object> keySelector, OrderDirection orderDirection = OrderDirection.Ascending)
         {
-            Guard.ArgumentNotNull(() => orderSpecifications);
+            Guard.ArgumentNotNull(() => keySelector);
 
-            this.orderSpecifications.AddRange(orderSpecifications);
+            this.orderSpecifications.Add(new OrderSpecification<T>(keySelector, orderDirection));
 
             this.Refresh();
         }
 
-        public void AddOrderSpecification(OrderSpecification<T> orderSpecification)
+        /// <summary>
+        /// Removes all order specifications.
+        /// </summary>
+        public void RemoveOrderSpecifications()
         {
-            Guard.ArgumentNotNull(() => orderSpecification);
-
-            this.orderSpecifications.Add(orderSpecification);
+            this.orderSpecifications.Clear();
 
             this.Refresh();
         }
@@ -562,38 +552,38 @@ namespace CrossPlatformLibrary.Collection.Generic
             return queryableDtos.Provider.CreateQuery<T>(whereCallExpression).ToObservableCollection();
         }
 
-        ////private ObservableCollection<T> PerformOrdering(IEnumerable<T> viewCollection)
-        ////{
-        ////    lock (this.orderSpecifications)
-        ////    {
-        ////        IQueryable<T> query = viewCollection.AsQueryable();
+        private static IEnumerable<T> PerformOrdering<T>(IEnumerable<T> enumerable, IEnumerable<OrderSpecification<T>> orderSpecifications)
+        {
+            lock (orderSpecifications)
+            {
+                IQueryable<T> query = enumerable.AsQueryable();
 
-        ////        OrderSpecification<T> firstSpecification = this.orderSpecifications.First();
-        ////        IOrderedEnumerable<T> orderedQuery;
-        ////        if (firstSpecification.OrderDirection == OrderDirection.Ascending)
-        ////        {
-        ////            orderedQuery = query.OrderBy(firstSpecification.KeySelector);
-        ////        }
-        ////        else
-        ////        {
-        ////            orderedQuery = query.OrderByDescending(firstSpecification.KeySelector);
-        ////        }
+                OrderSpecification<T> firstSpecification = orderSpecifications.First();
+                IOrderedEnumerable<T> orderedQuery;
+                if (firstSpecification.OrderDirection == OrderDirection.Ascending)
+                {
+                    orderedQuery = query.OrderBy(firstSpecification.KeySelector);
+                }
+                else
+                {
+                    orderedQuery = query.OrderByDescending(firstSpecification.KeySelector);
+                }
 
-        ////        foreach (var orderSpecification in this.orderSpecifications.Skip(1))
-        ////        {
-        ////            if (orderSpecification.OrderDirection == OrderDirection.Ascending)
-        ////            {
-        ////                orderedQuery = orderedQuery.ThenBy(orderSpecification.KeySelector);
-        ////            }
-        ////            else
-        ////            {
-        ////                orderedQuery = orderedQuery.ThenByDescending(orderSpecification.KeySelector);
-        ////            }
-        ////        }
+                foreach (var orderSpecification in orderSpecifications.Skip(1))
+                {
+                    if (orderSpecification.OrderDirection == OrderDirection.Ascending)
+                    {
+                        orderedQuery = orderedQuery.ThenBy(orderSpecification.KeySelector);
+                    }
+                    else
+                    {
+                        orderedQuery = orderedQuery.ThenByDescending(orderSpecification.KeySelector);
+                    }
+                }
 
-        ////        return orderedQuery.ToObservableCollection();
-        ////    }
-        ////}
+                return orderedQuery.ToList();
+            }
+        }
 
         #endregion
     }

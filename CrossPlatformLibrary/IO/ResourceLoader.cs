@@ -28,7 +28,7 @@ namespace CrossPlatformLibrary.IO
                 throw new Exception(string.Format("Resource ending with {0} not found.", resourceFileName));
             }
 
-            if (resourcePaths.Count() > 1)
+            if (resourcePaths.Length > 1)
             {
                 throw new Exception(string.Format("Multiple resources ending with {0} found: {1}{2}", resourceFileName, Environment.NewLine, string.Join(Environment.NewLine, resourcePaths)));
             }

@@ -38,7 +38,7 @@ namespace CrossPlatformLibrary.Tools
 
         public virtual void LoadReferencedAssemblies()
         {
-            // This function cannot be used on some platforms
+            // This function cannot be used on all platforms
         }
     }
 }

@@ -13,51 +13,77 @@ namespace CrossPlatformLibrary.Tests.Tracing
     {
         public TracerTests()
         {
-            Tracer.SetFactory(null);
+            Tracer.Initialize();
         }
 
         public void Dispose()
         {
-            Tracer.SetFactory(null);
-        }
-
-
-        [Fact]
-        public void IfNoFactoryIsSetTheDefaultFactoryIsUsed()
-        {
-            Assert.IsType<EmptyTracerFactory>(Tracer.Factory);
+            Tracer.Initialize();
         }
 
         [Fact]
-        public void SetFactorySetsCorrectFactory()
+        public void ShouldReturnDefaultFactoryIfNoFactoryIsSet()
         {
+            // Act
+            var factory = Tracer.Factory;
+
+            // Assert
+            Assert.IsType<EmptyTracerFactory>(factory);
+        }
+
+        [Fact]
+        public void ShouldSetFactory()
+        {
+            // Arrange
             MockRepository mocks = new MockRepository(MockBehavior.Strict);
             Mock<ITracerFactory> factoryMock = mocks.Create<ITracerFactory>();
 
+            // Act
             Tracer.SetFactory(factoryMock.Object);
-            Assert.Same(factoryMock.Object, Tracer.Factory);
 
+            // Assert
+            Assert.Same(factoryMock.Object, Tracer.Factory);
             mocks.VerifyAll();
         }
 
         [Fact]
-        public void SetFactoryWithNullFactorySetsDefaultFactory()
+        public void ShouldReturnDefaultFactoryIfFactoryIsSetNull()
         {
+            // Arrange
             MockRepository mocks = new MockRepository(MockBehavior.Strict);
             Mock<ITracerFactory> factoryMock = mocks.Create<ITracerFactory>();
 
             Tracer.SetFactory(factoryMock.Object);
             Assert.Same(factoryMock.Object, Tracer.Factory);
 
+            // Act
             Tracer.SetFactory(null);
-            Assert.IsType<EmptyTracerFactory>(Tracer.Factory);
 
+            // Assert
+            Assert.IsType<EmptyTracerFactory>(Tracer.Factory);
+            mocks.VerifyAll();
+        }
+
+        [Fact]
+        public void ShouldOverrideDefaultFactory()
+        {
+            // Arrange
+            MockRepository mocks = new MockRepository(MockBehavior.Strict);
+            Mock<ITracerFactory> factoryMock = mocks.Create<ITracerFactory>();
+            Tracer.SetFactory(null);
+
+            // Act
+            Tracer.SetDefaultFactory(factoryMock.Object);
+
+            // Assert
+            Assert.Same(factoryMock.Object, Tracer.Factory);
             mocks.VerifyAll();
         }
 
         [Fact]
         public void CreateWithNameCallsCreateOnFactory()
         {
+            // Arrange
             MockRepository mocks = new MockRepository(MockBehavior.Strict);
             Mock<ITracerFactory> factoryMock = mocks.Create<ITracerFactory>();
             Mock<ITracer> tracerMock = mocks.Create<ITracer>();
@@ -65,8 +91,11 @@ namespace CrossPlatformLibrary.Tests.Tracing
             factoryMock.Setup(factory => factory.Create("Name")).Returns(tracerMock.Object);
 
             Tracer.SetFactory(factoryMock.Object);
+
+            // Act
             Tracer.Create("Name");
 
+            // Assert
             mocks.VerifyAll();
         }
 

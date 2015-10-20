@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Tests.Stubs;
@@ -67,6 +66,7 @@ namespace CrossPlatformLibrary.Tests.Extensions
             isNullable.Should().BeFalse();
         }
         #endregion
+
         #region ToTypeName Tests
         [Fact]
         public void ShouldGetTypeNameOfValueType()
@@ -75,7 +75,7 @@ namespace CrossPlatformLibrary.Tests.Extensions
             Type type = typeof(String);
 
             // Act
-            var typeName = type.ToTypeName();
+            var typeName = type.GetFormattedName();
 
             // Assert
             typeName.Should().Be("String");
@@ -88,7 +88,7 @@ namespace CrossPlatformLibrary.Tests.Extensions
             Type type = typeof(Person);
 
             // Act
-            var typeName = type.ToTypeName();
+            var typeName = type.GetFormattedName();
 
             // Assert
             typeName.Should().Be("Person");
@@ -101,7 +101,7 @@ namespace CrossPlatformLibrary.Tests.Extensions
             Type type = typeof(GenericClass1<string, int>);
 
             // Act
-            var typeName = type.ToTypeName();
+            var typeName = type.GetFormattedName();
 
             // Assert
             typeName.Should().Be("GenericClass1<String, Int32>");
@@ -114,7 +114,7 @@ namespace CrossPlatformLibrary.Tests.Extensions
             Type type = typeof(GenericClass1<GenericClass1<int, float>, Person>);
 
             // Act
-            var typeName = type.ToTypeName();
+            var typeName = type.GetFormattedName();
 
             // Assert
             typeName.Should().Be("GenericClass1<GenericClass1<Int32, Single>, Person>");
@@ -127,7 +127,7 @@ namespace CrossPlatformLibrary.Tests.Extensions
             Type type = typeof(bool?);
 
             // Act
-            var typeName = type.ToTypeName();
+            var typeName = type.GetFormattedName();
 
             // Assert
             typeName.Should().Be("Nullable<Boolean>");

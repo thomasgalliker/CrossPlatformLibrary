@@ -293,7 +293,7 @@ namespace CrossPlatformLibrary.Tests.Collection.Generic
             };
 
             var observableCarsView = new ObservableView<Car>(carsList);
-            observableCarsView.AddOrderSpecification(new OrderSpecification<Car>(x => x.Brand, OrderDirection.Descending));
+            observableCarsView.AddOrderSpecification(x => x.Brand, OrderDirection.Descending);
 
             // Act
             var orderedView = observableCarsView.View;
@@ -323,9 +323,8 @@ namespace CrossPlatformLibrary.Tests.Collection.Generic
             };
 
             var observableCarsView = new ObservableView<Car>(carsList);
-            observableCarsView.AddOrderSpecification(
-                new OrderSpecification<Car>(x => x.Brand, OrderDirection.Ascending),
-                new OrderSpecification<Car>(x => x.Model, OrderDirection.Ascending));
+            observableCarsView.AddOrderSpecification(x => x.Brand, OrderDirection.Ascending);
+            observableCarsView.AddOrderSpecification(x => x.Model, OrderDirection.Descending);
 
             // Act
             var orderedView = observableCarsView.View;
@@ -334,12 +333,12 @@ namespace CrossPlatformLibrary.Tests.Collection.Generic
             orderedView.Should().NotBeNull();
             orderedView.Should().HaveCount(carsList.Count);
 
-            orderedView[0].Model.Should().Be(this.carAudiA1.Model);
-            orderedView[1].Model.Should().Be(this.carAudiA3.Model);
-            orderedView[2].Model.Should().Be(this.carBmwM1.Model);
-            orderedView[3].Model.Should().Be(this.carBmwM3.Model);
-            orderedView[4].Model.Should().Be(this.carVwGolf.Model);
-            orderedView[5].Model.Should().Be(this.carVwPolo.Model);
+            orderedView[0].Model.Should().Be(this.carAudiA3.Model);
+            orderedView[1].Model.Should().Be(this.carAudiA1.Model);
+            orderedView[2].Model.Should().Be(this.carBmwM3.Model);
+            orderedView[3].Model.Should().Be(this.carBmwM1.Model);
+            orderedView[4].Model.Should().Be(this.carVwPolo.Model);
+            orderedView[5].Model.Should().Be(this.carVwGolf.Model);
         }
         #endregion
 

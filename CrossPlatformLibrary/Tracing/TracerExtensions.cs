@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
+using Guards;
+
 namespace CrossPlatformLibrary.Tracing
 {
     [DebuggerStepThrough]
@@ -9,33 +11,49 @@ namespace CrossPlatformLibrary.Tracing
     {
         public static void Info(this ITracer tracer, string message, params object[] arguments)
         {
+            Guard.ArgumentNotNull(() => tracer);
+
             tracer.Write(Category.Information, message, arguments);
         }
 
         public static void Debug(this ITracer tracer, string message, params object[] arguments)
         {
+            Guard.ArgumentNotNull(() => tracer);
+
             tracer.Write(Category.Debug, message, arguments);
         }
 
         public static void Warning(this ITracer tracer, string message, params object[] arguments)
         {
+            Guard.ArgumentNotNull(() => tracer);
+
             tracer.Write(Category.Warning, message, arguments);
         }
 
         public static void Error(this ITracer tracer, string message, params object[] arguments)
         {
+            Guard.ArgumentNotNull(() => tracer);
+
             tracer.Write(Category.Error, message, arguments);
         }
 
         public static void Exception(this ITracer tracer, Exception exception, string message = null, params object[] arguments)
         {
+            Guard.ArgumentNotNull(() => tracer);
+            Guard.ArgumentNotNull(() => exception);
+
+            if (message == null)
+            {
+                message = exception.Message;
+            }
+
             tracer.Write(Category.Error, exception, message, arguments);
         }
 
         public static void Exception(this ITracer tracer, Exception exception, string message = null, [CallerMemberName]string callerMemberName = "")
         {
             exception.Data["callerMemberName"] = callerMemberName;
-            tracer.Write(Category.Error, exception, message);
+            tracer.Exception(exception, message, new object[]{});
         }
 
         /// <summary>
@@ -44,6 +62,8 @@ namespace CrossPlatformLibrary.Tracing
         /// </summary>
         public static void FatalError(this ITracer tracer, Exception exception)
         {
+            Guard.ArgumentNotNull(() => tracer);
+
             tracer.Write(Category.Fatal, exception, "FatalError");
         }
     }

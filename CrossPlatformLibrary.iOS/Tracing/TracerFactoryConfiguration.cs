@@ -7,7 +7,7 @@ namespace CrossPlatformLibrary.Tracing
     {
         public void Initialize(ISimpleIoc container)
         {
-            Tracer.SetFactory(new ConsoleTracerFactory());
+            Tracer.SetDefaultFactory(new ConsoleTracerFactory());
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Globalization;
 
 using CrossPlatformLibrary.Tracing;
 
@@ -59,6 +61,11 @@ namespace CrossPlatformLibrary.Tests.Tracing
             {
                 return this.CreateTracerAction(name);
             }
+        }
+
+        private static string NameAndVersion(Type type)
+        {
+            return string.Format(CultureInfo.InvariantCulture, "{0}[{1}]", type.FullName, FileVersionInfo.GetVersionInfo(type.Assembly.Location).FileVersion);
         }
 
         public class TracerMock : ITracer

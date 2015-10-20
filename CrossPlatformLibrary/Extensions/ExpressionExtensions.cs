@@ -21,38 +21,5 @@ namespace CrossPlatformLibrary.Extensions
             var methodInfo = typeof(string).GetRuntimeMethod("Contains", new[] { typeof(string) });
             return Expression.Call(expression, methodInfo, containsExpression);
         }
-
-        public static IEnumerable<T> PerformOrdering<T>(IEnumerable<T> enumerable, IEnumerable<OrderSpecification<T>> orderSpecifications)
-        {
-            lock (orderSpecifications)
-            {
-                IQueryable<T> query = enumerable.AsQueryable();
-
-                OrderSpecification<T> firstSpecification = orderSpecifications.First();
-                IOrderedEnumerable<T> orderedQuery;
-                if (firstSpecification.OrderDirection == OrderDirection.Ascending)
-                {
-                    orderedQuery = query.OrderBy(firstSpecification.KeySelector);
-                }
-                else
-                {
-                    orderedQuery = query.OrderByDescending(firstSpecification.KeySelector);
-                }
-
-                foreach (var orderSpecification in orderSpecifications.Skip(1))
-                {
-                    if (orderSpecification.OrderDirection == OrderDirection.Ascending)
-                    {
-                        orderedQuery = orderedQuery.ThenBy(orderSpecification.KeySelector);
-                    }
-                    else
-                    {
-                        orderedQuery = orderedQuery.ThenByDescending(orderSpecification.KeySelector);
-                    }
-                }
-
-                return orderedQuery.ToList();
-            }
-        }
     }
 }
