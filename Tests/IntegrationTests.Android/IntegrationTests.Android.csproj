@@ -152,9 +152,6 @@
       <Name>IntegrationTests</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="MainActivity.cs.txt" />
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
