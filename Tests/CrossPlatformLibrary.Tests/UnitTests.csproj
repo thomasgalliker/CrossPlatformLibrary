@@ -102,7 +102,6 @@
     <Compile Include="Stubs\Person.cs" />
     <Compile Include="Stubs\TestClass10.cs" />
     <Compile Include="ExceptionHandling\PlatformSpecificExceptionHandlerStub.cs" />
-    <Compile Include="Collection\RangeTests.cs" />
     <Compile Include="Extensions\IntegerExtensionsTests.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
     <Compile Include="Stubs\TestRegistrationConvention.cs" />
@@ -143,7 +142,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tracing\TracerTests.cs" />
-    <Compile Include="Utils\HighlightMarkerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossPlatformLibrary\CrossPlatformLibrary.csproj">

@@ -66,13 +66,11 @@
     <Compile Include="Media\ColorExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
-    <Compile Include="Collection\Range.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Tools\IPlatformServices.cs" />
     <Compile Include="Tools\PlatformServicesBase.cs" />
     <Compile Include="Tracing\ActionTracer.cs" />
     <Compile Include="Tracing\ActionTracerFactory.cs" />
-    <Compile Include="Utils\HighlightMarker.cs" />
     <Compile Include="Tracing\Category.cs" />
     <Compile Include="Tracing\DebugTracer.cs" />
     <Compile Include="Tracing\DebugTracerFactory.cs" />
@@ -106,6 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Collection\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

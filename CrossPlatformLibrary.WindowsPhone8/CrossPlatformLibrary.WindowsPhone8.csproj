@@ -103,7 +103,6 @@
     <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Controls\LongListSelectorExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controls\SearchTextHighlighting.cs" />
     <Compile Include="Extensions\PointExtensions.cs" />
     <Compile Include="Themes\CustomStylesInitilizer.cs" />
   </ItemGroup>
