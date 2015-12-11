@@ -25,7 +25,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -33,11 +33,10 @@
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
     <DocumentationFile>bin\iPhone\Release\CrossPlatformLibrary.Platform.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>TRACE;__UNIFIED__;__MOBILE__;__IOS__;</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\CrossPlatformLibrary.iOS\Controls\ObservableViewTableViewController.cs">
-      <Link>Controls\ObservableViewTableViewController.cs</Link>
-    </Compile>
     <Compile Include="..\CrossPlatformLibrary.iOS\Dispatching\DispatcherService.cs">
       <Link>Dispatching\DispatcherService.cs</Link>
     </Compile>

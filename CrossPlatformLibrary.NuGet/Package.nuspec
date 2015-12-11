@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>CrossPlatformLibrary</id>
-    <version>1.0.68-alpha</version>
+    <version>1.0.69</version>
     <title>CrossPlatformLibrary</title>
     <authors>Thomas Galliker</authors>
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
@@ -18,9 +18,7 @@
       windows phone winphone wp8 wpa81 win81 windowsphone android xamarin.forms xamarin.ios ios monoandroid monodroid monotouch mvvmcross mvvmlight
     </tags>
     <releaseNotes>
-      - New method Tracer.SetDefaultFactory added.
-      - Replaced bulky AddOrderSpecification methods of ObservableView with a lightweight method
-      - Added RemoveOrderSpecifications
+      - Extracted ObservableView to new NuGet package https://www.nuget.org/packages/ObservableView/
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
     <language>en-US</language>
@@ -87,18 +85,18 @@
 
     <!--Xamarin.iOS Classic API-->
     <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.dll" target="lib\MonoTouch10\CrossPlatformLibrary.dll" />
-    <!--<file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.pdb" target="lib\MonoTouch10\CrossPlatformLibrary.pdb" />-->
+    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.pdb" target="lib\MonoTouch10\CrossPlatformLibrary.pdb" />
     <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\MonoTouch10\CrossPlatformLibrary.xml" />
     <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.Platform.dll" target="lib\MonoTouch10\CrossPlatformLibrary.Platform.dll" />
-    <!--<file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.Platform.pdb" target="lib\MonoTouch10\CrossPlatformLibrary.Platform.pdb" />-->
+    <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.Platform.pdb" target="lib\MonoTouch10\CrossPlatformLibrary.Platform.pdb" />
     <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.Platform.xml" target="lib\MonoTouch10\CrossPlatformLibrary.Platform.xml" />
 
     <!--Xamarin.iOS Unified API-->
     <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.dll" target="lib\xamarin.ios10\CrossPlatformLibrary.dll" />
-    <!--<file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.pdb" target="lib\xamarin.ios10\CrossPlatformLibrary.pdb" />-->
+    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.pdb" target="lib\xamarin.ios10\CrossPlatformLibrary.pdb" />
     <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\xamarin.ios10\CrossPlatformLibrary.xml" />
     <file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.Platform.dll" target="lib\xamarin.ios10\CrossPlatformLibrary.Platform.dll" />
-    <!--<file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.Platform.pdb" target="lib\xamarin.ios10\CrossPlatformLibrary.Platform.pdb" />-->
+    <file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.Platform.pdb" target="lib\xamarin.ios10\CrossPlatformLibrary.Platform.pdb" />
     <file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.Platform.xml" target="lib\xamarin.ios10\CrossPlatformLibrary.Platform.xml" />
 
     <!--.Net Framework 4.5-->

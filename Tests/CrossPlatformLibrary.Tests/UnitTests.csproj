@@ -38,12 +38,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentAssertions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\FluentAssertions.4.0.0\lib\net45\FluentAssertions.dll</HintPath>
+    <Reference Include="FluentAssertions, Version=4.0.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentAssertions.4.0.1\lib\net45\FluentAssertions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FluentAssertions.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\FluentAssertions.4.0.0\lib\net45\FluentAssertions.Core.dll</HintPath>
+    <Reference Include="FluentAssertions.Core, Version=4.0.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FluentAssertions.4.0.1\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Guards, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ac6aedb73a72f46e, processorArchitecture=MSIL">
@@ -54,8 +54,8 @@
       <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Moq, Version=4.2.1507.118, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
+    <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PlatformAdapter">
@@ -102,9 +102,7 @@
     <Compile Include="Stubs\Person.cs" />
     <Compile Include="Stubs\TestClass10.cs" />
     <Compile Include="ExceptionHandling\PlatformSpecificExceptionHandlerStub.cs" />
-    <Compile Include="Collection\Generic\ObservableViewTests.cs" />
     <Compile Include="Collection\RangeTests.cs" />
-    <Compile Include="Extensions\ExpressionExtensionsTests.cs" />
     <Compile Include="Extensions\IntegerExtensionsTests.cs" />
     <Compile Include="Extensions\EnumerableExtensionsTests.cs" />
     <Compile Include="Stubs\TestRegistrationConvention.cs" />

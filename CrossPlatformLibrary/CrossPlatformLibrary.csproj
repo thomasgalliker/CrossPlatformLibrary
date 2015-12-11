@@ -65,12 +65,8 @@
     <Compile Include="Media\Color.cs" />
     <Compile Include="Media\ColorExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Collection\Generic\AlphaGroupKeyAlgorithm.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
-    <Compile Include="Collection\Generic\IGroupKeyAlgorithm.cs" />
-    <Compile Include="Collection\Generic\ObservableView.cs" />
     <Compile Include="Collection\Range.cs" />
-    <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Tools\IPlatformServices.cs" />
     <Compile Include="Tools\PlatformServicesBase.cs" />
