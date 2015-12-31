@@ -9,9 +9,9 @@
     <projectUrl>https://github.com/thomasgalliker/CrossPlatformLibrary</projectUrl>
     <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <summary>CrossPlatformLibrary is an extensible toolkit which provides a basic set of functionality used in most mobile apps.</summary>
+    <summary>An extensible cross-platform toolkit which provides a basic set of functionality used in most mobile apps.</summary>
     <description>
-      CrossPlatformLibrary is an extensible toolkit which provides a basic set of functionality used in most mobile apps such as bootstrapping, exception handling, tracing and UI dispatching.
+      CrossPlatformLibrary is an extensible cross-platform toolkit which provides a basic set of functionality used in most mobile apps such as bootstrapping, exception handling, tracing and UI dispatching.
     </description>
     <tags>
       xamarin pcl CrossPlatformLibrary cross-platform library bootstrapping dispatching tracing exception handling mobile
