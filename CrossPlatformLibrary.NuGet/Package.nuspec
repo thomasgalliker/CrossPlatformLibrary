@@ -21,7 +21,7 @@
       - Extracted ObservableView to new NuGet package https://www.nuget.org/packages/ObservableView/
       - Extracted HighlightMarker to new NuGet package https://www.nuget.org/packages/HighlightMarker/
     </releaseNotes>
-    <copyright>Copyright 2015</copyright>
+    <copyright>Copyright 2016</copyright>
     <language>en-US</language>
     <dependencies>
       <group targetFramework="MonoTouch10">
