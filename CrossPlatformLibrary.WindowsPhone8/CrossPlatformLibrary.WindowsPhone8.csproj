@@ -90,8 +90,8 @@
     <Compile Include="..\CrossPlatformLibrary.iOS\Tracing\ConsoleTracerFactory.cs">
       <Link>Tracing\ConsoleTracerFactory.cs</Link>
     </Compile>
-    <Compile Include="..\CrossPlatformLibrary.iOS\Tracing\TracerFactoryConfiguration.cs">
-      <Link>Tracing\TracerFactoryConfiguration.cs</Link>
+    <Compile Include="..\CrossPlatformLibrary.iOS\Tracing\DefaultTracerFactoryConfiguration.cs">
+      <Link>Tracing\DefaultTracerFactoryConfiguration.cs</Link>
     </Compile>
     <Compile Include="IO\FileSystem.cs" />
     <Compile Include="Tools\PlatformServices.cs" />
@@ -121,7 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Guards, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ac6aedb73a72f46e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Guards.1.0.8\lib\wp8\Guards.dll</HintPath>
+      <HintPath>..\packages\Guards.1.0.10\lib\wp8\Guards.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=8.0.1.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">

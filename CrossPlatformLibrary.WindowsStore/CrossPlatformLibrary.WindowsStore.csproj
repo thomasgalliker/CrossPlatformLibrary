@@ -102,11 +102,11 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\CrossPlatformLibrary.NetFx\Tracing\DefaultTracerFactoryConfiguration.cs">
+      <Link>Tracing\DefaultTracerFactoryConfiguration.cs</Link>
+    </Compile>
     <Compile Include="..\CrossPlatformLibrary.WindowsPhone81\ExceptionHandling\PlatformSpecificExceptionHandler.cs">
       <Link>ExceptionHandling\PlatformSpecificExceptionHandler.cs</Link>
-    </Compile>
-    <Compile Include="..\CrossPlatformLibrary.WindowsPhone81\Tracing\TracerFactoryConfiguration.cs">
-      <Link>Tracing\TracerFactoryConfiguration.cs</Link>
     </Compile>
     <Compile Include="..\CrossPlatformLibrary.WindowsPhone8\Dispatching\DispatcherService.cs">
       <Link>Dispatching\DispatcherService.cs</Link>

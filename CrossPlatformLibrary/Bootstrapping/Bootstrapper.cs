@@ -22,7 +22,7 @@ namespace CrossPlatformLibrary.Bootstrapping
     /// </summary>
     public class Bootstrapper : IBootstrapper
     {
-        private readonly ITracer tracer;
+        private ITracer tracer;
 
         /// <summary>
         /// Gets the IOC/DI container of the application, which is being
@@ -32,15 +32,9 @@ namespace CrossPlatformLibrary.Bootstrapping
 
         private static ApplicationLifecycle applicationLifecycle = ApplicationLifecycle.Uninitialized;
 
-        public Bootstrapper() : this(Tracer.Create<Bootstrapper>())
+        public Bootstrapper()
         {
-        }
-
-        public Bootstrapper(ITracer tracer)
-        {
-            Guard.ArgumentNotNull(() => tracer);
-
-            this.tracer = tracer;
+            this.tracer = Tracer.Create<Bootstrapper>();
         }
 
         public static ApplicationLifecycle ApplicationLifecycle
@@ -78,8 +72,7 @@ namespace CrossPlatformLibrary.Bootstrapping
 
             if (applicationLifecycle == ApplicationLifecycle.Uninitialized)
             {
-                // Register ITracer with a factory that allows type-specific tracer creation
-                this.simpleIoc.Register<ITracer>((Type parentType) => Tracer.Create(parentType));
+                this.InternalConfigureDefaultTracerFactory();
 
                 this.InternalConfigureExceptionHandling();
 
@@ -102,6 +95,38 @@ namespace CrossPlatformLibrary.Bootstrapping
         public void Sleep()
         {
             applicationLifecycle = ApplicationLifecycle.Sleep;
+        }
+
+        /// <summary>
+        /// Configures a platform-specific default tracer factory.
+        /// Each target platform can configure
+        /// </summary>
+        private void InternalConfigureDefaultTracerFactory()
+        {
+            try
+            {
+                // Register ITracer with a factory that allows type-specific tracer creation
+                this.simpleIoc.Register<ITracer>((Type parentType) => Tracer.Create(parentType));
+
+                // Resolve platform-specific default tracer factory and set it in Tracer.SetDefaultFactory
+                this.simpleIoc.RegisterWithConvention<IDefaultTracerFactoryConfiguration>();
+                var platformspecificDefaultTracerConfiguration = this.simpleIoc.TryGetInstance<IDefaultTracerFactoryConfiguration>();
+                if (platformspecificDefaultTracerConfiguration != null)
+                {
+                    var defaultTracerFactory = platformspecificDefaultTracerConfiguration.GetDefaultTracerFactory();
+                    Tracer.SetDefaultFactory(defaultTracerFactory);
+
+                    // Recreate tracer in order to use platform-specific default tracer factory
+                    this.tracer = Tracer.Create(this);
+                }
+            }
+            catch (Exception ex)
+            {
+                if (!this.HandleBootstrappingException(ex))
+                {
+                    throw new BootstrappingException("Bootstrapping failed during ConfigureDefaultTracerFactory sequence.", ex);
+                }
+            }
         }
 
         private void InternalConfigureExceptionHandling()
