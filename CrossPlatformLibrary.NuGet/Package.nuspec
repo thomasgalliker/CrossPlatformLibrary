@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>CrossPlatformLibrary</id>
-    <version>1.0.72-pre1</version>
+    <version>1.0.72-pre3</version>
     <title>CrossPlatformLibrary</title>
     <authors>Thomas Galliker</authors>
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
@@ -20,6 +20,7 @@
     <releaseNotes>
       1.0.72
       - Automatically configure console tracer depending on platform
+      - Added LinkerHelper.cs to solve the Xamarin iOS linker issue
 
       1.0.71
       - Extracted ObservableView to new NuGet package https://www.nuget.org/packages/ObservableView/
@@ -95,6 +96,7 @@
     <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.Platform.dll" target="lib\MonoTouch10\CrossPlatformLibrary.Platform.dll" />
     <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.Platform.pdb" target="lib\MonoTouch10\CrossPlatformLibrary.Platform.pdb" />
     <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.Platform.xml" target="lib\MonoTouch10\CrossPlatformLibrary.Platform.xml" />
+    <file src="..\CrossPlatformLibrary.iOS\LinkerHelper.cs" target="content\MonoTouch10\LinkerHelper.cs" />
 
     <!--Xamarin.iOS Unified API-->
     <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.dll" target="lib\xamarin.ios10\CrossPlatformLibrary.dll" />
@@ -103,7 +105,8 @@
     <file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.Platform.dll" target="lib\xamarin.ios10\CrossPlatformLibrary.Platform.dll" />
     <file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.Platform.pdb" target="lib\xamarin.ios10\CrossPlatformLibrary.Platform.pdb" />
     <file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.Platform.xml" target="lib\xamarin.ios10\CrossPlatformLibrary.Platform.xml" />
-
+    <file src="..\CrossPlatformLibrary.iOSUnified\LinkerHelper.cs" target="content\xamarin.ios10\LinkerHelper.cs" />
+    
     <!--.Net Framework 4.5-->
     <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.dll" target="lib\net45\CrossPlatformLibrary.dll" />
     <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.pdb" target="lib\net45\CrossPlatformLibrary.pdb" />
