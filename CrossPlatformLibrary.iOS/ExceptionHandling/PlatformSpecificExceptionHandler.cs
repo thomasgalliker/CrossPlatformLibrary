@@ -2,8 +2,6 @@
 using System.IO;
 using System.Runtime.InteropServices;
 
-
-
 #if __UNIFIED__
 using Foundation;
 #else

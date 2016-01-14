@@ -2,7 +2,6 @@
 
 using System;
 
-
 #if NETFX_CORE
 using Windows.UI.Core;
 using Windows.UI.Xaml;
