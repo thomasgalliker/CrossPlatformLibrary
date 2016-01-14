@@ -12,7 +12,7 @@ namespace Sample
         {
             this.bootstrapper = new Bootstrapper();
 
-            this.MainPage = new DemoPage();
+            this.MainPage = new NavigationPage(new DemoPage());
         }
 
         protected override void OnStart()
