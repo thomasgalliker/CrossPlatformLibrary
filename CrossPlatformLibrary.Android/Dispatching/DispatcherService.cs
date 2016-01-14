@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 using Android.App;
 
@@ -8,11 +9,18 @@ namespace CrossPlatformLibrary.Dispatching
 {
     public class DispatcherService : IDispatcherService
     {
-        public void CheckBeginInvokeOnUI(Action action)
+        public void CheckBeginInvokeOnUI(Action dispatchAction)
         {
-            Guard.ArgumentNotNull(() => action);
+            Guard.ArgumentNotNull(dispatchAction, "dispatchAction");
 
-            Application.SynchronizationContext.Post(_ => action(), null);
+            if (Application.SynchronizationContext == SynchronizationContext.Current)
+            {
+                dispatchAction();
+            }
+            else
+            {
+                Application.SynchronizationContext.Post(_ => dispatchAction(), null);
+            }
         }
     }
 }
