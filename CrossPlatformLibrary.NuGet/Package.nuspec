@@ -21,6 +21,7 @@
       1.0.72
       - Automatically configure console tracer depending on platform
       - Added LinkerHelper.cs to solve the Xamarin iOS linker issue
+      - Added CrossPlatformApplication as application bootstrapper for WPF
 
       1.0.71
       - Extracted ObservableView to new NuGet package https://www.nuget.org/packages/ObservableView/
