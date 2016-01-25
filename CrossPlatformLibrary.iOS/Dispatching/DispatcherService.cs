@@ -18,7 +18,14 @@ namespace CrossPlatformLibrary.Dispatching
         {
             Guard.ArgumentNotNull(() => action);
 
-            this.dispatcher.BeginInvokeOnMainThread(() => action());
+            if (NSThread.Current.IsMainThread)
+            {
+                action();
+            }
+            else
+            {
+                this.dispatcher.BeginInvokeOnMainThread(() => action());
+            }
         }
     }
 }
