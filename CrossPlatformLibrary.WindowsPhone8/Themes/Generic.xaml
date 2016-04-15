@@ -1,9 +1,6 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="clr-namespace:CrossPlatformLibrary.Converters">
-
-    <converters:VisibilityInverter x:Key="VisibilityInverter" />
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--These styles can be overriden by using CustomStylesInitilizer.OverrideStyles method-->
     <SolidColorBrush x:Key="PhoneAccentBrushBright" Color="{StaticResource PhoneAccentColor}"/>

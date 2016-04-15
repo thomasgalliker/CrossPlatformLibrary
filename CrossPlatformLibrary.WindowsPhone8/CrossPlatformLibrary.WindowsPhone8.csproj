@@ -95,8 +95,6 @@
     </Compile>
     <Compile Include="IO\FileSystem.cs" />
     <Compile Include="Tools\PlatformServices.cs" />
-    <Compile Include="Converters\BoolToValueConverter.cs" />
-    <Compile Include="Converters\VisibilityInverter.cs" />
     <Compile Include="Dispatching\DispatcherService.cs" />
     <Compile Include="ExceptionHandling\PlatformSpecificExceptionHandler.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
