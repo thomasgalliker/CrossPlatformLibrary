@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>CrossPlatformLibrary</id>
-    <version>1.0.72-pre3</version>
+    <version>1.0.72</version>
     <title>CrossPlatformLibrary</title>
     <authors>Thomas Galliker</authors>
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
@@ -22,6 +22,8 @@
       - Automatically configure console tracer depending on platform
       - Added LinkerHelper.cs to solve the Xamarin iOS linker issue
       - Added CrossPlatformApplication as application bootstrapper for WPF
+      - Optimization: Check synchronization context in iOS DispatcherService before calling BeginInvokeOnMainThread
+      - Removed PhoneTextBoxEx and WPtoolkit dependency. (Moved to new NuGet package named DelayedPhoneTextBox).
 
       1.0.71
       - Extracted ObservableView to new NuGet package https://www.nuget.org/packages/ObservableView/
@@ -68,11 +70,6 @@
       <group targetFramework="portable-net45+dnxcore50+wp80+wpa81+win81+netcore45+monoandroid10+monotouch10+xamarin.ios10">
         <dependency id="CommonServiceLocator" version="1.3" />
         <dependency id="Guards" version="1.0.10"/>
-      </group>
-
-      <!--WPtoolkit-->
-      <group targetFramework="wp8">
-        <dependency id="WPtoolkit" version="4.2013.8.16" />
       </group>
     </dependencies>
   </metadata>
