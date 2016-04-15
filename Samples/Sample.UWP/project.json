@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "CommonServiceLocator": "1.3.0",
+    "CrossPlatformAdapter": "1.0.12",
     "Guards": "1.0.10",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
   },
