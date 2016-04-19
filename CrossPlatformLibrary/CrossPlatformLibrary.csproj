@@ -60,8 +60,6 @@
     <Compile Include="IoC\PreferredConstructor.cs" />
     <Compile Include="IoC\SimpleIoc.cs" />
     <Compile Include="IoC\UseCacheAttribute.cs" />
-    <Compile Include="IO\ResourceLoader.cs" />
-    <Compile Include="IO\XmlSerializerHelper.cs" />
     <Compile Include="Media\Color.cs" />
     <Compile Include="Media\ColorExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

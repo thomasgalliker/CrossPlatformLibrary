@@ -95,7 +95,6 @@
     <Compile Include="Extensions\TypeExtensionsTests.cs" />
     <Compile Include="IoC\ResolvedParameterTests.cs" />
     <Compile Include="IO\HashCodeHelperTests.cs" />
-    <Compile Include="IO\TestData\Restaurant.cs" />
     <Compile Include="Stubs\GenericClass1.cs" />
     <Compile Include="Stubs\ITestClass10.cs" />
     <Compile Include="Stubs\ITestClass2.cs" />
@@ -116,7 +115,6 @@
     <Compile Include="IoC\SimpleIocTestMultipleInstances.cs" />
     <Compile Include="IoC\SimpleIocTestSingleInstance.cs" />
     <Compile Include="IoC\SimpleIocTestUnregistration.cs" />
-    <Compile Include="IO\XmlSerializerHelperTests.cs" />
     <Compile Include="Stubs\ITestClass1.cs" />
     <Compile Include="Stubs\TestBaseClass.cs" />
     <Compile Include="Stubs\TestClass1.cs" />
@@ -151,9 +149,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="IO\TestData\SerializedData.xml" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>CrossPlatformLibrary</id>
-    <version>1.0.74-pre1</version>
+    <version>1.0.74-pre2</version>
     <title>CrossPlatformLibrary</title>
     <authors>Thomas Galliker</authors>
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
@@ -18,9 +18,11 @@
       windows phone winphone wp8 wpa81 win81 windowsphone universal uwp uap android xamarin.forms xamarin.ios ios monoandroid monodroid monotouch
     </tags>
     <releaseNotes>
-      1.0.74-pre1
+      1.0.74-pre2
       - Moved all IValueConverters to ValueConverters.NET NuGet package
-      
+      - Moved ResourceLoader to ResourceLoader NuGet package
+      - Moved XmlSerializerHelper to XmlSerializerHelper NuGet package
+
       1.0.73
       - Added support for Universal Windows Platform (UWP).
 
