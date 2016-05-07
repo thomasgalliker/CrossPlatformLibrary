@@ -84,15 +84,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\CrossPlatformLibrary.iOS\Tracing\ConsoleTracer.cs">
-      <Link>Tracing\ConsoleTracer.cs</Link>
-    </Compile>
-    <Compile Include="..\CrossPlatformLibrary.iOS\Tracing\ConsoleTracerFactory.cs">
-      <Link>Tracing\ConsoleTracerFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\CrossPlatformLibrary.iOS\Tracing\DefaultTracerFactoryConfiguration.cs">
-      <Link>Tracing\DefaultTracerFactoryConfiguration.cs</Link>
-    </Compile>
     <Compile Include="IO\FileSystem.cs" />
     <Compile Include="Tools\PlatformServices.cs" />
     <Compile Include="Dispatching\DispatcherService.cs" />
@@ -117,6 +108,10 @@
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Tracing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tracing.1.0.1\lib\wp8\Tracing.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>

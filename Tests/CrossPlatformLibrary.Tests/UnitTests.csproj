@@ -129,17 +129,6 @@
     <Compile Include="Stubs\TestClassForCreationTime.cs" />
     <Compile Include="Stubs\TestClassWithMultiConstructors.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tracing\EmptyTracerTests.cs" />
-    <Compile Include="Tracing\TraceEntryTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tracing\TracerBaseTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tracing\TracerFactoryBaseTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Tracing\TracerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CrossPlatformLibrary\CrossPlatformLibrary.csproj">

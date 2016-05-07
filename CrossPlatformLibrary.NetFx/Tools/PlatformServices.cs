@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 using CrossPlatformLibrary.Extensions;
-using CrossPlatformLibrary.Tracing;
+using Tracing;
 
 namespace CrossPlatformLibrary.Tools
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-using CrossPlatformLibrary.Tracing;
+using Tracing;
 
 using Guards;
 

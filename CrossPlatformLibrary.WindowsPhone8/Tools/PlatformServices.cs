@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using CrossPlatformLibrary.Extensions;
-using CrossPlatformLibrary.Tracing;
+using Tracing;
 using Windows.Storage;
 
 namespace CrossPlatformLibrary.Tools

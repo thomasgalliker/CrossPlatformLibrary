@@ -1,6 +1,6 @@
 ﻿using System;
 
-using CrossPlatformLibrary.Tracing;
+using Tracing;
 using Guards;
 
 namespace CrossPlatformLibrary.ExceptionHandling.Handlers

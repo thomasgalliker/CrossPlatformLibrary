@@ -27,6 +27,8 @@ using Guards;
 
 using Microsoft.Practices.ServiceLocation;
 
+using Tracing.IoC;
+
 namespace CrossPlatformLibrary.IoC
 {
     /// <summary>

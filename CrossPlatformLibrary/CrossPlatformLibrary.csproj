@@ -59,7 +59,6 @@
     <Compile Include="IoC\ISimpleIoc.cs" />
     <Compile Include="IoC\PreferredConstructor.cs" />
     <Compile Include="IoC\SimpleIoc.cs" />
-    <Compile Include="IoC\UseCacheAttribute.cs" />
     <Compile Include="Media\Color.cs" />
     <Compile Include="Media\ColorExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,21 +66,6 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Tools\IPlatformServices.cs" />
     <Compile Include="Tools\PlatformServicesBase.cs" />
-    <Compile Include="Tracing\ActionTracer.cs" />
-    <Compile Include="Tracing\ActionTracerFactory.cs" />
-    <Compile Include="Tracing\Category.cs" />
-    <Compile Include="Tracing\DebugTracer.cs" />
-    <Compile Include="Tracing\DebugTracerFactory.cs" />
-    <Compile Include="Tracing\EmptyTracer.cs" />
-    <Compile Include="Tracing\EmptyTracerFactory.cs" />
-    <Compile Include="Tracing\IDefaultTracerFactoryConfiguration.cs" />
-    <Compile Include="Tracing\ITracer.cs" />
-    <Compile Include="Tracing\ITracerFactory.cs" />
-    <Compile Include="Tracing\TraceEntry.cs" />
-    <Compile Include="Tracing\Tracer.cs" />
-    <Compile Include="Tracing\TracerBase.cs" />
-    <Compile Include="Tracing\TracerExtensions.cs" />
-    <Compile Include="Tracing\TracerFactoryBase.cs" />
     <Compile Include="Utils\ByteConverter.cs" />
     <Compile Include="Utils\HashCodeHelper.cs" />
     <Compile Include="Utils\AsyncInline.cs" />
@@ -98,6 +82,10 @@
     </Reference>
     <Reference Include="PlatformAdapter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6631b0d7444ed877, processorArchitecture=MSIL">
       <HintPath>..\packages\CrossPlatformAdapter.1.0.12\lib\portable-net45+wp8+wpa81+win81+netcore45+monoandroid1+xamarin.ios10\PlatformAdapter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Tracing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tracing.1.0.1\lib\portable-net45+wp8+win8+wpa81\Tracing.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

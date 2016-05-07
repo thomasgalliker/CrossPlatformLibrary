@@ -49,15 +49,6 @@
     <Compile Include="..\CrossPlatformLibrary.iOS\Tools\PlatformServices.cs">
       <Link>Tools\PlatformServices.cs</Link>
     </Compile>
-    <Compile Include="..\CrossPlatformLibrary.iOS\Tracing\ConsoleTracer.cs">
-      <Link>Tracing\ConsoleTracer.cs</Link>
-    </Compile>
-    <Compile Include="..\CrossPlatformLibrary.iOS\Tracing\ConsoleTracerFactory.cs">
-      <Link>Tracing\ConsoleTracerFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\CrossPlatformLibrary.iOS\Tracing\DefaultTracerFactoryConfiguration.cs">
-      <Link>Tracing\DefaultTracerFactoryConfiguration.cs</Link>
-    </Compile>
     <Compile Include="LinkerHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -73,6 +64,10 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="Tracing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tracing.1.0.1\lib\xamarin.ios10\Tracing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>

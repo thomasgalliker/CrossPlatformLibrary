@@ -108,9 +108,6 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\CrossPlatformLibrary.NetFx\Tracing\DefaultTracerFactoryConfiguration.cs">
-      <Link>Tracing\DefaultTracerFactoryConfiguration.cs</Link>
-    </Compile>
     <Compile Include="..\CrossPlatformLibrary.WindowsPhone81\ExceptionHandling\PlatformSpecificExceptionHandler.cs">
       <Link>ExceptionHandling\PlatformSpecificExceptionHandler.cs</Link>
     </Compile>

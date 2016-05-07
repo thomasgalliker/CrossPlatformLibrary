@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using CrossPlatformLibrary.Tracing;
+using Tracing;
 
 namespace CrossPlatformLibrary.Tools
 {

@@ -2,16 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
 using CrossPlatformLibrary.ExceptionHandling;
 using CrossPlatformLibrary.ExceptionHandling.Handlers;
 using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.IoC;
 using CrossPlatformLibrary.Tools;
-using CrossPlatformLibrary.Tracing;
-using Guards;
-
 using Microsoft.Practices.ServiceLocation;
+using Tracing;
 
 namespace CrossPlatformLibrary.Bootstrapping
 {
@@ -107,18 +104,6 @@ namespace CrossPlatformLibrary.Bootstrapping
             {
                 // Register ITracer with a factory that allows type-specific tracer creation
                 this.simpleIoc.Register<ITracer>((Type parentType) => Tracer.Create(parentType));
-
-                // Resolve platform-specific default tracer factory and set it in Tracer.SetDefaultFactory
-                this.simpleIoc.RegisterWithConvention<IDefaultTracerFactoryConfiguration>();
-                var platformspecificDefaultTracerConfiguration = this.simpleIoc.TryGetInstance<IDefaultTracerFactoryConfiguration>();
-                if (platformspecificDefaultTracerConfiguration != null)
-                {
-                    var defaultTracerFactory = platformspecificDefaultTracerConfiguration.GetDefaultTracerFactory();
-                    Tracer.SetDefaultFactory(defaultTracerFactory);
-
-                    // Recreate tracer in order to use platform-specific default tracer factory
-                    this.tracer = Tracer.Create(this);
-                }
             }
             catch (Exception ex)
             {
