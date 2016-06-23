@@ -19,7 +19,7 @@ namespace CrossPlatformLibrary.Bootstrapping
     /// </summary>
     public class Bootstrapper : IBootstrapper
     {
-        private ITracer tracer;
+        private readonly ITracer tracer;
 
         /// <summary>
         /// Gets the IOC/DI container of the application, which is being
