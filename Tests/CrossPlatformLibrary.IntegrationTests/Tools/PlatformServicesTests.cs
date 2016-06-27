@@ -31,7 +31,6 @@ namespace CrossPlatformLibrary.IntegrationTests.Tools
             // Assert
             assemblies.Count().Should().BeGreaterThan(0);
             assemblies.Should().Contain(assembly => assembly.FullName.Contains("CrossPlatformLibrary"));
-            assemblies.Should().Contain(assembly => assembly.FullName.Contains("CrossPlatformLibrary.Platform"));
         }
 
         [Fact]

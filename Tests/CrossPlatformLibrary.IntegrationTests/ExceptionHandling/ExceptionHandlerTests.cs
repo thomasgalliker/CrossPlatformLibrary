@@ -25,7 +25,7 @@ namespace CrossPlatformLibrary.IntegrationTests.ExceptionHandling
         public void ShouldGetInstanceOfPlatformSpecificExceptionHandler()
         {
             // Act
-            var platformSpecificExceptionHandler = SimpleIoc.Default.GetInstance<IPlatformSpecificExceptionHandler>();
+            var platformSpecificExceptionHandler = SimpleIoc.Default.GetInstance<IExceptionHandler>();
 
             // Assert
             platformSpecificExceptionHandler.Should().NotBeNull();
