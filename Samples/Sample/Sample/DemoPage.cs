@@ -1,7 +1,5 @@
 ﻿using System;
 
-using CrossPlatformLibrary.IoC;
-
 using Xamarin.Forms;
 
 namespace Sample
@@ -12,19 +10,19 @@ namespace Sample
         {
             var titleLabel = new Label { Text = "CrossPlatformLibrary Demo", FontSize = 24};
 
-            var button = new Button
+            var throwExceptionButton = new Button
             {
                 Text = "Throw InvalidOperationException"
             };
-            button.Clicked += (sender, args) =>
+            throwExceptionButton.Clicked += (sender, args) =>
             {
                throw new InvalidOperationException("Some exception text...");
             };
-            
+
             var stackPanel = new StackLayout
             {
                 Orientation = StackOrientation.Vertical,
-                Children = { titleLabel, button }
+                Children = { titleLabel, throwExceptionButton }
             };
 
             this.Content = stackPanel;

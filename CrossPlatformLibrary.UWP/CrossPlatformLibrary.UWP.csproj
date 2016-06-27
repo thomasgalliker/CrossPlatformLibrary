@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CrossPlatformLibrary</RootNamespace>
-    <AssemblyName>CrossPlatformLibrary.Platform</AssemblyName>
+    <AssemblyName>CrossPlatformLibrary</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
@@ -35,7 +35,7 @@
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\CrossPlatformLibrary.Platform.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\CrossPlatformLibrary.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <PlatformTarget>x86</PlatformTarget>
@@ -120,13 +120,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\CrossPlatformLibrary.UWP.rd.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CrossPlatformLibrary\CrossPlatformLibrary.csproj">
-      <Project>{a6fcef44-d2ba-42c7-b3cb-13667bcd7b54}</Project>
-      <Name>CrossPlatformLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
+  <Import Project="..\CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

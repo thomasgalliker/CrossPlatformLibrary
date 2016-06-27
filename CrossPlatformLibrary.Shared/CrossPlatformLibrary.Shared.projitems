@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>9061e23b-3329-4ccf-8d69-61faa11bb380</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>CrossPlatformLibrary</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Bootstrapping\ApplicationLifecycle.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Bootstrapping\ApplicationLifecycleException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Bootstrapping\Bootstrapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Bootstrapping\BootstrappingException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Bootstrapping\IBootstrapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CrossPlatformLibrary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dispatching\DispatcherExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Dispatching\IDispatcherService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExceptionHandling\AsyncSynchronizationContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExceptionHandling\ExceptionHandlerBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExceptionHandling\ExceptionHandlingStrategies\RethrowExceptionHandlingStrategy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExceptionHandling\ExceptionHandlingStrategies\TracingExceptionHandlingStrategy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExceptionHandling\IExceptionHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExceptionHandling\IExceptionHandlingStrategy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerableExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumeratorExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\IntegerExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\TypeExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoC\IContainerExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoC\IResolvedParameter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoC\ISimpleIoc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoC\PreferredConstructor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoC\ResolvedParameter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoC\SimpleIoc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Media\Color.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Media\ColorExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools\IPlatformServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools\PlatformServicesBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\AsyncInline.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\ByteConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\HashCodeHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\RandomUtils.cs" />
+  </ItemGroup>
+</Project>

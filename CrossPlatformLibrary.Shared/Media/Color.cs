@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Text;
 
-#if __IOS__
-using UIKit;
-using CoreGraphics;
+#if __IOS__ 
+    #if __UNIFIED__
+        using UIKit;
+        using CoreGraphics;
+    #else
+        using MonoTouch.CoreGraphics;
+        using MonoTouch.UIKit;
+    #endif
 #endif
 
 namespace CrossPlatformLibrary.Media

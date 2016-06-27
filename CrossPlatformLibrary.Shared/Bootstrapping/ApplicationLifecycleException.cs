@@ -4,17 +4,8 @@ namespace CrossPlatformLibrary.Bootstrapping
 {
     public class ApplicationLifecycleException : Exception
     {
-        public ApplicationLifecycleException()
-        {
-        }
-
         public ApplicationLifecycleException(string message)
             : base(message)
-        {
-        }
-
-        public ApplicationLifecycleException(string message, Exception innerException)
-            : base(message, innerException)
         {
         }
 

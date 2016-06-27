@@ -2,12 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>CrossPlatformLibrary</id>
-    <version>1.0.74-pre5</version>
+    <version>2.0.0-pre5</version>
     <title>CrossPlatformLibrary</title>
     <authors>Thomas Galliker</authors>
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
     <projectUrl>https://github.com/thomasgalliker/CrossPlatformLibrary</projectUrl>
-    <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/master/Images/cpl_short.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>An extensible cross-platform toolkit which provides a basic set of functionality used in most mobile apps.</summary>
     <description>
@@ -18,7 +18,8 @@
       windows phone winphone wp8 wpa81 win81 windowsphone universal uwp uap android xamarin.forms xamarin.ios ios monoandroid monodroid monotouch
     </tags>
     <releaseNotes>
-      1.0.74-pre3
+      2.0.0-prerelease
+      - Major refactoring to support the "bait-and-switch" PCL pattern
       - Moved ITracer to new NuGet package "Tracing"
       - Moved all IValueConverters to new NuGet package "ValueConverters.NET"
       - Moved ResourceLoader to new NuGet package "ResourceLoader"
@@ -45,49 +46,41 @@
         <dependency id="CommonServiceLocator" version="1.3" />
         <dependency id="Guards" version="1.0.11"/>
         <dependency id="Tracing" version="1.0.2" />
-        <dependency id="CrossPlatformAdapter" version="1.0.12"/>
       </group>
       <group targetFramework="xamarin.ios10">
         <dependency id="CommonServiceLocator" version="1.3" />
         <dependency id="Guards" version="1.0.11"/>
         <dependency id="Tracing" version="1.0.2" />
-        <dependency id="CrossPlatformAdapter" version="1.0.12"/>
       </group>
       <group targetFramework="MonoAndroid10">
         <dependency id="CommonServiceLocator" version="1.3" />
         <dependency id="Guards" version="1.0.11"/>
         <dependency id="Tracing" version="1.0.2" />
-        <dependency id="CrossPlatformAdapter" version="1.0.12"/>
       </group>
       <group targetFramework="net45">
         <dependency id="CommonServiceLocator" version="1.3" />
         <dependency id="Guards" version="1.0.11"/>
         <dependency id="Tracing" version="1.0.2" />
-        <dependency id="CrossPlatformAdapter" version="1.0.12"/>
       </group>
       <group targetFramework="wp8">
         <dependency id="CommonServiceLocator" version="1.3" />
         <dependency id="Guards" version="1.0.11"/>
         <dependency id="Tracing" version="1.0.2" />
-        <dependency id="CrossPlatformAdapter" version="1.0.12"/>
       </group>
       <group targetFramework="wpa81">
         <dependency id="CommonServiceLocator" version="1.3" />
         <dependency id="Guards" version="1.0.11"/>
         <dependency id="Tracing" version="1.0.2" />
-        <dependency id="CrossPlatformAdapter" version="1.0.12"/>
       </group>
       <group targetFramework="win81">
         <dependency id="CommonServiceLocator" version="1.3" />
         <dependency id="Guards" version="1.0.11"/>
         <dependency id="Tracing" version="1.0.2" />
-        <dependency id="CrossPlatformAdapter" version="1.0.12"/>
       </group>
       <group targetFramework="uap10.0">
         <dependency id="CommonServiceLocator" version="1.3" />
         <dependency id="Guards" version="1.0.11"/>
         <dependency id="Tracing" version="1.0.2" />
-        <dependency id="CrossPlatformAdapter" version="1.0.12"/>
       </group>
       <group targetFramework="portable-net45+dnxcore50+wp80+wpa81+win81+netcore45+monoandroid10+monotouch10+xamarin.ios10">
         <dependency id="CommonServiceLocator" version="1.3" />
@@ -103,70 +96,46 @@
     <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\portable-net45+dnxcore50+wp80+wpa81+win81+netcore45+monoandroid10+monotouch10+xamarin.ios10\CrossPlatformLibrary.xml" />
 
     <!--Xamarin.Android-->
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.dll" target="lib\MonoAndroid10\CrossPlatformLibrary.dll" />
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.pdb" target="lib\MonoAndroid10\CrossPlatformLibrary.pdb" />
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\MonoAndroid10\CrossPlatformLibrary.xml" />
-    <file src="..\CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.Platform.dll" target="lib\MonoAndroid10\CrossPlatformLibrary.Platform.dll" />
-    <file src="..\CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.Platform.pdb" target="lib\MonoAndroid10\CrossPlatformLibrary.Platform.pdb" />
-    <file src="..\CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.Platform.xml" target="lib\MonoAndroid10\CrossPlatformLibrary.Platform.xml" />
+    <file src="..\CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.dll" target="lib\MonoAndroid10\CrossPlatformLibrary.dll" />
+    <file src="..\CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.pdb" target="lib\MonoAndroid10\CrossPlatformLibrary.pdb" />
+    <file src="..\CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.xml" target="lib\MonoAndroid10\CrossPlatformLibrary.xml" />
 
     <!--Xamarin.iOS Classic API-->
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.dll" target="lib\MonoTouch10\CrossPlatformLibrary.dll" />
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.pdb" target="lib\MonoTouch10\CrossPlatformLibrary.pdb" />
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\MonoTouch10\CrossPlatformLibrary.xml" />
-    <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.Platform.dll" target="lib\MonoTouch10\CrossPlatformLibrary.Platform.dll" />
-    <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.Platform.pdb" target="lib\MonoTouch10\CrossPlatformLibrary.Platform.pdb" />
-    <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.Platform.xml" target="lib\MonoTouch10\CrossPlatformLibrary.Platform.xml" />
+    <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.dll" target="lib\MonoTouch10\CrossPlatformLibrary.dll" />
+    <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.pdb" target="lib\MonoTouch10\CrossPlatformLibrary.pdb" />
+    <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.xml" target="lib\MonoTouch10\CrossPlatformLibrary.xml" />
     <file src="..\CrossPlatformLibrary.iOS\LinkerHelper.cs" target="content\MonoTouch10\LinkerHelper.cs" />
 
     <!--Xamarin.iOS Unified API-->
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.dll" target="lib\xamarin.ios10\CrossPlatformLibrary.dll" />
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.pdb" target="lib\xamarin.ios10\CrossPlatformLibrary.pdb" />
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\xamarin.ios10\CrossPlatformLibrary.xml" />
-    <file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.Platform.dll" target="lib\xamarin.ios10\CrossPlatformLibrary.Platform.dll" />
-    <file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.Platform.pdb" target="lib\xamarin.ios10\CrossPlatformLibrary.Platform.pdb" />
-    <file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.Platform.xml" target="lib\xamarin.ios10\CrossPlatformLibrary.Platform.xml" />
+    <file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.dll" target="lib\xamarin.ios10\CrossPlatformLibrary.dll" />
+    <file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.pdb" target="lib\xamarin.ios10\CrossPlatformLibrary.pdb" />
+    <file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.xml" target="lib\xamarin.ios10\CrossPlatformLibrary.xml" />
     <file src="..\CrossPlatformLibrary.iOSUnified\LinkerHelper.cs" target="content\xamarin.ios10\LinkerHelper.cs" />
 
     <!--.Net Framework 4.5-->
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.dll" target="lib\net45\CrossPlatformLibrary.dll" />
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.pdb" target="lib\net45\CrossPlatformLibrary.pdb" />
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\net45\CrossPlatformLibrary.xml" />
-    <file src="..\CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.Platform.dll" target="lib\net45\CrossPlatformLibrary.Platform.dll" />
-    <file src="..\CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.Platform.pdb" target="lib\net45\CrossPlatformLibrary.Platform.pdb" />
-    <file src="..\CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.Platform.xml" target="lib\net45\CrossPlatformLibrary.Platform.xml" />
+    <file src="..\CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.dll" target="lib\net45\CrossPlatformLibrary.dll" />
+    <file src="..\CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.pdb" target="lib\net45\CrossPlatformLibrary.pdb" />
+    <file src="..\CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.xml" target="lib\net45\CrossPlatformLibrary.xml" />
 
     <!--Windows Phone 8-->
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.dll" target="lib\wp8\CrossPlatformLibrary.dll" />
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.pdb" target="lib\wp8\CrossPlatformLibrary.pdb" />
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\wp8\CrossPlatformLibrary.xml" />
-    <file src="..\CrossPlatformLibrary.WindowsPhone8\Bin\Release\CrossPlatformLibrary.Platform.dll" target="lib\wp8\CrossPlatformLibrary.Platform.dll" />
-    <file src="..\CrossPlatformLibrary.WindowsPhone8\Bin\Release\CrossPlatformLibrary.Platform.pdb" target="lib\wp8\CrossPlatformLibrary.Platform.pdb" />
-    <file src="..\CrossPlatformLibrary.WindowsPhone8\Bin\Release\CrossPlatformLibrary.Platform.xml" target="lib\wp8\CrossPlatformLibrary.Platform.xml" />
+    <file src="..\CrossPlatformLibrary.WindowsPhone8\Bin\Release\CrossPlatformLibrary.dll" target="lib\wp8\CrossPlatformLibrary.dll" />
+    <file src="..\CrossPlatformLibrary.WindowsPhone8\Bin\Release\CrossPlatformLibrary.pdb" target="lib\wp8\CrossPlatformLibrary.pdb" />
+    <file src="..\CrossPlatformLibrary.WindowsPhone8\Bin\Release\CrossPlatformLibrary.xml" target="lib\wp8\CrossPlatformLibrary.xml" />
 
     <!--Windows Phone 8.1-->
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.dll" target="lib\wpa81\CrossPlatformLibrary.dll" />
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.pdb" target="lib\wpa81\CrossPlatformLibrary.pdb" />
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\wpa81\CrossPlatformLibrary.xml" />
-    <file src="..\CrossPlatformLibrary.WindowsPhone81\Bin\Release\CrossPlatformLibrary.Platform.dll" target="lib\wpa81\CrossPlatformLibrary.Platform.dll" />
-    <file src="..\CrossPlatformLibrary.WindowsPhone81\Bin\Release\CrossPlatformLibrary.Platform.pdb" target="lib\wpa81\CrossPlatformLibrary.Platform.pdb" />
-    <file src="..\CrossPlatformLibrary.WindowsPhone81\Bin\Release\CrossPlatformLibrary.Platform.xml" target="lib\wpa81\CrossPlatformLibrary.Platform.xml" />
+    <file src="..\CrossPlatformLibrary.WindowsPhone81\Bin\Release\CrossPlatformLibrary.dll" target="lib\wpa81\CrossPlatformLibrary.dll" />
+    <file src="..\CrossPlatformLibrary.WindowsPhone81\Bin\Release\CrossPlatformLibrary.pdb" target="lib\wpa81\CrossPlatformLibrary.pdb" />
+    <file src="..\CrossPlatformLibrary.WindowsPhone81\Bin\Release\CrossPlatformLibrary.xml" target="lib\wpa81\CrossPlatformLibrary.xml" />
 
     <!--Windows Store 8.1-->
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.dll" target="lib\win81\CrossPlatformLibrary.dll" />
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.pdb" target="lib\win81\CrossPlatformLibrary.pdb" />
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\win81\CrossPlatformLibrary.xml" />
-    <file src="..\CrossPlatformLibrary.WindowsStore\Bin\Release\CrossPlatformLibrary.Platform.dll" target="lib\win81\CrossPlatformLibrary.Platform.dll" />
-    <file src="..\CrossPlatformLibrary.WindowsStore\Bin\Release\CrossPlatformLibrary.Platform.pdb" target="lib\win81\CrossPlatformLibrary.Platform.pdb" />
-    <file src="..\CrossPlatformLibrary.WindowsStore\Bin\Release\CrossPlatformLibrary.Platform.xml" target="lib\win81\CrossPlatformLibrary.Platform.xml" />
+    <file src="..\CrossPlatformLibrary.WindowsStore\Bin\Release\CrossPlatformLibrary.dll" target="lib\win81\CrossPlatformLibrary.dll" />
+    <file src="..\CrossPlatformLibrary.WindowsStore\Bin\Release\CrossPlatformLibrary.pdb" target="lib\win81\CrossPlatformLibrary.pdb" />
+    <file src="..\CrossPlatformLibrary.WindowsStore\Bin\Release\CrossPlatformLibrary.xml" target="lib\win81\CrossPlatformLibrary.xml" />
 
     <!--Universal Windows Platform-->
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.dll" target="lib\uap10.0\CrossPlatformLibrary.dll" />
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.pdb" target="lib\uap10.0\CrossPlatformLibrary.pdb" />
-    <file src="..\CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\uap10.0\CrossPlatformLibrary.xml" />
-    <file src="..\CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.Platform.dll" target="lib\uap10.0\CrossPlatformLibrary.Platform.dll" />
-    <file src="..\CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.Platform.pdb" target="lib\uap10.0\CrossPlatformLibrary.Platform.pdb" />
-    <file src="..\CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.Platform.xml" target="lib\uap10.0\CrossPlatformLibrary.Platform.xml" />
+    <file src="..\CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.dll" target="lib\uap10.0\CrossPlatformLibrary.dll" />
+    <file src="..\CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.pdb" target="lib\uap10.0\CrossPlatformLibrary.pdb" />
+    <file src="..\CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.xml" target="lib\uap10.0\CrossPlatformLibrary.xml" />
 
     <file src="tools\init.ps1" target="tools\init.ps1" />
     <file src="tools\install.ps1" target="tools\install.ps1" />

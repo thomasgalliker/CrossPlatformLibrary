@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Threading;
 
-using CrossPlatformAdapter;
-
 using CrossPlatformLibrary.Bootstrapping;
 using CrossPlatformLibrary.ExceptionHandling;
 using CrossPlatformLibrary.IoC;
-using CrossPlatformLibrary.Tests.Stubs;
 
 using FluentAssertions;
 
@@ -27,8 +24,6 @@ namespace CrossPlatformLibrary.Tests.Bootstrapping
         public void ShouldStartupBootstrapper()
         {
             // Arrange
-            var testRegistrationConvention = new TestRegistrationConvention();
-            SimpleIoc.Default.SetAdapterResolver(new ProbingAdapterResolver(testRegistrationConvention));
             IBootstrapper bootstrapper = new Bootstrapper();
 
             // Act
@@ -42,8 +37,6 @@ namespace CrossPlatformLibrary.Tests.Bootstrapping
         public void ShouldShutdownBootstrapper()
         {
             // Arrange
-            var testRegistrationConvention = new TestRegistrationConvention();
-            SimpleIoc.Default.SetAdapterResolver(new ProbingAdapterResolver(testRegistrationConvention));
             IBootstrapper bootstrapper = new Bootstrapper();
             bootstrapper.Startup();
 
@@ -58,8 +51,6 @@ namespace CrossPlatformLibrary.Tests.Bootstrapping
         public void ShouldSleepBootstrapper()
         {
             // Arrange
-            var testRegistrationConvention = new TestRegistrationConvention();
-            SimpleIoc.Default.SetAdapterResolver(new ProbingAdapterResolver(testRegistrationConvention));
             IBootstrapper bootstrapper = new Bootstrapper();
             bootstrapper.Startup();
 
@@ -74,8 +65,6 @@ namespace CrossPlatformLibrary.Tests.Bootstrapping
         public void ShouldResumeBootstrapper()
         {
             // Arrange
-            var testRegistrationConvention = new TestRegistrationConvention();
-            SimpleIoc.Default.SetAdapterResolver(new ProbingAdapterResolver(testRegistrationConvention));
             IBootstrapper bootstrapper = new Bootstrapper();
             bootstrapper.Startup();
             bootstrapper.Sleep();

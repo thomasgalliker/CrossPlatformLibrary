@@ -1,9 +1,9 @@
 ﻿{
   "dependencies": {
     "CommonServiceLocator": "1.3.0",
-    "Guards": "1.0.10",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "Tracing": "1.0.1"
+    "Guards": "1.0.11",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
+    "Tracing": "1.0.2"
   },
   "frameworks": {
     "uap10.0": {}

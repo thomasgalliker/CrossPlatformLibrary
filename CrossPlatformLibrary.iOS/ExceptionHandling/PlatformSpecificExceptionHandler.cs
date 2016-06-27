@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
-
 #if __UNIFIED__
 using Foundation;
 #else
@@ -21,6 +20,11 @@ namespace CrossPlatformLibrary.ExceptionHandling
         {
             SIGBUS = 10,
             SIGSEGV = 11
+        }
+
+        public PlatformSpecificExceptionHandler(IExceptionHandlingStrategy exceptionHandlingStrategy)
+            : base(exceptionHandlingStrategy)
+        {
         }
 
         protected override void Attach()
@@ -87,7 +91,7 @@ namespace CrossPlatformLibrary.ExceptionHandling
             var exception = e.ExceptionObject as Exception;
             if (exception != null)
             {
-                this.ExceptionHandler.HandleException(exception);
+                this.HandleException(exception);
             }
         }
     }

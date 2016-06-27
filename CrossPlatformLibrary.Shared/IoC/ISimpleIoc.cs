@@ -16,8 +16,6 @@
 
 using System;
 
-using CrossPlatformAdapter;
-
 using Microsoft.Practices.ServiceLocation;
 
 namespace CrossPlatformLibrary.IoC
@@ -161,21 +159,6 @@ namespace CrossPlatformLibrary.IoC
         /// </param>
         /// <param name="resolvedParameter">The resolve parameter which can be used to inject named dependencies.</param>
         void Register<TInterface>(Type classType, bool createInstanceImmediately, params IResolvedParameter[] resolvedParameter) where TInterface : class;
-
-        /// <summary>
-        ///     Registers an interface using the default probing strategy which will be used to resolve the concrete type from the given interface.
-        /// </summary>
-        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
-        /// <param name="resolvedParameter">The resolve parameter which can be used to inject named dependencies.</param>
-        void RegisterWithConvention<TInterface>(params IResolvedParameter[] resolvedParameter) where TInterface : class;
-
-        /// <summary>
-        ///     Registers an interface using a custom probing strategy which will be used to resolve the concrete type from the given interface.
-        /// </summary>
-        /// <typeparam name="TInterface">The interface for which instances will be resolved.</typeparam>
-        /// <param name="strategy">The strategy used to convert between the given interface type and the class.</param>
-        /// <param name="resolvedParameter">The resolve parameter which can be used to inject named dependencies.</param>
-        void RegisterWithConvention<TInterface>(IProbingStrategy strategy, params IResolvedParameter[] resolvedParameter) where TInterface : class;
 
         /// <summary>
         ///     Registers a given instance for a given type.

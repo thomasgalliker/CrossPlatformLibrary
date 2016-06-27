@@ -1,19 +1,20 @@
 ﻿using System;
 
-using Tracing;
 using Guards;
 
-namespace CrossPlatformLibrary.ExceptionHandling.Handlers
+using Tracing;
+
+namespace CrossPlatformLibrary.ExceptionHandling.ExceptionHandlingStrategies
 {
     /// <summary>
-    /// Provides a <see cref="IExceptionHandler"/> that traces the exception as FatalError to an <see cref="ITracer"/>.
+    /// Provides a <see cref="IExceptionHandlingStrategy"/> that traces the exception as FatalError to an <see cref="ITracer"/>.
     /// Exceptions are always rethrown. 
     /// </summary>
-    public class TracingExceptionHandler : IExceptionHandler
+    public class TracingExceptionHandlingStrategy : IExceptionHandlingStrategy
     {
         private readonly ITracer tracer;
 
-        public TracingExceptionHandler(ITracer tracer)
+        public TracingExceptionHandlingStrategy(ITracer tracer)
         {
             Guard.ArgumentNotNull(() => tracer);
 

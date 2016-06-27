@@ -1,18 +1,26 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+
+using CrossPlatformLibrary.ExceptionHandling.ExceptionHandlingStrategies;
 
 using Guards;
 
+using Tracing;
+
 namespace CrossPlatformLibrary.ExceptionHandling
 {
-    public abstract class ExceptionHandlerBase : IPlatformSpecificExceptionHandler
+    /// <summary>
+    /// ExceptionHandlerBase is a cross-platform base for attaching to resp. detaching from application wide exception handlers.
+    /// </summary>
+    public abstract class ExceptionHandlerBase : IExceptionHandler
     {
-        protected IExceptionHandler ExceptionHandler;
+        private readonly IExceptionHandlingStrategy exceptionHandlingStrategy;
 
-        public void RegisterExceptionHandler(IExceptionHandler targetExceptionHandler)
+        protected ExceptionHandlerBase(IExceptionHandlingStrategy exceptionHandlingStrategy)
         {
-            Guard.ArgumentNotNull(() => targetExceptionHandler);
+            Guard.ArgumentNotNull(exceptionHandlingStrategy, nameof(exceptionHandlingStrategy));
 
-            this.ExceptionHandler = targetExceptionHandler;
+            this.exceptionHandlingStrategy = exceptionHandlingStrategy;
 
             // Before attaching we want to make sure, we only have one subscription at the time
             this.InternalDetach();
@@ -26,6 +34,14 @@ namespace CrossPlatformLibrary.ExceptionHandling
             this.Attach();
 
             TaskScheduler.UnobservedTaskException += this.OnTaskSchedulerUnobservedTaskException;
+
+            // Set sync context for ui thread so that async void exceptions can be handled, keeps process alive
+            // Example: Call this method with 'await'
+            // private async void Test()
+            // {
+            //    throw new Exception("TestException");
+            // }
+            AsyncSynchronizationContext.Register(this.exceptionHandlingStrategy);
         }
 
         protected abstract void Attach();
@@ -35,6 +51,8 @@ namespace CrossPlatformLibrary.ExceptionHandling
             this.Detach();
 
             TaskScheduler.UnobservedTaskException -= this.OnTaskSchedulerUnobservedTaskException;
+
+            AsyncSynchronizationContext.Register(new RethrowExceptionHandlingStrategy()); // TODO: Really?
         }
 
         protected abstract void Detach();
@@ -49,12 +67,17 @@ namespace CrossPlatformLibrary.ExceptionHandling
         {
             if (e.Exception != null)
             {
-                var isHandled = this.ExceptionHandler.HandleException(e.Exception);
+                var isHandled = this.HandleException(e.Exception);
                 if (isHandled)
                 {
                     e.SetObserved();
                 }
             }
+        }
+
+        protected bool HandleException(Exception exception)
+        {
+            return this.exceptionHandlingStrategy.HandleException(exception);
         }
     }
 }

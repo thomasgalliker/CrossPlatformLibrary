@@ -5,7 +5,7 @@ namespace CrossPlatformLibrary.ExceptionHandling
     /// <summary>
     /// Provides an interface to handle any <see cref="Exception"/> that is not handled by the application.
     /// </summary>
-    public interface IExceptionHandler
+    public interface IExceptionHandlingStrategy
     {
         /// <summary>
         /// Handles the specified <paramref name="exception"/>.

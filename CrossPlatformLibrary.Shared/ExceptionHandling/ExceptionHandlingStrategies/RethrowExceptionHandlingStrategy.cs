@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace CrossPlatformLibrary.ExceptionHandling.Handlers
+namespace CrossPlatformLibrary.ExceptionHandling.ExceptionHandlingStrategies
 {
     /// <summary>
-    /// Provides an <see cref="IExceptionHandler"/> that always returns <c>false</c>.
+    /// Provides an <see cref="IExceptionHandlingStrategy"/> that always returns <c>false</c>.
     /// </summary>
-    public class RethrowExceptionHandler : IExceptionHandler
+    public class RethrowExceptionHandlingStrategy : IExceptionHandlingStrategy
     {
         /// <summary>
         /// Handles the specified <paramref name="exception"/>.
@@ -14,7 +14,7 @@ namespace CrossPlatformLibrary.ExceptionHandling.Handlers
         /// <exception cref="Exception">The specified <paramref name="exception"/> is always thrown;
         /// expect the <paramref name="exception"/> parameter is <c>null</c>.</exception>
         /// <returns><c>True</c> if the specified <paramref name="exception"/> was successfully handled; otherwise, <c>false</c>.</returns>
-        /// <remarks>The <see cref="RethrowExceptionHandler"/> always returns <c>false</c> meaning the <paramref name="exception"/> was
+        /// <remarks>The <see cref="RethrowExceptionHandlingStrategy"/> always returns <c>false</c> meaning the <paramref name="exception"/> was
         /// not handled and should be rethrown.</remarks>
         public bool HandleException(Exception exception)
         {

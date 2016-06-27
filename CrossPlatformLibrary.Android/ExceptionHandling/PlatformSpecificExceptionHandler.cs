@@ -2,24 +2,19 @@
 
 using Android.Runtime;
 
-
 namespace CrossPlatformLibrary.ExceptionHandling
 {
     public class PlatformSpecificExceptionHandler : ExceptionHandlerBase
     {
+        public PlatformSpecificExceptionHandler(IExceptionHandlingStrategy exceptionHandlingStrategy)
+            : base(exceptionHandlingStrategy)
+        {
+        }
+
         protected override void Attach()
         {
             AppDomain.CurrentDomain.UnhandledException += this.CurrentDomainUnhandledException;
             AndroidEnvironment.UnhandledExceptionRaiser += this.AndroidEnvironmentUnhandledExceptionRaiser;
-
-
-            // Set sync context for ui thread so that async void exceptions can be handled, keeps process alive
-            // Example: Call this method with 'await'
-            // private async void Test()
-            // {
-            //    throw new Exception("TestException");
-            // }
-            AsyncSynchronizationContext.Register(this.ExceptionHandler); // TODO GATH: Move to ExceptionHandlerBase?
         }
 
         protected override void Detach()
@@ -33,7 +28,7 @@ namespace CrossPlatformLibrary.ExceptionHandling
             var exception = e.ExceptionObject as Exception;
             if (exception != null)
             {
-                this.ExceptionHandler.HandleException(exception);
+                this.HandleException(exception);
             }
         }
 
@@ -41,7 +36,7 @@ namespace CrossPlatformLibrary.ExceptionHandling
         {
             if (e.Exception != null)
             {
-                e.Handled = this.ExceptionHandler.HandleException(e.Exception);
+                e.Handled = this.HandleException(e.Exception);
             }
         }
     }

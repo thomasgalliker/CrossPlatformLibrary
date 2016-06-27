@@ -10,9 +10,9 @@ namespace CrossPlatformLibrary.ExceptionHandling
     /// </summary>
     public class AsyncSynchronizationContext : SynchronizationContext
     {
-        public static AsyncSynchronizationContext Register(IExceptionHandler handler)
+        public static AsyncSynchronizationContext Register(IExceptionHandlingStrategy strategy)
         {
-            exceptionHandler = handler;
+            exceptionHandlingStrategy = strategy;
 
             var currentSyncContext = Current;
             if (currentSyncContext == null)
@@ -32,7 +32,7 @@ namespace CrossPlatformLibrary.ExceptionHandling
         }
 
         private readonly SynchronizationContext syncContext;
-        private static IExceptionHandler exceptionHandler;
+        private static IExceptionHandlingStrategy exceptionHandlingStrategy;
 
         private AsyncSynchronizationContext(SynchronizationContext syncContext)
         {
@@ -74,7 +74,11 @@ namespace CrossPlatformLibrary.ExceptionHandling
                     }
                     catch (Exception ex)
                     {
-                        exceptionHandler.HandleException(ex);
+                        var isExceptionHandled = exceptionHandlingStrategy != null && exceptionHandlingStrategy.HandleException(ex);
+                        if (!isExceptionHandled)
+                        {
+                            throw;
+                        }
                     }
                 };
         }

@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
+using CrossPlatformLibrary.Dispatching;
 using CrossPlatformLibrary.ExceptionHandling;
-using CrossPlatformLibrary.ExceptionHandling.Handlers;
+using CrossPlatformLibrary.ExceptionHandling.ExceptionHandlingStrategies;
 using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.IoC;
 using CrossPlatformLibrary.Tools;
@@ -118,15 +120,13 @@ namespace CrossPlatformLibrary.Bootstrapping
         {
             try
             {
-                // Register the default exception handler and instantiate it immediately
-                this.simpleIoc.RegisterWithConvention<IPlatformSpecificExceptionHandler>();
-                var exceptionHandlerType = this.GetExceptionHandlerType() ?? this.GetDefaultExceptionHandlerType();
-                this.simpleIoc.Register<IExceptionHandler>(exceptionHandlerType);
+                // Register IExceptionHandlingStrategy
+                var strategyType = this.GetExceptionHandlingStrategyType() ?? this.GetDefaultExceptionHandlingStrategyType();
+                this.simpleIoc.Register<IExceptionHandlingStrategy>(strategyType);
 
-                // Wire-up IPlatformSpecificExceptionHandler with specified IExceptionHandler 
-                var exceptionHandler = this.simpleIoc.GetInstance<IExceptionHandler>();
-                var platformSpecificExceptionHandler = this.simpleIoc.GetInstance<IPlatformSpecificExceptionHandler>();
-                platformSpecificExceptionHandler.RegisterExceptionHandler(exceptionHandler);
+                // Register the platform-specific exception handler which injects IExceptionHandlingStrategy
+                this.simpleIoc.Register<IExceptionHandler, PlatformSpecificExceptionHandler>();
+                this.simpleIoc.GetInstance<IExceptionHandler>();
             }
             catch (Exception ex)
             {
@@ -146,16 +146,37 @@ namespace CrossPlatformLibrary.Bootstrapping
             {
                 this.tracer.Debug("Calling ConfigureExtensions procedure");
 
-                if (this.ConfigureExtensionAssemblyFilter() != null)
-                {
-                    CrossPlatformLibrary.AssemblyNamespaces.AddRange(this.ConfigureExtensionAssemblyFilter());
-                }
+                this.simpleIoc.Register<IDispatcherService, DispatcherService>();
 
-                this.simpleIoc.RegisterWithConvention<IPlatformServices>();
+                this.simpleIoc.Register<IPlatformServices, PlatformServices>();
                 var platformServices = this.simpleIoc.GetInstance<IPlatformServices>();
                 platformServices.LoadReferencedAssemblies();
 
-                this.ConfigureExtensions(platformServices);
+                // Try to find all known types which implement the IContainerExtension interface
+                var containerExtensionInterface = typeof(IContainerExtension);
+                var allAssemblies = platformServices.GetAssemblies();
+                var containerExtensionTypes = allAssemblies
+                    .Where(a => a.FullName.ContainsAny(CrossPlatformLibrary.AssemblyNamespaces))
+                    .SelectMany(this.TryGetExportedTypes)
+                    .Distinct()
+                    .Where(t => containerExtensionInterface.GetTypeInfo().IsAssignableFrom(t.GetTypeInfo()))
+                    .Where(t => t != containerExtensionInterface)
+                    .ToList();
+
+                // Use the dependency service to create IContainerExtension-based objects
+                // and call Initialize in order to hand-over the dependency service to the modules
+                foreach (var containerExtensionType in containerExtensionTypes)
+                {
+                    string containerExtensionIdentifier = containerExtensionType.FullName;
+
+                    this.simpleIoc.Register(containerExtensionType, containerExtensionIdentifier, false);
+                    var containerExtension = (IContainerExtension)this.simpleIoc.GetInstanceWithoutCaching(containerExtensionType, containerExtensionIdentifier);
+
+                    this.tracer.Debug("Initializing container extension {0}.", containerExtension.GetType().FullName);
+                    containerExtension.Initialize(this.simpleIoc);
+
+                    this.simpleIoc.Unregister(containerExtensionType, containerExtensionIdentifier);
+                }
 
             }
             catch (Exception ex)
@@ -164,48 +185,6 @@ namespace CrossPlatformLibrary.Bootstrapping
                 {
                     throw new BootstrappingException("Bootstrapping failed during ConfigureExtensions sequence.", ex);
                 }
-            }
-        }
-
-        /// <summary>
-        /// Returns a list of assembly names which shall be loaded at startup time.
-        /// The given assemblies may contain plugins which can be configured at boostrapping time using IContainerExtension interface.
-        /// </summary>
-        /// <returns></returns>
-        protected virtual IEnumerable<string> ConfigureExtensionAssemblyFilter()
-        {
-            return null;
-        }
-
-        /// <summary>
-        /// Configures all extension which implement the IContainerExtension interface
-        /// </summary>
-        private void ConfigureExtensions(IPlatformServices platformServices)
-        {
-            // Try to find all known types which implement the IContainerExtension interface
-            var containerExtensionInterface = typeof(IContainerExtension);
-            var allAssemblies = platformServices.GetAssemblies();
-            var containerExtensionTypes = allAssemblies
-                .Where(a => a.FullName.ContainsAny(CrossPlatformLibrary.AssemblyNamespaces))
-                .SelectMany(this.TryGetExportedTypes)
-                .Distinct()
-                .Where(t => containerExtensionInterface.GetTypeInfo().IsAssignableFrom(t.GetTypeInfo()))
-                .Where(t => t != containerExtensionInterface)
-                .ToList();
-
-            // Use the dependency service to create IContainerExtension-based objects
-            // and call Initialize in order to hand-over the dependency service to the modules
-            foreach (var containerExtensionType in containerExtensionTypes)
-            {
-                string containerExtensionIdentifier = containerExtensionType.FullName;
-
-                this.simpleIoc.Register(containerExtensionType, containerExtensionIdentifier, false);
-                var containerExtension = (IContainerExtension)this.simpleIoc.GetInstanceWithoutCaching(containerExtensionType, containerExtensionIdentifier);
-
-                this.tracer.Debug("Initializing container extension {0}.", containerExtension.GetType().FullName);
-                containerExtension.Initialize(this.simpleIoc);
-
-                this.simpleIoc.Unregister(containerExtensionType, containerExtensionIdentifier);
             }
         }
 
@@ -235,9 +214,9 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// </returns>
         protected virtual bool HandleBootstrappingException(Exception ex)
         {
-            var exceptionHandler = this.simpleIoc.TryGetInstance<IExceptionHandler>();
+            var exceptionHandlingStrategy = this.simpleIoc.TryGetInstance<IExceptionHandlingStrategy>();
 
-            var isExceptionHandled = exceptionHandler != null && exceptionHandler.HandleException(ex);
+            var isExceptionHandled = exceptionHandlingStrategy != null && exceptionHandlingStrategy.HandleException(ex);
             if (!isExceptionHandled)
             {
                 this.tracer.Exception(ex, "BootstrapperUnhandledException");
@@ -250,16 +229,16 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// The purpose of the instance which will be created from the given type is to handle any <see cref="Exception"/>
         /// which is not handled by the application.
         /// </summary>
-        /// <remarks>When overridden by inheriting classes, this method must return a type which implements <see cref="IExceptionHandler"/>.
-        /// If this method returns <c>null</c>, the <see cref="RethrowExceptionHandler"/> is used as default.</remarks>
-        protected virtual Type GetExceptionHandlerType()
+        /// <remarks>When overridden by inheriting classes, this method must return a type which implements <see cref="IExceptionHandlingStrategy"/>.
+        /// If this method returns <c>null</c>, the <see cref="TracingExceptionHandlingStrategy"/> is used as default.</remarks>
+        protected virtual Type GetExceptionHandlingStrategyType()
         {
-            return this.GetDefaultExceptionHandlerType();
+            return this.GetDefaultExceptionHandlingStrategyType();
         }
 
-        private Type GetDefaultExceptionHandlerType()
+        private Type GetDefaultExceptionHandlingStrategyType()
         {
-            return typeof(TracingExceptionHandler);
+            return typeof(TracingExceptionHandlingStrategy);
         }
 
         private void InternalOnStartup()

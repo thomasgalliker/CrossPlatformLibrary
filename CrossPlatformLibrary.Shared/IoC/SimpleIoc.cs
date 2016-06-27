@@ -21,8 +21,6 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-using CrossPlatformAdapter;
-
 using Guards;
 
 using Microsoft.Practices.ServiceLocation;
@@ -56,8 +54,6 @@ namespace CrossPlatformLibrary.IoC
 
         private readonly object syncLock = new object();
 
-        private IAdapterResolver adapterResolver;
-
         public static SimpleIoc Default
         {
             get
@@ -68,7 +64,6 @@ namespace CrossPlatformLibrary.IoC
 
         private SimpleIoc()
         {
-            this.adapterResolver = new ProbingAdapterResolver();
         }
 
         /// <inheritdoc />
@@ -122,32 +117,6 @@ namespace CrossPlatformLibrary.IoC
 
                 return this.factories[classType].ContainsKey(key);
             }
-        }
-
-        /// <inheritdoc />
-        public void RegisterWithConvention<TInterface>(params IResolvedParameter[] resolvedParameters) where TInterface : class
-        {
-            var classType = this.adapterResolver.ResolveClassType(typeof(TInterface));
-
-            this.Register<TInterface>(classType, resolvedParameters);
-        }
-
-        /// <inheritdoc />
-        public void RegisterWithConvention<TInterface>(IProbingStrategy strategy, params IResolvedParameter[] resolvedParameters) where TInterface : class
-        {
-            Guard.ArgumentNotNull(() => strategy);
-
-            this.adapterResolver.AddProbingStrategy(strategy);
-            var classType = this.adapterResolver.ResolveClassType(typeof(TInterface));
-
-            this.Register<TInterface>(classType, resolvedParameters);
-        }
-
-        internal void SetAdapterResolver(IAdapterResolver resolver)
-        {
-            Guard.ArgumentNotNull(() => resolver);
-
-            this.adapterResolver = resolver;
         }
 
         /// <inheritdoc />
@@ -674,11 +643,11 @@ namespace CrossPlatformLibrary.IoC
                 resolveTo = serviceType;
             }
 
-#if NETFX_CORE
+//#if NETFX_CORE
             var constructorInfos = resolveTo.GetTypeInfo().DeclaredConstructors.Where(c => c.IsPublic).ToArray();
-#else
-            var constructorInfos = interfaceType.GetConstructors();
-#endif
+////#else
+////            var constructorInfos = interfaceType.GetConstructors();
+////#endif
 
             if (constructorInfos.Length > 1)
             {

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.NuGet", "CrossPlatformLibrary.NuGet\CrossPlatformLibrary.NuGet.csproj", "{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -59,7 +59,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.UWP", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.UWP", "Samples\Sample.UWP\Sample.UWP.csproj", "{DD71BAD6-2C7A-4A57-8E3D-A7F26880DF23}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CrossPlatformLibrary.Shared", "CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.shproj", "{9061E23B-3329-4CCF-8D69-61FAA11BB380}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{ac987deb-1a08-40bf-b996-360c7fdaebdc}*SharedItemsImports = 4
+		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{d7f3aa16-8ef1-4924-9e0a-dad4ab46b2eb}*SharedItemsImports = 4
+		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{56a56f17-7de1-4ca1-9617-bf32e971ac84}*SharedItemsImports = 4
+		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{2882aeeb-d4cd-4eb9-8a6c-6653b33681f0}*SharedItemsImports = 4
+		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{5876144b-47dd-4c4e-b421-bc03f191b996}*SharedItemsImports = 4
+		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{9061e23b-3329-4ccf-8d69-61faa11bb380}*SharedItemsImports = 13
+		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{7169373f-0b82-4e5d-9129-7cc3065b90fa}*SharedItemsImports = 4
+		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{ed9a4ca1-c04c-457d-9a2e-7995ccf12356}*SharedItemsImports = 4
+		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{a6fcef44-d2ba-42c7-b3cb-13667bcd7b54}*SharedItemsImports = 4
+		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{651016a2-9700-4f09-a9da-8d4563ac0c7b}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
 		Ad-Hoc|ARM = Ad-Hoc|ARM

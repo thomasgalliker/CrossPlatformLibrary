@@ -1,12 +1,15 @@
 ﻿
+using System;
+
 using CrossPlatformLibrary.ExceptionHandling;
 
 namespace CrossPlatformLibrary.Tests.ExceptionHandling
 {
-    public class PlatformSpecificExceptionHandlerStub : IPlatformSpecificExceptionHandler
+    public class PlatformSpecificExceptionHandlerStub : IExceptionHandler
     {
-        public void RegisterExceptionHandler(IExceptionHandler exceptionHandler)
+        public bool HandleException(Exception exception)
         {
+            return true;
         }
     }
 }

@@ -126,16 +126,6 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\CrossPlatformLibrary.UWP\CrossPlatformLibrary.UWP.csproj">
-      <Project>{651016a2-9700-4f09-a9da-8d4563ac0c7b}</Project>
-      <Name>CrossPlatformLibrary.UWP</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\CrossPlatformLibrary\CrossPlatformLibrary.csproj">
-      <Project>{a6fcef44-d2ba-42c7-b3cb-13667bcd7b54}</Project>
-      <Name>CrossPlatformLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
