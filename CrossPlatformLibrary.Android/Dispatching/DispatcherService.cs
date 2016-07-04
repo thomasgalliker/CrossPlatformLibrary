@@ -7,6 +7,9 @@ using Guards;
 
 namespace CrossPlatformLibrary.Dispatching
 {
+    /// <summary>
+    /// Provides an implementation of <see cref="IDispatcherService"/> for Android.
+    /// </summary>
     public class DispatcherService : IDispatcherService
     {
         public void CheckBeginInvokeOnUI(Action dispatchAction)

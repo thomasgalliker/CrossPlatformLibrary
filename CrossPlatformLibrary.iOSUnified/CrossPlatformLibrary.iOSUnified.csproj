@@ -40,8 +40,8 @@
     <Compile Include="..\CrossPlatformLibrary.iOS\Dispatching\DispatcherService.cs">
       <Link>Dispatching\DispatcherService.cs</Link>
     </Compile>
-    <Compile Include="..\CrossPlatformLibrary.iOS\ExceptionHandling\PlatformSpecificExceptionHandler.cs">
-      <Link>ExceptionHandling\PlatformSpecificExceptionHandler.cs</Link>
+    <Compile Include="..\CrossPlatformLibrary.iOS\ExceptionHandling\ExceptionHandler.cs">
+      <Link>ExceptionHandling\ExceptionHandler.cs</Link>
     </Compile>
     <Compile Include="..\CrossPlatformLibrary.iOS\LinkerHook.cs">
       <Link>LinkerHook.cs</Link>

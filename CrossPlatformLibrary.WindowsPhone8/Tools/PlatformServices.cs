@@ -9,6 +9,9 @@ using Windows.Storage;
 
 namespace CrossPlatformLibrary.Tools
 {
+    /// <summary>
+    /// Provides an implementation of <see cref="IPlatformServices"/> for Windows Phone, Windows Store Apps and Universal Windows Platform.
+    /// </summary>
     public class PlatformServices : PlatformServicesBase
     {
         private const string DllFileExtension = ".dll";

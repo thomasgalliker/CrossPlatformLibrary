@@ -3,6 +3,9 @@ using System.Windows.Threading;
 
 namespace CrossPlatformLibrary.Dispatching
 {
+    /// <summary>
+    /// Provides an implementation of <see cref="IDispatcherService"/> for .Net Framework.
+    /// </summary>
     public class DispatcherService : IDispatcherService
     {
         private readonly Dispatcher dispatcher;

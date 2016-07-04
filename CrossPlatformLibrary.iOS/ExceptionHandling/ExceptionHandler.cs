@@ -9,7 +9,7 @@ using MonoTouch.Foundation;
 
 namespace CrossPlatformLibrary.ExceptionHandling
 {
-    public class PlatformSpecificExceptionHandler : ExceptionHandlerBase
+    public class ExceptionHandler : ExceptionHandlerBase
     {
         private const string StackTraceDirectory = "stacktraces";
 
@@ -22,7 +22,7 @@ namespace CrossPlatformLibrary.ExceptionHandling
             SIGSEGV = 11
         }
 
-        public PlatformSpecificExceptionHandler(IExceptionHandlingStrategy exceptionHandlingStrategy)
+        public ExceptionHandler(IExceptionHandlingStrategy exceptionHandlingStrategy)
             : base(exceptionHandlingStrategy)
         {
         }

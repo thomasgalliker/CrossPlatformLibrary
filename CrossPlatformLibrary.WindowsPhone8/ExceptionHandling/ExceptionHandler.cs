@@ -2,9 +2,12 @@
 
 namespace CrossPlatformLibrary.ExceptionHandling
 {
-    public class PlatformSpecificExceptionHandler : ExceptionHandlerBase
+    /// <summary>
+    /// Provides an implementation of <see cref="IExceptionHandler"/> for Windows Phone 8 (SL).
+    /// </summary>
+    public class ExceptionHandler : ExceptionHandlerBase
     {
-        public PlatformSpecificExceptionHandler(IExceptionHandlingStrategy exceptionHandlingStrategy)
+        public ExceptionHandler(IExceptionHandlingStrategy exceptionHandlingStrategy)
             : base(exceptionHandlingStrategy)
         {
         }

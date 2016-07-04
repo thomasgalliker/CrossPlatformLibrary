@@ -4,6 +4,9 @@ using Tracing;
 
 namespace CrossPlatformLibrary.Tools
 {
+    /// <summary>
+    /// Provides an implementation of <see cref="IPlatformServices"/> for iOS.
+    /// </summary>
     public class PlatformServices : PlatformServicesBase
     {
         public PlatformServices(ITracer tracer)

@@ -4,6 +4,9 @@ using Tracing;
 
 namespace CrossPlatformLibrary.Tools
 {
+    /// <summary>
+    /// Provides an implementation of <see cref="IPlatformServices"/> for Android.
+    /// </summary>
     public class PlatformServices : PlatformServicesBase
     {
         public PlatformServices(ITracer tracer)

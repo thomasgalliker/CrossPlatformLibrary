@@ -16,6 +16,9 @@ using System.Windows;
 
 namespace CrossPlatformLibrary.Dispatching
 {
+    /// <summary>
+    /// Provides an implementation of <see cref="IDispatcherService"/> for Windows Phone, Windows Store Apps and Universal Windows Platform.
+    /// </summary>
     public class DispatcherService : IDispatcherService
     {
         public DispatcherService()

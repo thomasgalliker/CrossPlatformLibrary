@@ -58,7 +58,7 @@
   <ItemGroup>
     <Compile Include="CrossPlatformApplication.cs" />
     <Compile Include="Dispatching\DispatcherService.cs" />
-    <Compile Include="ExceptionHandling\PlatformSpecificExceptionHandler.cs" />
+    <Compile Include="ExceptionHandling\ExceptionHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\PlatformServices.cs" />
   </ItemGroup>

@@ -1,12 +1,14 @@
-﻿using System;
-
-using Android.Runtime;
+﻿
+using System;
 
 namespace CrossPlatformLibrary.ExceptionHandling
 {
-    public class PlatformSpecificExceptionHandler : ExceptionHandlerBase
+    /// <summary>
+    /// Provides an implementation of <see cref="IExceptionHandler"/> for .Net Framework.
+    /// </summary>
+    public class ExceptionHandler : ExceptionHandlerBase
     {
-        public PlatformSpecificExceptionHandler(IExceptionHandlingStrategy exceptionHandlingStrategy)
+        public ExceptionHandler(IExceptionHandlingStrategy exceptionHandlingStrategy)
             : base(exceptionHandlingStrategy)
         {
         }
@@ -14,13 +16,11 @@ namespace CrossPlatformLibrary.ExceptionHandling
         protected override void Attach()
         {
             AppDomain.CurrentDomain.UnhandledException += this.CurrentDomainUnhandledException;
-            AndroidEnvironment.UnhandledExceptionRaiser += this.AndroidEnvironmentUnhandledExceptionRaiser;
         }
 
         protected override void Detach()
         {
             AppDomain.CurrentDomain.UnhandledException -= this.CurrentDomainUnhandledException;
-            AndroidEnvironment.UnhandledExceptionRaiser -= this.AndroidEnvironmentUnhandledExceptionRaiser;
         }
 
         private void CurrentDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -29,14 +29,6 @@ namespace CrossPlatformLibrary.ExceptionHandling
             if (exception != null)
             {
                 this.HandleException(exception);
-            }
-        }
-
-        private void AndroidEnvironmentUnhandledExceptionRaiser(object sender, RaiseThrowableEventArgs e)
-        {
-            if (e.Exception != null)
-            {
-                e.Handled = this.HandleException(e.Exception);
             }
         }
     }

@@ -1,8 +1,8 @@
 ﻿namespace CrossPlatformLibrary.ExceptionHandling
 {
-    public class PlatformSpecificExceptionHandler : IExceptionHandler
+    public class ExceptionHandler : IExceptionHandler
     {
-        public PlatformSpecificExceptionHandler()
+        public ExceptionHandler()
         {
             throw Exceptions.NotImplementedInReferenceAssembly();
         }

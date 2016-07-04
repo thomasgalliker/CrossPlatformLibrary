@@ -38,7 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Dispatching\DispatcherService.cs" />
-    <Compile Include="ExceptionHandling\PlatformSpecificExceptionHandler.cs" />
+    <Compile Include="ExceptionHandling\ExceptionHandler.cs" />
     <Compile Include="LinkerHelper.cs" />
     <Compile Include="LinkerHook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

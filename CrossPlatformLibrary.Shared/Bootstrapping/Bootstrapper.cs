@@ -125,7 +125,7 @@ namespace CrossPlatformLibrary.Bootstrapping
                 this.simpleIoc.Register<IExceptionHandlingStrategy>(strategyType);
 
                 // Register the platform-specific exception handler which injects IExceptionHandlingStrategy
-                this.simpleIoc.Register<IExceptionHandler, PlatformSpecificExceptionHandler>();
+                this.simpleIoc.Register<IExceptionHandler, ExceptionHandler>();
                 this.simpleIoc.GetInstance<IExceptionHandler>();
             }
             catch (Exception ex)

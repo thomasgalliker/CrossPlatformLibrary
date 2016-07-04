@@ -108,8 +108,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\CrossPlatformLibrary.WindowsPhone81\ExceptionHandling\PlatformSpecificExceptionHandler.cs">
-      <Link>ExceptionHandling\PlatformSpecificExceptionHandler.cs</Link>
+    <Compile Include="..\CrossPlatformLibrary.WindowsPhone81\ExceptionHandling\ExceptionHandler.cs">
+      <Link>ExceptionHandling\ExceptionHandler.cs</Link>
     </Compile>
     <Compile Include="..\CrossPlatformLibrary.WindowsPhone8\Dispatching\DispatcherService.cs">
       <Link>Dispatching\DispatcherService.cs</Link>

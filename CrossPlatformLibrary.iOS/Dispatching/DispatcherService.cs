@@ -10,6 +10,9 @@ using MonoTouch.Foundation;
 
 namespace CrossPlatformLibrary.Dispatching
 {
+    /// <summary>
+    /// Provides an implementation of <see cref="IDispatcherService"/> for iOS.
+    /// </summary>
     public class DispatcherService : IDispatcherService
     {
         private readonly NSObject dispatcher = new NSObject();

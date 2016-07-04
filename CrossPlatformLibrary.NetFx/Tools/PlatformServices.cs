@@ -10,6 +10,9 @@ using Tracing;
 
 namespace CrossPlatformLibrary.Tools
 {
+    /// <summary>
+    /// Provides an implementation of <see cref="IPlatformServices"/> for .Net Framework.
+    /// </summary>
     public class PlatformServices : PlatformServicesBase
     {
         private const string DllFileExtension = ".dll";

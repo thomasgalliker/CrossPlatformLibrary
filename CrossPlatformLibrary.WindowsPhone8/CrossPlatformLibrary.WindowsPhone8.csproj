@@ -87,7 +87,7 @@
     <Compile Include="IO\FileSystem.cs" />
     <Compile Include="Tools\PlatformServices.cs" />
     <Compile Include="Dispatching\DispatcherService.cs" />
-    <Compile Include="ExceptionHandling\PlatformSpecificExceptionHandler.cs" />
+    <Compile Include="ExceptionHandling\ExceptionHandler.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Controls\LongListSelectorExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

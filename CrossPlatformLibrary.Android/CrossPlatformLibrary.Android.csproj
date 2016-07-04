@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dispatching\DispatcherService.cs" />
-    <Compile Include="ExceptionHandling\PlatformSpecificExceptionHandler.cs" />
+    <Compile Include="ExceptionHandling\ExceptionHandler.cs" />
     <Compile Include="Extensions\AndroidExtensions.cs" />
     <Compile Include="Extensions\AnimationExtensions.cs" />
     <Compile Include="Extensions\GoogleMapExtensions.cs" />
