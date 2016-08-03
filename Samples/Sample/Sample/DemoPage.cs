@@ -8,7 +8,7 @@ namespace Sample
     {
         public DemoPage()
         {
-            var titleLabel = new Label { Text = "CrossPlatformLibrary Demo", FontSize = 24};
+            var titleLabel = new Label { Text = "CrossPlatformLibrary Demo", FontSize = 32, };
 
             var throwExceptionButton = new Button
             {
@@ -16,7 +16,7 @@ namespace Sample
             };
             throwExceptionButton.Clicked += (sender, args) =>
             {
-               throw new InvalidOperationException("Some exception text...");
+                throw new InvalidOperationException("Some exception text...");
             };
 
             var stackPanel = new StackLayout
