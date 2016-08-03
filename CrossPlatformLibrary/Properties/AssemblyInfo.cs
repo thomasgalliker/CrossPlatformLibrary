@@ -31,4 +31,5 @@ using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("CrossPlatformLibrary.Tests")]
 [assembly: InternalsVisibleTo("CrossPlatformLibrary.IntegrationTests")]
+[assembly: InternalsVisibleTo("CrossPlatformLibrary.WebBrowser")]
 [assembly: InternalsVisibleTo("CrossPlatformLibrary")]
