@@ -6,7 +6,7 @@ namespace CrossPlatformLibrary.Dispatching
     {
         public void CheckBeginInvokeOnUI(Action action)
         {
-            throw Exceptions.NotImplementedInReferenceAssembly();
+            throw new NotImplementedInReferenceAssemblyException();
         }
     }
 }

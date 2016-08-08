@@ -4,7 +4,7 @@
     {
         public ExceptionHandler()
         {
-            throw Exceptions.NotImplementedInReferenceAssembly();
+            throw new NotImplementedInReferenceAssemblyException();
         }
     }
 }

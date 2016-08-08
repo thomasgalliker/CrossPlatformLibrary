@@ -6,12 +6,12 @@ namespace CrossPlatformLibrary.Tools
     {
         public Assembly[] GetAssemblies()
         {
-            throw Exceptions.NotImplementedInReferenceAssembly();
+            throw new NotImplementedInReferenceAssemblyException();
         }
 
         public void LoadReferencedAssemblies()
         {
-            throw Exceptions.NotImplementedInReferenceAssembly();
+            throw new NotImplementedInReferenceAssemblyException();
         }
     }
 }
