@@ -2,7 +2,7 @@
   "dependencies": {
     "CrossPlatformLibrary": "2.0.0-pre5",
     "Guards": "1.0.11",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
     "Tracing": "1.0.2"
   },
   "frameworks": {
