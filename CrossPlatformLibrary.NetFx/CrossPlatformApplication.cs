@@ -9,7 +9,7 @@ namespace CrossPlatformLibrary
     /// </summary>
     public partial class CrossPlatformApplication : Application
     {
-        private readonly Bootstrapper bootstrapper;
+        private readonly IBootstrapper bootstrapper;
 
         protected CrossPlatformApplication()
         {
