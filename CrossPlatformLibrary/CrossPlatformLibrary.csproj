@@ -51,7 +51,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Tracing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tracing.1.0.2\lib\portable-net45+wp8+win8+wpa81\Tracing.dll</HintPath>
+      <HintPath>..\packages\Tracing.1.0.3-pre3\lib\portable-net45+wp8+win8+wpa81\Tracing.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

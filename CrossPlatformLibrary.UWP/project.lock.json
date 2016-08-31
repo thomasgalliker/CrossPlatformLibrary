@@ -2159,7 +2159,7 @@
           }
         }
       },
-      "Tracing/1.0.2": {
+      "Tracing/1.0.3-pre3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Tracing.dll": {}
@@ -4434,7 +4434,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Tracing/1.0.2": {
+      "Tracing/1.0.3-pre3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Tracing.dll": {}
@@ -6748,7 +6748,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Tracing/1.0.2": {
+      "Tracing/1.0.3-pre3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Tracing.dll": {}
@@ -9032,7 +9032,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Tracing/1.0.2": {
+      "Tracing/1.0.3-pre3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Tracing.dll": {}
@@ -11355,7 +11355,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Tracing/1.0.2": {
+      "Tracing/1.0.3-pre3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Tracing.dll": {}
@@ -13639,7 +13639,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Tracing/1.0.2": {
+      "Tracing/1.0.3-pre3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Tracing.dll": {}
@@ -15962,7 +15962,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Tracing/1.0.2": {
+      "Tracing/1.0.3-pre3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Tracing.dll": {}
@@ -22025,11 +22025,11 @@
         "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll"
       ]
     },
-    "Tracing/1.0.2": {
-      "sha512": "BWvloHJ21DJmHwMGBO5VHq38683QmVoODn+c/9++W88VF8bruQuTNow6wWlhELiRTgC1QGS5YWZidd8seKutlA==",
+    "Tracing/1.0.3-pre3": {
+      "sha512": "UCY7UXHf1XdEB2a0Qs376Grxu1r8kh7rYT9EMUZI6SOHQ7InccK4CJihGOTezWUCf2ZdjDgaywPzkZb5rnz54A==",
       "type": "package",
       "files": [
-        "Tracing.1.0.2.nupkg.sha512",
+        "Tracing.1.0.3-pre3.nupkg.sha512",
         "Tracing.nuspec",
         "lib/monoandroid10/Tracing.dll",
         "lib/monoandroid10/Tracing.pdb",
@@ -22069,7 +22069,7 @@
       "CommonServiceLocator >= 1.3.0",
       "Guards >= 1.0.11",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.2.2",
-      "Tracing >= 1.0.2"
+      "Tracing >= 1.0.3-pre3"
     ],
     "UAP,Version=v10.0": []
   }

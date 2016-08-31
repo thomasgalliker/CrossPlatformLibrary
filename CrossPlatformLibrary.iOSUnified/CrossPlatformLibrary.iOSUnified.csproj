@@ -65,7 +65,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Tracing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tracing.1.0.2\lib\xamarin.ios10\Tracing.dll</HintPath>
+      <HintPath>..\packages\Tracing.1.0.3-pre3\lib\xamarin.ios10\Tracing.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.iOS" />

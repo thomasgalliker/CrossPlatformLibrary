@@ -58,7 +58,7 @@
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
     <Reference Include="Tracing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tracing.1.0.2\lib\monotouch10\Tracing.dll</HintPath>
+      <HintPath>..\packages\Tracing.1.0.3-pre3\lib\monotouch10\Tracing.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

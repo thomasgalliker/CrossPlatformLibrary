@@ -52,7 +52,7 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="Tracing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tracing.1.0.2\lib\monoandroid10\Tracing.dll</HintPath>
+      <HintPath>..\packages\Tracing.1.0.3-pre3\lib\monoandroid10\Tracing.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

@@ -12,7 +12,7 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
-      "CrossPlatformLibrary/2.0.0-pre5": {
+      "CrossPlatformLibrary/2.0.0-pre8": {
         "type": "package",
         "dependencies": {
           "CommonServiceLocator": "1.3.0",
@@ -2173,7 +2173,7 @@
           }
         }
       },
-      "Tracing/1.0.2": {
+      "Tracing/1.0.3-pre3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Tracing.dll": {}
@@ -2193,7 +2193,7 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
-      "CrossPlatformLibrary/2.0.0-pre5": {
+      "CrossPlatformLibrary/2.0.0-pre8": {
         "type": "package",
         "dependencies": {
           "CommonServiceLocator": "1.3.0",
@@ -4462,7 +4462,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Tracing/1.0.2": {
+      "Tracing/1.0.3-pre3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Tracing.dll": {}
@@ -4482,7 +4482,7 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
-      "CrossPlatformLibrary/2.0.0-pre5": {
+      "CrossPlatformLibrary/2.0.0-pre8": {
         "type": "package",
         "dependencies": {
           "CommonServiceLocator": "1.3.0",
@@ -6790,7 +6790,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Tracing/1.0.2": {
+      "Tracing/1.0.3-pre3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Tracing.dll": {}
@@ -6810,7 +6810,7 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
-      "CrossPlatformLibrary/2.0.0-pre5": {
+      "CrossPlatformLibrary/2.0.0-pre8": {
         "type": "package",
         "dependencies": {
           "CommonServiceLocator": "1.3.0",
@@ -9088,7 +9088,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Tracing/1.0.2": {
+      "Tracing/1.0.3-pre3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Tracing.dll": {}
@@ -9108,7 +9108,7 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
-      "CrossPlatformLibrary/2.0.0-pre5": {
+      "CrossPlatformLibrary/2.0.0-pre8": {
         "type": "package",
         "dependencies": {
           "CommonServiceLocator": "1.3.0",
@@ -11425,7 +11425,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Tracing/1.0.2": {
+      "Tracing/1.0.3-pre3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Tracing.dll": {}
@@ -11445,7 +11445,7 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
-      "CrossPlatformLibrary/2.0.0-pre5": {
+      "CrossPlatformLibrary/2.0.0-pre8": {
         "type": "package",
         "dependencies": {
           "CommonServiceLocator": "1.3.0",
@@ -13723,7 +13723,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Tracing/1.0.2": {
+      "Tracing/1.0.3-pre3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Tracing.dll": {}
@@ -13743,7 +13743,7 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
-      "CrossPlatformLibrary/2.0.0-pre5": {
+      "CrossPlatformLibrary/2.0.0-pre8": {
         "type": "package",
         "dependencies": {
           "CommonServiceLocator": "1.3.0",
@@ -16060,7 +16060,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Tracing/1.0.2": {
+      "Tracing/1.0.3-pre3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/Tracing.dll": {}
@@ -16087,11 +16087,11 @@
         "package/services/metadata/core-properties/99be0c88b2fd41c8b07c42071005ee47.psmdcp"
       ]
     },
-    "CrossPlatformLibrary/2.0.0-pre5": {
-      "sha512": "IMlbRkonf7d8NZ+7yv5akJy4gTyoFGRUXSHMank6GMY34HM/M24EaK2TIPpWTstdtVUkH+2hFNFXAzU8l5y8Cw==",
+    "CrossPlatformLibrary/2.0.0-pre8": {
+      "sha512": "QRv4cHckh+v6Ipd0zuHrFtcBlkeheAn18S45hRe2bEWI7CKnZDn3mrO5YE03rBVp7bw0JBi6QEBYzVqkw8fhXw==",
       "type": "package",
       "files": [
-        "CrossPlatformLibrary.2.0.0-pre5.nupkg.sha512",
+        "CrossPlatformLibrary.2.0.0-pre8.nupkg.sha512",
         "CrossPlatformLibrary.nuspec",
         "content/MonoTouch10/LinkerHelper.cs",
         "content/xamarin.ios10/LinkerHelper.cs",
@@ -22163,11 +22163,11 @@
         "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll"
       ]
     },
-    "Tracing/1.0.2": {
-      "sha512": "BWvloHJ21DJmHwMGBO5VHq38683QmVoODn+c/9++W88VF8bruQuTNow6wWlhELiRTgC1QGS5YWZidd8seKutlA==",
+    "Tracing/1.0.3-pre3": {
+      "sha512": "UCY7UXHf1XdEB2a0Qs376Grxu1r8kh7rYT9EMUZI6SOHQ7InccK4CJihGOTezWUCf2ZdjDgaywPzkZb5rnz54A==",
       "type": "package",
       "files": [
-        "Tracing.1.0.2.nupkg.sha512",
+        "Tracing.1.0.3-pre3.nupkg.sha512",
         "Tracing.nuspec",
         "lib/monoandroid10/Tracing.dll",
         "lib/monoandroid10/Tracing.pdb",
@@ -22204,10 +22204,10 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "CrossPlatformLibrary >= 2.0.0-pre5",
+      "CrossPlatformLibrary >= 2.0.0-pre8",
       "Guards >= 1.0.11",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.2.2",
-      "Tracing >= 1.0.2"
+      "Tracing >= 1.0.3-pre3"
     ],
     "UAP,Version=v10.0": []
   }
