@@ -35,12 +35,6 @@ namespace CrossPlatformLibrary.ExceptionHandling
 
             TaskScheduler.UnobservedTaskException += this.OnTaskSchedulerUnobservedTaskException;
 
-            // Set sync context for ui thread so that async void exceptions can be handled, keeps process alive
-            // Example: Call this method with 'await'
-            // private async void Test()
-            // {
-            //    throw new Exception("TestException");
-            // }
             AsyncSynchronizationContext.Register(this.exceptionHandlingStrategy);
         }
 
@@ -52,7 +46,7 @@ namespace CrossPlatformLibrary.ExceptionHandling
 
             TaskScheduler.UnobservedTaskException -= this.OnTaskSchedulerUnobservedTaskException;
 
-            AsyncSynchronizationContext.Register(new RethrowExceptionHandlingStrategy()); // TODO: Really?
+            AsyncSynchronizationContext.Register(new RethrowExceptionHandlingStrategy());
         }
 
         protected abstract void Detach();

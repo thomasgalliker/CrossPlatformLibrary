@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Threading;
 
+using Guards;
+
+using Tracing;
+
 namespace CrossPlatformLibrary.ExceptionHandling
 {
     /// <summary>
@@ -10,18 +14,39 @@ namespace CrossPlatformLibrary.ExceptionHandling
     /// </summary>
     public class AsyncSynchronizationContext : SynchronizationContext
     {
+        static AsyncSynchronizationContext()
+        {
+            tracer = Tracer.Create<AsyncSynchronizationContext>();
+        }
+
+        /// <summary>
+        ///     Sets the SynchronisationContext for ui thread so that async void exceptions can be handled.
+        ///     <example>
+        ///         Example: Call this method with 'await' and observe the WrapCallback method:
+        ///         private async void Test()
+        ///         {
+        ///         throw new Exception("TestException");
+        ///         }
+        ///     </example>
+        /// </summary>
+        /// <param name="strategy"></param>
+        /// <returns></returns>
         public static AsyncSynchronizationContext Register(IExceptionHandlingStrategy strategy)
         {
+            Guard.ArgumentNotNull(strategy, nameof(strategy));
+
             exceptionHandlingStrategy = strategy;
 
             var currentSyncContext = Current;
             if (currentSyncContext == null)
             {
-                throw new InvalidOperationException("Ensure a synchronization context exists before calling this method. A synchronization context usually exists after the UI has been initialized.");
+                string nullContextInfo = "Ensure a synchronization context exists before calling this method. A synchronization context usually exists after the UI has been initialized. If your application does not have a UI you can ignore this message.";
+                tracer.Info(nullContextInfo);
+
+                return null;
             }
 
             var customSynchronizationContext = currentSyncContext as AsyncSynchronizationContext;
-
             if (customSynchronizationContext == null)
             {
                 customSynchronizationContext = new AsyncSynchronizationContext(currentSyncContext);
@@ -33,6 +58,7 @@ namespace CrossPlatformLibrary.ExceptionHandling
 
         private readonly SynchronizationContext syncContext;
         private static IExceptionHandlingStrategy exceptionHandlingStrategy;
+        private static readonly ITracer tracer;
 
         private AsyncSynchronizationContext(SynchronizationContext syncContext)
         {
