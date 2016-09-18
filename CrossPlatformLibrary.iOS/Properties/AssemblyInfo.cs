@@ -24,5 +24,5 @@ using MonoTouch.Foundation;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("730aeef8-8180-46e1-8120-ef5c55c961b8")]
 
-[assembly: AssemblyVersion("2.0.0.0")]
-[assembly: AssemblyFileVersion("2.0.0.0")]
+[assembly: AssemblyVersion("2.0.1")]
+[assembly: AssemblyFileVersion("2.0.1-pre0")]
