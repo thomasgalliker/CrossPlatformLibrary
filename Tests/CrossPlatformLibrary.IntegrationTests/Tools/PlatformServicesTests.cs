@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+
+using CrossPlatformLibrary.Bootstrapping;
 using CrossPlatformLibrary.IoC;
 using CrossPlatformLibrary.Tools;
 using FluentAssertions;
@@ -7,8 +10,16 @@ using Xunit;
 namespace CrossPlatformLibrary.IntegrationTests.Tools
 {
     [Trait("Category", "IntegrationTests")]
-    public class PlatformServicesTests
+    public class PlatformServicesTests : IDisposable
     {
+        private readonly Bootstrapper bootstrapper;
+
+        public PlatformServicesTests()
+        {
+            this.bootstrapper = new Bootstrapper();
+            this.bootstrapper.Startup();
+        }
+
         [Fact]
         public void ShouldGetInstanceOfPlatformServices()
         {
@@ -48,6 +59,11 @@ namespace CrossPlatformLibrary.IntegrationTests.Tools
             assembliesBeforeLoad.Should().HaveCount(assembliesAfterLoad.Count(),
                 "assembliesBeforeLoad and assembliesAfterLoad should have the same assemblies " + 
                 "because LoadReferencedAssemblies is already done at startup time.");
+        }
+
+        public void Dispose()
+        {
+            this.bootstrapper.Shutdown();
         }
     }
 }

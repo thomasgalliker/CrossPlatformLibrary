@@ -1,5 +1,7 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
+using CrossPlatformLibrary.Bootstrapping;
 using CrossPlatformLibrary.Dispatching;
 using CrossPlatformLibrary.IoC;
 
@@ -10,8 +12,16 @@ using Xunit;
 namespace CrossPlatformLibrary.IntegrationTests.Dispatching
 {
     [Trait("Category", "IntegrationTests")]
-    public class DispatcherServiceTests
+    public class DispatcherServiceTests : IDisposable
     {
+        private readonly Bootstrapper bootstrapper;
+
+        public DispatcherServiceTests()
+        {
+            this.bootstrapper = new Bootstrapper();
+            this.bootstrapper.Startup();
+        }
+
         [Fact]
         public void ShouldGetInstanceOfDispatcherService()
         {
@@ -36,6 +46,11 @@ namespace CrossPlatformLibrary.IntegrationTests.Dispatching
 
             // Assert
             beginInvokeCalled.Should().BeTrue();
+        }
+
+        public void Dispose()
+        {
+            this.bootstrapper.Shutdown();
         }
     }
 }

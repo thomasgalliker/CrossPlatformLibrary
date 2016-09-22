@@ -1,4 +1,7 @@
 ﻿
+using System;
+
+using CrossPlatformLibrary.Bootstrapping;
 using CrossPlatformLibrary.ExceptionHandling;
 using CrossPlatformLibrary.IoC;
 
@@ -9,8 +12,16 @@ using Xunit;
 namespace CrossPlatformLibrary.IntegrationTests.ExceptionHandling
 {
     [Trait("Category", "IntegrationTests")]
-    public class ExceptionHandlerTests
+    public class ExceptionHandlerTests : IDisposable
     {
+        private readonly Bootstrapper bootstrapper;
+
+        public ExceptionHandlerTests()
+        {
+            this.bootstrapper = new Bootstrapper();
+            this.bootstrapper.Startup();
+        }
+
         [Fact]
         public void ShouldGetInstanceOfExceptionHandler()
         {
@@ -29,6 +40,11 @@ namespace CrossPlatformLibrary.IntegrationTests.ExceptionHandling
 
             // Assert
             platformSpecificExceptionHandler.Should().NotBeNull();
+        }
+
+        public void Dispose()
+        {
+            this.bootstrapper.Shutdown();
         }
     }
 }
