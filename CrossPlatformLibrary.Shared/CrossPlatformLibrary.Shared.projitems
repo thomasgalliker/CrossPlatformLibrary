@@ -10,7 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrapping\ApplicationLifecycle.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Bootstrapping\ApplicationLifecycleException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrapping\Bootstrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrapping\BootstrappingException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrapping\IBootstrapper.cs" />

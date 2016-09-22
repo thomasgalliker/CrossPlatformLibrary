@@ -87,7 +87,7 @@ namespace CrossPlatformLibrary.Bootstrapping
             }
             else if(applicationLifecycle == ApplicationLifecycle.Running)
             {
-                throw ApplicationLifecycleException.InvalidStateTransition(applicationLifecycle, ApplicationLifecycle.Running);
+                this.tracer.Info($"ApplicationLifecycle is already in state {ApplicationLifecycle.Running}.");
             }
         }
 
