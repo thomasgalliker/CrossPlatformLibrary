@@ -5,12 +5,10 @@ using CrossPlatformLibrary.ExceptionHandling.ExceptionHandlingStrategies;
 
 using Guards;
 
-using Tracing;
-
 namespace CrossPlatformLibrary.ExceptionHandling
 {
     /// <summary>
-    /// ExceptionHandlerBase is a cross-platform base for attaching to resp. detaching from application wide exception handlers.
+    ///     ExceptionHandlerBase is a cross-platform base for attaching to resp. detaching from application wide exception handlers.
     /// </summary>
     public abstract class ExceptionHandlerBase : IExceptionHandler
     {
