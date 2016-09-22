@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
+﻿
 using Xamarin.Forms;
 
 namespace Sample
@@ -17,7 +15,7 @@ namespace Sample
             };
             throwExceptionButton.Clicked += (sender, args) =>
             {
-                throw new InvalidOperationException("Some exception text...");
+                ExceptionHandlingDemo.ThrowApplicationException();
             };
 
             var throwTaskExceptionButton = new Button
@@ -26,21 +24,7 @@ namespace Sample
             };
             throwTaskExceptionButton.Clicked += (sender, args) =>
                 {
-                    Task.Factory.StartNew(() =>
-                    {
-                        throw new InvalidOperationException("Some unobserved task exception text...");
-                    });
-
-                    Task.Delay(2000).ContinueWith(
-                        ct =>
-                            {
-                                // We need to enforce GC manually
-                                // so that the GC pushed the unobserved task exceptions to
-                                // ExceptionHandlerBase.OnTaskSchedulerUnobservedTaskException
-                                GC.Collect();
-                                GC.WaitForPendingFinalizers();
-                            });
-          
+                    ExceptionHandlingDemo.ThrowUnobservedTaskException();
                 };
 
             var stackPanel = new StackLayout

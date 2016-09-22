@@ -8,5 +8,15 @@ namespace Sample.WPF
         {
             this.InitializeComponent();
         }
+
+        private void ButtonThrowExceptionClicked(object sender, RoutedEventArgs e)
+        {
+            ExceptionHandlingDemo.ThrowApplicationException();
+        }
+
+        private void ButtonThrowTaskExceptionClicked(object sender, RoutedEventArgs e)
+        {
+            ExceptionHandlingDemo.ThrowUnobservedTaskException();
+        }
     }
 }

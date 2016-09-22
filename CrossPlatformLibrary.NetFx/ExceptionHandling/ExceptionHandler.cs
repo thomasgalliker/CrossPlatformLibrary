@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace CrossPlatformLibrary.ExceptionHandling
 {
@@ -16,11 +18,30 @@ namespace CrossPlatformLibrary.ExceptionHandling
         protected override void Attach()
         {
             AppDomain.CurrentDomain.UnhandledException += this.CurrentDomainUnhandledException;
+
+            if (Application.Current != null)
+            {
+                Application.Current.DispatcherUnhandledException += this.CurrentOnDispatcherUnhandledException;
+            }
         }
 
         protected override void Detach()
         {
             AppDomain.CurrentDomain.UnhandledException -= this.CurrentDomainUnhandledException;
+
+            if (Application.Current != null)
+            {
+                Application.Current.DispatcherUnhandledException -= this.CurrentOnDispatcherUnhandledException;
+            }
+        }
+
+        private void CurrentOnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            var exception = e.Exception;
+            if (exception != null)
+            {
+                e.Handled = this.HandleException(exception);
+            }
         }
 
         private void CurrentDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
