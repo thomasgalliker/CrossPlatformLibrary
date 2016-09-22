@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>CrossPlatformLibrary</id>
-    <version>2.0.1-pre1</version>
+    <version>2.0.1-pre2</version>
     <title>CrossPlatformLibrary</title>
     <authors>Thomas Galliker</authors>
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
@@ -25,7 +25,8 @@
       - Moved ResourceLoader to new NuGet package "ResourceLoader"
       - Moved XmlSerializerHelper to new NuGet package "XmlSerializerHelper"
       - Enabled Bootstrapper.Startup() to be called from withing a background thread
-
+      - Fixed invalid cross-thread exception raised by Bootstrapper.Startup on WP8
+      
       1.0.73
       - Added support for Universal Windows Platform (UWP).
 
