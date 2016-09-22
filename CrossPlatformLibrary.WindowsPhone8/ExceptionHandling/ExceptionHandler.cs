@@ -1,9 +1,10 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace CrossPlatformLibrary.ExceptionHandling
 {
     /// <summary>
-    /// Provides an implementation of <see cref="IExceptionHandler"/> for Windows Phone 8 (SL).
+    ///     Provides an implementation of <see cref="IExceptionHandler" /> for Windows Phone 8 (SL).
     /// </summary>
     public class ExceptionHandler : ExceptionHandlerBase
     {
@@ -12,24 +13,58 @@ namespace CrossPlatformLibrary.ExceptionHandling
         {
         }
 
+        protected override void Attach()
+        {
+            AppDomain.CurrentDomain.UnhandledException += this.CurrentDomainUnhandledException;
+
+            this.CheckBeginInvokeOnUI(
+                 () =>
+                 {
+                     if (Application.Current != null)
+                     {
+                         Application.Current.UnhandledException += this.OnCurrentApplicationUnhandledException;
+                     }
+                 });
+        }
+
+        protected override void Detach()
+        {
+            AppDomain.CurrentDomain.UnhandledException -= this.CurrentDomainUnhandledException;
+
+            this.CheckBeginInvokeOnUI(
+                () =>
+                    {
+                        if (Application.Current != null)
+                        {
+                            Application.Current.UnhandledException -= this.OnCurrentApplicationUnhandledException;
+                        }
+                    });
+        }
+
         private void OnCurrentApplicationUnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
             e.Handled = this.HandleException(e.ExceptionObject);
         }
 
-        protected override void Attach()
+        private void CurrentDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            if (Application.Current != null)
+            var exception = e.ExceptionObject as Exception;
+            if (exception != null)
             {
-                Application.Current.UnhandledException += this.OnCurrentApplicationUnhandledException;
+                this.HandleException(exception);
             }
         }
 
-        protected override void Detach()
+        private void CheckBeginInvokeOnUI(Action action)
         {
-            if (Application.Current != null)
+            var dispatcher = Deployment.Current.Dispatcher;
+            if (dispatcher.CheckAccess())
             {
-                Application.Current.UnhandledException -= this.OnCurrentApplicationUnhandledException;
+                action();
+            }
+            else
+            {
+                dispatcher.BeginInvoke(action);
             }
         }
     }
