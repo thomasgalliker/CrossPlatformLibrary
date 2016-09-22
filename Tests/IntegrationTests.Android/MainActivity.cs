@@ -1,8 +1,6 @@
 ﻿
 using Android.App;
 using Android.OS;
-
-using CrossPlatformLibrary.Bootstrapping;
 using CrossPlatformLibrary.IntegrationTests.Dispatching;
 
 using Xunit.Runners.UI;
@@ -15,9 +13,6 @@ namespace IntegrationTests.Android
     {
         protected override void OnCreate(Bundle bundle)
         {
-            var bootstrapper = new Bootstrapper();
-            bootstrapper.Startup();
-
             this.AddTestAssembly(typeof(DispatcherServiceTests).Assembly);
 
             this.AddExecutionAssembly(typeof(ExtensibilityPointFactory).Assembly);

@@ -1,5 +1,4 @@
-﻿using CrossPlatformLibrary.Bootstrapping;
-using CrossPlatformLibrary.IntegrationTests.Dispatching;
+﻿using CrossPlatformLibrary.IntegrationTests.Dispatching;
 
 using Xunit.Runners.UI;
 
@@ -14,9 +13,6 @@ namespace CrossPlatformLibrary.WindowsPhone8.Tests
 
         protected override void OnInitializeRunner()
         {
-            var bootstrapper = new Bootstrapper();
-            bootstrapper.Startup();
-
             this.AddTestAssembly(typeof(DispatcherServiceTests).Assembly);
         }
     }

@@ -57,10 +57,6 @@
     <DevInstrumentationEnabled>False</DevInstrumentationEnabled>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrossPlatformLibrary, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CrossPlatformLibrary.2.0.1-pre1\lib\MonoAndroid10\CrossPlatformLibrary.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="FluentAssertions, Version=4.14.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\FluentAssertions.4.14.0\lib\netstandard1.3\FluentAssertions.dll</HintPath>
       <Private>True</Private>
@@ -186,6 +182,10 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CrossPlatformLibrary.Android\CrossPlatformLibrary.Android.csproj">
+      <Project>{56a56f17-7de1-4ca1-9617-bf32e971ac84}</Project>
+      <Name>CrossPlatformLibrary.Android</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CrossPlatformLibrary.IntegrationTests\IntegrationTests.csproj">
       <Project>{26c644f0-fd3a-4807-8c1b-ca3bad52a5ca}</Project>
       <Name>IntegrationTests</Name>
