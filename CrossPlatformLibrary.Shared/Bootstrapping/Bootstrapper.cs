@@ -71,6 +71,8 @@ namespace CrossPlatformLibrary.Bootstrapping
 
             if (applicationLifecycle == ApplicationLifecycle.Uninitialized)
             {
+                this.simpleIoc.Reset();
+
                 this.InternalConfigureDefaultTracerFactory();
 
                 this.InternalConfigureExceptionHandling();
