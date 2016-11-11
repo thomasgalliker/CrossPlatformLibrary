@@ -8,7 +8,7 @@ namespace CrossPlatformLibrary.ExceptionHandling
     /// <summary>
     /// Provides an implementation of <see cref="IExceptionHandler"/> for .Net Framework.
     /// </summary>
-    public class ExceptionHandler : ExceptionHandlerBase
+    internal class ExceptionHandler : ExceptionHandlerBase
     {
         public ExceptionHandler(IExceptionHandlingStrategy exceptionHandlingStrategy)
             : base(exceptionHandlingStrategy)
