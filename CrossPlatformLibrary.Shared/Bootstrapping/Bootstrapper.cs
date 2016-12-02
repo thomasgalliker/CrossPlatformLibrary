@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -62,6 +63,9 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// <exception cref="BootstrappingException">An unknown exception occurred during the startup process.</exception>
         public void Startup()
         {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             this.tracer.Debug("Bootstrapper.Startup() called");
 
             this.simpleIoc = SimpleIoc.Default;
@@ -91,6 +95,9 @@ namespace CrossPlatformLibrary.Bootstrapping
             {
                 this.tracer.Info($"ApplicationLifecycle is already in state {ApplicationLifecycle.Running}.");
             }
+
+            stopwatch.Stop();
+            this.tracer.Debug($"Bootstrapper.Startup() finished in {stopwatch.Elapsed}.");
         }
 
         public void Sleep()
