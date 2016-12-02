@@ -18,7 +18,6 @@ namespace Sample
 
         protected override void OnStart()
         {
-            this.bootstrapper.Startup();
         }
 
         protected override void OnSleep()
