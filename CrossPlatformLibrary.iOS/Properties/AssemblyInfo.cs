@@ -12,7 +12,7 @@ using MonoTouch.Foundation;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Thomas Galliker")]
 [assembly: AssemblyProduct("CrossPlatformLibrary.iOS")]
-[assembly: AssemblyCopyright("Copyright © 2016")]
+[assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -25,4 +25,4 @@ using MonoTouch.Foundation;
 [assembly: Guid("730aeef8-8180-46e1-8120-ef5c55c961b8")]
 
 [assembly: AssemblyVersion("2.0.1")]
-[assembly: AssemblyFileVersion("2.0.1-pre3")]
+[assembly: AssemblyFileVersion("2.0.1-pre4")]

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Text;
 using System.Threading;
+
+using CrossPlatformLibrary.ExceptionHandling.ExceptionHandlingStrategies;
 
 using Guards;
 
@@ -37,19 +40,25 @@ namespace CrossPlatformLibrary.ExceptionHandling
 
             exceptionHandlingStrategy = strategy;
 
-            var currentSyncContext = Current;
-            if (currentSyncContext == null)
+            var currentSynchronizationContext = SynchronizationContext.Current;
+            if (currentSynchronizationContext == null)
             {
-                string nullContextInfo = "Ensure a synchronization context exists before calling this method. A synchronization context usually exists after the UI has been initialized. If your application does not have a UI you can ignore this message.";
-                tracer.Info(nullContextInfo);
+                if (strategy is RethrowExceptionHandlingStrategy == false)
+                {
+                    tracer.Info(new StringBuilder()
+                        .Append("Ensure a synchronization context exists before calling AsyncSynchronizationContext.Register. ")
+                        .Append("A synchronization context usually exists after the UI has been initialized. ")
+                        .Append("If your application does not have a UI you can ignore this message.").ToString());
+                }
+       
 
                 return null;
             }
 
-            var customSynchronizationContext = currentSyncContext as AsyncSynchronizationContext;
+            var customSynchronizationContext = currentSynchronizationContext as AsyncSynchronizationContext;
             if (customSynchronizationContext == null)
             {
-                customSynchronizationContext = new AsyncSynchronizationContext(currentSyncContext);
+                customSynchronizationContext = new AsyncSynchronizationContext(currentSynchronizationContext);
                 SetSynchronizationContext(customSynchronizationContext);
             }
 
