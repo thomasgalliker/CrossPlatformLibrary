@@ -16,7 +16,7 @@ namespace CrossPlatformLibrary.ExceptionHandling.ExceptionHandlingStrategies
 
         public TracingExceptionHandlingStrategy(ITracer tracer)
         {
-            Guard.ArgumentNotNull(() => tracer);
+            Guard.ArgumentNotNull(tracer, nameof(tracer));
 
             this.tracer = tracer;
         }
