@@ -117,6 +117,7 @@
     <Compile Include="..\CrossPlatformLibrary.WindowsPhone8\Tools\PlatformServices.cs">
       <Link>Tools\PlatformServices.cs</Link>
     </Compile>
+    <Compile Include="Localization\Localizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\CrossPlatformLibrary.UWP.rd.xml" />
   </ItemGroup>

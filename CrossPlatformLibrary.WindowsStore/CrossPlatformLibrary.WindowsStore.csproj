@@ -102,6 +102,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\CrossPlatformLibrary.UWP\Localization\Localizer.cs">
+      <Link>Localization\Localizer.cs</Link>
+    </Compile>
     <Compile Include="..\CrossPlatformLibrary.WindowsPhone81\ExceptionHandling\ExceptionHandler.cs">
       <Link>ExceptionHandling\ExceptionHandler.cs</Link>
     </Compile>

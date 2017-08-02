@@ -9,6 +9,7 @@ using CrossPlatformLibrary.ExceptionHandling;
 using CrossPlatformLibrary.ExceptionHandling.ExceptionHandlingStrategies;
 using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.IoC;
+using CrossPlatformLibrary.Localization;
 using CrossPlatformLibrary.Tools;
 using Microsoft.Practices.ServiceLocation;
 using Tracing;
@@ -156,6 +157,7 @@ namespace CrossPlatformLibrary.Bootstrapping
                 this.tracer.Debug("Calling ConfigureExtensions procedure");
 
                 this.simpleIoc.Register<IDispatcherService, DispatcherService>();
+                this.simpleIoc.Register<ILocalizer, Localizer>();
 
                 this.simpleIoc.Register<IPlatformServices, PlatformServices>();
                 var platformServices = this.simpleIoc.GetInstance<IPlatformServices>();

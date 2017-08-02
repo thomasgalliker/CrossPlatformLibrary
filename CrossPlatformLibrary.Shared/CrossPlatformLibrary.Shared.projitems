@@ -33,6 +33,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)IoC\PreferredConstructor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC\ResolvedParameter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC\SimpleIoc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localization\CultureInfoChangedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localization\ILocalizer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localization\ITranslationProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localization\ResxMultiTranslationProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localization\ResxSingleTranslationProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Localization\TranslationData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Media\Color.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Media\ColorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tools\IPlatformServices.cs" />

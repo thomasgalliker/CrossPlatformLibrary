@@ -49,6 +49,9 @@
     <Compile Include="..\CrossPlatformLibrary.iOS\Tools\PlatformServices.cs">
       <Link>Tools\PlatformServices.cs</Link>
     </Compile>
+    <Compile Include="..\CrossPlatformLibrary.NetFx\Localization\Localizer.cs">
+      <Link>Localization\Localizer.cs</Link>
+    </Compile>
     <Compile Include="LinkerHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

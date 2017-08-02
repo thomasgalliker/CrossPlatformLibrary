@@ -80,6 +80,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\CrossPlatformLibrary.UWP\Localization\Localizer.cs">
+      <Link>Localization\Localizer.cs</Link>
+    </Compile>
     <Compile Include="..\CrossPlatformLibrary.WindowsPhone8\Dispatching\DispatcherService.cs">
       <Link>Dispatching\DispatcherService.cs</Link>
     </Compile>
@@ -106,6 +109,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

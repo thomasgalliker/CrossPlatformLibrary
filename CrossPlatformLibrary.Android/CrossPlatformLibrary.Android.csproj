@@ -57,6 +57,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CrossPlatformLibrary.NetFx\Localization\Localizer.cs">
+      <Link>Localization\Localizer.cs</Link>
+    </Compile>
     <Compile Include="Dispatching\DispatcherService.cs" />
     <Compile Include="ExceptionHandling\ExceptionHandler.cs" />
     <Compile Include="Extensions\AndroidExtensions.cs" />

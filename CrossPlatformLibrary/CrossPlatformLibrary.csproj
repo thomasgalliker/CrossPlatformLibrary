@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Dispatching\DispatcherService.cs" />
     <Compile Include="ExceptionHandling\ExceptionHandler.cs" />
+    <Compile Include="Localization\Localizer.cs" />
     <Compile Include="NotImplementedInReferenceAssemblyException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\PlatformServices.cs" />

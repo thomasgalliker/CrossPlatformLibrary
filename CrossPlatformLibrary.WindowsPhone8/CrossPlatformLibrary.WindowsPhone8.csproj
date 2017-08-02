@@ -84,6 +84,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\CrossPlatformLibrary.NetFx\Localization\Localizer.cs">
+      <Link>Localization\Localizer.cs</Link>
+    </Compile>
     <Compile Include="IO\FileSystem.cs" />
     <Compile Include="Tools\PlatformServices.cs" />
     <Compile Include="Dispatching\DispatcherService.cs" />
