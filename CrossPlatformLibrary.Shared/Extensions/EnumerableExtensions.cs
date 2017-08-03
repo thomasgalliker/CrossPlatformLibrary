@@ -155,5 +155,15 @@ namespace CrossPlatformLibrary.Extensions
             }
             return null;
         }
+
+        public static IEnumerable<T> Add<T>(this IEnumerable<T> source, T item)
+        {
+            foreach (var sourceItem in source)
+            {
+                yield return sourceItem;
+            }
+
+            yield return item;
+        }
     }
 }
