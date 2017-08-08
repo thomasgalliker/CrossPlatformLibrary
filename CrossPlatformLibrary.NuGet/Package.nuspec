@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>CrossPlatformLibrary</id>
-    <version>2.0.1-pre7</version>
+    <version>2.0.1</version>
     <title>CrossPlatformLibrary</title>
     <authors>Thomas Galliker</authors>
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
@@ -18,7 +18,7 @@
       windows phone winphone wp8 wpa81 win81 windowsphone universal uwp uap android xamarin.forms xamarin.ios ios monoandroid monodroid monotouch
     </tags>
     <releaseNotes>
-      2.0.1-pre
+      2.0.1
       - Major refactoring to support the "bait-and-switch" PCL pattern
       - Moved ITracer to new NuGet package "Tracing"
       - Moved all IValueConverters to new NuGet package "ValueConverters.NET"
