@@ -18,30 +18,30 @@
       windows phone winphone wp8 wpa81 win81 windowsphone universal uwp uap android xamarin.forms xamarin.ios ios monoandroid monodroid monotouch
     </tags>
     <releaseNotes>
-      2.0.1
-      - Major refactoring to support the "bait-and-switch" PCL pattern
-      - Moved ITracer to new NuGet package "Tracing"
-      - Moved all IValueConverters to new NuGet package "ValueConverters.NET"
-      - Moved ResourceLoader to new NuGet package "ResourceLoader"
-      - Moved XmlSerializerHelper to new NuGet package "XmlSerializerHelper"
-      - Enabled Bootstrapper.Startup() to be called from withing a background thread
-      - Fixed invalid cross-thread exception raised by Bootstrapper.Startup on WP8
-      - Handle DispatcherUnhandledException in Netfx ExceptionHandler
-      - Added localization support
+2.0.1
+- Major refactoring to support the "bait-and-switch" PCL pattern
+- Moved ITracer to new NuGet package "Tracing"
+- Moved all IValueConverters to new NuGet package "ValueConverters.NET"
+- Moved ResourceLoader to new NuGet package "ResourceLoader"
+- Moved XmlSerializerHelper to new NuGet package "XmlSerializerHelper"
+- Enabled Bootstrapper.Startup() to be called from withing a background thread
+- Fixed invalid cross-thread exception raised by Bootstrapper.Startup on WP8
+- Handle DispatcherUnhandledException in Netfx ExceptionHandler
+- Added localization support
 
-      1.0.73
-      - Added support for Universal Windows Platform (UWP).
+1.0.73
+- Added support for Universal Windows Platform (UWP).
 
-      1.0.72
-      - Automatically configure console tracer depending on platform
-      - Added LinkerHelper.cs to solve the Xamarin iOS linker issue
-      - Added CrossPlatformApplication as application bootstrapper for WPF
-      - Optimization: Check synchronization context in iOS DispatcherService before calling BeginInvokeOnMainThread
-      - Removed PhoneTextBoxEx and WPtoolkit dependency. (Moved to new NuGet package named DelayedPhoneTextBox).
+1.0.72
+- Automatically configure console tracer depending on platform
+- Added LinkerHelper.cs to solve the Xamarin iOS linker issue
+- Added CrossPlatformApplication as application bootstrapper for WPF
+- Optimization: Check synchronization context in iOS DispatcherService before calling BeginInvokeOnMainThread
+- Removed PhoneTextBoxEx and WPtoolkit dependency. (Moved to new NuGet package named DelayedPhoneTextBox).
 
-      1.0.71
-      - Extracted ObservableView to new NuGet package https://www.nuget.org/packages/ObservableView/
-      - Extracted HighlightMarker to new NuGet package https://www.nuget.org/packages/HighlightMarker/
+1.0.71
+- Extracted ObservableView to new NuGet package https://www.nuget.org/packages/ObservableView/
+- Extracted HighlightMarker to new NuGet package https://www.nuget.org/packages/HighlightMarker/
     </releaseNotes>
     <copyright>Copyright 2016</copyright>
     <language>en-US</language>
