@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 using CrossPlatformLibrary.Extensions;
 
@@ -71,6 +70,32 @@ namespace CrossPlatformLibrary.Tests.Extensions
             Assert.True(resultCollection[4] == expectedCollection[4]);
             Assert.True(resultCollection[5] == expectedCollection[5]);
             Assert.True(resultCollection[6] == expectedCollection[6]);
+        }
+
+        [Fact]
+        public void ShouldAppendToList()
+        {
+            // Arrange.
+            var sourceCollection = new List<int> { 1, 2, 3 };
+
+            // Act.
+            var resultCollection = sourceCollection.Append(99);
+
+            // Assert
+            resultCollection.Should().ContainInOrder(new List<int> { 1, 2, 3, 99});
+        }
+
+        [Fact]
+        public void ShouldPrependToList()
+        {
+            // Arrange.
+            var sourceCollection = new List<int> { 1, 2, 3 };
+
+            // Act.
+            var resultCollection = sourceCollection.Prepend(99);
+
+            // Assert
+            resultCollection.Should().ContainInOrder(new List<int> { 99, 1, 2, 3 });
         }
     }
 }

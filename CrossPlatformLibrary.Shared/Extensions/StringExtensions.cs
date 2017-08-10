@@ -283,5 +283,20 @@ namespace CrossPlatformLibrary.Extensions
         {
             return strings.Any(s => source.StartsWith(s));
         }
+
+        /// <summary>
+        /// Converts the first character of <paramref name="s"/> to upper case.
+        /// </summary>
+        public static string ToUpperFirst(this string s)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                return string.Empty;
+            }
+
+            var a = s.ToCharArray();
+            a[0] = char.ToUpper(a[0]);
+            return new string(a);
+        }
     }
 }
