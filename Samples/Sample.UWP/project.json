@@ -1,9 +1,9 @@
 ﻿{
   "dependencies": {
-    "CrossPlatformLibrary": "2.0.1-pre2",
+    "CrossPlatformLibrary": "2.0.2-pre1",
     "Guards": "1.0.14",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3",
-    "Tracing": "1.0.3-pre3"
+    "Tracing": "1.0.3-pre5"
   },
   "frameworks": {
     "uap10.0": {}

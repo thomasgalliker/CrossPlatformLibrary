@@ -25,4 +25,4 @@ using MonoTouch.Foundation;
 [assembly: Guid("730aeef8-8180-46e1-8120-ef5c55c961b8")]
 
 [assembly: AssemblyVersion("2.0.2")]
-[assembly: AssemblyFileVersion("2.0.2-pre1")]
+[assembly: AssemblyFileVersion("2.0.2-pre2")]

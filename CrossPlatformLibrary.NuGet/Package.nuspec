@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>CrossPlatformLibrary</id>
-    <version>2.0.2-pre1</version>
+    <version>2.0.2-pre2</version>
     <title>CrossPlatformLibrary</title>
     <authors>Thomas Galliker</authors>
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
@@ -20,6 +20,7 @@
     <releaseNotes>
 2.0.2-pre
 - Added new extension methods
+- Added virtual method ConfigureTracing in Bootstrapper
 
 2.0.1
 - Major refactoring to support the "bait-and-switch" PCL pattern
@@ -73,12 +74,6 @@
     <file src="..\CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.dll" target="lib\MonoAndroid10\CrossPlatformLibrary.dll" />
     <file src="..\CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.pdb" target="lib\MonoAndroid10\CrossPlatformLibrary.pdb" />
     <file src="..\CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.xml" target="lib\MonoAndroid10\CrossPlatformLibrary.xml" />
-
-    <!--Xamarin.iOS Classic API is depricated as by version 2.0.0 -->
-    <!--<file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.dll" target="lib\MonoTouch10\CrossPlatformLibrary.dll" />
-    <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.pdb" target="lib\MonoTouch10\CrossPlatformLibrary.pdb" />
-    <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.xml" target="lib\MonoTouch10\CrossPlatformLibrary.xml" />
-    <file src="..\CrossPlatformLibrary.iOS\LinkerHelper.cs" target="content\MonoTouch10\LinkerHelper.cs" />-->
 
     <!--Xamarin.iOS Unified API-->
     <file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.dll" target="lib\xamarin.ios10\CrossPlatformLibrary.dll" />

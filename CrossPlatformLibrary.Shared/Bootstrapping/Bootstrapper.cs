@@ -23,7 +23,7 @@ namespace CrossPlatformLibrary.Bootstrapping
     /// </summary>
     public class Bootstrapper : IBootstrapper
     {
-        private readonly ITracer tracer;
+        private ITracer tracer;
 
         /// <summary>
         /// Gets the IOC/DI container of the application, which is being
@@ -78,7 +78,7 @@ namespace CrossPlatformLibrary.Bootstrapping
             {
                 this.simpleIoc.Reset();
 
-                this.InternalConfigureDefaultTracerFactory();
+                this.InternalConfigureTracing();
 
                 this.InternalConfigureExceptionHandling();
 
@@ -108,14 +108,15 @@ namespace CrossPlatformLibrary.Bootstrapping
 
         /// <summary>
         /// Configures a platform-specific default tracer factory.
-        /// Each target platform can configure
         /// </summary>
-        private void InternalConfigureDefaultTracerFactory()
+        private void InternalConfigureTracing()
         {
             try
             {
                 // Register ITracer with a factory that allows type-specific tracer creation
                 this.simpleIoc.Register<ITracer>((Type parentType) => Tracer.Create(parentType));
+                this.ConfigureTracing(this.simpleIoc);
+                this.tracer = Tracer.Create<Bootstrapper>();
             }
             catch (Exception ex)
             {
@@ -124,6 +125,14 @@ namespace CrossPlatformLibrary.Bootstrapping
                     throw new BootstrappingException("Bootstrapping failed during ConfigureDefaultTracerFactory sequence.", ex);
                 }
             }
+        }
+
+        /// <summary>
+        /// ConfigureTracing is called at the earliest possible point in time to configure the Tracer.
+        /// By default, a platform-matching console tracer is configured.
+        /// </summary>
+        protected virtual void ConfigureTracing(ISimpleIoc container)
+        {
         }
 
         private void InternalConfigureExceptionHandling()

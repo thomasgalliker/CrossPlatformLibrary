@@ -37,23 +37,15 @@
     <DefineConstants>TRACE;__UNIFIED__;__MOBILE__;__IOS__;</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\CrossPlatformLibrary.iOS\Dispatching\DispatcherService.cs">
-      <Link>Dispatching\DispatcherService.cs</Link>
-    </Compile>
-    <Compile Include="..\CrossPlatformLibrary.iOS\ExceptionHandling\ExceptionHandler.cs">
-      <Link>ExceptionHandling\ExceptionHandler.cs</Link>
-    </Compile>
-    <Compile Include="..\CrossPlatformLibrary.iOS\LinkerHook.cs">
-      <Link>LinkerHook.cs</Link>
-    </Compile>
-    <Compile Include="..\CrossPlatformLibrary.iOS\Tools\PlatformServices.cs">
-      <Link>Tools\PlatformServices.cs</Link>
-    </Compile>
     <Compile Include="..\CrossPlatformLibrary.NetFx\Localization\Localizer.cs">
       <Link>Localization\Localizer.cs</Link>
     </Compile>
+    <Compile Include="Dispatching\DispatcherService.cs" />
+    <Compile Include="ExceptionHandling\ExceptionHandler.cs" />
     <Compile Include="LinkerHelper.cs" />
+    <Compile Include="LinkerHook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\PlatformServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Guards, Version=1.0.14.0, Culture=neutral, PublicKeyToken=ac6aedb73a72f46e, processorArchitecture=MSIL">
@@ -67,8 +59,8 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="Tracing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tracing.1.0.3-pre3\lib\xamarin.ios10\Tracing.dll</HintPath>
+    <Reference Include="Tracing, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tracing.1.0.3-pre5\lib\xamarin.ios10\Tracing.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.iOS" />

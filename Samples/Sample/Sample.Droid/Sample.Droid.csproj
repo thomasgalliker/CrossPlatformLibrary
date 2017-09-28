@@ -48,10 +48,6 @@
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrossPlatformLibrary, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\CrossPlatformLibrary.2.0.1-pre2\lib\MonoAndroid10\CrossPlatformLibrary.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="FormsViewGroup, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Xamarin.Forms.2.3.3.168\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
       <Private>True</Private>
@@ -70,8 +66,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tracing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Tracing.1.0.3-pre3\lib\monoandroid10\Tracing.dll</HintPath>
+    <Reference Include="Tracing, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Tracing.1.0.3-pre5\lib\monoandroid10\Tracing.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Android.Support.Animated.Vector.Drawable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -142,6 +138,10 @@
     <Content Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\CrossPlatformLibrary.Android\CrossPlatformLibrary.Android.csproj">
+      <Project>{56a56f17-7de1-4ca1-9617-bf32e971ac84}</Project>
+      <Name>CrossPlatformLibrary.Android</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sample\Sample.csproj">
       <Name>Sample</Name>
     </ProjectReference>
