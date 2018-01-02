@@ -1,12 +1,12 @@
 ﻿{
   "dependencies": {
-    "CrossPlatformLibrary": "2.0.2-pre1",
+    "CrossPlatformLibrary": "2.0.2-pre2",
     "Guards": "1.0.14",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3",
     "Tracing": "1.0.3-pre5"
   },
   "frameworks": {
-    "uap10.0": {}
+    "uap10.0.10240": {}
   },
   "runtimes": {
     "win10-arm": {},
