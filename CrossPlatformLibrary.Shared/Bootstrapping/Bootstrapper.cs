@@ -58,10 +58,7 @@ namespace CrossPlatformLibrary.Bootstrapping
             }
         }
 
-        /// <summary>
-        /// Runs the startup procedure of the bootstrapper.
-        /// </summary>
-        /// <exception cref="BootstrappingException">An unknown exception occurred during the startup process.</exception>
+        /// <inheritdoc />
         public void Startup()
         {
             var stopwatch = new Stopwatch();
