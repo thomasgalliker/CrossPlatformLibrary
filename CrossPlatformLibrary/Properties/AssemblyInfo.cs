@@ -26,7 +26,7 @@ using System.Runtime.CompilerServices;
 // by using the '*' as shown below:
 
 [assembly: AssemblyVersion("3.0.1")]
-[assembly: AssemblyFileVersion("3.0.1-pre3")]
+[assembly: AssemblyFileVersion("3.0.1-pre4")]
 
 
 [assembly: InternalsVisibleTo("CrossPlatformLibrary.Tests")]
