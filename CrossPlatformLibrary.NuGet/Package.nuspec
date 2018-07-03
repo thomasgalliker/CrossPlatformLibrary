@@ -15,7 +15,7 @@
     </description>
     <tags>
       xamarin pcl CrossPlatformLibrary cross-platform library bootstrapping dispatching tracing exception handling mobile
-      windows phone winphone wp8 wpa81 win81 windowsphone universal uwp uap android xamarin.forms xamarin.ios ios monoandroid monodroid monotouch
+      windows universal uwp uap android xamarin.forms xamarin.ios ios monoandroid monodroid monotouch
     </tags>
     <releaseNotes>
 3.0.1-pre
@@ -51,7 +51,7 @@
 - Extracted ObservableView to new NuGet package https://www.nuget.org/packages/ObservableView/
 - Extracted HighlightMarker to new NuGet package https://www.nuget.org/packages/HighlightMarker/
     </releaseNotes>
-    <copyright>Copyright 2016</copyright>
+    <copyright>Copyright 2018</copyright>
     <language>en-US</language>
     <dependencies>
       <group>
