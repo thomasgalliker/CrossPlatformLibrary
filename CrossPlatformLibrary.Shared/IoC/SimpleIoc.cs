@@ -228,7 +228,7 @@ namespace CrossPlatformLibrary.IoC
         /// </param>
         public void Register(Type classType, string key, bool createInstanceImmediately)
         {
-            
+
 #if NETFX_CORE
             if (classType.GetTypeInfo().IsInterface)
 #else
@@ -284,16 +284,37 @@ namespace CrossPlatformLibrary.IoC
         /// </param>
         public void Register<TClass>(Func<TClass> factory) where TClass : class
         {
-            this.Register(factory, false);
+            this.Register(factory, null, false);
         }
 
         public void Register<TClass>(Func<Type, TClass> factory) where TClass : class
         {
-            this.Register<TClass>(factory, false);
+            this.Register<TClass>(factory, null, false);
+        }
+
+        /// <inheritdoc />
+        public void Register<TClass>(Func<TClass> factory, bool createInstanceImmediately) where TClass : class
+        {
+            this.Register<TClass>((Delegate)factory, null, createInstanceImmediately);
+        }
+
+        public void Register<TClass>(Func<TClass> factory, string key, bool createInstanceImmediately) where TClass : class
+        {
+            this.Register<TClass>((Delegate)factory, key, createInstanceImmediately);
+        }
+
+        public void Register<TClass>(Func<Type, TClass> factory, bool createInstanceImmediately) where TClass : class
+        {
+            this.Register<TClass>((Delegate)factory, null, createInstanceImmediately);
+        }
+
+        public void Register<TClass>(Func<Type, TClass> factory, string key, bool createInstanceImmediately) where TClass : class
+        {
+            this.Register<TClass>((Delegate)factory, key, createInstanceImmediately);
         }
 
         /// <summary>
-        ///     Registers a given instance for a given type with the possibility for immediate
+        ///     Registers a given instance for a given type and a given key with the possibility for immediate
         ///     creation of the instance.
         /// </summary>
         /// <typeparam name="TClass">The type that is being registered.</typeparam>
@@ -301,29 +322,25 @@ namespace CrossPlatformLibrary.IoC
         ///     The factory method able to create the instance that
         ///     must be returned when the given type is resolved.
         /// </param>
+        /// <param name="key">The key for which the given instance is registered.</param>
         /// <param name="createInstanceImmediately">
         ///     If true, forces the creation of the default
         ///     instance of the provided class.
         /// </param>
-        public void Register<TClass>(Func<TClass> factory, bool createInstanceImmediately) where TClass : class
-        {
-            this.Register<TClass>((Delegate)factory, createInstanceImmediately);
-        }
-
-        public void Register<TClass>(Func<Type, TClass> factory, bool createInstanceImmediately) where TClass : class
-        {
-            this.Register<TClass>((Delegate)factory, createInstanceImmediately);
-        }
-
-        private void Register<TClass>(Delegate factory, bool createInstanceImmediately) where TClass : class
+        public void Register<TClass>(Delegate factory, string key, bool createInstanceImmediately) where TClass : class
         {
             Guard.ArgumentNotNull(() => factory);
 
             lock (this.syncLock)
             {
+                if (string.IsNullOrEmpty(key))
+                {
+                    key = this.defaultKey;
+                }
+
                 var classType = typeof(TClass);
 
-                if (this.factories.ContainsKey(classType) && this.factories[classType].ContainsKey(this.defaultKey))
+                if (this.factories.ContainsKey(classType) && this.factories[classType].ContainsKey(key))
                 {
                     throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "There is already a factory registered for {0}.", classType.FullName));
                 }
@@ -333,11 +350,11 @@ namespace CrossPlatformLibrary.IoC
                     this.interfaceToClassMap.Add(classType, null);
                 }
 
-                this.DoRegister(classType, factory, this.defaultKey);
+                this.DoRegister(classType, factory, key);
 
                 if (createInstanceImmediately)
                 {
-                    this.GetInstance<TClass>();
+                    this.GetInstance<TClass>(key);
                 }
             }
         }
@@ -356,43 +373,9 @@ namespace CrossPlatformLibrary.IoC
             this.Register(factory, key, false);
         }
 
-        /// <summary>
-        ///     Registers a given instance for a given type and a given key with the possibility for immediate
-        ///     creation of the instance.
-        /// </summary>
-        /// <typeparam name="TClass">The type that is being registered.</typeparam>
-        /// <param name="factory">
-        ///     The factory method able to create the instance that
-        ///     must be returned when the given type is resolved.
-        /// </param>
-        /// <param name="key">The key for which the given instance is registered.</param>
-        /// <param name="createInstanceImmediately">
-        ///     If true, forces the creation of the default
-        ///     instance of the provided class.
-        /// </param>
-        public void Register<TClass>(Func<TClass> factory, string key, bool createInstanceImmediately) where TClass : class
+        public void Update()
         {
-            lock (this.syncLock)
-            {
-                var classType = typeof(TClass);
-
-                if (this.factories.ContainsKey(classType) && this.factories[classType].ContainsKey(key))
-                {
-                    throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "There is already a factory registered for {0} with key {1}.", classType.FullName, key));
-                }
-
-                if (!this.interfaceToClassMap.ContainsKey(classType))
-                {
-                    this.interfaceToClassMap.Add(classType, null);
-                }
-
-                this.DoRegister(classType, factory, key);
-
-                if (createInstanceImmediately)
-                {
-                    this.GetInstance<TClass>(key);
-                }
-            }
+            // Not required
         }
 
         /// <summary>
@@ -549,10 +532,10 @@ namespace CrossPlatformLibrary.IoC
                                         parentType.FullName,
                                         serviceType.FullName));
                             }
-                            
+
                             throw new ActivationException(string.Format(CultureInfo.InvariantCulture, "Type not found in cache: {0}.", serviceType.FullName));
                         }
-                        
+
                         return null;
                     }
 
@@ -643,11 +626,11 @@ namespace CrossPlatformLibrary.IoC
                 resolveTo = serviceType;
             }
 
-//#if NETFX_CORE
+            //#if NETFX_CORE
             var constructorInfos = resolveTo.GetTypeInfo().DeclaredConstructors.Where(c => c.IsPublic).ToArray();
-////#else
-////            var constructorInfos = interfaceType.GetConstructors();
-////#endif
+            ////#else
+            ////            var constructorInfos = interfaceType.GetConstructors();
+            ////#endif
 
             if (constructorInfos.Length > 1)
             {
@@ -961,9 +944,9 @@ namespace CrossPlatformLibrary.IoC
         {
             return (TService)this.DoGetService(
                 serviceType: typeof(TService),
-                parentType: null, 
+                parentType: null,
                 key: this.defaultKey,
-                cache: DefaultCacheUsage, 
+                cache: DefaultCacheUsage,
                 throwIfNotFound: false);
         }
 
@@ -1019,6 +1002,53 @@ namespace CrossPlatformLibrary.IoC
             return (TService)this.DoGetService(typeof(TService), null, key, false);
         }
 
+        #endregion
+
+        #region IIocContainer implementation
+        public void Register<TInterface, TClass>() where TInterface : class where TClass : class
+        {
+            this.Register<TInterface, TClass>(key: null, createInstanceImmediately: false);
+        }
+
+        public void Register<TInterface>(TInterface instance) where TInterface : class
+        {
+            this.Register(() => instance);
+        }
+
+        public void Register<TInterface>(Type interfaceType) where TInterface : class
+        {
+            this.Register<TInterface>(interfaceType, key: null, createInstanceImmediately: false);
+        }
+
+        public void RegisterSingleton<TClass>() where TClass : class
+        {
+            this.Register<TClass>(key: null, createInstanceImmediately: false);
+        }
+
+        public void RegisterSingleton<TInterface, TClass>() where TInterface : class where TClass : class
+        {
+            this.Register<TInterface, TClass>(createInstanceImmediately: false);
+        }
+
+        public void RegisterSingleton<TInterface>(TInterface instance) where TInterface : class
+        {
+            this.Register(() => instance);
+        }
+
+        public void RegisterSingleton<TInterface>(Type interfaceType) where TInterface : class
+        {
+            this.Register<TInterface>(interfaceType, key: null, createInstanceImmediately: false);
+        }
+
+        public void RegisterSingleton<TClass>(Func<TClass> factory) where TClass : class
+        {
+            this.Register<TClass>(factory, key: null, createInstanceImmediately: false);
+        }
+
+        public void Dispose()
+        {
+            this.Reset();
+        }
         #endregion
     }
 }

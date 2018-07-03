@@ -16,8 +16,6 @@
 
 using System;
 
-using Microsoft.Practices.ServiceLocation;
-
 namespace CrossPlatformLibrary.IoC
 {
     /// <summary>
@@ -27,7 +25,7 @@ namespace CrossPlatformLibrary.IoC
     ///     The inspiration for this class is at https://gist.github.com/716137 but it has
     ///     been extended with additional features.
     /// </summary>
-    public interface ISimpleIoc : IServiceLocator
+    public interface ISimpleIoc : IIocContainer
     {
         /// <summary>
         ///     Checks whether at least one instance of a given class is already created in the container.
@@ -189,6 +187,8 @@ namespace CrossPlatformLibrary.IoC
 
         void Register<TClass>(Func<Type, TClass> factory, bool createInstanceImmediately) where TClass : class;
 
+        void Register<TClass>(Func<Type, TClass> factory, string key, bool createInstanceImmediately) where TClass : class;
+
         /// <summary>
         ///     Registers a given instance for a given type and a given key.
         /// </summary>
@@ -254,5 +254,11 @@ namespace CrossPlatformLibrary.IoC
         /// <param name="classType"></param>
         /// <param name="key">The key corresponding to the instance that must be removed.</param>
         void Unregister(Type classType, string key);
+
+        TService TryGetInstance<TService>();
+
+        object GetInstanceWithoutCaching(Type serviceType);
+
+        object GetInstanceWithoutCaching(Type serviceType, string key);
     }
 }

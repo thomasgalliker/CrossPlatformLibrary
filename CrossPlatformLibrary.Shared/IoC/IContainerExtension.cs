@@ -10,6 +10,6 @@
         /// Allows to set-up the given container with plugin-specific dependencies. 
         /// </summary>
         /// <param name="container"></param>
-        void Initialize(ISimpleIoc container);
+        void Initialize(IIocContainer container);
     }
 }

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>CrossPlatformLibrary</id>
-    <version>2.0.2-pre2</version>
+    <version>3.0.1-pre3</version>
     <title>CrossPlatformLibrary</title>
     <authors>Thomas Galliker</authors>
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
@@ -18,6 +18,10 @@
       windows phone winphone wp8 wpa81 win81 windowsphone universal uwp uap android xamarin.forms xamarin.ios ios monoandroid monodroid monotouch
     </tags>
     <releaseNotes>
+3.0.1-pre
+- Refactored for better IoC support
+- IContainerExtensions is no longer bootstrapped
+
 2.0.2-pre
 - Added new extension methods
 - Added virtual method ConfigureTracing in Bootstrapper
@@ -85,21 +89,6 @@
     <file src="..\CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.dll" target="lib\net45\CrossPlatformLibrary.dll" />
     <file src="..\CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.pdb" target="lib\net45\CrossPlatformLibrary.pdb" />
     <file src="..\CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.xml" target="lib\net45\CrossPlatformLibrary.xml" />
-
-    <!--Windows Phone 8-->
-    <file src="..\CrossPlatformLibrary.WindowsPhone8\Bin\Release\CrossPlatformLibrary.dll" target="lib\wp8\CrossPlatformLibrary.dll" />
-    <file src="..\CrossPlatformLibrary.WindowsPhone8\Bin\Release\CrossPlatformLibrary.pdb" target="lib\wp8\CrossPlatformLibrary.pdb" />
-    <file src="..\CrossPlatformLibrary.WindowsPhone8\Bin\Release\CrossPlatformLibrary.xml" target="lib\wp8\CrossPlatformLibrary.xml" />
-
-    <!--Windows Phone 8.1-->
-    <file src="..\CrossPlatformLibrary.WindowsPhone81\Bin\Release\CrossPlatformLibrary.dll" target="lib\wpa81\CrossPlatformLibrary.dll" />
-    <file src="..\CrossPlatformLibrary.WindowsPhone81\Bin\Release\CrossPlatformLibrary.pdb" target="lib\wpa81\CrossPlatformLibrary.pdb" />
-    <file src="..\CrossPlatformLibrary.WindowsPhone81\Bin\Release\CrossPlatformLibrary.xml" target="lib\wpa81\CrossPlatformLibrary.xml" />
-
-    <!--Windows Store 8.1-->
-    <file src="..\CrossPlatformLibrary.WindowsStore\Bin\Release\CrossPlatformLibrary.dll" target="lib\win81\CrossPlatformLibrary.dll" />
-    <file src="..\CrossPlatformLibrary.WindowsStore\Bin\Release\CrossPlatformLibrary.pdb" target="lib\win81\CrossPlatformLibrary.pdb" />
-    <file src="..\CrossPlatformLibrary.WindowsStore\Bin\Release\CrossPlatformLibrary.xml" target="lib\win81\CrossPlatformLibrary.xml" />
 
     <!--Universal Windows Platform-->
     <file src="..\CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.dll" target="lib\uap10.0\CrossPlatformLibrary.dll" />

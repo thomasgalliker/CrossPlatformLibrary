@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TypeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC\IContainerExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoC\IIocContainer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC\IResolvedParameter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC\ISimpleIoc.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC\PreferredConstructor.cs" />

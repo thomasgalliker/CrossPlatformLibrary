@@ -11,7 +11,7 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
-      "CrossPlatformLibrary/2.0.2-pre2": {
+      "CrossPlatformLibrary/3.0.1-pre3": {
         "type": "package",
         "dependencies": {
           "CommonServiceLocator": "1.3.0",
@@ -2222,7 +2222,7 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
-      "CrossPlatformLibrary/2.0.2-pre2": {
+      "CrossPlatformLibrary/3.0.1-pre3": {
         "type": "package",
         "dependencies": {
           "CommonServiceLocator": "1.3.0",
@@ -4516,7 +4516,7 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
-      "CrossPlatformLibrary/2.0.2-pre2": {
+      "CrossPlatformLibrary/3.0.1-pre3": {
         "type": "package",
         "dependencies": {
           "CommonServiceLocator": "1.3.0",
@@ -6846,7 +6846,7 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
-      "CrossPlatformLibrary/2.0.2-pre2": {
+      "CrossPlatformLibrary/3.0.1-pre3": {
         "type": "package",
         "dependencies": {
           "CommonServiceLocator": "1.3.0",
@@ -9149,7 +9149,7 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
-      "CrossPlatformLibrary/2.0.2-pre2": {
+      "CrossPlatformLibrary/3.0.1-pre3": {
         "type": "package",
         "dependencies": {
           "CommonServiceLocator": "1.3.0",
@@ -11488,7 +11488,7 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
-      "CrossPlatformLibrary/2.0.2-pre2": {
+      "CrossPlatformLibrary/3.0.1-pre3": {
         "type": "package",
         "dependencies": {
           "CommonServiceLocator": "1.3.0",
@@ -13791,7 +13791,7 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
-      "CrossPlatformLibrary/2.0.2-pre2": {
+      "CrossPlatformLibrary/3.0.1-pre3": {
         "type": "package",
         "dependencies": {
           "CommonServiceLocator": "1.3.0",
@@ -16134,12 +16134,12 @@
         "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.pdb"
       ]
     },
-    "CrossPlatformLibrary/2.0.2-pre2": {
-      "sha512": "L/e4f/dqCwTFtSTpIWcCjo+2waMhqFxZT5kTwsRsTQ+kdNYaK8cC9Jd0U2UiXXfg4CBBL5TtjYUV9P6bTl9V3g==",
+    "CrossPlatformLibrary/3.0.1-pre3": {
+      "sha512": "o64YcIpom7OFyZTZF9Yo3gnegmu2jVwIOxAU9wDEVs0SLJnvSmD622jZ9OpJ7V/M2cGi0ULmFt51d3Pgv0Cbzg==",
       "type": "package",
-      "path": "crossplatformlibrary/2.0.2-pre2",
+      "path": "crossplatformlibrary/3.0.1-pre3",
       "files": [
-        "CrossPlatformLibrary.2.0.2-pre2.nupkg.sha512",
+        "CrossPlatformLibrary.3.0.1-pre3.nupkg.sha512",
         "CrossPlatformLibrary.nuspec",
         "content/xamarin.ios10/LinkerHelper.cs",
         "lib/MonoAndroid10/CrossPlatformLibrary.dll",
@@ -16154,15 +16154,6 @@
         "lib/uap10.0/CrossPlatformLibrary.dll",
         "lib/uap10.0/CrossPlatformLibrary.pdb",
         "lib/uap10.0/CrossPlatformLibrary.xml",
-        "lib/win81/CrossPlatformLibrary.dll",
-        "lib/win81/CrossPlatformLibrary.pdb",
-        "lib/win81/CrossPlatformLibrary.xml",
-        "lib/wp8/CrossPlatformLibrary.dll",
-        "lib/wp8/CrossPlatformLibrary.pdb",
-        "lib/wp8/CrossPlatformLibrary.xml",
-        "lib/wpa81/CrossPlatformLibrary.dll",
-        "lib/wpa81/CrossPlatformLibrary.pdb",
-        "lib/wpa81/CrossPlatformLibrary.xml",
         "lib/xamarin.ios10/CrossPlatformLibrary.dll",
         "lib/xamarin.ios10/CrossPlatformLibrary.pdb",
         "lib/xamarin.ios10/CrossPlatformLibrary.xml",
@@ -22418,7 +22409,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "CrossPlatformLibrary >= 2.0.2-pre2",
+      "CrossPlatformLibrary >= 3.0.1-pre3",
       "Guards >= 1.0.14",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.2.3",
       "Tracing >= 1.0.3-pre5"
@@ -22426,7 +22417,8 @@
     "UAP,Version=v10.0.10240": []
   },
   "packageFolders": {
-    "C:\\Users\\thoma\\.nuget\\packages\\": {}
+    "C:\\Users\\thoma\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {}
   },
   "project": {
     "restore": {
@@ -22437,9 +22429,13 @@
       "packagesPath": "C:\\Users\\thoma\\.nuget\\packages\\",
       "outputPath": "C:\\src\\github\\thomasgalliker\\CrossPlatformLibrary\\Samples\\Sample.UWP\\obj\\",
       "projectStyle": "ProjectJson",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\"
+      ],
       "configFilePaths": [
         "C:\\Users\\thoma\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -22448,10 +22444,10 @@
       }
     },
     "dependencies": {
-      "CrossPlatformLibrary": "2.0.2-pre2",
-      "Guards": "1.0.14",
-      "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.3",
-      "Tracing": "1.0.3-pre5"
+      "CrossPlatformLibrary": "[3.0.1-pre3, )",
+      "Guards": "[1.0.14, )",
+      "Microsoft.NETCore.UniversalWindowsPlatform": "[5.2.3, )",
+      "Tracing": "[1.0.3-pre5, )"
     },
     "frameworks": {
       "uap10.0.10240": {}

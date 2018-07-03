@@ -126,8 +126,8 @@
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="CrossPlatformLibrary, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\CrossPlatformLibrary.2.0.2-pre2\lib\xamarin.ios10\CrossPlatformLibrary.dll</HintPath>
+    <Reference Include="CrossPlatformLibrary, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\CrossPlatformLibrary.3.0.1-pre3\lib\xamarin.ios10\CrossPlatformLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Guards, Version=1.0.14.0, Culture=neutral, PublicKeyToken=ac6aedb73a72f46e, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Guards.1.0.14\lib\xamarin.ios10\Guards.dll</HintPath>

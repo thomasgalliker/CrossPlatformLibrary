@@ -20,8 +20,21 @@ namespace CrossPlatformLibrary.Bootstrapping
     /// Provides an base implementation of <see cref="IBootstrapper"/> which has to be used to startup and shutdown
     /// your application. The startup sequence contains some virtual method calls which can be overriden by your own
     /// implementation of  <see cref="Bootstrapper"/>.
+    /// 
+    /// This <see cref="Bootstrapper"/> uses <see cref="SimpleIoc"/> as IoC container.
     /// </summary>
-    public class Bootstrapper : IBootstrapper
+    public class Bootstrapper : Bootstrapper<SimpleIoc>
+    {
+    }
+
+    /// <summary>
+    /// Provides an base implementation of <see cref="IBootstrapper"/> which has to be used to startup and shutdown
+    /// your application. The startup sequence contains some virtual method calls which can be overriden by your own
+    /// implementation of  <see cref="Bootstrapper"/>.
+    /// 
+    /// This <see cref="Bootstrapper{TIocContainer}"/> takes <typeparam name="TIocContainer">a generic IIocContainer</typeparam> as IoC container.
+    /// </summary>
+    public class Bootstrapper<TIocContainer> : IBootstrapper where TIocContainer : class, IIocContainer
     {
         private ITracer tracer;
 
@@ -29,13 +42,13 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// Gets the IOC/DI container of the application, which is being
         /// created as part of the application initialization process.
         /// </summary>
-        private SimpleIoc simpleIoc;
+        private TIocContainer iocContainer;
 
         private static ApplicationLifecycle applicationLifecycle = ApplicationLifecycle.Uninitialized;
 
         public Bootstrapper()
         {
-            this.tracer = Tracer.Create<Bootstrapper>();
+            this.tracer = Tracer.Create(this);
         }
 
         public static ApplicationLifecycle ApplicationLifecycle
@@ -58,6 +71,14 @@ namespace CrossPlatformLibrary.Bootstrapping
             }
         }
 
+        /// <summary>
+        /// Returns the IoC container to be used for dependency management.
+        /// </summary>
+        protected virtual TIocContainer GetIocContainer()
+        {
+            return SimpleIoc.Default as TIocContainer;
+        }
+
         /// <inheritdoc />
         public void Startup()
         {
@@ -66,20 +87,18 @@ namespace CrossPlatformLibrary.Bootstrapping
 
             this.tracer.Debug("Bootstrapper.Startup() called");
 
-            this.simpleIoc = SimpleIoc.Default;
+            this.iocContainer = this.GetIocContainer();
 
             // The Service container is a service locator too. To be backwards compatible set the ServiceLocator property.
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            ServiceLocator.SetLocatorProvider(() => this.iocContainer);
 
             if (applicationLifecycle == ApplicationLifecycle.Uninitialized)
             {
-                this.simpleIoc.Reset();
+                this.iocContainer.Reset();
 
                 this.InternalConfigureTracing();
 
                 this.InternalConfigureExceptionHandling();
-
-                this.InternalConfigureExtensions();
 
                 this.InternalConfigureContainer();
 
@@ -110,10 +129,8 @@ namespace CrossPlatformLibrary.Bootstrapping
         {
             try
             {
-                // Register ITracer with a factory that allows type-specific tracer creation
-                this.simpleIoc.Register<ITracer>((Type parentType) => Tracer.Create(parentType));
-                this.ConfigureTracing(this.simpleIoc);
-                this.tracer = Tracer.Create<Bootstrapper>();
+                this.ConfigureTracing(this.iocContainer);
+                this.tracer = Tracer.Create(this);
             }
             catch (Exception ex)
             {
@@ -128,8 +145,13 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// ConfigureTracing is called at the earliest possible point in time to configure the Tracer.
         /// By default, a platform-matching console tracer is configured.
         /// </summary>
-        protected virtual void ConfigureTracing(ISimpleIoc container)
+        protected virtual void ConfigureTracing(TIocContainer container) 
         {
+            if (container is ISimpleIoc simpleIoc)
+            {
+                // Register ITracer with a factory that allows type-specific tracer creation
+                simpleIoc.Register<ITracer>((Type parentType) => Tracer.Create(parentType));
+            }
         }
 
         private void InternalConfigureExceptionHandling()
@@ -138,11 +160,13 @@ namespace CrossPlatformLibrary.Bootstrapping
             {
                 // Register IExceptionHandlingStrategy
                 var strategyType = this.GetExceptionHandlingStrategyType() ?? this.GetDefaultExceptionHandlingStrategyType();
-                this.simpleIoc.Register<IExceptionHandlingStrategy>(strategyType);
+                this.iocContainer.RegisterSingleton<IExceptionHandlingStrategy>(strategyType);
 
                 // Register the platform-specific exception handler which injects IExceptionHandlingStrategy
-                this.simpleIoc.Register<IExceptionHandler, ExceptionHandler>();
-                this.simpleIoc.GetInstance<IExceptionHandler>();
+                this.iocContainer.RegisterSingleton<IExceptionHandler, ExceptionHandler>();
+
+                this.iocContainer.Update();
+                this.iocContainer.GetInstance<IExceptionHandler>();
             }
             catch (Exception ex)
             {
@@ -154,75 +178,6 @@ namespace CrossPlatformLibrary.Bootstrapping
         }
 
         /// <summary>
-        /// Make sure all plugin assemblies are loaded and configured accordingly.
-        /// </summary>
-        private void InternalConfigureExtensions()
-        {
-            try
-            {
-                this.tracer.Debug("Calling ConfigureExtensions procedure");
-
-                this.simpleIoc.Register<IDispatcherService, DispatcherService>();
-                this.simpleIoc.Register<ILocalizer, Localizer>();
-
-                this.simpleIoc.Register<IPlatformServices, PlatformServices>();
-                var platformServices = this.simpleIoc.GetInstance<IPlatformServices>();
-                platformServices.LoadReferencedAssemblies();
-
-                // Try to find all known types which implement the IContainerExtension interface
-                var containerExtensionInterface = typeof(IContainerExtension);
-                var allAssemblies = platformServices.GetAssemblies();
-                var containerExtensionTypes = allAssemblies
-                    .Where(a => a.FullName.ContainsAny(CrossPlatformLibrary.AssemblyNamespaces))
-                    .SelectMany(this.TryGetExportedTypes)
-                    .Distinct()
-                    .Where(t => containerExtensionInterface.GetTypeInfo().IsAssignableFrom(t.GetTypeInfo()))
-                    .Where(t => t != containerExtensionInterface)
-                    .ToList();
-
-                // Use the dependency service to create IContainerExtension-based objects
-                // and call Initialize in order to hand-over the dependency service to the modules
-                foreach (var containerExtensionType in containerExtensionTypes)
-                {
-                    string containerExtensionIdentifier = containerExtensionType.FullName;
-
-                    this.simpleIoc.Register(containerExtensionType, containerExtensionIdentifier, false);
-                    var containerExtension = (IContainerExtension)this.simpleIoc.GetInstanceWithoutCaching(containerExtensionType, containerExtensionIdentifier);
-
-                    this.tracer.Debug("Initializing container extension {0}.", containerExtension.GetType().FullName);
-                    containerExtension.Initialize(this.simpleIoc);
-
-                    this.simpleIoc.Unregister(containerExtensionType, containerExtensionIdentifier);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                if (!this.HandleBootstrappingException(ex))
-                {
-                    throw new BootstrappingException("Bootstrapping failed during ConfigureExtensions sequence.", ex);
-                }
-            }
-        }
-
-        private IEnumerable<Type> TryGetExportedTypes(Assembly assembly)
-        {
-            try
-            {
-                if (assembly.DefinedTypes.Any())
-                {
-                    return assembly.ExportedTypes;
-                }
-            }
-            catch (Exception ex)
-            {
-                this.tracer.Error("Assembly {0} could not access ExportedTypes: {1}", assembly.FullName, ex.Message);
-            }
-
-            return Enumerable.Empty<Type>();
-        }
-
-        /// <summary>
         /// A handler for bootstrapping errors occurring during startup and run.
         /// </summary>
         /// <param name="ex">The exception that has occurred.</param>
@@ -231,15 +186,19 @@ namespace CrossPlatformLibrary.Bootstrapping
         /// </returns>
         protected virtual bool HandleBootstrappingException(Exception ex)
         {
-            var exceptionHandlingStrategy = this.simpleIoc.TryGetInstance<IExceptionHandlingStrategy>();
-
-            var isExceptionHandled = exceptionHandlingStrategy != null && exceptionHandlingStrategy.HandleException(ex);
-            if (!isExceptionHandled)
+            try
             {
-                this.tracer.Exception(ex, "BootstrapperUnhandledException");
-            }
+                var exceptionHandlingStrategy = this.iocContainer.GetInstance<IExceptionHandlingStrategy>();
 
-            return isExceptionHandled;
+                var isExceptionHandled = exceptionHandlingStrategy != null && exceptionHandlingStrategy.HandleException(ex);
+                if (!isExceptionHandled)
+                {
+                    this.tracer.Exception(ex, "BootstrapperUnhandledException");
+                }
+            }
+            catch { }
+
+            return false;
         }
 
         /// <summary>
@@ -314,7 +273,13 @@ namespace CrossPlatformLibrary.Bootstrapping
             try
             {
                 this.tracer.Debug("Calling custom ConfigureContainer procedure");
-                this.ConfigureContainer(this.simpleIoc);
+
+                this.iocContainer.RegisterSingleton<IDispatcherService, DispatcherService>();
+                this.iocContainer.RegisterSingleton<ILocalizer, Localizer>();
+                this.iocContainer.RegisterSingleton<IPlatformServices, PlatformServices>();
+                this.iocContainer.Update();
+
+                this.ConfigureContainer(this.iocContainer);
             }
             catch (Exception ex)
             {
@@ -326,10 +291,10 @@ namespace CrossPlatformLibrary.Bootstrapping
         }
 
         /// <summary>
-        /// ConfigureContainer is called when all necessary dependencies are registered.
-        /// ConfigureContainer is intended to resolve dependencies and configure them before first use.
+        /// ConfigureContainer is used to register services.
+        /// After that the container is ready for service resolves.
         /// </summary>
-        protected virtual void ConfigureContainer(ISimpleIoc container)
+        protected virtual void ConfigureContainer(TIocContainer container)
         {
         }
 
@@ -351,11 +316,7 @@ namespace CrossPlatformLibrary.Bootstrapping
             finally
             {
                 applicationLifecycle = ApplicationLifecycle.Uninitialized;
-                if (this.simpleIoc != null)
-                {
-                    this.simpleIoc.Reset();
-                    this.simpleIoc = null;
-                }
+                this.iocContainer.Reset();
             }
         }
 
