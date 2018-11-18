@@ -7,7 +7,7 @@ using CrossPlatformLibrary.IoC;
 
 using FluentAssertions;
 
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Xunit;
 
 namespace CrossPlatformLibrary.Tests.IoC

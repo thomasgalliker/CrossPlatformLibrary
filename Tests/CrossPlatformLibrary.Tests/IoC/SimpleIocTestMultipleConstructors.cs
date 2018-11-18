@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using CrossPlatformLibrary.IoC;
 using CrossPlatformLibrary.Tests.Stubs;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Xunit;
 
 namespace CrossPlatformLibrary.Tests.IoC

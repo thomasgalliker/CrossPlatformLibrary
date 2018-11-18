@@ -11,7 +11,7 @@ using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.IoC;
 using CrossPlatformLibrary.Localization;
 using CrossPlatformLibrary.Tools;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Tracing;
 
 namespace CrossPlatformLibrary.Bootstrapping

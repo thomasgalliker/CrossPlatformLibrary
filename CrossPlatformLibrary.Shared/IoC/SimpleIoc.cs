@@ -23,7 +23,7 @@ using System.Reflection;
 
 using Guards;
 
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 
 using Tracing.IoC;
 
