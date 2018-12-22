@@ -23794,6 +23794,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\src\\FishApp\\local-packages\\Syncfusion.Xamarin.SfChart.15.3.0.33": {},
         "https://api.nuget.org/v3/index.json": {}
       }
     },

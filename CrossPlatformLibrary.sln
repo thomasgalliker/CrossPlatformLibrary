@@ -3,16 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.NuGet", "CrossPlatformLibrary.NuGet\CrossPlatformLibrary.NuGet.csproj", "{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}"
-	ProjectSection(ProjectDependencies) = postProject
-		{56A56F17-7DE1-4CA1-9617-BF32E971AC84} = {56A56F17-7DE1-4CA1-9617-BF32E971AC84}
-		{223A4028-327E-47EE-BCDA-92C7830CE59C} = {223A4028-327E-47EE-BCDA-92C7830CE59C}
-		{A6FCEF44-D2BA-42C7-B3CB-13667BCD7B54} = {A6FCEF44-D2BA-42C7-B3CB-13667BCD7B54}
-		{651016A2-9700-4F09-A9DA-8D4563AC0C7B} = {651016A2-9700-4F09-A9DA-8D4563AC0C7B}
-		{AC987DEB-1A08-40BF-B996-360C7FDAEBDC} = {AC987DEB-1A08-40BF-B996-360C7FDAEBDC}
-		{2882AEEB-D4CD-4EB9-8A6C-6653B33681F0} = {2882AEEB-D4CD-4EB9-8A6C-6653B33681F0}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.Android", "CrossPlatformLibrary.Android\CrossPlatformLibrary.Android.csproj", "{56A56F17-7DE1-4CA1-9617-BF32E971AC84}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.iOSUnified", "CrossPlatformLibrary.iOSUnified\CrossPlatformLibrary.iOSUnified.csproj", "{2882AEEB-D4CD-4EB9-8A6C-6653B33681F0}"
@@ -24,8 +14,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "Tests\CrossPlatformLibrary.Tests\UnitTests.csproj", "{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "Tests\CrossPlatformLibrary.IntegrationTests\IntegrationTests.csproj", "{26C644F0-FD3A-4807-8C1B-CA3BAD52A5CA}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget", "nuget", "{7F4B9C1D-9A3B-4888-B884-F3EDFC1E785E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests.Android", "Tests\IntegrationTests.Android\IntegrationTests.Android.csproj", "{9446306A-C4A8-4636-9B2B-159D70A13F69}"
 EndProject
@@ -49,7 +37,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CrossPlatformLibrary.Shared
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Console", "Samples\Sample.Console\Sample.Console.csproj", "{45E7913F-25DF-4BCD-9474-898EE5B98D52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.NetStandard", "CrossPlatformLibrary.NetStandard\CrossPlatformLibrary.NetStandard.csproj", "{223A4028-327E-47EE-BCDA-92C7830CE59C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossPlatformLibrary.NetStandard", "CrossPlatformLibrary.NetStandard\CrossPlatformLibrary.NetStandard.csproj", "{223A4028-327E-47EE-BCDA-92C7830CE59C}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -87,46 +75,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Ad-Hoc|ARM.Build.0 = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Ad-Hoc|iPhoneSimulator.Build.0 = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Ad-Hoc|x64.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Ad-Hoc|x64.Build.0 = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Ad-Hoc|x86.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Ad-Hoc|x86.Build.0 = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.AppStore|Any CPU.Build.0 = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.AppStore|ARM.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.AppStore|ARM.Build.0 = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.AppStore|iPhone.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.AppStore|iPhone.Build.0 = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.AppStore|x64.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.AppStore|x64.Build.0 = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.AppStore|x86.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.AppStore|x86.Build.0 = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Release|ARM.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Release|iPhone.Build.0 = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Release|x64.ActiveCfg = Release|Any CPU
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE}.Release|x86.ActiveCfg = Release|Any CPU
 		{56A56F17-7DE1-4CA1-9617-BF32E971AC84}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
 		{56A56F17-7DE1-4CA1-9617-BF32E971AC84}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
 		{56A56F17-7DE1-4CA1-9617-BF32E971AC84}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU
@@ -838,7 +786,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{2CF5E868-1098-4C6D-9001-27D8DC0D87BE} = {7F4B9C1D-9A3B-4888-B884-F3EDFC1E785E}
 		{F5F3FE46-24B4-4FB8-9B5C-1D26B485E0BE} = {82600A24-8220-4C54-9EE6-EFF590F0104F}
 		{26C644F0-FD3A-4807-8C1B-CA3BAD52A5CA} = {82600A24-8220-4C54-9EE6-EFF590F0104F}
 		{9446306A-C4A8-4636-9B2B-159D70A13F69} = {82600A24-8220-4C54-9EE6-EFF590F0104F}
@@ -850,7 +797,7 @@ Global
 		{45E7913F-25DF-4BCD-9474-898EE5B98D52} = {07EA1824-E9D4-42CF-8D6C-BA242B299375}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {FBB7B9FD-D594-483C-8A6F-7A6101F73C5D}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal
