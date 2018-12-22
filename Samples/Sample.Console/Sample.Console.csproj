@@ -36,9 +36,6 @@
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CommonServiceLocator.2.0.4\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="CrossPlatformLibrary, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CrossPlatformLibrary.3.0.1-pre3\lib\net45\CrossPlatformLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="Guards, Version=2.0.18298.2, Culture=neutral, PublicKeyToken=ac6aedb73a72f46e, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Guards.2.0.18298.2\lib\net45\Guards.dll</HintPath>
     </Reference>
@@ -62,6 +59,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CrossPlatformLibrary.NetFx\CrossPlatformLibrary.NetFx.csproj">
+      <Project>{ac987deb-1a08-40bf-b996-360c7fdaebdc}</Project>
+      <Name>CrossPlatformLibrary.NetFx</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
