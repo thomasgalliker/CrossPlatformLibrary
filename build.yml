@@ -24,7 +24,6 @@ variables:
   buildConfiguration: 'Release'
   buildVersionPostfix: '-pre'
   nuspecFile: 'CrossPlatformLibrary.nuspec'
-  nuspecFileAnnotations: 'CrossPlatformLibrary.Annotations.nuspec'
 
 steps:
 - task: bleddynrichards.Assembly-Info-Task.Assembly-Info-Task.Assembly-Info-Task@1
