@@ -82,11 +82,11 @@
     <file src="..\CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.pdb" target="lib\MonoAndroid10\CrossPlatformLibrary.pdb" />
     <file src="..\CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.xml" target="lib\MonoAndroid10\CrossPlatformLibrary.xml" />
 
-    <!--Xamarin.iOS Unified API-->
-    <file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.dll" target="lib\xamarin.ios10\CrossPlatformLibrary.dll" />
-    <file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.pdb" target="lib\xamarin.ios10\CrossPlatformLibrary.pdb" />
-    <file src="..\CrossPlatformLibrary.iOSUnified\bin\iPhone\Release\CrossPlatformLibrary.xml" target="lib\xamarin.ios10\CrossPlatformLibrary.xml" />
-    <file src="..\CrossPlatformLibrary.iOSUnified\LinkerHelper.cs" target="content\xamarin.ios10\LinkerHelper.cs" />
+    <!--Xamarin.iOS-->
+    <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.dll" target="lib\xamarin.ios10\CrossPlatformLibrary.dll" />
+    <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.pdb" target="lib\xamarin.ios10\CrossPlatformLibrary.pdb" />
+    <file src="..\CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.xml" target="lib\xamarin.ios10\CrossPlatformLibrary.xml" />
+    <file src="..\CrossPlatformLibrary.iOS\LinkerHelper.cs" target="content\xamarin.ios10\LinkerHelper.cs" />
 
     <!--.Net Framework 4.5-->
     <file src="..\CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.dll" target="lib\net45\CrossPlatformLibrary.dll" />
