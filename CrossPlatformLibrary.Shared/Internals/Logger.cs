@@ -4,23 +4,15 @@ namespace CrossPlatformLibrary.Internals
 {
     public interface ITracer
     {
-        void Error(string errorMessage);
-        void Info(string errorMessage);
+        void Error(string message);
+        void Info(string message);
         void FatalError(Exception exception);
-        void Debug(string msg);
-        void Exception(Exception exception, string msg);
+        void Debug(string message);
+        void Exception(Exception exception, string message);
     }
 
     public class Tracer : ITracer
     {
-        public static void ArgumentNotNull<T>(T param, string paramName)
-        {
-            if (param == null)
-            {
-                throw new ArgumentNullException(paramName, $"{paramName} must not be null");
-            }
-        }
-
         public static ITracer Create<T>(T obj)
         {
             return new Tracer();
@@ -31,12 +23,12 @@ namespace CrossPlatformLibrary.Internals
             return new Tracer();
         }
 
-        public void Error(string errorMessage)
+        public void Error(string message)
         {
             throw new NotImplementedException();
         }
 
-        public void Info(string errorMessage)
+        public void Info(string message)
         {
             throw new NotImplementedException();
         }
@@ -46,12 +38,12 @@ namespace CrossPlatformLibrary.Internals
             throw new NotImplementedException();
         }
 
-        public void Debug(string msg)
+        public void Debug(string message)
         {
             throw new NotImplementedException();
         }
 
-        public void Exception(Exception exception, string msg)
+        public void Exception(Exception exception, string message)
         {
             throw new NotImplementedException();
         }

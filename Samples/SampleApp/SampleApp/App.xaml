@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:CrossPlatformLibrary.Forms;assembly=CrossPlatformLibrary.Forms"
+             x:Class="SampleApp.App">
+    <Application.Resources >
+
+        <Color x:Key="PrimarySuperBright">#E040FB</Color>
+        <Color x:Key="PrimaryBright">#E040FB</Color>
+        <Color x:Key="Primary">#E040FB</Color>
+        <Color x:Key="PrimaryDark">#E040FB</Color>
+        <Color x:Key="Accent">#E040FB</Color>
+    </Application.Resources>
+</Application>

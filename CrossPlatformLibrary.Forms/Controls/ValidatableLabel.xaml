@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    x:Class="CrossPlatformLibrary.Forms.Controls.ValidatableLabel"
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="FillAndExpand"
+    BackgroundColor="Transparent"
+    RowSpacing="0"
+    ColumnSpacing="0"
+    Padding="0, 0, 0, 15"
+    x:Name="Control">
+    
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!--Annotation Text-->
+    <Label
+        Grid.Row="0"
+        Text="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
+        IsVisible="{Binding Text, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
+        Style="{StaticResource AnnotationEntryLabelStyle}"
+        BackgroundColor="Transparent"
+        InputTransparent="True"/>
+
+    <controls:CustomLabel
+        Grid.Row="1"
+        Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}"
+        Style="{Binding Style, Source={x:Reference Control}, Mode=OneWay}"
+        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
+        LineBreakMode="{Binding LineBreakMode, Source={x:Reference Control}, Mode=OneWay}"
+        BackgroundColor="Transparent" 
+        VerticalOptions="StartAndExpand">
+        <controls:CustomLabel.Margin>
+            <OnPlatform x:TypeArguments="Thickness" Android="4, -4, 0, 4" iOS="0, 0, 0, 0" WinPhone="0, 0, 0, 0" />
+        </controls:CustomLabel.Margin>
+    </controls:CustomLabel>
+
+    <!--Validation Error Text-->
+    <!--There is currently no support for validation errors in ValidatableLabel-->
+</Grid>

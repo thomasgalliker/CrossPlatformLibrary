@@ -36,7 +36,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" version="[2.4.0.280,)"/>
+    <PackageReference Include="Xamarin.Forms" version="[3.4.0.1008975,)" />
+    <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="28.0.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +53,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Effects\BorderEffect.cs" />
+    <Compile Include="Effects\DatePickerLineColorEffect.cs" />
+    <Compile Include="Effects\Effects.cs" />
+    <Compile Include="Effects\EntryLineColorEffect.cs" />
+    <Compile Include="Effects\PickerLineColorEffect.cs" />
+    <Compile Include="Effects\TimePickerLineColorEffect.cs" />
+    <Compile Include="Effects\UnderlineTextEffect.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -63,6 +75,17 @@
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CrossPlatformLibrary.Android\CrossPlatformLibrary.Android.csproj">
+      <Project>{0048eba2-ef2b-4854-812a-76ba6c318845}</Project>
+      <Name>CrossPlatformLibrary.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CrossPlatformLibrary.Forms\CrossPlatformLibrary.Forms.csproj">
+      <Project>{92e8a8df-7f7b-4978-b5cd-8afb0e13cb49}</Project>
+      <Name>CrossPlatformLibrary.Forms</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="..\CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

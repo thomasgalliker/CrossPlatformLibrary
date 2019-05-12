@@ -1,14 +1,26 @@
-﻿using CrossPlatformLibrary.Internals;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Extensions
 {
     public static class EnumerableExtensions
     {
+        public static IList CreateList(this IEnumerable enumerable)
+        {
+            var list = new Collection<object>();
+
+            foreach (var item in enumerable)
+            {
+                list.Add(item);
+            }
+
+            return list;
+        }
+
         public static void Sort<TSource, TKey>(this ICollection<TSource> source, Func<TSource, TKey> keySelector)
         {
             Guard.ArgumentNotNull(source, nameof(source));

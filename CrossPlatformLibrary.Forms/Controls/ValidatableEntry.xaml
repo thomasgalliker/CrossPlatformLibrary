@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
+    x:Class="CrossPlatformLibrary.Forms.Controls.ValidatableEntry"
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="Fill"
+    HeightRequest="48"
+    BackgroundColor="Transparent"
+    ColumnSpacing="0"
+    RowSpacing="0"
+    x:Name="Control">
+
+    <Entry 
+        Grid.Row="0"
+        x:Name="Entry"
+        HeightRequest="48"
+        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}"
+        Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
+        Keyboard="{Binding Keyboard, Source={x:Reference Control}, Mode=OneWay}"
+        IsPassword="{Binding IsPassword, Source={x:Reference Control}, Mode=OneWay}"
+        Style="{Binding Style, Source={x:Reference Control}, Mode=OneWay}"
+        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
+        effects:LineColorEffect.ApplyLineColor="True"
+        effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
+        Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
+        BackgroundColor="Transparent">
+
+    </Entry>
+
+    <!--Annotation Text-->
+    <Label
+        Grid.Row="0"
+        Text="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
+        IsVisible="{Binding Text, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
+        Style="{StaticResource AnnotationEntryLabelStyle}"
+        BackgroundColor="Transparent"
+        InputTransparent="True"/>
+
+    <!--Validation Error Text-->
+    <Label
+        Grid.Row="0"
+        Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}"
+        Style="{StaticResource ValidationLabelStyle}"/>
+</Grid>

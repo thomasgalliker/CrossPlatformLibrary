@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+      xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
+      xmlns:behaviors="clr-namespace:CrossPlatformLibrary.Forms.Behaviors;assembly=CrossPlatformLibrary.Forms"
+      x:Class="SampleApp.Controls.AddressControl"
+      x:Name="Control">
+
+    <StackLayout Spacing="0">
+        <controls:CardView>
+            <StackLayout Spacing="0">
+                <controls:LabelSection Text="{localization:Translate UserProfileAddressCaptionText}"/>
+                <controls:HeaderDivider/>
+                <Grid Padding="{StaticResource CardViewPadding}" BackgroundColor="{StaticResource WindowBackground}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <controls:ValidatableEntry 
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Text="{Binding Street, Mode=TwoWay}"
+                        Placeholder="{localization:Translate UserAddressStreetLabelText}"
+                        Keyboard="Text"
+                        ValidationErrors="{Binding Errors[Street]}"
+                        BackgroundColor="{StaticResource WindowBackground}">
+                        <controls:ValidatableEntry.Behaviors>
+                            <behaviors:MaxLengthTextBehavior MaxLength="200"/>
+                        </controls:ValidatableEntry.Behaviors>
+                    </controls:ValidatableEntry>
+
+                    <controls:ValidatableEntry 
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Text="{Binding PostalCode, Mode=TwoWay}"
+                        Placeholder="{localization:Translate UserAddressPostalCodeLabelText}"
+                        Keyboard="Numeric"
+                        ValidationErrors="{Binding Errors[PostalCode]}">
+                        <controls:ValidatableEntry.Behaviors>
+                            <behaviors:MaxLengthTextBehavior MaxLength="4"/>
+                        </controls:ValidatableEntry.Behaviors>
+                    </controls:ValidatableEntry>
+
+                    <controls:ValidatableEntry 
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Text="{Binding Place, Mode=TwoWay}"
+                        Placeholder="{localization:Translate UserAddressPlaceLabelText}"
+                        Keyboard="Text"
+                        ValidationErrors="{Binding Errors[Place]}">
+                        <controls:ValidatableEntry.Behaviors>
+                            <behaviors:MaxLengthTextBehavior MaxLength="200"/>
+                        </controls:ValidatableEntry.Behaviors>
+                    </controls:ValidatableEntry>
+
+                    <controls:ValidatablePicker
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Placeholder="{localization:Translate UserAddressCountryLabelText}"
+                        ItemsSource="{Binding Countries}"
+                        DisplayMemberPath="Name"
+                        SelectedValuePath="Id"
+                        SelectedItem="{Binding Country, Mode=TwoWay}" 
+                        ValidationErrors="{Binding Errors[Country]}"/>
+
+                </Grid>
+                <controls:FooterDivider/>
+            </StackLayout>
+        </controls:CardView>
+    </StackLayout>
+</Grid>

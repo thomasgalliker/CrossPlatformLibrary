@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SampleApp"
+             xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+             xmlns:userControls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
+             xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
+             x:Class="SampleApp.MainPage">
+
+  <!--<Grid>
+    <controls1:AddressControl />
+  </Grid>-->
+    <controls:AlwaysScrollView>
+        <Grid>
+            <Grid IsVisible="{Binding HasViewModelError, Mode=OneWay, Converter={StaticResource BoolInverter}}">
+                <StackLayout IsVisible="{Binding IsNotBusy}">
+                    <StackLayout
+                        Spacing="{DynamicResource CardSpacing}"
+                        Padding="{DynamicResource CardPadding}">
+
+                        <!--User's Personal Information-->
+                        <!--<account:PersonalInformationControl
+                            ShowEditableFieldsOnly="False"
+                            BindingContext="{Binding PersonalInformation}" />-->
+
+                        <!--User's Identification-->
+                        <!--<account:UserIdentificationControl
+                            BindingContext="{Binding UserIdentification}" />-->
+
+                        <!--User's Address-->
+                        <userControls:AddressControl
+                            BindingContext="{Binding Address}" />
+
+                    </StackLayout>
+
+                    <controls:CustomButton
+                        Margin="{StaticResource ButtonMargin}"
+                        Text="{localization:Translate SaveButtonText}"
+                        Command="{Binding SaveProfileButtonCommand}"
+                        Style="{StaticResource CustomButtonPrimaryStyle}"/>
+                </StackLayout>
+
+                <controls:CustomActivityIndicator
+                    IsVisible="{Binding IsBusy, Mode=OneWay}"
+                    Caption="{localization:Translate LoadingText}" />
+            </Grid>
+
+            <controls:ViewModelErrorControl
+                IsVisible="{Binding HasViewModelError, Mode=OneWay}"
+                ViewModelError="{Binding ViewModelError, Mode=OneWay}"/>
+        </Grid>
+    </controls:AlwaysScrollView>
+
+
+</ContentPage>

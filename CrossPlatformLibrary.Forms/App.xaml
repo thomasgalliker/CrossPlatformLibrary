@@ -1,0 +1,753 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+             xmlns:converters="clr-namespace:CrossPlatformLibrary.Forms.Converters;assembly=CrossPlatformLibrary.Forms"
+             xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
+             x:Class="CrossPlatformLibrary.Forms.App">
+  <Application.Resources>
+    <ResourceDictionary>
+
+      <!--Paddings-->
+      <x:Double x:Key="SmallSpacing">4</x:Double>
+      <x:Double x:Key="MediumSpacing">8</x:Double>
+      <x:Double x:Key="StandardSpacing">16</x:Double>
+
+      <Thickness x:Key="SmallPadding">4</Thickness>
+      <Thickness x:Key="MediumPadding">8</Thickness>
+
+      <Thickness x:Key="StandardPadding"
+                 Left="{StaticResource StandardSpacing}"
+                 Top="{StaticResource StandardSpacing}"
+                 Right="{StaticResource StandardSpacing}"
+                 Bottom="{StaticResource StandardSpacing}"/>
+
+      <Thickness x:Key="CardViewPadding"
+                 Left="{StaticResource StandardSpacing}"
+                 Top="{StaticResource MediumSpacing}"
+                 Right="{StaticResource StandardSpacing}"
+                 Bottom="{StaticResource MediumSpacing}"/>
+
+      <Thickness x:Key="ButtonMargin"
+                 Left="{StaticResource MediumSpacing}"
+                 Top="0"
+                 Right="{StaticResource MediumSpacing}"
+                 Bottom="{StaticResource StandardSpacing}"/>
+
+      <!--Colors-->
+      <OnPlatform x:TypeArguments="Color" x:Key="WindowBackgroundTable">
+        <On Platform="Android" Value="#F5F5F5" />
+        <On Platform="iOS" Value="#EFEFF4" />
+      </OnPlatform>
+      <OnPlatform x:TypeArguments="Color" x:Key="WindowBackground">
+        <On Platform="Android" Value="#F5F5F5" />
+        <On Platform="iOS" Value="White" />
+      </OnPlatform>
+      <OnPlatform x:TypeArguments="Color" x:Key="LabelSectionBackground">
+        <On Platform="Android" Value="White" />
+        <On Platform="iOS" Value="#EFEFF4" />
+      </OnPlatform>
+      <OnPlatform x:TypeArguments="Color" x:Key="Divider">
+        <On Platform="Android" Value="#ECECEC" />
+        <On Platform="iOS" Value="#C8C7CC" />
+      </OnPlatform>
+      <Color x:Key="ButtonBorder">#C8C7CC</Color>
+      <Color x:Key="ListSeparator">#C8C7CC</Color>
+      <OnPlatform x:TypeArguments="Thickness" Android="8, 16" iOS="0, 0, 0, 16" WinPhone="0, 0, 0, 16" x:Key="CardPadding"/>
+      <OnPlatform x:TypeArguments="x:Double" Android="16" iOS="0" WinPhone="0" x:Key="CardSpacing"/>
+
+      <OnPlatform x:TypeArguments="x:Double" Android="16" iOS="16" WinPhone="13" x:Key="CustomListItemTextStyleSize" />
+      <OnPlatform x:TypeArguments="x:Double" Android="13" iOS="13" WinPhone="13" x:Key="CustomListItemDetailTextStyleSize" />
+      <OnPlatform x:TypeArguments="x:Double" Android="14" iOS="14" WinPhone="14" x:Key="TweetTextSize" />
+      <OnPlatform x:TypeArguments="Font" Android="SemiBold" iOS="SemiBold" WinPhone="SemiBold" x:Key="TweetUserTextSize" />
+
+      <!--Source: https://material.io/guidelines/style/color.html#color-color-palette-->
+
+      <!--Red-->
+      <Color x:Key="ColorCode50">#ffebee</Color>
+      <Color x:Key="ColorCode100">#ffcdd2</Color>
+      <Color x:Key="ColorCode200">#ef9a9a</Color>
+      <Color x:Key="ColorCode300">#e57373</Color>
+      <Color x:Key="ColorCode400">#ef5350</Color>
+      <Color x:Key="ColorCode500">#f44336</Color>
+      <Color x:Key="ColorCode600">#e53935</Color>
+      <Color x:Key="ColorCode700">#d32f2f</Color>
+      <Color x:Key="ColorCode800">#c62828</Color>
+      <Color x:Key="ColorCode900">#b71c1c</Color>
+      <Color x:Key="ColorCodeA100">#ff8a80</Color>
+      <Color x:Key="ColorCodeA200">#ff5252</Color>
+      <Color x:Key="ColorCodeA400">#ff1744</Color>
+      <Color x:Key="ColorCodeA700">#d50000</Color>
+
+      <!--Pink-->
+      <Color x:Key="ColorPink50">#FCE4EC</Color>
+      <Color x:Key="ColorPink100">#F8BBD0</Color>
+      <Color x:Key="ColorPink200">#F48FB1</Color>
+      <Color x:Key="ColorPink300">#F06292</Color>
+      <Color x:Key="ColorPink400">#EC407A</Color>
+      <Color x:Key="ColorPink500">#E91E63</Color>
+      <Color x:Key="ColorPink600">#D81B60</Color>
+      <Color x:Key="ColorPink700">#C2185B</Color>
+      <Color x:Key="ColorPink800">#AD1457</Color>
+      <Color x:Key="ColorPink900">#880E4F</Color>
+      <Color x:Key="ColorPinkA100">#FF80AB</Color>
+      <Color x:Key="ColorPinkA200">#FF4081</Color>
+      <Color x:Key="ColorPinkA400">#F50057</Color>
+      <Color x:Key="ColorPinkA700">#C51162</Color>
+
+      <!--Purple-->
+      <Color x:Key="ColorPurple50">#F3E5F5</Color>
+      <Color x:Key="ColorPurple100">#E1BEE7</Color>
+      <Color x:Key="ColorPurple200">#CE93D8</Color>
+      <Color x:Key="ColorPurple300">#BA68C8</Color>
+      <Color x:Key="ColorPurple400">#AB47BC</Color>
+      <Color x:Key="ColorPurple500">#9C27B0</Color>
+      <Color x:Key="ColorPurple600">#8E24AA</Color>
+      <Color x:Key="ColorPurple700">#7B1FA2</Color>
+      <Color x:Key="ColorPurple800">#6A1B9A</Color>
+      <Color x:Key="ColorPurple900">#4A148C</Color>
+      <Color x:Key="ColorPurpleA100">#EA80FC</Color>
+      <Color x:Key="ColorPurpleA200">#E040FB</Color>
+      <Color x:Key="ColorPurpleA400">#D500F9</Color>
+      <Color x:Key="ColorPurpleA700">#AA00FF</Color>
+
+      <!--Deep Purple-->
+      <Color x:Key="ColorDeepPurple50">#EDE7F6</Color>
+      <Color x:Key="ColorDeepPurple100">#D1C4E9</Color>
+      <Color x:Key="ColorDeepPurple200">#B39DDB</Color>
+      <Color x:Key="ColorDeepPurple300">#9575CD</Color>
+      <Color x:Key="ColorDeepPurple400">#7E57C2</Color>
+      <Color x:Key="ColorDeepPurple500">#673AB7</Color>
+      <Color x:Key="ColorDeepPurple600">#5E35B1</Color>
+      <Color x:Key="ColorDeepPurple700">#512DA8</Color>
+      <Color x:Key="ColorDeepPurple800">#4527A0</Color>
+      <Color x:Key="ColorDeepPurple900">#311B92</Color>
+      <Color x:Key="ColorDeepPurpleA100">#B388FF</Color>
+      <Color x:Key="ColorDeepPurpleA200">#7C4DFF</Color>
+      <Color x:Key="ColorDeepPurpleA400">#651FFF</Color>
+      <Color x:Key="ColorDeepPurpleA700">#6200EA</Color>
+
+      <!--Indigo-->
+      <Color x:Key="ColorIndigo50">#E8EAF6</Color>
+      <Color x:Key="ColorIndigo100">#C5CAE9</Color>
+      <Color x:Key="ColorIndigo200">#9FA8DA</Color>
+      <Color x:Key="ColorIndigo300">#7986CB</Color>
+      <Color x:Key="ColorIndigo400">#5C6BC0</Color>
+      <Color x:Key="ColorIndigo500">#3F51B5</Color>
+      <Color x:Key="ColorIndigo600">#3949AB</Color>
+      <Color x:Key="ColorIndigo700">#303F9F</Color>
+      <Color x:Key="ColorIndigo800">#283593</Color>
+      <Color x:Key="ColorIndigo900">#1A237E</Color>
+      <Color x:Key="ColorIndigoA100">#8C9EFF</Color>
+      <Color x:Key="ColorIndigoA200">#536DFE</Color>
+      <Color x:Key="ColorIndigoA400">#3D5AFE</Color>
+      <Color x:Key="ColorIndigoA700">#304FFE</Color>
+
+      <!--Blue-->
+      <Color x:Key="ColorBlue50">#E3F2FD</Color>
+      <Color x:Key="ColorBlue100">#BBDEFB</Color>
+      <Color x:Key="ColorBlue200">#90CAF9</Color>
+      <Color x:Key="ColorBlue300">#64B5F6</Color>
+      <Color x:Key="ColorBlue400">#42A5F5</Color>
+      <Color x:Key="ColorBlue500">#2196F3</Color>
+      <Color x:Key="ColorBlue600">#1E88E5</Color>
+      <Color x:Key="ColorBlue700">#1976D2</Color>
+      <Color x:Key="ColorBlue800">#1565C0</Color>
+      <Color x:Key="ColorBlue900">#0D47A1</Color>
+      <Color x:Key="ColorBlueA100">#82B1FF</Color>
+      <Color x:Key="ColorBlueA200">#448AFF</Color>
+      <Color x:Key="ColorBlueA400">#2979FF</Color>
+      <Color x:Key="ColorBlueA700">#2962FF</Color>
+
+      <!--Light Blue-->
+      <Color x:Key="ColorLightBlue50">#E1F5FE</Color>
+      <Color x:Key="ColorLightBlue100">#B3E5FC</Color>
+      <Color x:Key="ColorLightBlue200">#81D4FA</Color>
+      <Color x:Key="ColorLightBlue300">#4FC3F7</Color>
+      <Color x:Key="ColorLightBlue400">#29B6F6</Color>
+      <Color x:Key="ColorLightBlue500">#03A9F4</Color>
+      <Color x:Key="ColorLightBlue600">#039BE5</Color>
+      <Color x:Key="ColorLightBlue700">#0288D1</Color>
+      <Color x:Key="ColorLightBlue800">#0277BD</Color>
+      <Color x:Key="ColorLightBlue900">#01579B</Color>
+      <Color x:Key="ColorLightBlueA100">#80D8FF</Color>
+      <Color x:Key="ColorLightBlueA200">#40C4FF</Color>
+      <Color x:Key="ColorLightBlueA400">#00B0FF</Color>
+      <Color x:Key="ColorLightBlueA700">#0091EA</Color>
+
+      <!--Cyan-->
+      <Color x:Key="ColorCyan50">#E0F7FA</Color>
+      <Color x:Key="ColorCyan100">#B2EBF2</Color>
+      <Color x:Key="ColorCyan200">#80DEEA</Color>
+      <Color x:Key="ColorCyan300">#4DD0E1</Color>
+      <Color x:Key="ColorCyan400">#26C6DA</Color>
+      <Color x:Key="ColorCyan500">#00BCD4</Color>
+      <Color x:Key="ColorCyan600">#00ACC1</Color>
+      <Color x:Key="ColorCyan700">#0097A7</Color>
+      <Color x:Key="ColorCyan800">#00838F</Color>
+      <Color x:Key="ColorCyan900">#006064</Color>
+      <Color x:Key="ColorCyanA100">#84FFFF</Color>
+      <Color x:Key="ColorCyanA200">#18FFFF</Color>
+      <Color x:Key="ColorCyanA400">#00E5FF</Color>
+      <Color x:Key="ColorCyanA700">#00B8D4</Color>
+
+      <!--Teal-->
+      <Color x:Key="ColorTeal50">#E0F2F1</Color>
+      <Color x:Key="ColorTeal100">#B2DFDB</Color>
+      <Color x:Key="ColorTeal200">#80CBC4</Color>
+      <Color x:Key="ColorTeal300">#4DB6AC</Color>
+      <Color x:Key="ColorTeal400">#26A69A</Color>
+      <Color x:Key="ColorTeal500">#009688</Color>
+      <Color x:Key="ColorTeal600">#00897B</Color>
+      <Color x:Key="ColorTeal700">#00796B</Color>
+      <Color x:Key="ColorTeal800">#00695C</Color>
+      <Color x:Key="ColorTeal900">#004D40</Color>
+      <Color x:Key="ColorTealA100">#A7FFEB</Color>
+      <Color x:Key="ColorTealA200">#64FFDA</Color>
+      <Color x:Key="ColorTealA400">#1DE9B6</Color>
+      <Color x:Key="ColorTealA700">#00BFA5</Color>
+
+      <!--Green-->
+      <Color x:Key="ColorGreen50">#E8F5E9</Color>
+      <Color x:Key="ColorGreen100">#C8E6C9</Color>
+      <Color x:Key="ColorGreen200">#A5D6A7</Color>
+      <Color x:Key="ColorGreen300">#81C784</Color>
+      <Color x:Key="ColorGreen400">#66BB6A</Color>
+      <Color x:Key="ColorGreen500">#4CAF50</Color>
+      <Color x:Key="ColorGreen600">#43A047</Color>
+      <Color x:Key="ColorGreen700">#388E3C</Color>
+      <Color x:Key="ColorGreen800">#2E7D32</Color>
+      <Color x:Key="ColorGreen900">#1B5E20</Color>
+      <Color x:Key="ColorGreenA100">#B9F6CA</Color>
+      <Color x:Key="ColorGreenA200">#69F0AE</Color>
+      <Color x:Key="ColorGreenA400">#00E676</Color>
+      <Color x:Key="ColorGreenA700">#00C853</Color>
+
+      <!--Light Green-->
+      <Color x:Key="ColorLightGreen50">#F1F8E9</Color>
+      <Color x:Key="ColorLightGreen100">#DCEDC8</Color>
+      <Color x:Key="ColorLightGreen200">#C5E1A5</Color>
+      <Color x:Key="ColorLightGreen300">#AED581</Color>
+      <Color x:Key="ColorLightGreen400">#9CCC65</Color>
+      <Color x:Key="ColorLightGreen500">#8BC34A</Color>
+      <Color x:Key="ColorLightGreen600">#7CB342</Color>
+      <Color x:Key="ColorLightGreen700">#689F38</Color>
+      <Color x:Key="ColorLightGreen800">#558B2F</Color>
+      <Color x:Key="ColorLightGreen900">#33691E</Color>
+      <Color x:Key="ColorLightGreenA100">#CCFF90</Color>
+      <Color x:Key="ColorLightGreenA200">#B2FF59</Color>
+      <Color x:Key="ColorLightGreenA400">#76FF03</Color>
+      <Color x:Key="ColorLightGreenA700">#64DD17</Color>
+
+      <!--Lime-->
+      <Color x:Key="ColorLime50">#F9FBE7</Color>
+      <Color x:Key="ColorLime100">#F0F4C3</Color>
+      <Color x:Key="ColorLime200">#E6EE9C</Color>
+      <Color x:Key="ColorLime300">#DCE775</Color>
+      <Color x:Key="ColorLime400">#D4E157</Color>
+      <Color x:Key="ColorLime500">#CDDC39</Color>
+      <Color x:Key="ColorLime600">#C0CA33</Color>
+      <Color x:Key="ColorLime700">#AFB42B</Color>
+      <Color x:Key="ColorLime800">#9E9D24</Color>
+      <Color x:Key="ColorLime900">#827717</Color>
+      <Color x:Key="ColorLimeA100">#F4FF81</Color>
+      <Color x:Key="ColorLimeA200">#EEFF41</Color>
+      <Color x:Key="ColorLimeA400">#C6FF00</Color>
+      <Color x:Key="ColorLimeA700">#AEEA00</Color>
+
+      <!--Yellow-->
+      <Color x:Key="ColorYellow50">#FFFDE7</Color>
+      <Color x:Key="ColorYellow100">#FFF9C4</Color>
+      <Color x:Key="ColorYellow200">#FFF59D</Color>
+      <Color x:Key="ColorYellow300">#FFF176</Color>
+      <Color x:Key="ColorYellow400">#FFEE58</Color>
+      <Color x:Key="ColorYellow500">#FFEB3B</Color>
+      <Color x:Key="ColorYellow600">#FDD835</Color>
+      <Color x:Key="ColorYellow700">#FBC02D</Color>
+      <Color x:Key="ColorYellow800">#F9A825</Color>
+      <Color x:Key="ColorYellow900">#F57F17</Color>
+      <Color x:Key="ColorYellowA100">#FFFF8D</Color>
+      <Color x:Key="ColorYellowA200">#FFFF00</Color>
+      <Color x:Key="ColorYellowA400">#FFEA00</Color>
+      <Color x:Key="ColorYellowA700">#FFD600</Color>
+
+      <!--Amber-->
+      <Color x:Key="ColorAmber50">#FFF8E1</Color>
+      <Color x:Key="ColorAmber100">#FFECB3</Color>
+      <Color x:Key="ColorAmber200">#FFE082</Color>
+      <Color x:Key="ColorAmber300">#FFD54F</Color>
+      <Color x:Key="ColorAmber400">#FFCA28</Color>
+      <Color x:Key="ColorAmber500">#FFC107</Color>
+      <Color x:Key="ColorAmber600">#FFB300</Color>
+      <Color x:Key="ColorAmber700">#FFA000</Color>
+      <Color x:Key="ColorAmber800">#FF8F00</Color>
+      <Color x:Key="ColorAmber900">#FF6F00</Color>
+      <Color x:Key="ColorAmberA100">#FFE57F</Color>
+      <Color x:Key="ColorAmberA200">#FFD740</Color>
+      <Color x:Key="ColorAmberA400">#FFC400</Color>
+      <Color x:Key="ColorAmberA700">#FFAB00</Color>
+
+      <!--Orange-->
+      <Color x:Key="ColorOrange50">#FFF3E0</Color>
+      <Color x:Key="ColorOrange100">#FFE0B2</Color>
+      <Color x:Key="ColorOrange200">#FFCC80</Color>
+      <Color x:Key="ColorOrange300">#FFB74D</Color>
+      <Color x:Key="ColorOrange400">#FFA726</Color>
+      <Color x:Key="ColorOrange500">#FF9800</Color>
+      <Color x:Key="ColorOrange600">#FB8C00</Color>
+      <Color x:Key="ColorOrange700">#F57C00</Color>
+      <Color x:Key="ColorOrange800">#EF6C00</Color>
+      <Color x:Key="ColorOrange900">#E65100</Color>
+      <Color x:Key="ColorOrangeA100">#FFD180</Color>
+      <Color x:Key="ColorOrangeA200">#FFAB40</Color>
+      <Color x:Key="ColorOrangeA400">#FF9100</Color>
+      <Color x:Key="ColorOrangeA700">#FF6D00</Color>
+
+      <!--Deep Orange-->
+      <Color x:Key="ColorDeepOrange50">#FBE9E7</Color>
+      <Color x:Key="ColorDeepOrange100">#FFCCBC</Color>
+      <Color x:Key="ColorDeepOrange200">#FFAB91</Color>
+      <Color x:Key="ColorDeepOrange300">#FF8A65</Color>
+      <Color x:Key="ColorDeepOrange400">#FF7043</Color>
+      <Color x:Key="ColorDeepOrange500">#FF5722</Color>
+      <Color x:Key="ColorDeepOrange600">#F4511E</Color>
+      <Color x:Key="ColorDeepOrange700">#E64A19</Color>
+      <Color x:Key="ColorDeepOrange800">#D84315</Color>
+      <Color x:Key="ColorDeepOrange900">#BF360C</Color>
+      <Color x:Key="ColorDeepOrangeA100">#FF9E80</Color>
+      <Color x:Key="ColorDeepOrangeA200">#FF6E40</Color>
+      <Color x:Key="ColorDeepOrangeA400">#FF3D00</Color>
+      <Color x:Key="ColorDeepOrangeA700">#DD2C00</Color>
+
+      <!--Brown-->
+      <Color x:Key="ColorBrown50">#EFEBE9</Color>
+      <Color x:Key="ColorBrown100">#D7CCC8</Color>
+      <Color x:Key="ColorBrown200">#BCAAA4</Color>
+      <Color x:Key="ColorBrown300">#A1887F</Color>
+      <Color x:Key="ColorBrown400">#8D6E63</Color>
+      <Color x:Key="ColorBrown500">#795548</Color>
+      <Color x:Key="ColorBrown600">#6D4C41</Color>
+      <Color x:Key="ColorBrown700">#5D4037</Color>
+      <Color x:Key="ColorBrown800">#4E342E</Color>
+      <Color x:Key="ColorBrown900">#3E2723</Color>
+
+      <!--Grey-->
+      <Color x:Key="ColorGrey50">#FAFAFA</Color>
+      <Color x:Key="ColorGrey100">#F5F5F5</Color>
+      <Color x:Key="ColorGrey200">#EEEEEE</Color>
+      <Color x:Key="ColorGrey300">#E0E0E0</Color>
+      <Color x:Key="ColorGrey400">#BDBDBD</Color>
+      <Color x:Key="ColorGrey500">#9E9E9E</Color>
+      <Color x:Key="ColorGrey600">#757575</Color>
+      <Color x:Key="ColorGrey700">#616161</Color>
+      <Color x:Key="ColorGrey800">#424242</Color>
+      <Color x:Key="ColorGrey900">#212121</Color>
+
+      <!--Blue Grey-->
+      <Color x:Key="ColorBlueGrey50">#ECEFF1</Color>
+      <Color x:Key="ColorBlueGrey100">#CFD8DC</Color>
+      <Color x:Key="ColorBlueGrey200">#B0BEC5</Color>
+      <Color x:Key="ColorBlueGrey300">#90A4AE</Color>
+      <Color x:Key="ColorBlueGrey400">#78909C</Color>
+      <Color x:Key="ColorBlueGrey500">#607D8B</Color>
+      <Color x:Key="ColorBlueGrey600">#546E7A</Color>
+      <Color x:Key="ColorBlueGrey700">#455A64</Color>
+      <Color x:Key="ColorBlueGrey800">#37474F</Color>
+      <Color x:Key="ColorBlueGrey900">#263238</Color>
+
+      <Color x:Key="ColorBlack800">#000000</Color>
+      <Color x:Key="ColorWhite900">#FFFFFF</Color>
+
+      <!--Roche Colors-->
+      <Color x:Key="RocheColorC1">#FFFFFFFF</Color>
+      <Color x:Key="RocheColorC2">#FFF3F3F3</Color>
+      <Color x:Key="RocheColorC3">#FFECEDED</Color>
+      <Color x:Key="RocheColorC4">#FFE7E8E9</Color>
+      <Color x:Key="RocheColorC5">#FFCFD1D3</Color>
+      <Color x:Key="RocheColorC6">#FFC7C9CA</Color>
+      <!--Icon color disabled-->
+      <Color x:Key="RocheColorC8">#FFAEAEAE</Color>
+      <Color x:Key="RocheColorC9">#FFA0A3A6</Color>
+      <Color x:Key="RocheColorC10">#FFA5A9AD</Color>
+      <!--Font color disabled-->
+      <Color x:Key="RocheColorC11">#FF9A9A9A</Color>
+      <Color x:Key="RocheColorC12">#FF8F9295</Color>
+      <Color x:Key="RocheColorC13">#FF878C91</Color>
+      <Color x:Key="RocheColorC14">#FF85888B</Color>
+      <!--Icon color normal, focused-->
+      <Color x:Key="RocheColorC15">#FF7E8184</Color>
+      <Color x:Key="RocheColorC16">#FF717477</Color>
+      <Color x:Key="RocheColorC17">#FF5D5D5D</Color>
+      <!--Font color normal, focused-->
+      <Color x:Key="RocheColorC18">#FF343434</Color>
+      <Color x:Key="RocheColorC19">#FF000000</Color>
+      <Color x:Key="RocheColorC21">#FF437BB5</Color>
+      <Color x:Key="RocheColorC22">#FF008F06</Color>
+      <Color x:Key="RocheColorC23">#FFCC0000</Color>
+      <Color x:Key="RocheColorC24">#FFFF9900</Color>
+      <Color x:Key="RocheColorC25">#FFADD8F9</Color>
+      <Color x:Key="RocheColorC26">#FF5CA8F6</Color>
+      <Color x:Key="RocheColorC27">#FFFFFF99</Color>
+
+      <!-- Colors from the configurable color palette-->
+      <Color x:Key="RocheColorCC1">#FFFFAEAE</Color>
+      <Color x:Key="RocheColorCC2">#FFFFB894</Color>
+      <Color x:Key="RocheColorCC3">#FFFFD888</Color>
+      <Color x:Key="RocheColorCC4">#FFFFEC88</Color>
+      <Color x:Key="RocheColorCC5">#FFFFFF80</Color>
+      <Color x:Key="RocheColorCC6">#FFDFFF69</Color>
+      <Color x:Key="RocheColorCC7">#FFABFF80</Color>
+      <Color x:Key="RocheColorCC8">#FFABFF80</Color>
+      <Color x:Key="RocheColorCC9">#FF80FF95</Color>
+      <Color x:Key="RocheColorCC10">#FF80FFEB</Color>
+      <Color x:Key="RocheColorCC11">#FF85E5FF</Color>
+      <Color x:Key="RocheColorCC12">#FF80D5FF</Color>
+      <Color x:Key="RocheColorCC13">#FF8DC6FF</Color>
+      <Color x:Key="RocheColorCC14">#FFB1BEFF</Color>
+      <Color x:Key="RocheColorCC15">#FFC4B8FF</Color>
+      <Color x:Key="RocheColorCC16">#FFD8B1FF</Color>
+      <Color x:Key="RocheColorCC17">#FFF3B1FF</Color>
+      <Color x:Key="RocheColorCC18">#FFFFB3F3</Color>
+      <Color x:Key="RocheColorCC19">#FFFFA9CD</Color>
+      <Color x:Key="RocheColorCC20">#FFFFCACA</Color>
+
+      <!--Theme colors-->
+      <OnPlatform x:TypeArguments="Color" x:Key="PrimaryTextColor" Android="{StaticResource RocheColorC18}" iOS="{StaticResource RocheColorC18}" WinPhone="{StaticResource RocheColorC18}"/>
+      <OnPlatform x:TypeArguments="Color" x:Key="PrimaryTextColorBright" Android="{StaticResource RocheColorC15}" iOS="{StaticResource RocheColorC15}" WinPhone="{StaticResource RocheColorC15}"/>
+
+      <Color x:Key="PrimarySuperBright">#FFE5FFFE</Color>
+      <Color x:Key="PrimaryBright">#FF00d4c9</Color>
+      <Color x:Key="Primary">#FF00A19A</Color>
+      <Color x:Key="PrimaryDark">#FF004d49</Color>
+      <Color x:Key="Accent">#FF006e68</Color>
+
+      <!--Converters-->
+      <converters:DebugConverter x:Key="DebugConverter"/>
+      <converters:IsNotEmptyConverter x:Key="IsNotEmptyConverter"/>
+      <converters:BoolInverter x:Key="BoolInverter"/>
+      <converters:FirstErrorConverter x:Key="FirstErrorConverter"/>
+
+      <converters:PropertyErrorsToColorConverter x:Key="PropertyErrorsToColorConverter"
+                                                 NormalColor="{StaticResource PrimaryTextColorBright}"
+                                                 ErrorColor="{StaticResource ColorCode400}"/>
+
+      <!-- Font Sizes -->
+      <OnPlatform x:Key="LittleSize"
+                  x:TypeArguments="x:Double"
+                  iOS="11"
+                  Android="12"
+                  WinPhone="12"/>
+
+      <OnPlatform x:Key="MidMediumSize"
+                  x:TypeArguments="x:Double"
+                  iOS="12"
+                  Android="14"
+                  WinPhone="14"/>
+
+      <OnPlatform x:Key="MediumSize"
+                  x:TypeArguments="x:Double"
+                  iOS="14"
+                  Android="16"
+                  WinPhone="16"/>
+
+      <OnPlatform x:Key="LargeSize"
+                  x:TypeArguments="x:Double"
+                  iOS="16"
+                  Android="18"
+                  WinPhone="18"/>
+
+      <OnPlatform x:Key="LargerSize"
+                  x:TypeArguments="x:Double"
+                  iOS="18"
+                  Android="20"
+                  WinPhone="20"/>
+
+      <OnPlatform x:Key="BigSize"
+                  x:TypeArguments="x:Double"
+                  iOS="20"
+                  Android="24"
+                  WinPhone="24"/>
+
+      <OnPlatform x:Key="ExtraBigSize"
+                  x:TypeArguments="x:Double"
+                  iOS="24"
+                  Android="32"
+                  WinPhone="32"/>
+
+      <OnPlatform x:Key="HugeSize"
+                  x:TypeArguments="x:Double"
+                  iOS="32"
+                  Android="48"
+                  WinPhone="48"/>
+
+      <OnPlatform x:Key="FontFamily"
+                  x:TypeArguments="x:String"
+                  iOS="sans-serif"
+                  Android="Droid Sans"/>
+
+      <OnPlatform x:Key="FontFamilyCourierNew"
+                  x:TypeArguments="x:String"
+                  iOS="Courier New"
+                  Android="monospace"/>
+
+      <!-- Styles -->
+
+      <Style x:Key="DrilldownButtonStyle" TargetType="controls:DrilldownButton">
+        <Setter Property="Margin">
+          <OnPlatform x:TypeArguments="Thickness" Android="0, 8, 0, 0" iOS="0, 16, 0, 0" WinPhone="0, 16, 0, 0"/>
+        </Setter>
+      </Style>
+
+      <Style x:Key="CustomButtonStyle" TargetType="controls:CustomButton">
+        <Setter Property="BorderWidth" Value="2" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="TextColor" Value="{StaticResource Primary}" />
+        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+        <Setter Property="FontAttributes" Value="None" />
+      </Style>
+
+      <Style x:Key="CustomButtonPrimaryStyle" TargetType="controls:CustomButton" BasedOn="{StaticResource CustomButtonStyle}">
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+        <Setter Property="BorderColor" Value="{StaticResource Primary}" />
+        <Setter Property="BackgroundColorPressed" Value="{StaticResource PrimaryDark}" />
+        <Setter Property="BorderColorPressed" Value="{StaticResource PrimaryDark}" />
+        <Setter Property="TextColor" Value="{StaticResource RocheColorC1}" />
+        <Style.Triggers>
+          <Trigger TargetType="Button" Property="IsEnabled" Value="True">
+            <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+            <Setter Property="BorderColor" Value="{StaticResource Primary}" />
+          </Trigger>
+          <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+            <Setter Property="BackgroundColor" Value="{StaticResource RocheColorC5}" />
+            <Setter Property="BorderColor" Value="{StaticResource RocheColorC5}" />
+          </Trigger>
+        </Style.Triggers>
+      </Style>
+
+      <Style x:Key="CustomButtonSecondaryStyle" TargetType="controls:CustomButton" BasedOn="{StaticResource CustomButtonStyle}">
+        <Setter Property="BackgroundColor" Value="{StaticResource WindowBackgroundTable}" />
+        <Setter Property="BackgroundColorPressed" Value="{StaticResource WindowBackgroundTable}" />
+        <Setter Property="BorderColor" Value="{StaticResource Primary}" />
+        <Setter Property="BorderColorPressed" Value="{StaticResource Primary}" />
+        <Style.Triggers>
+          <Trigger TargetType="Button" Property="IsEnabled" Value="True">
+            <Setter Property="BackgroundColor" Value="{StaticResource RocheColorC1}" />
+            <Setter Property="BorderColor" Value="{StaticResource Primary}" />
+          </Trigger>
+          <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+            <Setter Property="BackgroundColor" Value="{StaticResource WindowBackgroundTable}" />
+            <Setter Property="BorderColor" Value="{StaticResource RocheColorC5}" />
+          </Trigger>
+        </Style.Triggers>
+      </Style>
+
+      <Style TargetType="controls:CustomButton" BasedOn="{StaticResource CustomButtonStyle}" >
+      </Style>
+
+      <Style x:Key="LabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
+      </Style>
+
+      <Style TargetType="Label" BasedOn="{StaticResource LabelStyle}" >
+      </Style>
+
+      <Style TargetType="controls:CustomLabel" BasedOn="{StaticResource LabelStyle}" >
+      </Style>
+
+      <Style x:Key="EntryLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
+        <Setter Property="Margin">
+          <OnPlatform x:TypeArguments="Thickness" Android="4, 0, 0, 0" iOS="0, 0, 0, 0" WinPhone="0, 0, 0, 0" />
+        </Setter>
+        <!--<Setter Property="HeightRequest" Value="48" />-->
+      </Style>
+
+      <Style x:Key="HyperLinkLabelStyle" TargetType="controls:HyperLinkLabel">
+        <Setter Property="TintColor" Value="{StaticResource Primary}" />
+      </Style>
+
+      <Style TargetType="controls:HyperLinkLabel" BasedOn="{StaticResource HyperLinkLabelStyle}" >
+      </Style>
+
+      <Style x:Key="CustomListItemDetailTextStyle" TargetType="Label" BaseResourceKey="ListItemDetailTextStyle">
+        <Setter Property="FontSize" Value="{DynamicResource ListItemDetailTextStyleSize}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColorBright}"/>
+      </Style>
+
+      <Style x:Key="EntryStyle" TargetType="Entry">
+        <Setter Property="HeightRequest" Value="{StaticResource HugeSize}" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource RocheColorC4}" />
+        <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="Opacity" Value="1.0" />
+      </Style>
+
+      <!--<Style TargetType="Entry" BasedOn="{StaticResource EntryStyle}" >
+            </Style>-->
+
+      <Style TargetType="Entry" >
+        <Setter Property="HeightRequest" Value="48" />
+      </Style>
+
+      <Style TargetType="controls:CustomSwitch">
+        <Setter Property="TintColor" Value="{StaticResource Primary}"/>
+      </Style>
+
+      <Style x:Key="LoginEntryStyle" TargetType="Entry" >
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <Setter Property="FontSize" Value="{StaticResource LargerSize}" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <!--TODO: obsolete?-->
+      </Style>
+
+      <Style x:Key="EditorStyle" TargetType="Editor">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource RocheColorC4}" />
+        <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Opacity" Value="1.0" />
+      </Style>
+
+      <Style TargetType="Editor" BasedOn="{StaticResource EditorStyle}" >
+      </Style>
+
+      <Style x:Key="PickerStyle" TargetType="Picker">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="HeightRequest" Value="48" />
+      </Style>
+
+      <Style TargetType="Picker" BasedOn="{StaticResource PickerStyle}" >
+      </Style>
+
+      <Style x:Key="BindablePickerStyle" TargetType="controls:BindablePicker">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="PlaceholderTextColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="HeightRequest" Value="48" />
+        <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+      </Style>
+
+      <Style TargetType="controls:BindablePicker" BasedOn="{StaticResource BindablePickerStyle}" >
+      </Style>
+
+      <Style x:Key="ExtendedDatePickerStyle" TargetType="controls:ExtendedDatePicker">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="PlaceholderTextColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="HeightRequest" Value="48" />
+        <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+      </Style>
+
+      <Style TargetType="controls:ExtendedDatePicker" BasedOn="{StaticResource ExtendedDatePickerStyle}" >
+      </Style>
+
+      <Style x:Key="DatePickerStyle" TargetType="DatePicker">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="HeightRequest" Value="48" />
+        <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+      </Style>
+
+      <Style TargetType="DatePicker" BasedOn="{StaticResource DatePickerStyle}" >
+      </Style>
+
+      <Style x:Key="TimePickerStyle" TargetType="TimePicker">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="HeightRequest" Value="48" />
+        <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+      </Style>
+
+      <Style TargetType="TimePicker" BasedOn="{StaticResource TimePickerStyle}" >
+      </Style>
+
+      <Style x:Key="ExtendedTimePickerStyle" TargetType="controls:ExtendedTimePicker">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="HeightRequest">
+          <OnPlatform x:TypeArguments="x:Double" Android="48" iOS="48" WinPhone="48"/>
+        </Setter>
+        <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+      </Style>
+
+      <Style TargetType="controls:ExtendedTimePicker" BasedOn="{StaticResource ExtendedTimePickerStyle}" >
+      </Style>
+
+      <Style x:Key="TitleLabelStyle" TargetType="Label">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="FontFamily" Value="HelveticaNeue-Thin" />
+        <Setter Property="FontSize" Value="{StaticResource HugeSize}" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+      </Style>
+
+      <Style x:Key="ValidationLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+        <Setter Property="TextColor" Value="{StaticResource ColorCode400}" />
+        <Setter Property="FontAttributes" Value="Italic" />
+        <Setter Property="Margin">
+          <OnPlatform x:TypeArguments="Thickness" Android="4, 0, 0, -44" iOS="0, 34, 0, 0" WinPhone="0, 34, 0, 0" />
+        </Setter>
+      </Style>
+
+      <Style x:Key="AnnotationEntryLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="VerticalOptions" Value="StartAndExpand" />
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
+        <Setter Property="Margin">
+          <OnPlatform x:TypeArguments="Thickness" Android="4, 0, 0, 0" iOS="0, 0, 0, 0" WinPhone="0, 0, 0, 0" />
+        </Setter>
+      </Style>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>

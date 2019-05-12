@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    x:Class="CrossPlatformLibrary.Forms.Controls.ValidatableDatePicker"
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="Fill"
+    x:Name="Control">
+
+    <Grid 
+        Grid.Row="0" 
+        HeightRequest="48"
+        HorizontalOptions="FillAndExpand"
+        Margin="0"
+        Padding="0" 
+        RowSpacing="0"
+        ColumnSpacing="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <controls:ExtendedDatePicker
+            Grid.Column="0"
+            Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
+            IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+            ValidityRange="{Binding ValidityRange, Source={x:Reference Control}, Mode=OneWay}"
+            NullableDate="{Binding Date, Source={x:Reference Control}, Mode=TwoWay}"
+            Format="{Binding Date, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource NullableDateTimeToFormatConverter}}"
+            HorizontalOptions="FillAndExpand"
+            effects:LineColorEffect.ApplyLineColor="True"
+            effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"/>
+        <Label
+            Grid.Column="0"
+            IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
+            Text="{Binding Date, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
+            Style="{StaticResource EntryLabelStyle}"
+            HorizontalOptions="StartAndExpand"
+            VerticalOptions="Center"/>
+    </Grid>
+
+    <!--Readonly Text-->
+    <Label
+        Grid.Row="0"
+        IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
+        Text="{Binding ReadonlyText, Source={x:Reference Control}, Mode=OneWay}"
+        Style="{StaticResource EntryLabelStyle}"
+        HorizontalOptions="StartAndExpand"
+        VerticalOptions="Center"/>
+
+    <!--Annotation Text-->
+    <Label
+        Grid.Row="0"
+        Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}"
+        Style="{StaticResource AnnotationEntryLabelStyle}"
+        InputTransparent="True"/>
+
+    <!--Validation Error Text-->
+    <Label
+        Grid.Row="0"
+        Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}"
+        Style="{StaticResource ValidationLabelStyle}"/>
+</Grid>
