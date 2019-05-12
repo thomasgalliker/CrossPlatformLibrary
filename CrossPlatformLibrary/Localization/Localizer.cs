@@ -8,13 +8,7 @@ namespace CrossPlatformLibrary.Localization
     {
         static readonly Lazy<ILocalizer> Implementation = new Lazy<ILocalizer>(CreateResourceLoader, LazyThreadSafetyMode.PublicationOnly);
 
-        public static ILocalizer Current
-        {
-            get
-            {
-                return Implementation.Value;
-            }
-        }
+        public static ILocalizer Current => Implementation.Value;
 
         static ILocalizer CreateResourceLoader()
         {

@@ -33,7 +33,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.Androi
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{0048eba2-ef2b-4854-812a-76ba6c318845}*SharedItemsImports = 4
 		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{2882aeeb-d4cd-4eb9-8a6c-6653b33681f0}*SharedItemsImports = 4
 		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{651016a2-9700-4f09-a9da-8d4563ac0c7b}*SharedItemsImports = 4
 		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{9061e23b-3329-4ccf-8d69-61faa11bb380}*SharedItemsImports = 13
