@@ -1,4 +1,4 @@
-﻿using Guards;
+﻿using CrossPlatformLibrary.Internals;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,8 +11,8 @@ namespace CrossPlatformLibrary.Extensions
     {
         public static void Sort<TSource, TKey>(this ICollection<TSource> source, Func<TSource, TKey> keySelector)
         {
-            Guard.ArgumentNotNull(() => source);
-            Guard.ArgumentNotNull(() => keySelector);
+            Guard.ArgumentNotNull(source, nameof(source));
+            Guard.ArgumentNotNull(keySelector, nameof(keySelector));
 
             IList<TSource> sortedList = source.OrderBy(keySelector).ToList();
             source.Clear();
@@ -24,8 +24,8 @@ namespace CrossPlatformLibrary.Extensions
 
         public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
-            Guard.ArgumentNotNull(() => source);
-            Guard.ArgumentNotNull(() => action);
+            Guard.ArgumentNotNull(source, nameof(source));
+            Guard.ArgumentNotNull(action, nameof(action));
 
             foreach (T item in source)
             {
@@ -53,9 +53,9 @@ namespace CrossPlatformLibrary.Extensions
         /// <param name="updateAction">The update action.</param>
         public static void Update<T>(this IEnumerable<T> source, Func<T, bool> selectorFunc, Action<T> updateAction)
         {
-            Guard.ArgumentNotNull(() => source);
-            Guard.ArgumentNotNull(() => selectorFunc);
-            Guard.ArgumentNotNull(() => updateAction);
+            Guard.ArgumentNotNull(source, nameof(source));
+            Guard.ArgumentNotNull(selectorFunc, nameof(selectorFunc));
+            Guard.ArgumentNotNull(updateAction, nameof(updateAction));
 
             foreach (var item in source.Where(selectorFunc))
             {
@@ -73,9 +73,9 @@ namespace CrossPlatformLibrary.Extensions
         /// <param name="updateAction">The update action.</param>
         public static void UpdateSingle<T>(this IEnumerable<T> source, Func<T, bool> selectorFunc, Action<T> updateAction)
         {
-            Guard.ArgumentNotNull(() => source);
-            Guard.ArgumentNotNull(() => selectorFunc);
-            Guard.ArgumentNotNull(() => updateAction);
+            Guard.ArgumentNotNull(source, nameof(source));
+            Guard.ArgumentNotNull(selectorFunc, nameof(selectorFunc));
+            Guard.ArgumentNotNull(updateAction, nameof(updateAction));
 
             var selected = source.Single(selectorFunc);
             updateAction(selected);
@@ -91,7 +91,7 @@ namespace CrossPlatformLibrary.Extensions
         /// <returns><c>true</c> if the specified search list contains duplicates; otherwise, <c>false</c>.</returns>
         public static bool AnyDuplicates<T, TResult>(this IEnumerable<T> searchList, Func<T, TResult> selectionCriteria)
         {
-            Guard.ArgumentNotNull(() => searchList);
+            Guard.ArgumentNotNull(searchList, nameof(searchList));
 
             return searchList.Select(selectionCriteria)
                     .GroupBy(x => x)
@@ -107,7 +107,7 @@ namespace CrossPlatformLibrary.Extensions
         /// <exception cref="System.InvalidOperationException">The source enumerable does not contain any elements.</exception>
         public static object Last(this IEnumerable source)
         {
-            Guard.ArgumentNotNull(() => source);
+            Guard.ArgumentNotNull(source, nameof(source));
 
             var lastOrDefault = source.LastOrDefault();
             if (lastOrDefault != null)
@@ -126,7 +126,7 @@ namespace CrossPlatformLibrary.Extensions
         /// <exception cref="System.InvalidOperationException">The source enumerable does not contain any elements.</exception>
         public static object LastOrDefault(this IEnumerable source)
         {
-            Guard.ArgumentNotNull(() => source);
+            Guard.ArgumentNotNull(source, nameof(source));
 
             var list = source as IList;
             if (list != null)

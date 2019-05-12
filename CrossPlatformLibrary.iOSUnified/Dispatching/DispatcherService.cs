@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Guards;
+using CrossPlatformLibrary.Internals;
 
 #if __UNIFIED__
 using Foundation;
@@ -19,7 +19,7 @@ namespace CrossPlatformLibrary.Dispatching
 
         public void CheckBeginInvokeOnUI(Action action)
         {
-            Guard.ArgumentNotNull(() => action);
+            Guard.ArgumentNotNull(action, nameof(action));
 
             if (NSThread.Current.IsMainThread)
             {

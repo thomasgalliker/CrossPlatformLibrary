@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Reflection;
-
-using Tracing;
-
-using Guards;
+using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Tools
 {
@@ -13,7 +10,7 @@ namespace CrossPlatformLibrary.Tools
 
         protected PlatformServicesBase(ITracer tracer)
         {
-            Guard.ArgumentNotNull(() => tracer);
+            Guard.ArgumentNotNull(tracer, nameof(tracer));
 
             this.tracer = tracer;
         }

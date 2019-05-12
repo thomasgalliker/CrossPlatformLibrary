@@ -21,11 +21,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-using Guards;
-
-using CommonServiceLocator;
-
-using Tracing.IoC;
+using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.IoC
 {
@@ -329,7 +325,7 @@ namespace CrossPlatformLibrary.IoC
         /// </param>
         public void Register<TClass>(Delegate factory, string key, bool createInstanceImmediately) where TClass : class
         {
-            Guard.ArgumentNotNull(() => factory);
+            Guard.ArgumentNotNull(factory, nameof(factory));
 
             lock (this.syncLock)
             {
@@ -784,7 +780,7 @@ namespace CrossPlatformLibrary.IoC
         /// <param name="serviceType">An object that specifies the type of service object to get.</param>
         public object GetService(Type serviceType)
         {
-            Guard.ArgumentNotNull(() => serviceType);
+            Guard.ArgumentNotNull(serviceType, nameof(serviceType));
 
             return this.DoGetService(serviceType, null, this.defaultKey);
         }
@@ -805,7 +801,7 @@ namespace CrossPlatformLibrary.IoC
         /// <returns>All the instances of the given type.</returns>
         public IEnumerable<object> GetAllInstances(Type serviceType)
         {
-            Guard.ArgumentNotNull(() => serviceType);
+            Guard.ArgumentNotNull(serviceType, nameof(serviceType));
 
             lock (this.factories)
             {
@@ -858,7 +854,7 @@ namespace CrossPlatformLibrary.IoC
         /// <returns>An instance of the given type.</returns>
         public object GetInstance(Type serviceType)
         {
-            Guard.ArgumentNotNull(() => serviceType);
+            Guard.ArgumentNotNull(serviceType, nameof(serviceType));
 
             return this.DoGetService(serviceType, null, this.defaultKey);
         }
@@ -878,7 +874,7 @@ namespace CrossPlatformLibrary.IoC
         /// <returns>An instance of the given type.</returns>
         public object GetInstanceWithoutCaching(Type serviceType)
         {
-            Guard.ArgumentNotNull(() => serviceType);
+            Guard.ArgumentNotNull(serviceType, nameof(serviceType));
 
             return this.DoGetService(serviceType, null, this.defaultKey, false);
         }
@@ -898,7 +894,7 @@ namespace CrossPlatformLibrary.IoC
         /// <returns>An instance corresponding to the given type and key.</returns>
         public object GetInstance(Type serviceType, string key)
         {
-            Guard.ArgumentNotNull(() => serviceType);
+            Guard.ArgumentNotNull(serviceType, nameof(serviceType));
 
             return this.DoGetService(serviceType, null, key);
         }
@@ -916,7 +912,7 @@ namespace CrossPlatformLibrary.IoC
         /// <returns>An instance corresponding to the given type and key.</returns>
         public object GetInstanceWithoutCaching(Type serviceType, string key)
         {
-            Guard.ArgumentNotNull(() => serviceType);
+            Guard.ArgumentNotNull(serviceType, nameof(serviceType));
 
             return this.DoGetService(serviceType, null, key, false);
         }
@@ -1050,5 +1046,17 @@ namespace CrossPlatformLibrary.IoC
             this.Reset();
         }
         #endregion
+    }
+
+    internal class UseCacheAttribute : Attribute
+    {
+        public bool UseCache { get; set; }
+    }
+
+    public class ActivationException : Exception
+    {
+        public ActivationException(string message) : base(message)
+        {
+        }
     }
 }

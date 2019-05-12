@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 using CrossPlatformLibrary.Extensions;
-using Tracing;
+using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Tools
 {
@@ -56,7 +56,7 @@ namespace CrossPlatformLibrary.Tools
             var assemblyName = dllFile.Name.Replace(DllFileExtension, "");
             try
             {
-                this.tracer.Debug("Calling Assembly.Load({0})", assemblyName);
+                this.tracer.Debug($"Calling Assembly.Load({assemblyName})");
 #if NETFX_CORE
                 return Assembly.Load(new AssemblyName(assemblyName));
 #else
@@ -65,7 +65,7 @@ namespace CrossPlatformLibrary.Tools
             }
             catch (Exception ex)
             {
-                this.tracer.Exception(ex, "Assembly.Load({0}) failed. Exception: {1}", assemblyName, ex.Message);
+                this.tracer.Exception(ex, $"Assembly.Load({assemblyName}) failed. Exception: {ex.Message}");
                 throw;
             }
         }
