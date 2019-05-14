@@ -4,11 +4,14 @@
              xmlns:forms="clr-namespace:CrossPlatformLibrary.Forms;assembly=CrossPlatformLibrary.Forms"
              x:Class="SampleApp.App">
     <Application.Resources >
+        <ResourceDictionary>
 
-        <Color x:Key="PrimarySuperBright">#E040FB</Color>
-        <Color x:Key="PrimaryBright">#E040FB</Color>
-        <Color x:Key="Primary">#E040FB</Color>
-        <Color x:Key="PrimaryDark">#E040FB</Color>
-        <Color x:Key="Accent">#E040FB</Color>
+            <Color x:Key="PrimarySuperBright">#E040FB</Color>
+            <Color x:Key="PrimaryBright">#E040FB</Color>
+            <Color x:Key="Primary">#E040FB</Color>
+            <Color x:Key="PrimaryDark">#E040FB</Color>
+            <Color x:Key="Accent">#E040FB</Color>
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>

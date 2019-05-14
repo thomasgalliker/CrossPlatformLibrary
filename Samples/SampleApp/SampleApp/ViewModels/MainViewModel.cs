@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using CrossPlatformLibrary.Forms.Controls;
@@ -33,6 +34,13 @@ namespace SampleApp.ViewModels
                 this.country = value;
                 this.OnPropertyChanged(nameof(this.Country));
             }
+        }
+
+        public ICommand PostalCodeUnfocusedCommand => new Command(this.OnPostalCodeUnfocused);
+
+        private void OnPostalCodeUnfocused()
+        {
+            Console.WriteLine("unfocused");
         }
 
         public ICommand SaveProfileButtonCommand => new Command(async () => await this.OnSaveProfile());

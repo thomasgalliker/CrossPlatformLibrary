@@ -31,11 +31,7 @@
                         Placeholder="{localization:Translate UserAddressStreetLabelText}"
                         Keyboard="Text"
                         ValidationErrors="{Binding Errors[Street]}"
-                        BackgroundColor="{StaticResource WindowBackground}">
-                        <controls:ValidatableEntry.Behaviors>
-                            <behaviors:MaxLengthTextBehavior MaxLength="200"/>
-                        </controls:ValidatableEntry.Behaviors>
-                    </controls:ValidatableEntry>
+                        MaxLength="200"/>
 
                     <controls:ValidatableEntry 
                         Grid.Row="1"
@@ -43,9 +39,13 @@
                         Text="{Binding PostalCode, Mode=TwoWay}"
                         Placeholder="{localization:Translate UserAddressPostalCodeLabelText}"
                         Keyboard="Numeric"
-                        ValidationErrors="{Binding Errors[PostalCode]}">
+                        ValidationErrors="{Binding Errors[PostalCode]}"
+                        MaxLength="4"
+                        Unfocused ="ValidatableEntry_OnUnfocused">
                         <controls:ValidatableEntry.Behaviors>
-                            <behaviors:MaxLengthTextBehavior MaxLength="4"/>
+                            <behaviors:EventToCommandBehavior
+                                    EventName="Unfocused"
+                                    Command="{Binding PostalCodeUnfocusedCommand}"/>
                         </controls:ValidatableEntry.Behaviors>
                     </controls:ValidatableEntry>
 
@@ -55,11 +55,8 @@
                         Text="{Binding Place, Mode=TwoWay}"
                         Placeholder="{localization:Translate UserAddressPlaceLabelText}"
                         Keyboard="Text"
-                        ValidationErrors="{Binding Errors[Place]}">
-                        <controls:ValidatableEntry.Behaviors>
-                            <behaviors:MaxLengthTextBehavior MaxLength="200"/>
-                        </controls:ValidatableEntry.Behaviors>
-                    </controls:ValidatableEntry>
+                        ValidationErrors="{Binding Errors[Place]}" 
+                        MaxLength="200"/>
 
                     <controls:ValidatablePicker
                         Grid.Row="2"

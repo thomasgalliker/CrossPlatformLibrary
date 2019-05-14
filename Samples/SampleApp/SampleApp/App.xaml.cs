@@ -12,8 +12,7 @@ namespace SampleApp
     {
         public App()
         {
-            // Initialize CrossPlatformLibrary.Forms
-            CrossPlatformLibrary.Forms.CrossPlatformLibrary.Init();
+
 
 
             // Initialize localization
@@ -23,6 +22,9 @@ namespace SampleApp
             TranslateExtension.Init(localizer, translationProvider);
 
             this.InitializeComponent();
+
+            // Initialize CrossPlatformLibrary.Forms
+            CrossPlatformLibrary.Forms.CrossPlatformLibrary.Init(this);
 
             this.MainPage = new MainPage();
         }

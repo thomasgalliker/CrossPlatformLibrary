@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace SampleApp.Controls
 {
@@ -8,6 +9,10 @@ namespace SampleApp.Controls
         public AddressControl()
         {
             this.InitializeComponent();
+        }
+
+        private void ValidatableEntry_OnUnfocused(object sender, FocusEventArgs e)
+        {
         }
     }
 }
