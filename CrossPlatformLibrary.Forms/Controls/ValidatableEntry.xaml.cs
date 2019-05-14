@@ -112,6 +112,20 @@ namespace CrossPlatformLibrary.Forms.Controls
             set { this.SetValue(FontFamilyProperty, value); }
         }
 
+        public static readonly BindableProperty MaxLengthProperty =
+            BindableProperty.Create(
+                nameof(MaxLength),
+                typeof(int),
+                typeof(ValidatableEntry),
+                default(int),
+                BindingMode.OneWay);
+
+        public int MaxLength
+        {
+            get { return (int)this.GetValue(MaxLengthProperty); }
+            set { this.SetValue(MaxLengthProperty, value); }
+        }
+
         public static readonly BindableProperty ValidationErrorsProperty =
             BindableProperty.Create(
                 nameof(ValidationErrors),
@@ -132,6 +146,11 @@ namespace CrossPlatformLibrary.Forms.Controls
             remove { this.Entry.Completed -= value; }
         }
 
+        public new event EventHandler<FocusEventArgs> Unfocused
+        {
+            add { this.Entry.Unfocused += value; }
+            remove { this.Entry.Unfocused -= value; }
+        }
 
         public event EventHandler<TextChangedEventArgs> TextChanged
         {

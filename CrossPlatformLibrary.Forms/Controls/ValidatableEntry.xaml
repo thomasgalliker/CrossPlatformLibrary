@@ -22,6 +22,7 @@
         IsPassword="{Binding IsPassword, Source={x:Reference Control}, Mode=OneWay}"
         Style="{Binding Style, Source={x:Reference Control}, Mode=OneWay}"
         FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
+        MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
         effects:LineColorEffect.ApplyLineColor="True"
         effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
         Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
