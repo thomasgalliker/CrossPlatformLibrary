@@ -117,7 +117,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(MaxLength),
                 typeof(int),
                 typeof(ValidatableEntry),
-                default(int),
+                int.MaxValue,
                 BindingMode.OneWay);
 
         public int MaxLength
@@ -144,6 +144,12 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             add { this.Entry.Completed += value; }
             remove { this.Entry.Completed -= value; }
+        }
+
+        public new event EventHandler<FocusEventArgs> Focused
+        {
+            add { this.Entry.Focused += value; }
+            remove { this.Entry.Focused -= value; }
         }
 
         public new event EventHandler<FocusEventArgs> Unfocused

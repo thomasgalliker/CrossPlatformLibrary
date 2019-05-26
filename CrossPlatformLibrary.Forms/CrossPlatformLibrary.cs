@@ -1,15 +1,30 @@
-﻿using Xamarin.Forms;
+﻿using System.Diagnostics;
+using ResourceDictionaryDemo;
+using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms
 {
     public static class CrossPlatformLibrary
     {
-        private static App app;
-
-        public static ResourceDictionary Init()
+        public static void Init(Application app)
         {
-            app = new App();
-            return app.Resources;
+            var resources = GetResources();
+            foreach (var pair in resources)
+            {
+                if (app.Resources.ContainsKey(pair.Key))
+                {
+                    Debug.WriteLine($"Resource with key={pair.Key} already exists");
+                }
+                else
+                {
+                    app.Resources.Add(pair.Key, pair.Value);
+                }
+            }
+        }
+
+        public static ResourceDictionary GetResources()
+        {
+            return new MyResourceDictionary();
         }
     }
 }

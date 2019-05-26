@@ -22,7 +22,7 @@
         Grid.Row="0"
         Text="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
         IsVisible="{Binding Text, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
-        Style="{StaticResource AnnotationEntryLabelStyle}"
+        Style="{DynamicResource AnnotationEntryLabelStyle}"
         BackgroundColor="Transparent"
         InputTransparent="True"/>
 
@@ -31,6 +31,7 @@
         Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}"
         Style="{Binding Style, Source={x:Reference Control}, Mode=OneWay}"
         FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
+        FontAttributes="{Binding FontAttributes, Source={x:Reference Control}, Mode=OneWay}"
         LineBreakMode="{Binding LineBreakMode, Source={x:Reference Control}, Mode=OneWay}"
         BackgroundColor="Transparent" 
         VerticalOptions="StartAndExpand">

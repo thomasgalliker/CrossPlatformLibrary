@@ -44,14 +44,40 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Effects\BorderEffect.cs" />
+    <Compile Include="Effects\DatePickerLineColorEffect.cs" />
     <Compile Include="Effects\Effects.cs" />
+    <Compile Include="Effects\EntryLineColorEffect.cs" />
+    <Compile Include="Effects\PickerLineColorEffect.cs" />
     <Compile Include="Effects\SafeAreaBottomPaddingEffect.cs" />
     <Compile Include="Effects\SafeAreaPaddingEffect.cs" />
     <Compile Include="Effects\SafeAreaTopPaddingEffect.cs" />
+    <Compile Include="Effects\TimePickerLineColorEffect.cs" />
+    <Compile Include="Effects\UnderlineTextEffect.cs" />
+    <Compile Include="Extensions\AlignmentExtensions.cs" />
+    <Compile Include="Extensions\UITableViewCellExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\AlwaysScrollViewRenderer.cs" />
+    <Compile Include="Renderers\BindablePickerRenderer.cs" />
+    <Compile Include="Renderers\CustomButtonRenderer.cs" />
+    <Compile Include="Renderers\CustomEntryRenderer.cs" />
+    <Compile Include="Renderers\CustomLabelRenderer.cs" />
+    <Compile Include="Renderers\CustomSearchBarRenderer.cs" />
+    <Compile Include="Renderers\CustomSwitchRenderer.cs" />
+    <Compile Include="Renderers\CustomTextCellRenderer.cs" />
+    <Compile Include="Renderers\CustomWebViewRenderer.cs" />
+    <Compile Include="Renderers\ExtendedDatePickerRenderer.cs" />
+    <Compile Include="Renderers\ExtendedTimePickerRenderer.cs" />
+    <Compile Include="Renderers\ExtendedViewCellRenderer.cs" />
+    <Compile Include="Renderers\HyperLinkLabelRenderer.cs" />
+    <Compile Include="Renderers\NonScrollableListViewRenderer.cs" />
+    <Compile Include="Renderers\ShapeView\ShapeViewRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CrossPlatformLibrary.Forms\CrossPlatformLibrary.Forms.csproj">
+      <Project>{92e8a8df-7f7b-4978-b5cd-8afb0e13cb49}</Project>
+      <Name>CrossPlatformLibrary.Forms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CrossPlatformLibrary.iOS\CrossPlatformLibrary.iOS.csproj">
       <Project>{e71f3053-056c-4381-9638-048ed73bdff6}</Project>
       <Name>CrossPlatformLibrary.iOS</Name>

@@ -66,7 +66,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="App.xaml">
+    <Compile Update="Controls\ValidatableEditor.xaml.cs">
+      <DependentUpon>ValidatableEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MyResourceDictionary.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Controls\ValidatableEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MyResourceDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\CustomActivityIndicator.xaml">
@@ -108,5 +123,14 @@
     <EmbeddedResource Update="Controls\ViewModelErrorControl.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Controls\CustomActivityIndicatorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\ValidatableEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 </Project>

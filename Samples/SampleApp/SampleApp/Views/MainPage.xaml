@@ -7,7 +7,7 @@
              xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
              x:Class="SampleApp.MainPage">
 
-  <!--<Grid>
+    <!--<Grid>
     <controls1:AddressControl />
   </Grid>-->
     <controls:AlwaysScrollView>
@@ -27,11 +27,48 @@
                         <!--<account:UserIdentificationControl
                             BindingContext="{Binding UserIdentification}" />-->
 
+                        <controls:CustomLabel Text="Enter name:"/>
+                        <controls:CustomEntry Text="Android EditText sets Padding=&quot;0&quot;" Padding="0" />
+
                         <!--User's Address-->
                         <userControls:AddressControl
                             BindingContext="{Binding Address}" />
 
+                        <Grid>
+                            <controls:ValidatableEditor
+                                Placeholder="{localization:Translate PersonalNotesLabelText}"
+                                Text="{Binding Notes, Mode=TwoWay}"
+                                IsEnabled="True"
+                                ValidationErrors="{Binding Errors[Notes]}"
+                                MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
+                                MaxLines="3"
+                                BackgroundColor="LightYellow"
+                                HorizontalOptions="FillAndExpand">
+                              <controls:ValidatableEditor.Keyboard>
+                                  <Keyboard x:FactoryMethod="Create">
+                                      <x:Arguments>
+                                          <KeyboardFlags>CapitalizeSentence,Spellcheck</KeyboardFlags>
+                                      </x:Arguments>
+                                  </Keyboard>
+                              </controls:ValidatableEditor.Keyboard>
+                            </controls:ValidatableEditor>
+                        </Grid>
+
+                      <controls:ValidatableLabel
+                          Text="This is a readonly label"/>
+
+                      <controls:HyperLinkLabel
+                            Text="{Binding AdminEmailAddress, Mode=OneWay}"
+                            NavigateCommand="{Binding MailNavigateCommand}"/>
+
+
                     </StackLayout>
+
+                    <controls:CustomButton
+                        Margin="{StaticResource ButtonMargin}"
+                        Text="{localization:Translate LoadDataButtonText}"
+                        Command="{Binding LoadDataButtonCommand}"
+                        Style="{StaticResource CustomButtonSecondaryStyle}"/>
 
                     <controls:CustomButton
                         Margin="{StaticResource ButtonMargin}"

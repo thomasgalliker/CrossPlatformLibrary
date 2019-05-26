@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using CrossPlatformLibrary.IoC;
 using CrossPlatformLibrary.Tests.Stubs;
-using CommonServiceLocator;
 using Xunit;
 
 namespace CrossPlatformLibrary.Tests.IoC
@@ -80,7 +79,7 @@ namespace CrossPlatformLibrary.Tests.IoC
                 Debug.WriteLine(ex.Message);
             }
         }
-        
+
         [Fact]
         public void TestBuildWithStaticConstructor()
         {

@@ -9,7 +9,7 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             nameof(MaxLength),
             typeof(int),
             typeof(MaxLengthTextBehavior),
-            default(int));
+            int.MaxValue);
 
         public int MaxLength
         {

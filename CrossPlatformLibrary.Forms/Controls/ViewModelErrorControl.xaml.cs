@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using CrossPlatformLibrary.Forms.Mvvm;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace CrossPlatformLibrary.Forms.Controls

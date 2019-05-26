@@ -4,6 +4,19 @@ namespace CrossPlatformLibrary.Forms.Controls
 {
     public class CustomEditor : Editor
     {
+        public static readonly BindableProperty MaxLinesProperty =
+            BindableProperty.Create(
+                nameof(MaxLines),
+                typeof(int),
+                typeof(CustomEditor),
+                -1);
+
+        public int MaxLines
+        {
+            get => (int)this.GetValue(MaxLinesProperty);
+            set => this.SetValue(MaxLinesProperty, value);
+        }
+
         public static readonly BindableProperty HideKeyboardProperty =
             BindableProperty.Create(
                 nameof(HideKeyboard),

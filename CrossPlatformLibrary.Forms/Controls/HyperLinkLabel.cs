@@ -39,7 +39,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             this.NavigateCommand = new Command(() =>
             {
-                if (this.NavigateUri != null)
+                if (!string.IsNullOrEmpty(this.NavigateUri))
                 {
                     Device.OpenUri(new Uri(this.NavigateUri));
                 }

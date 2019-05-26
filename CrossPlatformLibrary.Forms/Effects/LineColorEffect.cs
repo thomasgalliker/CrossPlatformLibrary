@@ -42,6 +42,13 @@ namespace CrossPlatformLibrary.Forms.Effects
                         view.Effects.Add(new EntryLineColorEffect());
                     }
                 }
+                else if (bindable is Editor)
+                {
+                    if (!view.Effects.Any(e => e is EditorLineColorEffect))
+                    {
+                        view.Effects.Add(new EditorLineColorEffect());
+                    }
+                }
                 else if (bindable is DatePicker)
                 {
                     if (!view.Effects.Any(e => e is DatePickerLineColorEffect))
@@ -74,6 +81,12 @@ namespace CrossPlatformLibrary.Forms.Effects
                 if (entryLineColorEffectToRemove != null)
                 {
                     view.Effects.Remove(entryLineColorEffectToRemove);
+                }
+
+                var editorLineColorEffectToRemove = view.Effects.FirstOrDefault(e => e is EditorLineColorEffect);
+                if (editorLineColorEffectToRemove != null)
+                {
+                    view.Effects.Remove(editorLineColorEffectToRemove);
                 }
 
                 var datePickerLineColorEffectToRemove = view.Effects.FirstOrDefault(e => e is DatePickerLineColorEffect);

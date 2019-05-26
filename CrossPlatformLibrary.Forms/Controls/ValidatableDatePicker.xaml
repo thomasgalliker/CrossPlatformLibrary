@@ -34,7 +34,7 @@
             Grid.Column="0"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
             Text="{Binding Date, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
-            Style="{StaticResource EntryLabelStyle}"
+            Style="{DynamicResource EntryLabelStyle}"
             HorizontalOptions="StartAndExpand"
             VerticalOptions="Center"/>
     </Grid>
@@ -44,7 +44,7 @@
         Grid.Row="0"
         IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
         Text="{Binding ReadonlyText, Source={x:Reference Control}, Mode=OneWay}"
-        Style="{StaticResource EntryLabelStyle}"
+        Style="{DynamicResource EntryLabelStyle}"
         HorizontalOptions="StartAndExpand"
         VerticalOptions="Center"/>
 
@@ -52,12 +52,12 @@
     <Label
         Grid.Row="0"
         Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}"
-        Style="{StaticResource AnnotationEntryLabelStyle}"
+        Style="{DynamicResource AnnotationEntryLabelStyle}"
         InputTransparent="True"/>
 
     <!--Validation Error Text-->
     <Label
         Grid.Row="0"
         Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}"
-        Style="{StaticResource ValidationLabelStyle}"/>
+        Style="{DynamicResource ValidationLabelStyle}"/>
 </Grid>

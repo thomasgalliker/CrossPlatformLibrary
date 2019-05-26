@@ -6,6 +6,10 @@
     <RootNamespace>CrossPlatformLibrary</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Mvvm\" />
+  </ItemGroup>
+
   <Import Project="..\CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems" Label="Shared" />
 
 </Project>

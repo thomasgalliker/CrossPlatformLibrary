@@ -35,7 +35,7 @@
         Grid.Row="0"
         Text="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
         IsVisible="{Binding Text, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
-        Style="{StaticResource AnnotationEntryLabelStyle}"
+        Style="{DynamicResource AnnotationEntryLabelStyle}"
         BackgroundColor="Transparent"
         InputTransparent="True"/>
 
@@ -43,5 +43,5 @@
     <Label
         Grid.Row="0"
         Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}"
-        Style="{StaticResource ValidationLabelStyle}"/>
+        Style="{DynamicResource ValidationLabelStyle}"/>
 </Grid>

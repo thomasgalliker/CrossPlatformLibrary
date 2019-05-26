@@ -19,7 +19,7 @@ namespace CrossPlatformLibrary.Tests.IoC
             instances.Should().HaveCount(1);
 
             var defaultInstance = SimpleIoc.Default.GetInstance<TestClass1>();
-            defaultInstance.ShouldBeEquivalentTo(instances.ElementAt(0));
+            defaultInstance.Should().BeEquivalentTo(instances.ElementAt(0));
         }
 
         [Fact]

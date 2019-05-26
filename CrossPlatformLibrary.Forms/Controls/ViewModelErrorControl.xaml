@@ -6,7 +6,7 @@
     x:Class="CrossPlatformLibrary.Forms.Controls.ViewModelErrorControl" 
     VerticalOptions="FillAndExpand"
     HorizontalOptions="FillAndExpand"
-    BackgroundColor="{StaticResource WindowBackground}"
+    BackgroundColor="{DynamicResource WindowBackground}"
     Margin="0"
     Padding="0"
     x:Name="Control">
@@ -17,7 +17,7 @@
         HorizontalOptions="CenterAndExpand"
         BackgroundColor="Transparent"
         Margin="0"
-        Padding="{StaticResource StandardPadding}">
+        Padding="{DynamicResource StandardPadding}">
 
         <Image
             Source="{controls:ImageResource CrossPlatformLibrary.Forms.Resources.Images.reload_192x192.png}" 

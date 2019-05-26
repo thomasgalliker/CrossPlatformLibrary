@@ -6,10 +6,10 @@
     <Application.Resources >
         <ResourceDictionary>
 
-            <Color x:Key="PrimarySuperBright">#E040FB</Color>
-            <Color x:Key="PrimaryBright">#E040FB</Color>
+            <Color x:Key="PrimarySuperBright">#FFBAFF</Color>
+            <Color x:Key="PrimaryBright">#FF7FFF</Color>
             <Color x:Key="Primary">#E040FB</Color>
-            <Color x:Key="PrimaryDark">#E040FB</Color>
+            <Color x:Key="PrimaryDark">#A400C1</Color>
             <Color x:Key="Accent">#E040FB</Color>
         </ResourceDictionary>
 

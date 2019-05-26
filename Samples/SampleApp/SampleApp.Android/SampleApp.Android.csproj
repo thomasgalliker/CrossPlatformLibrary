@@ -96,6 +96,10 @@
       <Project>{0048eba2-ef2b-4854-812a-76ba6c318845}</Project>
       <Name>CrossPlatformLibrary.Android</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\CrossPlatformLibrary.Forms.Android\CrossPlatformLibrary.Forms.Android.csproj">
+      <Project>{145fbb92-fd2f-4c5b-8560-ec0830c8c271}</Project>
+      <Name>CrossPlatformLibrary.Forms.Android</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\CrossPlatformLibrary\CrossPlatformLibrary.csproj">
       <Project>{a6fcef44-d2ba-42c7-b3cb-13667bcd7b54}</Project>
       <Name>CrossPlatformLibrary</Name>
