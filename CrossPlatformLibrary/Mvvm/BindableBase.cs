@@ -83,7 +83,7 @@ namespace CrossPlatformLibrary.Mvvm
         ///     value is optional and can be provided automatically when invoked from compilers
         ///     that support <see cref="CallerMemberNameAttribute" />.
         /// </param>
-        protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             //OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
 #pragma warning disable CS0618 // Type or member is obsolete
