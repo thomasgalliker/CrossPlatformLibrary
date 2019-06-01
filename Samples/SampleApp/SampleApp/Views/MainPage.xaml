@@ -36,7 +36,7 @@
 
                         <Grid>
                             <controls:ValidatableEditor
-                                Placeholder="{localization:Translate PersonalNotesLabelText}"
+                                Placeholder="{localization:Translate SimpleNotesLabelText}"
                                 Text="{Binding Notes, Mode=TwoWay}"
                                 IsEnabled="True"
                                 ValidationErrors="{Binding Errors[Notes]}"
@@ -54,7 +54,10 @@
                             </controls:ValidatableEditor>
                         </Grid>
 
-                      <controls:ValidatableLabel
+                        <userControls:NotesView
+                            BindingContext="{Binding .}" />
+
+                        <controls:ValidatableLabel
                           Text="This is a readonly label"/>
 
                       <controls:HyperLinkLabel
