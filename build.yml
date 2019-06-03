@@ -24,6 +24,7 @@ variables:
   buildConfiguration: 'Release'
   buildVersionPostfix: '-pre'
   nuspecFile: 'CrossPlatformLibrary.nuspec'
+  nuspecFileForms: 'CrossPlatformLibrary.Forms.nuspec'
 
 steps:
 - task: bleddynrichards.Assembly-Info-Task.Assembly-Info-Task.Assembly-Info-Task@1
@@ -74,16 +75,29 @@ steps:
     
 
 - task: NuGetCommand@2
-  displayName: 'Pack NuGet PreRelease'
+  displayName: 'Pack NuGet PreRelease $(nuspecFile)'
   inputs:
     command: custom
     arguments: pack $(nuspecFile) -Version $(PackageVersionPre) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
 
 - task: NuGetCommand@2
-  displayName: 'Pack NuGet Prod'
+  displayName: 'Pack NuGet Prod $(nuspecFile)'
   inputs:
     command: custom
     arguments: pack $(nuspecFile) -Version $(PackageVersion) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
+
+
+- task: NuGetCommand@2
+  displayName: 'Pack NuGet PreRelease $(nuspecFileForms)'
+  inputs:
+    command: custom
+    arguments: pack $(nuspecFileForms) -Version $(PackageVersionPre) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
+
+- task: NuGetCommand@2
+  displayName: 'Pack NuGet Prod $(nuspecFileForms)'
+  inputs:
+    command: custom
+    arguments: pack $(nuspecFileForms) -Version $(PackageVersion) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
 
 
 - task: CopyFiles@2
