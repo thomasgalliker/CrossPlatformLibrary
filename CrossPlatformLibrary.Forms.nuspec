@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
-    <id>CrossPlatformLibrary</id>
-    <version>4.0.0-alpha1</version>
-    <title>CrossPlatformLibrary</title>
+    <id>CrossPlatformLibrary.Forms</id>
+    <version>1.0.0</version>
+    <title>CrossPlatformLibrary.Forms</title>
     <authors>Thomas Galliker</authors>
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
     <projectUrl>https://github.com/thomasgalliker/CrossPlatformLibrary</projectUrl>
