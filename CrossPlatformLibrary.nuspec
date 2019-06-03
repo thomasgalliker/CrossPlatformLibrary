@@ -75,28 +75,29 @@
     <!--netstandard2.0-->
     <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.dll" target="lib\netstandard2.0+MonoAndroid10+xamarin.ios10\CrossPlatformLibrary.dll" />
     <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.pdb" target="lib\netstandard2.0+MonoAndroid10+xamarin.ios10\CrossPlatformLibrary.pdb" />
-    <!-- <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.xml" target="lib\netstandard2.0+MonoAndroid10+xamarin.ios10\CrossPlatformLibrary.xml" /> -->
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.deps.json" target="lib\netstandard2.0+MonoAndroid10+xamarin.ios10\CrossPlatformLibrary.deps.json" />
+    <file src="CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\netstandard2.0+MonoAndroid10+xamarin.ios10\CrossPlatformLibrary.xml" /> 
 
     <!--Xamarin.Android-->
     <file src="CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.Android.dll" target="lib\MonoAndroid10\CrossPlatformLibrary.Android.dll" />
     <file src="CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.Android.pdb" target="lib\MonoAndroid10\CrossPlatformLibrary.Android.pdb" />
-    <!-- <file src="CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.Android.xml" target="lib\MonoAndroid10\CrossPlatformLibrary.Android.xml" /> -->
+     <file src="CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.Android.xml" target="lib\MonoAndroid10\CrossPlatformLibrary.Android.xml" /> 
 
     <!--Xamarin.iOS-->
-    <file src="CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.iOS.dll" target="lib\xamarin.ios10\CrossPlatformLibrary.iOS.dll" />
-    <file src="CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.iOS.pdb" target="lib\xamarin.ios10\CrossPlatformLibrary.iOS.pdb" />
-    <!-- <file src="CrossPlatformLibrary.iOS\bin\iPhone\Release\CrossPlatformLibrary.iOS.xml" target="lib\xamarin.ios10\CrossPlatformLibrary.iOS.xml" /> -->
+    <file src="CrossPlatformLibrary.iOS\bin\Release\CrossPlatformLibrary.iOS.dll" target="lib\xamarin.ios10\CrossPlatformLibrary.iOS.dll" />
+    <file src="CrossPlatformLibrary.iOS\bin\Release\CrossPlatformLibrary.iOS.pdb" target="lib\xamarin.ios10\CrossPlatformLibrary.iOS.pdb" />
+     <file src="CrossPlatformLibrary.iOS\bin\Release\CrossPlatformLibrary.iOS.xml" target="lib\xamarin.ios10\CrossPlatformLibrary.iOS.xml" /> 
     <file src="CrossPlatformLibrary.iOS\LinkerHelper.cs" target="content\xamarin.ios10\LinkerHelper.cs" />
 
     <!--.Net Framework 4.5-->
     <file src="CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.dll" target="lib\net45\CrossPlatformLibrary.dll" />
     <file src="CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.pdb" target="lib\net45\CrossPlatformLibrary.pdb" />
-    <!-- <file src="CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.xml" target="lib\net45\CrossPlatformLibrary.xml" /> -->
+     <file src="CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.xml" target="lib\net45\CrossPlatformLibrary.xml" /> 
 
     <!--Universal Windows Platform-->
     <file src="CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.dll" target="lib\uap10.0\CrossPlatformLibrary.dll" />
     <file src="CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.pdb" target="lib\uap10.0\CrossPlatformLibrary.pdb" />
-    <!-- <file src="CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.xml" target="lib\uap10.0\CrossPlatformLibrary.xml" /> -->
+     <file src="CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.xml" target="lib\uap10.0\CrossPlatformLibrary.xml" /> 
 
     <file src="tools\init.ps1" target="tools\init.ps1" />
     <file src="tools\install.ps1" target="tools\install.ps1" />
