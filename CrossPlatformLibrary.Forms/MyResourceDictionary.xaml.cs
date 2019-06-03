@@ -6,7 +6,14 @@ namespace ResourceDictionaryDemo
     {
         public MyResourceDictionary()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+
+            this["CustomButtonStyle.TextColor"] = this["Primary"];
+
+            this["CustomButtonPrimaryStyle.BackgroundColor.Enabled"] = this["Primary"];
+            this["CustomButtonPrimaryStyle.BorderColor.Enabled"] = this["Primary"];
+
+            this["CustomButtonSecondaryStyle.BorderColor.Enabled"] = this["Primary"];
         }
     }
 }
