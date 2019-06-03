@@ -43,8 +43,8 @@
     <file src="CrossPlatformLibrary.Forms.Android\bin\Release\CrossPlatformLibrary.Forms.Android.xml" target="lib\MonoAndroid10\CrossPlatformLibrary.Forms.Android.xml" />
 
     <!--Xamarin.Forms iOS-->
-    <file src="CrossPlatformLibrary.Forms.iOS\bin\iPhone\Release\CrossPlatformLibrary.Forms.iOS.dll" target="lib\xamarin.ios10\CrossPlatformLibrary.Forms.iOS.dll" />
-    <file src="CrossPlatformLibrary.Forms.iOS\bin\iPhone\Release\CrossPlatformLibrary.Forms.iOS.pdb" target="lib\xamarin.ios10\CrossPlatformLibrary.Forms.iOS.pdb" />
-    <file src="CrossPlatformLibrary.Forms.iOS\bin\iPhone\Release\CrossPlatformLibrary.Forms.iOS.xml" target="lib\xamarin.ios10\CrossPlatformLibrary.Forms.iOS.xml" />
+    <file src="CrossPlatformLibrary.Forms.iOS\bin\Release\CrossPlatformLibrary.Forms.iOS.dll" target="lib\xamarin.ios10\CrossPlatformLibrary.Forms.iOS.dll" />
+    <file src="CrossPlatformLibrary.Forms.iOS\bin\Release\CrossPlatformLibrary.Forms.iOS.pdb" target="lib\xamarin.ios10\CrossPlatformLibrary.Forms.iOS.pdb" />
+    <file src="CrossPlatformLibrary.Forms.iOS\bin\Release\CrossPlatformLibrary.Forms.iOS.xml" target="lib\xamarin.ios10\CrossPlatformLibrary.Forms.iOS.xml" />
   </files>
 </package>
