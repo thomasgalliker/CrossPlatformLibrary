@@ -22,7 +22,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6A8FDA6-FCF8-4934-9875-1B19255DDF2E}"
 	ProjectSection(SolutionItems) = preProject
 		build.yml = build.yml
-		Package.nuspec = Package.nuspec
+		CrossPlatformLibrary.Forms.nuspec = CrossPlatformLibrary.Forms.nuspec
+		CrossPlatformLibrary.nuspec = CrossPlatformLibrary.nuspec
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -707,7 +708,7 @@ Global
 		{79D586BA-B455-4B84-994B-3DE2AD2FFF04} = {07EA1824-E9D4-42CF-8D6C-BA242B299375}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {FBB7B9FD-D594-483C-8A6F-7A6101F73C5D}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal

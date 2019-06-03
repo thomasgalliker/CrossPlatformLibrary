@@ -32,9 +32,9 @@
   </metadata>
   <files>
     <!--netstandard2.0-->
-    <file src="CrossPlatformLibrary.Forms\bin\Release\netstandard2.0\CrossPlatformLibrary.Forms.dll" target="lib\netstandard1.2\CrossPlatformLibrary.Forms.dll" />
-    <file src="CrossPlatformLibrary.Forms\bin\Release\netstandard2.0\CrossPlatformLibrary.Forms.pdb" target="lib\netstandard1.2\CrossPlatformLibrary.Forms.pdb" />
-    <file src="CrossPlatformLibrary.Forms\bin\Release\netstandard2.0\CrossPlatformLibrary.Forms.deps.json" target="lib\netstandard1.2\CrossPlatformLibrary.Forms.deps.json" />
+    <file src="CrossPlatformLibrary.Forms\bin\Release\netstandard2.0\CrossPlatformLibrary.Forms.dll" target="lib\netstandard2.0+MonoAndroid10+xamarin.ios10\CrossPlatformLibrary.Forms.dll" />
+    <file src="CrossPlatformLibrary.Forms\bin\Release\netstandard2.0\CrossPlatformLibrary.Forms.pdb" target="lib\netstandard2.0+MonoAndroid10+xamarin.ios10\CrossPlatformLibrary.Forms.pdb" />
+    <file src="CrossPlatformLibrary.Forms\bin\Release\netstandard2.0\CrossPlatformLibrary.Forms.deps.json" target="lib\netstandard2.0+MonoAndroid10+xamarin.ios10\CrossPlatformLibrary.Forms.deps.json" />
 	
     <!--Xamarin.Forms Android-->
     <file src="..\CrossPlatformLibrary.Forms.Android\bin\Release\CrossPlatformLibrary.Forms.Android.dll" target="lib\MonoAndroid10\CrossPlatformLibrary.dll" />
