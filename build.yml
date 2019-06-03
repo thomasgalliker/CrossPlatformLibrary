@@ -55,6 +55,10 @@ steps:
 - powershell: |
    Write-Host "##vso[task.setvariable variable=PackageVersion]$(Build.BuildNumber)"
    Write-Host "##vso[task.setvariable variable=PackageVersionPre]$(Build.BuildNumber)$(BuildVersionPostfix)"
+
+   Write-Host "##vso[task.setvariable variable=PackageVersionForms]$(Build.BuildNumber).Forms"
+   Write-Host "##vso[task.setvariable variable=PackageVersionFormsPre]$(Build.BuildNumber).Forms$(BuildVersionPostfix)"
+
   displayName: 'Set PackageVersion'
 
 - task: VSBuild@1
@@ -75,29 +79,29 @@ steps:
     
 
 - task: NuGetCommand@2
-  displayName: 'Pack NuGet PreRelease $(nuspecFile)'
+  displayName: 'Pack NuGet $(nuspecFile) PreRelease'
   inputs:
     command: custom
     arguments: pack $(nuspecFile) -Version $(PackageVersionPre) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
 
 - task: NuGetCommand@2
-  displayName: 'Pack NuGet Prod $(nuspecFile)'
+  displayName: 'Pack NuGet $(nuspecFile)'
   inputs:
     command: custom
     arguments: pack $(nuspecFile) -Version $(PackageVersion) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
 
 
 - task: NuGetCommand@2
-  displayName: 'Pack NuGet PreRelease $(nuspecFileForms)'
+  displayName: 'Pack NuGet $(nuspecFileForms) PreRelease'
   inputs:
     command: custom
-    arguments: pack $(nuspecFileForms) -Version $(PackageVersionPre) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
+    arguments: pack $(nuspecFileForms) -Version $(PackageVersionFormsPre) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
 
 - task: NuGetCommand@2
-  displayName: 'Pack NuGet Prod $(nuspecFileForms)'
+  displayName: 'Pack NuGet $(nuspecFileForms)'
   inputs:
     command: custom
-    arguments: pack $(nuspecFileForms) -Version $(PackageVersion) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
+    arguments: pack $(nuspecFileForms) -Version $(PackageVersionForms) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
 
 
 - task: CopyFiles@2
