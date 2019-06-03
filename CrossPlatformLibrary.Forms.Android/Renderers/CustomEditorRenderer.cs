@@ -87,7 +87,15 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            base.OnElementPropertyChanged(sender, e);
+            try
+            {
+                base.OnElementPropertyChanged(sender, e);
+
+            }
+            catch (Exception exception)
+            {
+            }
+      
 
             if (this.Element is CustomEditor customEditor)
             {

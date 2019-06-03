@@ -8,7 +8,7 @@
         /// <summary>
         /// Setup the validation rules for client side validations.
         /// </summary>
-        void SetupValidationRules();
+        //void SetupValidationRules();
 
         /// <summary>
         /// Validates the data.

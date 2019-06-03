@@ -1,5 +1,8 @@
+using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CrossPlatformLibrary.Forms.Validation;
 using CrossPlatformLibrary.Mvvm;
 using Xamarin.Forms;
 
@@ -14,6 +17,7 @@ namespace CrossPlatformLibrary.Forms.Mvvm
         private bool isRefreshing;
         private ViewModelError viewModelError;
         private bool isLoadingMore;
+        private ViewModelValidation validation;
 
         public const string TitlePropertyName = "Title";
         public const string IconPropertyName = "Icon";
@@ -22,6 +26,7 @@ namespace CrossPlatformLibrary.Forms.Mvvm
         protected BaseViewModel()
         {
             this.ViewModelError = ViewModelError.None;
+            this.SetupValidationInternal();
         }
 
         public virtual string Title
@@ -110,5 +115,34 @@ namespace CrossPlatformLibrary.Forms.Mvvm
         public bool HasViewModelError => this.IsNotBusy && this.viewModelError.HasError;
 
         public bool IsNotBusyAndHasNoViewModelError => this.IsNotBusy && this.viewModelError.HasError == false;
+
+        public ViewModelValidation Validation
+        {
+            get => this.validation ?? throw new InvalidOperationException($"Override {nameof(this.SetupValidation)} before accessing {nameof(this.Validation)}");
+            private set => this.SetProperty(ref this.validation, value, nameof(this.Validation));
+        }
+
+        private void SetupValidationInternal()
+        {
+            var viewModelValidation = this.SetupValidation();
+            if (viewModelValidation != null)
+            {
+                this.Validation = viewModelValidation;
+            }
+        }
+
+        /// <summary>
+        /// Overriding <see cref="SetupValidation"/> activates user input validation for this view model.
+        /// </summary>
+        protected virtual ViewModelValidation SetupValidation()
+        {
+            return null;
+        }
+
+        protected override void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnPropertyChanged(args);
+            this.Validation?.ValidateProperty(args.PropertyName);
+        }
     }
 }
