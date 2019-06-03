@@ -118,7 +118,7 @@ namespace CrossPlatformLibrary.Forms.Mvvm
 
         public ViewModelValidation Validation
         {
-            get => this.validation ?? throw new InvalidOperationException($"Override {nameof(this.SetupValidation)} before accessing {nameof(this.Validation)}");
+            get => this.validation /*?? throw new InvalidOperationException($"Override {nameof(this.SetupValidation)} before accessing {nameof(this.Validation)}")*/;
             private set => this.SetProperty(ref this.validation, value, nameof(this.Validation));
         }
 
