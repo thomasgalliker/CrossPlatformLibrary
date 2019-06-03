@@ -54,7 +54,7 @@
 - Extracted ObservableView to new NuGet package https://www.nuget.org/packages/ObservableView/
 - Extracted HighlightMarker to new NuGet package https://www.nuget.org/packages/HighlightMarker/
     </releaseNotes>
-    <copyright>Copyright 2018</copyright>
+    <copyright>Copyright 2019</copyright>
     <language>en-US</language>
     <dependencies>
       <group>
