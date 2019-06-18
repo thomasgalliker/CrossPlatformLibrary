@@ -4,12 +4,14 @@ namespace CrossPlatformLibrary.Forms.Controls
 {
     public class CustomEditor : Editor
     {
+        public const int MaxLinesDefault = -1;
+
         public static readonly BindableProperty MaxLinesProperty =
             BindableProperty.Create(
                 nameof(MaxLines),
                 typeof(int),
                 typeof(CustomEditor),
-                -1);
+                MaxLinesDefault);
 
         public int MaxLines
         {

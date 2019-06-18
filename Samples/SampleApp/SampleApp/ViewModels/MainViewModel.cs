@@ -17,6 +17,7 @@ namespace SampleApp.ViewModels
         private ICommand saveProfileButtonCommand;
         private ICommand loadDataButtonCommand;
         private UserDto user;
+        private string logContent;
 
         public MainViewModel()
         {
@@ -71,6 +72,12 @@ namespace SampleApp.ViewModels
                 this.notes = value;
                 this.OnPropertyChanged(nameof(this.Notes));
             }
+        }
+
+        public string LogContent
+        {
+            get => this.logContent;
+            set => this.SetProperty(ref this.logContent, value, nameof(this.LogContent));
         }
 
         public string AdminEmailAddress
@@ -140,6 +147,7 @@ namespace SampleApp.ViewModels
                 this.numberOfLoads++;
                 this.RaisePropertyChanged(nameof(this.RefreshButtonText));
 
+                this.LogContent = this.logContent + Environment.NewLine + $"{DateTime.Now:G} LoadData called";
                 if (this.numberOfLoads % 2 == 0)
                 {
                     // Simulate a data load exception

@@ -65,7 +65,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
         private void OnBeforeTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (this.Element is CustomEditor customEditor)
+            if (this.Element is CustomEditor customEditor && customEditor.MaxLines != CustomEditor.MaxLinesDefault)
             {
                 if (this.Control.LineCount <= customEditor.MaxLines)
                 {
@@ -76,7 +76,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
         private void OnAfterTextChanged(object sender, AfterTextChangedEventArgs e)
         {
-            if (this.Element is CustomEditor customEditor)
+            if (this.Element is CustomEditor customEditor && customEditor.MaxLines != CustomEditor.MaxLinesDefault)
             {
                 if (this.Control.LineCount > customEditor.MaxLines)
                 {
@@ -95,7 +95,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
             catch (Exception exception)
             {
             }
-      
+
 
             if (this.Element is CustomEditor customEditor)
             {
@@ -122,19 +122,22 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
         private void UpdateText(CustomEditor customEditor)
         {
-            if (customEditor.Text != null)
+            if (customEditor.MaxLines != CustomEditor.MaxLinesDefault)
             {
-                var textLines = customEditor.Text.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.None);
-                if (textLines.Length > customEditor.MaxLines)
+                if (customEditor.Text != null)
                 {
-                    customEditor.Text = string.Join(Environment.NewLine, textLines.Take(customEditor.MaxLines));
+                    var textLines = customEditor.Text.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.None);
+                    if (textLines.Length > customEditor.MaxLines)
+                    {
+                        customEditor.Text = string.Join(Environment.NewLine, textLines.Take(customEditor.MaxLines));
+                    }
                 }
             }
         }
 
         private void UpdateLines(CustomEditor customEditor)
         {
-            if (customEditor.MaxLines != -1)
+            if (customEditor.MaxLines != CustomEditor.MaxLinesDefault)
             {
                 this.Control.SetSingleLine(false);
                 this.Control.SetMaxLines(customEditor.MaxLines);
