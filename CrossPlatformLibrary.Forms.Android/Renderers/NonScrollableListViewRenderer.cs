@@ -1,13 +1,18 @@
-﻿using CrossPlatformLibrary.Forms.Controls;
-using CrossPlatformLibrary.Forms.iOS.Renderers;
+﻿using Android.Content;
+using CrossPlatformLibrary.Forms.Android.Renderers;
+using CrossPlatformLibrary.Forms.Controls;
 using Xamarin.Forms;
-using Xamarin.Forms.Platform.iOS;
+using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(NonScrollableListView), typeof(NonScrollableListViewRenderer))]
-namespace CrossPlatformLibrary.Forms.iOS.Renderers
+namespace CrossPlatformLibrary.Forms.Android.Renderers
 {
     public class NonScrollableListViewRenderer : ListViewRenderer
     {
+        public NonScrollableListViewRenderer(Context context) : base(context)
+        {
+        }
+
         protected override void OnElementChanged(ElementChangedEventArgs<ListView> e)
         {
             base.OnElementChanged(e);
@@ -16,7 +21,8 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             {
                 if (this.Control != null)
                 {
-                    this.Control.ScrollEnabled = false;
+                    this.Control.VerticalScrollBarEnabled = false;
+                    this.Control.HorizontalScrollBarEnabled = false;
                 }
             }
         }

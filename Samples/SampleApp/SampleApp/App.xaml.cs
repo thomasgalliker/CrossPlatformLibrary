@@ -1,4 +1,5 @@
-﻿using CrossPlatformLibrary.Forms.Localization;
+﻿using CrossPlatformLibrary.Forms.Controls;
+using CrossPlatformLibrary.Forms.Localization;
 using CrossPlatformLibrary.Localization;
 using SampleApp.Resources;
 using Xamarin.Forms;
@@ -20,6 +21,7 @@ namespace SampleApp
             var translationProvider = ResxSingleTranslationProvider.Instance;
             translationProvider.Init(Strings.ResourceManager);
             TranslateExtension.Init(localizer, translationProvider);
+            ImageResourceExtension.Init(typeof(App).Assembly);
 
             this.InitializeComponent();
 

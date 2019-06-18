@@ -40,6 +40,20 @@ namespace CrossPlatformLibrary.Forms.Controls
             set { this.SetValue(CommandProperty, value); }
         }
 
+        public static readonly BindableProperty CommandParameterProperty =
+            BindableProperty.Create(
+                nameof(CommandParameter),
+                typeof(object),
+                typeof(DrilldownButton),
+                null,
+                BindingMode.OneWay);
+
+        public object CommandParameter
+        {
+            get => this.GetValue(CommandParameterProperty);
+            set => this.SetValue(CommandParameterProperty, value);
+        }
+
         public new static readonly BindableProperty IsEnabledProperty =
             BindableProperty.Create(
                 nameof(IsEnabled),

@@ -10,19 +10,45 @@ namespace SampleApp.ViewModels
     public class MainViewModel : BaseViewModel
     {
         private CountryViewModel country;
-        private bool isBusy;
         private string notes;
         private string adminEmailAddress;
 
         private int numberOfLoads = 0;
         private ICommand saveProfileButtonCommand;
         private ICommand loadDataButtonCommand;
+        private UserDto user;
 
         public MainViewModel()
         {
             this.ViewModelError = ViewModelError.None;
+            this.User = new UserDto();
             this.Countries = new ObservableCollection<CountryViewModel>();
             this.LoadData();
+        }
+
+        private UserDto User
+        {
+            get => this.user;
+            set
+            {
+                if (this.SetProperty(ref this.user, value, nameof(this.User)))
+                {
+                    this.RaisePropertyChanged(nameof(this.UserId));
+                    this.RaisePropertyChanged(nameof(this.UserName));
+                }
+            }
+        }
+
+        public int UserId
+        {
+            get => this.User.Id;
+            set => this.SetProperty(this.User, value, nameof(this.UserId), nameof(this.User.Id));
+        }
+
+        public string UserName
+        {
+            get => this.User.UserName;
+            set => this.SetProperty(this.User, value);
         }
 
         public ObservableCollection<CountryViewModel> Countries { get; }
@@ -104,7 +130,15 @@ namespace SampleApp.ViewModels
 
             try
             {
+                this.User = new UserDto
+                {
+                    Id = 1,
+                    UserName = "thomasgalliker"
+                };
+                this.UserId = 2;
+
                 this.numberOfLoads++;
+                this.RaisePropertyChanged(nameof(this.RefreshButtonText));
 
                 if (this.numberOfLoads % 2 == 0)
                 {
@@ -126,6 +160,11 @@ namespace SampleApp.ViewModels
             }
 
             this.IsBusy = false;
+        }
+
+        public string RefreshButtonText
+        {
+            get { return $"Refresh {this.numberOfLoads}"; }
         }
     }
 }

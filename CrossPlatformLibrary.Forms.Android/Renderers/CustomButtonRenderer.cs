@@ -50,6 +50,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
                     button.SetBackgroundDrawable(sld);
 
                     this.UpdateAlignment(customButton);
+                    this.UpdateAllCaps(customButton);
                 }
             }
         }
@@ -85,8 +86,17 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
                     {
                         this.UpdateAlignment(customButton);
                     }
+                    else if (e.PropertyName == CustomButton.AllCapsProperty.PropertyName || e.PropertyName == Button.TextProperty.PropertyName)
+                    {
+                        this.UpdateAllCaps(customButton);
+                    }
                 }
             }
+        }
+
+        private void UpdateAllCaps(CustomButton customButton)
+        {
+            this.Control.SetAllCaps(customButton.AllCaps);
         }
 
         private void UpdateAlignment(CustomButton customButton)

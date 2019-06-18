@@ -23,7 +23,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         public static readonly BindableProperty VerticalContentAlignmentProperty = BindableProperty.Create(
             nameof(VerticalContentAlignment),
             typeof(TextAlignment),
-            typeof(CustomButton), 
+            typeof(CustomButton),
             TextAlignment.Center);
 
         public TextAlignment VerticalContentAlignment
@@ -42,6 +42,30 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             get { return (TextAlignment)this.GetValue(HorizontalContentAlignmentProperty); }
             set { this.SetValue(HorizontalContentAlignmentProperty, value); }
+        }
+
+
+        public static readonly BindableProperty AllCapsProperty =
+            BindableProperty.Create(
+                nameof(AllCaps),
+                typeof(bool),
+                typeof(CustomButton),
+                GetDefaultAllCaps());
+
+        private static object GetDefaultAllCaps()
+        {
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool AllCaps
+        {
+            get { return (bool)this.GetValue(AllCapsProperty); }
+            set { this.SetValue(AllCapsProperty, value); }
         }
     }
 }

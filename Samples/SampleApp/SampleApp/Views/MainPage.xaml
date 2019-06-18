@@ -20,6 +20,14 @@
               Spacing="{DynamicResource CardSpacing}"
               Padding="{DynamicResource CardPadding}">
 
+            <Label Text="&lt;!--Demo ValidatableLabel--&gt;" TextColor="LightGreen" FontAttributes="Italic"/>
+            <controls:ValidatableLabel
+                Text="{Binding UserId, Mode=OneWay}"/>
+
+            <Label Text="&lt;!--Demo ValidatableEntry--&gt;" TextColor="LightGreen" FontAttributes="Italic"/>
+            <controls:ValidatableEntry
+                Text="{Binding UserName, Mode=TwoWay}"/>
+
             <!--User's Personal Information-->
             <!--<account:PersonalInformationControl
                             ShowEditableFieldsOnly="False"
@@ -59,20 +67,18 @@
             <userControls:NotesView
                 BindingContext="{Binding .}" />
 
-            <controls:ValidatableLabel
-              Text="This is a readonly label"/>
-
+            <Label Text="&lt;!--Demo HyperLinkLabel--&gt;" TextColor="LightGreen" FontAttributes="Italic"/>
             <controls:HyperLinkLabel
                   Text="{Binding AdminEmailAddress, Mode=OneWay}"
                   NavigateCommand="{Binding MailNavigateCommand}"/>
 
-            <!--Demo DrilldownButton-->
-            <controls:DrilldownButton 
+            <Label Text="&lt;!--Demo DrilldownButton--&gt;" TextColor="LightGreen" FontAttributes="Italic"/>
+            <controls:DrilldownButton
                 Text="{localization:Translate SingleButtonText}"
                 ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
                 Command="{Binding MailNavigateCommand}"/>
 
-            <!--Demo DrilldownButtonList-->
+            <Label Text="&lt;!--Demo DrilldownButtonList--&gt;" TextColor="LightGreen" FontAttributes="Italic"/>
             <controls:CardView>
               <controls:StackLayoutZero>
                 <controls:LabelSection Text="{localization:Translate ListOfSettingsSectionText}"/>
@@ -82,12 +88,12 @@
                     <objectModel:ObservableCollection x:TypeArguments="controls:DrilldownButtonCell">
                       <controls:DrilldownButtonCell
                           Text="{localization:Translate LogButtonText}"
-                          ImageSource="{controls:ImageResource chevron_right_grey_192x192.png}"
+                          ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
                           Command="{Binding BindingContext.NavigateToLogCommand, Source={x:Reference Page}}"/>
                       <controls:DrilldownButtonCell
-                          Text="{localization:Translate DeveloperSettingsButtonText}"
-                          ImageSource="{controls:ImageResource chevron_right_grey_192x192.png}"
-                          Command="{Binding BindingContext.NavigateToDeveloperSettingsCommand, Source={x:Reference Page}}"/>
+                          BindingContext ="{Binding BindingContext, Source={x:Reference Page}}"
+                          Text="{Binding RefreshButtonText}"
+                          Command="{Binding RefreshCommand}"/>
                     </objectModel:ObservableCollection>
                   </controls:DrilldownButtonList.ItemsSource>
                 </controls:DrilldownButtonList>
@@ -96,8 +102,18 @@
 
             </controls:CardView>
 
+            <Label Text="&lt;!--Demo NoBarsScrollViewer--&gt;" TextColor="LightGreen" FontAttributes="Italic"/>
+            <controls:NoBarsScrollViewer Orientation="Horizontal">
+              <controls:StackLayoutZero Orientation="Horizontal">
+                <Label Text="Label Green &gt;&gt;&gt;" BackgroundColor="LightGreen" WidthRequest="333"/>
+                <Label Text="&lt;&lt;&lt; Label Red &gt;&gt;&gt;" BackgroundColor="LightCoral" WidthRequest="333"/>
+                <Label Text="&lt;&lt;&lt; Label Blue" BackgroundColor="LightBlue" WidthRequest="333"/>
+              </controls:StackLayoutZero>
+            </controls:NoBarsScrollViewer>
+
           </StackLayout>
 
+          <Label Text="&lt;!--Demo CustomButton--&gt;" TextColor="LightGreen" FontAttributes="Italic"/>
           <controls:CustomButton
               Margin="{StaticResource ButtonMargin}"
               Text="{localization:Translate LoadDataButtonText}"
@@ -111,11 +127,13 @@
               Style="{StaticResource CustomButtonPrimaryStyle}"/>
         </StackLayout>
 
+        <Label Text="&lt;!--Demo CustomActivityIndicator--&gt;" TextColor="LightGreen" FontAttributes="Italic" IsVisible="{Binding IsBusy, Mode=OneWay}"/>
         <controls:CustomActivityIndicator
             IsVisible="{Binding IsBusy, Mode=OneWay}"
             Caption="{localization:Translate LoadingText}" />
       </Grid>
 
+      <Label Text="&lt;!--Demo ViewModelErrorControl--&gt;" TextColor="LightGreen" FontAttributes="Italic" IsVisible="{Binding HasViewModelError, Mode=OneWay}"/>
       <controls:ViewModelErrorControl
           IsVisible="{Binding HasViewModelError, Mode=OneWay}"
           ViewModelError="{Binding ViewModelError, Mode=OneWay}"/>

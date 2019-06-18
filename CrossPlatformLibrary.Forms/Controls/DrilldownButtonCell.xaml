@@ -14,6 +14,7 @@
 
       <controls:CustomButton
           Text="{Binding Text, Mode=OneWay}"
+          AllCaps="False"
           FontAttributes="None"
           FontSize="{DynamicResource LargeSize}"
           HorizontalOptions="FillAndExpand"
@@ -23,7 +24,8 @@
           CornerRadius="0"
           TextColor="{DynamicResource Primary}"
           Command="{Binding Command, Mode=OneWay}"
-          IsEnabled="{Binding IsEnabled, Source={x:Reference Control}, Mode=OneWay}"
+          CommandParameter="{Binding CommandParameter, Mode=OneWay}"
+          IsEnabled="{Binding IsEnabled, Mode=OneWay}"
           Style="{DynamicResource CustomButtonStyle}"
           BackgroundColor="Transparent"
           BackgroundColorPressed="{DynamicResource WindowBackground}"
@@ -46,8 +48,8 @@
       </controls:CustomButton>
 
       <Image
-          Source="{Binding ImageSource, Source={x:Reference Control}, Mode=OneWay}"
-          IsVisible="{Binding IsBusy, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+          Source="{Binding ImageSource, Mode=OneWay}"
+          IsVisible="{Binding IsBusy, Mode=OneWay, Converter={StaticResource BoolInverter}}"
           HeightRequest="24"
           WidthRequest="24"
           HorizontalOptions="EndAndExpand"
@@ -55,8 +57,8 @@
           Margin="0, 0, 8, 0"/>
 
       <ActivityIndicator
-          IsRunning="{Binding IsBusy, Source={x:Reference Control}, Mode=OneWay}"
-          IsVisible="{Binding IsBusy, Source={x:Reference Control}, Mode=OneWay}"
+          IsRunning="{Binding IsBusy, Mode=OneWay}"
+          IsVisible="{Binding IsBusy, Mode=OneWay}"
           WidthRequest="24"
           HorizontalOptions="EndAndExpand"
           VerticalOptions="CenterAndExpand"
@@ -67,8 +69,10 @@
       </ActivityIndicator>
 
       <Grid.GestureRecognizers>
-        <TapGestureRecognizer Command="{Binding Command, Mode=OneWay}"/>
-      </Grid.GestureRecognizers>
+          <TapGestureRecognizer 
+              Command="{Binding Command, Mode=OneWay}"
+              CommandParameter="{Binding CommandParameter, Mode=OneWay}"/>
+            </Grid.GestureRecognizers>
     </Grid>
   </ViewCell.View>
 </controls:ExtendedViewCell>

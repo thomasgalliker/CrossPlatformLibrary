@@ -19,6 +19,7 @@
             
             <controls:CustomButton
                 Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}"
+                AllCaps="False"
                 FontAttributes="None"
                 FontSize="{DynamicResource LargeSize}"
                 HorizontalOptions="FillAndExpand"
@@ -28,6 +29,7 @@
                 CornerRadius="0"
                 TextColor="{DynamicResource Primary}"
                 Command="{Binding Command, Source={x:Reference Control}, Mode=OneWay}"
+                CommandParameter="{Binding CommandParameter, Source={x:Reference Control}, Mode=OneWay}"
                 IsEnabled="{Binding IsEnabled, Source={x:Reference Control}, Mode=OneWay}"
                 Style="{DynamicResource CustomButtonStyle}"
                 BackgroundColor="Transparent"
@@ -51,7 +53,7 @@
             </controls:CustomButton>
 
             <Image 
-                Source="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
+                Source="{Binding ImageSource, Source={x:Reference Control}, Mode=OneWay}"
                 HeightRequest="24"
                 WidthRequest="24"
                 HorizontalOptions="EndAndExpand"
@@ -71,7 +73,9 @@
             </ActivityIndicator>
 
             <Grid.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding Command, Source={x:Reference Control}, Mode=OneWay}"/>
+                <TapGestureRecognizer 
+                    Command="{Binding Command, Source={x:Reference Control}, Mode=OneWay}"
+                    CommandParameter="{Binding CommandParameter, Source={x:Reference Control}, Mode=OneWay}"/>
             </Grid.GestureRecognizers>
         </Grid>
         <controls:FooterDivider/>
