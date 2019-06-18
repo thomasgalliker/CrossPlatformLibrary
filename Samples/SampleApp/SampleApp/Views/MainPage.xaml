@@ -49,7 +49,7 @@
                             FontAttributes="Italic" />
                         <userControls:AddressControl BindingContext="{Binding Address}" />
 
-                        <!--<Grid>
+                        <Grid>
                             <controls:ValidatableEditor
                                 Placeholder="{localization:Translate SimpleNotesLabelText}"
                                 Text="{Binding Notes, Mode=TwoWay}"
@@ -69,10 +69,10 @@
                             </controls:ValidatableEditor>
                         </Grid>
 
-                        <userControls:NotesView BindingContext="{Binding .}" />-->
+                        <userControls:NotesView BindingContext="{Binding .}" />
 
                         <Label
-                            Text="&lt;!--Demo CustomEditor--&gt;"
+                            Text="&lt;!--Demo CustomEditor with hidden keyboard--&gt;"
                             TextColor="LightGreen"
                             FontAttributes="Italic" />
                         <controls:CustomEditor
