@@ -6,14 +6,14 @@ namespace CrossPlatformLibrary.Settings.Internals
 {
     internal class ConverterRegistry
     {
-        private readonly Dictionary<Tuple<Type, Type>, Func<IConvertible>> converters;
+        private readonly Dictionary<Tuple<Type, Type>, IConvertible> converters;
 
         public ConverterRegistry()
         {
-            this.converters = new Dictionary<Tuple<Type, Type>, Func<IConvertible>>();
+            this.converters = new Dictionary<Tuple<Type, Type>, IConvertible>();
         }
 
-        internal void RegisterConverter<TSource, TTarget>(Func<IConvertible> converterFactory, bool reverse)
+        internal void RegisterConverter<TSource, TTarget>(IConvertible converterFactory, bool reverse)
         {
             lock (this.converters)
             {
@@ -46,7 +46,7 @@ namespace CrossPlatformLibrary.Settings.Internals
                 if (this.converters.ContainsKey(key))
                 {
                     var converterFactory = this.converters[key];
-                    return converterFactory();
+                    return converterFactory;
                 }
 
                 throw new SettingsValueConversionException($"Missing converter for sourceType={sourceType.GetFormattedName()} and targetType={targetType.GetFormattedName()}");

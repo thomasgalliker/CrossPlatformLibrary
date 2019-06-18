@@ -1,14 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<StackLayout 
+<controls:StackLayoutZero
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     x:Class="CrossPlatformLibrary.Forms.Controls.ViewModelErrorControl" 
     VerticalOptions="FillAndExpand"
     HorizontalOptions="FillAndExpand"
-    BackgroundColor="{DynamicResource WindowBackground}"
-    Margin="0"
-    Padding="0"
     x:Name="Control">
 
     <StackLayout
@@ -29,6 +26,7 @@
 
         <controls:CustomLabel 
             Text="{Binding ViewModelError.Text, Source={x:Reference Control}}" 
+            FontSize="{DynamicResource LargeSize}"
             LineBreakMode="WordWrap"
             BackgroundColor="Transparent"
             HorizontalTextAlignment="Center"
@@ -40,4 +38,4 @@
             <TapGestureRecognizer Command="{Binding ViewModelError.Command, Source={x:Reference Control}}" />
         </StackLayout.GestureRecognizers>
     </StackLayout>
-</StackLayout>
+</controls:StackLayoutZero>

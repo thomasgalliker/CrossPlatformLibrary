@@ -1,7 +1,4 @@
-﻿
-using System;
-
-namespace CrossPlatformLibrary.Settings
+﻿namespace CrossPlatformLibrary.Settings
 {
     public interface ISettingsService
     {
@@ -22,7 +19,20 @@ namespace CrossPlatformLibrary.Settings
         /// <param name="value">Value for settings</param>
         void AddOrUpdateValue<T>(string key, T value);
 
-        void RegisterConverter<TSource, TTarget>(Func<IConvertible> converterFactory, bool reverse);
+        /// <summary>
+        /// Registers a custom conversion logic to convert from type <typeparamref name="TSource"/> to <typeparamref name="TTarget"/>.
+        /// </summary>
+        /// <typeparam name="TSource">The source type.</typeparam>
+        /// <typeparam name="TTarget">The target type.</typeparam>
+        /// <param name="convertible">The instance of IConvertible.</param>
+        /// <param name="reverse">The flag <paramref name="reverse"/> indicates if the converter works in both directions.</param>
+        void RegisterConverter<TSource, TTarget>(IConvertible convertible, bool reverse);
+
+        /// <summary>
+        /// The default conversion logic which kicks in if no other matching <code>IConvertible</code> is registered.
+        /// </summary>
+        /// <param name="convertible">The instance of IConvertible.</param>
+        void RegisterDefaultConverter(IConvertible convertible);
 
         ////void Remove(string key);
 

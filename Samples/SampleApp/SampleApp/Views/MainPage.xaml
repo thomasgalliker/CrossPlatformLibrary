@@ -5,91 +5,122 @@
              xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
              xmlns:userControls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
              xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
-             x:Class="SampleApp.MainPage">
+             xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
+             x:Class="SampleApp.MainPage"
+             x:Name="Page">
 
-    <!--<Grid>
+  <!--<Grid>
     <controls1:AddressControl />
   </Grid>-->
-    <controls:AlwaysScrollView>
-        <Grid>
-            <Grid IsVisible="{Binding HasViewModelError, Mode=OneWay, Converter={StaticResource BoolInverter}}">
-                <StackLayout IsVisible="{Binding IsNotBusy}">
-                    <StackLayout
-                        Spacing="{DynamicResource CardSpacing}"
-                        Padding="{DynamicResource CardPadding}">
+  <controls:AlwaysScrollView>
+    <Grid>
+      <Grid IsVisible="{Binding HasViewModelError, Mode=OneWay, Converter={StaticResource BoolInverter}}">
+        <StackLayout IsVisible="{Binding IsNotBusy}">
+          <StackLayout
+              Spacing="{DynamicResource CardSpacing}"
+              Padding="{DynamicResource CardPadding}">
 
-                        <!--User's Personal Information-->
-                        <!--<account:PersonalInformationControl
+            <!--User's Personal Information-->
+            <!--<account:PersonalInformationControl
                             ShowEditableFieldsOnly="False"
                             BindingContext="{Binding PersonalInformation}" />-->
 
-                        <!--User's Identification-->
-                        <!--<account:UserIdentificationControl
+            <!--User's Identification-->
+            <!--<account:UserIdentificationControl
                             BindingContext="{Binding UserIdentification}" />-->
 
-                        <controls:CustomLabel Text="Enter name:"/>
-                        <controls:CustomEntry Text="Android EditText sets Padding=&quot;0&quot;" Padding="0" />
+            <controls:CustomLabel Text="Enter name:"/>
+            <controls:CustomEntry Text="Android EditText sets Padding=&quot;0&quot;" Padding="0" />
 
-                        <!--User's Address-->
-                        <userControls:AddressControl
-                            BindingContext="{Binding Address}" />
+            <!--User's Address-->
+            <userControls:AddressControl
+                BindingContext="{Binding Address}" />
 
-                        <Grid>
-                            <controls:ValidatableEditor
-                                Placeholder="{localization:Translate SimpleNotesLabelText}"
-                                Text="{Binding Notes, Mode=TwoWay}"
-                                IsEnabled="True"
-                                ValidationErrors="{Binding Errors[Notes]}"
-                                MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
-                                MaxLines="3"
-                                BackgroundColor="LightYellow"
-                                HorizontalOptions="FillAndExpand">
-                              <controls:ValidatableEditor.Keyboard>
-                                  <Keyboard x:FactoryMethod="Create">
-                                      <x:Arguments>
-                                          <KeyboardFlags>CapitalizeSentence,Spellcheck</KeyboardFlags>
-                                      </x:Arguments>
-                                  </Keyboard>
-                              </controls:ValidatableEditor.Keyboard>
-                            </controls:ValidatableEditor>
-                        </Grid>
-
-                        <userControls:NotesView
-                            BindingContext="{Binding .}" />
-
-                        <controls:ValidatableLabel
-                          Text="This is a readonly label"/>
-
-                      <controls:HyperLinkLabel
-                            Text="{Binding AdminEmailAddress, Mode=OneWay}"
-                            NavigateCommand="{Binding MailNavigateCommand}"/>
-
-
-                    </StackLayout>
-
-                    <controls:CustomButton
-                        Margin="{StaticResource ButtonMargin}"
-                        Text="{localization:Translate LoadDataButtonText}"
-                        Command="{Binding LoadDataButtonCommand}"
-                        Style="{StaticResource CustomButtonSecondaryStyle}"/>
-
-                    <controls:CustomButton
-                        Margin="{StaticResource ButtonMargin}"
-                        Text="{localization:Translate SaveButtonText}"
-                        Command="{Binding SaveProfileButtonCommand}"
-                        Style="{StaticResource CustomButtonPrimaryStyle}"/>
-                </StackLayout>
-
-                <controls:CustomActivityIndicator
-                    IsVisible="{Binding IsBusy, Mode=OneWay}"
-                    Caption="{localization:Translate LoadingText}" />
+            <Grid>
+              <controls:ValidatableEditor
+                  Placeholder="{localization:Translate SimpleNotesLabelText}"
+                  Text="{Binding Notes, Mode=TwoWay}"
+                  IsEnabled="True"
+                  ValidationErrors="{Binding Errors[Notes]}"
+                  MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
+                  MaxLines="3"
+                  BackgroundColor="LightYellow"
+                  HorizontalOptions="FillAndExpand">
+                <controls:ValidatableEditor.Keyboard>
+                  <Keyboard x:FactoryMethod="Create">
+                    <x:Arguments>
+                      <KeyboardFlags>CapitalizeSentence,Spellcheck</KeyboardFlags>
+                    </x:Arguments>
+                  </Keyboard>
+                </controls:ValidatableEditor.Keyboard>
+              </controls:ValidatableEditor>
             </Grid>
 
-            <controls:ViewModelErrorControl
-                IsVisible="{Binding HasViewModelError, Mode=OneWay}"
-                ViewModelError="{Binding ViewModelError, Mode=OneWay}"/>
-        </Grid>
-    </controls:AlwaysScrollView>
+            <userControls:NotesView
+                BindingContext="{Binding .}" />
+
+            <controls:ValidatableLabel
+              Text="This is a readonly label"/>
+
+            <controls:HyperLinkLabel
+                  Text="{Binding AdminEmailAddress, Mode=OneWay}"
+                  NavigateCommand="{Binding MailNavigateCommand}"/>
+
+            <!--Demo DrilldownButton-->
+            <controls:DrilldownButton 
+                Text="{localization:Translate SingleButtonText}"
+                ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
+                Command="{Binding MailNavigateCommand}"/>
+
+            <!--Demo DrilldownButtonList-->
+            <controls:CardView>
+              <controls:StackLayoutZero>
+                <controls:LabelSection Text="{localization:Translate ListOfSettingsSectionText}"/>
+                <controls:HeaderDivider/>
+                <controls:DrilldownButtonList>
+                  <controls:DrilldownButtonList.ItemsSource>
+                    <objectModel:ObservableCollection x:TypeArguments="controls:DrilldownButtonCell">
+                      <controls:DrilldownButtonCell
+                          Text="{localization:Translate LogButtonText}"
+                          ImageSource="{controls:ImageResource chevron_right_grey_192x192.png}"
+                          Command="{Binding BindingContext.NavigateToLogCommand, Source={x:Reference Page}}"/>
+                      <controls:DrilldownButtonCell
+                          Text="{localization:Translate DeveloperSettingsButtonText}"
+                          ImageSource="{controls:ImageResource chevron_right_grey_192x192.png}"
+                          Command="{Binding BindingContext.NavigateToDeveloperSettingsCommand, Source={x:Reference Page}}"/>
+                    </objectModel:ObservableCollection>
+                  </controls:DrilldownButtonList.ItemsSource>
+                </controls:DrilldownButtonList>
+                <controls:FooterDivider />
+              </controls:StackLayoutZero>
+
+            </controls:CardView>
+
+          </StackLayout>
+
+          <controls:CustomButton
+              Margin="{StaticResource ButtonMargin}"
+              Text="{localization:Translate LoadDataButtonText}"
+              Command="{Binding LoadDataButtonCommand}"
+              Style="{StaticResource CustomButtonSecondaryStyle}"/>
+
+          <controls:CustomButton
+              Margin="{StaticResource ButtonMargin}"
+              Text="{localization:Translate SaveButtonText}"
+              Command="{Binding SaveProfileButtonCommand}"
+              Style="{StaticResource CustomButtonPrimaryStyle}"/>
+        </StackLayout>
+
+        <controls:CustomActivityIndicator
+            IsVisible="{Binding IsBusy, Mode=OneWay}"
+            Caption="{localization:Translate LoadingText}" />
+      </Grid>
+
+      <controls:ViewModelErrorControl
+          IsVisible="{Binding HasViewModelError, Mode=OneWay}"
+          ViewModelError="{Binding ViewModelError, Mode=OneWay}"/>
+    </Grid>
+  </controls:AlwaysScrollView>
 
 
 </ContentPage>

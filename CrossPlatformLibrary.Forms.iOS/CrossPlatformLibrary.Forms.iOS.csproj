@@ -33,7 +33,7 @@
     <DocumentationFile>bin\Release\CrossPlatformLibrary.Forms.iOS.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" version="[3.4.0.1008975,)" />
+    <PackageReference Include="Xamarin.Forms" version="3.6.0.344457" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

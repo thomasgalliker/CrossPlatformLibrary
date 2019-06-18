@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+        x:Class="CrossPlatformLibrary.Forms.Controls.DrilldownButtonList"
+        x:Name="Control"
+        >
+
+    <Grid.Resources>
+    <ResourceDictionary>
+      <DataTemplate x:Key="DrilldownButtonCell">
+        <controls:DrilldownButtonCell/>
+      </DataTemplate>
+    </ResourceDictionary>
+  </Grid.Resources>
+
+    <!--Padding="{DynamicResource CardViewPadding}" BackgroundColor="{DynamicResource CardViewBackgroundColor}"-->
+    <Grid.Padding>
+    <OnPlatform x:TypeArguments="Thickness" Android="0" iOS="0, 24, 0, 4" />
+  </Grid.Padding>
+
+  <StackLayout Spacing="0">
+    <!--<controls:HeaderDivider/>-->
+
+    <controls:NonScrollableListView
+        BackgroundColor="Transparent"
+        Margin="0"
+        ItemsSource="{Binding ItemsSource, Source={x:Reference Control}, Mode=OneWay}"
+        HasUnevenRows="False"
+        ItemTemplate="{StaticResource DrilldownButtonCell}"
+        RowHeight="46"
+        VerticalOptions="StartAndExpand">
+
+        <controls:NonScrollableListView.SeparatorColor>
+            <OnPlatform x:TypeArguments="Color" Android="{StaticResource ListSeparator}" iOS="Transparent"/>
+        </controls:NonScrollableListView.SeparatorColor>  
+
+    </controls:NonScrollableListView>
+    <!--<controls:FooterDivider/>-->
+  </StackLayout>
+</Grid>

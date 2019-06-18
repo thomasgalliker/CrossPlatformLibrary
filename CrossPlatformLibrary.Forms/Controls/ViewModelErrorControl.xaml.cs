@@ -5,7 +5,7 @@ using Xamarin.Forms.Xaml;
 namespace CrossPlatformLibrary.Forms.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ViewModelErrorControl : StackLayout
+    public partial class ViewModelErrorControl : StackLayoutZero
     {
         public static readonly BindableProperty ViewModelErrorProperty =
             BindableProperty.Create(

@@ -29,9 +29,9 @@
                 TextColor="{DynamicResource Primary}"
                 Command="{Binding Command, Source={x:Reference Control}, Mode=OneWay}"
                 IsEnabled="{Binding IsEnabled, Source={x:Reference Control}, Mode=OneWay}"
-                Style="{StaticResource CustomButtonStyle}"
+                Style="{DynamicResource CustomButtonStyle}"
                 BackgroundColor="Transparent"
-                BackgroundColorPressed="{StaticResource WindowBackground}"
+                BackgroundColorPressed="{DynamicResource WindowBackground}"
                 BorderColor="Transparent"
                 BorderColorPressed="Transparent">
 
@@ -51,8 +51,7 @@
             </controls:CustomButton>
 
             <Image 
-                Source="{Binding ImageSource, Source={x:Reference Control}, Mode=OneWay}"
-                IsVisible="{Binding IsBusy, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+                Source="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
                 HeightRequest="24"
                 WidthRequest="24"
                 HorizontalOptions="EndAndExpand"

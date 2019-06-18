@@ -19,16 +19,16 @@ namespace CrossPlatformLibrary.Settings
 
             this.tracer = tracer;
             this.converterRegistry = new ConverterRegistry();
-            this.converterRegistry.RegisterConverter<string, bool>(() => new StringToBoolConverter(), reverse: true);
-            this.converterRegistry.RegisterConverter<string, int>(() => new StringToIntegerConverter(), reverse: true);
-            this.converterRegistry.RegisterConverter<string, Uri>(() => new StringToUriConverter(), reverse: true);
-            this.converterRegistry.RegisterConverter<string, Guid>(() => new StringToGuidConverter(), reverse: true);
-            this.converterRegistry.RegisterConverter<string, float>(() => new StringToFloatConverter(), reverse: true);
-            this.converterRegistry.RegisterConverter<string, double>(() => new StringToDoubleConverter(), reverse: true);
-            this.converterRegistry.RegisterConverter<string, decimal>(() => new StringToDecimalConverter(), reverse: true);
-            this.converterRegistry.RegisterConverter<string, TimeSpan>(() => new StringToTimeSpanConverter(), reverse: true);
-            this.converterRegistry.RegisterConverter<string, DateTime>(() => new StringToDateTimeConverter(), reverse: true);
-            this.converterRegistry.RegisterConverter<string, DateTimeOffset>(() => new StringToDateTimeOffsetConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, bool>(new StringToBoolConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, int>(new StringToIntegerConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, Uri>(new StringToUriConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, Guid>(new StringToGuidConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, float>(new StringToFloatConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, double>(new StringToDoubleConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, decimal>(new StringToDecimalConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, TimeSpan>(new StringToTimeSpanConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, DateTime>(new StringToDateTimeConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, DateTimeOffset>(new StringToDateTimeOffsetConverter(), reverse: true);
         }
 
         protected abstract object GetValueOrDefaultFunction<T>(string key, T defaultValue);
@@ -91,6 +91,8 @@ namespace CrossPlatformLibrary.Settings
             typeof(DateTimeOffset),
             typeof(DateTimeOffset?),
         };
+
+        private IConvertible defaultConverter;
 
         public T GetValueOrDefault<T>(string key, T defaultValue = default(T))
         {
@@ -157,9 +159,14 @@ namespace CrossPlatformLibrary.Settings
             }
         }
 
-        public void RegisterConverter<TSource, TTarget>(Func<IConvertible> converterFactory, bool reverse)
+        public void RegisterConverter<TSource, TTarget>(IConvertible converterFactory, bool reverse)
         {
             this.converterRegistry.RegisterConverter<TSource, TTarget>(converterFactory, reverse);
+        }
+
+        public void RegisterDefaultConverter(IConvertible converterFactory)
+        {
+            this.defaultConverter = converterFactory;
         }
 
         /// <summary>
@@ -167,6 +174,14 @@ namespace CrossPlatformLibrary.Settings
         /// </summary>
         protected virtual object DeserializeFromString(Type targetType, string serializedValue)
         {
+            var sourceType = typeof(string);
+
+            if (this.defaultConverter != null)
+            {
+                var deserializedValue = this.defaultConverter.Convert(serializedValue, sourceType, targetType);
+                return deserializedValue;
+            }
+
             throw new SettingsValueConversionException($"{nameof(this.DeserializeFromString)} for targetType={targetType.GetFormattedName()} is currently not supported by the settings service");
         }
 
@@ -176,7 +191,20 @@ namespace CrossPlatformLibrary.Settings
         protected virtual string SerializeToString<T>(T value)
         {
             var sourceType = typeof(T);
-            throw new SettingsValueConversionException($"{nameof(this.SerializeToString)} for targetType={sourceType.GetFormattedName()}  is currently not supported by the settings service");
+            var targetType = typeof(string);
+
+            if (this.defaultConverter != null)
+            {
+                var result = this.defaultConverter.Convert(value, sourceType, targetType);
+                if (result is string str)
+                {
+                    return str;
+                }
+
+                throw new SettingsValueConversionException($"{nameof(this.defaultConverter)} for sourceType={sourceType.GetFormattedName()} must convert to targetType={targetType.GetFormattedName()}");
+            }
+
+            throw new SettingsValueConversionException($"{nameof(this.SerializeToString)} for sourceType={sourceType.GetFormattedName()} is currently not supported by the settings service");
         }
     }
 }

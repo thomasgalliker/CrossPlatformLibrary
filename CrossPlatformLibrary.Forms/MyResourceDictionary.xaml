@@ -53,6 +53,10 @@
         <On Platform="Android" Value="White" />
         <On Platform="iOS" Value="#EFEFF4" />
     </OnPlatform>
+    <OnPlatform x:TypeArguments="Color" x:Key="CardViewBackgroundColor">
+        <On Platform="Android" Value="#ECEF5F5F5CEC" />
+        <On Platform="iOS" Value="#EFEFF4" />
+    </OnPlatform>
     <OnPlatform x:TypeArguments="Color" x:Key="CardViewDividerColor">
         <On Platform="Android" Value="#ECECEC" />
         <On Platform="iOS" Value="#C8C7CC" />

@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -63,15 +62,13 @@ namespace CrossPlatformLibrary.Forms.Mvvm
                     this.RaisePropertyChanged(nameof(this.IsNotBusy));
                     this.RaisePropertyChanged(nameof(this.HasViewModelError));
                     this.RaisePropertyChanged(nameof(this.IsNotBusyAndHasNoViewModelError));
+                    this.RaisePropertyChanged(nameof(this.HasNoDataAvailable));
                     this.OnBusyChanged(value);
                 }
             }
         }
 
-        public bool IsNotBusy
-        {
-            get { return !this.isBusy; }
-        }
+        public bool IsNotBusy => !this.isBusy;
 
         protected virtual void OnBusyChanged(bool busy)
         {
@@ -108,13 +105,30 @@ namespace CrossPlatformLibrary.Forms.Mvvm
                 {
                     this.RaisePropertyChanged(nameof(this.HasViewModelError));
                     this.RaisePropertyChanged(nameof(this.IsNotBusyAndHasNoViewModelError));
+                    this.RaisePropertyChanged(nameof(this.HasNoDataAvailable));
+                    this.OnViewModelErrorChanged();
                 }
             }
+        }
+
+        protected virtual void OnViewModelErrorChanged()
+        {
         }
 
         public bool HasViewModelError => this.IsNotBusy && this.viewModelError.HasError;
 
         public bool IsNotBusyAndHasNoViewModelError => this.IsNotBusy && this.viewModelError.HasError == false;
+
+        /// <summary>
+        /// Indicates if the view model has payload data available.
+        /// Override this property and return a bool value to indicated if data loading returned any data.
+        /// </summary>
+        public virtual bool HasDataAvailable
+        {
+            get => true;
+        }
+
+        public bool HasNoDataAvailable => !this.HasDataAvailable && this.IsNotBusy && !this.HasViewModelError;
 
         public ViewModelValidation Validation
         {
