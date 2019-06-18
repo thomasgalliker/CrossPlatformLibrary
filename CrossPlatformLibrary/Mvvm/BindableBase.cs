@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
 namespace CrossPlatformLibrary.Mvvm
@@ -75,6 +76,26 @@ namespace CrossPlatformLibrary.Mvvm
             return true;
         }
 
+        protected virtual bool SetProperty<TObject, T>(TObject source, T value, [CallerMemberName] string propertyName = null, string sourcePropertyName = null)
+        {
+            if (sourcePropertyName == null)
+            {
+                sourcePropertyName = propertyName;
+            }
+
+            var propertyInfo = typeof(TObject).GetProperty(sourcePropertyName);
+            var sourceValue = (T)propertyInfo.GetValue(source);
+            if (EqualityComparer<T>.Default.Equals(sourceValue, value))
+            {
+                return false;
+            }
+
+            propertyInfo.SetValue(source, value);
+            this.RaisePropertyChanged(propertyName);
+
+            return true;
+        }
+
         /// <summary>
         ///     Raises this object's PropertyChanged event.
         /// </summary>
@@ -113,6 +134,26 @@ namespace CrossPlatformLibrary.Mvvm
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs args)
         {
             this.PropertyChanged?.Invoke(this, args);
+        }
+
+        internal static string GetPropertyName(LambdaExpression expression)
+        {
+            if (!(expression.Body is MemberExpression memberExpression))
+            {
+                throw new ArgumentException("MemberExpression is expected in expression.Body", nameof(expression));
+            }
+
+            //const string vblocalPrefix = "$VB$Local_";
+            var member = memberExpression.Member;
+            ////if (
+            ////    member.MemberType == MemberTypes.Field &&
+            ////    member.Name != null &&
+            ////    member.Name.StartsWith(vblocalPrefix))
+            ////{
+            ////    return member.Name.Substring(vblocalPrefix.Length);
+            ////}
+
+            return member.Name;
         }
     }
 }
