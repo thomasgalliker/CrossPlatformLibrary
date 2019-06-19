@@ -1,4 +1,5 @@
-﻿using SampleApp.ViewModels;
+﻿using System;
+using SampleApp.ViewModels;
 using Xamarin.Forms;
 
 namespace SampleApp
@@ -7,8 +8,17 @@ namespace SampleApp
     {
         public MainPage()
         {
-            this.InitializeComponent();
-            this.BindingContext = new MainViewModel();
+            try
+            {
+                this.InitializeComponent();
+                this.BindingContext = new MainViewModel();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
         }
     }
 }

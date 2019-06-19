@@ -70,6 +70,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\DrilldownSwitchCell.xaml.cs">
+      <DependentUpon>DrilldownSwitchCell.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Controls\ValidatableEditor.xaml.cs">
       <DependentUpon>ValidatableEditor.xaml</DependentUpon>
     </Compile>
@@ -85,6 +88,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Controls\DrilldownSwitchCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Controls\DrilldownButtonCell.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

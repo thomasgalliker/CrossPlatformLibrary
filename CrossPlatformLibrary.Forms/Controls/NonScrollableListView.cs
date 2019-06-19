@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
-    public class NonScrollableListView : ListView
+    public class NonScrollableListView : ExtendedListView
     {
         public NonScrollableListView() : base(ListViewCachingStrategy.RecycleElement)
         {

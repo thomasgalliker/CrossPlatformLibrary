@@ -8,6 +8,7 @@
     xmlns:userControls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
     xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
+    xmlns:sys="clr-namespace:System;assembly=netstandard"
     x:Name="Page">
 
     <!--<Grid>
@@ -109,15 +110,20 @@
                                 <controls:HeaderDivider />
                                 <controls:DrilldownButtonList>
                                     <controls:DrilldownButtonList.ItemsSource>
-                                        <objectModel:ObservableCollection x:TypeArguments="controls:DrilldownButtonCell">
-                                            <controls:DrilldownButtonCell
-                                                Text="{localization:Translate LogButtonText}"
+                                        <objectModel:ObservableCollection x:TypeArguments="BindableObject">
+                                            <controls:DrilldownButtonView
+                                                Title="{localization:Translate LogButtonText}"
                                                 ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
-                                                Command="{Binding BindingContext.NavigateToLogCommand, Source={x:Reference Page}}" />
-                                            <controls:DrilldownButtonCell
-                                                BindingContext="{Binding BindingContext, Source={x:Reference Page}}"
-                                                Text="{Binding RefreshButtonText}"
-                                                Command="{Binding RefreshCommand}" />
+                                                Command="{Binding NavigateToLogCommand}"
+                                                IsEnabled="False" />
+                                            <controls:DrilldownButtonView
+                                                Title="{Binding RefreshButtonText}"
+                                                Command="{Binding RefreshCommand}"
+                                                IsBusy="{Binding IsRefreshing, Mode=OneWay}" />
+                                            <controls:DrilldownSwitchView
+                                                Title="{Binding ToggleSwitchButtonText}"
+                                                Command="{Binding ToggleSwitchCommand}"
+                                                IsToggled="{Binding IsToggled, Mode=TwoWay}" />
                                         </objectModel:ObservableCollection>
                                     </controls:DrilldownButtonList.ItemsSource>
                                 </controls:DrilldownButtonList>

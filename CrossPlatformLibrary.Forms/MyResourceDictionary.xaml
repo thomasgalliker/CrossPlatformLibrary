@@ -354,9 +354,9 @@
         <Setter Property="HeightRequest" Value="48" />
     </Style>
 
-    <Style TargetType="controls:CustomSwitch">
+    <!--<Style TargetType="controls:CustomSwitch">
         <Setter Property="TintColor" Value="{DynamicResource Primary}" />
-    </Style>
+    </Style>-->
 
     <Style x:Key="LoginEntryStyle" TargetType="Entry">
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />

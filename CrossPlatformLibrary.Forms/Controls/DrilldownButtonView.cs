@@ -1,34 +1,34 @@
-﻿using System.Windows.Input;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
-    public class DrilldownButtonView : BindableObject
+    public class DrilldownButtonView : DrilldownView
     {
-        public static readonly BindableProperty TitleProperty =
+        public static readonly BindableProperty ImageSourceProperty =
             BindableProperty.Create(
-                nameof(Title),
-                typeof(string),
+                nameof(ImageSource),
+                typeof(ImageSource),
                 typeof(DrilldownButtonView));
 
-        public string Title
+        public ImageSource ImageSource
         {
-            get { return (string)this.GetValue(TitleProperty); }
-            set { this.SetValue(TitleProperty, value); }
+            get { return (ImageSource)this.GetValue(ImageSourceProperty); }
+            set { this.SetValue(ImageSourceProperty, value); }
         }
 
-        public static readonly BindableProperty CommandProperty =
+
+        public static readonly BindableProperty IsBusyProperty =
             BindableProperty.Create(
-                nameof(Command),
-                typeof(ICommand),
-                typeof(DrilldownButtonView));
+                nameof(IsBusy),
+                typeof(bool),
+                typeof(DrilldownButtonView),
+                false,
+                BindingMode.OneWay);
 
-        public ICommand Command
+        public bool IsBusy
         {
-            get { return (ICommand)this.GetValue(CommandProperty); }
-            set { this.SetValue(CommandProperty, value); }
+            get { return (bool)this.GetValue(IsBusyProperty); }
+            set { this.SetValue(IsBusyProperty, value); }
         }
-
-        public string IconSource { get; set; }
     }
 }

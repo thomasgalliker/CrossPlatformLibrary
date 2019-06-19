@@ -18,6 +18,8 @@ namespace SampleApp.ViewModels
         private ICommand loadDataButtonCommand;
         private UserDto user;
         private string logContent;
+        private ICommand toggleSwitchCommand;
+        private bool isToggled;
 
         public MainViewModel()
         {
@@ -120,6 +122,11 @@ namespace SampleApp.ViewModels
             this.IsBusy = false;
         }
 
+        protected override async Task OnRefreshList()
+        {
+            await Task.Delay(1000);
+        }
+
         public ICommand LoadDataButtonCommand
         {
             get
@@ -173,6 +180,32 @@ namespace SampleApp.ViewModels
         public string RefreshButtonText
         {
             get { return $"Refresh {this.numberOfLoads}"; }
+        }
+
+        public bool IsToggled
+        {
+            get => this.isToggled;
+            set
+            {
+                if (this.SetProperty(ref this.isToggled, value, nameof(this.IsToggled)))
+                {
+                    this.RaisePropertyChanged(nameof(this.ToggleSwitchButtonText));
+                }
+            }
+        }
+
+        public string ToggleSwitchButtonText => this.IsToggled ? "IsToggled: Yes" : "IsToggled: No";
+
+        public ICommand ToggleSwitchCommand
+        {
+            get
+            {
+                return this.toggleSwitchCommand ??
+                       (this.toggleSwitchCommand = new Command(() =>
+                       {
+                           this.IsToggled = !this.IsToggled;
+                       }));
+            }
         }
     }
 }

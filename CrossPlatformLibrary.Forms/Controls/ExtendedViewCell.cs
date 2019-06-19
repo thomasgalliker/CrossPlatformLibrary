@@ -1,4 +1,5 @@
 ﻿using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
@@ -7,6 +8,7 @@ namespace CrossPlatformLibrary.Forms.Controls
     /// the background colour of the cell based on whether it's (un)selected.
     /// Source: https://github.com/wislon/xfdemos/tree/master/src/xamformsdemo/xamformsdemo/CustomControls
     /// </summary>
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public class ExtendedViewCell : ViewCell
     {
         public static readonly BindableProperty SelectedBackgroundColorProperty =
