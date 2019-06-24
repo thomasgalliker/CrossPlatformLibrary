@@ -73,7 +73,7 @@
     <file src="CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\netstandard2.0\CrossPlatformLibrary.xml" />
 
     <!--Xamarin.Android-->
-    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.dll" target="libMonoAndroid10\CrossPlatformLibrary.dll" />
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.dll" target="lib\MonoAndroid10\CrossPlatformLibrary.dll" />
     <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.pdb" target="lib\MonoAndroid10\CrossPlatformLibrary.pdb" />
     <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.deps.json" target="lib\MonoAndroid10\CrossPlatformLibrary.deps.json" />
     <file src="CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\MonoAndroid10\CrossPlatformLibrary.xml" />
