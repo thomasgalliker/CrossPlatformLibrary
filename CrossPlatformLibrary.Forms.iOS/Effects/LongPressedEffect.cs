@@ -18,12 +18,9 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
             this.longPressRecognizer = new UILongPressGestureRecognizer(this.HandleLongClick);
         }
 
-        /// <summary>
-        ///     Apply the handler
-        /// </summary>
         protected override void OnAttached()
         {
-            //because an effect can be detached immediately after attached (happens in listview), only attach the handler one time
+            // Because an effect can be detached immediately after attached (happens in ListView), only attach the handler one time
             if (!this.attached)
             {
                 this.Container.AddGestureRecognizer(this.longPressRecognizer);
@@ -31,18 +28,12 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
             }
         }
 
-        /// <summary>
-        ///     Invoke the command if there is one
-        /// </summary>
         private void HandleLongClick()
         {
             var command = LongPressEffect.GetCommand(this.Element);
             command?.Execute(LongPressEffect.GetCommandParameter(this.Element));
         }
 
-        /// <summary>
-        ///     Clean the event handler on detach
-        /// </summary>
         protected override void OnDetached()
         {
             if (this.attached)

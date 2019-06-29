@@ -11,7 +11,11 @@ namespace CrossPlatformLibrary.Forms.Effects
         }
 
         public static readonly BindableProperty CommandProperty =
-            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(LongPressEffect), (object)null);
+            BindableProperty.CreateAttached(
+                "Command",
+                typeof(ICommand),
+                typeof(LongPressEffect),
+                null);
 
         public static ICommand GetCommand(BindableObject view)
         {
@@ -24,7 +28,11 @@ namespace CrossPlatformLibrary.Forms.Effects
         }
 
         public static readonly BindableProperty CommandParameterProperty =
-            BindableProperty.CreateAttached("CommandParameter", typeof(object), typeof(LongPressEffect), (object)null);
+            BindableProperty.CreateAttached(
+                "CommandParameter",
+                typeof(object),
+                typeof(LongPressEffect),
+                null);
 
         public static object GetCommandParameter(BindableObject view)
         {
