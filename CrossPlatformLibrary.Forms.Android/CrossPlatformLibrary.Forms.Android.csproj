@@ -59,6 +59,7 @@
     <Compile Include="Effects\Effects.cs" />
     <Compile Include="Effects\EditorLineColorEffect.cs" />
     <Compile Include="Effects\EntryLineColorEffect.cs" />
+    <Compile Include="Effects\LongPressEffect.cs" />
     <Compile Include="Effects\PickerLineColorEffect.cs" />
     <Compile Include="Effects\TimePickerLineColorEffect.cs" />
     <Compile Include="Effects\UnderlineTextEffect.cs" />

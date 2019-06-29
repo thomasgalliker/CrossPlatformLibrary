@@ -20,6 +20,7 @@ namespace SampleApp.ViewModels
         private string logContent;
         private ICommand toggleSwitchCommand;
         private bool isToggled;
+        private ICommand longPressCommand;
 
         public MainViewModel()
         {
@@ -89,6 +90,15 @@ namespace SampleApp.ViewModels
             {
                 this.adminEmailAddress = value;
                 this.OnPropertyChanged(nameof(this.AdminEmailAddress));
+            }
+        }
+
+        public ICommand LongPressCommand
+        {
+            get
+            {
+                return this.longPressCommand ??
+                       (this.longPressCommand = new Command(async () => await this.LoadData()));
             }
         }
 

@@ -9,6 +9,7 @@
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
     xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
     xmlns:sys="clr-namespace:System;assembly=netstandard"
+    xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     x:Name="Page">
 
     <!--<Grid>
@@ -25,6 +26,20 @@
                             TextColor="LightGreen"
                             FontAttributes="Italic" />
                         <controls:ValidatableLabel Text="{Binding UserId, Mode=OneWay}" />
+
+                        <Label
+                            Text="&lt;!--Demo LongPressEffect--&gt;"
+                            TextColor="LightGreen"
+                            FontAttributes="Italic" />
+                        <Label
+                            x:Name="LongPressLabel"
+                            effects:LongPressEffect.Command="{Binding LongPressCommand}"
+                            effects:LongPressEffect.CommandParameter="{Binding Text, Source={x:Reference LongPressLabel}}"
+                            Text="Press and hold to run the attached command. This effect can be used if you want to make text accessible e.g. for copy/paste.">
+                            <Label.Effects>
+                                <effects:LongPressEffect />
+                            </Label.Effects>
+                        </Label>
 
                         <Label
                             Text="&lt;!--Demo ValidatableEntry--&gt;"
