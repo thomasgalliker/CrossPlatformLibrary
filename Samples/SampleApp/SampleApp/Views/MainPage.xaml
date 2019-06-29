@@ -31,15 +31,29 @@
                             Text="&lt;!--Demo LongPressEffect--&gt;"
                             TextColor="LightGreen"
                             FontAttributes="Italic" />
-                        <Label
-                            x:Name="LongPressLabel"
-                            effects:LongPressEffect.Command="{Binding LongPressCommand}"
-                            effects:LongPressEffect.CommandParameter="{Binding Text, Source={x:Reference LongPressLabel}}"
-                            Text="Press and hold to run the attached command. This effect can be used if you want to make text accessible e.g. for copy/paste.">
-                            <Label.Effects>
-                                <effects:LongPressEffect />
-                            </Label.Effects>
-                        </Label>
+
+                        <controls:GridZero Padding="20" BackgroundColor="DarkBlue">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                x:Name="LongPressLabel"
+                                effects:LongPressEffect.Command="{Binding LongPressCommand}"
+                                effects:LongPressEffect.CommandParameter="{Binding Text, Source={x:Reference LongPressLabel}}"
+                                Text="Press and hold to run the attached command. This effect can be used if you want to make text accessible e.g. for copy/paste."
+                                BackgroundColor="LightBlue"
+                                FontSize="Medium"
+                                LineBreakMode="WordWrap">
+                                <Label.Effects>
+                                    <effects:LongPressEffect />
+                                </Label.Effects>
+                            </Label>
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NormalPressCommand}" CommandParameter="{Binding Text, Source={x:Reference LongPressLabel}}" />
+                            </Grid.GestureRecognizers>
+                        </controls:GridZero>
 
                         <Label
                             Text="&lt;!--Demo ValidatableEntry--&gt;"

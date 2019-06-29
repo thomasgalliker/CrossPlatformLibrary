@@ -9,6 +9,7 @@ namespace SampleApp.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+        private readonly DisplayService displayService;
         private CountryViewModel country;
         private string notes;
         private string adminEmailAddress;
@@ -21,9 +22,11 @@ namespace SampleApp.ViewModels
         private ICommand toggleSwitchCommand;
         private bool isToggled;
         private ICommand longPressCommand;
+        private ICommand normalPressCommand;
 
-        public MainViewModel()
+        public MainViewModel(DisplayService displayService)
         {
+            this.displayService = displayService;
             this.ViewModelError = ViewModelError.None;
             this.User = new UserDto();
             this.Countries = new ObservableCollection<CountryViewModel>();
@@ -93,12 +96,21 @@ namespace SampleApp.ViewModels
             }
         }
 
+        public ICommand NormalPressCommand
+        {
+            get
+            {
+                return this.normalPressCommand ??
+                       (this.normalPressCommand = new Command<string>(async (message) => await this.displayService.DisplayAlert("NormalPressCommand", message)));
+            }
+        }
+
         public ICommand LongPressCommand
         {
             get
             {
                 return this.longPressCommand ??
-                       (this.longPressCommand = new Command(async () => await this.LoadData()));
+                       (this.longPressCommand = new Command<string>(async (message) => await this.displayService.DisplayAlert("LongPressCommand", message)));
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using SampleApp.ViewModels;
 using Xamarin.Forms;
 
@@ -10,8 +11,9 @@ namespace SampleApp
         {
             try
             {
+                var displayService = new DisplayService((t, m) => this.DisplayAlert(t, m, "OK"));
                 this.InitializeComponent();
-                this.BindingContext = new MainViewModel();
+                this.BindingContext = new MainViewModel(displayService);
             }
             catch (Exception e)
             {
@@ -20,5 +22,23 @@ namespace SampleApp
             }
 
         }
+    }
+
+    public class DisplayService : IDisplayService
+    {
+        private readonly Func<string, string, Task> alertAction;
+
+        public DisplayService(Func<string, string, Task> alertAction)
+        {
+            this.alertAction = alertAction;
+        }
+        public async Task DisplayAlert(string title, string message)
+        {
+            await this.alertAction(title, message);
+        }
+    }
+    public interface IDisplayService
+    {
+        Task DisplayAlert(string title, string message);
     }
 }
