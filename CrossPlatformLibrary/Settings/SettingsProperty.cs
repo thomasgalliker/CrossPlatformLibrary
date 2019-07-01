@@ -9,11 +9,18 @@ namespace CrossPlatformLibrary.Settings
         private readonly ISettingsService settingsService;
         private readonly string key;
         private readonly T defaultValue;
+        private CachedValue<T> cachedValue;
 
         public SettingsProperty(ISettingsService settingsService, Expression<Func<T>> expression, T defaultValue = default(T))
             : this(settingsService, ((MemberExpression)expression.Body).Member.Name, defaultValue)
         {
         }
+
+        /// <summary>
+        ///     Turns property value caching on/off.
+        ///     Default: <c>True</c> = on.
+        /// </summary>
+        public bool CachingEnabled { get; set; } = true;
 
         public SettingsProperty(ISettingsService settingsService, string key, T defaultValue = default(T))
         {
@@ -34,24 +41,52 @@ namespace CrossPlatformLibrary.Settings
         {
             get
             {
-                return this.settingsService.GetValueOrDefault(this.key, this.defaultValue);
+                if (this.CachingEnabled && this.cachedValue.HasValue)
+                {
+                    return this.cachedValue.Value;
+                }
+
+                var value = this.settingsService.GetValueOrDefault(this.key, this.defaultValue);
+
+                if (this.CachingEnabled)
+                {
+                    this.cachedValue.Value = value;
+                }
+
+                return value;
             }
             set
             {
+                if (this.CachingEnabled)
+                {
+                    this.cachedValue.Value = value;
+                }
+
                 this.settingsService.AddOrUpdateValue(this.key, value);
             }
         }
 
         object ISettingsProperty.Value
         {
-            get
-            {
-                return this.Value;
-            }
+            get => this.Value;
 
+            set => this.Value = (T)value;
+        }
+    }
+
+    internal struct CachedValue<T>
+    {
+        private T value;
+
+        public bool HasValue { get; private set; }
+
+        public T Value
+        {
+            get => this.value;
             set
             {
-                this.Value = (T)value;
+                this.value = value;
+                this.HasValue = true;
             }
         }
     }
