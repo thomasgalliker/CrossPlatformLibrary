@@ -2,7 +2,7 @@
 
 namespace CrossPlatformLibrary.Internals
 {
-    public static class Guard
+    internal static class Guard
     {
         public static void ArgumentNotNull<T>(T param, string paramName)
         {
