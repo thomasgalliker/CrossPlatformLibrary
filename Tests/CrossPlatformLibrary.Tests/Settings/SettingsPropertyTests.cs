@@ -68,14 +68,28 @@ namespace CrossPlatformLibrary.Tests.Settings
             // Arrange
             const int writeOperations = 100;
             const int readOperationsPerWriteOperation = 10;
-            var expectedDuration = TimeSpan.FromSeconds(1.2d);
             var settingsKeyName = RandomUtils.GenerateRandomString(255);
 
             var settingsServiceStub = new SettingsServiceStub();
 
-            var settingsProperty = new SettingsProperty<string>(settingsServiceStub, settingsKeyName);
+            var settingsPropertyCachingEnabled = new SettingsProperty<string>(settingsServiceStub, settingsKeyName);
+            settingsPropertyCachingEnabled.CachingEnabled = true;
+
+            var settingsPropertyCachingDisabled = new SettingsProperty<string>(settingsServiceStub, settingsKeyName);
+            settingsPropertyCachingDisabled.CachingEnabled = false;
 
             // Act
+            var elapsedWithCachingEnabled = RunPerformanceTest(settingsPropertyCachingEnabled, writeOperations, readOperationsPerWriteOperation);
+            var elapsedWithCachingDisabled = RunPerformanceTest(settingsPropertyCachingDisabled, writeOperations, readOperationsPerWriteOperation);
+
+            // Assert
+            this.testOutputHelper.WriteLine($"Finished with {nameof(writeOperations)}={writeOperations} and {nameof(readOperationsPerWriteOperation)}={readOperationsPerWriteOperation}  in {elapsedWithCachingEnabled:g}s");
+            this.testOutputHelper.WriteLine($"Finished with {nameof(writeOperations)}={writeOperations} and {nameof(readOperationsPerWriteOperation)}={readOperationsPerWriteOperation}  in {elapsedWithCachingDisabled:g}s");
+            elapsedWithCachingEnabled.Should().BeLessThan(elapsedWithCachingDisabled);
+        }
+
+        private static TimeSpan RunPerformanceTest(SettingsProperty<string> settingsProperty, int writeOperations, int readOperationsPerWriteOperation)
+        {
             TimeSpan elapsed;
             using (var stopWatch = StopWatch.StartNew())
             {
@@ -83,7 +97,7 @@ namespace CrossPlatformLibrary.Tests.Settings
                 {
                     settingsProperty.Value = $"Write attempt {i:D4}";
 
-                    for (int j = 0; j < readOperationsPerWriteOperation; j++)
+                    for (var j = 0; j < readOperationsPerWriteOperation; j++)
                     {
                         var value = settingsProperty.Value;
                         Debug.WriteLine(value);
@@ -93,10 +107,7 @@ namespace CrossPlatformLibrary.Tests.Settings
                 elapsed = stopWatch.Elapsed;
             }
 
-            // Assert
-            this.testOutputHelper.WriteLine($"Finished with {nameof(writeOperations)}={writeOperations} and {nameof(readOperationsPerWriteOperation)}={readOperationsPerWriteOperation}  in {elapsed:g}s");
-            elapsed.Should().BeLessThan(expectedDuration);
-
+            return elapsed;
         }
     }
 
