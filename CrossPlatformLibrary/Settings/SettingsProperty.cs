@@ -16,12 +16,6 @@ namespace CrossPlatformLibrary.Settings
         {
         }
 
-        /// <summary>
-        ///     Turns property value caching on/off.
-        ///     Default: <c>True</c> = on.
-        /// </summary>
-        public bool CachingEnabled { get; set; } = true;
-
         public SettingsProperty(ISettingsService settingsService, string key, T defaultValue = default(T))
         {
             Guard.ArgumentNotNull(settingsService, nameof(settingsService));
@@ -36,6 +30,12 @@ namespace CrossPlatformLibrary.Settings
             this.key = key;
             this.defaultValue = defaultValue;
         }
+
+        /// <summary>
+        ///     Turns property value caching on/off.
+        ///     Default: <c>True</c> = on.
+        /// </summary>
+        public bool CachingEnabled { get; set; } = true;
 
         public T Value
         {
