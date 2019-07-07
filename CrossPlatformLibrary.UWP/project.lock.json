@@ -22123,7 +22123,8 @@
         "https://api.nuget.org/v3/index.json": {},
         "https://kellerdruck.pkgs.visualstudio.com/_packaging/KellerCloudNugetFeed/nuget/v3/index.json": {},
         "https://nuget.syncfusion.com/nuget_wpf/nuget/getsyncfusionpackages/wpf": {},
-        "https://nuget.syncfusion.com/nuget_xamarin/nuget/getsyncfusionpackages/xamarin": {}
+        "https://nuget.syncfusion.com/nuget_xamarin/nuget/getsyncfusionpackages/xamarin": {},
+        "https://pkgs.dev.azure.com/superdevgmbh/_packaging/LocalNugets/nuget/v3/index.json": {}
       }
     },
     "dependencies": {

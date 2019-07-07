@@ -214,5 +214,17 @@ namespace CrossPlatformLibrary.Extensions
 
             yield return item;
         }
+
+        /// <summary>
+        /// Returns the number of items in <paramref name="enumerable"/>.
+        /// </summary>
+        public static int GetCount(this IEnumerable enumerable)
+        {
+            var enumerator = enumerable.GetEnumerator();
+            int num = 0;
+            while (enumerator.MoveNext())
+                ++num;
+            return num;
+        }
     }
 }
