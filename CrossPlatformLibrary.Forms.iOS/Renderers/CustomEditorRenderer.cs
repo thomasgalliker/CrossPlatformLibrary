@@ -110,12 +110,16 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             if (customEditor.MaxLines != CustomEditor.MaxLinesDefault)
             {
                 this.Control.TextContainer.MaximumNumberOfLines = new nuint((uint)customEditor.MaxLines);
-                //this.Control.AlwaysBounceVertical = false;
-                //this.Control.ShowsVerticalScrollIndicator = false;
+                this.Control.AlwaysBounceVertical = false;
+                this.Control.ShowsVerticalScrollIndicator = false;
+                this.Control.ShowsHorizontalScrollIndicator = false;
             }
             else
             {
                 this.Control.TextContainer.MaximumNumberOfLines = 0;
+                this.Control.AlwaysBounceVertical = true;
+                this.Control.ShowsVerticalScrollIndicator = true;
+                this.Control.ShowsHorizontalScrollIndicator = true;
             }
         }
     }
