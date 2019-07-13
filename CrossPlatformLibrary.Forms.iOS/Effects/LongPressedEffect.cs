@@ -4,7 +4,7 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportEffect(typeof(LongPressedEffect), "LongPressEffect")]
+[assembly: ExportEffect(typeof(LongPressedEffect), nameof(LongPressedEffect))]
 
 namespace CrossPlatformLibrary.Forms.iOS.Effects
 {

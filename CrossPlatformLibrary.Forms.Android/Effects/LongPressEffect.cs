@@ -3,7 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using View = Android.Views.View;
 
-[assembly: ExportEffect(typeof(LongPressEffect), "LongPressEffect")]
+[assembly: ExportEffect(typeof(LongPressEffect), nameof(LongPressEffect))]
 
 namespace CrossPlatformLibrary.Forms.Android.Effects
 {
