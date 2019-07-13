@@ -71,7 +71,10 @@
                             BindingContext="{Binding UserIdentification}" />-->
 
                         <controls:CustomLabel Text="Enter name:" />
-                        <controls:CustomEntry Padding="0" Text="Android EditText sets Padding=&quot;0&quot;" />
+                        <controls:CustomEntry
+                            Padding="0"
+                            HideBorder="True"
+                            Text="Android EditText sets Padding=&quot;0&quot;" />
 
                         <Label
                             Text="&lt;!--Demo User Controls--&gt;"

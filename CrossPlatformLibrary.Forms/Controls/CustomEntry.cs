@@ -13,8 +13,22 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public Thickness Padding
         {
-            get { return (Thickness)this.GetValue(PaddingProperty); }
-            set { this.SetValue(PaddingProperty, value); }
+            get => (Thickness)this.GetValue(PaddingProperty);
+            set => this.SetValue(PaddingProperty, value);
+        }
+
+        public static readonly BindableProperty HideBorderProperty =
+            BindableProperty.Create(
+                nameof(HideBorder),
+                typeof(bool),
+                typeof(CustomEntry),
+                default(bool),
+                BindingMode.OneWay);
+
+        public bool HideBorder
+        {
+            get => (bool)this.GetValue(HideBorderProperty);
+            set => this.SetValue(HideBorderProperty, value);
         }
     }
 }
