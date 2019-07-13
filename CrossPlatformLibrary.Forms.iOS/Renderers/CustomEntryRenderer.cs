@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using CrossPlatformLibrary.Forms.Controls;
 using CrossPlatformLibrary.Forms.iOS.Renderers;
 using UIKit;
@@ -12,6 +13,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
 {
     public class CustomEntryRenderer : EntryRenderer
     {
+        private bool returnButtonAdded;
         private nfloat? originalBorderWidth;
         private UITextBorderStyle? originalBorderStyle;
 
@@ -28,6 +30,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                 if (this.Element is CustomEntry customEntry)
                 {
                     this.UpdateBorder(customEntry);
+                    this.AddRemoveReturnKeyToNumericInput(customEntry);
                 }
             }
         }
@@ -41,6 +44,10 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                 if (e.PropertyName == CustomEntry.HideBorderProperty.PropertyName)
                 {
                     this.UpdateBorder(customEntry);
+                }
+                else if (e.PropertyName == nameof(Entry.Keyboard))
+                {
+                    this.AddRemoveReturnKeyToNumericInput(customEntry);
                 }
             }
         }
@@ -62,11 +69,42 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                     this.Control.Layer.BorderWidth = this.originalBorderWidth.Value;
                     this.originalBorderWidth = null;
                 }
+
                 if (this.originalBorderStyle != null)
                 {
                     this.Control.BorderStyle = this.originalBorderStyle.Value;
                     this.originalBorderStyle = null;
                 }
+            }
+        }
+
+        private void AddRemoveReturnKeyToNumericInput(CustomEntry customEntry)
+        {
+            if (customEntry.Keyboard == Keyboard.Numeric || customEntry.Keyboard == Keyboard.Telephone)
+            {
+                UIToolbar toolbar = null;
+
+                if (!this.returnButtonAdded)
+                {
+                    toolbar = new UIToolbar(new RectangleF(0.0f, 0.0f, 50.0f, 44.0f));
+
+                    var doneButton = new UIBarButtonItem(UIBarButtonSystemItem.Done, delegate
+                    {
+                        this.Control.ResignFirstResponder();
+                        this.Element.SendCompleted();
+                    });
+
+                    toolbar.Items = new[] { new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace), doneButton };
+
+                    this.returnButtonAdded = true;
+                }
+
+                this.Control.InputAccessoryView = toolbar;
+            }
+
+            else
+            {
+                this.Control.InputAccessoryView = null;
             }
         }
     }

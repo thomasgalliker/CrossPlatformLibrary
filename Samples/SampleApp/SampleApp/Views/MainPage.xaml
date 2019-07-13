@@ -81,7 +81,9 @@
                         <controls:CustomEntry
                             Padding="0"
                             HideBorder="True"
-                            Text="CustomEntry with HideBorder=&quot;True&quot;" />
+                            Keyboard="Telephone"
+                            Placeholder="CustomEntry with HideBorder=&quot;True&quot;"
+                            Text="" />
 
                         <Label
                             Text="&lt;!--Demo User Controls--&gt;"
