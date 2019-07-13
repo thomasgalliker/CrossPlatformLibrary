@@ -22,14 +22,14 @@ namespace CrossPlatformLibrary.Forms.Converters
 
         public Color NormalColor
         {
-            get { return (Color)this.GetValue(NormalColorProperty); }
-            set { this.SetValue(NormalColorProperty, value); }
+            get => (Color)this.GetValue(NormalColorProperty);
+            set => this.SetValue(NormalColorProperty, value);
         }
 
         public Color ErrorColor
         {
-            get { return (Color)this.GetValue(ErrorColorProperty); }
-            set { this.SetValue(ErrorColorProperty, value); }
+            get => (Color)this.GetValue(ErrorColorProperty);
+            set => this.SetValue(ErrorColorProperty, value);
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

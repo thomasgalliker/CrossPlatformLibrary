@@ -59,7 +59,10 @@
                             Text="&lt;!--Demo ValidatableEntry--&gt;"
                             TextColor="LightGreen"
                             FontAttributes="Italic" />
-                        <controls:ValidatableEntry Text="{Binding UserName, Mode=TwoWay}" />
+                        <controls:ValidatableEntry
+                            Placeholder="Username"
+                            Text="{Binding UserName, Mode=TwoWay}"
+                            ValidationErrors="{Binding Validation.Errors[UserName]}" />
 
                         <!--  User's Personal Information  -->
                         <!--<account:PersonalInformationControl

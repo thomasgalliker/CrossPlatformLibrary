@@ -26,7 +26,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Cannot set property on attached control. Error: ", ex.Message);
+                Console.WriteLine("Cannot set property on attached control. Error: {0}", ex.Message);
             }
         }
 
@@ -49,8 +49,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
 
         private void Initialize()
         {
-            var entry = this.Element as Entry;
-            if (entry != null)
+            if (this.Element is Entry entry)
             {
                 this.Control.Bounds = new CGRect(0, 0, entry.Width, entry.Height);
             }
@@ -64,9 +63,11 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
 
             if (lineLayer == null)
             {
-                lineLayer = new BorderLineLayer();
-                lineLayer.MasksToBounds = true;
-                lineLayer.BorderWidth = 1.0f;
+                lineLayer = new BorderLineLayer
+                {
+                    MasksToBounds = true,
+                    BorderWidth = 1.0f
+                };
                 this.control.Layer.AddSublayer(lineLayer);
                 this.control.BorderStyle = UITextBorderStyle.None;
             }

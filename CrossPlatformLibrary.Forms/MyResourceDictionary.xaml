@@ -133,7 +133,7 @@
     <converters:PropertyErrorsToColorConverter
         x:Key="PropertyErrorsToColorConverter"
         NormalColor="{StaticResource PrimaryTextColorBright}"
-        ErrorColor="{DynamicResource ColorCode400}" />
+        ErrorColor="{StaticResource ColorCode400}" />
 
     <!--  Font Sizes  -->
     <OnPlatform

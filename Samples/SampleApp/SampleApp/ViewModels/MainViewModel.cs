@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using CrossPlatformLibrary.Forms.Mvvm;
+using CrossPlatformLibrary.Forms.Validation;
 using Xamarin.Forms;
 
 namespace SampleApp.ViewModels
@@ -66,7 +67,7 @@ namespace SampleApp.ViewModels
             set
             {
                 this.country = value;
-                this.OnPropertyChanged(nameof(this.Country));
+                this.RaisePropertyChanged(nameof(this.Country));
             }
         }
 
@@ -76,7 +77,7 @@ namespace SampleApp.ViewModels
             set
             {
                 this.notes = value;
-                this.OnPropertyChanged(nameof(this.Notes));
+                this.RaisePropertyChanged(nameof(this.Notes));
             }
         }
 
@@ -92,7 +93,7 @@ namespace SampleApp.ViewModels
             set
             {
                 this.adminEmailAddress = value;
-                this.OnPropertyChanged(nameof(this.AdminEmailAddress));
+                this.RaisePropertyChanged(nameof(this.AdminEmailAddress));
             }
         }
 
@@ -140,7 +141,15 @@ namespace SampleApp.ViewModels
         private async Task OnSaveProfile()
         {
             this.IsBusy = true;
+
             await Task.Delay(1000);
+
+            var isValid = this.Validation.IsValid();
+            if (isValid)
+            {
+                // TODO Save...
+            }
+
             this.IsBusy = false;
         }
 
@@ -197,6 +206,21 @@ namespace SampleApp.ViewModels
             }
 
             this.IsBusy = false;
+        }
+
+        protected override ViewModelValidation SetupValidation()
+        {
+            var viewModelValidation = new ViewModelValidation();
+
+            viewModelValidation.AddValidationFor(nameof(this.UserName))
+                .When(() => string.IsNullOrWhiteSpace(this.UserName))
+                .Show(() => $"Username must not be empty");
+
+            viewModelValidation.AddValidationFor(nameof(this.UserName))
+                .When(() => string.Equals(this.UserName, "thomasgalliker", StringComparison.InvariantCultureIgnoreCase))
+                .Show(() => $"Username '{this.UserName}' already exists");
+
+            return viewModelValidation;
         }
 
         public string RefreshButtonText
