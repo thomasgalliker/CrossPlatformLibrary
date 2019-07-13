@@ -14,38 +14,38 @@
 
     <Thickness
         x:Key="SmallPadding"
+        Bottom="{StaticResource SmallSpacing}"
         Left="{StaticResource SmallSpacing}"
-        Top="{StaticResource SmallSpacing}"
         Right="{StaticResource SmallSpacing}"
-        Bottom="{StaticResource SmallSpacing}" />
+        Top="{StaticResource SmallSpacing}" />
 
     <Thickness
         x:Key="MediumPadding"
+        Bottom="{StaticResource MediumSpacing}"
         Left="{StaticResource MediumSpacing}"
-        Top="{StaticResource MediumSpacing}"
         Right="{StaticResource MediumSpacing}"
-        Bottom="{StaticResource MediumSpacing}" />
+        Top="{StaticResource MediumSpacing}" />
 
     <Thickness
         x:Key="StandardPadding"
+        Bottom="{StaticResource StandardSpacing}"
         Left="{StaticResource StandardSpacing}"
-        Top="{StaticResource StandardSpacing}"
         Right="{StaticResource StandardSpacing}"
-        Bottom="{StaticResource StandardSpacing}" />
+        Top="{StaticResource StandardSpacing}" />
 
     <Thickness
         x:Key="CardViewPadding"
+        Bottom="{StaticResource MediumSpacing}"
         Left="{StaticResource StandardSpacing}"
-        Top="{StaticResource MediumSpacing}"
         Right="{StaticResource StandardSpacing}"
-        Bottom="{StaticResource MediumSpacing}" />
+        Top="{StaticResource MediumSpacing}" />
 
     <Thickness
         x:Key="ButtonMargin"
+        Bottom="{StaticResource StandardSpacing}"
         Left="{StaticResource MediumSpacing}"
-        Top="0"
         Right="{StaticResource MediumSpacing}"
-        Bottom="{StaticResource StandardSpacing}" />
+        Top="0" />
 
     <!--  Colors  -->
     <OnPlatform x:Key="WindowBackgroundTable" x:TypeArguments="Color">
@@ -84,26 +84,26 @@
         x:Key="CustomListItemTextStyleSize"
         x:TypeArguments="x:Double"
         Android="16"
-        iOS="16"
-        WinPhone="13" />
+        WinPhone="13"
+        iOS="16" />
     <OnPlatform
         x:Key="CustomListItemDetailTextStyleSize"
         x:TypeArguments="x:Double"
         Android="13"
-        iOS="13"
-        WinPhone="13" />
+        WinPhone="13"
+        iOS="13" />
     <OnPlatform
         x:Key="TweetTextSize"
         x:TypeArguments="x:Double"
         Android="14"
-        iOS="14"
-        WinPhone="14" />
+        WinPhone="14"
+        iOS="14" />
     <OnPlatform
         x:Key="TweetUserTextSize"
         x:TypeArguments="Font"
         Android="SemiBold"
-        iOS="SemiBold"
-        WinPhone="SemiBold" />
+        WinPhone="SemiBold"
+        iOS="SemiBold" />
 
     <!--  Theme colors  -->
     <OnPlatform x:Key="PrimaryTextColor" x:TypeArguments="Color">
@@ -132,77 +132,77 @@
 
     <converters:PropertyErrorsToColorConverter
         x:Key="PropertyErrorsToColorConverter"
-        NormalColor="{StaticResource PrimaryTextColorBright}"
-        ErrorColor="{StaticResource ColorCode400}" />
+        ErrorColor="{StaticResource ColorCode400}"
+        NormalColor="{StaticResource PrimaryTextColorBright}" />
 
     <!--  Font Sizes  -->
     <OnPlatform
         x:Key="LittleSize"
         x:TypeArguments="x:Double"
-        iOS="11"
         Android="12"
-        WinPhone="12" />
+        WinPhone="12"
+        iOS="11" />
 
     <OnPlatform
         x:Key="MidMediumSize"
         x:TypeArguments="x:Double"
-        iOS="12"
         Android="14"
-        WinPhone="14" />
+        WinPhone="14"
+        iOS="12" />
 
     <OnPlatform
         x:Key="MediumSize"
         x:TypeArguments="x:Double"
-        iOS="14"
         Android="16"
-        WinPhone="16" />
+        WinPhone="16"
+        iOS="14" />
 
     <OnPlatform
         x:Key="LargeSize"
         x:TypeArguments="x:Double"
-        iOS="16"
         Android="18"
-        WinPhone="18" />
+        WinPhone="18"
+        iOS="16" />
 
     <OnPlatform
         x:Key="LargerSize"
         x:TypeArguments="x:Double"
-        iOS="18"
         Android="20"
-        WinPhone="20" />
+        WinPhone="20"
+        iOS="18" />
 
     <OnPlatform
         x:Key="BigSize"
         x:TypeArguments="x:Double"
-        iOS="20"
         Android="24"
-        WinPhone="24" />
+        WinPhone="24"
+        iOS="20" />
 
     <OnPlatform
         x:Key="ExtraBigSize"
         x:TypeArguments="x:Double"
-        iOS="24"
         Android="32"
-        WinPhone="32" />
+        WinPhone="32"
+        iOS="24" />
 
     <OnPlatform
         x:Key="HugeSize"
         x:TypeArguments="x:Double"
-        iOS="32"
         Android="48"
-        WinPhone="48" />
+        WinPhone="48"
+        iOS="32" />
 
     <OnPlatform
         x:Key="FontFamily"
         x:TypeArguments="x:String"
-        iOS="sans-serif"
-        Android="Droid Sans" />
+        Android="Droid Sans"
+        iOS="sans-serif" />
 
     <OnPlatform
         x:Key="FontFamilyCourierNew"
         x:TypeArguments="x:String"
-        iOS="Courier New"
-        Android="monospace" />
+        Android="monospace"
+        iOS="Courier New" />
 
     <!--  Styles  -->
 
@@ -211,8 +211,8 @@
             <OnPlatform
                 x:TypeArguments="Thickness"
                 Android="0, 8, 0, 0"
-                iOS="0, 16, 0, 0"
-                WinPhone="0, 16, 0, 0" />
+                WinPhone="0, 16, 0, 0"
+                iOS="0, 16, 0, 0" />
         </Setter>
     </Style>
 
@@ -235,8 +235,8 @@
 
     <Style
         x:Key="CustomButtonPrimaryStyle"
-        TargetType="controls:CustomButton"
-        BasedOn="{StaticResource CustomButtonStyle}">
+        BasedOn="{StaticResource CustomButtonStyle}"
+        TargetType="controls:CustomButton">
         <Setter Property="BackgroundColor" Value="{DynamicResource Primary}" />
         <Setter Property="BorderColor" Value="{DynamicResource Primary}" />
         <Setter Property="BackgroundColorPressed" Value="{DynamicResource PrimaryDark}" />
@@ -262,8 +262,8 @@
 
     <Style
         x:Key="CustomButtonSecondaryStyle"
-        TargetType="controls:CustomButton"
-        BasedOn="{StaticResource CustomButtonStyle}">
+        BasedOn="{StaticResource CustomButtonStyle}"
+        TargetType="controls:CustomButton">
         <Setter Property="BackgroundColor" Value="{DynamicResource WindowBackgroundTable}" />
         <Setter Property="BackgroundColorPressed" Value="{DynamicResource WindowBackgroundTable}" />
         <Setter Property="BorderColor" Value="{DynamicResource Primary}" />
@@ -280,7 +280,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="controls:CustomButton" BasedOn="{StaticResource CustomButtonStyle}" />
+    <Style BasedOn="{StaticResource CustomButtonStyle}" TargetType="controls:CustomButton" />
 
     <Style x:Key="LabelStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
@@ -295,9 +295,9 @@
         <Setter Property="LineBreakMode" Value="TailTruncation" />
     </Style>
 
-    <Style TargetType="Label" BasedOn="{StaticResource LabelStyle}" />
+    <Style BasedOn="{StaticResource LabelStyle}" TargetType="Label" />
 
-    <Style TargetType="controls:CustomLabel" BasedOn="{StaticResource LabelStyle}" />
+    <Style BasedOn="{StaticResource LabelStyle}" TargetType="controls:CustomLabel" />
 
     <Style x:Key="EntryLabelStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
@@ -313,8 +313,8 @@
             <OnPlatform
                 x:TypeArguments="Thickness"
                 Android="4, 0, 0, 0"
-                iOS="0, 0, 0, 0"
-                WinPhone="0, 0, 0, 0" />
+                WinPhone="0, 0, 0, 0"
+                iOS="0, 0, 0, 0" />
         </Setter>
         <!--<Setter Property="HeightRequest" Value="48" />-->
     </Style>
@@ -324,12 +324,12 @@
         <Setter Property="TextDecorations" Value="Underline" />
     </Style>
 
-    <Style TargetType="controls:HyperLinkLabel" BasedOn="{StaticResource HyperLinkLabelStyle}" />
+    <Style BasedOn="{StaticResource HyperLinkLabelStyle}" TargetType="controls:HyperLinkLabel" />
 
     <Style
         x:Key="CustomListItemDetailTextStyle"
-        TargetType="Label"
-        BaseResourceKey="ListItemDetailTextStyle">
+        BaseResourceKey="ListItemDetailTextStyle"
+        TargetType="Label">
         <Setter Property="FontSize" Value="{DynamicResource ListItemDetailTextStyleSize}" />
         <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColorBright}" />
     </Style>
@@ -379,7 +379,7 @@
         <Setter Property="Opacity" Value="1.0" />
     </Style>
 
-    <Style TargetType="Editor" BasedOn="{StaticResource EditorStyle}" />
+    <Style BasedOn="{StaticResource EditorStyle}" TargetType="Editor" />
 
     <Style x:Key="PickerStyle" TargetType="Picker">
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
@@ -388,7 +388,7 @@
         <Setter Property="HeightRequest" Value="48" />
     </Style>
 
-    <Style TargetType="Picker" BasedOn="{StaticResource PickerStyle}" />
+    <Style BasedOn="{StaticResource PickerStyle}" TargetType="Picker" />
 
     <Style x:Key="BindablePickerStyle" TargetType="controls:BindablePicker">
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
@@ -405,7 +405,7 @@
         <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
     </Style>
 
-    <Style TargetType="controls:BindablePicker" BasedOn="{StaticResource BindablePickerStyle}" />
+    <Style BasedOn="{StaticResource BindablePickerStyle}" TargetType="controls:BindablePicker" />
 
     <Style x:Key="ExtendedDatePickerStyle" TargetType="controls:ExtendedDatePicker">
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
@@ -417,7 +417,7 @@
         <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
     </Style>
 
-    <Style TargetType="controls:ExtendedDatePicker" BasedOn="{StaticResource ExtendedDatePickerStyle}" />
+    <Style BasedOn="{StaticResource ExtendedDatePickerStyle}" TargetType="controls:ExtendedDatePicker" />
 
     <Style x:Key="DatePickerStyle" TargetType="DatePicker">
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
@@ -428,7 +428,7 @@
         <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
     </Style>
 
-    <Style TargetType="DatePicker" BasedOn="{StaticResource DatePickerStyle}" />
+    <Style BasedOn="{StaticResource DatePickerStyle}" TargetType="DatePicker" />
 
     <Style x:Key="TimePickerStyle" TargetType="TimePicker">
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
@@ -439,7 +439,7 @@
         <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
     </Style>
 
-    <Style TargetType="TimePicker" BasedOn="{StaticResource TimePickerStyle}" />
+    <Style BasedOn="{StaticResource TimePickerStyle}" TargetType="TimePicker" />
 
     <Style x:Key="ExtendedTimePickerStyle" TargetType="controls:ExtendedTimePicker">
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
@@ -449,14 +449,14 @@
             <OnPlatform
                 x:TypeArguments="x:Double"
                 Android="48"
-                iOS="48"
-                WinPhone="48" />
+                WinPhone="48"
+                iOS="48" />
         </Setter>
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
         <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
     </Style>
 
-    <Style TargetType="controls:ExtendedTimePicker" BasedOn="{StaticResource ExtendedTimePickerStyle}" />
+    <Style BasedOn="{StaticResource ExtendedTimePickerStyle}" TargetType="controls:ExtendedTimePicker" />
 
     <Style x:Key="TitleLabelStyle" TargetType="Label">
         <Setter Property="BackgroundColor" Value="Transparent" />
@@ -475,8 +475,8 @@
             <OnPlatform
                 x:TypeArguments="Thickness"
                 Android="4, 0, 0, -44"
-                iOS="0, 34, 0, 0"
-                WinPhone="0, 34, 0, 0" />
+                WinPhone="0, 34, 0, 0"
+                iOS="0, 34, 0, 0" />
         </Setter>
     </Style>
 
@@ -491,8 +491,8 @@
             <OnPlatform
                 x:TypeArguments="Thickness"
                 Android="4, 0, 0, 0"
-                iOS="0, 0, 0, 0"
-                WinPhone="0, 0, 0, 0" />
+                WinPhone="0, 0, 0, 0"
+                iOS="0, 0, 0, 0" />
         </Setter>
     </Style>
 </ResourceDictionary>
