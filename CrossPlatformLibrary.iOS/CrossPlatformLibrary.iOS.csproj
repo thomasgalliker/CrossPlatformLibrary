@@ -51,6 +51,7 @@
     <Compile Include="LinkerHook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ClipboardService.cs" />
+    <Compile Include="Services\AppHandler.cs" />
     <Compile Include="Services\ToastService.cs" />
     <Compile Include="Settings\SettingsService.cs" />
     <Compile Include="Tools\PlatformServices.cs" />
