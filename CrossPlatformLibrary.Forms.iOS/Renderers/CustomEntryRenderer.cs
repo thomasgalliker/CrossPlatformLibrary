@@ -12,8 +12,8 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
 {
     public class CustomEntryRenderer : EntryRenderer
     {
-        private nfloat originalBorderWidth;
-        private UITextBorderStyle originalBorderStyle;
+        private nfloat? originalBorderWidth;
+        private UITextBorderStyle? originalBorderStyle;
 
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {
@@ -51,13 +51,22 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             {
                 this.originalBorderWidth = this.Control.Layer.BorderWidth;
                 this.originalBorderStyle = this.Control.BorderStyle;
+
                 this.Control.Layer.BorderWidth = 0;
                 this.Control.BorderStyle = UITextBorderStyle.None;
             }
             else
             {
-                this.Control.Layer.BorderWidth = this.originalBorderWidth;
-                this.Control.BorderStyle = this.originalBorderStyle;
+                if (this.originalBorderWidth != null)
+                {
+                    this.Control.Layer.BorderWidth = this.originalBorderWidth.Value;
+                    this.originalBorderWidth = null;
+                }
+                if (this.originalBorderStyle != null)
+                {
+                    this.Control.BorderStyle = this.originalBorderStyle.Value;
+                    this.originalBorderStyle = null;
+                }
             }
         }
     }

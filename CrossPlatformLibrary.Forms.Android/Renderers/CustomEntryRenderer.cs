@@ -74,8 +74,11 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
             }
             else
             {
-                this.Control.Background = this.originalBackground;
-                this.originalBackground = null;
+                if (this.originalBackground != null)
+                {
+                    this.Control.Background = this.originalBackground;
+                    this.originalBackground = null;
+                }
             }
         }
     }
