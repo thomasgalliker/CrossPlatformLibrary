@@ -3,13 +3,13 @@
     x:Class="SampleApp.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:SampleApp"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
-    xmlns:userControls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
+    xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
+    xmlns:local="clr-namespace:SampleApp"
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
     xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
     xmlns:sys="clr-namespace:System;assembly=netstandard"
-    xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
+    xmlns:userControls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
     x:Name="Page">
 
     <!--<Grid>
@@ -22,15 +22,15 @@
                     <StackLayout Padding="{DynamicResource CardPadding}" Spacing="{DynamicResource CardSpacing}">
 
                         <Label
+                            FontAttributes="Italic"
                             Text="&lt;!--Demo ValidatableLabel--&gt;"
-                            TextColor="LightGreen"
-                            FontAttributes="Italic" />
+                            TextColor="LightGreen" />
                         <controls:ValidatableLabel Text="{Binding UserId, Mode=OneWay}" />
 
                         <Label
+                            FontAttributes="Italic"
                             Text="&lt;!--Demo LongPressEffect--&gt;"
-                            TextColor="LightGreen"
-                            FontAttributes="Italic" />
+                            TextColor="LightGreen" />
 
                         <controls:GridZero Padding="20" BackgroundColor="DarkBlue">
                             <Grid.ColumnDefinitions>
@@ -41,10 +41,10 @@
                                 x:Name="LongPressLabel"
                                 effects:LongPressEffect.Command="{Binding LongPressCommand}"
                                 effects:LongPressEffect.CommandParameter="{Binding Text, Source={x:Reference LongPressLabel}}"
-                                Text="Press and hold to run the attached command. This effect can be used if you want to make text accessible e.g. for copy/paste."
                                 BackgroundColor="LightBlue"
                                 FontSize="Medium"
-                                LineBreakMode="WordWrap">
+                                LineBreakMode="WordWrap"
+                                Text="Press and hold to run the attached command. This effect can be used if you want to make text accessible e.g. for copy/paste.">
                                 <Label.Effects>
                                     <effects:LongPressEffect />
                                 </Label.Effects>
@@ -56,9 +56,9 @@
                         </controls:GridZero>
 
                         <Label
+                            FontAttributes="Italic"
                             Text="&lt;!--Demo ValidatableEntry--&gt;"
-                            TextColor="LightGreen"
-                            FontAttributes="Italic" />
+                            TextColor="LightGreen" />
                         <controls:ValidatableEntry
                             Placeholder="Username"
                             Text="{Binding UserName, Mode=TwoWay}"
@@ -86,21 +86,21 @@
                             Text="" />
 
                         <Label
+                            FontAttributes="Italic"
                             Text="&lt;!--Demo User Controls--&gt;"
-                            TextColor="LightGreen"
-                            FontAttributes="Italic" />
+                            TextColor="LightGreen" />
                         <userControls:AddressControl BindingContext="{Binding Address}" />
 
                         <Grid>
                             <controls:ValidatableEditor
-                                Placeholder="{localization:Translate SimpleNotesLabelText}"
-                                Text="{Binding Notes, Mode=TwoWay}"
+                                BackgroundColor="LightYellow"
+                                HorizontalOptions="FillAndExpand"
                                 IsEnabled="True"
-                                ValidationErrors="{Binding Errors[Notes]}"
                                 MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
                                 MaxLines="3"
-                                BackgroundColor="LightYellow"
-                                HorizontalOptions="FillAndExpand">
+                                Placeholder="{localization:Translate SimpleNotesLabelText}"
+                                Text="{Binding Notes, Mode=TwoWay}"
+                                ValidationErrors="{Binding Errors[Notes]}">
                                 <controls:ValidatableEditor.Keyboard>
                                     <Keyboard x:FactoryMethod="Create">
                                         <x:Arguments>
@@ -114,37 +114,40 @@
                         <userControls:NotesView BindingContext="{Binding .}" />
 
                         <Label
+                            FontAttributes="Italic"
                             Text="&lt;!--Demo CustomEditor with hidden keyboard--&gt;"
-                            TextColor="LightGreen"
-                            FontAttributes="Italic" />
+                            TextColor="LightGreen" />
                         <controls:CustomEditor
                             Margin="0"
-                            Text="{Binding LogContent, Mode=OneWay}"
-                            Keyboard="Text"
-                            HideKeyboard="True"
                             FontSize="8"
+                            HideKeyboard="True"
                             HorizontalOptions="FillAndExpand"
+                            Keyboard="Text"
+                            Text="{Binding LogContent, Mode=OneWay}"
                             VerticalOptions="FillAndExpand" />
 
                         <Label
+                            FontAttributes="Italic"
                             Text="&lt;!--Demo HyperLinkLabel--&gt;"
-                            TextColor="LightGreen"
-                            FontAttributes="Italic" />
-                        <controls:HyperLinkLabel Text="{Binding AdminEmailAddress, Mode=OneWay}" NavigateCommand="{Binding MailNavigateCommand}" />
+                            TextColor="LightGreen" />
+                        <controls:HyperLinkLabel
+                            NavigateCommand="{Binding MailNavigateCommand}"
+                            Text="{Binding AdminEmailAddress, Mode=OneWay}"
+                            TintColor="Red" />
 
                         <Label
+                            FontAttributes="Italic"
                             Text="&lt;!--Demo DrilldownButton--&gt;"
-                            TextColor="LightGreen"
-                            FontAttributes="Italic" />
+                            TextColor="LightGreen" />
                         <controls:DrilldownButton
-                            Text="{localization:Translate SingleButtonText}"
+                            Command="{Binding MailNavigateCommand}"
                             ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
-                            Command="{Binding MailNavigateCommand}" />
+                            Text="{localization:Translate SingleButtonText}" />
 
                         <Label
+                            FontAttributes="Italic"
                             Text="&lt;!--Demo DrilldownButtonList--&gt;"
-                            TextColor="LightGreen"
-                            FontAttributes="Italic" />
+                            TextColor="LightGreen" />
                         <controls:CardView>
                             <controls:StackLayoutZero>
                                 <controls:LabelSection Text="{localization:Translate ListOfSettingsSectionText}" />
@@ -154,8 +157,8 @@
                                         <objectModel:ObservableCollection x:TypeArguments="BindableObject">
                                             <controls:DrilldownButtonView
                                                 Title="{localization:Translate LogButtonText}"
-                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
                                                 Command="{Binding NavigateToLogCommand}"
+                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
                                                 IsEnabled="False" />
                                             <controls:DrilldownButtonView
                                                 Title="{Binding RefreshButtonText}"
@@ -174,22 +177,22 @@
                         </controls:CardView>
 
                         <Label
+                            FontAttributes="Italic"
                             Text="&lt;!--Demo NoBarsScrollViewer--&gt;"
-                            TextColor="LightGreen"
-                            FontAttributes="Italic" />
+                            TextColor="LightGreen" />
                         <controls:NoBarsScrollViewer Orientation="Horizontal">
                             <controls:StackLayoutZero Orientation="Horizontal">
                                 <Label
-                                    Text="Label Green &gt;&gt;&gt;"
                                     BackgroundColor="LightGreen"
+                                    Text="Label Green &gt;&gt;&gt;"
                                     WidthRequest="333" />
                                 <Label
-                                    Text="&lt;&lt;&lt; Label Red &gt;&gt;&gt;"
                                     BackgroundColor="LightCoral"
+                                    Text="&lt;&lt;&lt; Label Red &gt;&gt;&gt;"
                                     WidthRequest="333" />
                                 <Label
-                                    Text="&lt;&lt;&lt; Label Blue"
                                     BackgroundColor="LightBlue"
+                                    Text="&lt;&lt;&lt; Label Blue"
                                     WidthRequest="333" />
                             </controls:StackLayoutZero>
                         </controls:NoBarsScrollViewer>
@@ -197,35 +200,35 @@
                     </StackLayout>
 
                     <Label
+                        FontAttributes="Italic"
                         Text="&lt;!--Demo CustomButton--&gt;"
-                        TextColor="LightGreen"
-                        FontAttributes="Italic" />
+                        TextColor="LightGreen" />
                     <controls:CustomButton
                         Margin="{StaticResource ButtonMargin}"
-                        Text="{localization:Translate LoadDataButtonText}"
                         Command="{Binding LoadDataButtonCommand}"
-                        Style="{StaticResource CustomButtonSecondaryStyle}" />
+                        Style="{StaticResource CustomButtonSecondaryStyle}"
+                        Text="{localization:Translate LoadDataButtonText}" />
 
                     <controls:CustomButton
                         Margin="{StaticResource ButtonMargin}"
-                        Text="{localization:Translate SaveButtonText}"
                         Command="{Binding SaveProfileButtonCommand}"
-                        Style="{StaticResource CustomButtonPrimaryStyle}" />
+                        Style="{StaticResource CustomButtonPrimaryStyle}"
+                        Text="{localization:Translate SaveButtonText}" />
                 </StackLayout>
 
                 <Label
-                    Text="&lt;!--Demo CustomActivityIndicator--&gt;"
-                    TextColor="LightGreen"
                     FontAttributes="Italic"
-                    IsVisible="{Binding IsBusy, Mode=OneWay}" />
-                <controls:CustomActivityIndicator IsVisible="{Binding IsBusy, Mode=OneWay}" Caption="{localization:Translate LoadingText}" />
+                    IsVisible="{Binding IsBusy, Mode=OneWay}"
+                    Text="&lt;!--Demo CustomActivityIndicator--&gt;"
+                    TextColor="LightGreen" />
+                <controls:CustomActivityIndicator Caption="{localization:Translate LoadingText}" IsVisible="{Binding IsBusy, Mode=OneWay}" />
             </Grid>
 
             <Label
-                Text="&lt;!--Demo ViewModelErrorControl--&gt;"
-                TextColor="LightGreen"
                 FontAttributes="Italic"
-                IsVisible="{Binding HasViewModelError, Mode=OneWay}" />
+                IsVisible="{Binding HasViewModelError, Mode=OneWay}"
+                Text="&lt;!--Demo ViewModelErrorControl--&gt;"
+                TextColor="LightGreen" />
             <controls:ViewModelErrorControl IsVisible="{Binding HasViewModelError, Mode=OneWay}" ViewModelError="{Binding ViewModelError, Mode=OneWay}" />
         </Grid>
     </controls:AlwaysScrollView>

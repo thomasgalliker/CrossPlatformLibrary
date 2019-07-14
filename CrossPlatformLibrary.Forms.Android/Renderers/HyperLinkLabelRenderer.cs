@@ -13,7 +13,7 @@ using Xamarin.Forms.Platform.Android;
 namespace CrossPlatformLibrary.Forms.Android.Renderers
 {
     [Preserve(AllMembers = true)]
-    public class HyperLinkLabelRenderer : Xamarin.Forms.Platform.Android.LabelRenderer
+    public class HyperLinkLabelRenderer : LabelRenderer
     {
         public static async void Init()
         {
@@ -30,7 +30,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
             if (this.Control != null)
             {
-                Linkify.AddLinks(this.Control, MatchOptions.All);
+                this.UpdateLinks();
 
                 if (this.Element is HyperLinkLabel hyperLinkLabel)
                 {
@@ -43,15 +43,22 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (e.PropertyName == HyperLinkLabel.NavigateUriProperty.PropertyName)
+            if (e.PropertyName == Label.TextProperty.PropertyName || e.PropertyName == HyperLinkLabel.NavigateUriProperty.PropertyName || e.PropertyName == HyperLinkLabel.NavigateCommandProperty.PropertyName)
             {
-                Linkify.AddLinks(this.Control, MatchOptions.All);
+                this.UpdateLinks();
             }
             else if (e.PropertyName == HyperLinkLabel.TintColorProperty.PropertyName)
             {
-                var hyperLinkLabel = (HyperLinkLabel)this.Element;
-                this.UpdateTintColor(hyperLinkLabel);
+                if (this.Element is HyperLinkLabel hyperLinkLabel)
+                {
+                    this.UpdateTintColor(hyperLinkLabel);
+                }
             }
+        }
+
+        private void UpdateLinks()
+        {
+            Linkify.AddLinks(this.Control, MatchOptions.All);
         }
 
         private void UpdateTintColor(HyperLinkLabel hyperLinkLabel)
