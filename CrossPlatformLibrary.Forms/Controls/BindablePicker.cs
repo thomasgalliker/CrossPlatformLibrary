@@ -167,27 +167,15 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         private void InstanceOnItemsSourceChanged(object oldValue, object newValue)
         {
-            ////if (oldValue == null)
-            ////{
-            ////    return;
-            ////}
-
-            ////if (this.Items == null)
-            ////{
-            ////    return;
-            ////}
-
             this.disableNestedCalls = true;
             this.Items.Clear();
 
-            var oldCollectionINotifyCollectionChanged = oldValue as INotifyCollectionChanged;
-            if (oldCollectionINotifyCollectionChanged != null)
+            if (oldValue is INotifyCollectionChanged oldCollectionINotifyCollectionChanged)
             {
                 oldCollectionINotifyCollectionChanged.CollectionChanged -= this.ItemsSource_CollectionChanged;
             }
 
-            var newCollectionINotifyCollectionChanged = newValue as INotifyCollectionChanged;
-            if (newCollectionINotifyCollectionChanged != null)
+            if (newValue is INotifyCollectionChanged newCollectionINotifyCollectionChanged)
             {
                 newCollectionINotifyCollectionChanged.CollectionChanged += this.ItemsSource_CollectionChanged;
             }
@@ -239,7 +227,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             }
         }
 
-        void InternalSelectedItemChanged()
+        private void InternalSelectedItemChanged()
         {
             if (this.disableNestedCalls)
             {
@@ -279,7 +267,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             this.disableNestedCalls = false;
         }
 
-        void InternalSelectedValueChanged()
+        private void InternalSelectedValueChanged()
         {
             if (this.disableNestedCalls)
             {
@@ -421,8 +409,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 return;
             }
 
-            var bindablePicker = bindable as BindablePicker;
-            if (bindablePicker != null)
+            if (bindable is BindablePicker bindablePicker)
             {
                 bindablePicker.InstanceOnItemsSourceChanged(oldValue, newValue);
             }
