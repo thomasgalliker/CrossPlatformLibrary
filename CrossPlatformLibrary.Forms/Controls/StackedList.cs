@@ -78,6 +78,19 @@ namespace CrossPlatformLibrary.Forms.Controls
             itemsLayout.HookUp();
         }
 
+        public static readonly BindableProperty SelectionModeProperty =
+            BindableProperty.Create(
+                nameof(SelectionMode),
+                typeof(SelectionMode),
+                typeof(StackedList),
+                SelectionMode.None);
+
+        public SelectionMode SelectionMode
+        {
+            get => (SelectionMode)this.GetValue(SelectionModeProperty);
+            set => this.SetValue(SelectionModeProperty, value);
+        }
+
         public StackedList()
         {
             this.Spacing = 5;
@@ -125,7 +138,11 @@ namespace CrossPlatformLibrary.Forms.Controls
                 view =>
                 {
                     this.SelectedItem = view.BindingContext;
-                    this.SelectedItem = null; // Allowing item second time selection
+
+                    if (this.SelectionMode == SelectionMode.None)
+                    {
+                        this.SelectedItem = null; // Allowing item second time selection
+                    }
                 });
 
             this.itemsStackLayout.Orientation = this.ListOrientation;
@@ -147,9 +164,8 @@ namespace CrossPlatformLibrary.Forms.Controls
         protected virtual View GetItemView(object item)
         {
             var content = this.ItemTemplate.CreateContent();
-            View view = null;
-            var viewCell = content as ViewCell;
-            if (viewCell != null)
+            View view;
+            if (content is ViewCell viewCell)
             {
                 view = viewCell.View;
             }
