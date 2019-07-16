@@ -168,13 +168,14 @@ namespace CrossPlatformLibrary.Forms.Controls
                 return;
             }
 
-            if (this.SearchCommandDelay == TimeSpan.Zero)
+            var delay = this.SearchCommandDelay;
+            if (delay == TimeSpan.Zero)
             {
                 this.PerformSearchCommand(e.NewTextValue);
             }
             else
             {
-                await this.taskDelayer.RunWithDelay(TimeSpan.FromMilliseconds(1000), () => this.PerformSearchCommand(e.NewTextValue));
+                await this.taskDelayer.RunWithDelay(delay, () => this.PerformSearchCommand(e.NewTextValue));
             }
         }
 
