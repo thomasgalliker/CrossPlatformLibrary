@@ -183,19 +183,14 @@ namespace CrossPlatformLibrary.Forms.Controls
             if (newValue != null)
             {
                 var hasDisplayMemberPath = this.HasDisplayMemberPath;
+                var displayMemberPath = this.DisplayMemberPath;
 
                 foreach (var item in (IEnumerable)newValue)
                 {
                     object propValue = null;
                     if (hasDisplayMemberPath)
                     {
-                        var type = item.GetType();
-                        var prop = type.GetRuntimeProperty(this.DisplayMemberPath);
-                        if (prop == null)
-                        {
-                            throw new InvalidOperationException($"DisplayMemberPath={this.DisplayMemberPath} does not exist on item of type {type.Name}.");
-                        }
-                        propValue = prop.GetValue(item);
+                        propValue = BindingHelper.GetDisplayMember(item, displayMemberPath);
                     }
                     else
                     {
@@ -307,13 +302,6 @@ namespace CrossPlatformLibrary.Forms.Controls
             this.disableNestedCalls = false;
         }
 
-        private static string GetDisplayMemberString(object item, string displayMemberPath)
-        {
-            var type = item.GetType();
-            var prop = type.GetRuntimeProperty(displayMemberPath);
-            return prop.GetValue(item).ToString();
-        }
-
         private bool HasDisplayMemberPath => !string.IsNullOrWhiteSpace(this.DisplayMemberPath);
 
         private void ItemsSource_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -326,7 +314,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 {
                     if (hasDisplayMemberPath)
                     {
-                        var displayMemberString = GetDisplayMemberString(item, displayMemberPath);
+                        var displayMemberString = BindingHelper.GetDisplayMemberString(item, displayMemberPath);
                         this.Items.Add(displayMemberString);
                     }
                     else
@@ -341,7 +329,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 {
                     if (hasDisplayMemberPath)
                     {
-                        var displayMemberString = GetDisplayMemberString(item, displayMemberPath);
+                        var displayMemberString = BindingHelper.GetDisplayMemberString(item, displayMemberPath);
                         this.Items.Remove(displayMemberString);
                     }
                     else
@@ -356,7 +344,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 {
                     if (hasDisplayMemberPath)
                     {
-                        var displayMemberString = GetDisplayMemberString(item, displayMemberPath);
+                        var displayMemberString = BindingHelper.GetDisplayMemberString(item, displayMemberPath);
                         this.Items.Remove(displayMemberString);
                     }
                     else
@@ -378,7 +366,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                     {
                         if (hasDisplayMemberPath)
                         {
-                            var displayMemberString = GetDisplayMemberString(item, displayMemberPath);
+                            var displayMemberString = BindingHelper.GetDisplayMemberString(item, displayMemberPath);
                             this.Items.Remove(displayMemberString);
                         }
                         else
