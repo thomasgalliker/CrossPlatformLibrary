@@ -20,7 +20,12 @@
                             <Label
                                 HorizontalOptions="Start"
                                 Text="{Binding Name}"
-                                VerticalOptions="Center" />
+                                VerticalOptions="Center"
+                                Style="{DynamicResource EntryLabelStyle}" />
+                            <BoxView
+                                HeightRequest="1"
+                                BackgroundColor="{DynamicResource ListSeparator}"
+                                HorizontalOptions="FillAndExpand" />
 
                         </StackLayout>
                     </ViewCell.View>
