@@ -7,35 +7,35 @@ namespace CrossPlatformLibrary.Forms.Behaviors
 {
     public class EventToCommandBehavior : BehaviorBase<View>
     {
-        Delegate eventHandler;
+        private Delegate eventHandler;
 
-        public static readonly BindableProperty EventNameProperty = BindableProperty.Create("EventName", typeof(string), typeof(EventToCommandBehavior), null, propertyChanged: OnEventNameChanged);
-        public static readonly BindableProperty CommandProperty = BindableProperty.Create("Command", typeof(ICommand), typeof(EventToCommandBehavior), null);
-        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create("CommandParameter", typeof(object), typeof(EventToCommandBehavior), null);
-        public static readonly BindableProperty InputConverterProperty = BindableProperty.Create("Converter", typeof(IValueConverter), typeof(EventToCommandBehavior), null);
+        public static readonly BindableProperty EventNameProperty = BindableProperty.Create(nameof(EventName), typeof(string), typeof(EventToCommandBehavior), null, propertyChanged: OnEventNameChanged);
+        public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(EventToCommandBehavior), null);
+        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(EventToCommandBehavior), null);
+        public static readonly BindableProperty InputConverterProperty = BindableProperty.Create(nameof(Converter), typeof(IValueConverter), typeof(EventToCommandBehavior), null);
 
         public string EventName
         {
-            get { return (string)this.GetValue(EventNameProperty); }
-            set { this.SetValue(EventNameProperty, value); }
+            get => (string)this.GetValue(EventNameProperty);
+            set => this.SetValue(EventNameProperty, value);
         }
 
         public ICommand Command
         {
-            get { return (ICommand)this.GetValue(CommandProperty); }
-            set { this.SetValue(CommandProperty, value); }
+            get => (ICommand)this.GetValue(CommandProperty);
+            set => this.SetValue(CommandProperty, value);
         }
 
         public object CommandParameter
         {
-            get { return this.GetValue(CommandParameterProperty); }
-            set { this.SetValue(CommandParameterProperty, value); }
+            get => this.GetValue(CommandParameterProperty);
+            set => this.SetValue(CommandParameterProperty, value);
         }
 
         public IValueConverter Converter
         {
-            get { return (IValueConverter)this.GetValue(InputConverterProperty); }
-            set { this.SetValue(InputConverterProperty, value); }
+            get => (IValueConverter)this.GetValue(InputConverterProperty);
+            set => this.SetValue(InputConverterProperty, value);
         }
 
         protected override void OnAttachedTo(View bindable)
@@ -50,24 +50,25 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             this.DeregisterEvent(this.EventName);
         }
 
-        void RegisterEvent(string name)
+        private void RegisterEvent(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 return;
             }
 
-            EventInfo eventInfo = this.AssociatedObject.GetType().GetRuntimeEvent(name);
+            var eventInfo = this.AssociatedObject.GetType().GetRuntimeEvent(name);
             if (eventInfo == null)
             {
-                throw new ArgumentException(string.Format("EventToCommandBehavior: Can't register the '{0}' event.", this.EventName));
+                throw new ArgumentException($"EventToCommandBehavior: Can't register the '{this.EventName}' event.");
             }
-            MethodInfo methodInfo = typeof(EventToCommandBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
+
+            var methodInfo = typeof(EventToCommandBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
             this.eventHandler = methodInfo.CreateDelegate(eventInfo.EventHandlerType, this);
             eventInfo.AddEventHandler(this.AssociatedObject, this.eventHandler);
         }
 
-        void DeregisterEvent(string name)
+        private void DeregisterEvent(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -78,11 +79,13 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             {
                 return;
             }
+
             EventInfo eventInfo = this.AssociatedObject.GetType().GetRuntimeEvent(name);
             if (eventInfo == null)
             {
                 throw new ArgumentException(string.Format("EventToCommandBehavior: Can't de-register the '{0}' event.", this.EventName));
             }
+
             eventInfo.RemoveEventHandler(this.AssociatedObject, this.eventHandler);
             this.eventHandler = null;
         }
@@ -114,7 +117,7 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             }
         }
 
-        static void OnEventNameChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void OnEventNameChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var behavior = (EventToCommandBehavior)bindable;
             if (behavior.AssociatedObject == null)
@@ -130,4 +133,3 @@ namespace CrossPlatformLibrary.Forms.Behaviors
         }
     }
 }
-
