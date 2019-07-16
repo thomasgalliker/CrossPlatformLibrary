@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Windows.Input;
-using CrossPlatformLibrary.Extensions;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
@@ -158,13 +158,15 @@ namespace CrossPlatformLibrary.Forms.Controls
             {
                 autoCompleteView.Entry.TextChanged -= autoCompleteView.OnEntryTextChanged;
             }
-
         }
 
         private async void OnEntryTextChanged(object sender, TextChangedEventArgs e)
         {
             if (this.SearchCommand == null)
             {
+                // In case no search command is specified by the user,
+                // we don't have to do anything here
+                // TODO: Raise exception? This situation should not occur!
                 return;
             }
 
@@ -181,12 +183,23 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         private void PerformSearchCommand(string searchText)
         {
+            var selectedItem = this.SelectedItem;
+            if (selectedItem != null)
+            {
+                var selectedItemString = this.GetDisplayString(selectedItem);
+                if (string.Equals(selectedItemString, searchText))
+                {
+                    // If SelectedItem is set and its textual representation equals to Entry.TextChanged
+                    // we can assume that Entry.Text was set by SelectedItem
+                    return;
+                }
+            }
+
             if (this.SearchCommand.CanExecute(searchText))
             {
                 this.SearchCommand.Execute(searchText);
             }
         }
-
 
         public static readonly BindableProperty SearchCommandDelayProperty =
             BindableProperty.Create(
@@ -201,7 +214,6 @@ namespace CrossPlatformLibrary.Forms.Controls
             get => (TimeSpan)this.GetValue(SearchCommandDelayProperty);
             set => this.SetValue(SearchCommandDelayProperty, value);
         }
-
 
         public static readonly BindableProperty SuggestedItemsSourceProperty =
             BindableProperty.Create(
@@ -238,9 +250,13 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         private void HandleSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.NewItems is IEnumerable ien && ien.GetCount() > 0)
+            Debug.WriteLine($"HandleSourceCollectionChanged: e.Action={e.Action}, e.NewItems.Count={e.NewItems?.Count}");
+
+            if (e.NewItems is IList newItems && newItems.Count > 0)
             {
-                if (!Equals(this.SuggestionList.SelectedItem, e.NewItems[0]))
+                //var first = newItems[0];
+                //var selectedItem = this.SuggestionList.SelectedItem;
+                //if (selectedItem == null || !Equals(selectedItem, first))
                 {
                     this.SuggestionList.IsVisible = true;
                     return;
@@ -266,6 +282,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         private static void OnSelectedItemChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
+            Debug.WriteLine($"OnSelectedItemChanged: oldvalue={oldvalue}, newvalue={newvalue}");
+
             if (newvalue == null)
             {
                 return;
@@ -274,16 +292,19 @@ namespace CrossPlatformLibrary.Forms.Controls
             var autoCompleteView = (ValidatableAutoCompleteView)bindable;
             autoCompleteView.SuggestionList.IsVisible = false;
 
-            var hasDisplayMemberPath = autoCompleteView.HasDisplayMemberPath;
-            if (hasDisplayMemberPath)
+            autoCompleteView.Entry.Text = autoCompleteView.GetDisplayString(newvalue);
+        }
+
+        private string GetDisplayString(object value)
+        {
+            var displayMemberPath = this.DisplayMemberPath;
+            if (!string.IsNullOrEmpty(displayMemberPath))
             {
-                var displayMemberString = BindingHelper.GetDisplayMemberString(newvalue, autoCompleteView.DisplayMemberPath);
-                autoCompleteView.Entry.Text = displayMemberString;
+                var displayMemberString = BindingHelper.GetDisplayMemberString(value, this.DisplayMemberPath);
+                return displayMemberString;
             }
-            else
-            {
-                autoCompleteView.Entry.Text = $"{newvalue}";
-            }
+
+            return $"{value}";
         }
 
         public object SelectedItem
@@ -309,7 +330,6 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(DisplayMemberPath),
                 typeof(string),
                 typeof(ValidatableAutoCompleteView));
-
 
         private bool HasDisplayMemberPath => !string.IsNullOrWhiteSpace(this.DisplayMemberPath);
 

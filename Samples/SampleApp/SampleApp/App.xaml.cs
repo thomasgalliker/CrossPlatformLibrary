@@ -12,13 +12,10 @@ namespace SampleApp
 {
     public partial class App : Application
     {
-        public static readonly TimeSpan SearchCommandDelay = TimeSpan.FromMilliseconds(200);
+        public static readonly TimeSpan SearchCommandDelay = TimeSpan.FromMilliseconds(500);
 
         public App()
         {
-
-
-
             // Initialize localization
             ILocalizer localizer = Localizer.Current;
             var translationProvider = ResxSingleTranslationProvider.Instance;

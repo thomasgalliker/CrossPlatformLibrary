@@ -51,9 +51,9 @@
     <controls:StackedList
         x:Name="SuggestionList"
         Grid.Row="1"
-        IsVisible="True"
         ItemsSource="{Binding SuggestedItemsSource, Source={x:Reference Control}, Mode=OneWay}"
         SelectedItem="{Binding SelectedItem, Source={x:Reference Control}, Mode=TwoWay}"
         ItemTemplate="{Binding SuggestedItemTemplate, Source={x:Reference Control}, Mode=OneWay}"
+        SelectionMode="Single"
         Style="{DynamicResource SuggestionListStyle}" />
 </controls:GridZero>
