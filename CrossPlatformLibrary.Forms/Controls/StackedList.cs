@@ -9,6 +9,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 {
     public class StackedList : Grid
     {
+        private INotifyCollectionChanged sourceCollection;
         private ICommand innerSelectedCommand;
         private readonly NoBarsScrollViewer scrollView;
         private readonly StackLayout itemsStackLayout;
@@ -20,12 +21,13 @@ namespace CrossPlatformLibrary.Forms.Controls
         public double Spacing { get; set; }
 
         public static readonly BindableProperty SelectedCommandProperty = BindableProperty.Create(
-            "SelectedCommand",
+            nameof(SelectedCommand),
             typeof(ICommand),
-            typeof(StackedList), null);
+            typeof(StackedList),
+            null);
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
-            "ItemsSource",
+            nameof(ItemsSource),
             typeof(IEnumerable),
             typeof(StackedList),
             default(IEnumerable<object>),
@@ -33,7 +35,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             propertyChanged: ItemsSourceChanged);
 
         public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create(
-            "SelectedItem",
+            nameof(SelectedItem),
             typeof(object),
             typeof(StackedList),
             null,
@@ -41,7 +43,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             propertyChanged: OnSelectedItemChanged);
 
         public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(
-            "ItemTemplate",
+            nameof(ItemTemplate),
             typeof(DataTemplate),
             typeof(StackedList),
             default(DataTemplate));
@@ -51,8 +53,6 @@ namespace CrossPlatformLibrary.Forms.Controls
             get { return (ICommand)this.GetValue(SelectedCommandProperty); }
             set { this.SetValue(SelectedCommandProperty, value); }
         }
-
-        private INotifyCollectionChanged sourceCollection;
 
         public IEnumerable ItemsSource
         {

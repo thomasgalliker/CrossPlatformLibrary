@@ -10,17 +10,18 @@ namespace CrossPlatformLibrary.Forms.Controls
 {
     public class StackedGrid : Grid
     {
+        private INotifyCollectionChanged sourceCollection;
         private ICommand innerSelectedCommand;
 
         public event EventHandler SelectedItemChanged;
 
         public static readonly BindableProperty SelectedCommandProperty = BindableProperty.Create(
-            "SelectedCommand",
+            nameof(SelectedCommand),
             typeof(ICommand),
             typeof(StackedGrid), null);
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
-            "ItemsSource",
+            nameof(ItemsSource),
             typeof(IEnumerable),
             typeof(StackedGrid),
             default(IEnumerable<object>),
@@ -28,7 +29,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             propertyChanged: ItemsSourceChanged);
 
         public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create(
-            "SelectedItem",
+            nameof(SelectedItem),
             typeof(object),
             typeof(StackedGrid),
             null,
@@ -36,7 +37,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             propertyChanged: OnSelectedItemChanged);
 
         public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(
-            "ItemTemplate",
+            nameof(ItemTemplate),
             typeof(DataTemplate),
             typeof(StackedGrid),
             default(DataTemplate));
@@ -46,8 +47,6 @@ namespace CrossPlatformLibrary.Forms.Controls
             get { return (ICommand)this.GetValue(SelectedCommandProperty); }
             set { this.SetValue(SelectedCommandProperty, value); }
         }
-
-        private INotifyCollectionChanged sourceCollection;
 
         public virtual IEnumerable ItemsSource
         {
