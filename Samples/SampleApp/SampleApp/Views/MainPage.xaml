@@ -33,7 +33,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <controls:AlwaysScrollView>
+    <controls:AlwaysScrollView x:Name="ScrollView">
         <Grid>
             <Grid IsVisible="{Binding HasViewModelError, Mode=OneWay, Converter={StaticResource BoolInverter}}">
                 <StackLayout IsVisible="{Binding IsNotBusy}">
@@ -82,15 +82,6 @@
                             Text="{Binding UserName, Mode=TwoWay}"
                             ValidationErrors="{Binding Validation.Errors[UserName]}" />
 
-                        <!--  User's Personal Information  -->
-                        <!--<account:PersonalInformationControl
-                            ShowEditableFieldsOnly="False"
-                            BindingContext="{Binding PersonalInformation}" />-->
-
-                        <!--  User's Identification  -->
-                        <!--<account:UserIdentificationControl
-                            BindingContext="{Binding UserIdentification}" />-->
-
                         <controls:CustomLabel Text="Enter name:" />
                         <controls:CustomEntry
                             Padding="0"
@@ -109,6 +100,7 @@
                             TextColor="LightGreen" />
 
                         <controls:ValidatableAutoCompleteView
+                            x:Name="AutoCompleteView"
                             Placeholder="AutoComplete by Country.Name"
                             Text="{Binding CountrySearchText, Mode=TwoWay}"
                             SearchCommand="{Binding AutoCompleteSearchCommand}"
@@ -117,7 +109,8 @@
                             SuggestedItemsSource="{Binding SuggestedCountries, Mode=OneWay}"
                             SuggestedItemTemplate="{StaticResource AutoCompleteSuggestionItemTemplate}"
                             SelectedItem="{Binding Country, Mode=TwoWay}"
-                            DisplayMemberPath="Name" />
+                            DisplayMemberPath="Name"
+                            TextChanged="AutoCompleteView_OnTextChanged"/>
 
                         <Label
                             FontAttributes="Italic"

@@ -23,7 +23,11 @@ namespace SampleApp
                 Console.WriteLine(e);
                 throw;
             }
+        }
 
+        private void AutoCompleteView_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            this.ScrollView.ScrollToAsync(this.AutoCompleteView, ScrollToPosition.Start, animated: true);
         }
     }
 
