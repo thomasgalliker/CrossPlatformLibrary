@@ -31,7 +31,11 @@
         FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
         MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
         Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
-        BackgroundColor="Transparent" />
+        BackgroundColor="Transparent">
+        <Entry.Effects>
+            <effects:EntrySelectAllText />
+        </Entry.Effects>
+    </Entry>
 
     <!--  Annotation Text  -->
     <Label
