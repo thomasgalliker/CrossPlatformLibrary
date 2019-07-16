@@ -76,6 +76,9 @@
     <Compile Update="Controls\ValidatableEditor.xaml.cs">
       <DependentUpon>ValidatableEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Controls\ValidatableAutoCompleteView.xaml.cs">
+      <DependentUpon>ValidatableAutoCompleteView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="MyResourceDictionary.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -98,6 +101,9 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\ValidatableEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\ValidatableAutoCompleteView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="MyResourceDictionary.xaml">

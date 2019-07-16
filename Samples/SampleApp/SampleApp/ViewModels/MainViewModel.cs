@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Forms.Mvvm;
 using CrossPlatformLibrary.Forms.Validation;
+using SampleApp.Services;
 using Xamarin.Forms;
 
 namespace SampleApp.ViewModels
@@ -11,6 +14,7 @@ namespace SampleApp.ViewModels
     public class MainViewModel : BaseViewModel
     {
         private readonly DisplayService displayService;
+        private readonly ICountryService countryService;
         private CountryViewModel country;
         private string notes;
         private string adminEmailAddress;
@@ -24,13 +28,18 @@ namespace SampleApp.ViewModels
         private bool isToggled;
         private ICommand longPressCommand;
         private ICommand normalPressCommand;
+        private string countrySearchText;
+        private ICommand autoCompleteSearchCommand;
 
-        public MainViewModel(DisplayService displayService)
+        public MainViewModel(DisplayService displayService, ICountryService countryService)
         {
             this.displayService = displayService;
+            this.countryService = countryService;
+
             this.ViewModelError = ViewModelError.None;
             this.User = new UserDto();
             this.Countries = new ObservableCollection<CountryViewModel>();
+            this.SuggestedCountries = new ObservableCollection<CountryViewModel>();
             this.LoadData();
         }
 
@@ -61,6 +70,8 @@ namespace SampleApp.ViewModels
 
         public ObservableCollection<CountryViewModel> Countries { get; }
 
+        public ObservableCollection<CountryViewModel> SuggestedCountries { get; }
+
         public CountryViewModel Country
         {
             get => this.country;
@@ -68,6 +79,41 @@ namespace SampleApp.ViewModels
             {
                 this.country = value;
                 this.RaisePropertyChanged(nameof(this.Country));
+            }
+        }
+
+        public string CountrySearchText
+        {
+            get => this.countrySearchText;
+            set
+            {
+                if (this.SetProperty(ref this.countrySearchText, value, nameof(this.CountrySearchText)))
+                {
+                    // Use SearchText property binding to filter local data sources...
+                    Console.WriteLine($"CountrySearchText changed: {value}");
+                }
+            }
+        }
+
+
+        public ICommand AutoCompleteSearchCommand
+        {
+            get
+            {
+                return this.autoCompleteSearchCommand ??
+                       (this.autoCompleteSearchCommand = new Command<string>(async (s) => await this.OnAutoCompleteSearch(s)));
+            }
+        }
+
+        private async Task OnAutoCompleteSearch(string searchText)
+        {
+            // Use SearchCommand to run sync/async queries against a backend data source, etc...
+
+            this.SuggestedCountries.Clear();
+
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                this.SuggestedCountries.AddRange(this.Countries.Where(c => c.Name.IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) > -1).OrderBy(c => c.Name).Take(10));
             }
         }
 
@@ -193,9 +239,9 @@ namespace SampleApp.ViewModels
                 }
 
                 this.Countries.Clear();
-                this.Countries.Add(new CountryViewModel { Id = 1, Name = "Switzerland" });
-                this.Countries.Add(new CountryViewModel { Id = 2, Name = "Germany" });
-                this.Countries.Add(new CountryViewModel { Id = 3, Name = "USA" });
+
+                var countryDtos = await this.countryService.GetAllAsync();
+                this.Countries.AddRange(countryDtos.Select(c => new CountryViewModel(c)));
 
                 //this.Notes = $"Test test test{Environment.NewLine}Line 2 text text text";
                 this.AdminEmailAddress = "thomas@bluewin.ch";
@@ -247,10 +293,7 @@ namespace SampleApp.ViewModels
             get
             {
                 return this.toggleSwitchCommand ??
-                       (this.toggleSwitchCommand = new Command(() =>
-                       {
-                           this.IsToggled = !this.IsToggled;
-                       }));
+                       (this.toggleSwitchCommand = new Command(() => { this.IsToggled = !this.IsToggled; }));
             }
         }
     }

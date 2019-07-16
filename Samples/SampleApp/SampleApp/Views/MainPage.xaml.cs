@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using SampleApp.Services;
 using SampleApp.ViewModels;
 using Xamarin.Forms;
 
@@ -11,9 +12,11 @@ namespace SampleApp
         {
             try
             {
-                var displayService = new DisplayService((t, m) => this.DisplayAlert(t, m, "OK"));
                 this.InitializeComponent();
-                this.BindingContext = new MainViewModel(displayService);
+
+                var displayService = new DisplayService((t, m) => this.DisplayAlert(t, m, "OK"));
+                var countryService = new CountryService();
+                this.BindingContext = new MainViewModel(displayService, countryService);
             }
             catch (Exception e)
             {

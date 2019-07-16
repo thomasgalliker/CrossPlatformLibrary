@@ -55,5 +55,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ByteConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\HashCodeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\RandomUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\TaskDelayer.cs" />
   </ItemGroup>
 </Project>

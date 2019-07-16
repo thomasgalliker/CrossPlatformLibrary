@@ -11,6 +11,23 @@
     xmlns:sys="clr-namespace:System;assembly=netstandard"
     xmlns:userControls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
     x:Name="Page">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="AutoCompleteSuggestionItemTemplate">
+                <ViewCell Height="30">
+                    <ViewCell.View>
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <Label
+                                HorizontalOptions="Start"
+                                Text="{Binding Name}"
+                                VerticalOptions="Center" />
+
+                        </StackLayout>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <!--<Grid>
     <controls1:AddressControl />
@@ -84,6 +101,22 @@
                             Keyboard="Telephone"
                             Placeholder="CustomEntry with HideBorder=&quot;True&quot;"
                             Text="" />
+
+                        <Label
+                            FontAttributes="Italic"
+                            Text="&lt;!--Demo ValidatableAutoCompleteView--&gt;"
+                            TextColor="LightGreen" />
+
+                        <controls:ValidatableAutoCompleteView
+                            Placeholder="AutoComplete by Country.Name"
+                            Text="{Binding CountrySearchText, Mode=TwoWay}"
+                            SearchCommand="{Binding AutoCompleteSearchCommand}"
+                            SearchCommandDelay="{x:Static local:App.SearchCommandDelay}"
+                            ValidationErrors="{Binding Validation.Errors[CountrySearchText]}"
+                            SuggestedItemsSource="{Binding SuggestedCountries, Mode=OneWay}"
+                            SuggestedItemTemplate="{StaticResource AutoCompleteSuggestionItemTemplate}"
+                            SelectedItem="{Binding Country, Mode=TwoWay}"
+                            DisplayMemberPath="Name" />
 
                         <Label
                             FontAttributes="Italic"

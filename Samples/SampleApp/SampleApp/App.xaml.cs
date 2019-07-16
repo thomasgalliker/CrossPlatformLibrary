@@ -1,4 +1,5 @@
-﻿using CrossPlatformLibrary.Forms.Controls;
+﻿using System;
+using CrossPlatformLibrary.Forms.Controls;
 using CrossPlatformLibrary.Forms.Localization;
 using CrossPlatformLibrary.Localization;
 using SampleApp.Resources;
@@ -11,6 +12,8 @@ namespace SampleApp
 {
     public partial class App : Application
     {
+        public static readonly TimeSpan SearchCommandDelay = TimeSpan.FromMilliseconds(200);
+
         public App()
         {
 

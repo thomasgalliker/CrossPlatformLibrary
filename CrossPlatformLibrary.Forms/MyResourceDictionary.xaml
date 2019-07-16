@@ -480,6 +480,17 @@
         </Setter>
     </Style>
 
+    <Style x:Key="SuggestionListStyle" TargetType="controls:StackedList">
+        <Setter Property="BackgroundColor" Value="Magenta" />
+        <Setter Property="Margin">
+            <OnPlatform
+                x:TypeArguments="Thickness"
+                Android="4, 0, 4, 0"
+                WinPhone="0, 0, 0, 0"
+                iOS="0, 0, 0, 0" />
+        </Setter>
+    </Style>
+
     <Style x:Key="AnnotationEntryLabelStyle" TargetType="Label">
         <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColorBright}" />
