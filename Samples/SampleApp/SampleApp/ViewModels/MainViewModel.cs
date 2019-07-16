@@ -113,7 +113,10 @@ namespace SampleApp.ViewModels
 
             if (!string.IsNullOrEmpty(searchText))
             {
-                this.SuggestedCountries.AddRange(this.Countries.Where(c => c.Name.IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) > -1).OrderBy(c => c.Name).Take(10));
+                var filteredViewModels = this.Countries.Where(c => c.Name.StartsWith(searchText, StringComparison.InvariantCultureIgnoreCase))
+                    .OrderBy(c => c.Name)
+                    .Take(10);
+                this.SuggestedCountries.AddRange(filteredViewModels);
             }
         }
 
