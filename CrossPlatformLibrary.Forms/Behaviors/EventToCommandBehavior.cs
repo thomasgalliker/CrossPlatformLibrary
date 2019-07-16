@@ -80,10 +80,10 @@ namespace CrossPlatformLibrary.Forms.Behaviors
                 return;
             }
 
-            EventInfo eventInfo = this.AssociatedObject.GetType().GetRuntimeEvent(name);
+            var eventInfo = this.AssociatedObject.GetType().GetRuntimeEvent(name);
             if (eventInfo == null)
             {
-                throw new ArgumentException(string.Format("EventToCommandBehavior: Can't de-register the '{0}' event.", this.EventName));
+                throw new ArgumentException($"EventToCommandBehavior: Can't de-register the '{this.EventName}' event.");
             }
 
             eventInfo.RemoveEventHandler(this.AssociatedObject, this.eventHandler);
@@ -125,8 +125,8 @@ namespace CrossPlatformLibrary.Forms.Behaviors
                 return;
             }
 
-            string oldEventName = (string)oldValue;
-            string newEventName = (string)newValue;
+            var oldEventName = (string)oldValue;
+            var newEventName = (string)newValue;
 
             behavior.DeregisterEvent(oldEventName);
             behavior.RegisterEvent(newEventName);
