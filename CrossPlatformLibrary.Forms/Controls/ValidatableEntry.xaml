@@ -30,6 +30,7 @@
         Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
         BackgroundColor="Transparent" />
 
+    <!--  Readonly Text  -->
     <Label
         Grid.Row="0"
         IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"

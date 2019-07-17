@@ -66,8 +66,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public bool IsReadonly
         {
-            get { return (bool)this.GetValue(IsReadonlyProperty); }
-            set { this.SetValue(IsReadonlyProperty, value); }
+            get => (bool)this.GetValue(IsReadonlyProperty);
+            set => this.SetValue(IsReadonlyProperty, value);
         }
 
         public static readonly BindableProperty KeyboardProperty =

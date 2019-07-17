@@ -1,20 +1,22 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Grid 
-    xmlns="http://xamarin.com/schemas/2014/forms" 
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    x:Class="CrossPlatformLibrary.Forms.Controls.ValidatablePicker"
+    xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
-    x:Class="CrossPlatformLibrary.Forms.Controls.ValidatablePicker"
+    x:Name="Control"
     HorizontalOptions="FillAndExpand"
     VerticalOptions="Fill"
-    HeightRequest="48"
-    x:Name="Control">
+    HeightRequest="48">
 
     <controls:BindablePicker
+        Title="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
         Grid.Row="0"
+        effects:LineColorEffect.ApplyLineColor="True"
+        effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
         HeightRequest="48"
         IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
-        Title="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
         Style="{Binding Style, Source={x:Reference Control}, Mode=OneWay}"
         FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
         ItemsSource="{Binding ItemsSource, Source={x:Reference Control}}"
@@ -22,31 +24,27 @@
         SelectedValuePath="{Binding SelectedValuePath, Source={x:Reference Control}}"
         SelectedItem="{Binding SelectedItem, Source={x:Reference Control}, Mode=TwoWay}"
         SelectedValue="{Binding SelectedValue, Source={x:Reference Control}, Mode=TwoWay}"
-        HorizontalOptions="FillAndExpand"
-        effects:LineColorEffect.ApplyLineColor="True"
-        effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}">
+        HorizontalOptions="FillAndExpand" />
 
-    </controls:BindablePicker>
-    
-    <!--Readonly Text-->
+    <!--  Readonly Text  -->
     <Label
         Grid.Row="0"
         IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
         Text="{Binding ReadonlyText, Source={x:Reference Control}, Mode=OneWay}"
         Style="{DynamicResource EntryLabelStyle}"
         HorizontalOptions="StartAndExpand"
-        VerticalOptions="Center"/>
+        VerticalOptions="Center" />
 
-    <!--Annotation Text-->
+    <!--  Annotation Text  -->
     <Label
         Grid.Row="0"
         Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}"
         Style="{DynamicResource AnnotationEntryLabelStyle}"
-        InputTransparent="True"/>
+        InputTransparent="True" />
 
-    <!--Validation Error Text-->
+    <!--  Validation Error Text  -->
     <Label
         Grid.Row="0"
         Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}"
-        Style="{DynamicResource ValidationLabelStyle}"/>
+        Style="{DynamicResource ValidationLabelStyle}" />
 </Grid>

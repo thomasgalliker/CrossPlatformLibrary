@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
-    public partial class ValidatableAutoCompleteView : GridZero
+    public partial class ValidatableAutoCompleteView : Grid
     {
         private INotifyCollectionChanged sourceCollection;
         private readonly TaskDelayer taskDelayer;
@@ -58,6 +58,20 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             get { return (string)this.GetValue(PlaceholderProperty); }
             set { this.SetValue(PlaceholderProperty, value); }
+        }
+
+        public static readonly BindableProperty IsReadonlyProperty =
+            BindableProperty.Create(
+                nameof(IsReadonly),
+                typeof(bool),
+                typeof(ValidatableAutoCompleteView),
+                false,
+                BindingMode.OneWay);
+
+        public bool IsReadonly
+        {
+            get => (bool)this.GetValue(IsReadonlyProperty);
+            set => this.SetValue(IsReadonlyProperty, value);
         }
 
         public static readonly BindableProperty KeyboardProperty =
