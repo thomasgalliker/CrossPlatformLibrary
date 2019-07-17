@@ -133,7 +133,7 @@
     <converters:PropertyErrorsToColorConverter
         x:Key="PropertyErrorsToColorConverter"
         ErrorColor="{StaticResource ColorCode400}"
-        NormalColor="{StaticResource PrimaryTextColorBright}" />
+        NormalColor="{DynamicResource PrimaryTextColorBright}" />
 
     <!--  Font Sizes  -->
     <OnPlatform
@@ -359,30 +359,31 @@
     </Style>-->
 
     <Style x:Key="LoginEntryStyle" TargetType="Entry">
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-        <Setter Property="PlaceholderColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="PlaceholderColor" Value="{DynamicResource PrimaryTextColorBright}" />
         <Setter Property="FontSize" Value="{StaticResource LargerSize}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="FontAttributes" Value="None" />
         <Setter Property="Opacity" Value="1" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
-        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource PrimaryTextColorBright}" />
         <!--  TODO: obsolete?  -->
     </Style>
 
     <Style x:Key="EditorStyle" TargetType="Editor">
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-        <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
-        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource LargeSize}" />
         <Setter Property="FontAttributes" Value="None" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="Opacity" Value="1.0" />
     </Style>
 
-    <Style BasedOn="{StaticResource EditorStyle}" TargetType="Editor" />
+    <Style TargetType="Editor" BasedOn="{StaticResource EditorStyle}" />
+    <Style TargetType="controls:CustomEditor" BasedOn="{StaticResource EditorStyle}" />
 
     <Style x:Key="PickerStyle" TargetType="Picker">
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="Opacity" Value="1.0" />
         <Setter Property="HeightRequest" Value="48" />
@@ -391,8 +392,8 @@
     <Style BasedOn="{StaticResource PickerStyle}" TargetType="Picker" />
 
     <Style x:Key="BindablePickerStyle" TargetType="controls:BindablePicker">
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-        <Setter Property="PlaceholderTextColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="PlaceholderTextColor" Value="{DynamicResource PrimaryTextColorBright}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
         <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
@@ -402,47 +403,47 @@
         <Setter Property="Opacity" Value="1.0" />
         <Setter Property="HeightRequest" Value="48" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
-        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource PrimaryTextColorBright}" />
     </Style>
 
     <Style BasedOn="{StaticResource BindablePickerStyle}" TargetType="controls:BindablePicker" />
 
     <Style x:Key="ExtendedDatePickerStyle" TargetType="controls:ExtendedDatePicker">
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-        <Setter Property="PlaceholderTextColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="PlaceholderTextColor" Value="{DynamicResource PrimaryTextColorBright}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="Opacity" Value="1.0" />
         <Setter Property="HeightRequest" Value="48" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
-        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource PrimaryTextColorBright}" />
     </Style>
 
     <Style BasedOn="{StaticResource ExtendedDatePickerStyle}" TargetType="controls:ExtendedDatePicker" />
 
     <Style x:Key="DatePickerStyle" TargetType="DatePicker">
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="Opacity" Value="1.0" />
         <Setter Property="HeightRequest" Value="48" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
-        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource PrimaryTextColorBright}" />
     </Style>
 
     <Style BasedOn="{StaticResource DatePickerStyle}" TargetType="DatePicker" />
 
     <Style x:Key="TimePickerStyle" TargetType="TimePicker">
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="Opacity" Value="1.0" />
         <Setter Property="HeightRequest" Value="48" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
-        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource PrimaryTextColorBright}" />
     </Style>
 
     <Style BasedOn="{StaticResource TimePickerStyle}" TargetType="TimePicker" />
 
     <Style x:Key="ExtendedTimePickerStyle" TargetType="controls:ExtendedTimePicker">
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="Opacity" Value="1.0" />
         <Setter Property="HeightRequest">
@@ -453,7 +454,7 @@
                 iOS="48" />
         </Setter>
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
-        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource PrimaryTextColorBright}" />
     </Style>
 
     <Style BasedOn="{StaticResource ExtendedTimePickerStyle}" TargetType="controls:ExtendedTimePicker" />
@@ -464,7 +465,7 @@
         <Setter Property="FontAttributes" Value="None" />
         <Setter Property="FontFamily" Value="HelveticaNeue-Thin" />
         <Setter Property="FontSize" Value="{StaticResource HugeSize}" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
     </Style>
 
     <Style x:Key="ValidationLabelStyle" TargetType="Label">
@@ -493,7 +494,7 @@
 
     <Style x:Key="AnnotationEntryLabelStyle" TargetType="Label">
         <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColorBright}" />
         <Setter Property="FontAttributes" Value="None" />
         <Setter Property="VerticalOptions" Value="StartAndExpand" />
         <Setter Property="HorizontalOptions" Value="StartAndExpand" />
