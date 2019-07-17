@@ -349,14 +349,10 @@
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
         <Setter Property="Opacity" Value="1.0" />
-    </Style>
-
-    <!--<Style TargetType="Entry" BasedOn="{StaticResource EntryStyle}" >
-            </Style>-->
-
-    <Style TargetType="Entry">
         <Setter Property="HeightRequest" Value="48" />
     </Style>
+
+    <Style TargetType="Entry" BasedOn="{StaticResource EntryStyle}" />
 
     <!--<Style TargetType="controls:CustomSwitch">
         <Setter Property="TintColor" Value="{DynamicResource Primary}" />
