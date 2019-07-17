@@ -43,7 +43,11 @@
                             FontAttributes="Italic"
                             Text="&lt;!--Demo ValidatableLabel--&gt;"
                             TextColor="LightGreen" />
-                        <controls:ValidatableLabel Text="{Binding UserId, Mode=OneWay}" />
+                        <controls:ValidatableLabel Placeholder="ValidatableLabel1" Text="ValidatableLabel without Style" />
+                        <controls:ValidatableLabel
+                            Placeholder="ValidatableLabel2"
+                            Text="ValidatableLabel with Style"
+                            LabelStyle="{DynamicResource EntryLabelStyle}" />
 
                         <Label
                             FontAttributes="Italic"
@@ -110,7 +114,7 @@
                             SuggestedItemTemplate="{StaticResource AutoCompleteSuggestionItemTemplate}"
                             SelectedItem="{Binding Country, Mode=TwoWay}"
                             DisplayMemberPath="Name"
-                            TextChanged="AutoCompleteView_OnTextChanged"/>
+                            TextChanged="AutoCompleteView_OnTextChanged" />
 
                         <Label
                             FontAttributes="Italic"

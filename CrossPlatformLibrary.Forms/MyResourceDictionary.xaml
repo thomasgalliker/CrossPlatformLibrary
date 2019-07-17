@@ -319,6 +319,10 @@
         <!--<Setter Property="HeightRequest" Value="48" />-->
     </Style>
 
+    <Style TargetType="controls:ValidatableLabel">
+        <Setter Property="LabelStyle" Value="{DynamicResource EntryLabelStyle}" />
+    </Style>
+
     <Style x:Key="HyperLinkLabelStyle" TargetType="controls:HyperLinkLabel">
         <Setter Property="TintColor" Value="Blue" />
         <Setter Property="TextDecorations" Value="Underline" />

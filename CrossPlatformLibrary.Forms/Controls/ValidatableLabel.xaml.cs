@@ -7,7 +7,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         public ValidatableLabel()
         {
             this.InitializeComponent();
-            this.SetDynamicResource(StyleProperty, "EntryLabelStyle");
+            //this.SetDynamicResource(LabelStyleProperty, "EntryLabelStyle");
         }
 
         public static readonly BindableProperty TextProperty =
@@ -38,18 +38,18 @@ namespace CrossPlatformLibrary.Forms.Controls
             set { this.SetValue(PlaceholderProperty, value); }
         }
 
-        public new static readonly BindableProperty StyleProperty =
+        public static readonly BindableProperty LabelStyleProperty =
             BindableProperty.Create(
-                nameof(Style),
+                nameof(LabelStyle),
                 typeof(Style),
                 typeof(ValidatableLabel),
                 default(Style),
                 BindingMode.OneWay);
 
-        public new Style Style
+        public Style LabelStyle
         {
-            get { return (Style)this.GetValue(StyleProperty); }
-            set { this.SetValue(StyleProperty, value); }
+            get { return (Style)this.GetValue(LabelStyleProperty); }
+            set { this.SetValue(LabelStyleProperty, value); }
         }
 
         public static readonly BindableProperty FontFamilyProperty =
