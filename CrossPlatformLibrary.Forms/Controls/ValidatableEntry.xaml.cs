@@ -98,18 +98,18 @@ namespace CrossPlatformLibrary.Forms.Controls
             set { this.SetValue(IsPasswordProperty, value); }
         }
 
-        public new static readonly BindableProperty StyleProperty =
+        public static readonly BindableProperty EntryStyleProperty =
             BindableProperty.Create(
-                nameof(Style),
+                nameof(EntryStyle),
                 typeof(Style),
                 typeof(ValidatableEntry),
                 default(Style),
                 BindingMode.OneWay);
 
-        public new Style Style
+        public Style EntryStyle
         {
-            get { return (Style)this.GetValue(StyleProperty); }
-            set { this.SetValue(StyleProperty, value); }
+            get { return (Style)this.GetValue(EntryStyleProperty); }
+            set { this.SetValue(EntryStyleProperty, value); }
         }
 
         public static readonly BindableProperty FontFamilyProperty =
