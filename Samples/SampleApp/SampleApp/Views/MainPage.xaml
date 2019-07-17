@@ -64,8 +64,9 @@
                                 BackgroundColor="Aquamarine" />
                             <controls:ValidatableEntry
                                 Grid.Column="1"
-                                Placeholder="ValidatableEntry"
-                                Text="ValidatableEntry Demo"
+                                Placeholder="ValidatableEntry IsReadonly=True"
+                                Text="ValidatableEntry IsReadonly=True"
+                                IsReadonly="{Binding IsToggled, Mode=OneWay}"
                                 BackgroundColor="LightGoldenrodYellow" />
                         </Grid>
 

@@ -56,6 +56,20 @@ namespace CrossPlatformLibrary.Forms.Controls
             set { this.SetValue(PlaceholderProperty, value); }
         }
 
+        public static readonly BindableProperty IsReadonlyProperty =
+            BindableProperty.Create(
+                nameof(IsReadonly),
+                typeof(bool),
+                typeof(ValidatableEntry),
+                false,
+                BindingMode.OneWay);
+
+        public bool IsReadonly
+        {
+            get { return (bool)this.GetValue(IsReadonlyProperty); }
+            set { this.SetValue(IsReadonlyProperty, value); }
+        }
+
         public static readonly BindableProperty KeyboardProperty =
             BindableProperty.Create(
                 nameof(Keyboard),

@@ -18,6 +18,7 @@
         Grid.Row="0"
         effects:LineColorEffect.ApplyLineColor="True"
         effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
+        IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
         HeightRequest="48"
         Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}"
         Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
@@ -28,6 +29,12 @@
         MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
         Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
         BackgroundColor="Transparent" />
+
+    <Label
+        Grid.Row="0"
+        IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
+        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}"
+        Style="{DynamicResource EntryLabelStyle}" />
 
     <!--  Annotation Text  -->
     <Label
