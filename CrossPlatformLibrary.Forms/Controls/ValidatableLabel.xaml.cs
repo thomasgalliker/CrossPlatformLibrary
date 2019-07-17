@@ -2,7 +2,7 @@
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
-    public partial class ValidatableLabel : Grid
+    public partial class ValidatableLabel : GridZero
     {
         public ValidatableLabel()
         {
@@ -62,8 +62,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string FontFamily
         {
-            get { return (string)this.GetValue(FontFamilyProperty); }
-            set { this.SetValue(FontFamilyProperty, value); }
+            get => (string)this.GetValue(FontFamilyProperty);
+            set => this.SetValue(FontFamilyProperty, value);
         }
 
         public static readonly BindableProperty FontAttributesProperty =
@@ -76,8 +76,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public FontAttributes FontAttributes
         {
-            get { return (FontAttributes)this.GetValue(FontAttributesProperty); }
-            set { this.SetValue(FontAttributesProperty, (object)value); }
+            get => (FontAttributes)this.GetValue(FontAttributesProperty);
+            set => this.SetValue(FontAttributesProperty, value);
         }
 
         public static readonly BindableProperty LineBreakModeProperty =
@@ -90,8 +90,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public LineBreakMode LineBreakMode
         {
-            get { return (LineBreakMode)this.GetValue(LineBreakModeProperty); }
-            set { this.SetValue(LineBreakModeProperty, value); }
+            get => (LineBreakMode)this.GetValue(LineBreakModeProperty);
+            set => this.SetValue(LineBreakModeProperty, value);
         }
     }
 }

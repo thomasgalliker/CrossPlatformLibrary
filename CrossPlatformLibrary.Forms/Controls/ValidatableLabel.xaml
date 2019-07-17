@@ -1,16 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<Grid
+<controls:GridZero
     x:Class="CrossPlatformLibrary.Forms.Controls.ValidatableLabel"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
-    Padding="0,0,0,15"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="FillAndExpand"
-    BackgroundColor="Transparent"
-    RowSpacing="0"
-    ColumnSpacing="0">
+    VerticalOptions="Fill"
+    HeightRequest="48"
+    BackgroundColor="Transparent">
 
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
@@ -46,4 +44,4 @@
 
     <!--  Validation Error Text  -->
     <!--  There is currently no support for validation errors in ValidatableLabel  -->
-</Grid>
+</controls:GridZero>

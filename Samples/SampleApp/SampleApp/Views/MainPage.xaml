@@ -43,39 +43,31 @@
                             FontAttributes="Italic"
                             Text="&lt;!--Demo ValidatableLabel--&gt;"
                             TextColor="LightGreen" />
-                        <controls:ValidatableLabel Placeholder="ValidatableLabel1" Text="ValidatableLabel without Style" />
                         <controls:ValidatableLabel
-                            Placeholder="ValidatableLabel2"
-                            Text="ValidatableLabel with Style"
-                            LabelStyle="{DynamicResource EntryLabelStyle}" />
+                            Placeholder="ValidatableLabel1"
+                            Text="ValidatableLabel without Style"
+                            BackgroundColor="LightGray" />
 
-                        <Label
-                            FontAttributes="Italic"
-                            Text="&lt;!--Demo LongPressEffect--&gt;"
-                            TextColor="LightGreen" />
-
-                        <controls:GridZero Padding="20" BackgroundColor="DarkBlue">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-
-                            <Label
-                                x:Name="LongPressLabel"
-                                effects:LongPressEffect.Command="{Binding LongPressCommand}"
-                                effects:LongPressEffect.CommandParameter="{Binding Text, Source={x:Reference LongPressLabel}}"
-                                BackgroundColor="LightBlue"
-                                FontSize="Medium"
-                                LineBreakMode="WordWrap"
-                                Text="Press and hold to run the attached command. This effect can be used if you want to make text accessible e.g. for copy/paste.">
-                                <Label.Effects>
-                                    <effects:LongPressEffect />
-                                </Label.Effects>
-                            </Label>
-
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding NormalPressCommand}" CommandParameter="{Binding Text, Source={x:Reference LongPressLabel}}" />
-                            </Grid.GestureRecognizers>
-                        </controls:GridZero>
+                            <controls:ValidatableLabel
+                                Grid.Column="0"
+                                Placeholder="ValidatableLabel2"
+                                Text="ValidatableLabel with Style"
+                                LabelStyle="{DynamicResource EntryLabelStyle}"
+                                BackgroundColor="Aquamarine" />
+                            <controls:ValidatableEntry
+                                Grid.Column="1"
+                                Placeholder="ValidatableEntry"
+                                Text="ValidatableEntry Demo"
+                                BackgroundColor="LightGoldenrodYellow" />
+                        </Grid>
 
                         <Label
                             FontAttributes="Italic"
@@ -227,6 +219,34 @@
                                     WidthRequest="333" />
                             </controls:StackLayoutZero>
                         </controls:NoBarsScrollViewer>
+
+
+                        <Label
+                            FontAttributes="Italic"
+                            Text="&lt;!--Demo LongPressEffect--&gt;"
+                            TextColor="LightGreen" />
+                        <controls:GridZero Padding="20" BackgroundColor="LightGray">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                x:Name="LongPressLabel"
+                                effects:LongPressEffect.Command="{Binding LongPressCommand}"
+                                effects:LongPressEffect.CommandParameter="{Binding Text, Source={x:Reference LongPressLabel}}"
+                                BackgroundColor="LightBlue"
+                                FontSize="Medium"
+                                LineBreakMode="WordWrap"
+                                Text="Press and hold to run the attached command. This effect can be used if you want to make text accessible e.g. for copy/paste.">
+                                <Label.Effects>
+                                    <effects:LongPressEffect />
+                                </Label.Effects>
+                            </Label>
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NormalPressCommand}" CommandParameter="{Binding Text, Source={x:Reference LongPressLabel}}" />
+                            </Grid.GestureRecognizers>
+                        </controls:GridZero>
 
                     </StackLayout>
 
