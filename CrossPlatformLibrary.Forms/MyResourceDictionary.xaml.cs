@@ -1,7 +1,9 @@
 ﻿using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
-namespace ResourceDictionaryDemo
+namespace CrossPlatformLibrary.Forms
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MyResourceDictionary : ResourceDictionary
     {
         public MyResourceDictionary()
