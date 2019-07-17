@@ -1,8 +1,9 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
-    public class CustomEditor : Editor
+    public class CustomEditor : Editor, IDisposable
     {
         public const int MaxLinesDefault = -1;
 
@@ -28,8 +29,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public bool HideKeyboard
         {
-            get { return (bool)this.GetValue(HideKeyboardProperty); }
-            set { this.SetValue(HideKeyboardProperty, value); }
+            get => (bool)this.GetValue(HideKeyboardProperty);
+            set => this.SetValue(HideKeyboardProperty, value);
         }
 
         public CustomEditor()
@@ -40,6 +41,11 @@ namespace CrossPlatformLibrary.Forms.Controls
         private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
             this.InvalidateMeasure();
+        }
+
+        public void Dispose()
+        {
+            this.TextChanged -= this.OnTextChanged;
         }
     }
 }
