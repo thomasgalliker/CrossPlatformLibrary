@@ -133,7 +133,7 @@
     <converters:PropertyErrorsToColorConverter
         x:Key="PropertyErrorsToColorConverter"
         ErrorColor="{StaticResource ColorCode400}"
-        NormalColor="{DynamicResource PrimaryTextColorBright}" />
+        NormalColor="{StaticResource PrimaryTextColorBright}" />
 
     <!--  Font Sizes  -->
     <OnPlatform
@@ -366,7 +366,7 @@
         <Setter Property="FontAttributes" Value="None" />
         <Setter Property="Opacity" Value="1" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
-        <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource PrimaryTextColorBright}" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
         <!--  TODO: obsolete?  -->
     </Style>
 
@@ -403,7 +403,7 @@
         <Setter Property="Opacity" Value="1.0" />
         <Setter Property="HeightRequest" Value="48" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
-        <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource PrimaryTextColorBright}" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
     </Style>
 
     <Style BasedOn="{StaticResource BindablePickerStyle}" TargetType="controls:BindablePicker" />
@@ -415,7 +415,7 @@
         <Setter Property="Opacity" Value="1.0" />
         <Setter Property="HeightRequest" Value="48" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
-        <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource PrimaryTextColorBright}" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
     </Style>
 
     <Style BasedOn="{StaticResource ExtendedDatePickerStyle}" TargetType="controls:ExtendedDatePicker" />
@@ -426,7 +426,7 @@
         <Setter Property="Opacity" Value="1.0" />
         <Setter Property="HeightRequest" Value="48" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
-        <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource PrimaryTextColorBright}" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
     </Style>
 
     <Style BasedOn="{StaticResource DatePickerStyle}" TargetType="DatePicker" />
@@ -437,7 +437,7 @@
         <Setter Property="Opacity" Value="1.0" />
         <Setter Property="HeightRequest" Value="48" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
-        <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource PrimaryTextColorBright}" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
     </Style>
 
     <Style BasedOn="{StaticResource TimePickerStyle}" TargetType="TimePicker" />
@@ -454,7 +454,7 @@
                 iOS="48" />
         </Setter>
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
-        <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource PrimaryTextColorBright}" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
     </Style>
 
     <Style BasedOn="{StaticResource ExtendedTimePickerStyle}" TargetType="controls:ExtendedTimePicker" />
