@@ -46,7 +46,7 @@
                         <controls:ValidatableLabel
                             Placeholder="ValidatableLabel1"
                             Text="ValidatableLabel without Style"
-                            BackgroundColor="LightGray" />
+                            BackgroundColor="Transparent" />
 
                         <Grid>
                             <Grid.RowDefinitions>
@@ -74,10 +74,27 @@
                             FontAttributes="Italic"
                             Text="&lt;!--Demo ValidatableEntry--&gt;"
                             TextColor="LightGreen" />
-                        <controls:ValidatableEntry
-                            Placeholder="Username"
-                            Text="{Binding UserName, Mode=TwoWay}"
-                            ValidationErrors="{Binding Validation.Errors[UserName]}" />
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <controls:ValidatableEntry
+                                Grid.Column="0"
+                                Placeholder="ValidatableEntry"
+                                Text="{Binding UserName, Mode=TwoWay}"
+                                ValidationErrors="{Binding Validation.Errors[UserName]}"
+                                IsReadonly="{Binding IsToggled}" />
+                            <Entry
+                                Grid.Column="1"
+                                Placeholder="Xamarin.Forms.Entry"
+                                Text="{Binding UserName, Mode=TwoWay}" />
+                        </Grid>
+
+
 
                         <controls:CustomLabel Text="Enter name:" />
                         <controls:CustomEntry
@@ -107,7 +124,8 @@
                             SuggestedItemTemplate="{StaticResource AutoCompleteSuggestionItemTemplate}"
                             SelectedItem="{Binding Country, Mode=TwoWay}"
                             DisplayMemberPath="Name"
-                            TextChanged="AutoCompleteView_OnTextChanged" />
+                            TextChanged="AutoCompleteView_OnTextChanged"
+                            IsReadonly="{Binding IsToggled, Mode=OneWay}" />
 
                         <Label
                             FontAttributes="Italic"
