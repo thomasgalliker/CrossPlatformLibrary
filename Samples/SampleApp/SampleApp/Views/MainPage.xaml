@@ -159,9 +159,9 @@
                             FontAttributes="Italic"
                             Text="&lt;!--Demo CustomEditor with hidden keyboard--&gt;"
                             TextColor="LightGreen" />
+                        <Editor Text="{Binding LogContent, Mode=OneWay}" />
                         <controls:CustomEditor
                             Margin="0"
-                            FontSize="8"
                             HideKeyboard="True"
                             HorizontalOptions="FillAndExpand"
                             Keyboard="Text"

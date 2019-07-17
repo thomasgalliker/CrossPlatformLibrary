@@ -18,7 +18,7 @@
             <Color x:Key="PrimaryDark">#A400C1</Color>
             <Color x:Key="Accent">#E040FB</Color>
 
-            <Color x:Key="PrimaryTextColor">DarkSlateGray</Color>
+            <Color x:Key="PrimaryTextColor">DarkBlue</Color>
 
         </ResourceDictionary>
 
