@@ -131,7 +131,7 @@
                             IsReadonly="{Binding IsToggled, Mode=OneWay}" />
 
                         <Label Text="&lt;!--Demo User Controls--&gt;" Style="{StaticResource DemoLabelStyle}" />
-                        <userControls:AddressControl BindingContext="{Binding Address}" />
+                        <userControls:AddressControl BindingContext="{Binding .}" />
 
                         <Grid>
                             <controls:ValidatableEditor
