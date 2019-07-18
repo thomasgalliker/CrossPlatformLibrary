@@ -384,6 +384,14 @@
 
     <Style x:Key="PickerStyle" TargetType="Picker">
         <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="TitleColor" Value="{DynamicResource PrimaryTextColorBright}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="Opacity" Value="1.0" />
         <Setter Property="HeightRequest" Value="48" />
@@ -391,19 +399,11 @@
 
     <Style BasedOn="{StaticResource PickerStyle}" TargetType="Picker" />
 
-    <Style x:Key="BindablePickerStyle" TargetType="controls:BindablePicker">
-        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
-        <Setter Property="PlaceholderTextColor" Value="{DynamicResource PrimaryTextColorBright}" />
-        <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
-        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
-        <Setter Property="FontAttributes" Value="None" />
-        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-        <Setter Property="Opacity" Value="1.0" />
-        <Setter Property="HeightRequest" Value="48" />
-        <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
-        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+    <Style
+        x:Key="BindablePickerStyle"
+        BasedOn="{StaticResource PickerStyle}"
+        TargetType="controls:BindablePicker">
+        <!--<Setter Property="PlaceholderTextColor" Value="{DynamicResource PrimaryTextColorBright}" />-->
     </Style>
 
     <Style BasedOn="{StaticResource BindablePickerStyle}" TargetType="controls:BindablePicker" />
