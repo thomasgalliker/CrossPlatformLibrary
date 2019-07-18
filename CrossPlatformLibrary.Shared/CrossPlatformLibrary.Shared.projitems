@@ -27,9 +27,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\IntegerExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TypeExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Category.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\DebugTracer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\ITracer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Guard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Tracer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\TracerExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC\IContainerExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC\IIocContainer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC\IResolvedParameter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoC\IServiceLocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC\ISimpleIoc.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC\PreferredConstructor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC\ResolvedParameter.cs" />
@@ -48,5 +55,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ByteConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\HashCodeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\RandomUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\TaskDelayer.cs" />
   </ItemGroup>
 </Project>

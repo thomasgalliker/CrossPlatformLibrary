@@ -1,4 +1,4 @@
-﻿using Guards;
+﻿using CrossPlatformLibrary.Internals;
 
 using System;
 
@@ -55,7 +55,7 @@ namespace CrossPlatformLibrary.Dispatching
         /// </param>
         public void CheckBeginInvokeOnUI(Action action)
         {
-            Guard.ArgumentNotNull(() => action);
+            Guard.ArgumentNotNull(action, nameof(action));
 
 #if NETFX_CORE
             if (this.UIDispatcher.HasThreadAccess)

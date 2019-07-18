@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="CrossPlatformLibrary.Forms.MyResourceDictionary"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:converters="clr-namespace:CrossPlatformLibrary.Forms.Converters;assembly=CrossPlatformLibrary.Forms"
+    xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms">
+
+    <!--  Paddings, Spacings, Margins  -->
+    <x:Double x:Key="SmallSpacing">4</x:Double>
+    <x:Double x:Key="MediumSpacing">8</x:Double>
+    <x:Double x:Key="StandardSpacing">16</x:Double>
+
+    <Thickness
+        x:Key="SmallPadding"
+        Bottom="{StaticResource SmallSpacing}"
+        Left="{StaticResource SmallSpacing}"
+        Right="{StaticResource SmallSpacing}"
+        Top="{StaticResource SmallSpacing}" />
+
+    <Thickness
+        x:Key="MediumPadding"
+        Bottom="{StaticResource MediumSpacing}"
+        Left="{StaticResource MediumSpacing}"
+        Right="{StaticResource MediumSpacing}"
+        Top="{StaticResource MediumSpacing}" />
+
+    <Thickness
+        x:Key="StandardPadding"
+        Bottom="{StaticResource StandardSpacing}"
+        Left="{StaticResource StandardSpacing}"
+        Right="{StaticResource StandardSpacing}"
+        Top="{StaticResource StandardSpacing}" />
+
+    <Thickness
+        x:Key="CardViewPadding"
+        Bottom="{StaticResource MediumSpacing}"
+        Left="{StaticResource StandardSpacing}"
+        Right="{StaticResource StandardSpacing}"
+        Top="{StaticResource MediumSpacing}" />
+
+    <Thickness
+        x:Key="ButtonMargin"
+        Bottom="{StaticResource StandardSpacing}"
+        Left="{StaticResource MediumSpacing}"
+        Right="{StaticResource MediumSpacing}"
+        Top="0" />
+
+    <!--  Colors  -->
+    <OnPlatform x:Key="WindowBackgroundTable" x:TypeArguments="Color">
+        <On Platform="Android" Value="#F5F5F5" />
+        <On Platform="iOS" Value="#EFEFF4" />
+    </OnPlatform>
+    <OnPlatform x:Key="WindowBackground" x:TypeArguments="Color">
+        <On Platform="Android" Value="#F5F5F5" />
+        <On Platform="iOS" Value="White" />
+    </OnPlatform>
+    <OnPlatform x:Key="LabelSectionBackground" x:TypeArguments="Color">
+        <On Platform="Android" Value="White" />
+        <On Platform="iOS" Value="#EFEFF4" />
+    </OnPlatform>
+    <OnPlatform x:Key="CardViewBackgroundColor" x:TypeArguments="Color">
+        <On Platform="Android" Value="#ECEF5F5F5CEC" />
+        <On Platform="iOS" Value="#EFEFF4" />
+    </OnPlatform>
+    <OnPlatform x:Key="CardViewDividerColor" x:TypeArguments="Color">
+        <On Platform="Android" Value="#ECECEC" />
+        <On Platform="iOS" Value="#C8C7CC" />
+    </OnPlatform>
+    <Color x:Key="ButtonBorder">#C8C7CC</Color>
+    <Color x:Key="ListSeparator">#C8C7CC</Color>
+
+    <OnPlatform x:Key="CardPadding" x:TypeArguments="Thickness">
+        <On Platform="Android" Value="8,16" />
+        <On Platform="iOS" Value="0,0,0,16" />
+    </OnPlatform>
+    <OnPlatform x:Key="CardSpacing" x:TypeArguments="x:Double">
+        <On Platform="Android" Value="16" />
+        <On Platform="iOS" Value="0" />
+    </OnPlatform>
+
+    <OnPlatform
+        x:Key="CustomListItemTextStyleSize"
+        x:TypeArguments="x:Double"
+        Android="16"
+        WinPhone="13"
+        iOS="16" />
+    <OnPlatform
+        x:Key="CustomListItemDetailTextStyleSize"
+        x:TypeArguments="x:Double"
+        Android="13"
+        WinPhone="13"
+        iOS="13" />
+    <OnPlatform
+        x:Key="TweetTextSize"
+        x:TypeArguments="x:Double"
+        Android="14"
+        WinPhone="14"
+        iOS="14" />
+    <OnPlatform
+        x:Key="TweetUserTextSize"
+        x:TypeArguments="Font"
+        Android="SemiBold"
+        WinPhone="SemiBold"
+        iOS="SemiBold" />
+
+    <!--  Theme colors  -->
+    <OnPlatform x:Key="PrimaryTextColor" x:TypeArguments="Color">
+        <On Platform="Android" Value="#FF343434" />
+        <On Platform="iOS" Value="#FF343434" />
+    </OnPlatform>
+    <OnPlatform x:Key="PrimaryTextColorBright" x:TypeArguments="Color">
+        <On Platform="Android" Value="#FF7E8184" />
+        <On Platform="iOS" Value="#FF7E8184" />
+    </OnPlatform>
+
+    <Color x:Key="PrimarySuperBright">#FFE5FFFE</Color>
+    <Color x:Key="PrimaryBright">#FF00d4c9</Color>
+    <Color x:Key="Primary">#FF00A19A</Color>
+    <Color x:Key="PrimaryDark">#FF004d49</Color>
+    <Color x:Key="Accent">#FF006e68</Color>
+
+    <Color x:Key="ColorCode400">#ff1744</Color>
+
+    <!--  Converters  -->
+    <converters:DebugConverter x:Key="DebugConverter" />
+    <converters:IsNotEmptyConverter x:Key="IsNotEmptyConverter" />
+    <converters:BoolInverter x:Key="BoolInverter" />
+    <converters:FirstErrorConverter x:Key="FirstErrorConverter" />
+    <converters:NullableDateTimeToFormatConverter x:Key="NullableDateTimeToFormatConverter" />
+
+    <converters:PropertyErrorsToColorConverter
+        x:Key="PropertyErrorsToColorConverter"
+        ErrorColor="{StaticResource ColorCode400}"
+        NormalColor="{StaticResource PrimaryTextColorBright}" />
+
+    <!--  Font Sizes  -->
+    <OnPlatform
+        x:Key="LittleSize"
+        x:TypeArguments="x:Double"
+        Android="12"
+        WinPhone="12"
+        iOS="11" />
+
+    <OnPlatform
+        x:Key="MidMediumSize"
+        x:TypeArguments="x:Double"
+        Android="14"
+        WinPhone="14"
+        iOS="12" />
+
+    <OnPlatform
+        x:Key="MediumSize"
+        x:TypeArguments="x:Double"
+        Android="16"
+        WinPhone="16"
+        iOS="14" />
+
+    <OnPlatform
+        x:Key="LargeSize"
+        x:TypeArguments="x:Double"
+        Android="18"
+        WinPhone="18"
+        iOS="16" />
+
+    <OnPlatform
+        x:Key="LargerSize"
+        x:TypeArguments="x:Double"
+        Android="20"
+        WinPhone="20"
+        iOS="18" />
+
+    <OnPlatform
+        x:Key="BigSize"
+        x:TypeArguments="x:Double"
+        Android="24"
+        WinPhone="24"
+        iOS="20" />
+
+    <OnPlatform
+        x:Key="ExtraBigSize"
+        x:TypeArguments="x:Double"
+        Android="32"
+        WinPhone="32"
+        iOS="24" />
+
+    <OnPlatform
+        x:Key="HugeSize"
+        x:TypeArguments="x:Double"
+        Android="48"
+        WinPhone="48"
+        iOS="32" />
+
+    <OnPlatform
+        x:Key="FontFamily"
+        x:TypeArguments="x:String"
+        Android="Droid Sans"
+        iOS="sans-serif" />
+
+    <OnPlatform
+        x:Key="FontFamilyCourierNew"
+        x:TypeArguments="x:String"
+        Android="monospace"
+        iOS="Courier New" />
+
+    <!--  Styles  -->
+
+    <Style x:Key="DrilldownButtonStyle" TargetType="controls:DrilldownButton">
+        <Setter Property="Margin">
+            <OnPlatform
+                x:TypeArguments="Thickness"
+                Android="0, 8, 0, 0"
+                WinPhone="0, 16, 0, 0"
+                iOS="0, 16, 0, 0" />
+        </Setter>
+    </Style>
+
+    <Color x:Key="CustomButtonStyle.TextColor" />
+
+    <Style x:Key="CustomButtonStyle" TargetType="controls:CustomButton">
+        <Setter Property="BorderWidth" Value="2" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="TextColor" Value="{DynamicResource CustomButtonStyle.TextColor}" />
+        <Setter Property="FontSize" Value="{DynamicResource LargeSize}" />
+        <Setter Property="FontAttributes" Value="None" />
+    </Style>
+
+
+    <Color x:Key="CustomButtonPrimaryStyle.TextColor">White</Color>
+    <Color x:Key="CustomButtonPrimaryStyle.BorderColor.Enabled" />
+    <Color x:Key="CustomButtonPrimaryStyle.BorderColor.Disabled">#FFCFD1D3</Color>
+    <Color x:Key="CustomButtonPrimaryStyle.BackgroundColor.Enabled" />
+    <Color x:Key="CustomButtonPrimaryStyle.BackgroundColor.Disabled">#FFCFD1D3</Color>
+
+    <Style
+        x:Key="CustomButtonPrimaryStyle"
+        BasedOn="{StaticResource CustomButtonStyle}"
+        TargetType="controls:CustomButton">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Primary}" />
+        <Setter Property="BorderColor" Value="{DynamicResource Primary}" />
+        <Setter Property="BackgroundColorPressed" Value="{DynamicResource PrimaryDark}" />
+        <Setter Property="BorderColorPressed" Value="{DynamicResource PrimaryDark}" />
+        <Setter Property="TextColor" Value="{DynamicResource CustomButtonPrimaryStyle.TextColor}" />
+        <Style.Triggers>
+            <Trigger TargetType="Button" Property="IsEnabled" Value="True">
+                <Setter Property="BackgroundColor" Value="{DynamicResource CustomButtonPrimaryStyle.BackgroundColor.Enabled}" />
+                <Setter Property="BorderColor" Value="{DynamicResource CustomButtonPrimaryStyle.BorderColor.Enabled}" />
+            </Trigger>
+            <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                <Setter Property="BackgroundColor" Value="{DynamicResource CustomButtonPrimaryStyle.BackgroundColor.Disabled}" />
+                <Setter Property="BorderColor" Value="{DynamicResource CustomButtonPrimaryStyle.BorderColor.Disabled}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Color x:Key="CustomButtonSecondaryStyle.BorderColor.Enabled" />
+    <Color x:Key="CustomButtonSecondaryStyle.BorderColor.Disabled">#FFCFD1D3</Color>
+    <Color x:Key="CustomButtonSecondaryStyle.BackgroundColor.Enabled">White</Color>
+    <Color x:Key="CustomButtonSecondaryStyle.BackgroundColor.Disabled">#FFCFD1D3</Color>
+
+    <Style
+        x:Key="CustomButtonSecondaryStyle"
+        BasedOn="{StaticResource CustomButtonStyle}"
+        TargetType="controls:CustomButton">
+        <Setter Property="BackgroundColor" Value="{DynamicResource WindowBackgroundTable}" />
+        <Setter Property="BackgroundColorPressed" Value="{DynamicResource WindowBackgroundTable}" />
+        <Setter Property="BorderColor" Value="{DynamicResource Primary}" />
+        <Setter Property="BorderColorPressed" Value="{DynamicResource Primary}" />
+        <Style.Triggers>
+            <Trigger TargetType="Button" Property="IsEnabled" Value="True">
+                <Setter Property="BackgroundColor" Value="{DynamicResource CustomButtonSecondaryStyle.BackgroundColor.Enabled}" />
+                <Setter Property="BorderColor" Value="{DynamicResource CustomButtonSecondaryStyle.BorderColor.Enabled}" />
+            </Trigger>
+            <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                <Setter Property="BackgroundColor" Value="{DynamicResource CustomButtonSecondaryStyle.BackgroundColor.Disabled}" />
+                <Setter Property="BorderColor" Value="{DynamicResource CustomButtonSecondaryStyle.BorderColor.Disabled}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style BasedOn="{StaticResource CustomButtonStyle}" TargetType="controls:CustomButton" />
+
+    <Style x:Key="LabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource MediumSize}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
+    </Style>
+
+    <Style BasedOn="{StaticResource LabelStyle}" TargetType="Label" />
+
+    <Style BasedOn="{StaticResource LabelStyle}" TargetType="controls:CustomLabel" />
+
+    <Style x:Key="EntryLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource LargeSize}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
+        <Setter Property="Margin">
+            <OnPlatform
+                x:TypeArguments="Thickness"
+                Android="4, 0, 0, 0"
+                WinPhone="0, 0, 0, 0"
+                iOS="0, 0, 0, 0" />
+        </Setter>
+        <!--<Setter Property="HeightRequest" Value="48" />-->
+    </Style>
+
+    <Style TargetType="controls:ValidatableLabel">
+        <Setter Property="LabelStyle" Value="{DynamicResource EntryLabelStyle}" />
+    </Style>
+
+    <Style x:Key="HyperLinkLabelStyle" TargetType="controls:HyperLinkLabel">
+        <Setter Property="TintColor" Value="Blue" />
+        <Setter Property="TextDecorations" Value="Underline" />
+    </Style>
+
+    <Style BasedOn="{StaticResource HyperLinkLabelStyle}" TargetType="controls:HyperLinkLabel" />
+
+    <Style
+        x:Key="CustomListItemDetailTextStyle"
+        BaseResourceKey="ListItemDetailTextStyle"
+        TargetType="Label">
+        <Setter Property="FontSize" Value="{DynamicResource ListItemDetailTextStyleSize}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColorBright}" />
+    </Style>
+
+    <Style x:Key="EntryStyle" TargetType="Entry">
+        <Setter Property="HeightRequest" Value="{DynamicResource HugeSize}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="PlaceholderColor" Value="{DynamicResource PrimaryTextColorBright}" />
+        <Setter Property="BackgroundColor" Value="#FFCFD1D3" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource LargeSize}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="HeightRequest" Value="48" />
+    </Style>
+
+    <Style TargetType="Entry" BasedOn="{StaticResource EntryStyle}" />
+
+    <!--<Style TargetType="controls:CustomSwitch">
+        <Setter Property="TintColor" Value="{DynamicResource Primary}" />
+    </Style>-->
+
+    <Style x:Key="LoginEntryStyle" TargetType="Entry">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="PlaceholderColor" Value="{DynamicResource PrimaryTextColorBright}" />
+        <Setter Property="FontSize" Value="{StaticResource LargerSize}" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+        <!--  TODO: obsolete?  -->
+    </Style>
+
+    <Style x:Key="EditorStyle" TargetType="Editor">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource LargeSize}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Opacity" Value="1.0" />
+    </Style>
+
+    <Style TargetType="Editor" BasedOn="{StaticResource EditorStyle}" />
+    <Style TargetType="controls:CustomEditor" BasedOn="{StaticResource EditorStyle}" />
+
+    <Style x:Key="PickerStyle" TargetType="Picker">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="HeightRequest" Value="48" />
+    </Style>
+
+    <Style BasedOn="{StaticResource PickerStyle}" TargetType="Picker" />
+
+    <Style x:Key="BindablePickerStyle" TargetType="controls:BindablePicker">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="PlaceholderTextColor" Value="{DynamicResource PrimaryTextColorBright}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="HeightRequest" Value="48" />
+        <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+    </Style>
+
+    <Style BasedOn="{StaticResource BindablePickerStyle}" TargetType="controls:BindablePicker" />
+
+    <Style x:Key="ExtendedDatePickerStyle" TargetType="controls:ExtendedDatePicker">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="PlaceholderTextColor" Value="{DynamicResource PrimaryTextColorBright}" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="HeightRequest" Value="48" />
+        <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+    </Style>
+
+    <Style BasedOn="{StaticResource ExtendedDatePickerStyle}" TargetType="controls:ExtendedDatePicker" />
+
+    <Style x:Key="DatePickerStyle" TargetType="DatePicker">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="HeightRequest" Value="48" />
+        <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+    </Style>
+
+    <Style BasedOn="{StaticResource DatePickerStyle}" TargetType="DatePicker" />
+
+    <Style x:Key="TimePickerStyle" TargetType="TimePicker">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="HeightRequest" Value="48" />
+        <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+    </Style>
+
+    <Style BasedOn="{StaticResource TimePickerStyle}" TargetType="TimePicker" />
+
+    <Style x:Key="ExtendedTimePickerStyle" TargetType="controls:ExtendedTimePicker">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Opacity" Value="1.0" />
+        <Setter Property="HeightRequest">
+            <OnPlatform
+                x:TypeArguments="x:Double"
+                Android="48"
+                WinPhone="48"
+                iOS="48" />
+        </Setter>
+        <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
+        <Setter Property="effects:LineColorEffect.LineColor" Value="{StaticResource PrimaryTextColorBright}" />
+    </Style>
+
+    <Style BasedOn="{StaticResource ExtendedTimePickerStyle}" TargetType="controls:ExtendedTimePicker" />
+
+    <Style x:Key="TitleLabelStyle" TargetType="Label">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="FontFamily" Value="HelveticaNeue-Thin" />
+        <Setter Property="FontSize" Value="{StaticResource HugeSize}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
+    </Style>
+
+    <Style x:Key="ValidationLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+        <Setter Property="TextColor" Value="{DynamicResource ColorCode400}" />
+        <Setter Property="FontAttributes" Value="Italic" />
+        <Setter Property="Margin">
+            <OnPlatform
+                x:TypeArguments="Thickness"
+                Android="4, 0, 0, -44"
+                WinPhone="0, 34, 0, 0"
+                iOS="0, 34, 0, 0" />
+        </Setter>
+    </Style>
+
+    <Style x:Key="SuggestionListStyle" TargetType="controls:StackedList">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="Margin">
+            <OnPlatform
+                x:TypeArguments="Thickness"
+                Android="4, 0, 4, 0"
+                WinPhone="0, 0, 0, 0"
+                iOS="0, 0, 0, 0" />
+        </Setter>
+    </Style>
+
+    <Style x:Key="AnnotationEntryLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColorBright}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="VerticalOptions" Value="StartAndExpand" />
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
+        <Setter Property="Margin">
+            <OnPlatform
+                x:TypeArguments="Thickness"
+                Android="4, 0, 0, 0"
+                WinPhone="0, 0, 0, 0"
+                iOS="0, 0, 0, 0" />
+        </Setter>
+    </Style>
+</ResourceDictionary>

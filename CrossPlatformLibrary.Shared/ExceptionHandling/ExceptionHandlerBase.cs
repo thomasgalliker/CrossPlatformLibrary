@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using CrossPlatformLibrary.ExceptionHandling.ExceptionHandlingStrategies;
 
-using Guards;
+using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.ExceptionHandling
 {

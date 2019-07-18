@@ -2,9 +2,6 @@
 
 using CrossPlatformLibrary.IoC;
 using CrossPlatformLibrary.Tests.Stubs;
-
-
-using CommonServiceLocator;
 using Xunit;
 
 namespace CrossPlatformLibrary.Tests.IoC

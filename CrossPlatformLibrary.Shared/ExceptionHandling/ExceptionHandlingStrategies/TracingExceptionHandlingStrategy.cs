@@ -1,8 +1,5 @@
 ﻿using System;
-
-using Guards;
-
-using Tracing;
+using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.ExceptionHandling.ExceptionHandlingStrategies
 {

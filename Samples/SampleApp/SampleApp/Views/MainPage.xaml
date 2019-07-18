@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SampleApp.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
+    xmlns:local="clr-namespace:SampleApp"
+    xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
+    xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
+    xmlns:userControls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
+    x:Name="Page">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="AutoCompleteSuggestionItemTemplate">
+                <ViewCell Height="30">
+                    <ViewCell.View>
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <Label
+                                HorizontalOptions="Start"
+                                Text="{Binding Name}"
+                                VerticalOptions="Center"
+                                Style="{DynamicResource EntryLabelStyle}" />
+                            <BoxView
+                                HeightRequest="1"
+                                BackgroundColor="{DynamicResource ListSeparator}"
+                                HorizontalOptions="FillAndExpand" />
+
+                        </StackLayout>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <controls:AlwaysScrollView x:Name="ScrollView">
+        <Grid>
+            <Grid IsVisible="{Binding HasViewModelError, Mode=OneWay, Converter={StaticResource BoolInverter}}">
+                <StackLayout IsVisible="{Binding IsNotBusy}">
+                    <StackLayout Padding="{DynamicResource CardPadding}" Spacing="{DynamicResource CardSpacing}">
+
+                        <Label Text="&lt;!--Demo ValidatableLabel--&gt;" Style="{StaticResource DemoLabelStyle}" />
+                        <controls:ValidatableLabel
+                            Placeholder="ValidatableLabel1"
+                            Text="ValidatableLabel without Style"
+                            LineBreakMode="TailTruncation"
+                            BackgroundColor="Transparent" />
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <controls:ValidatableLabel
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Placeholder="ValidatableLabel2"
+                                Text="ValidatableLabel with Style"
+                                LabelStyle="{DynamicResource EntryLabelStyle}"
+                                LineBreakMode="NoWrap"
+                                BackgroundColor="Aquamarine" />
+                            <controls:ValidatableEntry
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Placeholder="ValidatableEntry IsReadonly=True"
+                                Text="ValidatableEntry IsReadonly=True"
+                                IsReadonly="{Binding IsToggled, Mode=OneWay}"
+                                BackgroundColor="LightGoldenrodYellow" />
+                            <controls:ValidatableLabel
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Placeholder="ValidatableLabel2"
+                                Text="ValidatableLabel with LineBreakMode=WordWrap&#x0a;Multiple lines of text&#x0a;Line 3: More text"
+                                LineBreakMode="WordWrap"
+                                BackgroundColor="MistyRose" />
+                        </Grid>
+
+                        <Label Text="&lt;!--Demo ValidatableEntry--&gt;" Style="{StaticResource DemoLabelStyle}" />
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <controls:ValidatableEntry
+                                Grid.Column="0"
+                                Placeholder="ValidatableEntry"
+                                Text="{Binding UserName, Mode=TwoWay}"
+                                ValidationErrors="{Binding Validation.Errors[UserName]}"
+                                IsReadonly="{Binding IsToggled}" />
+                            <Entry
+                                Grid.Column="1"
+                                Placeholder="Xamarin.Forms.Entry"
+                                Text="{Binding UserName, Mode=TwoWay}" />
+                        </Grid>
+
+
+
+                        <controls:CustomLabel Text="Enter name:" />
+                        <controls:CustomEntry
+                            Padding="0"
+                            HideBorder="{Binding IsToggled}"
+                            Text="Android EditText sets Padding=&quot;0&quot;" />
+                        <controls:CustomEntry
+                            Padding="0"
+                            HideBorder="True"
+                            Keyboard="Telephone"
+                            Placeholder="CustomEntry with HideBorder=&quot;True&quot;"
+                            Text="" />
+
+                        <Label Text="&lt;!--Demo ValidatableAutoCompleteView--&gt;" Style="{StaticResource DemoLabelStyle}" />
+                        <controls:ValidatableAutoCompleteView
+                            x:Name="AutoCompleteView"
+                            Placeholder="AutoComplete by Country.Name"
+                            Text="{Binding CountrySearchText, Mode=TwoWay}"
+                            SearchCommand="{Binding AutoCompleteSearchCommand}"
+                            SearchCommandDelay="{x:Static local:App.SearchCommandDelay}"
+                            ValidationErrors="{Binding Validation.Errors[CountrySearchText]}"
+                            SuggestedItemsSource="{Binding SuggestedCountries, Mode=OneWay}"
+                            SuggestedItemTemplate="{StaticResource AutoCompleteSuggestionItemTemplate}"
+                            SelectedItem="{Binding Country, Mode=TwoWay}"
+                            DisplayMemberPath="Name"
+                            TextChanged="AutoCompleteView_OnTextChanged"
+                            IsReadonly="{Binding IsToggled, Mode=OneWay}" />
+
+                        <Label Text="&lt;!--Demo User Controls--&gt;" Style="{StaticResource DemoLabelStyle}" />
+                        <userControls:AddressControl BindingContext="{Binding Address}" />
+
+                        <Grid>
+                            <controls:ValidatableEditor
+                                BackgroundColor="LightYellow"
+                                HorizontalOptions="FillAndExpand"
+                                IsEnabled="True"
+                                MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
+                                MaxLines="3"
+                                Placeholder="{localization:Translate SimpleNotesLabelText}"
+                                Text="{Binding Notes, Mode=TwoWay}"
+                                ValidationErrors="{Binding Errors[Notes]}">
+                                <controls:ValidatableEditor.Keyboard>
+                                    <Keyboard x:FactoryMethod="Create">
+                                        <x:Arguments>
+                                            <KeyboardFlags>CapitalizeSentence,Spellcheck</KeyboardFlags>
+                                        </x:Arguments>
+                                    </Keyboard>
+                                </controls:ValidatableEditor.Keyboard>
+                            </controls:ValidatableEditor>
+                        </Grid>
+
+                        <userControls:NotesView BindingContext="{Binding .}" />
+
+                        <Label Text="&lt;!--Demo CustomEditor with hidden keyboard--&gt;" Style="{StaticResource DemoLabelStyle}" />
+                        <Editor Text="{Binding LogContent, Mode=OneWay}" />
+                        <controls:CustomEditor
+                            Margin="0"
+                            HideKeyboard="True"
+                            HorizontalOptions="FillAndExpand"
+                            Keyboard="Text"
+                            Text="{Binding LogContent, Mode=OneWay}"
+                            VerticalOptions="FillAndExpand" />
+
+                        <Label Text="&lt;!--Demo HyperLinkLabel--&gt;" Style="{StaticResource DemoLabelStyle}" />
+                        <controls:HyperLinkLabel
+                            NavigateCommand="{Binding MailNavigateCommand}"
+                            Text="{Binding AdminEmailAddress, Mode=OneWay}"
+                            TintColor="Red" />
+
+                        <Label Text="&lt;!--Demo DrilldownButton--&gt;" Style="{StaticResource DemoLabelStyle}" />
+                        <controls:DrilldownButton
+                            Command="{Binding MailNavigateCommand}"
+                            ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
+                            Text="{localization:Translate SingleButtonText}" />
+
+                        <Label Text="&lt;!--Demo DrilldownButtonList--&gt;" Style="{StaticResource DemoLabelStyle}" />
+                        <controls:CardView>
+                            <controls:StackLayoutZero>
+                                <controls:LabelSection Text="{localization:Translate ListOfSettingsSectionText}" />
+                                <controls:HeaderDivider />
+                                <controls:DrilldownButtonList>
+                                    <controls:DrilldownButtonList.ItemsSource>
+                                        <objectModel:ObservableCollection x:TypeArguments="BindableObject">
+                                            <controls:DrilldownButtonView
+                                                Title="{localization:Translate LogButtonText}"
+                                                Command="{Binding NavigateToLogCommand}"
+                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
+                                                IsEnabled="False" />
+                                            <controls:DrilldownButtonView
+                                                Title="{Binding RefreshButtonText}"
+                                                Command="{Binding RefreshCommand}"
+                                                IsBusy="{Binding IsRefreshing, Mode=OneWay}" />
+                                            <controls:DrilldownSwitchView
+                                                Title="{Binding ToggleSwitchButtonText}"
+                                                Command="{Binding ToggleSwitchCommand}"
+                                                IsToggled="{Binding IsToggled, Mode=TwoWay}" />
+                                        </objectModel:ObservableCollection>
+                                    </controls:DrilldownButtonList.ItemsSource>
+                                </controls:DrilldownButtonList>
+                                <controls:FooterDivider />
+                            </controls:StackLayoutZero>
+
+                        </controls:CardView>
+
+                        <Label Text="&lt;!--Demo NoBarsScrollViewer--&gt;" Style="{StaticResource DemoLabelStyle}" />
+                        <controls:NoBarsScrollViewer Orientation="Horizontal">
+                            <controls:StackLayoutZero Orientation="Horizontal">
+                                <Label
+                                    BackgroundColor="LightGreen"
+                                    Text="Label Green &gt;&gt;&gt;"
+                                    WidthRequest="333" />
+                                <Label
+                                    BackgroundColor="LightCoral"
+                                    Text="&lt;&lt;&lt; Label Red &gt;&gt;&gt;"
+                                    WidthRequest="333" />
+                                <Label
+                                    BackgroundColor="LightBlue"
+                                    Text="&lt;&lt;&lt; Label Blue"
+                                    WidthRequest="333" />
+                            </controls:StackLayoutZero>
+                        </controls:NoBarsScrollViewer>
+
+                        <Label Text="&lt;!--Demo LongPressEffect--&gt;" Style="{StaticResource DemoLabelStyle}" />
+                        <controls:GridZero Padding="20" BackgroundColor="LightGray">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label
+                                x:Name="LongPressLabel"
+                                effects:LongPressEffect.Command="{Binding LongPressCommand}"
+                                effects:LongPressEffect.CommandParameter="{Binding Text, Source={x:Reference LongPressLabel}}"
+                                BackgroundColor="LightBlue"
+                                FontSize="Medium"
+                                LineBreakMode="WordWrap"
+                                Text="Press and hold to run the attached command. This effect can be used if you want to make text accessible e.g. for copy/paste.">
+                                <Label.Effects>
+                                    <effects:LongPressEffect />
+                                </Label.Effects>
+                            </Label>
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NormalPressCommand}" CommandParameter="{Binding Text, Source={x:Reference LongPressLabel}}" />
+                            </Grid.GestureRecognizers>
+                        </controls:GridZero>
+
+                    </StackLayout>
+
+                    <Label Text="&lt;!--Demo CustomButton--&gt;" Style="{StaticResource DemoLabelStyle}" />
+                    <controls:CustomButton
+                        Margin="{StaticResource ButtonMargin}"
+                        Command="{Binding LoadDataButtonCommand}"
+                        Style="{StaticResource CustomButtonSecondaryStyle}"
+                        Text="{localization:Translate LoadDataButtonText}" />
+
+                    <controls:CustomButton
+                        Margin="{StaticResource ButtonMargin}"
+                        Command="{Binding SaveProfileButtonCommand}"
+                        Style="{StaticResource CustomButtonPrimaryStyle}"
+                        Text="{localization:Translate SaveButtonText}" />
+                </StackLayout>
+
+                <Label
+                    Text="&lt;!--Demo CustomActivityIndicator--&gt;"
+                    Style="{StaticResource DemoLabelStyle}"
+                    IsVisible="{Binding IsBusy, Mode=OneWay}" />
+                <controls:CustomActivityIndicator Caption="{localization:Translate LoadingText}" IsVisible="{Binding IsBusy, Mode=OneWay}" />
+            </Grid>
+
+            <Label
+                Text="&lt;!--Demo ViewModelErrorControl--&gt;"
+                Style="{StaticResource DemoLabelStyle}"
+                IsVisible="{Binding HasViewModelError, Mode=OneWay}" />
+            <controls:ViewModelErrorControl IsVisible="{Binding HasViewModelError, Mode=OneWay}" ViewModelError="{Binding ViewModelError, Mode=OneWay}" />
+        </Grid>
+    </controls:AlwaysScrollView>
+
+
+</ContentPage>

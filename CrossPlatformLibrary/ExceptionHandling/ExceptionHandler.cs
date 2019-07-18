@@ -1,10 +1,34 @@
-﻿namespace CrossPlatformLibrary.ExceptionHandling
+﻿using System;
+
+namespace CrossPlatformLibrary.ExceptionHandling
 {
-    public class ExceptionHandler : IExceptionHandler
+    /// <summary>
+    /// Provides an implementation of <see cref="IExceptionHandler"/> for .Net Standard.
+    /// </summary>
+    public class ExceptionHandler : ExceptionHandlerBase
     {
-        public ExceptionHandler()
+        public ExceptionHandler(IExceptionHandlingStrategy exceptionHandlingStrategy)
+            : base(exceptionHandlingStrategy)
         {
-            throw new NotImplementedInReferenceAssemblyException();
+        }
+
+        protected override void Attach()
+        {
+            AppDomain.CurrentDomain.UnhandledException += this.CurrentDomainUnhandledException;
+        }
+
+        protected override void Detach()
+        {
+            AppDomain.CurrentDomain.UnhandledException -= this.CurrentDomainUnhandledException;
+        }
+
+        private void CurrentDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            var exception = e.ExceptionObject as Exception;
+            if (exception != null)
+            {
+                this.HandleException(exception);
+            }
         }
     }
 }

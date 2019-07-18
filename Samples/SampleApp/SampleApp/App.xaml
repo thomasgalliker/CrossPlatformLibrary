@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    x:Class="SampleApp.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xForms="clr-namespace:CrossPlatformLibrary.Forms;assembly=CrossPlatformLibrary.Forms"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <xForms:MyResourceDictionary />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--  Converters  -->
+            <valueConverters:StringIsNotNullOrEmptyConverter x:Key="StringIsNotNullOrEmptyConverter" />
+
+            <!--  Colors  -->
+            <Color x:Key="PrimarySuperBright">#a59e39</Color>
+            <Color x:Key="PrimaryBright">#aabf74</Color>
+            <Color x:Key="Primary">#ff70fc</Color>
+            <Color x:Key="PrimaryDark">#5e0087</Color>
+            <Color x:Key="Accent">#73e5c6</Color>
+            <Color x:Key="PrimaryTextColor">DarkBlue</Color>
+
+            <!--  Styles  -->
+            <Style x:Key="DemoLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Green" />
+                <Setter Property="BackgroundColor" Value="#e6ffe6" />
+                <Setter Property="FontAttributes" Value="Italic" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+            </Style>
+
+
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>

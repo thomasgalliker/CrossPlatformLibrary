@@ -2,8 +2,7 @@
 using System.Threading;
 
 using Android.App;
-
-using Guards;
+using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Dispatching
 {
