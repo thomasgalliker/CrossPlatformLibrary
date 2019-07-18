@@ -39,17 +39,16 @@
                 <StackLayout IsVisible="{Binding IsNotBusy}">
                     <StackLayout Padding="{DynamicResource CardPadding}" Spacing="{DynamicResource CardSpacing}">
 
-                        <Label
-                            FontAttributes="Italic"
-                            Text="&lt;!--Demo ValidatableLabel--&gt;"
-                            TextColor="LightGreen" />
+                        <Label Text="&lt;!--Demo ValidatableLabel--&gt;" Style="{StaticResource DemoLabelStyle}" />
                         <controls:ValidatableLabel
                             Placeholder="ValidatableLabel1"
                             Text="ValidatableLabel without Style"
+                            LineBreakMode="TailTruncation"
                             BackgroundColor="Transparent" />
 
                         <Grid>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
@@ -57,23 +56,31 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <controls:ValidatableLabel
+                                Grid.Row="0"
                                 Grid.Column="0"
                                 Placeholder="ValidatableLabel2"
                                 Text="ValidatableLabel with Style"
                                 LabelStyle="{DynamicResource EntryLabelStyle}"
+                                LineBreakMode="NoWrap"
                                 BackgroundColor="Aquamarine" />
                             <controls:ValidatableEntry
+                                Grid.Row="0"
                                 Grid.Column="1"
                                 Placeholder="ValidatableEntry IsReadonly=True"
                                 Text="ValidatableEntry IsReadonly=True"
                                 IsReadonly="{Binding IsToggled, Mode=OneWay}"
                                 BackgroundColor="LightGoldenrodYellow" />
+                            <controls:ValidatableLabel
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Placeholder="ValidatableLabel2"
+                                Text="ValidatableLabel with LineBreakMode=WordWrap&#x0a;Multiple lines of text&#x0a;Line 3: More text"
+                                LineBreakMode="WordWrap"
+                                BackgroundColor="MistyRose" />
                         </Grid>
 
-                        <Label
-                            FontAttributes="Italic"
-                            Text="&lt;!--Demo ValidatableEntry--&gt;"
-                            TextColor="LightGreen" />
+                        <Label Text="&lt;!--Demo ValidatableEntry--&gt;" Style="{StaticResource DemoLabelStyle}" />
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -108,11 +115,7 @@
                             Placeholder="CustomEntry with HideBorder=&quot;True&quot;"
                             Text="" />
 
-                        <Label
-                            FontAttributes="Italic"
-                            Text="&lt;!--Demo ValidatableAutoCompleteView--&gt;"
-                            TextColor="LightGreen" />
-
+                        <Label Text="&lt;!--Demo ValidatableAutoCompleteView--&gt;" Style="{StaticResource DemoLabelStyle}" />
                         <controls:ValidatableAutoCompleteView
                             x:Name="AutoCompleteView"
                             Placeholder="AutoComplete by Country.Name"
@@ -127,10 +130,7 @@
                             TextChanged="AutoCompleteView_OnTextChanged"
                             IsReadonly="{Binding IsToggled, Mode=OneWay}" />
 
-                        <Label
-                            FontAttributes="Italic"
-                            Text="&lt;!--Demo User Controls--&gt;"
-                            TextColor="LightGreen" />
+                        <Label Text="&lt;!--Demo User Controls--&gt;" Style="{StaticResource DemoLabelStyle}" />
                         <userControls:AddressControl BindingContext="{Binding Address}" />
 
                         <Grid>
@@ -155,10 +155,7 @@
 
                         <userControls:NotesView BindingContext="{Binding .}" />
 
-                        <Label
-                            FontAttributes="Italic"
-                            Text="&lt;!--Demo CustomEditor with hidden keyboard--&gt;"
-                            TextColor="LightGreen" />
+                        <Label Text="&lt;!--Demo CustomEditor with hidden keyboard--&gt;" Style="{StaticResource DemoLabelStyle}" />
                         <Editor Text="{Binding LogContent, Mode=OneWay}" />
                         <controls:CustomEditor
                             Margin="0"
@@ -168,28 +165,19 @@
                             Text="{Binding LogContent, Mode=OneWay}"
                             VerticalOptions="FillAndExpand" />
 
-                        <Label
-                            FontAttributes="Italic"
-                            Text="&lt;!--Demo HyperLinkLabel--&gt;"
-                            TextColor="LightGreen" />
+                        <Label Text="&lt;!--Demo HyperLinkLabel--&gt;" Style="{StaticResource DemoLabelStyle}" />
                         <controls:HyperLinkLabel
                             NavigateCommand="{Binding MailNavigateCommand}"
                             Text="{Binding AdminEmailAddress, Mode=OneWay}"
                             TintColor="Red" />
 
-                        <Label
-                            FontAttributes="Italic"
-                            Text="&lt;!--Demo DrilldownButton--&gt;"
-                            TextColor="LightGreen" />
+                        <Label Text="&lt;!--Demo DrilldownButton--&gt;" Style="{StaticResource DemoLabelStyle}" />
                         <controls:DrilldownButton
                             Command="{Binding MailNavigateCommand}"
                             ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
                             Text="{localization:Translate SingleButtonText}" />
 
-                        <Label
-                            FontAttributes="Italic"
-                            Text="&lt;!--Demo DrilldownButtonList--&gt;"
-                            TextColor="LightGreen" />
+                        <Label Text="&lt;!--Demo DrilldownButtonList--&gt;" Style="{StaticResource DemoLabelStyle}" />
                         <controls:CardView>
                             <controls:StackLayoutZero>
                                 <controls:LabelSection Text="{localization:Translate ListOfSettingsSectionText}" />
@@ -218,10 +206,7 @@
 
                         </controls:CardView>
 
-                        <Label
-                            FontAttributes="Italic"
-                            Text="&lt;!--Demo NoBarsScrollViewer--&gt;"
-                            TextColor="LightGreen" />
+                        <Label Text="&lt;!--Demo NoBarsScrollViewer--&gt;" Style="{StaticResource DemoLabelStyle}" />
                         <controls:NoBarsScrollViewer Orientation="Horizontal">
                             <controls:StackLayoutZero Orientation="Horizontal">
                                 <Label
@@ -239,11 +224,7 @@
                             </controls:StackLayoutZero>
                         </controls:NoBarsScrollViewer>
 
-
-                        <Label
-                            FontAttributes="Italic"
-                            Text="&lt;!--Demo LongPressEffect--&gt;"
-                            TextColor="LightGreen" />
+                        <Label Text="&lt;!--Demo LongPressEffect--&gt;" Style="{StaticResource DemoLabelStyle}" />
                         <controls:GridZero Padding="20" BackgroundColor="LightGray">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -269,10 +250,7 @@
 
                     </StackLayout>
 
-                    <Label
-                        FontAttributes="Italic"
-                        Text="&lt;!--Demo CustomButton--&gt;"
-                        TextColor="LightGreen" />
+                    <Label Text="&lt;!--Demo CustomButton--&gt;" Style="{StaticResource DemoLabelStyle}" />
                     <controls:CustomButton
                         Margin="{StaticResource ButtonMargin}"
                         Command="{Binding LoadDataButtonCommand}"
@@ -287,18 +265,16 @@
                 </StackLayout>
 
                 <Label
-                    FontAttributes="Italic"
-                    IsVisible="{Binding IsBusy, Mode=OneWay}"
                     Text="&lt;!--Demo CustomActivityIndicator--&gt;"
-                    TextColor="LightGreen" />
+                    Style="{StaticResource DemoLabelStyle}"
+                    IsVisible="{Binding IsBusy, Mode=OneWay}" />
                 <controls:CustomActivityIndicator Caption="{localization:Translate LoadingText}" IsVisible="{Binding IsBusy, Mode=OneWay}" />
             </Grid>
 
             <Label
-                FontAttributes="Italic"
-                IsVisible="{Binding HasViewModelError, Mode=OneWay}"
                 Text="&lt;!--Demo ViewModelErrorControl--&gt;"
-                TextColor="LightGreen" />
+                Style="{StaticResource DemoLabelStyle}"
+                IsVisible="{Binding HasViewModelError, Mode=OneWay}" />
             <controls:ViewModelErrorControl IsVisible="{Binding HasViewModelError, Mode=OneWay}" ViewModelError="{Binding ViewModelError, Mode=OneWay}" />
         </Grid>
     </controls:AlwaysScrollView>
