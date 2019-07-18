@@ -25,7 +25,9 @@
             <!--  Styles  -->
             <Style x:Key="DemoLabelStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="Green" />
+                <Setter Property="BackgroundColor" Value="#e6ffe6" />
                 <Setter Property="FontAttributes" Value="Italic" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
             </Style>
 
 
