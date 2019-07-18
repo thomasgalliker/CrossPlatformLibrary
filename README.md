@@ -1,5 +1,5 @@
 # CrossPlatformLibrary
-
+<img src="https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/master/Images/cpl_short.png" alt="CrossPlatformLibrary" align="right" height="100">
 CrossPlatformLibrary is an extensible toolkit which addresses cross-cutting concern. It is a lightweight library which provides a collection of functionality used in most mobile and desktop applications such as bootstrapping, exception handling, tracing and UI dispatching.
 
 #### Supported Platforms
@@ -32,7 +32,6 @@ CrossPlatformLibrary is an extensible toolkit which addresses cross-cutting conc
   </tr>
 </table>
 
-
 ### Download and Install CrossPlatformLibrary
 
 This library is available on [NuGet](https://www.nuget.org/packages/CrossPlatformLibrary). Use the following command to install CrossPlatformLibrary using NuGet package manager console:
@@ -43,7 +42,16 @@ The Xamarin.Forms specific library can be installed using following command:
 
 ```PM> Install-Package CrossPlatformLibrary.Forms```
 
-### API Usage
+### Usage
+
+#### User Controls
+The library contains a rich set of customized user controls which extend basic implementations of existing controls. Following screenshots of the SampleApp demonstrate the usege of some of the delivered controls:
+<p float="left">
+<img src="https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/master/Images/Screenshot_SampleApp_Android.png" alt="SampleApp Android">
+<img src="https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/master/Images/Screenshot_SampleApp_Android.png" alt="SampleApp Android">
+</p>
+
+```TODO: to be documented```
 
 #### Bootstrapping
 
