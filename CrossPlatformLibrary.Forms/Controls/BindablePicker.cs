@@ -10,37 +10,6 @@ namespace CrossPlatformLibrary.Forms.Controls
     {
         private bool disableNestedCalls;
 
-        public static readonly BindableProperty FontFamilyProperty =
-            BindableProperty.Create(
-                nameof(FontFamily),
-                typeof(string),
-                typeof(BindablePicker),
-                Font.Default.FontFamily,
-                BindingMode.OneWay);
-
-        public static readonly BindableProperty FontSizeProperty =
-            BindableProperty.Create(
-                nameof(FontSize),
-                typeof(double),
-                typeof(BindablePicker),
-                Font.Default.FontSize,
-                BindingMode.OneWay);
-
-        public static readonly BindableProperty FontAttributesProperty =
-            BindableProperty.Create(
-                nameof(FontAttributes),
-                typeof(FontAttributes),
-                typeof(BindablePicker),
-                FontAttributes.None,
-                BindingMode.OneWay);
-
-        public static readonly BindableProperty PlaceholderTextColorProperty =
-            BindableProperty.Create(
-                nameof(PlaceholderTextColor),
-                typeof(Color),
-                typeof(BindablePicker),
-                Color.Default);
-
         public new static readonly BindableProperty ItemsSourceProperty =
             BindableProperty.Create(
                 nameof(ItemsSource),
@@ -65,30 +34,6 @@ namespace CrossPlatformLibrary.Forms.Controls
                 typeof(BindablePicker),
                 null, BindingMode.TwoWay,
                 propertyChanged: OnSelectedValueChanged);
-
-        public string FontFamily
-        {
-            get { return (string)this.GetValue(FontFamilyProperty); }
-            set { this.SetValue(FontFamilyProperty, value); }
-        }
-
-        public double FontSize
-        {
-            get { return (double)this.GetValue(FontSizeProperty); }
-            set { this.SetValue(FontSizeProperty, value); }
-        }
-
-        public FontAttributes FontAttributes
-        {
-            get { return (FontAttributes)this.GetValue(FontAttributesProperty); }
-            set { this.SetValue(FontAttributesProperty, (object)value); }
-        }
-
-        public Color PlaceholderTextColor
-        {
-            get { return (Color)this.GetValue(PlaceholderTextColorProperty); }
-            set { this.SetValue(PlaceholderTextColorProperty, value); }
-        }
 
         public IEnumerable ItemsSource
         {
@@ -145,8 +90,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         private static void OnDisplayMemberPathChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var bindablePicker = bindable as BindablePicker;
-            if (bindablePicker != null)
+            if (bindable is BindablePicker bindablePicker)
             {
                 bindablePicker.InstanceOnItemsSourceChanged(bindablePicker.ItemsSource, bindablePicker.ItemsSource);
             }

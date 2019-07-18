@@ -17,7 +17,7 @@
         effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
         HeightRequest="48"
         IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
-        Style="{Binding Style, Source={x:Reference Control}, Mode=OneWay}"
+        Style="{Binding PickerStyle, Source={x:Reference Control}, Mode=OneWay}"
         FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
         ItemsSource="{Binding ItemsSource, Source={x:Reference Control}}"
         DisplayMemberPath="{Binding DisplayMemberPath, Source={x:Reference Control}}"

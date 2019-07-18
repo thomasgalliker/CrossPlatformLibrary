@@ -53,8 +53,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public DateRange ValidityRange
         {
-            get { return (DateRange)this.GetValue(ValidityRangeProperty); }
-            set { this.SetValue(ValidityRangeProperty, value); }
+            get => (DateRange)this.GetValue(ValidityRangeProperty);
+            set => this.SetValue(ValidityRangeProperty, value);
         }
 
         public static readonly BindableProperty XAlignProperty =
