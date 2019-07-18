@@ -50,18 +50,18 @@ namespace CrossPlatformLibrary.Forms.Controls
             }
         }
 
-        public new static readonly BindableProperty StyleProperty =
+        public static readonly BindableProperty PickerStyleProperty =
             BindableProperty.Create(
-                nameof(Style),
+                nameof(PickerStyle),
                 typeof(Style),
                 typeof(ValidatablePicker),
                 default(Style),
                 BindingMode.OneWay);
 
-        public new Style Style
+        public Style PickerStyle
         {
-            get { return (Style)this.GetValue(StyleProperty); }
-            set { this.SetValue(StyleProperty, value); }
+            get => (Style)this.GetValue(PickerStyleProperty);
+            set => this.SetValue(PickerStyleProperty, value);
         }
 
         public static readonly BindableProperty FontFamilyProperty =
