@@ -6,8 +6,8 @@
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="Fill"
-    HeightRequest="48"
+    VerticalOptions="FillAndExpand"
+    MinimumHeightRequest="48"
     BackgroundColor="Transparent">
 
     <Grid.RowDefinitions>
