@@ -3,10 +3,7 @@ using System.Text;
 using System.Threading;
 
 using CrossPlatformLibrary.ExceptionHandling.ExceptionHandlingStrategies;
-
-using Guards;
-
-using Tracing;
+using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.ExceptionHandling
 {

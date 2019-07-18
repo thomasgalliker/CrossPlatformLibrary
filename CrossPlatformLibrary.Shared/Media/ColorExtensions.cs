@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Tracing;
+using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Media
 {

@@ -7,14 +7,12 @@ CrossPlatformLibrary is an extensible toolkit which addresses cross-cutting conc
 <table>
   <tr>
     <td></td>
-    <td>Android</td>
-    <td>iOS
-(Classic API)</td>
-    <td>iOS
-(Unified API)</td>
-    <td>Windows Phone 8 (SL)</td>
-    <td>Windows Phone 8.1</td>
-    <td>Windows Store / Universal</td>
+    <td>.Net 4.5 / WPF</td>
+    <td>.Net Standard 2.0</td>
+    <td>Xamarin.Android</td>
+    <td>Xamarin.iOS</td>
+    <td>UWP</td>
+
   </tr>
   <tr>
     <td>CrossPlatformLibrary</td>
@@ -23,57 +21,33 @@ CrossPlatformLibrary is an extensible toolkit which addresses cross-cutting conc
     <td>yes</td>
     <td>yes</td>
     <td>yes</td>
+  </tr>
+  <tr>
+    <td>CrossPlatformLibrary.Forms</td>
+    <td>no</td>
     <td>yes</td>
+    <td>yes</td>
+    <td>yes</td>
+    <td>not yet</td>
   </tr>
 </table>
 
 
 ### Download and Install CrossPlatformLibrary
 
-This library is available on NuGet:[ ](https://www.nuget.org/packages/TypeConverter/)[https://www.nuget.org/packages/CrossPlatformLibrary](https://www.nuget.org/packages/CrossPlatformLibrary). Use the following command to install CrossPlatformLibrary using NuGet package manager console:
+This library is available on [NuGet](https://www.nuget.org/packages/CrossPlatformLibrary). Use the following command to install CrossPlatformLibrary using NuGet package manager console:
 
 ```PM> Install-Package CrossPlatformLibrary```
 
-You can use this library in any .Net project which is compatible to PCL (e.g. Xamarin Android, iOS, Windows Phone, Windows Store, Universal Apps, etc.). Make sure you install this NuGet package to all relevant projects. NuGet automatically adds a reference to assembly CrossPlatformLibrary.dll and CrossPlatformLibrary.Platform.dll. For PCL projects it only adds the platform-independant assembly CrossPlatformLibrary.dll.
+The Xamarin.Forms specific library can be installed using following command:
+
+```PM> Install-Package CrossPlatformLibrary.Forms```
 
 ### API Usage
 
 #### Bootstrapping
 
-The bootstrapping mechanism is used to startup and shutdown an application in a controlled way. The boostrapper is called at the entry point of an application and it cares about the basic initialisation tasks. The entry point of the application can differ from application type to application type. Following table gives an overview from where the bootstrapper needs to be launched on different platforms:
-
-<table>
-  <tr>
-    <td>Platform</td>
-    <td>From where to call Boostrapper.Startup method</td>
-  </tr>
-  <tr>
-    <td>Android</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>iOS
-(Classic API)</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>iOS
-(Unified API)</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Windows Phone 8 (SL)</td>
-    <td>App.cs constructor</td>
-  </tr>
-  <tr>
-    <td>Windows Phone 8.1</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Windows Store / Universal</td>
-    <td></td>
-  </tr>
-</table>
+The bootstrapping mechanism is used to startup and shutdown an application in a controlled way. The boostrapper is called at the entry point of an application and it cares about the basic initialisation tasks. The entry point of the application can differ from application type to application type.
 
 
 CrossPlatformLibrary provides you with a base implementation of a bootstrapper. You may want to inherit the Bootstrapper class in order to influence the startup procedure and/or bootstrap parts of your own application. Following things can be done with a custom Bootstrapper:
@@ -84,7 +58,7 @@ CrossPlatformLibrary provides you with a base implementation of a bootstrapper. 
 
 * Handle exceptions that happen during Bootstrapping (BootstrappingException)
 
-to be documented --- What is the Bootstrapping Mechanism
+```TODO: to be documented```
 
 #### Exception Handling
 
@@ -99,41 +73,25 @@ The tracing functionality provided by CrossPlatformLibrary can be used to write 
 <table>
   <tr>
     <td>Tracer Name</td>
-    <td>Contained in</td>
     <td>Description</td>
   </tr>
   <tr>
     <td>EmptyTracer</td>
-    <td>CrossPlatformLibrary</td>
     <td>EmptyTracer doesn’t trace anything. Each call to the Write method will not execute anything.</td>
   </tr>
   <tr>
     <td>DebugTracer</td>
-    <td>CrossPlatformLibrary</td>
     <td>DebugTracer uses System.Diagnostics.Debug.WriteLine to write traces.</td>
   </tr>
   <tr>
     <td>ActionTracer</td>
-    <td>CrossPlatformLibrary</td>
     <td>ActionTracer allows you to define an Action/Delegate to which traces are written to.</td>
   </tr>
   <tr>
-    <td>Log4NetTracer</td>
-    <td><reference nuget></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>MetroLogTracer</td>
-    <td><reference nuget></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>Your own ITracer implementation</td>
+    <td>Write your own tracer by implementing ITracer or abstract TracerBase.</td>
   </tr>
 </table>
-
 
 You can implement your own tracer by either implementing the ITracer and ITracerFactory interface on you own or extend the provided base implementation of the TracerBase and TracerFactoryBase.
 
@@ -144,23 +102,23 @@ You can implement your own tracer by either implementing the ITracer and ITracer
   </tr>
   <tr>
     <td>Debug</td>
-    <td></td>
+    <td>Information traced for debugging purposes. Usually only active in test or pre-production releases.</td>
   </tr>
   <tr>
     <td>Information</td>
-    <td></td>
+    <td>Important trace information which is usually also traced by production software.</td>
   </tr>
   <tr>
     <td>Warning</td>
-    <td></td>
+    <td>Some warnings which are not critical but need care.</td>
   </tr>
   <tr>
     <td>Error</td>
-    <td></td>
+    <td>Typically handled exceptions which have to be traced in order to be analyzed and avoided.</td>
   </tr>
   <tr>
     <td>Fatal</td>
-    <td></td>
+    <td>Software crashes, unhandled exceptions.</td>
   </tr>
 </table>
 
@@ -169,106 +127,17 @@ You can implement your own tracer by either implementing the ITracer and ITracer
 
 CrossPlatformLibrary was designed in a way which promotes modular design. Modules are loosely coupled and self-contained units which serve a concrete purpose. This approach supports the separation of concerns in your application. You can easily test modules in isolation and integrate them later into your application(s) without having them too tighly coupled. 
 
-Following matrix shows the available modules and its supported platforms:
-
-<table>
-  <tr>
-    <td></td>
-    <td>Android</td>
-    <td>iOS
-(Classic API)</td>
-    <td>iOS
-(Unified API)</td>
-    <td>Windows Phone 8 (SL)</td>
-    <td>Windows Phone 8.1</td>
-    <td>Windows Store / Universal</td>
-  </tr>
-  <tr>
-    <td>CrossPlatformLibrary.Camera</td>
-    <td>yes</td>
-    <td>not yet</td>
-    <td>not yet</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-  </tr>
-  <tr>
-    <td>CrossPlatformLibrary.Connectivity</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>CrossPlatformLibrary.Device</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-  </tr>
-  <tr>
-    <td>CrossPlatformLibrary.Geolocation</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-  </tr>
-  <tr>
-    <td>CrossPlatformLibrary.Market</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-  </tr>
-  <tr>
-    <td>CrossPlatformLibrary.Maps</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-  </tr>
-  <tr>
-    <td>CrossPlatformLibrary.Messaging</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-  </tr>
-  <tr>
-    <td>CrossPlatformLibrary.Settings</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-    <td>yes</td>
-  </tr>
-</table>
-
-
-to be documented
+```TODO: to be documented```
 
 #### UI Dispatching
 
-to be documented
+```TODO: to be documented```
 
 #### Dependency Management
 
 Dependency injection containers are used to manage dependencies between components. This typically involes registration and instanciation and resolution of dependencies. CrossPlatformLibrary uses its own implementation of a dependency injection container, CrossPlatformLibrary.Ioc.SimpleIoc.
 
-to be documented
+```TODO: to be documented```
 
 ### Planned features
 
@@ -278,5 +147,5 @@ to be documented
 
 ### License
 
-CrossPlatformLibrary is Copyright &copy; 2015 [Thomas Galliker](https://ch.linkedin.com/in/thomasgalliker). Free for non-commercial use. For commercial use please contact the author.
+CrossPlatformLibrary is Copyright &copy; 2019 [Thomas Galliker](https://ch.linkedin.com/in/thomasgalliker). Free for non-commercial use. For commercial use please contact the author.
 

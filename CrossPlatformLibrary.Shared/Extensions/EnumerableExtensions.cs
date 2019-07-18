@@ -1,18 +1,30 @@
-﻿using Guards;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Extensions
 {
     public static class EnumerableExtensions
     {
+        public static IList CreateList(this IEnumerable enumerable)
+        {
+            var list = new Collection<object>();
+
+            foreach (var item in enumerable)
+            {
+                list.Add(item);
+            }
+
+            return list;
+        }
+
         public static void Sort<TSource, TKey>(this ICollection<TSource> source, Func<TSource, TKey> keySelector)
         {
-            Guard.ArgumentNotNull(() => source);
-            Guard.ArgumentNotNull(() => keySelector);
+            Guard.ArgumentNotNull(source, nameof(source));
+            Guard.ArgumentNotNull(keySelector, nameof(keySelector));
 
             IList<TSource> sortedList = source.OrderBy(keySelector).ToList();
             source.Clear();
@@ -24,8 +36,8 @@ namespace CrossPlatformLibrary.Extensions
 
         public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
         {
-            Guard.ArgumentNotNull(() => source);
-            Guard.ArgumentNotNull(() => action);
+            Guard.ArgumentNotNull(source, nameof(source));
+            Guard.ArgumentNotNull(action, nameof(action));
 
             foreach (T item in source)
             {
@@ -45,7 +57,18 @@ namespace CrossPlatformLibrary.Extensions
         }
 
         /// <summary>
-        /// Updates all items in the specified source which match with selectorFunc with the specified updateAction.
+        /// Adds a collection of <typeparamref name="T"/> to the given list <paramref name="list"/>.
+        /// </summary>
+        public static void AddRange<T>(this IList<T> list, IEnumerable<T> collection)
+        {
+            foreach (var item in collection)
+            {
+                list.Add(item);
+            }
+        }
+
+        /// <summary>
+        ///     Updates all items in the specified source which match with selectorFunc with the specified updateAction.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source">The source.</param>
@@ -53,9 +76,9 @@ namespace CrossPlatformLibrary.Extensions
         /// <param name="updateAction">The update action.</param>
         public static void Update<T>(this IEnumerable<T> source, Func<T, bool> selectorFunc, Action<T> updateAction)
         {
-            Guard.ArgumentNotNull(() => source);
-            Guard.ArgumentNotNull(() => selectorFunc);
-            Guard.ArgumentNotNull(() => updateAction);
+            Guard.ArgumentNotNull(source, nameof(source));
+            Guard.ArgumentNotNull(selectorFunc, nameof(selectorFunc));
+            Guard.ArgumentNotNull(updateAction, nameof(updateAction));
 
             foreach (var item in source.Where(selectorFunc))
             {
@@ -64,8 +87,8 @@ namespace CrossPlatformLibrary.Extensions
         }
 
         /// <summary>
-        /// Updates a single item in the given source using the selector function to find the item
-        /// and the update action to update it accordingly.
+        ///     Updates a single item in the given source using the selector function to find the item
+        ///     and the update action to update it accordingly.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="source">The source.</param>
@@ -73,16 +96,16 @@ namespace CrossPlatformLibrary.Extensions
         /// <param name="updateAction">The update action.</param>
         public static void UpdateSingle<T>(this IEnumerable<T> source, Func<T, bool> selectorFunc, Action<T> updateAction)
         {
-            Guard.ArgumentNotNull(() => source);
-            Guard.ArgumentNotNull(() => selectorFunc);
-            Guard.ArgumentNotNull(() => updateAction);
+            Guard.ArgumentNotNull(source, nameof(source));
+            Guard.ArgumentNotNull(selectorFunc, nameof(selectorFunc));
+            Guard.ArgumentNotNull(updateAction, nameof(updateAction));
 
             var selected = source.Single(selectorFunc);
             updateAction(selected);
         }
 
         /// <summary>
-        /// Determines whether the specified search list contains duplicates.
+        ///     Determines whether the specified search list contains duplicates.
         /// </summary>
         /// <typeparam name="T">The generic type T.</typeparam>
         /// <typeparam name="TResult">The type of the T result.</typeparam>
@@ -91,23 +114,23 @@ namespace CrossPlatformLibrary.Extensions
         /// <returns><c>true</c> if the specified search list contains duplicates; otherwise, <c>false</c>.</returns>
         public static bool AnyDuplicates<T, TResult>(this IEnumerable<T> searchList, Func<T, TResult> selectionCriteria)
         {
-            Guard.ArgumentNotNull(() => searchList);
+            Guard.ArgumentNotNull(searchList, nameof(searchList));
 
             return searchList.Select(selectionCriteria)
-                    .GroupBy(x => x)
-                    .Where(y => y.Count() > 1)
-                    .Select(z => z.Key)
-                    .Any();
+                .GroupBy(x => x)
+                .Where(y => y.Count() > 1)
+                .Select(z => z.Key)
+                .Any();
         }
 
         /// <summary>
-        /// Returns the last object of source enumerable.
+        ///     Returns the last object of source enumerable.
         /// </summary>
         /// <exception cref="ArgumentNullException">The source enumerable is null.</exception>
         /// <exception cref="System.InvalidOperationException">The source enumerable does not contain any elements.</exception>
         public static object Last(this IEnumerable source)
         {
-            Guard.ArgumentNotNull(() => source);
+            Guard.ArgumentNotNull(source, nameof(source));
 
             var lastOrDefault = source.LastOrDefault();
             if (lastOrDefault != null)
@@ -119,14 +142,14 @@ namespace CrossPlatformLibrary.Extensions
         }
 
         /// <summary>
-        /// Returns the last object of source enumerable.
-        /// If there are no items in source enumerable, it returns null.
+        ///     Returns the last object of source enumerable.
+        ///     If there are no items in source enumerable, it returns null.
         /// </summary>
         /// <exception cref="ArgumentNullException">The source enumerable is null.</exception>
         /// <exception cref="System.InvalidOperationException">The source enumerable does not contain any elements.</exception>
         public static object LastOrDefault(this IEnumerable source)
         {
-            Guard.ArgumentNotNull(() => source);
+            Guard.ArgumentNotNull(source, nameof(source));
 
             var list = source as IList;
             if (list != null)
@@ -149,15 +172,17 @@ namespace CrossPlatformLibrary.Extensions
                         {
                             result = e.Current;
                         } while (e.MoveNext());
+
                         return result;
                     }
                 }
             }
+
             return null;
         }
 
         /// <summary>
-        /// Prepends element <paramref name="item"/> to enumerable <paramref name="source"/>.
+        ///     Prepends element <paramref name="item" /> to enumerable <paramref name="source" />.
         /// </summary>
         internal static IEnumerable<T> Prepend<T>(this IEnumerable<T> source, T item)
         {
@@ -170,7 +195,7 @@ namespace CrossPlatformLibrary.Extensions
         }
 
         /// <summary>
-        /// Appends element <paramref name="item"/> to enumerable <paramref name="source"/>.
+        ///     Appends element <paramref name="item" /> to enumerable <paramref name="source" />.
         /// </summary>
         public static IEnumerable<T> Append<T>(this IEnumerable<T> source, T item)
         {
@@ -178,7 +203,7 @@ namespace CrossPlatformLibrary.Extensions
         }
 
         /// <summary>
-        /// Appends element <paramref name="item"/> to enumerable <paramref name="source"/>.
+        ///     Appends element <paramref name="item" /> to enumerable <paramref name="source" />.
         /// </summary>
         public static IEnumerable<T> Add<T>(this IEnumerable<T> source, T item)
         {
@@ -188,6 +213,18 @@ namespace CrossPlatformLibrary.Extensions
             }
 
             yield return item;
+        }
+
+        /// <summary>
+        /// Returns the number of items in <paramref name="enumerable"/>.
+        /// </summary>
+        public static int GetCount(this IEnumerable enumerable)
+        {
+            var enumerator = enumerable.GetEnumerator();
+            int num = 0;
+            while (enumerator.MoveNext())
+                ++num;
+            return num;
         }
     }
 }

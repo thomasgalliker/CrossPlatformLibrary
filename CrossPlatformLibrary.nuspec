@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>CrossPlatformLibrary</id>
+    <version>1.0.0</version>
+    <title>CrossPlatformLibrary</title>
+    <authors>Thomas Galliker</authors>
+    <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
+    <projectUrl>https://github.com/thomasgalliker/CrossPlatformLibrary</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/master/Images/cpl_short.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>An extensible cross-platform toolkit which provides a basic set of functionality used in most mobile apps.</summary>
+    <description>
+      CrossPlatformLibrary is an extensible cross-platform toolkit which provides a basic set of functionality used in most mobile apps such as bootstrapping, exception handling, tracing and UI dispatching.
+    </description>
+    <tags>
+      xamarin pcl CrossPlatformLibrary cross-platform library bootstrapping dispatching tracing exception handling mobile
+      windows universal uwp uap android xamarin.forms xamarin.ios ios monoandroid monodroid monotouch
+    </tags>
+    <releaseNotes>
+      4.0.0-pre
+      - Support for .Net Standard
+
+      3.0.1
+      - Refactored for better IoC support
+      - IContainerExtensions is no longer bootstrapped
+
+      2.0.2-pre
+      - Added new extension methods
+      - Added virtual method ConfigureTracing in Bootstrapper
+
+      2.0.1
+      - Major refactoring to support the "bait-and-switch" PCL pattern
+      - Moved ITracer to new NuGet package "Tracing"
+      - Moved all IValueConverters to new NuGet package "ValueConverters.NET"
+      - Moved ResourceLoader to new NuGet package "ResourceLoader"
+      - Moved XmlSerializerHelper to new NuGet package "XmlSerializerHelper"
+      - Enabled Bootstrapper.Startup() to be called from withing a background thread
+      - Fixed invalid cross-thread exception raised by Bootstrapper.Startup on WP8
+      - Handle DispatcherUnhandledException in Netfx ExceptionHandler
+      - Added localization support
+
+      1.0.73
+      - Added support for Universal Windows Platform (UWP).
+
+      1.0.72
+      - Automatically configure console tracer depending on platform
+      - Added LinkerHelper.cs to solve the Xamarin iOS linker issue
+      - Added CrossPlatformApplication as application bootstrapper for WPF
+      - Optimization: Check synchronization context in iOS DispatcherService before calling BeginInvokeOnMainThread
+      - Removed PhoneTextBoxEx and WPtoolkit dependency. (Moved to new NuGet package named DelayedPhoneTextBox).
+
+      1.0.71
+      - Extracted ObservableView to new NuGet package https://www.nuget.org/packages/ObservableView/
+      - Extracted HighlightMarker to new NuGet package https://www.nuget.org/packages/HighlightMarker/
+    </releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <language>en-US</language>
+    <dependencies>
+      <group>
+      </group>
+      <group targetFramework="uap10.0">
+        <!--Former versions the netcore dependency for UWP cause problems during Bootstrapper.Startup()-->
+        <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="[5.2.2,)" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <!--netstandard2.0-->
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.dll" target="lib\netstandard2.0\CrossPlatformLibrary.dll" />
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.pdb" target="lib\netstandard2.0\CrossPlatformLibrary.pdb" />
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.deps.json" target="lib\netstandard2.0\CrossPlatformLibrary.deps.json" />
+    <file src="CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\netstandard2.0\CrossPlatformLibrary.xml" />
+
+    <!--Xamarin.Android-->
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.dll" target="lib\MonoAndroid10\CrossPlatformLibrary.dll" />
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.pdb" target="lib\MonoAndroid10\CrossPlatformLibrary.pdb" />
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.deps.json" target="lib\MonoAndroid10\CrossPlatformLibrary.deps.json" />
+    <file src="CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\MonoAndroid10\CrossPlatformLibrary.xml" />
+
+    <file src="CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.Android.dll" target="lib\MonoAndroid10\CrossPlatformLibrary.Android.dll" />
+    <file src="CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.Android.pdb" target="lib\MonoAndroid10\CrossPlatformLibrary.Android.pdb" />
+    <file src="CrossPlatformLibrary.Android\bin\Release\CrossPlatformLibrary.Android.xml" target="lib\MonoAndroid10\CrossPlatformLibrary.Android.xml" />
+
+    <!--Xamarin.iOS-->
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.dll" target="lib\xamarin.ios10\CrossPlatformLibrary.dll" />
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.pdb" target="lib\xamarin.ios10\CrossPlatformLibrary.pdb" />
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.deps.json" target="lib\xamarin.ios10\CrossPlatformLibrary.deps.json" />
+    <file src="CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\xamarin.ios10\CrossPlatformLibrary.xml" />
+
+    <file src="CrossPlatformLibrary.iOS\bin\Release\CrossPlatformLibrary.iOS.dll" target="lib\xamarin.ios10\CrossPlatformLibrary.iOS.dll" />
+    <file src="CrossPlatformLibrary.iOS\bin\Release\CrossPlatformLibrary.iOS.pdb" target="lib\xamarin.ios10\CrossPlatformLibrary.iOS.pdb" />
+    <file src="CrossPlatformLibrary.iOS\bin\Release\CrossPlatformLibrary.iOS.xml" target="lib\xamarin.ios10\CrossPlatformLibrary.iOS.xml" />
+    <file src="CrossPlatformLibrary.iOS\LinkerHelper.cs" target="content\xamarin.ios10\LinkerHelper.cs" />
+
+    <!--.Net Framework 4.5-->
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.dll" target="lib\net45\CrossPlatformLibrary.dll" />
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.pdb" target="lib\net45\CrossPlatformLibrary.pdb" />
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.deps.json" target="lib\net45\CrossPlatformLibrary.deps.json" />
+    <file src="CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\net45\CrossPlatformLibrary.xml" />
+
+    <file src="CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.dll" target="lib\net45\CrossPlatformLibrary.dll" />
+    <file src="CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.pdb" target="lib\net45\CrossPlatformLibrary.pdb" />
+    <file src="CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.xml" target="lib\net45\CrossPlatformLibrary.xml" />
+
+    <!--Universal Windows Platform-->
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.dll" target="lib\uap10.0\CrossPlatformLibrary.dll" />
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.pdb" target="lib\uap10.0\CrossPlatformLibrary.pdb" />
+    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.deps.json" target="lib\uap10.0\CrossPlatformLibrary.deps.json" />
+    <file src="CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\uap10.0\CrossPlatformLibrary.xml" />
+
+    <file src="CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.dll" target="lib\uap10.0\CrossPlatformLibrary.dll" />
+    <file src="CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.pdb" target="lib\uap10.0\CrossPlatformLibrary.pdb" />
+    <file src="CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.xml" target="lib\uap10.0\CrossPlatformLibrary.xml" />
+
+  </files>
+</package>

@@ -1,50 +1,42 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-
 using CrossPlatformLibrary.Dispatching;
 using CrossPlatformLibrary.ExceptionHandling;
 using CrossPlatformLibrary.ExceptionHandling.ExceptionHandlingStrategies;
-using CrossPlatformLibrary.Extensions;
+using CrossPlatformLibrary.Internals;
 using CrossPlatformLibrary.IoC;
 using CrossPlatformLibrary.Localization;
 using CrossPlatformLibrary.Tools;
-using CommonServiceLocator;
-using Tracing;
 
 namespace CrossPlatformLibrary.Bootstrapping
 {
     /// <summary>
-    /// Provides an base implementation of <see cref="IBootstrapper"/> which has to be used to startup and shutdown
-    /// your application. The startup sequence contains some virtual method calls which can be overriden by your own
-    /// implementation of  <see cref="Bootstrapper"/>.
-    /// 
-    /// This <see cref="Bootstrapper"/> uses <see cref="SimpleIoc"/> as IoC container.
+    ///     Provides an base implementation of <see cref="IBootstrapper" /> which has to be used to startup and shutdown
+    ///     your application. The startup sequence contains some virtual method calls which can be overriden by your own
+    ///     implementation of  <see cref="Bootstrapper" />.
+    ///     This <see cref="Bootstrapper" /> uses <see cref="SimpleIoc" /> as IoC container.
     /// </summary>
     public class Bootstrapper : Bootstrapper<SimpleIoc>
     {
     }
 
     /// <summary>
-    /// Provides an base implementation of <see cref="IBootstrapper"/> which has to be used to startup and shutdown
-    /// your application. The startup sequence contains some virtual method calls which can be overriden by your own
-    /// implementation of  <see cref="Bootstrapper"/>.
-    /// 
-    /// This <see cref="Bootstrapper{TIocContainer}"/> takes <typeparam name="TIocContainer">a generic IIocContainer</typeparam> as IoC container.
+    ///     Provides an base implementation of <see cref="IBootstrapper" /> which has to be used to startup and shutdown
+    ///     your application. The startup sequence contains some virtual method calls which can be overriden by your own
+    ///     implementation of  <see cref="Bootstrapper" />.
+    ///     This <see cref="Bootstrapper{TIocContainer}" /> takes
+    ///     <typeparam name="TIocContainer">a generic IIocContainer</typeparam>
+    ///     as IoC container.
     /// </summary>
     public class Bootstrapper<TIocContainer> : IBootstrapper where TIocContainer : class, IIocContainer
     {
         private ITracer tracer;
 
         /// <summary>
-        /// Gets the IOC/DI container of the application, which is being
-        /// created as part of the application initialization process.
+        ///     Gets the IOC/DI container of the application, which is being
+        ///     created as part of the application initialization process.
         /// </summary>
         private TIocContainer iocContainer;
-
-        private static ApplicationLifecycle applicationLifecycle = ApplicationLifecycle.Uninitialized;
 
         public Bootstrapper()
         {
@@ -53,26 +45,18 @@ namespace CrossPlatformLibrary.Bootstrapping
 
         public static ApplicationLifecycle ApplicationLifecycle
         {
-            get
-            {
-                return applicationLifecycle;
-            }
+            get;
             internal set // Used for unit testing
-            {
-                applicationLifecycle = value;
-            }
-        }
+            ;
+        } = ApplicationLifecycle.Uninitialized;
 
         ApplicationLifecycle IBootstrapper.ApplicationLifecycle
         {
-            get
-            {
-                return ApplicationLifecycle;
-            }
+            get { return ApplicationLifecycle; }
         }
 
         /// <summary>
-        /// Returns the IoC container to be used for dependency management.
+        ///     Returns the IoC container to be used for dependency management.
         /// </summary>
         protected virtual TIocContainer GetIocContainer()
         {
@@ -89,10 +73,7 @@ namespace CrossPlatformLibrary.Bootstrapping
 
             this.iocContainer = this.GetIocContainer();
 
-            // The Service container is a service locator too. To be backwards compatible set the ServiceLocator property.
-            ServiceLocator.SetLocatorProvider(() => this.iocContainer);
-
-            if (applicationLifecycle == ApplicationLifecycle.Uninitialized)
+            if (ApplicationLifecycle == ApplicationLifecycle.Uninitialized)
             {
                 this.iocContainer.Reset();
 
@@ -104,11 +85,11 @@ namespace CrossPlatformLibrary.Bootstrapping
 
                 this.InternalOnStartup();
             }
-            else if (applicationLifecycle == ApplicationLifecycle.Sleep)
+            else if (ApplicationLifecycle == ApplicationLifecycle.Sleep)
             {
                 this.InternalOnResume();
             }
-            else if(applicationLifecycle == ApplicationLifecycle.Running)
+            else if (ApplicationLifecycle == ApplicationLifecycle.Running)
             {
                 this.tracer.Info($"ApplicationLifecycle is already in state {ApplicationLifecycle.Running}.");
             }
@@ -119,11 +100,11 @@ namespace CrossPlatformLibrary.Bootstrapping
 
         public void Sleep()
         {
-            applicationLifecycle = ApplicationLifecycle.Sleep;
+            ApplicationLifecycle = ApplicationLifecycle.Sleep;
         }
 
         /// <summary>
-        /// Configures a platform-specific default tracer factory.
+        ///     Configures a platform-specific default tracer factory.
         /// </summary>
         private void InternalConfigureTracing()
         {
@@ -142,10 +123,10 @@ namespace CrossPlatformLibrary.Bootstrapping
         }
 
         /// <summary>
-        /// ConfigureTracing is called at the earliest possible point in time to configure the Tracer.
-        /// By default, a platform-matching console tracer is configured.
+        ///     ConfigureTracing is called at the earliest possible point in time to configure the Tracer.
+        ///     By default, a platform-matching console tracer is configured.
         /// </summary>
-        protected virtual void ConfigureTracing(TIocContainer container) 
+        protected virtual void ConfigureTracing(TIocContainer container)
         {
             if (container is ISimpleIoc simpleIoc)
             {
@@ -178,11 +159,12 @@ namespace CrossPlatformLibrary.Bootstrapping
         }
 
         /// <summary>
-        /// A handler for bootstrapping errors occurring during startup and run.
+        ///     A handler for bootstrapping errors occurring during startup and run.
         /// </summary>
         /// <param name="ex">The exception that has occurred.</param>
         /// <returns>
-        /// <c>True</c> if the exception was handled by the method and can be ignored by the caller of this method, <c>false</c> otherwise.
+        ///     <c>True</c> if the exception was handled by the method and can be ignored by the caller of this method,
+        ///     <c>false</c> otherwise.
         /// </returns>
         protected virtual bool HandleBootstrappingException(Exception ex)
         {
@@ -196,17 +178,22 @@ namespace CrossPlatformLibrary.Bootstrapping
                     this.tracer.Exception(ex, "BootstrapperUnhandledException");
                 }
             }
-            catch { }
+            catch
+            {
+            }
 
             return false;
         }
 
         /// <summary>
-        /// The purpose of the instance which will be created from the given type is to handle any <see cref="Exception"/>
-        /// which is not handled by the application.
+        ///     The purpose of the instance which will be created from the given type is to handle any <see cref="Exception" />
+        ///     which is not handled by the application.
         /// </summary>
-        /// <remarks>When overridden by inheriting classes, this method must return a type which implements <see cref="IExceptionHandlingStrategy"/>.
-        /// If this method returns <c>null</c>, the <see cref="TracingExceptionHandlingStrategy"/> is used as default.</remarks>
+        /// <remarks>
+        ///     When overridden by inheriting classes, this method must return a type which implements
+        ///     <see cref="IExceptionHandlingStrategy" />.
+        ///     If this method returns <c>null</c>, the <see cref="TracingExceptionHandlingStrategy" /> is used as default.
+        /// </remarks>
         protected virtual Type GetExceptionHandlingStrategyType()
         {
             return this.GetDefaultExceptionHandlingStrategyType();
@@ -223,7 +210,7 @@ namespace CrossPlatformLibrary.Bootstrapping
             {
                 this.tracer.Debug("Calling custom OnStartup procedure");
                 this.OnStartup();
-                applicationLifecycle = ApplicationLifecycle.Running;
+                ApplicationLifecycle = ApplicationLifecycle.Running;
             }
             catch (Exception ex)
             {
@@ -235,9 +222,12 @@ namespace CrossPlatformLibrary.Bootstrapping
         }
 
         /// <summary>
-        /// Does the actual start procedure for the application or service.
+        ///     Does the actual start procedure for the application or service.
         /// </summary>
-        /// <remarks>When implemented by inheriting classes, this method will show the shell form of the application or start the service.</remarks>
+        /// <remarks>
+        ///     When implemented by inheriting classes, this method will show the shell form of the application or start the
+        ///     service.
+        /// </remarks>
         protected virtual void OnStartup()
         {
         }
@@ -253,7 +243,7 @@ namespace CrossPlatformLibrary.Bootstrapping
             {
                 this.tracer.Debug("Calling custom OnResume procedure");
                 this.OnResume();
-                applicationLifecycle = ApplicationLifecycle.Running;
+                ApplicationLifecycle = ApplicationLifecycle.Running;
             }
             catch (Exception ex)
             {
@@ -291,8 +281,8 @@ namespace CrossPlatformLibrary.Bootstrapping
         }
 
         /// <summary>
-        /// ConfigureContainer is used to register services.
-        /// After that the container is ready for service resolves.
+        ///     ConfigureContainer is used to register services.
+        ///     After that the container is ready for service resolves.
         /// </summary>
         protected virtual void ConfigureContainer(TIocContainer container)
         {
@@ -315,15 +305,18 @@ namespace CrossPlatformLibrary.Bootstrapping
             }
             finally
             {
-                applicationLifecycle = ApplicationLifecycle.Uninitialized;
+                ApplicationLifecycle = ApplicationLifecycle.Uninitialized;
                 this.iocContainer.Reset();
             }
         }
 
         /// <summary>
-        /// Does the actual shutdown procedure for the application or service.
+        ///     Does the actual shutdown procedure for the application or service.
         /// </summary>
-        /// <remarks>When overridden by inheriting classes, this method will close the shell form of the application or stop the service.</remarks>
+        /// <remarks>
+        ///     When overridden by inheriting classes, this method will close the shell form of the application or stop the
+        ///     service.
+        /// </remarks>
         protected virtual void OnShutdown()
         {
         }

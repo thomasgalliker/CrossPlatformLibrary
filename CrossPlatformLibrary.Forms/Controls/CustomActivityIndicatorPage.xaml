@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CrossPlatformLibrary.Forms.Controls.CustomActivityIndicatorPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    BackgroundColor="Transparent">
+    <ContentPage.Content>
+        <Grid
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Padding="50">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <BoxView
+                CornerRadius="8"
+                BackgroundColor="Gray"
+                HeightRequest="100"
+                WidthRequest="100">
+         
+            </BoxView>
+            <controls:CustomActivityIndicator
+                x:Name="ActivityIndicator"
+                IsVisible="True" />
+        </Grid>
+      </ContentPage.Content>
+</ContentPage>

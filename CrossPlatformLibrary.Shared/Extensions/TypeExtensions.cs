@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-using Guards;
+using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Extensions
 {
@@ -87,7 +87,7 @@ namespace CrossPlatformLibrary.Extensions
 
         public static string GetFormattedName(this Type type)
         {
-            Guard.ArgumentNotNull(() => type);
+            Guard.ArgumentNotNull(type, nameof(type));
 
             var typeInfo = type.GetTypeInfo();
             if (!typeInfo.IsGenericType)
@@ -100,7 +100,7 @@ namespace CrossPlatformLibrary.Extensions
 
         public static string GetFormattedFullname(this Type type)
         {
-            Guard.ArgumentNotNull(() => type);
+            Guard.ArgumentNotNull(type, nameof(type));
 
             var typeInfo = type.GetTypeInfo();
             if (!typeInfo.IsGenericType)
@@ -117,7 +117,7 @@ namespace CrossPlatformLibrary.Extensions
         /// </summary>
         public static bool IsCompilerGenerated(this Type type)
         {
-            Guard.ArgumentNotNull(() => type);
+            Guard.ArgumentNotNull(type, nameof(type));
 
             return type.GetTypeInfo().IsDefined(typeof(CompilerGeneratedAttribute), false) || IsCompilerGenerated(type.DeclaringType);
         }
