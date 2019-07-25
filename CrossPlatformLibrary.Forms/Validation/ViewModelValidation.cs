@@ -46,7 +46,7 @@ namespace CrossPlatformLibrary.Forms.Validation
             if (!this.HasValidations)
             {
                 var errorMessage = $"{nameof(this.ValidateAll)} cannot find any validation rules. Use method {nameof(this.AddValidationFor)} to setup validation rules.";
-                this.AddErrorMessageForProperty("InvalidOperationException", errorMessage);
+                this.AddErrorMessageForPropertyInternal("InvalidOperationException", errorMessage);
                 throw new InvalidOperationException(errorMessage);
             }
 
@@ -77,11 +77,11 @@ namespace CrossPlatformLibrary.Forms.Validation
         {
             if (propertyValidation.IsInvalid())
             {
-                this.AddErrorMessageForProperty(propertyValidation.PropertyName, propertyValidation.GetErrorMessage());
+                this.AddErrorMessageForPropertyInternal(propertyValidation.PropertyName, propertyValidation.GetErrorMessage());
             }
         }
 
-        private void AddErrorMessageForProperty(string propertyName, string errorMessage)
+        private void AddErrorMessageForPropertyInternal(string propertyName, string errorMessage)
         {
             if (this.errorMessages.ContainsKey(propertyName))
             {
@@ -91,6 +91,16 @@ namespace CrossPlatformLibrary.Forms.Validation
             {
                 this.errorMessages.Add(propertyName, new List<string> { errorMessage });
             }
+        }
+
+        /// <summary>
+        /// Manually add <paramref name="errorMessage"/> for a particular <paramref name="propertyName"/>.
+        /// Each call to this method raises a <see cref="ErrorsChanged"/> event.
+        /// </summary>
+        public void AddErrorMessageForProperty(string propertyName, string errorMessage)
+        {
+            this.AddErrorMessageForPropertyInternal(propertyName, errorMessage);
+            this.OnErrorsChanged(propertyName);
         }
 
         #region INotifyDataErrorInfo
