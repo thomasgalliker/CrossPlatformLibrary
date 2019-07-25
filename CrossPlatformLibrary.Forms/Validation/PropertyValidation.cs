@@ -1,5 +1,5 @@
 ﻿using System;
-using CrossPlatformLibrary.Forms.Validation.Rules;
+using System.Reflection;
 
 namespace CrossPlatformLibrary.Forms.Validation
 {
@@ -7,7 +7,9 @@ namespace CrossPlatformLibrary.Forms.Validation
     {
         private Func<bool> validCriteria;
         private Func<string> errorFunction;
-        private string errorMessage;
+        private PropertyInfo propertyInfo;
+        private object baseViewModel;
+        private IValidationRule validationRule;
 
         public PropertyValidation(string propertyName)
         {
@@ -22,26 +24,30 @@ namespace CrossPlatformLibrary.Forms.Validation
         /// <exception cref="System.InvalidOperationException">You can only set the validation criteria once.</exception>
         public PropertyValidation When(Func<bool> validationCriteria)
         {
-            if (this.validCriteria != null)
-            {
-                throw new InvalidOperationException("You can only set the validation criteria once.");
-            }
+            this.EnsureValidationCriteria();
 
             this.validCriteria = validationCriteria;
 
             return this;
         }
 
-        public PropertyValidation When(IValidationRule validationRule)
+        public PropertyValidation When<T>(IValidationRule<T> validationRule)
+        {
+            this.EnsureValidationCriteria();
+
+            this.validationRule = validationRule;
+
+            this.validCriteria = () => !validationRule.IsValid((T)this.GetPropertyValue());
+
+            return this;
+        }
+
+        private void EnsureValidationCriteria()
         {
             if (this.validCriteria != null)
             {
                 throw new InvalidOperationException("You can only set the validation criteria once.");
             }
-
-            this.validCriteria = () => !validationRule.IsValid();
-
-            return this;
         }
 
         /// <summary>
@@ -55,23 +61,17 @@ namespace CrossPlatformLibrary.Forms.Validation
         /// <exception cref="System.InvalidOperationException">You can only set the message once.</exception>
         public PropertyValidation Show(string message)
         {
-            if (this.errorMessage != null && this.errorFunction == null)
-            {
-                throw new InvalidOperationException("You can only set the message once.");
-            }
+            this.EnsureErrorFunction();
 
-            this.errorMessage = message;
+            this.errorFunction = () => message;
             return this;
         }
 
         public PropertyValidation ShowNewLine()
         {
-            if (this.errorMessage != null && this.errorFunction == null)
-            {
-                throw new InvalidOperationException("You can only set the message once.");
-            }
+            this.EnsureErrorFunction();
 
-            this.errorMessage = string.Empty;
+            this.errorFunction = () => string.Empty;
             return this;
         }
 
@@ -85,13 +85,37 @@ namespace CrossPlatformLibrary.Forms.Validation
         /// <exception cref="System.InvalidOperationException">You can only set the message once.</exception>
         public PropertyValidation Show(Func<string> function)
         {
-            if (this.errorFunction != null && this.errorMessage == null)
-            {
-                throw new InvalidOperationException("You can only set the message once.");
-            }
+            this.EnsureErrorFunction();
 
             this.errorFunction = function;
             return this;
+        }
+
+        public PropertyValidation Show(Func<object, string> function)
+        {
+            this.EnsureErrorFunction();
+
+            this.errorFunction = () => function(this.GetPropertyValue());
+            return this;
+        }
+
+        private void EnsureErrorFunction()
+        {
+            if (this.errorFunction != null)
+            {
+                throw new InvalidOperationException("You can only set the message once.");
+            }
+        }
+
+        internal void SetContext(object baseViewModel)
+        {
+            this.baseViewModel = baseViewModel;
+            this.propertyInfo = baseViewModel.GetType().GetProperty(this.PropertyName);
+        }
+
+        private object GetPropertyValue()
+        {
+            return this.propertyInfo.GetValue(this.baseViewModel);
         }
 
         /// <summary>
@@ -104,12 +128,13 @@ namespace CrossPlatformLibrary.Forms.Validation
         /// </exception>
         public bool IsInvalid()
         {
-            if (this.validCriteria == null)
+            if (this.validCriteria != null)
             {
-                throw new InvalidOperationException("No criteria have been provided for this validation. (Use the 'When(..)' method.)");
+                return this.validCriteria();
             }
 
-            return this.validCriteria();
+            throw new InvalidOperationException("No criteria have been provided for this validation. (Use the 'When(..)' method.)");
+
         }
 
         /// <summary>
@@ -122,12 +147,28 @@ namespace CrossPlatformLibrary.Forms.Validation
         /// </exception>
         public string GetErrorMessage()
         {
-            if (this.errorMessage == null && this.errorFunction == null)
+            if (this.errorFunction != null)
             {
-                throw new InvalidOperationException("No error message has been set for this validation. (Use the 'Show(..)' method.)");
+                return this.errorFunction();
             }
 
-            return this.errorMessage ?? this.errorFunction.Invoke();
+            // Get parameter-less error message
+            if (this.validationRule is IValidationMessage validationMessage)
+            {
+                return validationMessage.GetErrorMessage();
+            }
+
+            // Get error message with property value as parameter
+            if (this.validationRule != null)
+            {
+                var getErrorMessageMethod = this.validationRule.GetType().GetMethod(nameof(IValidationMessage<object>.GetErrorMessage));
+                if (getErrorMessageMethod != null)
+                {
+                    return getErrorMessageMethod.Invoke(this.validationRule, new[] { this.GetPropertyValue() }) as string;
+                }
+            }
+
+            throw new InvalidOperationException("No error message has been set for this validation. (Use the 'Show(..)' method.)");
         }
 
         /// <summary>

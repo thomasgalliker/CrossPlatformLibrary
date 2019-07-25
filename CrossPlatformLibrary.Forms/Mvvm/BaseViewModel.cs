@@ -142,6 +142,7 @@ namespace CrossPlatformLibrary.Forms.Mvvm
             if (viewModelValidation != null)
             {
                 this.Validation = viewModelValidation;
+                this.Validation.SetContext(this);
             }
         }
 

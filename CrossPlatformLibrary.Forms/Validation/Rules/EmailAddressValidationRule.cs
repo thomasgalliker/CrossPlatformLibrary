@@ -1,29 +1,23 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace CrossPlatformLibrary.Forms.Validation.Rules
 {
-    public class EmailAddressValidationRule : IValidationRule
+    public class EmailAddressValidationRule : IValidationRule<string>, IValidationMessage<string>
     {
-        private readonly Func<string> emailAddresse;
-
-        public EmailAddressValidationRule(Func<string> emailAddresse)
+        public string GetErrorMessage(string emailAddress)
         {
-            this.emailAddresse = emailAddresse;
+            return $"Email address '{emailAddress}' is not valid.";
         }
 
-        public string ValidationMessage { get; set; }
-
-        public bool IsValid()
+        public bool IsValid(string emailAddress)
         {
-            var str = this.emailAddresse();
-            if (str == null)
+            if (emailAddress == null)
             {
                 return false;
             }
 
             var regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-            var match = regex.Match(str);
+            var match = regex.Match(emailAddress);
 
             return match.Success;
         }

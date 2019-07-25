@@ -15,6 +15,10 @@ namespace CrossPlatformLibrary.Forms.Validation
         private readonly IDictionary<string, IList<string>> errorMessages = new Dictionary<string, IList<string>>();
         private static readonly ReadOnlyCollection<string> EmptyErrorsCollection = new ReadOnlyCollection<string>(new List<string>(0));
 
+        public ViewModelValidation()
+        {
+        }
+
         public ViewModelValidation Errors => this;
 
         public ReadOnlyCollection<string> this[string propertyName]
@@ -69,11 +73,11 @@ namespace CrossPlatformLibrary.Forms.Validation
             }
         }
 
-        private void PerformValidation(PropertyValidation validation)
+        private void PerformValidation(PropertyValidation propertyValidation)
         {
-            if (validation.IsInvalid())
+            if (propertyValidation.IsInvalid())
             {
-                this.AddErrorMessageForProperty(validation.PropertyName, validation.GetErrorMessage());
+                this.AddErrorMessageForProperty(propertyValidation.PropertyName, propertyValidation.GetErrorMessage());
             }
         }
 
@@ -160,6 +164,11 @@ namespace CrossPlatformLibrary.Forms.Validation
             base.OnPropertyChanged(args);
             this.ValidateProperty(args.PropertyName);
 
+        }
+
+        internal void SetContext(object baseViewModel)
+        {
+            this.validations.ForEach(v => v.SetContext(baseViewModel));
         }
     }
 }
