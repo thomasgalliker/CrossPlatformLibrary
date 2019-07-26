@@ -70,7 +70,7 @@ steps:
   continueOnError: false
   inputs:
     command: test
-    projects: '**/CrossPlatformLibrary.Tests.csproj'
+    projects: '**/*.Tests.csproj'
     arguments: ''
     
 
