@@ -103,6 +103,22 @@ namespace CrossPlatformLibrary.Forms.Validation
             this.OnErrorsChanged(propertyName);
         }
 
+        /// <summary>
+        /// Manually add <paramref name="errorMessages"/> for multiple properties.
+        /// </summary>
+        public void AddErrorMessagesForProperty(Dictionary<string, List<string>> errorMessages)
+        {
+            foreach (var property in errorMessages)
+            {
+                foreach (var errorMessage in property.Value)
+                {
+                    this.AddErrorMessageForPropertyInternal(property.Key, errorMessage);
+                }
+            }
+
+            this.UpdateAllValidationEnabledProperties();
+        }
+
         #region INotifyDataErrorInfo
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
