@@ -133,16 +133,19 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
                 Email = "thomas@bluewin.ch"
             };
             var isValid1 = testViewModel.Validation.IsValid();
+
+            var hasErrors1 = testViewModel.Validation.HasErrors;
             testViewModel.Validation.AddErrorMessageForProperty(nameof(TestViewModel.Email), "Some backend validation error");
-            var isValid2 = testViewModel.Validation.IsValid();
+            var hasErrors2 = testViewModel.Validation.HasErrors;
 
             // Act
-            var isValid3 = testViewModel.Validation.IsValid();
+            var isValid2 = testViewModel.Validation.IsValid();
 
             // Assert
-            isValid1.Should().BeTrue(because: "Initially, we're all green");
-            isValid2.Should().BeFalse(because: "We add a validation error manually");
-            isValid3.Should().BeTrue(because: "IsValid clears all manually added error messages");
+            isValid1.Should().BeTrue(because: "initially, we're all green");
+            hasErrors1.Should().BeFalse(because: "initially, we're all green");
+            hasErrors2.Should().BeTrue(because: "we add a validation error manually");
+            isValid2.Should().BeTrue(because: "IsValid clears all manually added error messages");
 
             testViewModel.Validation.Errors.HasErrors.Should().BeFalse();
         }
