@@ -36,7 +36,7 @@ namespace CrossPlatformLibrary.Forms.Validation
         public DelegateValidation AddDelegateValidation(params string[] propertyNames)
         {
             var validation = new DelegateValidation(propertyNames);
-            this.validations.Add(validation);
+            this.AddValidation(validation);
 
             return validation;
         }
@@ -44,7 +44,7 @@ namespace CrossPlatformLibrary.Forms.Validation
         public PropertyValidation AddValidationFor(string propertyName)
         {
             var validation = new PropertyValidation(propertyName);
-            this.validations.Add(validation);
+            this.AddValidation(validation);
 
             return validation;
         }

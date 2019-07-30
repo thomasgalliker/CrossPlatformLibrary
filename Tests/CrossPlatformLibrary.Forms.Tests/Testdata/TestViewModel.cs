@@ -62,7 +62,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Testdata
 
             // Validation delegated to async service
             viewModelValidation.AddDelegateValidation(nameof(this.UserName), nameof(this.Email))
-                .Show(async () => (await this.validationService.ValidatePersonAsync(this.CreatePerson())).Errors);
+                .Validate(async () => (await this.validationService.ValidatePersonAsync(this.CreatePerson())).Errors);
 
             return viewModelValidation;
         }

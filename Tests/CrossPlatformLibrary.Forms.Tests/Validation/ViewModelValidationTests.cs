@@ -212,7 +212,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
         }
 
         [Fact]
-        public async Task ShouldAddValidation_IsValidFalse()
+        public async Task ShouldAddDelegateValidation_IsValidFalse()
         {
             // Arrange
             var validationResultDto = new ValidationResultDto

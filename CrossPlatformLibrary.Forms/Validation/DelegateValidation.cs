@@ -10,7 +10,7 @@ namespace CrossPlatformLibrary.Forms.Validation
         private static readonly Dictionary<string, List<string>> EmptyErrorsCollection = new Dictionary<string, List<string>>(0);
 
         private readonly TaskDelayer taskDelayer = new TaskDelayer();
-        private readonly TimeSpan delay = TimeSpan.FromMilliseconds(200);
+        private TimeSpan delay;
         private Func<Task<Dictionary<string, List<string>>>> errorFunction;
 
         public DelegateValidation(string[] propertyNames)
@@ -18,19 +18,17 @@ namespace CrossPlatformLibrary.Forms.Validation
             this.PropertyNames = propertyNames;
         }
 
-        public void Show(Func<Task<Dictionary<string, List<string>>>> function)
+        public DelegateValidation Validate(Func<Task<Dictionary<string, List<string>>>> function, TimeSpan? validationDelay = null)
         {
-            this.EnsureErrorFunction();
-
             this.errorFunction = function;
+            return this.WithDelay(validationDelay ?? TimeSpan.Zero);
         }
 
-        private void EnsureErrorFunction()
+        public DelegateValidation WithDelay(TimeSpan validationDelay)
         {
-            if (this.errorFunction != null)
-            {
-                throw new InvalidOperationException("You can only set the message once.");
-            }
+            this.delay = validationDelay;
+
+            return this;
         }
 
         public string[] PropertyNames { get; }
@@ -38,7 +36,17 @@ namespace CrossPlatformLibrary.Forms.Validation
         public async Task<Dictionary<string, List<string>>> GetErrors()
         {
             Debug.WriteLine($"GetErrors");
-            var result = await this.taskDelayer.RunWithDelay(this.delay, () => this.errorFunction(), () => EmptyErrorsCollection);
+
+            Dictionary<string, List<string>> result;
+            if (this.delay > TimeSpan.Zero)
+            {
+                result = await this.taskDelayer.RunWithDelay(this.delay, () => this.errorFunction(), () => EmptyErrorsCollection);
+            }
+            else
+            {
+                result = await this.errorFunction();
+            }
+
             Debug.WriteLine($"GetErrors (result={result.Count})");
 
             return result;

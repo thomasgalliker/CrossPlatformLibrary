@@ -273,7 +273,7 @@ namespace SampleApp.ViewModels
                 .Show(() => $"Username must not be empty");
 
             viewModelValidation.AddDelegateValidation(nameof(this.UserName))
-                .Show(async () => (await this.validationService.ValidatePersonAsync(this.CreatePerson())).Errors);
+                .Validate(async () => (await this.validationService.ValidatePersonAsync(this.CreatePerson())).Errors, validationDelay: TimeSpan.FromMilliseconds(1000));
 
             return viewModelValidation;
         }

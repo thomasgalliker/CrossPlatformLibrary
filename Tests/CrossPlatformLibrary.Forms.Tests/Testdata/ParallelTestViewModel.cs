@@ -1,3 +1,4 @@
+using System;
 using CrossPlatformLibrary.Forms.Mvvm;
 using CrossPlatformLibrary.Forms.Validation;
 using SampleApp.Model;
@@ -15,7 +16,8 @@ namespace CrossPlatformLibrary.Forms.Tests.Testdata
             {
                 var personId = i;
                 this.Validation.AddDelegateValidation(nameof(this.UserName))
-                    .Show(async () => (await validationService.ValidatePersonAsync(this.CreatePerson(personId))).Errors);
+                    .Validate(async () => (await validationService.ValidatePersonAsync(this.CreatePerson(personId))).Errors)
+                    .WithDelay(TimeSpan.FromMilliseconds(200));
             }
 
         }
