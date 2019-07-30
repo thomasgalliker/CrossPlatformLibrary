@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using SampleApp.Services;
+using SampleApp.Validation;
 using SampleApp.ViewModels;
 using Xamarin.Forms;
 
@@ -16,7 +17,8 @@ namespace SampleApp
 
                 var displayService = new DisplayService((t, m) => this.DisplayAlert(t, m, "OK"));
                 var countryService = new CountryService();
-                this.BindingContext = new MainViewModel(displayService, countryService);
+                var validationService = new ValidationService();
+                this.BindingContext = new MainViewModel(displayService, countryService, validationService);
             }
             catch (Exception e)
             {

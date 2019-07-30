@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Moq" Version="4.10.1" />
     <PackageReference Include="FluentAssertions" Version="5.6.0" />
-    <PackageReference Include="ObjectDumper.NET" Version="2.4.19119.1-pre" />
+    <PackageReference Include="ObjectDumper.NET" Version="2.4.19166.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
     <PackageReference Include="TestFactory" Version="1.0.19011.18" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\CrossPlatformLibrary.Forms\CrossPlatformLibrary.Forms.csproj" />
     <ProjectReference Include="..\..\CrossPlatformLibrary\CrossPlatformLibrary.csproj" />
+    <ProjectReference Include="..\..\Samples\SampleApp\SampleApp\SampleApp.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Mvvm;
 
@@ -11,7 +13,7 @@ namespace CrossPlatformLibrary.Forms.Validation
 {
     public class ViewModelValidation : BindableBase, IValidatable, INotifyDataErrorInfo
     {
-        private readonly List<PropertyValidation> validations = new List<PropertyValidation>();
+        private readonly List<IValidation> validations = new List<IValidation>();
         private readonly IDictionary<string, IList<string>> errorMessages = new Dictionary<string, IList<string>>();
         private static readonly ReadOnlyCollection<string> EmptyErrorsCollection = new ReadOnlyCollection<string>(new List<string>(0));
 
@@ -22,11 +24,21 @@ namespace CrossPlatformLibrary.Forms.Validation
         public ViewModelValidation Errors => this;
 
         public ReadOnlyCollection<string> this[string propertyName]
+            => this.errorMessages.ContainsKey(propertyName)
+                ? new ReadOnlyCollection<string>(this.errorMessages[propertyName])
+                : EmptyErrorsCollection;
+
+        public void AddValidation(IValidation validation)
         {
-            get
-            {
-                return this.errorMessages.ContainsKey(propertyName) ? new ReadOnlyCollection<string>(this.errorMessages[propertyName]) : EmptyErrorsCollection;
-            }
+            this.validations.Add(validation);
+        }
+
+        public DelegateValidation AddDelegateValidation(params string[] propertyNames)
+        {
+            var validation = new DelegateValidation(propertyNames);
+            this.validations.Add(validation);
+
+            return validation;
         }
 
         public PropertyValidation AddValidationFor(string propertyName)
@@ -39,18 +51,26 @@ namespace CrossPlatformLibrary.Forms.Validation
 
         public bool HasValidations => this.validations.Any();
 
-        private void ValidateAll()
+        private async Task ValidateAll()
         {
             this.errorMessages.Clear();
 
             if (!this.HasValidations)
             {
-                var errorMessage = $"{nameof(this.ValidateAll)} cannot find any validation rules. Use method {nameof(this.AddValidationFor)} to setup validation rules.";
+                var errorMessage = $"Cannot find any validation rules. Use method {nameof(this.AddDelegateValidation)} to setup validation rules.";
                 this.AddErrorMessageForPropertyInternal("InvalidOperationException", errorMessage);
                 throw new InvalidOperationException(errorMessage);
             }
 
-            this.validations.ForEach(this.PerformValidation);
+            //foreach (var validation in this.validations)
+            //{
+            //    // TODO: Parallelize validation (thread-safety!)
+            //    await this.PerformValidation(validation);
+            //}
+
+            var validationTasks = this.validations.Select(this.PerformValidation).ToList();
+            await Task.WhenAll(validationTasks);
+
             this.UpdateAllValidationEnabledProperties();
         }
 
@@ -62,40 +82,62 @@ namespace CrossPlatformLibrary.Forms.Validation
             this.OnErrorsChanged(string.Empty);
         }
 
-        internal void ValidateProperty(string propertyName)
+        internal async Task ValidateProperty(string propertyName)
         {
+            Debug.WriteLine($"ValidateProperty(propertyName: \"{propertyName}\")");
+
             if (this.errorMessages.ContainsKey(propertyName))
             {
                 this.errorMessages[propertyName].Clear();
 
-                this.validations.Where(v => v.PropertyName == propertyName).ForEach(this.PerformValidation);
+                //foreach (var validation in this.validations.Where(v => v.PropertyNames.Contains(propertyName)))
+                //{
+                //    // TODO: Parallelize validation (thread-safety!)
+                //    await this.PerformValidation(validation);
+                //}
+
+                var validationTasks = this.validations.Where(v => v.PropertyNames.Contains(propertyName)).Select(this.PerformValidation).ToList();
+                await Task.WhenAll(validationTasks);
+
                 this.OnErrorsChanged(propertyName);
             }
         }
 
-        private void PerformValidation(PropertyValidation propertyValidation)
+        private async Task PerformValidation(IValidation validation)
         {
-            if (propertyValidation.IsInvalid())
+            Debug.WriteLine($"PerformValidation(validation: {validation.GetType().GetFormattedName()})");
+
+            var propertyErrors = await validation.GetErrors();
+            if (propertyErrors != null && propertyErrors.Any())
             {
-                this.AddErrorMessageForPropertyInternal(propertyValidation.PropertyName, propertyValidation.GetErrorMessage());
+                foreach (var propertyError in propertyErrors)
+                {
+                    foreach (var message in propertyError.Value)
+                    {
+                        this.AddErrorMessageForPropertyInternal(propertyError.Key, message);
+                    }
+                }
             }
         }
 
         private void AddErrorMessageForPropertyInternal(string propertyName, string errorMessage)
         {
-            if (this.errorMessages.ContainsKey(propertyName))
+            lock (this.errorMessages)
             {
-                this.errorMessages[propertyName].Add(errorMessage);
-            }
-            else
-            {
-                this.errorMessages.Add(propertyName, new List<string> { errorMessage });
+                if (this.errorMessages.ContainsKey(propertyName))
+                {
+                    this.errorMessages[propertyName].Add(errorMessage);
+                }
+                else
+                {
+                    this.errorMessages.Add(propertyName, new List<string> { errorMessage });
+                }
             }
         }
 
         /// <summary>
-        /// Manually add <paramref name="errorMessage"/> for a particular <paramref name="propertyName"/>.
-        /// Each call to this method raises a <see cref="ErrorsChanged"/> event.
+        ///     Manually add <paramref name="errorMessage" /> for a particular <paramref name="propertyName" />.
+        ///     Each call to this method raises a <see cref="ErrorsChanged" /> event.
         /// </summary>
         public void AddErrorMessageForProperty(string propertyName, string errorMessage)
         {
@@ -104,7 +146,7 @@ namespace CrossPlatformLibrary.Forms.Validation
         }
 
         /// <summary>
-        /// Manually add <paramref name="errorMessages"/> for multiple properties.
+        ///     Manually add <paramref name="errorMessages" /> for multiple properties.
         /// </summary>
         public void AddErrorMessagesForProperty(Dictionary<string, List<string>> errorMessages)
         {
@@ -120,12 +162,16 @@ namespace CrossPlatformLibrary.Forms.Validation
         }
 
         #region INotifyDataErrorInfo
+
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
         /// <summary>
-        /// Gets the validation errors for a specified property or for the entire entity.
+        ///     Gets the validation errors for a specified property or for the entire entity.
         /// </summary>
-        /// <param name="propertyName">The name of the property to retrieve validation errors for; or null or <see cref="F:System.String.Empty" />, to retrieve entity-level errors.</param>
+        /// <param name="propertyName">
+        ///     The name of the property to retrieve validation errors for; or null or
+        ///     <see cref="F:System.String.Empty" />, to retrieve entity-level errors.
+        /// </param>
         /// <returns>The validation errors for the property or entity.</returns>
         public IEnumerable GetErrors(string propertyName)
         {
@@ -142,13 +188,12 @@ namespace CrossPlatformLibrary.Forms.Validation
             return this.errorMessages;
         }
 
-        public bool HasErrors
-        {
-            get { return this.GetErrors().Count > 0; }
-        }
+        public bool HasErrors => this.GetErrors().Count > 0;
 
         private void OnErrorsChanged(string propertyName)
         {
+            Debug.WriteLine($"OnErrorsChanged(propertyName: \"{propertyName}\")");
+
             this.RaisePropertyChanged(nameof(this.Errors));
             this.RaisePropertyChanged(nameof(this.HasErrors));
             this.RaisePropertyChanged($"Item[{propertyName}]");
@@ -177,24 +222,26 @@ namespace CrossPlatformLibrary.Forms.Validation
             this.UpdateAllValidationEnabledProperties();
         }
 
-        public bool IsValid()
+        public async Task<bool> IsValidAsync()
         {
-            this.ValidateAll();
+            await this.ValidateAll();
 
             return !this.HasErrors;
         }
+
         #endregion
 
         protected override void OnPropertyChanged(PropertyChangedEventArgs args)
         {
             base.OnPropertyChanged(args);
             this.ValidateProperty(args.PropertyName);
-
         }
 
-        internal void SetContext(object baseViewModel)
+        internal void TrySetContext(object baseViewModel)
         {
-            this.validations.ForEach(v => v.SetContext(baseViewModel));
+            this.validations
+                .OfType<IContextAware>()
+                .ForEach(v => v.SetContext(baseViewModel));
         }
     }
 }

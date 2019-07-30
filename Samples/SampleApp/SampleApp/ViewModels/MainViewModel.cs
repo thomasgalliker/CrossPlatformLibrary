@@ -6,7 +6,9 @@ using System.Windows.Input;
 using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Forms.Mvvm;
 using CrossPlatformLibrary.Forms.Validation;
+using SampleApp.Model;
 using SampleApp.Services;
+using SampleApp.Validation;
 using Xamarin.Forms;
 
 namespace SampleApp.ViewModels
@@ -15,6 +17,7 @@ namespace SampleApp.ViewModels
     {
         private readonly DisplayService displayService;
         private readonly ICountryService countryService;
+        private readonly IValidationService validationService;
         private CountryViewModel country;
         private string notes;
         private string adminEmailAddress;
@@ -31,10 +34,14 @@ namespace SampleApp.ViewModels
         private string countrySearchText;
         private ICommand autoCompleteSearchCommand;
 
-        public MainViewModel(DisplayService displayService, ICountryService countryService)
+        public MainViewModel(
+            DisplayService displayService,
+            ICountryService countryService,
+            IValidationService validationService)
         {
             this.displayService = displayService;
             this.countryService = countryService;
+            this.validationService = validationService;
 
             this.ViewModelError = ViewModelError.None;
             this.User = new UserDto();
@@ -58,13 +65,13 @@ namespace SampleApp.ViewModels
 
         public int UserId
         {
-            get => this.User.Id;
+            get => this.User?.Id ?? 0;
             set => this.SetProperty(this.User, value, nameof(this.UserId), nameof(this.User.Id));
         }
 
         public string UserName
         {
-            get => this.User.UserName;
+            get => this.User?.UserName;
             set => this.SetProperty(this.User, value);
         }
 
@@ -193,7 +200,7 @@ namespace SampleApp.ViewModels
 
             await Task.Delay(1000);
 
-            var isValid = this.Validation.IsValid();
+            var isValid = await this.Validation.IsValidAsync();
             if (isValid)
             {
                 // TODO Save...
@@ -265,11 +272,18 @@ namespace SampleApp.ViewModels
                 .When(() => string.IsNullOrWhiteSpace(this.UserName))
                 .Show(() => $"Username must not be empty");
 
-            viewModelValidation.AddValidationFor(nameof(this.UserName))
-                .When(() => string.Equals(this.UserName, "thomasgalliker", StringComparison.InvariantCultureIgnoreCase))
-                .Show(() => $"Username '{this.UserName}' already exists");
+            viewModelValidation.AddDelegateValidation(nameof(this.UserName))
+                .Show(async () => (await this.validationService.ValidatePersonAsync(this.CreatePerson())).Errors);
 
             return viewModelValidation;
+        }
+
+        private PersonDto CreatePerson()
+        {
+            return new PersonDto
+            {
+                UserName = this.UserName
+            };
         }
 
         public string RefreshButtonText

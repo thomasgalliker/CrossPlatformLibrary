@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace CrossPlatformLibrary.Forms.Validation
 {
-    public class PropertyValidation
+    public class PropertyValidation : IValidation, IContextAware
     {
+        private static readonly Dictionary<string, List<string>> EmptyErrorsCollection = new Dictionary<string, List<string>>(0);
+
         private Func<bool> validCriteria;
         private Func<string> errorFunction;
         private PropertyInfo propertyInfo;
@@ -13,7 +17,7 @@ namespace CrossPlatformLibrary.Forms.Validation
 
         public PropertyValidation(string propertyName)
         {
-            this.PropertyName = propertyName;
+            this.PropertyNames = new[] { propertyName };
         }
 
         /// <summary>
@@ -107,10 +111,10 @@ namespace CrossPlatformLibrary.Forms.Validation
             }
         }
 
-        internal void SetContext(object baseViewModel)
+        public void SetContext(object baseViewModel)
         {
             this.baseViewModel = baseViewModel;
-            this.propertyInfo = baseViewModel.GetType().GetProperty(this.PropertyName);
+            this.propertyInfo = baseViewModel.GetType().GetProperty(this.PropertyNames[0]);
         }
 
         private object GetPropertyValue()
@@ -126,15 +130,29 @@ namespace CrossPlatformLibrary.Forms.Validation
         ///     No criteria have been provided for this validation. (Use the
         ///     'When(..)' method.).
         /// </exception>
-        public bool IsInvalid()
+        private bool IsValid()
         {
             if (this.validCriteria != null)
             {
-                return this.validCriteria();
+                return !this.validCriteria();
             }
 
             throw new InvalidOperationException("No criteria have been provided for this validation. (Use the 'When(..)' method.)");
+        }
 
+        public string[] PropertyNames { get; }
+
+        public Task<Dictionary<string, List<string>>> GetErrors()
+        {
+            if (this.IsValid())
+            {
+                return Task.FromResult(EmptyErrorsCollection);
+            }
+
+            return Task.FromResult(new Dictionary<string, List<string>>
+            {
+                { this.PropertyNames[0], new List<string> { this.GetErrorMessage() } }
+            });
         }
 
         /// <summary>
@@ -170,11 +188,5 @@ namespace CrossPlatformLibrary.Forms.Validation
 
             throw new InvalidOperationException("No error message has been set for this validation. (Use the 'Show(..)' method.)");
         }
-
-        /// <summary>
-        ///     Gets the name of the property.
-        /// </summary>
-        /// <value>The name of the property.</value>
-        public string PropertyName { get; }
     }
 }

@@ -1,16 +1,20 @@
 using CrossPlatformLibrary.Forms.Mvvm;
 using CrossPlatformLibrary.Forms.Validation;
 using CrossPlatformLibrary.Forms.Validation.Rules;
+using SampleApp.Model;
+using SampleApp.Validation;
 
 namespace CrossPlatformLibrary.Forms.Tests.Testdata
 {
     public class TestViewModel : BaseViewModel
     {
+        private readonly IValidationService validationService;
         private string email;
         private string userName;
 
-        public TestViewModel()
+        public TestViewModel(IValidationService validationService)
         {
+            this.validationService = validationService;
         }
 
         public string UserName
@@ -56,7 +60,20 @@ namespace CrossPlatformLibrary.Forms.Tests.Testdata
                 .When(new EmailAddressValidationRule())
                 .Show(p => $"Your mail address '{p}' is not valid.");
 
+            // Validation delegated to async service
+            viewModelValidation.AddDelegateValidation(nameof(this.UserName), nameof(this.Email))
+                .Show(async () => (await this.validationService.ValidatePersonAsync(this.CreatePerson())).Errors);
+
             return viewModelValidation;
+        }
+
+        private PersonDto CreatePerson()
+        {
+            return new PersonDto
+            {
+                UserName = this.UserName,
+                Email = this.Email,
+            };
         }
     }
 }
