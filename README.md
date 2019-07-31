@@ -53,6 +53,47 @@ The library contains a rich set of customized user controls which extend basic i
 
 ```TODO: to be documented```
 
+#### Input Validation
+The base viewmodel ```BaseViewModel``` implements a pretty sophisiticated and praxisproven user input validation system which allows to run client- and server-based property validation side-by-side.
+There are a few steps to follow to get input validation to work:
+
+- Inherit your viewmodels from ```BaseViewModel``` or implement a similar logic which exposes a ```BaseViewModel.Validation``` property.
+- Override the protected method ```SetupValidation```. This enables your viewmodel to use input validation. The most simple setup just returns an empty  ```ViewModelValidation```.
+- Setup validation rules inside ```SetupValidation```. There are basically two different approaches: Either you validate viewmodel properties locally (validation logic provided by the viewmodel) or you call a backend service which validates a given object (DTO) against some central validation logic.
+- Configure the according view to react on validation errors. This is done in XAML by binding a dependency property to the string list of validation errors for a certain property. The following example binds to validation errors for property 'UserName': ```ValidationErrors="{Binding Validation.Errors[UserName]}"```
+- In order to run the validation, just call ```Validation.IsValidAsync()```. Depending on the result (true/false) we proceed with further actions (e.g. saving the object).
+```
+  var isValid = await this.Validation.IsValidAsync();
+  if (isValid)
+  {
+      // TODO Save...
+  }
+```
+
+Following snippet is an extract of a unit test. It demonstrates some setup variations.
+```
+protected override ViewModelValidation SetupValidation()
+{
+    var viewModelValidation = new ViewModelValidation();
+
+    // Validation function with parameter-less custom error message
+    viewModelValidation.AddValidationFor(nameof(this.UserName))
+        .When(() => string.IsNullOrEmpty(this.UserName))
+        .Show(() => "Username must not be empty");
+
+    // Validation rule with parameter and custom error message
+    viewModelValidation.AddValidationFor(nameof(this.Email))
+        .When(new IsNotNullOrEmptyRule())
+        .Show(p => $"Email address '{p}' must not be empty.");
+
+    // Validation delegated to async service
+    viewModelValidation.AddDelegateValidation(nameof(this.UserName), nameof(this.Email))
+        .Validate(async () => (await this.validationService.ValidatePersonAsync(this.CreatePerson())).Errors);
+
+    return viewModelValidation;
+}
+```
+
 #### Bootstrapping
 
 The bootstrapping mechanism is used to startup and shutdown an application in a controlled way. The boostrapper is called at the entry point of an application and it cares about the basic initialisation tasks. The entry point of the application can differ from application type to application type.
