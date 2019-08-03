@@ -53,13 +53,16 @@ namespace CrossPlatformLibrary.Forms.Validation
 
         private async Task ValidateAll()
         {
-            this.errorMessages.Clear();
-
             if (!this.HasValidations)
             {
                 var errorMessage = $"Cannot find any validation rules. Use method {nameof(this.AddDelegateValidation)} to setup validation rules.";
                 this.AddErrorMessageForPropertyInternal("InvalidOperationException", errorMessage);
                 throw new InvalidOperationException(errorMessage);
+            }
+
+            lock (this.errorMessages)
+            {
+                this.errorMessages.Clear();
             }
 
             //foreach (var validation in this.validations)
@@ -117,11 +120,14 @@ namespace CrossPlatformLibrary.Forms.Validation
             var propertyErrors = await validation.GetErrors();
             if (propertyErrors != null && propertyErrors.Any())
             {
-                foreach (var propertyError in propertyErrors)
+                lock (this.errorMessages)
                 {
-                    foreach (var message in propertyError.Value)
+                    foreach (var propertyError in propertyErrors)
                     {
-                        this.AddErrorMessageForPropertyInternal(propertyError.Key, message);
+                        foreach (var message in propertyError.Value)
+                        {
+                            this.AddErrorMessageForPropertyInternal(propertyError.Key, message);
+                        }
                     }
                 }
             }
@@ -157,11 +163,14 @@ namespace CrossPlatformLibrary.Forms.Validation
         /// </summary>
         public void AddErrorMessagesForProperty(Dictionary<string, List<string>> errorMessages)
         {
-            foreach (var property in errorMessages)
+            lock (this.errorMessages)
             {
-                foreach (var errorMessage in property.Value)
+                foreach (var property in errorMessages)
                 {
-                    this.AddErrorMessageForPropertyInternal(property.Key, errorMessage);
+                    foreach (var errorMessage in property.Value)
+                    {
+                        this.AddErrorMessageForPropertyInternal(property.Key, errorMessage);
+                    }
                 }
             }
 

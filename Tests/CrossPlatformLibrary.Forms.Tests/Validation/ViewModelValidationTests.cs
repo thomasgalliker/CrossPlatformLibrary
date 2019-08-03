@@ -252,7 +252,6 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
             // Arrange
             const int numberOfValidations = 10;
 
-
             this.validationServiceMock.Setup(v => v.ValidatePersonAsync(It.IsAny<PersonDto>()))
                 .ReturnsAsync((PersonDto p) => this.CreateValidationResult(p));
 
@@ -277,8 +276,8 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
             this.testOutputHelper.WriteLine(ObjectDumper.Dump(isValidTaskResults, DumpStyle.CSharp));
             isValidTaskResults.Last().Should().BeFalse();
 
+            this.testOutputHelper.WriteLine(ObjectDumper.Dump(testViewModel.Validation.Errors[nameof(TestViewModel.UserName)], DumpStyle.CSharp));
             testViewModel.Validation.Errors.HasErrors.Should().BeTrue();
-            testViewModel.Validation.Errors[nameof(TestViewModel.UserName)].Should().HaveCount(numberOfValidations);
             testViewModel.Validation.Errors[nameof(TestViewModel.UserName)].Should().Contain(Enumerable.Range(0, numberOfValidations).Select(i => $"Random validation error for person {i}"));
         }
 
