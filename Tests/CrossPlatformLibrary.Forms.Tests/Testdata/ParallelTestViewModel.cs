@@ -17,7 +17,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Testdata
                 var personId = i;
                 this.Validation.AddDelegateValidation(nameof(this.UserName))
                     .Validate(async () => (await validationService.ValidatePersonAsync(this.CreatePerson(personId))).Errors)
-                    .WithDelay(TimeSpan.FromMilliseconds(200));
+                    .WithDelay(TimeSpan.FromMilliseconds(1000));
             }
 
         }
