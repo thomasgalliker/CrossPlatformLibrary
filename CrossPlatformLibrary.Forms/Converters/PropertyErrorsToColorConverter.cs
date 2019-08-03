@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Xamarin.Forms;
@@ -34,7 +34,7 @@ namespace CrossPlatformLibrary.Forms.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var propertyErrors = (ReadOnlyCollection<string>)value;
+            var propertyErrors = (IEnumerable<string>)value;
             if (propertyErrors != null && propertyErrors.Any())
             {
                 return this.ErrorColor;
