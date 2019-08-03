@@ -5,19 +5,16 @@ using System.Threading.Tasks;
 
 namespace CrossPlatformLibrary.Forms.Validation
 {
-    public class PropertyValidation : IValidation, IContextAware
+    public class PropertyValidation : AbstractValidation, IContextAware
     {
-        private static readonly Dictionary<string, List<string>> EmptyErrorsCollection = new Dictionary<string, List<string>>(0);
-
         private Func<bool> validCriteria;
         private Func<string> errorFunction;
         private PropertyInfo propertyInfo;
         private object baseViewModel;
         private IValidationRule validationRule;
 
-        public PropertyValidation(string propertyName)
+        public PropertyValidation(string propertyName) : base(new[] { propertyName })
         {
-            this.PropertyNames = new[] { propertyName };
         }
 
         /// <summary>
@@ -140,9 +137,7 @@ namespace CrossPlatformLibrary.Forms.Validation
             throw new InvalidOperationException("No criteria have been provided for this validation. (Use the 'When(..)' method.)");
         }
 
-        public string[] PropertyNames { get; }
-
-        public Task<Dictionary<string, List<string>>> GetErrors()
+        public override Task<Dictionary<string, List<string>>> GetErrors()
         {
             if (this.IsValid())
             {

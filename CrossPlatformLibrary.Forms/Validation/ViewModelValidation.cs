@@ -68,7 +68,10 @@ namespace CrossPlatformLibrary.Forms.Validation
             //    await this.PerformValidation(validation);
             //}
 
-            var validationTasks = this.validations.Select(this.PerformValidation).ToList();
+            var validationTasks = this.validations
+                .Select(this.PerformValidation)
+                .ToList();
+
             await Task.WhenAll(validationTasks);
 
             this.UpdateAllValidationEnabledProperties();
@@ -96,7 +99,11 @@ namespace CrossPlatformLibrary.Forms.Validation
                 //    await this.PerformValidation(validation);
                 //}
 
-                var validationTasks = this.validations.Where(v => v.PropertyNames.Contains(propertyName)).Select(this.PerformValidation).ToList();
+                var validationTasks = this.validations
+                    .Where(v => v.PropertyNames.Contains(propertyName))
+                    .Select(this.PerformValidation)
+                    .ToList();
+
                 await Task.WhenAll(validationTasks);
 
                 this.OnErrorsChanged(propertyName);
