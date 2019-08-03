@@ -13,6 +13,7 @@ namespace CrossPlatformLibrary.Forms.Validation
 
         public DelegateValidation(string[] propertyNames) : base(propertyNames)
         {
+            this.errorFunction = () => throw new InvalidOperationException($"Use Validate(...) method to setup validation delegation.");
         }
 
         public DelegateValidation Validate(Func<Task<Dictionary<string, List<string>>>> function, TimeSpan? validationDelay = null)
@@ -42,7 +43,7 @@ namespace CrossPlatformLibrary.Forms.Validation
                 result = await this.errorFunction();
             }
 
-            Debug.WriteLine($"GetErrors (result={result.Count})");
+            Debug.WriteLine($"GetErrors (result={(result == null ? "null" : $"{result.Count}")})");
 
             return result;
         }
