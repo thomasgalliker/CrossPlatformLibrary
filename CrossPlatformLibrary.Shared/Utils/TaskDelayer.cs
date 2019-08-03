@@ -36,26 +36,33 @@ namespace CrossPlatformLibrary
         /// <param name="task">The task to be executed after delay.</param>
         /// <param name="defaultValue">The default value to be returned in case of a cancellation</param>
         /// <returns></returns>
-        public async Task<T> RunWithDelay<T>(TimeSpan delay, Func<Task<T>> task, Func<T> defaultValue)
+        public Task<T> RunWithDelay<T>(TimeSpan delay, Func<Task<T>> task, Func<T> defaultValue)
         {
-            try
-            {
-                Interlocked.Exchange(ref this.throttleCts, new CancellationTokenSource()).Cancel();
-                var result = default(T);
-                await Task.Delay(delay, this.throttleCts.Token)
-                    .ContinueWith(async ct => { result = await task(); },
-                        CancellationToken.None,
-                        TaskContinuationOptions.OnlyOnRanToCompletion,
-                        TaskScheduler.FromCurrentSynchronizationContext());
+            var tcs = new TaskCompletionSource<T>();
 
-                return result;
-            }
-            catch /*(Exception ex)*/
+            Task.Factory.StartNew(async () =>
             {
-                // Ignore any Threading errors
-            }
+                try
+                {
+                    Interlocked.Exchange(ref this.throttleCts, new CancellationTokenSource()).Cancel();
+                    await Task.Delay(delay, this.throttleCts.Token)
+                        .ContinueWith(async ct =>
+                            {
+                                var result = await task();
+                                tcs.TrySetResult(result);
+                            },
+                            CancellationToken.None,
+                            TaskContinuationOptions.OnlyOnRanToCompletion,
+                            TaskScheduler.Default);
+                }
+                catch
+                {
+                    // Ignore any Threading errors
+                    tcs.TrySetResult(defaultValue());
+                }
+            });
 
-            return defaultValue();
+            return tcs.Task;
         }
 
         /// <summary>
