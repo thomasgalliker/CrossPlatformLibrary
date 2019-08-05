@@ -21,6 +21,7 @@
         FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
         ItemsSource="{Binding ItemsSource, Source={x:Reference Control}}"
         DisplayMemberPath="{Binding DisplayMemberPath, Source={x:Reference Control}}"
+        NullString="{Binding NullString, Source={x:Reference Control}}"
         SelectedValuePath="{Binding SelectedValuePath, Source={x:Reference Control}}"
         SelectedItem="{Binding SelectedItem, Source={x:Reference Control}, Mode=TwoWay}"
         SelectedValue="{Binding SelectedValue, Source={x:Reference Control}, Mode=TwoWay}"

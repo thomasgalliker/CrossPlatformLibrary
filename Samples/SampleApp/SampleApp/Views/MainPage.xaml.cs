@@ -16,7 +16,7 @@ namespace SampleApp
                 this.InitializeComponent();
 
                 var displayService = new DisplayService((t, m) => this.DisplayAlert(t, m, "OK"));
-                var countryService = new CountryService();
+                var countryService = new CountryServiceMock();
                 var validationService = new ValidationService();
                 this.BindingContext = new MainViewModel(displayService, countryService, validationService);
             }

@@ -98,8 +98,21 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string DisplayMemberPath
         {
-            get { return (string)this.GetValue(DisplayMemberPathProperty); }
-            set { this.SetValue(DisplayMemberPathProperty, value); }
+            get => (string)this.GetValue(DisplayMemberPathProperty);
+            set => this.SetValue(DisplayMemberPathProperty, value);
+        }
+
+        public static readonly BindableProperty NullStringProperty =
+            BindableProperty.Create(
+                nameof(NullString),
+                typeof(string),
+                typeof(BindablePicker),
+                "<null>");
+
+        public string NullString
+        {
+            get => (string)this.GetValue(NullStringProperty);
+            set => this.SetValue(NullStringProperty, value);
         }
 
         public BindablePicker()
@@ -141,7 +154,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                         propValue = item;
                     }
 
-                    this.Items.Add(propValue == null ? "<null>" : propValue.ToString());
+                    this.Items.Add(propValue == null ? this.NullString : propValue.ToString());
                 }
 
                 this.SelectedIndex = -1;
@@ -263,7 +276,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                     }
                     else
                     {
-                        this.Items.Add(item.ToString());
+                        this.Items.Add(item == null ? this.NullString : item.ToString());
                     }
                 }
             }

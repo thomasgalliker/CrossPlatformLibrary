@@ -195,8 +195,22 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string DisplayMemberPath
         {
-            get { return (string)this.GetValue(DisplayMemberPathProperty); }
-            set { this.SetValue(DisplayMemberPathProperty, value); }
+            get => (string)this.GetValue(DisplayMemberPathProperty);
+            set => this.SetValue(DisplayMemberPathProperty, value);
+        }
+
+        public static readonly BindableProperty NullStringProperty =
+            BindableProperty.Create(
+                nameof(NullString),
+                typeof(string),
+                typeof(ValidatablePicker),
+                "null",
+                BindingMode.OneWay);
+
+        public string NullString
+        {
+            get => (string)this.GetValue(NullStringProperty);
+            set => this.SetValue(NullStringProperty, value);
         }
 
         public static readonly BindableProperty IsReadonlyProperty =

@@ -33,6 +33,7 @@ namespace SampleApp.ViewModels
         private ICommand normalPressCommand;
         private string countrySearchText;
         private ICommand autoCompleteSearchCommand;
+        private ObservableCollection<CountryViewModel> countries;
 
         public MainViewModel(
             DisplayService displayService,
@@ -75,7 +76,11 @@ namespace SampleApp.ViewModels
             set => this.SetProperty(this.User, value);
         }
 
-        public ObservableCollection<CountryViewModel> Countries { get; }
+        public ObservableCollection<CountryViewModel> Countries
+        {
+            get => this.countries;
+            private set => this.SetProperty(ref this.countries, value, nameof(this.Countries));
+        }
 
         public ObservableCollection<CountryViewModel> SuggestedCountries { get; }
 
@@ -250,8 +255,14 @@ namespace SampleApp.ViewModels
 
                 this.Countries.Clear();
 
-                var countryDtos = await this.countryService.GetAllAsync();
-                this.Countries.AddRange(countryDtos.Select(c => new CountryViewModel(c)));
+                var defaultCountryViewModel = new CountryViewModel(new CountryDto { Name = null });
+                var countryDtos = (await this.countryService.GetAllAsync()).ToList();
+
+                // Set countries all at once
+                this.Countries = new ObservableCollection<CountryViewModel>(countryDtos.Select(c => new CountryViewModel(c)).Prepend(defaultCountryViewModel));
+
+                // Set countries one after the other
+                this.Countries.AddRange(countryDtos.Select(c => new CountryViewModel(c)).Prepend(defaultCountryViewModel));
 
                 //this.Notes = $"Test test test{Environment.NewLine}Line 2 text text text";
                 this.AdminEmailAddress = "thomas@bluewin.ch";

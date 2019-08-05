@@ -130,6 +130,16 @@
                             TextChanged="AutoCompleteView_OnTextChanged"
                             IsReadonly="{Binding IsToggled, Mode=OneWay}" />
 
+                        <Label Text="&lt;!--Demo ValidatablePicker--&gt;" Style="{StaticResource DemoLabelStyle}" />
+                        <controls:ValidatablePicker
+                            Placeholder="ValidatablePicker by Country.Name"
+                            ItemsSource="{Binding Countries}"
+                            ValidationErrors="{Binding Validation.Errors[CountrySearchText]}"
+                            SelectedItem="{Binding Country, Mode=TwoWay}"
+                            DisplayMemberPath="Name"
+                            NullString="&lt;Default Country&gt;"
+                            IsReadonly="{Binding IsToggled, Mode=OneWay}" />
+
                         <Label Text="&lt;!--Demo User Controls--&gt;" Style="{StaticResource DemoLabelStyle}" />
                         <userControls:AddressControl BindingContext="{Binding .}" />
 
