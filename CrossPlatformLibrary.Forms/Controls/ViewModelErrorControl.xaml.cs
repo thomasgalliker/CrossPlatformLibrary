@@ -16,8 +16,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public ViewModelError ViewModelError
         {
-            get { return (ViewModelError)this.GetValue(ViewModelErrorProperty); }
-            set { this.SetValue(ViewModelErrorProperty, value); }
+            get => (ViewModelError)this.GetValue(ViewModelErrorProperty);
+            set => this.SetValue(ViewModelErrorProperty, value);
         }
 
         public ViewModelErrorControl()
