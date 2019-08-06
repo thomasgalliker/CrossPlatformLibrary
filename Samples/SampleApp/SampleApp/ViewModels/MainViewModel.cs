@@ -34,6 +34,7 @@ namespace SampleApp.ViewModels
         private string countrySearchText;
         private ICommand autoCompleteSearchCommand;
         private ObservableCollection<CountryViewModel> countries;
+        private int userNameMaxLength;
 
         public MainViewModel(
             DisplayService displayService,
@@ -76,6 +77,12 @@ namespace SampleApp.ViewModels
             set => this.SetProperty(this.User, value);
         }
 
+        public int UserNameMaxLength
+        {
+            get => this.userNameMaxLength;
+            set => this.SetProperty(ref this.userNameMaxLength, value, nameof(this.UserNameMaxLength));
+        }
+
         public ObservableCollection<CountryViewModel> Countries
         {
             get => this.countries;
@@ -106,7 +113,6 @@ namespace SampleApp.ViewModels
                 }
             }
         }
-
 
         public ICommand AutoCompleteSearchCommand
         {
@@ -245,6 +251,9 @@ namespace SampleApp.ViewModels
 
                 this.numberOfLoads++;
                 this.RaisePropertyChanged(nameof(this.RefreshButtonText));
+
+                // Demo dynamic adjustment of MaxLength binding
+                this.UserNameMaxLength = Math.Max(10, ++this.UserNameMaxLength);
 
                 this.LogContent = this.logContent + Environment.NewLine + $"{DateTime.Now:G} LoadData called";
                 if (this.numberOfLoads % 2 == 0)

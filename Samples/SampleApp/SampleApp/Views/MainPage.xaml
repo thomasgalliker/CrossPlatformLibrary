@@ -9,6 +9,7 @@
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
     xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
     xmlns:userControls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
+    xmlns:behaviors="clr-namespace:CrossPlatformLibrary.Forms.Behaviors;assembly=CrossPlatformLibrary.Forms"
     x:Name="Page">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -94,7 +95,11 @@
                                 Placeholder="ValidatableEntry"
                                 Text="{Binding UserName, Mode=TwoWay}"
                                 ValidationErrors="{Binding Validation.Errors[UserName]}"
-                                IsReadonly="{Binding IsToggled}" />
+                                IsReadonly="{Binding IsToggled}">
+                                <controls:ValidatableEntry.Behaviors>
+                                    <behaviors:MaxLengthTextBehavior MaxLength="{Binding UserNameMaxLength}" />
+                                </controls:ValidatableEntry.Behaviors>
+                            </controls:ValidatableEntry>
                             <Entry
                                 Grid.Column="1"
                                 Placeholder="Xamarin.Forms.Entry"
