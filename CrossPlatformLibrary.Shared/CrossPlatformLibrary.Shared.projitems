@@ -26,6 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumeratorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\IntegerExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\TimeSpanExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TypeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Category.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\DebugTracer.cs" />
