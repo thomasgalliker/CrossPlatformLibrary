@@ -13,6 +13,8 @@
 
             <!--  Converters  -->
             <valueConverters:StringIsNotNullOrEmptyConverter x:Key="StringIsNotNullOrEmptyConverter" />
+            <valueConverters:DateTimeConverter x:Key="DateTimeConverter" Format="g" />
+            <valueConverters:DateTimeConverter x:Key="ShortDateConverter" Format="d" />
 
             <!--  Colors  -->
             <Color x:Key="PrimarySuperBright">#a59e39</Color>

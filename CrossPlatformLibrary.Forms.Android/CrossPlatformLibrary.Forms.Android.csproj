@@ -69,6 +69,9 @@
     <Compile Include="Renderers\CustomEditorRenderer.cs" />
     <Compile Include="Renderers\CustomEntryRenderer.cs" />
     <Compile Include="Renderers\CustomLabelRenderer.cs" />
+    <Compile Include="Renderers\DatePickerRenderer.cs" />
+    <Compile Include="Renderers\ExtendedDatePickerRenderer.cs" />
+    <Compile Include="Renderers\ExtendedTimePickerRenderer.cs" />
     <Compile Include="Renderers\HyperLinkLabelRenderer.cs" />
     <Compile Include="Renderers\NoBarsScrollViewerRenderer.cs" />
     <Compile Include="Renderers\NonScrollableListViewRenderer.cs" />
@@ -76,6 +79,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\ShapeView\Shape.cs" />
     <Compile Include="Renderers\ShapeView\ShapeViewRenderer.cs" />
+    <Compile Include="Renderers\TimePickerRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

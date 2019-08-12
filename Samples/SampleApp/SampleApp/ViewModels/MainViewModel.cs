@@ -35,6 +35,7 @@ namespace SampleApp.ViewModels
         private ICommand autoCompleteSearchCommand;
         private ObservableCollection<CountryViewModel> countries;
         private int userNameMaxLength;
+        private DateTime? birthdate;
 
         public MainViewModel(
             DisplayService displayService,
@@ -81,6 +82,12 @@ namespace SampleApp.ViewModels
         {
             get => this.userNameMaxLength;
             set => this.SetProperty(ref this.userNameMaxLength, value, nameof(this.UserNameMaxLength));
+        }
+
+        public DateTime? Birthdate
+        {
+            get => this.birthdate;
+            set => this.SetProperty(ref this.birthdate, value, nameof(this.Birthdate));
         }
 
         public ObservableCollection<CountryViewModel> Countries
@@ -291,6 +298,10 @@ namespace SampleApp.ViewModels
             viewModelValidation.AddValidationFor(nameof(this.UserName))
                 .When(() => string.IsNullOrWhiteSpace(this.UserName))
                 .Show(() => $"Username must not be empty");
+
+            viewModelValidation.AddValidationFor(nameof(this.Birthdate))
+                .When(() => this.Birthdate == null)
+                .Show(() => $"Birthdate must be set");
 
             viewModelValidation.AddDelegateValidation(nameof(this.UserName))
                 .Validate(async () => (await this.validationService.ValidatePersonAsync(this.CreatePerson())).Errors, validationDelay: TimeSpan.FromMilliseconds(1000));

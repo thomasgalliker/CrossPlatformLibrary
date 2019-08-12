@@ -106,8 +106,6 @@
                                 Text="{Binding UserName, Mode=TwoWay}" />
                         </Grid>
 
-
-
                         <controls:CustomLabel Text="Enter name:" />
                         <controls:CustomEntry
                             Padding="0"
@@ -144,6 +142,22 @@
                             DisplayMemberPath="Name"
                             NullString="&lt;Default Country&gt;"
                             IsReadonly="{Binding IsToggled, Mode=OneWay}" />
+
+                        <Label Text="&lt;!--Demo ValidatableDatePicker--&gt;" Style="{StaticResource DemoLabelStyle}" />
+                        <controls:ValidatableDatePicker
+                            Placeholder="Birthdate with ValidatableDatePicker"
+                            Date="{Binding Birthdate, Mode=TwoWay}"
+                            ValidationErrors="{Binding Validation.Errors[Birthdate]}"
+                            IsReadonly="{Binding IsToggled, Mode=OneWay}"
+                            ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}" />
+
+                        <Label Text="&lt;!--Demo ValidatableDateTimePicker--&gt;" Style="{StaticResource DemoLabelStyle}" />
+                        <controls:ValidatableDateTimePicker
+                            Placeholder="Birthdate with ValidatableDateTimePicker"
+                            Date="{Binding Birthdate, Mode=TwoWay}"
+                            ValidationErrors="{Binding Validation.Errors[Birthdate]}"
+                            IsReadonly="{Binding IsToggled, Mode=OneWay}"
+                            ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}" />
 
                         <Label Text="&lt;!--Demo User Controls--&gt;" Style="{StaticResource DemoLabelStyle}" />
                         <userControls:AddressControl BindingContext="{Binding .}" />

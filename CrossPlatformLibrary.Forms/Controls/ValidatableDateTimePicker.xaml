@@ -30,13 +30,6 @@
             NullableDate="{Binding Date, Source={x:Reference Control}, Mode=TwoWay}"
             Format="{Binding Date, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource NullableDateTimeToFormatConverter}}"
             HorizontalOptions="FillAndExpand" />
-        <Label
-            Grid.Column="0"
-            IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
-            Text="{Binding Date, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
-            Style="{StaticResource EntryLabelStyle}"
-            HorizontalOptions="StartAndExpand"
-            VerticalOptions="Center" />
 
         <controls:ExtendedTimePicker
             Grid.Column="1"
@@ -46,13 +39,6 @@
             NullableTime="{Binding Time, Source={x:Reference Control}, Mode=TwoWay}"
             Format="{Binding Time, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource NullableDateTimeToFormatConverter}}"
             HorizontalOptions="FillAndExpand" />
-        <Label
-            Grid.Column="1"
-            IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
-            Text="{Binding Time, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource ShortTimeConverter}}"
-            Style="{StaticResource EntryLabelStyle}"
-            HorizontalOptions="StartAndExpand"
-            VerticalOptions="Center" />
     </Grid>
 
     <!--  Readonly Text  -->
