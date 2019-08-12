@@ -48,8 +48,15 @@ namespace CrossPlatformLibrary
                     await Task.Delay(delay, this.throttleCts.Token)
                         .ContinueWith(async ct =>
                             {
-                                var result = await task().ConfigureAwait(false);
-                                tcs.TrySetResult(result);
+                                try
+                                {
+                                    var result = await task().ConfigureAwait(false);
+                                    tcs.TrySetResult(result);
+                                }
+                                catch (Exception ex)
+                                {
+                                    tcs.TrySetException(ex);
+                                }
                             },
                             CancellationToken.None,
                             TaskContinuationOptions.OnlyOnRanToCompletion,

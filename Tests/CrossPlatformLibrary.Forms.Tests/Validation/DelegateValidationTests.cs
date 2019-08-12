@@ -87,5 +87,35 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
                 { propertyName, new List<string>{ "Error1"}}
             };
         }
+
+        [Fact]
+        public async Task ShouldGetErrorsWithDelay_MultipleTasks_ThrowsException()
+        {
+            // Arrange
+            var propertyName = "TestProperty1";
+            var delegateValidation = new DelegateValidation(new[] { propertyName })
+                .Validate(() => ValidateWithExceptionAsync(propertyName))
+                .WithDelay(TimeSpan.FromMilliseconds(1000));
+
+            // Act
+            var errorsTask1 = delegateValidation.GetErrors();
+            var errorsTask2 = delegateValidation.GetErrors();
+
+            var errors1 = await errorsTask1;
+            await Task.Delay(200);
+            Func<Task> action = async () => await errorsTask2;
+
+            // Assert
+            errors1.Should().NotBeNull();
+            errors1.Should().BeEmpty(because: "this task must be cancelled");
+
+            action.Should().Throw<NotSupportedException>().Which.Message.Should().Contain("Validation raised exception for property 'TestProperty1'");
+        }
+
+        private static async Task<Dictionary<string, List<string>>> ValidateWithExceptionAsync(string propertyName)
+        {
+            await Task.Delay(200);
+            throw new NotSupportedException($"Validation raised exception for property '{propertyName}'");
+        }
     }
 }
