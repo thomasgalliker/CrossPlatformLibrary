@@ -29,38 +29,20 @@ namespace CrossPlatformLibrary.Forms.Converters
 
         public string DateFormat
         {
-            get
-            {
-                return (string)this.GetValue(DateFormatProperty);
-            }
-            set
-            {
-                this.SetValue(DateFormatProperty, value);
-            }
+            get => (string)this.GetValue(DateFormatProperty);
+            set => this.SetValue(DateFormatProperty, value);
         }
 
         public string TimeFormat
         {
-            get
-            {
-                return (string)this.GetValue(TimeFormatProperty);
-            }
-            set
-            {
-                this.SetValue(TimeFormatProperty, value);
-            }
+            get => (string)this.GetValue(TimeFormatProperty);
+            set => this.SetValue(TimeFormatProperty, value);
         }
 
         public string NullableFormat
         {
-            get
-            {
-                return (string)this.GetValue(NullableFormatProperty);
-            }
-            set
-            {
-                this.SetValue(NullableFormatProperty, value);
-            }
+            get => (string)this.GetValue(NullableFormatProperty);
+            set => this.SetValue(NullableFormatProperty, value);
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
