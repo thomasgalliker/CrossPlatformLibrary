@@ -247,6 +247,26 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
         }
 
         [Fact]
+        public void ShouldAddDelegateValidation_IsValidThrowsException()
+        {
+            // Arrange
+            this.validationServiceMock.Setup(v => v.ValidatePersonAsync(It.IsAny<PersonDto>()))
+                .Throws(new NotSupportedException("Test exception"));
+
+            var testViewModel = new TestViewModel(this.validationServiceMock.Object)
+            {
+                UserName = "thomas",
+                Email = "thomas@bluewin.ch"
+            };
+
+            // Act
+            Func<Task> action = async () => await testViewModel.Validation.IsValidAsync();
+
+            // Assert
+            action.Should().Throw<NotSupportedException>().Which.Message.Should().Contain("Test exception");
+        }
+
+        [Fact]
         public async Task ShouldHandleThreadSafeParallelValidations()
         {
             // Arrange

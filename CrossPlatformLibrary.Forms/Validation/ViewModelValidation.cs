@@ -75,7 +75,7 @@ namespace CrossPlatformLibrary.Forms.Validation
                 .Select(this.PerformValidation)
                 .ToList();
 
-            await Task.WhenAll(validationTasks);
+            await Task.WhenAll(validationTasks).ConfigureAwait(false);
 
             this.UpdateAllValidationEnabledProperties();
         }
@@ -117,16 +117,20 @@ namespace CrossPlatformLibrary.Forms.Validation
         {
             Debug.WriteLine($"PerformValidation(validation: {validation.GetType().GetFormattedName()})");
 
-            var propertyErrors = await validation.GetErrors();
-            if (propertyErrors != null && propertyErrors.Any())
+            var getErrorsTask = validation.GetErrors();
+            if (getErrorsTask != null)
             {
-                lock (this.errorMessages)
+                var propertyErrors = await getErrorsTask.ConfigureAwait(false);
+                if (propertyErrors != null && propertyErrors.Any())
                 {
-                    foreach (var propertyError in propertyErrors)
+                    lock (this.errorMessages)
                     {
-                        foreach (var message in propertyError.Value)
+                        foreach (var propertyError in propertyErrors)
                         {
-                            this.AddErrorMessageForPropertyInternal(propertyError.Key, message);
+                            foreach (var message in propertyError.Value)
+                            {
+                                this.AddErrorMessageForPropertyInternal(propertyError.Key, message);
+                            }
                         }
                     }
                 }
@@ -240,7 +244,7 @@ namespace CrossPlatformLibrary.Forms.Validation
 
         public async Task<bool> IsValidAsync()
         {
-            await this.ValidateAll();
+            await this.ValidateAll().ConfigureAwait(false);
 
             return !this.HasErrors;
         }

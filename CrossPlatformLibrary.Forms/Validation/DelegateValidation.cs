@@ -7,13 +7,14 @@ namespace CrossPlatformLibrary.Forms.Validation
 {
     public class DelegateValidation : AbstractValidation
     {
+        private static readonly Func<Task<Dictionary<string, List<string>>>> DefaultErrorFunction = () => throw new InvalidOperationException($"Use Validate(...) method to setup validation delegation.");
         private readonly TaskDelayer taskDelayer = new TaskDelayer();
         private TimeSpan delay;
         private Func<Task<Dictionary<string, List<string>>>> errorFunction;
 
         public DelegateValidation(string[] propertyNames) : base(propertyNames)
         {
-            this.errorFunction = () => throw new InvalidOperationException($"Use Validate(...) method to setup validation delegation.");
+            this.errorFunction = DefaultErrorFunction;
         }
 
         public DelegateValidation Validate(Func<Task<Dictionary<string, List<string>>>> function, TimeSpan? validationDelay = null)
@@ -36,11 +37,11 @@ namespace CrossPlatformLibrary.Forms.Validation
             Dictionary<string, List<string>> result;
             if (this.delay > TimeSpan.Zero)
             {
-                result = await this.taskDelayer.RunWithDelay(this.delay, () => this.errorFunction(), () => EmptyErrorsCollection);
+                result = await this.taskDelayer.RunWithDelay(this.delay, () => this.errorFunction(), () => EmptyErrorsCollection).ConfigureAwait(false);
             }
             else
             {
-                result = await this.errorFunction();
+                result = await this.errorFunction().ConfigureAwait(false);
             }
 
             Debug.WriteLine($"GetErrors (result={(result == null ? "null" : $"{result.Count}")})");

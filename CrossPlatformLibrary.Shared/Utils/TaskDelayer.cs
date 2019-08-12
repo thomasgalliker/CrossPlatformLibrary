@@ -48,7 +48,7 @@ namespace CrossPlatformLibrary
                     await Task.Delay(delay, this.throttleCts.Token)
                         .ContinueWith(async ct =>
                             {
-                                var result = await task();
+                                var result = await task().ConfigureAwait(false);
                                 tcs.TrySetResult(result);
                             },
                             CancellationToken.None,
@@ -60,7 +60,7 @@ namespace CrossPlatformLibrary
                     // Ignore any Threading errors
                     tcs.TrySetResult(defaultValue());
                 }
-            });
+            }).ConfigureAwait(false);
 
             return tcs.Task;
         }
@@ -76,7 +76,7 @@ namespace CrossPlatformLibrary
             {
                 Interlocked.Exchange(ref this.throttleCts, new CancellationTokenSource()).Cancel();
                 await Task.Delay(delay, this.throttleCts.Token)
-                    .ContinueWith(async ct => await task(),
+                    .ContinueWith(async ct => await task().ConfigureAwait(false),
                         CancellationToken.None,
                         TaskContinuationOptions.OnlyOnRanToCompletion,
                         TaskScheduler.FromCurrentSynchronizationContext());
