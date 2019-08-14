@@ -29,6 +29,7 @@
             ValidityRange="{Binding ValidityRange, Source={x:Reference Control}, Mode=OneWay}"
             NullableDate="{Binding Date, Source={x:Reference Control}, Mode=TwoWay}"
             Format="{Binding Date, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource NullableDateTimeToFormatConverter}}"
+            Style="{Binding PickerStyle, Source={x:Reference Control}, Mode=OneWay}"
             HorizontalOptions="FillAndExpand" />
     </Grid>
 

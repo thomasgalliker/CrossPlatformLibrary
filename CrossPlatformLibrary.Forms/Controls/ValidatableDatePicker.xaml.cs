@@ -189,5 +189,19 @@ namespace CrossPlatformLibrary.Forms.Controls
             get => (IEnumerable<string>)this.GetValue(ValidationErrorsProperty);
             set => this.SetValue(ValidationErrorsProperty, value);
         }
+
+        public static readonly BindableProperty PickerStyleProperty =
+            BindableProperty.Create(
+                nameof(PickerStyle),
+                typeof(Style),
+                typeof(ValidatableDatePicker),
+                default(Style),
+                BindingMode.OneWay);
+
+        public Style PickerStyle
+        {
+            get => (Style)this.GetValue(PickerStyleProperty);
+            set => this.SetValue(PickerStyleProperty, value);
+        }
     }
 }
