@@ -289,14 +289,79 @@ namespace CrossPlatformLibrary.Extensions
         /// </summary>
         public static string ToUpperFirst(this string s)
         {
-            if (string.IsNullOrEmpty(s))
+            if (s == null)
             {
-                return string.Empty;
+                return null;
+            }
+
+            if (s == "")
+            {
+                return "";
             }
 
             var a = s.ToCharArray();
             a[0] = char.ToUpper(a[0]);
             return new string(a);
+        }
+
+        private static readonly char[] TrimNewLineChars = Environment.NewLine.ToCharArray();
+        private static readonly char[] TrimChars = $"{Environment.NewLine} ".ToCharArray();
+
+        /// <summary>
+        ///     Removes all leading and trailing occurrences of new line (\n\r) as well as white-space characters in an array from
+        ///     the current <see cref="T:System.String"></see> object.
+        /// </summary>
+        /// <param name="str">Input string.</param>
+        /// <returns>
+        ///     The string that remains after all occurrences of trim characters are removed from the start and end of the current
+        ///     string.
+        /// </returns>
+        public static string TrimStartAndEnd(this string str)
+        {
+            return TrimStartAndEnd(str, TrimChars);
+        }
+
+        /// <summary>
+        ///     Removes all leading and trailing occurrences of a set of characters specified in an array from the current
+        ///     <see cref="T:System.String"></see> object.
+        /// </summary>
+        /// <param name="str">Input string.</param>
+        /// <param name="trimChars">An array of Unicode characters to remove, or null.</param>
+        /// <returns>
+        ///     The string that remains after all occurrences of characters in the <paramref name="trimChars">trimChars</paramref>
+        ///     parameter are removed from the start and end of the current string.
+        ///     If <paramref name="trimChars">trimChars</paramref> is null or an empty array, white-space characters are removed
+        ///     instead.
+        /// </returns>
+        public static string TrimStartAndEnd(this string str, params char[] trimChars)
+        {
+            if (str == null)
+            {
+                return null;
+            }
+
+            return str
+                .TrimStart(trimChars)
+                .TrimEnd(trimChars);
+        }
+
+        public static string RemoveEmptyLines(this string str)
+        {
+            if (str == null)
+            {
+                return null;
+            }
+
+            var lines = str.Split(TrimNewLineChars, StringSplitOptions.RemoveEmptyEntries);
+
+            var stringBuilder = new StringBuilder(str.Length);
+
+            foreach (var line in lines)
+            {
+                stringBuilder.AppendLine(line);
+            }
+
+            return stringBuilder.ToString().TrimEnd(TrimNewLineChars);
         }
     }
 }
