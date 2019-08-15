@@ -14,7 +14,7 @@ namespace CrossPlatformLibrary.Forms.Validation
     public class ViewModelValidation : BindableBase, IValidatable, INotifyDataErrorInfo
     {
         private readonly List<IValidation> validations = new List<IValidation>();
-        private readonly IDictionary<string, IList<string>> errorMessages = new Dictionary<string, IList<string>>();
+        private readonly Dictionary<string, List<string>> errorMessages = new Dictionary<string, List<string>>();
         private static readonly ReadOnlyCollection<string> EmptyErrorsCollection = new ReadOnlyCollection<string>(new List<string>(0));
 
         public ViewModelValidation()
@@ -203,7 +203,7 @@ namespace CrossPlatformLibrary.Forms.Validation
             return null;
         }
 
-        public virtual IDictionary<string, IList<string>> GetErrors()
+        public virtual Dictionary<string, List<string>> GetErrors()
         {
             return this.errorMessages;
         }
@@ -227,7 +227,7 @@ namespace CrossPlatformLibrary.Forms.Validation
 
         //public abstract void SetupValidationRules();
 
-        protected virtual void OnValidationErrorOccurred(IDictionary<string, IList<string>> occurredErrors)
+        protected virtual void OnValidationErrorOccurred(Dictionary<string, List<string>> occurredErrors)
         {
         }
 
