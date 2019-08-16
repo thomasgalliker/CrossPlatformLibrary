@@ -1,8 +1,10 @@
 # CrossPlatformLibrary
+[![Version](https://img.shields.io/nuget/v/CrossPlatformLibrary.svg)](https://www.nuget.org/packages/CrossPlatformLibrary)  [![Downloads](https://img.shields.io/nuget/dt/CrossPlatformLibrary.svg)](https://www.nuget.org/packages/CrossPlatformLibrary)
+
 <img src="https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/master/Images/cpl_short.png" alt="CrossPlatformLibrary" align="right" height="100">
 CrossPlatformLibrary is an extensible toolkit which addresses cross-cutting concern. It is a lightweight library which provides a collection of functionality used in most mobile and desktop applications such as bootstrapping, exception handling, tracing and UI dispatching.
 
-#### Supported Platforms
+### Supported Platforms
 
 <table>
   <tr>
@@ -188,11 +190,9 @@ Dependency injection containers are used to manage dependencies between componen
 
 ```TODO: to be documented```
 
-### Planned features
+### Contribution
 
-* Encapsulate dependency injection containers so that 3rd party framworks such as AutoFac, Unity, etc.. can be used with CrossPlatformLibrary.
-
-* Sample projects to demonstrate features.
+Want to contribute to this project? Feel free to start a discussion in the issues area to see if your idea could fit in.
 
 ### License
 
