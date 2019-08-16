@@ -17,9 +17,11 @@
       xamarin pcl CrossPlatformLibrary cross-platform library bootstrapping dispatching tracing exception handling mobile
       windows universal uwp uap android xamarin.forms xamarin.ios ios monoandroid monodroid monotouch
     </tags>
-    <releaseNotes>
-4.0.0-pre
-- Support for .Net Standard
+    <releaseNotes>4.0.1
+      - Support for .Net Standard
+      - New input validation infrastructure
+      - New view model error handling
+      - Improved user controls
     </releaseNotes>
     <copyright>Copyright 2019</copyright>
     <language>en-US</language>
