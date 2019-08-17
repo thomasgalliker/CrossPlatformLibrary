@@ -304,8 +304,8 @@ namespace CrossPlatformLibrary.Extensions
             return new string(a);
         }
 
-        private static readonly char[] TrimNewLineChars = Environment.NewLine.ToCharArray();
-        private static readonly char[] TrimChars = $"{Environment.NewLine} ".ToCharArray();
+        public static readonly char[] TrimNewLineChars = Environment.NewLine.ToCharArray();
+        public static readonly char[] TrimChars = $"{Environment.NewLine} ".ToCharArray();
 
         /// <summary>
         ///     Removes all leading and trailing occurrences of new line (\n\r) as well as white-space characters in an array from
