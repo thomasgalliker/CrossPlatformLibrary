@@ -258,6 +258,11 @@
                             </controls:StackLayoutZero>
                         </controls:NoBarsScrollViewer>
 
+                        <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo FrameZero--&gt;" />
+                        <controls:FrameZero>
+                            <Label Text="Inside a FrameZero" />
+                        </controls:FrameZero>
+
                         <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo LongPressEffect--&gt;" />
                         <controls:GridZero Padding="20" BackgroundColor="LightGray">
                             <Grid.ColumnDefinitions>
