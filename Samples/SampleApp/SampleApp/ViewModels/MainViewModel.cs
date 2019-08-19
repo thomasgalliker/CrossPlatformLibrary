@@ -203,6 +203,14 @@ namespace SampleApp.ViewModels
             Console.WriteLine("unfocused");
         }
 
+
+        public ICommand CalloutCommand => new Command<string>(this.OnCalloutCommand);
+
+        private async void OnCalloutCommand(string parameter)
+        {
+            await this.displayService.DisplayAlert("CalloutCommand", $"parameter: {parameter}");
+        }
+
         public ICommand SaveProfileButtonCommand
         {
             get

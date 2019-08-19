@@ -29,6 +29,25 @@
         Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
         BackgroundColor="Transparent" />
 
+    <!--  Trailing Icon  -->
+    <Image
+        Grid.Row="0"
+        Source="{Binding TrailingIcon, Source={x:Reference Control}, Mode=OneWay}"
+        HeightRequest="24"
+        WidthRequest="24"
+        HorizontalOptions="EndAndExpand"
+        VerticalOptions="CenterAndExpand">
+        <Image.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="Android" Value="0,0,4,0" />
+                <On Platform="iOS" Value="0,0,0,0" />
+            </OnPlatform>
+        </Image.Margin>
+        <Image.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding TrailingIconCommand, Source={x:Reference Control}, Mode=OneWay}" CommandParameter="{Binding TrailingIconCommandParameter, Source={x:Reference Control}, Mode=OneWay}" />
+        </Image.GestureRecognizers>
+    </Image>
+
     <!--  Readonly Text  -->
     <Label
         Grid.Row="0"

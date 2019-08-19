@@ -10,10 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\camera_outline_black_192.png" />
     <None Remove="Resources\Images\chevron_right_grey_192x192.png" />
+    <None Remove="Resources\Images\rectangle_magenta_192.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\rectangle_magenta_192.png" />
+    <EmbeddedResource Include="Resources\Images\camera_outline_black_192.png" />
     <EmbeddedResource Include="Resources\Images\chevron_right_grey_192x192.png" />
   </ItemGroup>
 

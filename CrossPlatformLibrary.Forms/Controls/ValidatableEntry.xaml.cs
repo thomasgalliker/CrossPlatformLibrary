@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
@@ -152,6 +153,48 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             get { return (IEnumerable<string>)this.GetValue(ValidationErrorsProperty); }
             set { this.SetValue(ValidationErrorsProperty, value); }
+        }
+
+        public static readonly BindableProperty TrailingIconProperty =
+            BindableProperty.Create(
+                nameof(TrailingIcon),
+                typeof(ImageSource),
+                typeof(ValidatableEntry),
+                null,
+                BindingMode.OneWay);
+
+        public ImageSource TrailingIcon
+        {
+            get => (ImageSource)this.GetValue(TrailingIconProperty);
+            set => this.SetValue(TrailingIconProperty, value);
+        }
+
+        public static readonly BindableProperty TrailingIconCommandProperty =
+            BindableProperty.Create(
+                nameof(TrailingIconCommand),
+                typeof(ICommand),
+                typeof(ValidatableEntry),
+                null,
+                BindingMode.OneWay);
+
+        public ICommand TrailingIconCommand
+        {
+            get => (ICommand)this.GetValue(TrailingIconCommandProperty);
+            set => this.SetValue(TrailingIconCommandProperty, value);
+        }
+
+        public static readonly BindableProperty TrailingIconCommandParameterProperty =
+            BindableProperty.Create(
+                nameof(TrailingIconCommandParameter),
+                typeof(object),
+                typeof(ValidatableEntry),
+                null,
+                BindingMode.OneWay);
+
+        public object TrailingIconCommandParameter
+        {
+            get => this.GetValue(TrailingIconCommandParameterProperty);
+            set => this.SetValue(TrailingIconCommandParameterProperty, value);
         }
 
         public event EventHandler Completed

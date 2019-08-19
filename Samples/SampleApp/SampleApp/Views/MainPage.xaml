@@ -91,11 +91,15 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <controls:ValidatableEntry
+                                x:Name="UserNameEntry"
                                 Grid.Column="0"
                                 IsReadonly="{Binding IsToggled}"
                                 Placeholder="ValidatableEntry"
                                 Text="{Binding UserName, Mode=TwoWay}"
-                                ValidationErrors="{Binding Validation.Errors[UserName]}">
+                                ValidationErrors="{Binding Validation.Errors[UserName]}"
+                                TrailingIcon="{controls:ImageResource SampleApp.Resources.Images.rectangle_magenta_192.png}"
+                                TrailingIconCommand="{Binding CalloutCommand}"
+                                TrailingIconCommandParameter="{Binding Text, Source={x:Reference UserNameEntry}}">
                                 <controls:ValidatableEntry.Behaviors>
                                     <behaviors:MaxLengthTextBehavior MaxLength="{Binding UserNameMaxLength}" />
                                 </controls:ValidatableEntry.Behaviors>
