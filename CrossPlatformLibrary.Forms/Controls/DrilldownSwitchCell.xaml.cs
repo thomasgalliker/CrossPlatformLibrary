@@ -30,8 +30,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string Text
         {
-            get { return (string)this.GetValue(TextProperty); }
-            set { this.SetValue(TextProperty, value); }
+            get => (string)this.GetValue(TextProperty);
+            set => this.SetValue(TextProperty, value);
         }
 
         public static readonly BindableProperty CommandProperty =
@@ -44,8 +44,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public ICommand Command
         {
-            get { return (ICommand)this.GetValue(CommandProperty); }
-            set { this.SetValue(CommandProperty, value); }
+            get => (ICommand)this.GetValue(CommandProperty);
+            set => this.SetValue(CommandProperty, value);
         }
 
         public static readonly BindableProperty CommandParameterProperty =
@@ -72,8 +72,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public new bool IsEnabled
         {
-            get { return (bool)this.GetValue(IsEnabledProperty); }
-            set { this.SetValue(IsEnabledProperty, value); }
+            get => (bool)this.GetValue(IsEnabledProperty);
+            set => this.SetValue(IsEnabledProperty, value);
         }
 
         public static readonly BindableProperty IsToggledProperty =

@@ -27,8 +27,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public bool IsBusy
         {
-            get { return (bool)this.GetValue(IsBusyProperty); }
-            set { this.SetValue(IsBusyProperty, value); }
+            get => (bool)this.GetValue(IsBusyProperty);
+            set => this.SetValue(IsBusyProperty, value);
         }
     }
 }
