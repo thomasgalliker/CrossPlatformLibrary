@@ -25,6 +25,7 @@
         SelectedValuePath="{Binding SelectedValuePath, Source={x:Reference Control}}"
         SelectedItem="{Binding SelectedItem, Source={x:Reference Control}, Mode=TwoWay}"
         SelectedValue="{Binding SelectedValue, Source={x:Reference Control}, Mode=TwoWay}"
+        SelectedIndex="{Binding SelectedIndex, Source={x:Reference Control}, Mode=TwoWay}"
         HorizontalOptions="FillAndExpand" />
 
     <!--  Readonly Text  -->

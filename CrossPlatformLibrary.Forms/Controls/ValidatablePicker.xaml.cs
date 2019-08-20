@@ -10,6 +10,8 @@ namespace CrossPlatformLibrary.Forms.Controls
     /// </summary>
     public partial class ValidatablePicker : Grid
     {
+        private const int SelectedIndexDefaultValue = -1;
+
         public ValidatablePicker()
         {
             this.InitializeComponent();
@@ -33,15 +35,15 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string Placeholder
         {
-            get { return (string)this.GetValue(PlaceholderProperty); }
-            set { this.SetValue(PlaceholderProperty, value); }
+            get => (string)this.GetValue(PlaceholderProperty);
+            set => this.SetValue(PlaceholderProperty, value);
         }
 
         public string AnnotationText
         {
             get
             {
-                if (this.SelectedItem != null)
+                if (this.SelectedIndex != SelectedIndexDefaultValue)
                 {
                     return this.Placeholder;
                 }
@@ -143,13 +145,12 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             var picker = (ValidatablePicker)bindable;
             picker.OnPropertyChanged(nameof(picker.Placeholder));
-            picker.OnPropertyChanged(nameof(picker.AnnotationText));
             picker.OnPropertyChanged(nameof(picker.ReadonlyText));
         }
 
         public object SelectedItem
         {
-            get { return this.GetValue(SelectedItemProperty); }
+            get => this.GetValue(SelectedItemProperty);
             set
             {
                 this.SetValue(SelectedItemProperty, value);
@@ -167,8 +168,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public object SelectedValue
         {
-            get { return this.GetValue(SelectedValueProperty); }
-            set { this.SetValue(SelectedValueProperty, value); }
+            get => this.GetValue(SelectedValueProperty);
+            set => this.SetValue(SelectedValueProperty, value);
         }
 
         public static readonly BindableProperty SelectedValuePathProperty =
@@ -181,8 +182,31 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string SelectedValuePath
         {
-            get { return (string)this.GetValue(SelectedValuePathProperty); }
-            set { this.SetValue(SelectedValuePathProperty, value); }
+            get => (string)this.GetValue(SelectedValuePathProperty);
+            set => this.SetValue(SelectedValuePathProperty, value);
+        }
+
+
+        public static readonly BindableProperty SelectedIndexProperty =
+            BindableProperty.Create(
+                nameof(SelectedIndex),
+                typeof(int),
+                typeof(ValidatablePicker),
+                SelectedIndexDefaultValue,
+                BindingMode.TwoWay,
+                null,
+                OnSelectedIndexPropertyChanged);
+
+        public int SelectedIndex
+        {
+            get => (int)this.GetValue(SelectedIndexProperty);
+            set => this.SetValue(SelectedIndexProperty, value);
+        }
+
+        private static void OnSelectedIndexPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var picker = (ValidatablePicker)bindable;
+            picker.OnPropertyChanged(nameof(picker.AnnotationText));
         }
 
         public static readonly BindableProperty DisplayMemberPathProperty =
