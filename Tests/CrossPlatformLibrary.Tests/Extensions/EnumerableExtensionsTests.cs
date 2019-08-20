@@ -9,7 +9,7 @@ using Xunit;
 
 namespace CrossPlatformLibrary.Tests.Extensions
 {
-    public class EnumerableExtensionsTests
+    public partial class EnumerableExtensionsTests
     {
         [Fact]
         public void SortExtensionTest()
@@ -82,7 +82,7 @@ namespace CrossPlatformLibrary.Tests.Extensions
             var resultCollection = sourceCollection.Append(99);
 
             // Assert
-            resultCollection.Should().ContainInOrder(new List<int> { 1, 2, 3, 99});
+            resultCollection.Should().ContainInOrder(new List<int> { 1, 2, 3, 99 });
         }
 
         [Fact]
