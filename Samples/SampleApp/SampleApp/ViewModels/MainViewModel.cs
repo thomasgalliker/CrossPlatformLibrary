@@ -138,7 +138,7 @@ namespace SampleApp.ViewModels
 
             if (!string.IsNullOrEmpty(searchText))
             {
-                var filteredViewModels = this.Countries.Where(c => c.Name.StartsWith(searchText, StringComparison.InvariantCultureIgnoreCase))
+                var filteredViewModels = this.Countries.Where(c => c.Name != null && c.Name.StartsWith(searchText, StringComparison.InvariantCultureIgnoreCase))
                     .OrderBy(c => c.Name)
                     .Take(10);
                 this.SuggestedCountries.AddRange(filteredViewModels);
@@ -208,6 +208,15 @@ namespace SampleApp.ViewModels
         private async void OnCalloutCommand(string parameter)
         {
             await this.displayService.DisplayAlert("CalloutCommand", $"parameter: {parameter}");
+        }
+
+        public ICommand SetFantasyLandCommand => new Command(this.OnSetFantasyLand);
+
+        private void OnSetFantasyLand()
+        {
+            // Since none of the Countries are IEquitable<> to "Fantasy Land", the UI controls binding to Country
+            // need to react properly: Bindable Picker switches to state 'nothing selected'.
+            this.Country = new CountryViewModel(new CountryDto { Id = 99, Name = "Fantasy Land" });
         }
 
         public ICommand SaveProfileButtonCommand
