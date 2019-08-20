@@ -16,22 +16,22 @@
             <controls:CustomButton
                 HorizontalContentAlignment="Start"
                 VerticalContentAlignment="Center"
-                Text="{Binding Title, Mode=OneWay}"
                 AllCaps="False"
-                FontAttributes="None"
-                FontSize="{DynamicResource LargeSize}"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="StartAndExpand"
-                CornerRadius="0"
-                TextColor="{DynamicResource Primary}"
-                Command="{Binding Command, Mode=OneWay}"
-                CommandParameter="{Binding CommandParameter, Mode=OneWay}"
-                IsEnabled="{Binding IsEnabled, Mode=OneWay}"
-                Style="{DynamicResource CustomButtonStyle}"
                 BackgroundColor="Transparent"
                 BackgroundColorPressed="{DynamicResource WindowBackground}"
                 BorderColor="Transparent"
-                BorderColorPressed="Transparent">
+                BorderColorPressed="Transparent"
+                Command="{Binding Command, Mode=OneWay}"
+                CommandParameter="{Binding CommandParameter, Mode=OneWay}"
+                CornerRadius="0"
+                FontAttributes="None"
+                FontSize="{DynamicResource LargeSize}"
+                HorizontalOptions="FillAndExpand"
+                IsEnabled="{Binding IsEnabled, Mode=OneWay}"
+                Style="{DynamicResource CustomButtonStyle}"
+                Text="{Binding Title, Mode=OneWay}"
+                TextColor="{DynamicResource Primary}"
+                VerticalOptions="StartAndExpand">
 
                 <controls:CustomButton.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
@@ -50,20 +50,20 @@
 
             <Image
                 Margin="0,0,8,0"
-                Source="{Binding ImageSource, Mode=OneWay}"
-                IsVisible="{Binding IsBusy, Mode=OneWay, Converter={StaticResource BoolInverter}}"
                 HeightRequest="24"
-                WidthRequest="24"
                 HorizontalOptions="EndAndExpand"
-                VerticalOptions="CenterAndExpand" />
+                IsVisible="{Binding IsBusy, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+                Source="{Binding ImageSource, Mode=OneWay}"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="24" />
 
             <ActivityIndicator
                 Margin="0,0,8,0"
+                HorizontalOptions="EndAndExpand"
                 IsRunning="{Binding IsBusy, Mode=OneWay}"
                 IsVisible="{Binding IsBusy, Mode=OneWay}"
-                WidthRequest="24"
-                HorizontalOptions="EndAndExpand"
-                VerticalOptions="CenterAndExpand">
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="24">
                 <ActivityIndicator.Color>
                     <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}" />
                 </ActivityIndicator.Color>
