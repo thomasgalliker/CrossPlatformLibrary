@@ -203,7 +203,6 @@ namespace SampleApp.ViewModels
             Console.WriteLine("unfocused");
         }
 
-
         public ICommand CalloutCommand => new Command<string>(this.OnCalloutCommand);
 
         private async void OnCalloutCommand(string parameter)
@@ -277,15 +276,15 @@ namespace SampleApp.ViewModels
                     throw new InvalidOperationException("Failed to load data. Try again.");
                 }
 
-                this.Countries.Clear();
-
                 var defaultCountryViewModel = new CountryViewModel(new CountryDto { Name = null });
                 var countryDtos = (await this.countryService.GetAllAsync()).ToList();
 
                 // Set countries all at once
+                this.Countries.Clear();
                 this.Countries = new ObservableCollection<CountryViewModel>(countryDtos.Select(c => new CountryViewModel(c)).Prepend(defaultCountryViewModel));
 
                 // Set countries one after the other
+                this.Countries.Clear();
                 this.Countries.AddRange(countryDtos.Select(c => new CountryViewModel(c)).Prepend(defaultCountryViewModel));
 
                 //this.Notes = $"Test test test{Environment.NewLine}Line 2 text text text";

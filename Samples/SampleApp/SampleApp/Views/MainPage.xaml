@@ -96,10 +96,10 @@
                                 IsReadonly="{Binding IsToggled}"
                                 Placeholder="ValidatableEntry"
                                 Text="{Binding UserName, Mode=TwoWay}"
-                                ValidationErrors="{Binding Validation.Errors[UserName]}"
                                 TrailingIcon="{controls:ImageResource SampleApp.Resources.Images.rectangle_magenta_192.png}"
                                 TrailingIconCommand="{Binding CalloutCommand}"
-                                TrailingIconCommandParameter="{Binding Text, Source={x:Reference UserNameEntry}}">
+                                TrailingIconCommandParameter="{Binding Text, Source={x:Reference UserNameEntry}}"
+                                ValidationErrors="{Binding Validation.Errors[UserName]}">
                                 <controls:ValidatableEntry.Behaviors>
                                     <behaviors:MaxLengthTextBehavior MaxLength="{Binding UserNameMaxLength}" />
                                 </controls:ValidatableEntry.Behaviors>
@@ -243,6 +243,24 @@
                             </controls:StackLayoutZero>
 
                         </controls:CardView>
+
+                        <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo StackedList (Vertical)--&gt;" />
+                        <controls:StackedList
+                            BackgroundColor="LightGray"
+                            ItemTemplate="{StaticResource AutoCompleteSuggestionItemTemplate}"
+                            ItemsSource="{Binding Countries, Mode=OneWay}"
+                            ListOrientation="Vertical"
+                            SelectedItem="{Binding Country, Mode=TwoWay}"
+                            SelectionMode="Single" />
+
+                        <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo StackedList (Horizontal)--&gt;" />
+                        <controls:StackedList
+                            BackgroundColor="LightGray"
+                            ItemTemplate="{StaticResource AutoCompleteSuggestionItemTemplate}"
+                            ItemsSource="{Binding Countries, Mode=OneWay}"
+                            ListOrientation="Horizontal"
+                            SelectedItem="{Binding Country, Mode=TwoWay}"
+                            SelectionMode="None" />
 
                         <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo NoBarsScrollViewer--&gt;" />
                         <controls:NoBarsScrollViewer Orientation="Horizontal">

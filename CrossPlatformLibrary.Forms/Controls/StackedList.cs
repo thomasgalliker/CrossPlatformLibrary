@@ -50,26 +50,26 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public ICommand SelectedCommand
         {
-            get { return (ICommand)this.GetValue(SelectedCommandProperty); }
-            set { this.SetValue(SelectedCommandProperty, value); }
+            get => (ICommand)this.GetValue(SelectedCommandProperty);
+            set => this.SetValue(SelectedCommandProperty, value);
         }
 
         public IEnumerable ItemsSource
         {
-            get { return (IEnumerable)this.GetValue(ItemsSourceProperty); }
-            set { this.SetValue(ItemsSourceProperty, value); }
+            get => (IEnumerable)this.GetValue(ItemsSourceProperty);
+            set => this.SetValue(ItemsSourceProperty, value);
         }
 
         public object SelectedItem
         {
-            get { return (object)this.GetValue(SelectedItemProperty); }
-            set { this.SetValue(SelectedItemProperty, value); }
+            get => this.GetValue(SelectedItemProperty);
+            set => this.SetValue(SelectedItemProperty, value);
         }
 
         public DataTemplate ItemTemplate
         {
-            get { return (DataTemplate)this.GetValue(ItemTemplateProperty); }
-            set { this.SetValue(ItemTemplateProperty, value); }
+            get => (DataTemplate)this.GetValue(ItemTemplateProperty);
+            set => this.SetValue(ItemTemplateProperty, value);
         }
 
         private static void ItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
@@ -131,34 +131,43 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         protected virtual void SetItems()
         {
-            this.itemsStackLayout.Children.Clear();
-            this.itemsStackLayout.Spacing = this.Spacing;
+            try
+            {
+                this.itemsStackLayout.Children.Clear();
+                this.itemsStackLayout.Spacing = this.Spacing;
 
-            this.innerSelectedCommand = new Command<View>(
-                view =>
-                {
-                    this.SelectedItem = view.BindingContext;
-
-                    if (this.SelectionMode == SelectionMode.None)
+                this.innerSelectedCommand = new Command<View>(
+                    view =>
                     {
-                        this.SelectedItem = null; // Allowing item second time selection
-                    }
-                });
+                        this.SelectedItem = view.BindingContext;
 
-            this.itemsStackLayout.Orientation = this.ListOrientation;
-            this.scrollView.Orientation = this.ListOrientation == StackOrientation.Horizontal ? ScrollOrientation.Horizontal : ScrollOrientation.Vertical;
+                        if (this.SelectionMode == SelectionMode.None)
+                        {
+                            this.SelectedItem = null; // Allowing item second time selection
+                        }
+                    });
 
-            if (this.ItemsSource == null)
-            {
-                return;
+                var listOrientation = this.ListOrientation;
+                this.itemsStackLayout.Orientation = listOrientation;
+                this.scrollView.Orientation = listOrientation == StackOrientation.Horizontal ? ScrollOrientation.Horizontal : ScrollOrientation.Vertical;
+
+                if (this.ItemsSource == null)
+                {
+                    return;
+                }
+
+                foreach (var item in this.ItemsSource)
+                {
+                    this.itemsStackLayout.Children.Add(this.GetItemView(item));
+                }
+
+                this.SelectedItem = null;
             }
-
-            foreach (var item in this.ItemsSource)
+            catch (Exception ex)
             {
-                this.itemsStackLayout.Children.Add(this.GetItemView(item));
+                Console.WriteLine($"SetItems failed with exception: {ex}");
+                throw;
             }
-
-            this.SelectedItem = null;
         }
 
         protected virtual View GetItemView(object item)
