@@ -6,17 +6,17 @@ namespace CrossPlatformLibrary.Extensions
 {
     public static class EnumeratorExtensions
     {
-        public static IEnumerable<T> Cast<T>(this IEnumerator iterator)
+        public static IEnumerable<T> ToEnumerable<T>(this IEnumerator enumerator)
         {
-            while (iterator.MoveNext())
+            while (enumerator?.MoveNext() == true)
             {
-                yield return (T)iterator.Current;
+                yield return (T)enumerator.Current;
             }
         }
 
         public static IEnumerable<T> ToList<T>(this IEnumerator iterator)
         {
-            return iterator.Cast<T>().ToList();
+            return iterator.ToEnumerable<T>().ToList();
         }
     }
 }
