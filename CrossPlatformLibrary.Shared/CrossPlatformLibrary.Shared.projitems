@@ -24,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ExceptionHandling\IExceptionHandlingStrategy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerableExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumeratorExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\GuidExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\IntegerExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TimeSpanExtensions.cs" />
