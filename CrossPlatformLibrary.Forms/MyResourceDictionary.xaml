@@ -216,6 +216,7 @@
         </Setter>
     </Style>
 
+    <!--  CustomButton Base Style  -->
     <Color x:Key="CustomButtonStyle.TextColor" />
 
     <Style x:Key="CustomButtonStyle" TargetType="controls:CustomButton">
@@ -226,27 +227,26 @@
         <Setter Property="FontAttributes" Value="None" />
     </Style>
 
-
-    <Color x:Key="CustomButtonPrimaryStyle.TextColor">White</Color>
+    <!--  CustomButton Primary Style  -->
+    <Color x:Key="CustomButtonPrimaryStyle.TextColor">Black</Color>
     <Color x:Key="CustomButtonPrimaryStyle.BorderColor.Enabled" />
     <Color x:Key="CustomButtonPrimaryStyle.BorderColor.Disabled">#FFCFD1D3</Color>
-    <Color x:Key="CustomButtonPrimaryStyle.BackgroundColor.Enabled" />
+    <Color x:Key="CustomButtonPrimaryStyle.BorderColor.Pressed">Black</Color>
+    <Color x:Key="CustomButtonPrimaryStyle.BackgroundColor.Enabled">White</Color>
     <Color x:Key="CustomButtonPrimaryStyle.BackgroundColor.Disabled">#FFCFD1D3</Color>
+    <Color x:Key="CustomButtonPrimaryStyle.BackgroundColor.Pressed">Black</Color>
 
     <Style
         x:Key="CustomButtonPrimaryStyle"
         BasedOn="{StaticResource CustomButtonStyle}"
         TargetType="controls:CustomButton">
-        <Setter Property="BackgroundColor" Value="{DynamicResource Primary}" />
-        <Setter Property="BorderColor" Value="{DynamicResource Primary}" />
-        <Setter Property="BackgroundColorPressed" Value="{DynamicResource PrimaryDark}" />
-        <Setter Property="BorderColorPressed" Value="{DynamicResource PrimaryDark}" />
         <Setter Property="TextColor" Value="{DynamicResource CustomButtonPrimaryStyle.TextColor}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource CustomButtonPrimaryStyle.BackgroundColor.Enabled}" />
+        <Setter Property="BackgroundColorPressed" Value="{DynamicResource CustomButtonPrimaryStyle.BackgroundColor.Pressed}" />
+        <Setter Property="BorderColor" Value="{DynamicResource CustomButtonPrimaryStyle.BorderColor.Enabled}" />
+        <Setter Property="BorderColorPressed" Value="{DynamicResource CustomButtonPrimaryStyle.BorderColor.Pressed}" />
         <Style.Triggers>
-            <Trigger TargetType="Button" Property="IsEnabled" Value="True">
-                <Setter Property="BackgroundColor" Value="{DynamicResource CustomButtonPrimaryStyle.BackgroundColor.Enabled}" />
-                <Setter Property="BorderColor" Value="{DynamicResource CustomButtonPrimaryStyle.BorderColor.Enabled}" />
-            </Trigger>
+            <!--  IsEnabled/False will automatically restore it's state if set to IsEnabled/True  -->
             <Trigger TargetType="Button" Property="IsEnabled" Value="False">
                 <Setter Property="BackgroundColor" Value="{DynamicResource CustomButtonPrimaryStyle.BackgroundColor.Disabled}" />
                 <Setter Property="BorderColor" Value="{DynamicResource CustomButtonPrimaryStyle.BorderColor.Disabled}" />
@@ -254,25 +254,26 @@
         </Style.Triggers>
     </Style>
 
-
+    <!--  CustomButton Secondary Style  -->
+    <Color x:Key="CustomButtonSecondaryStyle.TextColor">White</Color>
     <Color x:Key="CustomButtonSecondaryStyle.BorderColor.Enabled" />
     <Color x:Key="CustomButtonSecondaryStyle.BorderColor.Disabled">#FFCFD1D3</Color>
+    <Color x:Key="CustomButtonSecondaryStyle.BorderColor.Pressed">Black</Color>
     <Color x:Key="CustomButtonSecondaryStyle.BackgroundColor.Enabled">White</Color>
     <Color x:Key="CustomButtonSecondaryStyle.BackgroundColor.Disabled">#FFCFD1D3</Color>
+    <Color x:Key="CustomButtonSecondaryStyle.BackgroundColor.Pressed">Black</Color>
 
     <Style
         x:Key="CustomButtonSecondaryStyle"
         BasedOn="{StaticResource CustomButtonStyle}"
         TargetType="controls:CustomButton">
-        <Setter Property="BackgroundColor" Value="{DynamicResource WindowBackgroundTable}" />
-        <Setter Property="BackgroundColorPressed" Value="{DynamicResource WindowBackgroundTable}" />
-        <Setter Property="BorderColor" Value="{DynamicResource Primary}" />
-        <Setter Property="BorderColorPressed" Value="{DynamicResource Primary}" />
+        <Setter Property="TextColor" Value="{DynamicResource CustomButtonSecondaryStyle.TextColor}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource CustomButtonSecondaryStyle.BackgroundColor.Enabled}" />
+        <Setter Property="BackgroundColorPressed" Value="{DynamicResource CustomButtonSecondaryStyle.BackgroundColor.Pressed}" />
+        <Setter Property="BorderColor" Value="{DynamicResource CustomButtonSecondaryStyle.BorderColor.Enabled}" />
+        <Setter Property="BorderColorPressed" Value="{DynamicResource CustomButtonSecondaryStyle.BorderColor.Pressed}" />
         <Style.Triggers>
-            <Trigger TargetType="Button" Property="IsEnabled" Value="True">
-                <Setter Property="BackgroundColor" Value="{DynamicResource CustomButtonSecondaryStyle.BackgroundColor.Enabled}" />
-                <Setter Property="BorderColor" Value="{DynamicResource CustomButtonSecondaryStyle.BorderColor.Enabled}" />
-            </Trigger>
+            <!--  IsEnabled/False will automatically restore it's state if set to IsEnabled/True  -->
             <Trigger TargetType="Button" Property="IsEnabled" Value="False">
                 <Setter Property="BackgroundColor" Value="{DynamicResource CustomButtonSecondaryStyle.BackgroundColor.Disabled}" />
                 <Setter Property="BorderColor" Value="{DynamicResource CustomButtonSecondaryStyle.BorderColor.Disabled}" />
@@ -282,6 +283,7 @@
 
     <Style BasedOn="{StaticResource CustomButtonStyle}" TargetType="controls:CustomButton" />
 
+    <!--  LabelStyle  -->
     <Style x:Key="LabelStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
@@ -323,6 +325,7 @@
         <Setter Property="LabelStyle" Value="{DynamicResource EntryLabelStyle}" />
     </Style>
 
+    <!--  HyperLinkLabelStyle  -->
     <Style x:Key="HyperLinkLabelStyle" TargetType="controls:HyperLinkLabel">
         <Setter Property="TintColor" Value="Blue" />
         <Setter Property="TextDecorations" Value="Underline" />

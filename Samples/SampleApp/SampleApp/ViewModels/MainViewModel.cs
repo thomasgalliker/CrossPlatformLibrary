@@ -36,6 +36,7 @@ namespace SampleApp.ViewModels
         private ObservableCollection<CountryViewModel> countries;
         private int userNameMaxLength;
         private DateTime? birthdate;
+        private bool isSaving;
 
         public MainViewModel(
             DisplayService displayService,
@@ -219,19 +220,39 @@ namespace SampleApp.ViewModels
             this.Country = new CountryViewModel(new CountryDto { Id = 99, Name = "Fantasy Land" });
         }
 
+        protected override void OnBusyChanged(bool busy)
+        {
+            this.RaisePropertyChanged(nameof(this.CanExecuteSaveProfileButtonCommand));
+            this.RaisePropertyChanged(nameof(this.CanExecuteLoadDataButtonCommand));
+        }
+
+        public bool CanExecuteSaveProfileButtonCommand => this.IsNotBusy && !this.IsSaving;
+
+        public bool IsSaving
+        {
+            get => this.isSaving;
+            set
+            {
+                if (this.SetProperty(ref this.isSaving, value, nameof(this.IsSaving)))
+                {
+                    this.RaisePropertyChanged(nameof(this.CanExecuteSaveProfileButtonCommand));
+                    this.RaisePropertyChanged(nameof(this.CanExecuteLoadDataButtonCommand));
+                }
+            }
+        }
+
         public ICommand SaveProfileButtonCommand
         {
             get
             {
                 return this.saveProfileButtonCommand ??
-                       (this.saveProfileButtonCommand = new Command(async () => await this.OnSaveProfile()));
+                       (this.saveProfileButtonCommand = new Command(async () => await this.OnSaveProfile(), () => this.CanExecuteSaveProfileButtonCommand));
             }
         }
 
         private async Task OnSaveProfile()
         {
-            this.IsBusy = true;
-
+            this.IsSaving = true;
             await Task.Delay(1000);
 
             var isValid = await this.Validation.IsValidAsync();
@@ -240,13 +261,15 @@ namespace SampleApp.ViewModels
                 // TODO Save...
             }
 
-            this.IsBusy = false;
+            this.IsSaving = false;
         }
 
         protected override async Task OnRefreshList()
         {
             await Task.Delay(1000);
         }
+
+        public bool CanExecuteLoadDataButtonCommand => this.IsNotBusy && !this.IsSaving;
 
         public ICommand LoadDataButtonCommand
         {

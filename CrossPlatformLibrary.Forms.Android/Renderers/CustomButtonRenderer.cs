@@ -77,7 +77,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
                         this.pressedDrawable.SetCornerRadius(customButton.CornerRadius);
                     }
                     else if (e.PropertyName == Button.BorderWidthProperty.PropertyName || e.PropertyName == Button.BorderColorProperty.PropertyName
-                             || e.PropertyName == CustomButton.BorderColorPressedProperty.PropertyName)
+                                                                                       || e.PropertyName == CustomButton.BorderColorPressedProperty.PropertyName)
                     {
                         this.normalDrawable.SetStroke((int)customButton.BorderWidth, customButton.BorderColor.ToAndroid());
                         this.pressedDrawable.SetStroke((int)customButton.BorderWidth, customButton.BorderColorPressed.ToAndroid());

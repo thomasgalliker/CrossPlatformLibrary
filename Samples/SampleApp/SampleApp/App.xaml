@@ -29,7 +29,9 @@
                 <Setter Property="TextColor" Value="Green" />
                 <Setter Property="BackgroundColor" Value="#e6ffe6" />
                 <Setter Property="FontAttributes" Value="Italic" />
-                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="LineBreakMode" Value="CharacterWrap" />
             </Style>
 
 

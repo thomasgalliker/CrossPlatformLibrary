@@ -312,31 +312,70 @@
 
                     </StackLayout>
 
-                    <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomButton--&gt;" />
+                    <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomButton (SecondaryStyle)--&gt;" />
                     <controls:CustomButton
+                        x:Name="CustomButtonSecondary"
                         Margin="{StaticResource ButtonMargin}"
                         Command="{Binding LoadDataButtonCommand}"
+                        IsEnabled="{Binding CanExecuteLoadDataButtonCommand}"
                         Style="{StaticResource CustomButtonSecondaryStyle}"
-                        Text="{localization:Translate LoadDataButtonText}" />
+                        Text="{localization:Translate LoadDataButtonText}"
+                        VerticalOptions="StartAndExpand" />
+                    <controls:StackLayoutZero Orientation="Vertical">
+                        <Label
+                            Text="{Binding IsEnabled, StringFormat='IsEnabled={0}', Source={x:Reference CustomButtonSecondary}}"
+                            FontSize="Micro"
+                            LineBreakMode="CharacterWrap" />
+                        <Label
+                            Text="{Binding IsBusy, StringFormat='IsBusy={0}'}"
+                            FontSize="Micro"
+                            LineBreakMode="CharacterWrap" />
+                        <Label
+                            Text="{Binding CanExecuteLoadDataButtonCommand, StringFormat='CanExecuteLoadDataButtonCommand={0}'}"
+                            FontSize="Micro"
+                            LineBreakMode="CharacterWrap" />
+                    </controls:StackLayoutZero>
 
+                    <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomButton (PrimaryStyle)--&gt;" />
                     <controls:CustomButton
+                        x:Name="CustomButtonPrimary"
                         Margin="{StaticResource ButtonMargin}"
                         Command="{Binding SaveProfileButtonCommand}"
+                        IsEnabled="{Binding CanExecuteSaveProfileButtonCommand}"
                         Style="{StaticResource CustomButtonPrimaryStyle}"
-                        Text="{localization:Translate SaveButtonText}" />
+                        Text="{localization:Translate SaveButtonText}"
+                        VerticalOptions="StartAndExpand" />
+                    <controls:StackLayoutZero Orientation="Vertical">
+                        <Label
+                            Text="{Binding IsEnabled, StringFormat='IsEnabled={0}', Source={x:Reference CustomButtonPrimary}}"
+                            FontSize="Micro"
+                            LineBreakMode="CharacterWrap" />
+                        <Label
+                            Text="{Binding IsSaving, StringFormat='IsSaving={0}'}"
+                            FontSize="Micro"
+                            LineBreakMode="CharacterWrap" />
+                        <Label
+                            Text="{Binding CanExecuteSaveProfileButtonCommand, StringFormat='CanExecuteSaveProfileButtonCommand={0}'}"
+                            FontSize="Micro"
+                            LineBreakMode="CharacterWrap" />
+                    </controls:StackLayoutZero>
                 </StackLayout>
 
                 <Label
                     IsVisible="{Binding IsBusy, Mode=OneWay}"
                     Style="{StaticResource DemoLabelStyle}"
-                    Text="&lt;!--Demo CustomActivityIndicator--&gt;" />
+                    Text="&lt;!--Demo CustomActivityIndicator--&gt;"
+                    VerticalOptions="Start"
+                    HorizontalOptions="FillAndExpand" />
                 <controls:CustomActivityIndicator Caption="{localization:Translate LoadingText}" IsVisible="{Binding IsBusy, Mode=OneWay}" />
             </Grid>
 
             <Label
                 IsVisible="{Binding HasViewModelError, Mode=OneWay}"
                 Style="{StaticResource DemoLabelStyle}"
-                Text="&lt;!--Demo ViewModelErrorControl--&gt;" />
+                Text="&lt;!--Demo ViewModelErrorControl--&gt;"
+                VerticalOptions="Start"
+                HorizontalOptions="FillAndExpand" />
             <controls:ViewModelErrorControl IsVisible="{Binding HasViewModelError, Mode=OneWay}" ViewModelError="{Binding ViewModelError, Mode=OneWay}" />
         </Grid>
     </controls:AlwaysScrollView>
