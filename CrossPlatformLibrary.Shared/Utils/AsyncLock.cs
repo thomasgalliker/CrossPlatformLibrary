@@ -61,6 +61,15 @@ namespace NeoSmart.AsyncLock
                 }
             }
 
+            internal async Task ObtainLockAsync(TimeSpan timeout)
+            {
+                while (!this.TryEnter())
+                {
+                    //we need to wait for someone to leave the lock before trying again
+                    await this.parent.Retry.WaitAsync(timeout);
+                }
+            }
+
             internal void ObtainLock()
             {
                 while (!this.TryEnter())
@@ -129,6 +138,13 @@ namespace NeoSmart.AsyncLock
         {
             var @lock = new InnerLock(this);
             await @lock.ObtainLockAsync(ct);
+            return @lock;
+        }
+
+        public async Task<IDisposable> LockAsync(TimeSpan timeout)
+        {
+            var @lock = new InnerLock(this);
+            await @lock.ObtainLockAsync(timeout);
             return @lock;
         }
     }
