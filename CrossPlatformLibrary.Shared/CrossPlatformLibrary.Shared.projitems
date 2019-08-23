@@ -54,6 +54,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Tools\IPlatformServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tools\PlatformServicesBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\AsyncInline.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\AsyncLock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ByteConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\HashCodeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\RandomUtils.cs" />
