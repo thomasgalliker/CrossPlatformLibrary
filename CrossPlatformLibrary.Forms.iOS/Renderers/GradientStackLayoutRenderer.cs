@@ -14,27 +14,28 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
         public override void Draw(CGRect rect)
         {
             base.Draw(rect);
-            var stack = (GradientStackLayout)this.Element;
-            var startColor = stack.StartColor.ToCGColor();
-            var endColor = stack.EndColor.ToCGColor();
 
-
-            var gradientLayer = new CAGradientLayer();
-
-
-            //var gradientLayer = new CAGradientLayer()
-            //{
-            //  StartPoint = new CGPoint(0, 0.5),
-            //  EndPoint = new CGPoint(1, 0.5)
-            //};
-
-            gradientLayer.Frame = rect;
-            gradientLayer.Colors = new[]
+            if (this.Element is GradientStackLayout gradientStackLayout)
             {
-                startColor, endColor
-            };
+                var startColor = gradientStackLayout.StartColor.ToCGColor();
+                var endColor = gradientStackLayout.EndColor.ToCGColor();
 
-            this.NativeView.Layer.InsertSublayer(gradientLayer, 0);
+                var gradientLayer = new CAGradientLayer();
+
+                if (gradientStackLayout.GradientOrientation == StackOrientation.Horizontal)
+                {
+                    gradientLayer.StartPoint = new CGPoint(0, 0.5);
+                    gradientLayer.EndPoint = new CGPoint(1, 0.5);
+                }
+
+                gradientLayer.Frame = rect;
+                gradientLayer.Colors = new[]
+                {
+                    startColor, endColor
+                };
+
+                this.NativeView.Layer.InsertSublayer(gradientLayer, 0);
+            }
         }
     }
 }
