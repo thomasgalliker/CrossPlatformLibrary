@@ -1,21 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Grid
+<controls:GridZero
     x:Class="CrossPlatformLibrary.Forms.Controls.DrilldownButtonList"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     x:Name="Control">
 
     <Grid.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="VerySimpleDataTemplate">
-                <ViewCell>
-                    <StackLayout>
-                        <Label Text="{Binding Text}" />
-                        <Label Text="{Binding Title}" BackgroundColor="Yellow" />
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
             <DataTemplate x:Key="DrilldownButtonCell">
                 <controls:DrilldownButtonCell />
             </DataTemplate>
@@ -29,34 +22,16 @@
         </ResourceDictionary>
     </Grid.Resources>
 
-    <!--  Padding="{DynamicResource CardViewPadding}" BackgroundColor="{DynamicResource CardViewBackgroundColor}"  -->
-    <Grid.Padding>
-        <OnPlatform
-            x:TypeArguments="Thickness"
-            Android="0"
-            iOS="0, 24, 0, 4" />
-    </Grid.Padding>
+    <controls:NonScrollableListView
+        Margin="0"
+        ios:ListView.SeparatorStyle="FullWidth"
+        ItemTemplateSelector="{StaticResource DrilldownCellTemplateSelector}"
+        ItemsSource="{Binding ItemsSource, Source={x:Reference Control}, Mode=OneWay}"
+        HasUnevenRows="False"
+        RowHeight="46"
+        VerticalOptions="StartAndExpand"
+        SeparatorColor="{DynamicResource ListSeparator}"
+        SeparatorVisibility="Default"
+        Footer="{x:Null}" />
 
-    <StackLayout Spacing="0">
-        <!--<controls:HeaderDivider/>-->
-
-        <controls:NonScrollableListView
-            Margin="0"
-            BackgroundColor="Transparent"
-            ItemTemplateSelector="{StaticResource DrilldownCellTemplateSelector}"
-            ItemsSource="{Binding ItemsSource, Source={x:Reference Control}, Mode=OneWay}"
-            HasUnevenRows="False"
-            RowHeight="46"
-            VerticalOptions="StartAndExpand">
-
-            <controls:NonScrollableListView.SeparatorColor>
-                <OnPlatform
-                    x:TypeArguments="Color"
-                    Android="{StaticResource ListSeparator}"
-                    iOS="Transparent" />
-            </controls:NonScrollableListView.SeparatorColor>
-
-        </controls:NonScrollableListView>
-        <!--<controls:FooterDivider/>-->
-    </StackLayout>
-</Grid>
+</controls:GridZero>

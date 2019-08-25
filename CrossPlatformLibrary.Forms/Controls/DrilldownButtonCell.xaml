@@ -8,7 +8,7 @@
     SelectedBackgroundColor="{DynamicResource WindowBackgroundTable}">
 
     <ViewCell.View>
-        <Grid>
+        <controls:GridZero>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
@@ -72,6 +72,6 @@
             <Grid.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding Command, Mode=OneWay}" CommandParameter="{Binding CommandParameter, Mode=OneWay}" />
             </Grid.GestureRecognizers>
-        </Grid>
+        </controls:GridZero>
     </ViewCell.View>
 </controls:ExtendedViewCell>

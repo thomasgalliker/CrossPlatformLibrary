@@ -6,13 +6,12 @@ using Xamarin.Forms.Xaml;
 namespace CrossPlatformLibrary.Forms.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DrilldownButtonList : Grid
+    public partial class DrilldownButtonList : GridZero
     {
         public DrilldownButtonList()
         {
             this.InitializeComponent();
         }
-
 
         public static readonly BindableProperty ItemsSourceProperty =
             BindableProperty.Create(
@@ -20,31 +19,12 @@ namespace CrossPlatformLibrary.Forms.Controls
                 typeof(IEnumerable),
                 typeof(DrilldownButtonList),
                 null,
-                BindingMode.OneWay,
-                null,
-                propertyChanged: OnItemsSourcePropertyChanged);
-
-        private static void OnItemsSourcePropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
-        {
-            var drilldownButtonList = (DrilldownButtonList)bindable;
-
-            var newItems = newvalue as IEnumerable;
-            if (newItems == null)
-            {
-                return;
-            }
-
-            //var bc = drilldownButtonList.BindingContext;
-            //foreach (var child in newItems.OfType<BindableObject>())
-            //{
-            //    SetInheritedBindingContext(child, bc);
-            //}
-        }
+                BindingMode.OneWay);
 
         public IEnumerable ItemsSource
         {
-            get { return (IEnumerable)this.GetValue(ItemsSourceProperty); }
-            set { this.SetValue(ItemsSourceProperty, value); }
+            get => (IEnumerable)this.GetValue(ItemsSourceProperty);
+            set => this.SetValue(ItemsSourceProperty, value);
         }
 
         protected override void OnBindingContextChanged()

@@ -217,7 +217,7 @@
                             Text="{localization:Translate SingleButtonText}" />
 
                         <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo DrilldownButtonList--&gt;" />
-                        <controls:CardView>
+                        <controls:CardView Padding="0,0,0,16">
                             <controls:StackLayoutZero>
                                 <controls:LabelSection Text="{localization:Translate ListOfSettingsSectionText}" />
                                 <controls:HeaderDivider />
@@ -232,15 +232,18 @@
                                             <controls:DrilldownButtonView
                                                 Title="{Binding RefreshButtonText}"
                                                 Command="{Binding RefreshCommand}"
-                                                IsBusy="{Binding IsRefreshing, Mode=OneWay}" />
+                                                IsBusy="{Binding IsRefreshing, Mode=OneWay}"
+                                                IsEnabled="{Binding IsRefreshing, Converter={StaticResource BoolInverter}" />
                                             <controls:DrilldownSwitchView
                                                 Title="{Binding ToggleSwitchButtonText}"
                                                 Command="{Binding ToggleSwitchCommand}"
-                                                IsToggled="{Binding IsToggled, Mode=TwoWay}" />
+                                                IsToggled="{Binding IsToggled, Mode=TwoWay}"
+                                                IsEnabled="True" />
                                         </objectModel:ObservableCollection>
                                     </controls:DrilldownButtonList.ItemsSource>
                                 </controls:DrilldownButtonList>
-                                <controls:FooterDivider />
+                                <!--  DrilldownButtonList can be closed without a FooterDivider  -->
+                                <!--<controls:FooterDivider />-->
                             </controls:StackLayoutZero>
 
                         </controls:CardView>
