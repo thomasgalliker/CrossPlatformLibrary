@@ -61,7 +61,7 @@
     <Compile Include="Extensions\UITableViewCellExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\AlwaysScrollViewRenderer.cs" />
-    <Compile Include="Renderers\GradientColorStackRenderer.cs" />
+    <Compile Include="Renderers\GradientStackLayoutRenderer.cs" />
     <Compile Include="Renderers\CustomEditorRenderer.cs" />
     <Compile Include="Renderers\NoBarsScrollViewerRenderer.cs" />
     <Compile Include="Renderers\CustomButtonRenderer.cs" />
