@@ -25,6 +25,7 @@
     <controls:NonScrollableListView
         Margin="0"
         ios:ListView.SeparatorStyle="FullWidth"
+        BackgroundColor="Transparent"
         ItemTemplateSelector="{StaticResource DrilldownCellTemplateSelector}"
         ItemsSource="{Binding ItemsSource, Source={x:Reference Control}, Mode=OneWay}"
         HasUnevenRows="False"

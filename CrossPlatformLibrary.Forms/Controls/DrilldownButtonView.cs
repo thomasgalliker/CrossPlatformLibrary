@@ -12,10 +12,9 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public ImageSource ImageSource
         {
-            get { return (ImageSource)this.GetValue(ImageSourceProperty); }
-            set { this.SetValue(ImageSourceProperty, value); }
+            get => (ImageSource)this.GetValue(ImageSourceProperty);
+            set => this.SetValue(ImageSourceProperty, value);
         }
-
 
         public static readonly BindableProperty IsBusyProperty =
             BindableProperty.Create(
