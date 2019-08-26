@@ -30,7 +30,7 @@
                 IsEnabled="{Binding IsEnabled, Mode=OneWay}"
                 Style="{DynamicResource CustomButtonStyle}"
                 Text="{Binding Title, Mode=OneWay}"
-                TextColor="{DynamicResource Primary}"
+                TextColor="{DynamicResource Theme.Color.Secondary}"
                 VerticalOptions="StartAndExpand">
 
                 <controls:CustomButton.Margin>

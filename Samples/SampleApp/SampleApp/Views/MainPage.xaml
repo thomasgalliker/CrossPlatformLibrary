@@ -31,14 +31,37 @@
                     </ViewCell.View>
                 </ViewCell>
             </DataTemplate>
+            <DataTemplate x:Key="ColorResourceItemTemplate">
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Grid.Column="0"
+                                BackgroundColor="{Binding Color}"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="CenterAndExpand" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding Id}"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <controls:GradientStackLayout
-        StartColor="LightBlue"
         EndColor="LightPink"
+        GradientOrientation="Vertical"
         Orientation="Vertical"
-        GradientOrientation="Vertical">
+        StartColor="LightBlue">
         <controls:AlwaysScrollView x:Name="ScrollView">
             <Grid>
                 <Grid IsVisible="{Binding HasViewModelError, Mode=OneWay, Converter={StaticResource BoolInverter}}">
@@ -151,7 +174,7 @@
                                 Placeholder="ValidatablePicker by Country.Name"
                                 SelectedItem="{Binding Country, Mode=TwoWay}"
                                 ValidationErrors="{Binding Validation.Errors[CountrySearchText]}" />
-                            <Button Text="Select non-existing 'Fantasy Land'" Command="{Binding SetFantasyLandCommand}" />
+                            <Button Command="{Binding SetFantasyLandCommand}" Text="Select non-existing 'Fantasy Land'" />
 
                             <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableDatePicker--&gt;" />
                             <controls:ValidatableDatePicker
@@ -242,8 +265,8 @@
                                                 <controls:DrilldownSwitchView
                                                     Title="{Binding ToggleSwitchButtonText}"
                                                     Command="{Binding ToggleSwitchCommand}"
-                                                    IsToggled="{Binding IsToggled, Mode=TwoWay}"
-                                                    IsEnabled="True" />
+                                                    IsEnabled="True"
+                                                    IsToggled="{Binding IsToggled, Mode=TwoWay}" />
                                             </objectModel:ObservableCollection>
                                         </controls:DrilldownButtonList.ItemsSource>
                                     </controls:DrilldownButtonList>
@@ -253,22 +276,19 @@
 
                             </controls:CardView>
 
-                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo StackedList (Vertical)--&gt;" />
-                            <controls:StackedList
-                                BackgroundColor="LightGray"
-                                ItemTemplate="{StaticResource AutoCompleteSuggestionItemTemplate}"
-                                ItemsSource="{Binding Countries, Mode=OneWay}"
-                                ListOrientation="Vertical"
-                                SelectedItem="{Binding Country, Mode=TwoWay}"
-                                SelectionMode="Single" />
-
                             <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo StackedList (Horizontal)--&gt;" />
                             <controls:StackedList
-                                BackgroundColor="LightGray"
                                 ItemTemplate="{StaticResource AutoCompleteSuggestionItemTemplate}"
                                 ItemsSource="{Binding Countries, Mode=OneWay}"
                                 ListOrientation="Horizontal"
                                 SelectedItem="{Binding Country, Mode=TwoWay}"
+                                SelectionMode="None" />
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo StackedList (Vertical)--&gt;" />
+                            <controls:StackedList
+                                ItemTemplate="{StaticResource ColorResourceItemTemplate}"
+                                ItemsSource="{Binding ThemeColors, Mode=OneWay}"
+                                ListOrientation="Vertical"
                                 SelectionMode="None" />
 
                             <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo NoBarsScrollViewer--&gt;" />
@@ -331,17 +351,17 @@
                             VerticalOptions="StartAndExpand" />
                         <controls:StackLayoutZero Orientation="Vertical">
                             <Label
-                                Text="{Binding IsEnabled, StringFormat='IsEnabled={0}', Source={x:Reference CustomButtonSecondary}}"
                                 FontSize="Micro"
-                                LineBreakMode="CharacterWrap" />
+                                LineBreakMode="CharacterWrap"
+                                Text="{Binding IsEnabled, StringFormat='IsEnabled={0}', Source={x:Reference CustomButtonSecondary}}" />
                             <Label
-                                Text="{Binding IsBusy, StringFormat='IsBusy={0}'}"
                                 FontSize="Micro"
-                                LineBreakMode="CharacterWrap" />
+                                LineBreakMode="CharacterWrap"
+                                Text="{Binding IsBusy, StringFormat='IsBusy={0}'}" />
                             <Label
-                                Text="{Binding CanExecuteLoadDataButtonCommand, StringFormat='CanExecuteLoadDataButtonCommand={0}'}"
                                 FontSize="Micro"
-                                LineBreakMode="CharacterWrap" />
+                                LineBreakMode="CharacterWrap"
+                                Text="{Binding CanExecuteLoadDataButtonCommand, StringFormat='CanExecuteLoadDataButtonCommand={0}'}" />
                         </controls:StackLayoutZero>
 
                         <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomButton (PrimaryStyle)--&gt;" />
@@ -355,35 +375,35 @@
                             VerticalOptions="StartAndExpand" />
                         <controls:StackLayoutZero Orientation="Vertical">
                             <Label
-                                Text="{Binding IsEnabled, StringFormat='IsEnabled={0}', Source={x:Reference CustomButtonPrimary}}"
                                 FontSize="Micro"
-                                LineBreakMode="CharacterWrap" />
+                                LineBreakMode="CharacterWrap"
+                                Text="{Binding IsEnabled, StringFormat='IsEnabled={0}', Source={x:Reference CustomButtonPrimary}}" />
                             <Label
-                                Text="{Binding IsSaving, StringFormat='IsSaving={0}'}"
                                 FontSize="Micro"
-                                LineBreakMode="CharacterWrap" />
+                                LineBreakMode="CharacterWrap"
+                                Text="{Binding IsSaving, StringFormat='IsSaving={0}'}" />
                             <Label
-                                Text="{Binding CanExecuteSaveProfileButtonCommand, StringFormat='CanExecuteSaveProfileButtonCommand={0}'}"
                                 FontSize="Micro"
-                                LineBreakMode="CharacterWrap" />
+                                LineBreakMode="CharacterWrap"
+                                Text="{Binding CanExecuteSaveProfileButtonCommand, StringFormat='CanExecuteSaveProfileButtonCommand={0}'}" />
                         </controls:StackLayoutZero>
                     </StackLayout>
 
                     <Label
+                        HorizontalOptions="FillAndExpand"
                         IsVisible="{Binding IsBusy, Mode=OneWay}"
                         Style="{StaticResource DemoLabelStyle}"
                         Text="&lt;!--Demo CustomActivityIndicator--&gt;"
-                        VerticalOptions="Start"
-                        HorizontalOptions="FillAndExpand" />
+                        VerticalOptions="Start" />
                     <controls:CustomActivityIndicator Caption="{localization:Translate LoadingText}" IsVisible="{Binding IsBusy, Mode=OneWay}" />
                 </Grid>
 
                 <Label
+                    HorizontalOptions="FillAndExpand"
                     IsVisible="{Binding HasViewModelError, Mode=OneWay}"
                     Style="{StaticResource DemoLabelStyle}"
                     Text="&lt;!--Demo ViewModelErrorControl--&gt;"
-                    VerticalOptions="Start"
-                    HorizontalOptions="FillAndExpand" />
+                    VerticalOptions="Start" />
                 <controls:ViewModelErrorControl IsVisible="{Binding HasViewModelError, Mode=OneWay}" ViewModelError="{Binding ViewModelError, Mode=OneWay}" />
             </Grid>
         </controls:AlwaysScrollView>

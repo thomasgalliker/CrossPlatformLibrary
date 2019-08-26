@@ -2,35 +2,16 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using CrossPlatformLibrary.Forms.Resources;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Converters
 {
     internal class PropertyErrorsToColorConverter : BindableObject, IValueConverter
     {
-        public static readonly BindableProperty NormalColorProperty = BindableProperty.Create(
-            nameof(NormalColor),
-            typeof(Color),
-            typeof(PropertyErrorsToColorConverter),
-            default(Color));
+        public object NormalColor => (Color)Application.Current.Resources[ThemeConstants.Color.TextColor];
 
-        public static readonly BindableProperty ErrorColorProperty = BindableProperty.Create(
-            nameof(ErrorColor),
-            typeof(Color),
-            typeof(PropertyErrorsToColorConverter),
-            default(Color));
-
-        public Color NormalColor
-        {
-            get => (Color)this.GetValue(NormalColorProperty);
-            set => this.SetValue(NormalColorProperty, value);
-        }
-
-        public Color ErrorColor
-        {
-            get => (Color)this.GetValue(ErrorColorProperty);
-            set => this.SetValue(ErrorColorProperty, value);
-        }
+        public object ErrorColor => (Color)Application.Current.Resources[ThemeConstants.Color.ERROR];
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

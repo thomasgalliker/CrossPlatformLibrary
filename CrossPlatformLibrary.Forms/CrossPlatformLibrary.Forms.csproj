@@ -50,6 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="CrossPlatformLibrary.Forms.csproj.DotSettings" />
     <None Remove="Resources\Images\reload_192x192.png" />
   </ItemGroup>
 
@@ -82,10 +83,13 @@
     <Compile Update="MyResourceDictionary.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="Resources\GoogleColors.xaml.cs">
+    <Compile Update="Resources\UI\GoogleColors.xaml.cs">
       <DependentUpon>GoogleColors.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Resources\NaturalColors.xaml.cs">
+    <Compile Update="Resources\UI\ThemeColorResources.xaml.cs">
+      <DependentUpon>ThemeColorResources.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\UI\NaturalColors.xaml.cs">
       <DependentUpon>NaturalColors.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -151,10 +155,16 @@
     <EmbeddedResource Update="Controls\ViewModelErrorControl.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\GoogleColors.xaml">
+    <EmbeddedResource Update="Resources\UI\GoogleColors.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\NaturalColors.xaml">
+    <EmbeddedResource Update="Resources\UI\ThemeColorResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\UI\MaterialSizes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\UI\NaturalColors.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

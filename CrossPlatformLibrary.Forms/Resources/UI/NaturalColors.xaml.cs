@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace ResourceDictionaryDemo.Resources
+namespace CrossPlatformLibrary.Forms.Resources
 {
     public partial class NaturalColors : ResourceDictionary
     {

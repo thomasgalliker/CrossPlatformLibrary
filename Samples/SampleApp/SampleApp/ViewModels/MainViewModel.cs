@@ -37,6 +37,7 @@ namespace SampleApp.ViewModels
         private int userNameMaxLength;
         private DateTime? birthdate;
         private bool isSaving;
+        private ObservableCollection<ColorResource> themeColors;
 
         public MainViewModel(
             DisplayService displayService,
@@ -220,6 +221,15 @@ namespace SampleApp.ViewModels
             this.Country = new CountryViewModel(new CountryDto { Id = 99, Name = "Fantasy Land" });
         }
 
+
+
+        public ObservableCollection<ColorResource> ThemeColors
+        {
+            get => this.themeColors;
+            private set => this.SetProperty(ref this.themeColors, value, nameof(this.ThemeColors));
+        }
+
+
         protected override void OnBusyChanged(bool busy)
         {
             this.RaisePropertyChanged(nameof(this.CanExecuteSaveProfileButtonCommand));
@@ -318,6 +328,12 @@ namespace SampleApp.ViewModels
                 // Set countries one after the other
                 this.Countries.Clear();
                 this.Countries.AddRange(countryDtos.Select(c => new CountryViewModel(c)).Prepend(defaultCountryViewModel));
+
+                this.ThemeColors = App.Current.Resources.MergedDictionaries.SelectMany(md => md)
+                    .Where(r => r.Value is Color)
+                    .Select(c => new ColorResource(c))
+                    .OrderBy(c => c.Id)
+                    .ToObservableCollection();
 
                 //this.Notes = $"Test test test{Environment.NewLine}Line 2 text text text";
                 this.AdminEmailAddress = "thomas@bluewin.ch";

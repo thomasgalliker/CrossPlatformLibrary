@@ -65,6 +65,7 @@
     <Compile Include="Effects\TimePickerLineColorEffect.cs" />
     <Compile Include="Effects\UnderlineTextEffect.cs" />
     <Compile Include="Extensions\AlignmentExtensions.cs" />
+    <Compile Include="Renderers\CustomSwitchRenderer.cs" />
     <Compile Include="Renderers\GradientStackLayoutRenderer.cs" />
     <Compile Include="Renderers\CustomButtonRenderer.cs" />
     <Compile Include="Renderers\CustomEditorRenderer.cs" />
