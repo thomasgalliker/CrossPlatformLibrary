@@ -200,12 +200,14 @@
     </Style>
 
     <!--  CustomButton Base Style  -->
-    <Color x:Key="CustomButtonStyle.TextColor" />
-
     <Style x:Key="CustomButtonStyle" TargetType="controls:CustomButton">
+        <Setter Property="TextColor" Value="{DynamicResource CustomButtonStyle.TextColor}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource CustomButtonStyle.BackgroundColor.Enabled}" />
+        <Setter Property="BackgroundColorPressed" Value="{DynamicResource CustomButtonStyle.BackgroundColor.Pressed}" />
+        <Setter Property="BorderColor" Value="{DynamicResource CustomButtonStyle.BorderColor.Enabled}" />
+        <Setter Property="BorderColorPressed" Value="{DynamicResource CustomButtonStyle.BorderColor.Pressed}" />
         <Setter Property="BorderWidth" Value="2" />
         <Setter Property="CornerRadius" Value="20" />
-        <Setter Property="TextColor" Value="{DynamicResource CustomButtonStyle.TextColor}" />
         <Setter Property="FontSize" Value="{DynamicResource LargeSize}" />
         <Setter Property="FontAttributes" Value="None" />
     </Style>

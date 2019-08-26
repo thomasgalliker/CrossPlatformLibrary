@@ -16,6 +16,14 @@ namespace CrossPlatformLibrary.Forms.Resources
 
         private void SetButtonColors(CrossPlatformLibraryColorConfiguration colorConfiguration)
         {
+            this[ThemeConstants.CustomButtonStyle.TextColor] = colorConfiguration.TextColor;
+            this[ThemeConstants.CustomButtonStyle.BorderColorEnabled] = colorConfiguration.TextColor;
+            this[ThemeConstants.CustomButtonStyle.BorderColorDisabled] = colorConfiguration.TextColorBright;
+            this[ThemeConstants.CustomButtonStyle.BorderColorPressed] = colorConfiguration.TextColor;
+            this[ThemeConstants.CustomButtonStyle.BackgroundColorEnabled] = Color.White;
+            this[ThemeConstants.CustomButtonStyle.BackgroundColorDisabled] = colorConfiguration.TextColorBright;
+            this[ThemeConstants.CustomButtonStyle.BackgroundColorPressed] = colorConfiguration.TextColorBright;
+
             this[ThemeConstants.CustomButtonPrimaryStyle.TextColor] = colorConfiguration.OnPrimary;
             this[ThemeConstants.CustomButtonPrimaryStyle.BorderColorEnabled] = colorConfiguration.Primary;
             this[ThemeConstants.CustomButtonPrimaryStyle.BorderColorDisabled] = colorConfiguration.PrimaryVariant;

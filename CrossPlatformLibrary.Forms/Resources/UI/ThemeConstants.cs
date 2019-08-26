@@ -26,6 +26,17 @@
             public const string ON_ERROR = "Theme.Color.OnError";
         }
 
+        public static class CustomButtonStyle
+        {
+            public const string TextColor = "CustomButtonStyle.TextColor";
+            public const string BorderColorEnabled = "CustomButtonStyle.BorderColor.Enabled";
+            public const string BorderColorDisabled = "CustomButtonStyle.BorderColor.Disabled";
+            public const string BorderColorPressed = "CustomButtonStyle.BorderColor.Pressed";
+            public const string BackgroundColorEnabled = "CustomButtonStyle.BackgroundColor.Enabled";
+            public const string BackgroundColorDisabled = "CustomButtonStyle.BackgroundColor.Disabled";
+            public const string BackgroundColorPressed = "CustomButtonStyle.BackgroundColor.Pressed";
+        }
+
         public static class CustomButtonPrimaryStyle
         {
             public const string TextColor = "CustomButtonPrimaryStyle.TextColor";
