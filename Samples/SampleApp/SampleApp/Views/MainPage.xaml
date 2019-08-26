@@ -338,55 +338,77 @@
                                 </Grid.GestureRecognizers>
                             </controls:GridZero>
 
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomButton (PrimaryStyle)--&gt;" />
+                            <controls:CustomButton
+                                x:Name="CustomButtonPrimary"
+                                Command="{Binding SaveProfileButtonCommand}"
+                                IsEnabled="{Binding CanExecuteSaveProfileButtonCommand}"
+                                Style="{StaticResource CustomButtonPrimaryStyle}"
+                                Text="{localization:Translate SaveButtonText}"
+                                VerticalOptions="StartAndExpand" />
+                            <controls:CustomButton
+                                IsEnabled="True"
+                                Style="{DynamicResource CustomButtonPrimaryStyle}"
+                                Text="Primary (Enabled)" />
+                            <controls:CustomButton
+                                IsEnabled="False"
+                                Style="{DynamicResource CustomButtonPrimaryStyle}"
+                                Text="Primary (Disabled)" />
+                            <controls:StackLayoutZero Orientation="Vertical">
+                                <Label
+                                    FontSize="Micro"
+                                    LineBreakMode="CharacterWrap"
+                                    Text="{Binding IsEnabled, StringFormat='IsEnabled={0}', Source={x:Reference CustomButtonPrimary}}" />
+                                <Label
+                                    FontSize="Micro"
+                                    LineBreakMode="CharacterWrap"
+                                    Text="{Binding IsSaving, StringFormat='IsSaving={0}'}" />
+                                <Label
+                                    FontSize="Micro"
+                                    LineBreakMode="CharacterWrap"
+                                    Text="{Binding CanExecuteSaveProfileButtonCommand, StringFormat='CanExecuteSaveProfileButtonCommand={0}'}" />
+                            </controls:StackLayoutZero>
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomButton (SecondaryStyle)--&gt;" />
+                            <controls:CustomButton
+                                x:Name="CustomButtonSecondary"
+                                Command="{Binding LoadDataButtonCommand}"
+                                IsEnabled="{Binding CanExecuteLoadDataButtonCommand}"
+                                Style="{DynamicResource CustomButtonSecondaryStyle}"
+                                Text="{localization:Translate LoadDataButtonText}"
+                                VerticalOptions="StartAndExpand" />
+                            <controls:CustomButton
+                                IsEnabled="True"
+                                Style="{DynamicResource CustomButtonSecondaryStyle}"
+                                Text="Secondary (Enabled)" />
+                            <controls:CustomButton
+                                IsEnabled="False"
+                                Style="{DynamicResource CustomButtonSecondaryStyle}"
+                                Text="Secondary (Disabled)" />
+                            <controls:CustomButton
+                                IsEnabled="True"
+                                Style="{DynamicResource CustomButtonStyle}"
+                                Text="CustomButtonStyle (Enabled)" />
+                            <controls:CustomButton
+                                IsEnabled="False"
+                                Style="{DynamicResource CustomButtonStyle}"
+                                Text="CustomButtonStyle (Disabled)" />
+                            <controls:StackLayoutZero Orientation="Vertical">
+                                <Label
+                                    FontSize="Micro"
+                                    LineBreakMode="CharacterWrap"
+                                    Text="{Binding IsEnabled, StringFormat='IsEnabled={0}', Source={x:Reference CustomButtonSecondary}}" />
+                                <Label
+                                    FontSize="Micro"
+                                    LineBreakMode="CharacterWrap"
+                                    Text="{Binding IsBusy, StringFormat='IsBusy={0}'}" />
+                                <Label
+                                    FontSize="Micro"
+                                    LineBreakMode="CharacterWrap"
+                                    Text="{Binding CanExecuteLoadDataButtonCommand, StringFormat='CanExecuteLoadDataButtonCommand={0}'}" />
+                            </controls:StackLayoutZero>
+
                         </StackLayout>
-
-                        <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomButton (PrimaryStyle)--&gt;" />
-                        <controls:CustomButton
-                            x:Name="CustomButtonPrimary"
-                            Margin="{StaticResource ButtonMargin}"
-                            Command="{Binding SaveProfileButtonCommand}"
-                            IsEnabled="{Binding CanExecuteSaveProfileButtonCommand}"
-                            Style="{StaticResource CustomButtonPrimaryStyle}"
-                            Text="{localization:Translate SaveButtonText}"
-                            VerticalOptions="StartAndExpand" />
-                        <controls:StackLayoutZero Orientation="Vertical">
-                            <Label
-                                FontSize="Micro"
-                                LineBreakMode="CharacterWrap"
-                                Text="{Binding IsEnabled, StringFormat='IsEnabled={0}', Source={x:Reference CustomButtonPrimary}}" />
-                            <Label
-                                FontSize="Micro"
-                                LineBreakMode="CharacterWrap"
-                                Text="{Binding IsSaving, StringFormat='IsSaving={0}'}" />
-                            <Label
-                                FontSize="Micro"
-                                LineBreakMode="CharacterWrap"
-                                Text="{Binding CanExecuteSaveProfileButtonCommand, StringFormat='CanExecuteSaveProfileButtonCommand={0}'}" />
-                        </controls:StackLayoutZero>
-
-                        <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomButton (SecondaryStyle)--&gt;" />
-                        <controls:CustomButton
-                            x:Name="CustomButtonSecondary"
-                            Margin="{StaticResource ButtonMargin}"
-                            Command="{Binding LoadDataButtonCommand}"
-                            IsEnabled="{Binding CanExecuteLoadDataButtonCommand}"
-                            Style="{StaticResource CustomButtonSecondaryStyle}"
-                            Text="{localization:Translate LoadDataButtonText}"
-                            VerticalOptions="StartAndExpand" />
-                        <controls:StackLayoutZero Orientation="Vertical">
-                            <Label
-                                FontSize="Micro"
-                                LineBreakMode="CharacterWrap"
-                                Text="{Binding IsEnabled, StringFormat='IsEnabled={0}', Source={x:Reference CustomButtonSecondary}}" />
-                            <Label
-                                FontSize="Micro"
-                                LineBreakMode="CharacterWrap"
-                                Text="{Binding IsBusy, StringFormat='IsBusy={0}'}" />
-                            <Label
-                                FontSize="Micro"
-                                LineBreakMode="CharacterWrap"
-                                Text="{Binding CanExecuteLoadDataButtonCommand, StringFormat='CanExecuteLoadDataButtonCommand={0}'}" />
-                        </controls:StackLayoutZero>
 
                     </StackLayout>
 

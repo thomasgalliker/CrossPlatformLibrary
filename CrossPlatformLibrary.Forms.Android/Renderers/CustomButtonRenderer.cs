@@ -26,44 +26,58 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
         {
             base.OnElementChanged(e);
 
-            if (this.Element is CustomButton customButton)
+            if (this.Element is CustomButton customButton && this.Control is global::Android.Widget.Button button)
             {
-                var button = this.Control;
-                if (button != null)
-                {
-                    // Create a drawable for the button's normal state
-                    this.normalDrawable = new GradientDrawable();
-                    this.normalDrawable.SetColor(customButton.BackgroundColor.ToAndroid());
-                    this.normalDrawable.SetStroke((int)customButton.BorderWidth, customButton.BorderColor.ToAndroid());
-                    this.normalDrawable.SetCornerRadius(customButton.CornerRadius);
+                button.Background = this.CreateDrawable(customButton);
 
-                    // Create a drawable for the button's pressed state
-                    this.pressedDrawable = new GradientDrawable();
-                    this.pressedDrawable.SetColor(customButton.BackgroundColorPressed.ToAndroid());
-                    this.pressedDrawable.SetStroke((int)customButton.BorderWidth, customButton.BorderColorPressed.ToAndroid());
-                    this.pressedDrawable.SetCornerRadius(customButton.CornerRadius);
-
-                    // Add the drawables to a state list and assign the state list to the button
-                    var sld = new StateListDrawable();
-                    sld.AddState(new int[] { global::Android.Resource.Attribute.StatePressed }, this.pressedDrawable);
-                    sld.AddState(new int[] { }, this.normalDrawable);
-                    button.SetBackgroundDrawable(sld);
-
-                    this.UpdateAlignment(customButton);
-                    this.UpdateAllCaps(customButton);
-                }
+                this.UpdateAlignment(customButton);
+                this.UpdateAllCaps(customButton);
             }
+        }
+
+        private StateListDrawable CreateDrawable(CustomButton customButton)
+        {
+            // Create a drawable for the button's normal state
+            if (this.normalDrawable == null)
+            {
+                this.normalDrawable = new GradientDrawable();
+            }
+
+            this.normalDrawable.SetColor(customButton.BackgroundColor.ToAndroid());
+            this.normalDrawable.SetStroke((int)customButton.BorderWidth, customButton.BorderColor.ToAndroid());
+            this.normalDrawable.SetCornerRadius(customButton.CornerRadius);
+
+            // Create a drawable for the button's pressed state
+            if (this.pressedDrawable == null)
+            {
+                this.pressedDrawable = new GradientDrawable();
+            }
+
+            this.pressedDrawable.SetColor(customButton.BackgroundColorPressed.ToAndroid());
+            this.pressedDrawable.SetStroke((int)customButton.BorderWidth, customButton.BorderColorPressed.ToAndroid());
+            this.pressedDrawable.SetCornerRadius(customButton.CornerRadius);
+
+            // Add the drawables to a state list and assign the state list to the button
+            var sld = new StateListDrawable();
+            sld.AddState(new int[] { global::Android.Resource.Attribute.StatePressed }, this.pressedDrawable);
+            sld.AddState(new int[] { }, this.normalDrawable);
+            return sld;
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (this.Element is CustomButton customButton)
+            if (this.Element is CustomButton customButton && this.Control is global::Android.Widget.Button button)
             {
-                if (this.normalDrawable != null && this.pressedDrawable != null)
                 {
-                    if (e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName)
+                    if (e.PropertyName == VisualElement.IsEnabledProperty.PropertyName)
+                    {
+                        // For some reasons we have to redraw the button background
+                        // if IsEnabled is changed
+                        button.Background = this.CreateDrawable(customButton);
+                    }
+                    else if (e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName)
                     {
                         this.normalDrawable.SetColor(customButton.BackgroundColor.ToAndroid());
                     }
