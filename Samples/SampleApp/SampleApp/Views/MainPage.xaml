@@ -340,6 +340,30 @@
 
                         </StackLayout>
 
+                        <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomButton (PrimaryStyle)--&gt;" />
+                        <controls:CustomButton
+                            x:Name="CustomButtonPrimary"
+                            Margin="{StaticResource ButtonMargin}"
+                            Command="{Binding SaveProfileButtonCommand}"
+                            IsEnabled="{Binding CanExecuteSaveProfileButtonCommand}"
+                            Style="{StaticResource CustomButtonPrimaryStyle}"
+                            Text="{localization:Translate SaveButtonText}"
+                            VerticalOptions="StartAndExpand" />
+                        <controls:StackLayoutZero Orientation="Vertical">
+                            <Label
+                                FontSize="Micro"
+                                LineBreakMode="CharacterWrap"
+                                Text="{Binding IsEnabled, StringFormat='IsEnabled={0}', Source={x:Reference CustomButtonPrimary}}" />
+                            <Label
+                                FontSize="Micro"
+                                LineBreakMode="CharacterWrap"
+                                Text="{Binding IsSaving, StringFormat='IsSaving={0}'}" />
+                            <Label
+                                FontSize="Micro"
+                                LineBreakMode="CharacterWrap"
+                                Text="{Binding CanExecuteSaveProfileButtonCommand, StringFormat='CanExecuteSaveProfileButtonCommand={0}'}" />
+                        </controls:StackLayoutZero>
+
                         <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomButton (SecondaryStyle)--&gt;" />
                         <controls:CustomButton
                             x:Name="CustomButtonSecondary"
@@ -364,29 +388,6 @@
                                 Text="{Binding CanExecuteLoadDataButtonCommand, StringFormat='CanExecuteLoadDataButtonCommand={0}'}" />
                         </controls:StackLayoutZero>
 
-                        <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomButton (PrimaryStyle)--&gt;" />
-                        <controls:CustomButton
-                            x:Name="CustomButtonPrimary"
-                            Margin="{StaticResource ButtonMargin}"
-                            Command="{Binding SaveProfileButtonCommand}"
-                            IsEnabled="{Binding CanExecuteSaveProfileButtonCommand}"
-                            Style="{StaticResource CustomButtonPrimaryStyle}"
-                            Text="{localization:Translate SaveButtonText}"
-                            VerticalOptions="StartAndExpand" />
-                        <controls:StackLayoutZero Orientation="Vertical">
-                            <Label
-                                FontSize="Micro"
-                                LineBreakMode="CharacterWrap"
-                                Text="{Binding IsEnabled, StringFormat='IsEnabled={0}', Source={x:Reference CustomButtonPrimary}}" />
-                            <Label
-                                FontSize="Micro"
-                                LineBreakMode="CharacterWrap"
-                                Text="{Binding IsSaving, StringFormat='IsSaving={0}'}" />
-                            <Label
-                                FontSize="Micro"
-                                LineBreakMode="CharacterWrap"
-                                Text="{Binding CanExecuteSaveProfileButtonCommand, StringFormat='CanExecuteSaveProfileButtonCommand={0}'}" />
-                        </controls:StackLayoutZero>
                     </StackLayout>
 
                     <Label

@@ -9,25 +9,30 @@ namespace CrossPlatformLibrary.Forms
     /// </summary>
     public class CrossPlatformLibrary
     {
-        private readonly CrossPlatformLibraryConfiguration config;
+        private readonly ITheme config;
         private readonly ResourceDictionary applicationResources;
 
-        internal CrossPlatformLibrary(Application app, CrossPlatformLibraryConfiguration config)
+        internal CrossPlatformLibrary(Application app, ITheme config)
         {
             this.applicationResources = app.Resources;
-            this.config = config;
+            this.config = config ?? GetDefaultConfiguration(); ;
         }
 
         internal CrossPlatformLibrary(Application app, string key)
         {
             this.applicationResources = app.Resources;
-            this.config = app.Resources.GetResource<CrossPlatformLibraryConfiguration>(key);
+            this.config = app.Resources.GetResource<ITheme>(key) ?? GetDefaultConfiguration();
         }
 
         internal CrossPlatformLibrary(Application app)
         {
             this.applicationResources = app.Resources;
-            this.config = new CrossPlatformLibraryConfiguration
+            this.config = GetDefaultConfiguration();
+        }
+
+        private static CrossPlatformLibraryConfiguration GetDefaultConfiguration()
+        {
+            return new CrossPlatformLibraryConfiguration
             {
                 ColorConfiguration = new CrossPlatformLibraryColorConfiguration(),
             };
@@ -40,7 +45,7 @@ namespace CrossPlatformLibrary.Forms
         /// <param name="app">The cross-platform mobile application that is running.</param>
         /// <param name="crossPlatformLibraryResource">The configuration.</param>
         /// <exception cref="ArgumentNullException" />
-        public static void Init(Application app, CrossPlatformLibraryConfiguration crossPlatformLibraryResource)
+        public static void Init(Application app, ITheme crossPlatformLibraryResource)
         {
             if (app == null)
             {
@@ -58,11 +63,11 @@ namespace CrossPlatformLibrary.Forms
 
         /// <summary>
         ///     Configures the current app's resources by merging pre-defined CrossPlatformLibrary resources and creating new
-        ///     resources based on the <see cref="CrossPlatformLibraryConfiguration" />'s properties.
+        ///     resources based on the <see cref="ITheme" />'s properties.
         /// </summary>
         /// <param name="app">The cross-platform mobile application that is running.</param>
         /// <param name="key">
-        ///     The key of the <see cref="CrossPlatformLibraryConfiguration" /> object in the current app's resource
+        ///     The key of the <see cref="ITheme" /> object in the current app's resource
         ///     dictionary.
         /// </param>
         /// <exception cref="ArgumentNullException" />

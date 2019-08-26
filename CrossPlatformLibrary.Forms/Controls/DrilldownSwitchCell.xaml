@@ -30,7 +30,7 @@
                 IsEnabled="{Binding IsEnabled, Mode=OneWay}"
                 Style="{DynamicResource CustomButtonStyle}"
                 Text="{Binding Title, Mode=OneWay}"
-                TextColor="{DynamicResource Theme.Color.Secondary}"
+                TextColor="{DynamicResource Theme.Color.TextColor}"
                 VerticalOptions="StartAndExpand">
 
                 <controls:CustomButton.Margin>
@@ -51,7 +51,7 @@
                 HeightRequest="24"
                 HorizontalOptions="EndAndExpand"
                 IsToggled="{Binding IsToggled, Mode=TwoWay}"
-                TintColor="{DynamicResource Theme.Color.Secondary}"
+                TintColor="{DynamicResource Theme.Color.TextColor}"
                 VerticalOptions="CenterAndExpand">
                 <controls:CustomSwitch.Margin>
                     <OnPlatform x:TypeArguments="Thickness">

@@ -38,7 +38,7 @@
                 IsEnabled="{Binding IsEnabled, Source={x:Reference Control}, Mode=OneWay}"
                 Style="{DynamicResource CustomButtonStyle}"
                 Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}"
-                TextColor="{DynamicResource Primary}"
+                TextColor="{DynamicResource Theme.Color.TextColor}"
                 VerticalOptions="StartAndExpand">
 
                 <controls:CustomButton.Margin>
