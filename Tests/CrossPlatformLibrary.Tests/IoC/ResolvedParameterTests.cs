@@ -9,6 +9,7 @@ using Xunit;
 namespace CrossPlatformLibrary.Tests.IoC
 {
     [Collection("IoC")]
+    [Trait("Category", "SystemTest")]
     public class ResolvedParameterTests
     {
         public ResolvedParameterTests()

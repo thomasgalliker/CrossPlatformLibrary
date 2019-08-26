@@ -8,6 +8,7 @@ namespace CrossPlatformLibrary.Tests.IoC
     public class SimpleIocTestUnregistration
     {
         [Fact]
+        [Trait("Category", "SystemTest")]
         public void TestUnregisterClass()
         {
             SimpleIoc.Default.Reset();
