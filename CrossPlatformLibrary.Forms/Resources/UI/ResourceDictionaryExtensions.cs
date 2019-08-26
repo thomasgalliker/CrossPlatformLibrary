@@ -1,4 +1,5 @@
 ﻿using System;
+using CrossPlatformLibrary.Extensions;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Resources
@@ -16,28 +17,29 @@ namespace CrossPlatformLibrary.Forms.Resources
         /// </param>
         /// <exception cref="InvalidCastException" />
         /// <exception cref="ArgumentNullException" />
-        public static T GetResource<T>(this ResourceDictionary resourceDictionary, string key)
+        public static T ResolveTheme<T>(this ResourceDictionary resourceDictionary, string key)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            resourceDictionary.TryGetValue(key, out var value);
-
-            if (value is T resource)
+            var success = resourceDictionary.TryGetValue(key, out var value);
+            if (success)
             {
-                return resource;
+                if (value is T resource)
+                {
+                    return resource;
+                }
+
+                if (value != null)
+                {
+                    throw new InvalidCastException($"Resource with key='{key}' was not of the type {typeof(T).GetFormattedName()}.");
+                }
             }
 
-            if (value != null)
-            {
-                throw new InvalidCastException($"The resource retrieved was not of the type {typeof(T)}. Use {value.GetType()} instead.");
-            }
-
-            return default(T);
+            throw new InvalidOperationException($"{typeof(T).GetFormattedName()} with key='{key}' could not be found.");
         }
-
 
         public static void TryAddColorResource(this ResourceDictionary resourceDictionary, string key, Color color)
         {

@@ -21,7 +21,7 @@ namespace CrossPlatformLibrary.Forms
         internal CrossPlatformLibrary(Application app, string key)
         {
             this.applicationResources = app.Resources;
-            this.config = app.Resources.GetResource<ITheme>(key) ?? GetDefaultConfiguration();
+            this.config = app.Resources.ResolveTheme<ITheme>(key);
         }
 
         internal CrossPlatformLibrary(Application app)
