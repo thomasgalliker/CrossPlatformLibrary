@@ -18,7 +18,7 @@ namespace CrossPlatformLibrary.Forms.Resources
         {
             this[ThemeConstants.CustomButtonStyle.TextColor] = colorConfiguration.TextColor;
             this[ThemeConstants.CustomButtonStyle.BorderColorEnabled] = colorConfiguration.TextColor;
-            this[ThemeConstants.CustomButtonStyle.BorderColorDisabled] = colorConfiguration.TextColorBright;
+            this[ThemeConstants.CustomButtonStyle.BorderColorDisabled] = Color.DarkGray;
             this[ThemeConstants.CustomButtonStyle.BorderColorPressed] = colorConfiguration.TextColor;
             this[ThemeConstants.CustomButtonStyle.BackgroundColorEnabled] = Color.White;
             this[ThemeConstants.CustomButtonStyle.BackgroundColorDisabled] = colorConfiguration.TextColorBright;
@@ -30,7 +30,7 @@ namespace CrossPlatformLibrary.Forms.Resources
             this[ThemeConstants.CustomButtonPrimaryStyle.BorderColorPressed] = colorConfiguration.Primary;
             this[ThemeConstants.CustomButtonPrimaryStyle.BackgroundColorEnabled] = colorConfiguration.Primary;
             this[ThemeConstants.CustomButtonPrimaryStyle.BackgroundColorDisabled] = colorConfiguration.PrimaryVariant;
-            this[ThemeConstants.CustomButtonPrimaryStyle.BackgroundColorPressed] = colorConfiguration.Primary;
+            this[ThemeConstants.CustomButtonPrimaryStyle.BackgroundColorPressed] = colorConfiguration.PrimaryVariant;
 
             this[ThemeConstants.CustomButtonSecondaryStyle.TextColor] = colorConfiguration.Secondary;
             this[ThemeConstants.CustomButtonSecondaryStyle.BorderColorEnabled] = colorConfiguration.Secondary;
@@ -38,7 +38,7 @@ namespace CrossPlatformLibrary.Forms.Resources
             this[ThemeConstants.CustomButtonSecondaryStyle.BorderColorPressed] = colorConfiguration.Secondary;
             this[ThemeConstants.CustomButtonSecondaryStyle.BackgroundColorEnabled] = colorConfiguration.OnSecondary;
             this[ThemeConstants.CustomButtonSecondaryStyle.BackgroundColorDisabled] = colorConfiguration.SecondaryVariant;
-            this[ThemeConstants.CustomButtonSecondaryStyle.BackgroundColorPressed] = colorConfiguration.Secondary;
+            this[ThemeConstants.CustomButtonSecondaryStyle.BackgroundColorPressed] = colorConfiguration.SecondaryVariant;
         }
 
         private void SetThemeColors(CrossPlatformLibraryColorConfiguration colorConfiguration)
