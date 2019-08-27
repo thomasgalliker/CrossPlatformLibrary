@@ -71,7 +71,8 @@ steps:
   inputs:
     command: test
     projects: '**/*.Tests.csproj'
-    arguments: '--no-build --no-restore --filter Category!=SystemTest'
+    nobuild: true
+    arguments: '--filter Category!=SystemTest'
    
 
 - task: NuGetCommand@2
