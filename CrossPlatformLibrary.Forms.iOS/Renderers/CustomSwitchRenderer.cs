@@ -14,8 +14,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
         {
             base.OnElementChanged(e);
 
-            var customSwitch = this.Element as CustomSwitch;
-            if (customSwitch != null)
+            if (this.Element is CustomSwitch customSwitch)
             {
                 this.UpdateTintColor(customSwitch);
             }

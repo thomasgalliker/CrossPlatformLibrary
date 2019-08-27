@@ -71,8 +71,9 @@ steps:
   inputs:
     command: test
     projects: '**/*.Tests.csproj'
-    arguments: ''
-    
+    nobuild: true
+    arguments: '--filter Category!=SystemTest'
+   
 
 - task: NuGetCommand@2
   displayName: 'Pack NuGet $(nuspecFile) PreRelease'

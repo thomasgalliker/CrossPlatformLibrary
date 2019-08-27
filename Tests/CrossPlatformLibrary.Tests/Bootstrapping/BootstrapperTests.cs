@@ -12,6 +12,7 @@ using Xunit;
 namespace CrossPlatformLibrary.Tests.Bootstrapping
 {
     [Collection("Bootstrapping")]
+    [Trait("Category", "SystemTest")]
     public class BootstrapperTests
     {
         public BootstrapperTests()
@@ -80,7 +81,7 @@ namespace CrossPlatformLibrary.Tests.Bootstrapping
         public void ShouldConfigureExtensionAssemblyFilter()
         {
             ////var bootstrapperMock = new Mock<Bootstrapper>();
-            
+
             ////bootstrapperMock.Protected().Setup<IEnumerable<string>>("ConfigureExtensionAssemblyFilter").Returns(() => new List<string> { "abdbdbd" });
             ////bootstrapperMock.CallBase = true;
             ////bootstrapperMock.Object.Startup();
@@ -565,7 +566,7 @@ namespace CrossPlatformLibrary.Tests.Bootstrapping
         //    bootstrapper.Startup();
 
         //    i++;
-            
+
         //    bootstrapper.Shutdown();
 
         //    record.VerifyAll();

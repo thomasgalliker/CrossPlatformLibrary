@@ -1,12 +1,12 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace CrossPlatformLibrary.Forms
+namespace CrossPlatformLibrary.Forms.Resources
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MyResourceDictionary : ResourceDictionary
+    public partial class MaterialSizes : ResourceDictionary
     {
-        public MyResourceDictionary()
+        public MaterialSizes()
         {
             this.InitializeComponent();
         }

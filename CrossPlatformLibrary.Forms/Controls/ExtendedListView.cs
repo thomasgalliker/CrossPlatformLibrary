@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace CrossPlatformLibrary.Forms
+namespace CrossPlatformLibrary.Forms.Controls
 {
     public class ExtendedListView : ListView
     {

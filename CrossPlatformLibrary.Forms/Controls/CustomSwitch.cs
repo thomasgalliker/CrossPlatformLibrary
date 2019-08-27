@@ -13,8 +13,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public Color TintColor
         {
-            get { return (Color)this.GetValue(TintColorProperty); }
-            set { this.SetValue(TintColorProperty, value); }
+            get => (Color)this.GetValue(TintColorProperty);
+            set => this.SetValue(TintColorProperty, value);
         }
     }
 }

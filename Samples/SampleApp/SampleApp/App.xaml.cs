@@ -26,7 +26,7 @@ namespace SampleApp
             this.InitializeComponent();
 
             // Initialize CrossPlatformLibrary.Forms
-            CrossPlatformLibrary.Forms.CrossPlatformLibrary.Init(this);
+            CrossPlatformLibrary.Forms.CrossPlatformLibrary.Init(this, "SampleApp.Theme");
 
             this.MainPage = new MainPage();
         }

@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
-    SelectedBackgroundColor="{DynamicResource WindowBackgroundTable}">
+    SelectedBackgroundColor="{DynamicResource DrilldownButtonStyle.BackgroundColor.Pressed}">
 
     <ViewCell.View>
         <controls:GridZero>
@@ -17,10 +17,6 @@
                 HorizontalContentAlignment="Start"
                 VerticalContentAlignment="Center"
                 AllCaps="False"
-                BackgroundColor="Transparent"
-                BackgroundColorPressed="{DynamicResource WindowBackground}"
-                BorderColor="Transparent"
-                BorderColorPressed="Transparent"
                 Command="{Binding Command, Mode=OneWay}"
                 CommandParameter="{Binding CommandParameter, Mode=OneWay}"
                 CornerRadius="0"
@@ -28,9 +24,9 @@
                 FontSize="{DynamicResource LargeSize}"
                 HorizontalOptions="FillAndExpand"
                 IsEnabled="{Binding IsEnabled, Mode=OneWay}"
-                Style="{DynamicResource CustomButtonStyle}"
+                Style="{DynamicResource DrilldownButtonStyle}"
                 Text="{Binding Title, Mode=OneWay}"
-                TextColor="{DynamicResource Primary}"
+                TextColor="{DynamicResource Theme.Color.TextColor}"
                 VerticalOptions="StartAndExpand">
 
                 <controls:CustomButton.Margin>

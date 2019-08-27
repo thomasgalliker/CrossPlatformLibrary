@@ -26,13 +26,13 @@
         Margin="0"
         ios:ListView.SeparatorStyle="FullWidth"
         BackgroundColor="Transparent"
+        Footer="{x:Null}"
+        HasUnevenRows="False"
         ItemTemplateSelector="{StaticResource DrilldownCellTemplateSelector}"
         ItemsSource="{Binding ItemsSource, Source={x:Reference Control}, Mode=OneWay}"
-        HasUnevenRows="False"
         RowHeight="46"
-        VerticalOptions="StartAndExpand"
         SeparatorColor="{DynamicResource ListSeparator}"
         SeparatorVisibility="Default"
-        Footer="{x:Null}" />
+        VerticalOptions="StartAndExpand" />
 
 </controls:GridZero>
