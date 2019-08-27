@@ -5,31 +5,29 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Name="Control"
     Padding="{StaticResource SmallPadding}"
-    VerticalOptions="CenterAndExpand"
+    BackgroundColor="Transparent"
     HorizontalOptions="CenterAndExpand"
-    BackgroundColor="Transparent">
+    VerticalOptions="CenterAndExpand">
 
     <StackLayout.Orientation>
         <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal" />
     </StackLayout.Orientation>
 
-    <ActivityIndicator IsRunning="{Binding IsVisible, Source={x:Reference Control}}" BackgroundColor="Transparent">
-        <ActivityIndicator.Color>
-            <OnPlatform x:TypeArguments="Color">
-                <On Platform="Android" Value="{StaticResource Accent}" />
-            </OnPlatform>
-        </ActivityIndicator.Color>
+    <ActivityIndicator
+        x:Name="ActivityIndicator"
+        BackgroundColor="Transparent"
+        IsRunning="{Binding IsVisible, Source={x:Reference Control}}">
         <ActivityIndicator.WidthRequest>
             <OnPlatform
                 x:TypeArguments="x:Double"
-                iOS="24"
-                Android="100" />
+                Android="100"
+                iOS="24" />
         </ActivityIndicator.WidthRequest>
     </ActivityIndicator>
     <Label
-        Text="{Binding Caption, Source={x:Reference Control}}"
+        BackgroundColor="Transparent"
         FontAttributes="Bold"
-        BackgroundColor="Transparent">
+        Text="{Binding Caption, Source={x:Reference Control}}">
         <Label.HorizontalOptions>
             <OnPlatform x:TypeArguments="LayoutOptions">
                 <On Platform="Android" Value="Center" />

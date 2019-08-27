@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using CrossPlatformLibrary.Forms.Resources;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,6 +11,12 @@ namespace CrossPlatformLibrary.Forms.Controls
         public DrilldownButton()
         {
             this.InitializeComponent();
+
+            // Hack: OnPlatform lacks of support for DynamicResource bindings!
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                this.ActivityIndicator.SetDynamicResource(ActivityIndicator.ColorProperty, ThemeConstants.Color.SECONDARY);
+            }
         }
 
         public static readonly BindableProperty TextProperty =

@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using CrossPlatformLibrary.Forms.Resources;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace CrossPlatformLibrary.Forms.Controls
@@ -6,6 +7,17 @@ namespace CrossPlatformLibrary.Forms.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomActivityIndicator : StackLayout
     {
+        public CustomActivityIndicator()
+        {
+            this.InitializeComponent();
+
+            // Hack: OnPlatform lacks of support for DynamicResource bindings!
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                this.ActivityIndicator.SetDynamicResource(ActivityIndicator.ColorProperty, ThemeConstants.Color.SECONDARY);
+            }
+        }
+
         public static readonly BindableProperty CaptionProperty =
             BindableProperty.Create(
                 nameof(Caption),
@@ -15,13 +27,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string Caption
         {
-            get { return (string)this.GetValue(CaptionProperty); }
-            set { this.SetValue(CaptionProperty, value); }
-        }
-
-        public CustomActivityIndicator()
-        {
-            this.InitializeComponent();
+            get => (string)this.GetValue(CaptionProperty);
+            set => this.SetValue(CaptionProperty, value);
         }
     }
 }

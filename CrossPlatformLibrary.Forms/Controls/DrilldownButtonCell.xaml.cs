@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Input;
+using CrossPlatformLibrary.Forms.Resources;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
@@ -12,6 +13,12 @@ namespace CrossPlatformLibrary.Forms.Controls
             try
             {
                 this.InitializeComponent();
+
+                // Hack: OnPlatform lacks of support for DynamicResource bindings!
+                if (Device.RuntimePlatform == Device.Android)
+                {
+                    this.ActivityIndicator.SetDynamicResource(ActivityIndicator.ColorProperty, ThemeConstants.Color.SECONDARY);
+                }
             }
             catch (Exception ex)
             {
@@ -86,8 +93,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public ImageSource ImageSource
         {
-            get { return (ImageSource)this.GetValue(ImageSourceProperty); }
-            set { this.SetValue(ImageSourceProperty, value); }
+            get => (ImageSource)this.GetValue(ImageSourceProperty);
+            set => this.SetValue(ImageSourceProperty, value);
         }
 
         public static readonly BindableProperty IsBusyProperty =

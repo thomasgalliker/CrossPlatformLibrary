@@ -73,16 +73,13 @@
                 WidthRequest="24" />
 
             <ActivityIndicator
+                x:Name="ActivityIndicator"
                 Margin="0,0,8,0"
                 HorizontalOptions="EndAndExpand"
                 IsRunning="{Binding IsBusy, Source={x:Reference Control}, Mode=OneWay}"
                 IsVisible="{Binding IsBusy, Source={x:Reference Control}, Mode=OneWay}"
                 VerticalOptions="CenterAndExpand"
-                WidthRequest="24">
-                <ActivityIndicator.Color>
-                    <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}" />
-                </ActivityIndicator.Color>
-            </ActivityIndicator>
+                WidthRequest="24" />
 
             <Grid.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding Command, Source={x:Reference Control}, Mode=OneWay}" CommandParameter="{Binding CommandParameter, Source={x:Reference Control}, Mode=OneWay}" />
