@@ -12,6 +12,7 @@ namespace CrossPlatformLibrary.Forms.Resources
 
             this.SetThemeColors(colorConfiguration);
             this.SetButtonColors(colorConfiguration);
+            this.SetDrilldownButtonColors(colorConfiguration);
         }
 
         private void SetButtonColors(CrossPlatformLibraryColorConfiguration colorConfiguration)
@@ -39,6 +40,17 @@ namespace CrossPlatformLibrary.Forms.Resources
             this[ThemeConstants.CustomButtonSecondaryStyle.BackgroundColorEnabled] = colorConfiguration.OnSecondary;
             this[ThemeConstants.CustomButtonSecondaryStyle.BackgroundColorDisabled] = colorConfiguration.SecondaryVariant;
             this[ThemeConstants.CustomButtonSecondaryStyle.BackgroundColorPressed] = colorConfiguration.SecondaryVariant;
+        }
+
+        private void SetDrilldownButtonColors(CrossPlatformLibraryColorConfiguration colorConfiguration)
+        {
+            this[ThemeConstants.DrilldownButtonStyle.TextColor] = colorConfiguration.Secondary;
+            this[ThemeConstants.DrilldownButtonStyle.BorderColorEnabled] = Color.Transparent;
+            this[ThemeConstants.DrilldownButtonStyle.BorderColorDisabled] = Color.Transparent;
+            this[ThemeConstants.DrilldownButtonStyle.BorderColorPressed] = Color.Transparent;
+            this[ThemeConstants.DrilldownButtonStyle.BackgroundColorEnabled] = Color.Transparent;
+            this[ThemeConstants.DrilldownButtonStyle.BackgroundColorDisabled] = colorConfiguration.SemiTransparentBright;
+            this[ThemeConstants.DrilldownButtonStyle.BackgroundColorPressed] = colorConfiguration.SemiTransparentBright;
         }
 
         private void SetThemeColors(CrossPlatformLibraryColorConfiguration colorConfiguration)

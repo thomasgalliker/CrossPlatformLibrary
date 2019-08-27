@@ -7,9 +7,9 @@ namespace CrossPlatformLibrary.Forms
     /// </summary>
     public sealed class CrossPlatformLibraryColorConfiguration : BindableObject
     {
-        /// <summary>
-        ///     Backing field for the bindable property <see cref="Background" />.
-        /// </summary>
+        public readonly Color SemiTransparentBright = Color.FromHex("#7FFFFFFF");
+        public readonly Color SemiTransparentDark = Color.FromHex("#7F000000");
+
         public static readonly BindableProperty BackgroundProperty = BindableProperty.Create(
             nameof(Background),
             typeof(Color),
@@ -26,20 +26,50 @@ namespace CrossPlatformLibrary.Forms
             set => this.SetValue(BackgroundProperty, value);
         }
 
-        /// <summary>
-        ///     Backing field for the bindable property <see cref="Error" />.
-        /// </summary>
-        public static readonly BindableProperty ErrorProperty = BindableProperty.Create(nameof(Error), typeof(Color), typeof(Color), Color.FromHex("#B00020"));
+        public static readonly BindableProperty ErrorProperty = BindableProperty.Create(
+            nameof(Error),
+            typeof(Color),
+            typeof(Color),
+            Color.FromHex("#B00020"));
 
         /// <summary>
-        ///     Backing field for the bindable property <see cref="OnBackground" />.
+        ///     The color used to indicate error status.
         /// </summary>
-        public static readonly BindableProperty OnBackgroundProperty = BindableProperty.Create(nameof(OnBackground), typeof(Color), typeof(Color), Color.FromHex("#000000"));
+        public Color Error
+        {
+            get => (Color)this.GetValue(ErrorProperty);
+            set => this.SetValue(ErrorProperty, value);
+        }
+
+        public static readonly BindableProperty OnBackgroundProperty = BindableProperty.Create(
+            nameof(OnBackground),
+            typeof(Color),
+            typeof(Color),
+            Color.FromHex("#000000"));
 
         /// <summary>
-        ///     Backing field for the bindable property <see cref="OnError" />.
+        ///     A color that passes accessibility guidelines for text/iconography when drawn on top of <see cref="Background" />.
         /// </summary>
-        public static readonly BindableProperty OnErrorProperty = BindableProperty.Create(nameof(OnError), typeof(Color), typeof(Color), Color.FromHex("#FFFFFF"));
+        public Color OnBackground
+        {
+            get => (Color)this.GetValue(OnBackgroundProperty);
+            set => this.SetValue(OnBackgroundProperty, value);
+        }
+
+        public static readonly BindableProperty OnErrorProperty = BindableProperty.Create(
+            nameof(OnError),
+            typeof(Color),
+            typeof(Color),
+            Color.FromHex("#FFFFFF"));
+
+        /// <summary>
+        ///     A color that passes accessibility guidelines for text/iconography when drawn on top of <see cref="Error" />.
+        /// </summary>
+        public Color OnError
+        {
+            get => (Color)this.GetValue(OnErrorProperty);
+            set => this.SetValue(OnErrorProperty, value);
+        }
 
         /// <summary>
         ///     Backing field for the bindable property <see cref="OnPrimary" />.
@@ -83,7 +113,6 @@ namespace CrossPlatformLibrary.Forms
             set => this.SetValue(TextColorProperty, value);
         }
 
-
         public static readonly BindableProperty TextColorBrightProperty = BindableProperty.Create(
             nameof(TextColorBright),
             typeof(Color),
@@ -118,34 +147,6 @@ namespace CrossPlatformLibrary.Forms
         ///     Backing field for the bindable property <see cref="Surface" />.
         /// </summary>
         public static readonly BindableProperty SurfaceProperty = BindableProperty.Create(nameof(Surface), typeof(Color), typeof(Color), Color.FromHex("#FFFFFF"));
-
-
-        /// <summary>
-        ///     The color used to indicate error status.
-        /// </summary>
-        public Color Error
-        {
-            get => (Color)this.GetValue(ErrorProperty);
-            set => this.SetValue(ErrorProperty, value);
-        }
-
-        /// <summary>
-        ///     A color that passes accessibility guidelines for text/iconography when drawn on top of <see cref="Background" />.
-        /// </summary>
-        public Color OnBackground
-        {
-            get => (Color)this.GetValue(OnBackgroundProperty);
-            set => this.SetValue(OnBackgroundProperty, value);
-        }
-
-        /// <summary>
-        ///     A color that passes accessibility guidelines for text/iconography when drawn on top of <see cref="Error" />.
-        /// </summary>
-        public Color OnError
-        {
-            get => (Color)this.GetValue(OnErrorProperty);
-            set => this.SetValue(OnErrorProperty, value);
-        }
 
         /// <summary>
         ///     A color that passes accessibility guidelines for text/iconography when drawn on top of <see cref="Primary" />.

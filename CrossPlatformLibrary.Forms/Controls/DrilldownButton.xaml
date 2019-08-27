@@ -6,6 +6,14 @@
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control">
 
+    <controls:CardView.Margin>
+        <OnPlatform
+            x:TypeArguments="Thickness"
+            Android="0, 8, 0, 0"
+            WinPhone="0, 16, 0, 0"
+            iOS="0, 16, 0, 0" />
+    </controls:CardView.Margin>
+
     <controls:CardView.Padding>
         <OnPlatform
             x:TypeArguments="Thickness"
@@ -14,7 +22,7 @@
             iOS="0, 24, 0, 4" />
     </controls:CardView.Padding>
 
-    <StackLayout Spacing="0">
+    <controls:StackLayoutZero>
         <controls:HeaderDivider />
         <Grid BackgroundColor="White">
             <Grid.ColumnDefinitions>
@@ -81,5 +89,5 @@
             </Grid.GestureRecognizers>
         </Grid>
         <controls:FooterDivider />
-    </StackLayout>
+    </controls:StackLayoutZero>
 </controls:CardView>

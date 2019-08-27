@@ -105,10 +105,6 @@
         WinPhone="SemiBold"
         iOS="SemiBold" />
 
-    <!--  Theme colors  -->
-    <Color x:Key="Primary">#FF00A19A</Color>
-    <Color x:Key="Accent">#FF006e68</Color>
-
     <!--  Converters  -->
     <converters:DebugConverter x:Key="DebugConverter" />
     <converters:IsNotEmptyConverter x:Key="IsNotEmptyConverter" />
@@ -188,17 +184,6 @@
         iOS="Courier New" />
 
     <!--  Styles  -->
-
-    <Style x:Key="DrilldownButtonStyle" TargetType="controls:DrilldownButton">
-        <Setter Property="Margin">
-            <OnPlatform
-                x:TypeArguments="Thickness"
-                Android="0, 8, 0, 0"
-                WinPhone="0, 16, 0, 0"
-                iOS="0, 16, 0, 0" />
-        </Setter>
-    </Style>
-
     <!--  CustomButton Base Style  -->
     <Style x:Key="CustomButtonStyle" TargetType="controls:CustomButton">
         <Setter Property="TextColor" Value="{DynamicResource CustomButtonStyle.TextColor}" />
@@ -248,6 +233,25 @@
             <Trigger TargetType="Button" Property="IsEnabled" Value="False">
                 <Setter Property="BackgroundColor" Value="{DynamicResource CustomButtonSecondaryStyle.BackgroundColor.Disabled}" />
                 <Setter Property="BorderColor" Value="{DynamicResource CustomButtonSecondaryStyle.BorderColor.Disabled}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--  DrilldownButton Style  -->
+    <Style
+        x:Key="DrilldownButtonStyle"
+        BasedOn="{StaticResource CustomButtonStyle}"
+        TargetType="controls:CustomButton">
+        <Setter Property="TextColor" Value="{DynamicResource DrilldownButtonStyle.TextColor}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource DrilldownButtonStyle.BackgroundColor.Enabled}" />
+        <Setter Property="BackgroundColorPressed" Value="{DynamicResource DrilldownButtonStyle.BackgroundColor.Pressed}" />
+        <Setter Property="BorderColor" Value="{DynamicResource DrilldownButtonStyle.BorderColor.Enabled}" />
+        <Setter Property="BorderColorPressed" Value="{DynamicResource DrilldownButtonStyle.BorderColor.Pressed}" />
+        <Style.Triggers>
+            <!--  IsEnabled/False will automatically restore it's state if set to IsEnabled/True  -->
+            <Trigger TargetType="Button" Property="IsEnabled" Value="False">
+                <Setter Property="BackgroundColor" Value="{DynamicResource DrilldownButtonStyle.BackgroundColor.Disabled}" />
+                <Setter Property="BorderColor" Value="{DynamicResource DrilldownButtonStyle.BorderColor.Disabled}" />
             </Trigger>
         </Style.Triggers>
     </Style>

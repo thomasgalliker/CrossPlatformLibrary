@@ -1,12 +1,12 @@
 ﻿namespace CrossPlatformLibrary.Forms.Resources
 {
     /// <summary>
-    /// Static class that contains constant key values of Material resources.
+    ///     Static class that contains constant key values of Material resources.
     /// </summary>
     public static class ThemeConstants
     {
         /// <summary>
-        /// The Material color resource.
+        ///     The Material color resource.
         /// </summary>
         public static class Color
         {
@@ -48,7 +48,6 @@
             public const string BackgroundColorPressed = "CustomButtonPrimaryStyle.BackgroundColor.Pressed";
         }
 
-
         public static class CustomButtonSecondaryStyle
         {
             public const string TextColor = "CustomButtonSecondaryStyle.TextColor";
@@ -60,8 +59,19 @@
             public const string BackgroundColorPressed = "CustomButtonSecondaryStyle.BackgroundColor.Pressed";
         }
 
+        public static class DrilldownButtonStyle
+        {
+            public const string TextColor = "DrilldownButtonStyle.TextColor";
+            public const string BorderColorEnabled = "DrilldownButtonStyle.BorderColor.Enabled";
+            public const string BorderColorDisabled = "DrilldownButtonStyle.BorderColor.Disabled";
+            public const string BorderColorPressed = "DrilldownButtonStyle.BorderColor.Pressed";
+            public const string BackgroundColorEnabled = "DrilldownButtonStyle.BackgroundColor.Enabled";
+            public const string BackgroundColorDisabled = "DrilldownButtonStyle.BackgroundColor.Disabled";
+            public const string BackgroundColorPressed = "DrilldownButtonStyle.BackgroundColor.Pressed";
+        }
+
         /// <summary>
-        /// The Material font resource.
+        ///     The Material font resource.
         /// </summary>
         public static class FontFamily
         {

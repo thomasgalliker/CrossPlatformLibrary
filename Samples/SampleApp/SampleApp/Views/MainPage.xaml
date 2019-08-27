@@ -253,11 +253,16 @@
                                 <controls:StackLayoutZero>
                                     <controls:LabelSection Text="{localization:Translate ListOfSettingsSectionText}" />
                                     <controls:HeaderDivider />
-                                    <controls:DrilldownButtonList>
+                                    <controls:DrilldownButtonList BackgroundColor="#BEF5D5F5">
                                         <controls:DrilldownButtonList.ItemsSource>
                                             <objectModel:ObservableCollection x:TypeArguments="BindableObject">
                                                 <controls:DrilldownButtonView
-                                                    Title="{localization:Translate LogButtonText}"
+                                                    Title="DrilldownButtonCell (Enabled)"
+                                                    Command="{Binding NavigateToLogCommand}"
+                                                    ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
+                                                    IsEnabled="True" />
+                                                <controls:DrilldownButtonView
+                                                    Title="DrilldownButtonCell (Disabled)"
                                                     Command="{Binding NavigateToLogCommand}"
                                                     ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
                                                     IsEnabled="False" />
