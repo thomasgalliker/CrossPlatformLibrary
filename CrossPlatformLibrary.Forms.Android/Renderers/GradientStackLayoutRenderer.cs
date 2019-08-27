@@ -25,20 +25,24 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
         protected override void DispatchDraw(Canvas canvas)
         {
+            // Linear distribution is configurable:
+            // https://stackoverflow.com/questions/35974463/why-doesnt-this-argument-of-the-lineargradient-constructor-seem-to-work
+
             var gradient = this.GradientOrientation == StackOrientation.Horizontal
-                ? new LinearGradient(0, 0, this.Width, 0,
-                    this.StartColor.ToAndroid(),
-                    this.EndColor.ToAndroid(),
-                    Shader.TileMode.Clamp)
-                : new LinearGradient(0, 0, 0, this.Height,
-                    this.StartColor.ToAndroid(),
-                    this.EndColor.ToAndroid(),
-                    Shader.TileMode.Clamp);
+                ? new LinearGradient(x0: 0, y0: 0, x1: this.Width, y1: 0,
+                    color0: this.StartColor.ToAndroid(),
+                    color1: this.EndColor.ToAndroid(),
+                    tile: Shader.TileMode.Clamp)
+                : new LinearGradient(x0: 0, y0: 0, x1: 0, y1: this.Height,
+                    color0: this.StartColor.ToAndroid(),
+                    color1: this.EndColor.ToAndroid(),
+                    tile: Shader.TileMode.Clamp);
 
             var paint = new Paint
             {
                 Dither = true,
             };
+
             paint.SetShader(gradient);
             canvas.DrawPaint(paint);
             base.DispatchDraw(canvas);
