@@ -71,8 +71,15 @@ steps:
   inputs:
     command: test
     projects: '**/*.Tests.csproj'
-    nobuild: true
-    arguments: '--filter Category!=SystemTest /p:CollectCoverage=true /p:Exclude=[xunit.*]* /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/ "--logger:\"console;verbosity=detailed\"" /p:CoverletOutputFormat=json%2ccobertura /p:MergeWith=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.json'
+    arguments: '--no-build --no-restore --filter Category!=SystemTest /p:CollectCoverage=true /p:Exclude=[xunit.*]* /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/ "--logger:\"console;verbosity=detailed\"" /p:CoverletOutputFormat=json%2ccobertura /p:MergeWith=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.json'
+    
+- task: DotNetCoreCLI@2
+  displayName: 'Run SystemTests'
+  continueOnError: false
+  inputs:
+    command: test
+    projects: '**/*.Tests.csproj'
+    arguments: '--no-build --no-restore --filter Category!=SystemTest /p:CollectCoverage=true /p:Exclude=[xunit.*]* /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/ "--logger:\"console;verbosity=detailed\"" /p:CoverletOutputFormat=json%2ccobertura /p:MergeWith=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.json'
     
 
 - task: NuGetCommand@2
