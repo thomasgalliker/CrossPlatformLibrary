@@ -49,11 +49,21 @@ The Xamarin.Forms specific library can be installed using following command:
 #### User Controls
 The library contains a rich set of customized user controls which extend basic implementations of existing controls. Following screenshots of the SampleApp demonstrate the usege of some of the delivered controls:
 <p float="left">
-<img src="https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/master/Images/Screenshot_SampleApp_Android.png" alt="SampleApp Android">
-<img src="https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/master/Images/Screenshot_SampleApp_Android.png" alt="SampleApp Android">
+<img src="https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/develop/Images/Screenshot_SampleApp_Android.png" alt="SampleApp Android">
+<img src="https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/develop/Images/Screenshot_SampleApp_Android.png" alt="SampleApp Android">
 </p>
 
+In order to use user controls of CrossPlatformLibrary, the styles used in these controls need to be initialized properly. For this reason, add following line of code just after the line `this.InitializeComponent();` in `App.xaml.cs`:
+
+`
+CrossPlatformLibrary.Forms.CrossPlatformLibrary.Init(this, "InvoiceScanner.Theme");
+`
+
+
 ```TODO: to be documented```
+
+##### Known Problems
+- `System.Collections.Generic.KeyNotFoundException: The resource 'Theme.Color.TextColor' is not present in the dictionary.` This error eventually appears if user controls of CrossPlatformLibrary are used without calling the `CrossPlatformLibrary.Forms.Init(..)` method.
 
 #### Input Validation
 The base viewmodel ```BaseViewModel``` implements a pretty sophisiticated and praxisproven user input validation system which allows to run client- and server-based property validation side-by-side.
