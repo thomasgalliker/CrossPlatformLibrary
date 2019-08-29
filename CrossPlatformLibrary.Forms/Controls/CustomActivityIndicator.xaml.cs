@@ -1,4 +1,5 @@
 ﻿using CrossPlatformLibrary.Forms.Resources;
+using CrossPlatformLibrary.Forms.Themes;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

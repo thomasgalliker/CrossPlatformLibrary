@@ -10,7 +10,7 @@
 
     <StackLayout
         Margin="0"
-        Padding="{DynamicResource StandardPadding}"
+        Padding="{DynamicResource Theme.Padding.Large}"
         BackgroundColor="Transparent"
         HorizontalOptions="CenterAndExpand"
         Orientation="Vertical"

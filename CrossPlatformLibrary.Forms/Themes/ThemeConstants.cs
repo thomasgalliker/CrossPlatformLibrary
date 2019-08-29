@@ -1,4 +1,4 @@
-﻿namespace CrossPlatformLibrary.Forms.Resources
+﻿namespace CrossPlatformLibrary.Forms.Themes
 {
     /// <summary>
     ///     Static class that contains constant key values of Material resources.
@@ -69,6 +69,24 @@
             public const string BackgroundColorDisabled = "DrilldownButtonStyle.BackgroundColor.Disabled";
             public const string BackgroundColorPressed = "DrilldownButtonStyle.BackgroundColor.Pressed";
         }
+
+        public static class Spacings
+        {
+            public const string SmallSpacing = "Theme.Spacing.Small";
+            public const string MediumSpacing = "Theme.Spacing.Medium";
+            public const string LargeSpacing = "Theme.Spacing.Large";
+            public const string CardSpacing = "Theme.Spacing.CardSpacing";
+        }
+
+        public static class Paddings
+        {
+            public const string SmallPadding = "Theme.Padding.Small";
+            public const string MediumPadding = "Theme.Padding.Medium";
+            public const string LargePadding = "Theme.Padding.Large";
+            public const string CardViewPadding = "Theme.Padding.CardViewPadding";
+            public const string CardPadding = "Theme.Padding.CardPadding";
+        }
+
 
         /// <summary>
         ///     The Material font resource.

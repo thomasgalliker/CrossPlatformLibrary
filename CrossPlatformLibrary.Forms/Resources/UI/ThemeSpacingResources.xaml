@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="CrossPlatformLibrary.Forms.Resources.ThemeSpacingResources"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <x:Double x:Key="Theme.Slider.Height">27</x:Double>
+    <x:Double x:Key="Theme.Button.Height">48</x:Double>
+    <x:Double x:Key="Theme.Button.Outlined.BorderWidth">1</x:Double>
+    <x:Int32 x:Key="Theme.Button.CornerRadius">4</x:Int32>
+    <Thickness x:Key="Theme.Dialog.Margin">40</Thickness>
+    <Thickness x:Key="Theme.Snackbar.Margin">8,0,8,16</Thickness>
+    <OnIdiom x:Key="Theme.Dialog.Width" x:TypeArguments="x:Double">
+        <OnIdiom.Tablet>560</OnIdiom.Tablet>
+        <OnIdiom.Phone>280</OnIdiom.Phone>
+    </OnIdiom>
+    <OnIdiom x:Key="Theme.Snackbar.Width" x:TypeArguments="x:Double">
+        <OnIdiom.Tablet>344</OnIdiom.Tablet>
+        <OnIdiom.Phone>-1</OnIdiom.Phone>
+    </OnIdiom>
+    <OnIdiom x:Key="Theme.Snackbar.HorizontalOptions" x:TypeArguments="LayoutOptions">
+        <OnIdiom.Tablet>Center</OnIdiom.Tablet>
+        <OnIdiom.Phone>FillAndExpand</OnIdiom.Phone>
+    </OnIdiom>
+    <x:Double x:Key="Theme.LineHeight">1.4</x:Double>
+
+</ResourceDictionary>

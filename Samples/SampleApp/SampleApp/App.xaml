@@ -4,7 +4,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
-    xmlns:xForms="clr-namespace:CrossPlatformLibrary.Forms;assembly=CrossPlatformLibrary.Forms">
+    xmlns:xForms="clr-namespace:CrossPlatformLibrary.Forms;assembly=CrossPlatformLibrary.Forms"
+    xmlns:themes="clr-namespace:CrossPlatformLibrary.Forms.Themes;assembly=CrossPlatformLibrary.Forms">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -30,7 +31,7 @@
                 <Setter Property="LineBreakMode" Value="CharacterWrap" />
             </Style>
 
-            <xForms:CrossPlatformLibraryColorConfiguration
+            <themes:ColorConfiguration
                 x:Key="ColorConfiguration"
                 Background="#EAEAEA"
                 Error="#ff1744"
@@ -47,7 +48,22 @@
                 TextColor="DarkBlue"
                 TextColorBright="DarkGray" />
 
-            <xForms:CrossPlatformLibraryConfiguration x:Key="SampleApp.Theme" ColorConfiguration="{StaticResource ColorConfiguration}" />
+            <themes:SpacingConfiguration
+                x:Key="SpacingConfiguration"
+                SmallSpacing="1"
+                MediumSpacing="2"
+                LargeSpacing="4"
+                SmallPadding="1"
+                MediumPadding="2"
+                LargePadding="4"
+                CardPadding="4"
+                CardSpacing="4"
+                CardViewPadding="4" />
+
+            <themes:CrossPlatformLibraryConfiguration
+                x:Key="SampleApp.Theme"
+                ColorConfiguration="{StaticResource ColorConfiguration}"
+                SpacingConfiguration="{StaticResource SpacingConfiguration}" />
 
         </ResourceDictionary>
 

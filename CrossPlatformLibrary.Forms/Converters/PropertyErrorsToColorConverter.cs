@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using CrossPlatformLibrary.Forms.Resources;
+using CrossPlatformLibrary.Forms.Themes;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Converters

@@ -1,14 +1,15 @@
 ﻿using Xamarin.Forms;
 
-namespace CrossPlatformLibrary.Forms
+namespace CrossPlatformLibrary.Forms.Themes
 {
     /// <summary>
     ///     Class that provides color theme configuration based on https://material.io/design/color.
     /// </summary>
-    public sealed class CrossPlatformLibraryColorConfiguration : BindableObject
+    public sealed class ColorConfiguration : BindableObject, IColorConfiguration
     {
-        public readonly Color SemiTransparentBright = Color.FromHex("#7FFFFFFF");
-        public readonly Color SemiTransparentDark = Color.FromHex("#7F000000");
+        public Color SemiTransparentBright => Color.FromHex("#7FFFFFFF");
+
+        public Color SemiTransparentDark => Color.FromHex("#7F000000");
 
         public static readonly BindableProperty BackgroundProperty = BindableProperty.Create(
             nameof(Background),

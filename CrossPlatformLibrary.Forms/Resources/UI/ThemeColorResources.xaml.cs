@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using CrossPlatformLibrary.Forms.Themes;
+using CrossPlatformLibrary.Forms.Themes.Extensions;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace CrossPlatformLibrary.Forms.Resources
@@ -6,7 +8,7 @@ namespace CrossPlatformLibrary.Forms.Resources
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ThemeColorResources : ResourceDictionary
     {
-        internal ThemeColorResources(CrossPlatformLibraryColorConfiguration colorConfiguration)
+        internal ThemeColorResources(IColorConfiguration colorConfiguration)
         {
             this.InitializeComponent();
 
@@ -15,7 +17,7 @@ namespace CrossPlatformLibrary.Forms.Resources
             this.SetDrilldownButtonColors(colorConfiguration);
         }
 
-        private void SetButtonColors(CrossPlatformLibraryColorConfiguration colorConfiguration)
+        private void SetButtonColors(IColorConfiguration colorConfiguration)
         {
             this[ThemeConstants.CustomButtonStyle.TextColor] = colorConfiguration.TextColor;
             this[ThemeConstants.CustomButtonStyle.BorderColorEnabled] = colorConfiguration.TextColor;
@@ -42,7 +44,7 @@ namespace CrossPlatformLibrary.Forms.Resources
             this[ThemeConstants.CustomButtonSecondaryStyle.BackgroundColorPressed] = colorConfiguration.SecondaryVariant;
         }
 
-        private void SetDrilldownButtonColors(CrossPlatformLibraryColorConfiguration colorConfiguration)
+        private void SetDrilldownButtonColors(IColorConfiguration colorConfiguration)
         {
             this[ThemeConstants.DrilldownButtonStyle.TextColor] = colorConfiguration.Secondary;
             this[ThemeConstants.DrilldownButtonStyle.BorderColorEnabled] = Color.Transparent;
@@ -53,7 +55,7 @@ namespace CrossPlatformLibrary.Forms.Resources
             this[ThemeConstants.DrilldownButtonStyle.BackgroundColorPressed] = colorConfiguration.SemiTransparentBright;
         }
 
-        private void SetThemeColors(CrossPlatformLibraryColorConfiguration colorConfiguration)
+        private void SetThemeColors(IColorConfiguration colorConfiguration)
         {
             this.TryAddColorResource(ThemeConstants.Color.TextColor, colorConfiguration.TextColor);
             this.TryAddColorResource(ThemeConstants.Color.TextColorBright, colorConfiguration.TextColorBright);

@@ -7,46 +7,6 @@
     xmlns:converters="clr-namespace:CrossPlatformLibrary.Forms.Converters;assembly=CrossPlatformLibrary.Forms"
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms">
 
-    <!--  Paddings, Spacings, Margins  -->
-    <x:Double x:Key="SmallSpacing">4</x:Double>
-    <x:Double x:Key="MediumSpacing">8</x:Double>
-    <x:Double x:Key="StandardSpacing">16</x:Double>
-
-    <Thickness
-        x:Key="SmallPadding"
-        Bottom="{StaticResource SmallSpacing}"
-        Left="{StaticResource SmallSpacing}"
-        Right="{StaticResource SmallSpacing}"
-        Top="{StaticResource SmallSpacing}" />
-
-    <Thickness
-        x:Key="MediumPadding"
-        Bottom="{StaticResource MediumSpacing}"
-        Left="{StaticResource MediumSpacing}"
-        Right="{StaticResource MediumSpacing}"
-        Top="{StaticResource MediumSpacing}" />
-
-    <Thickness
-        x:Key="StandardPadding"
-        Bottom="{StaticResource StandardSpacing}"
-        Left="{StaticResource StandardSpacing}"
-        Right="{StaticResource StandardSpacing}"
-        Top="{StaticResource StandardSpacing}" />
-
-    <Thickness
-        x:Key="CardViewPadding"
-        Bottom="{StaticResource MediumSpacing}"
-        Left="{StaticResource StandardSpacing}"
-        Right="{StaticResource StandardSpacing}"
-        Top="{StaticResource MediumSpacing}" />
-
-    <Thickness
-        x:Key="ButtonMargin"
-        Bottom="{StaticResource StandardSpacing}"
-        Left="{StaticResource MediumSpacing}"
-        Right="{StaticResource MediumSpacing}"
-        Top="0" />
-
     <!--  Colors  -->
     <OnPlatform x:Key="WindowBackgroundTable" x:TypeArguments="Color">
         <On Platform="Android" Value="#F5F5F5" />
@@ -92,18 +52,6 @@
         Android="13"
         WinPhone="13"
         iOS="13" />
-    <OnPlatform
-        x:Key="TweetTextSize"
-        x:TypeArguments="x:Double"
-        Android="14"
-        WinPhone="14"
-        iOS="14" />
-    <OnPlatform
-        x:Key="TweetUserTextSize"
-        x:TypeArguments="Font"
-        Android="SemiBold"
-        WinPhone="SemiBold"
-        iOS="SemiBold" />
 
     <!--  Converters  -->
     <converters:DebugConverter x:Key="DebugConverter" />

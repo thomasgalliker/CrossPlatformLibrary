@@ -13,7 +13,7 @@
             <StackLayout Spacing="0">
                 <controls:LabelSection Text="{localization:Translate UserProfileAddressCaptionText}" />
                 <controls:HeaderDivider />
-                <Grid Padding="{StaticResource CardViewPadding}" BackgroundColor="{StaticResource WindowBackground}">
+                <Grid Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{StaticResource WindowBackground}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />

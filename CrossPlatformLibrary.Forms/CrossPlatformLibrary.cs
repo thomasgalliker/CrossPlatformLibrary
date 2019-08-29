@@ -1,5 +1,7 @@
 ﻿using System;
 using CrossPlatformLibrary.Forms.Resources;
+using CrossPlatformLibrary.Forms.Themes;
+using CrossPlatformLibrary.Forms.Themes.Extensions;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms
@@ -15,7 +17,7 @@ namespace CrossPlatformLibrary.Forms
         internal CrossPlatformLibrary(Application app, ITheme config)
         {
             this.applicationResources = app.Resources;
-            this.config = config ?? GetDefaultConfiguration(); ;
+            this.config = config ?? GetDefaultConfiguration();
         }
 
         internal CrossPlatformLibrary(Application app, string key)
@@ -34,7 +36,7 @@ namespace CrossPlatformLibrary.Forms
         {
             return new CrossPlatformLibraryConfiguration
             {
-                ColorConfiguration = new CrossPlatformLibraryColorConfiguration(),
+                ColorConfiguration = new ColorConfiguration(),
             };
         }
 
@@ -105,8 +107,8 @@ namespace CrossPlatformLibrary.Forms
 
         private void MergeCrossPlatformLibraryDictionaries()
         {
-            this.applicationResources.MergedDictionaries.Add(new ThemeColorResources(this.config.ColorConfiguration ?? new CrossPlatformLibraryColorConfiguration()));
-            this.applicationResources.MergedDictionaries.Add(new MaterialSizes());
+            this.applicationResources.MergedDictionaries.Add(new ThemeColorResources(this.config.ColorConfiguration ?? new ColorConfiguration()));
+            this.applicationResources.MergedDictionaries.Add(new ThemeSpacingResources(this.config.SpacingConfiguration ?? new SpacingConfiguration()));
         }
 
         /// <summary>

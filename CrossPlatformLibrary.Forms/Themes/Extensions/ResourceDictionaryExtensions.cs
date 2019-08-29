@@ -2,7 +2,7 @@
 using CrossPlatformLibrary.Extensions;
 using Xamarin.Forms;
 
-namespace CrossPlatformLibrary.Forms.Resources
+namespace CrossPlatformLibrary.Forms.Themes.Extensions
 {
     public static class ResourceDictionaryExtensions
     {
