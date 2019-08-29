@@ -46,7 +46,7 @@
                 IsEnabled="{Binding IsEnabled, Source={x:Reference Control}, Mode=OneWay}"
                 Style="{DynamicResource CustomButtonStyle}"
                 Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}"
-                TextColor="{DynamicResource Theme.Color.TextColor}"
+                TextColor="{DynamicResource DrilldownButtonStyle.TextColor}"
                 VerticalOptions="StartAndExpand">
 
                 <controls:CustomButton.Margin>

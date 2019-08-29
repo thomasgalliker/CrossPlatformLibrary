@@ -26,7 +26,6 @@
                 IsEnabled="{Binding IsEnabled, Mode=OneWay}"
                 Style="{DynamicResource DrilldownButtonStyle}"
                 Text="{Binding Title, Mode=OneWay}"
-                TextColor="{DynamicResource Theme.Color.TextColor}"
                 VerticalOptions="StartAndExpand">
 
                 <controls:CustomButton.Margin>

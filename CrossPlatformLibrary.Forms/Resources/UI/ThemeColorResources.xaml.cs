@@ -46,7 +46,7 @@ namespace CrossPlatformLibrary.Forms.Resources
 
         private void SetDrilldownButtonColors(IColorConfiguration colorConfiguration)
         {
-            this[ThemeConstants.DrilldownButtonStyle.TextColor] = colorConfiguration.Secondary;
+            this[ThemeConstants.DrilldownButtonStyle.TextColor] = colorConfiguration.TextColor;
             this[ThemeConstants.DrilldownButtonStyle.BorderColorEnabled] = Color.Transparent;
             this[ThemeConstants.DrilldownButtonStyle.BorderColorDisabled] = Color.Transparent;
             this[ThemeConstants.DrilldownButtonStyle.BorderColorPressed] = Color.Transparent;
