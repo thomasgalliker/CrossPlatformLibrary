@@ -47,13 +47,14 @@ The Xamarin.Forms specific library can be installed using following command:
 ### Usage
 
 #### User Controls
-The library contains a rich set of customized user controls which extend basic implementations of existing controls. Following screenshots of the SampleApp demonstrate the usege of some of the delivered controls:
+The library contains a rich set of customized user controls which extend basic implementations of existing controls. Following screenshots of the SampleApp demonstrate the usege of some of the delivered controls. The coloring is pretty random and mainly used for debugging/development purposes. Since every control uses dynamic styles, you're free to override the default styles.
 <p float="left">
-<img src="https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/develop/Images/Screenshot_SampleApp_Android.png" alt="SampleApp Android">
-<img src="https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/develop/Images/Screenshot_SampleApp_Android.png" alt="SampleApp Android">
+<img src="https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/develop/Images/Screenshot_SampleApp_Android.jpg" alt="SampleApp Android" height="500">
+<img src="https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/develop/Images/Screenshot_SampleApp_iOS.png" alt="SampleApp iOS" height="500">
 </p>
 
-In order to use user controls of CrossPlatformLibrary, the styles used in these controls need to be initialized properly. For this reason, add following line of code just after the line `this.InitializeComponent();` in `App.xaml.cs`:
+##### Getting Started
+In order to use the user controls of CrossPlatformLibrary, the styles used in these controls need to be initialized properly. For this reason, add following line of code just after the line `this.InitializeComponent();` in `App.xaml.cs`:
 
 `
 CrossPlatformLibrary.Forms.CrossPlatformLibrary.Init(this, "InvoiceScanner.Theme");
