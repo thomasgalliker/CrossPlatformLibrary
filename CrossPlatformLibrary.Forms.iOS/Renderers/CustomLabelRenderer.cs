@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
-using CrossPlatformLibrary.Forms.Controls;
+﻿using CrossPlatformLibrary.Forms.Controls;
 using CrossPlatformLibrary.Forms.iOS.Renderers;
+using System.ComponentModel;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -15,22 +15,27 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
         {
             base.OnElementChanged(e);
 
-            var customLabel = (CustomLabel)this.Element;
-            this.UpdateLines(customLabel);
-            this.JustifyText(customLabel);
+            if (this.Element is CustomLabel customLabel)
+            {
+                this.UpdateLines(customLabel);
+                this.JustifyText(customLabel);
+            }
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (this.Element is CustomLabel customLabel)
+            if (e.PropertyName == CustomLabel.LinesProperty.PropertyName)
             {
-                if (e.PropertyName == CustomLabel.LinesProperty.PropertyName)
+                if (this.Element is CustomLabel customLabel)
                 {
                     this.UpdateLines(customLabel);
                 }
-                else if (e.PropertyName == CustomLabel.JustifyTextProperty.PropertyName)
+            }
+            else if (e.PropertyName == CustomLabel.JustifyTextProperty.PropertyName)
+            {
+                if (this.Element is CustomLabel customLabel)
                 {
                     this.JustifyText(customLabel);
                 }
