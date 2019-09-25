@@ -141,12 +141,12 @@
 
                             <controls:CustomLabel Text="Enter name:" />
                             <controls:CustomLabel
-                                Text="Justified Text in a CustomLabel: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam."
                                 FontSize="Small"
+                                HorizontalOptions="Start"
                                 JustifyText="True"
                                 LineBreakMode="WordWrap"
-                                VerticalOptions="Start"
-                                HorizontalOptions="Start" />
+                                Text="Justified Text in a CustomLabel: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam."
+                                VerticalOptions="Start" />
 
                             <controls:CustomEntry
                                 Padding="0"
@@ -157,7 +157,8 @@
                                 HideBorder="True"
                                 Keyboard="Telephone"
                                 Placeholder="CustomEntry with HideBorder=&quot;True&quot;"
-                                Text="" />
+                                Text=""
+                                TextContentType="OneTimeCode" />
 
                             <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableAutoCompleteView--&gt;" />
                             <controls:ValidatableAutoCompleteView
@@ -201,8 +202,11 @@
                                 ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
                                 ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
 
-                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo User Controls--&gt;" />
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo User Controls: AddressControl--&gt;" />
                             <userControls:AddressControl BindingContext="{Binding .}" />
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo User Controls: PeriodicTaskView--&gt;" />
+                            <userControls:PeriodicTaskView BindingContext="{Binding PeriodicTask}" />
 
                             <Grid>
                                 <controls:ValidatableEditor

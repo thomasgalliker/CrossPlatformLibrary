@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid
+    x:Class="SampleApp.Controls.PeriodicTaskView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:CrossPlatformLibrary.Forms.Behaviors;assembly=CrossPlatformLibrary.Forms"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
+    x:Name="Control">
+
+    <StackLayout Spacing="0">
+        <controls:CardView>
+            <StackLayout Spacing="0">
+                <controls:LabelSection Text="{localization:Translate PeriodicTaskCaptionText}" />
+                <controls:HeaderDivider />
+                <Grid Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{StaticResource WindowBackground}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <controls:ValidatableLabel
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Placeholder="{localization:Translate TimerLabelText}"
+                        Text="{Binding TimerString, Mode=TwoWay}" />
+
+                    <controls:CustomButton
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Command="{Binding TimerStartStopCommand}"
+                        Style="{StaticResource CustomButtonSecondaryStyle}"
+                        Text="{Binding TimerButtonText}"
+                        VerticalOptions="StartAndExpand" />
+
+                    <controls:ValidatableLabel
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Placeholder="{localization:Translate CountdownLabelText}"
+                        Text="{Binding CountdownString, Mode=TwoWay}" />
+
+                    <controls:CustomButton
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Command="{Binding CountdownStartStopCommand}"
+                        Style="{StaticResource CustomButtonSecondaryStyle}"
+                        Text="{Binding CountdownButtonText}"
+                        VerticalOptions="StartAndExpand" />
+
+                </Grid>
+                <controls:FooterDivider />
+            </StackLayout>
+        </controls:CardView>
+    </StackLayout>
+</Grid>

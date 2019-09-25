@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -34,6 +34,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\PeriodicTaskView.xaml.cs">
+      <DependentUpon>PeriodicTaskView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Controls\NotesView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -45,6 +48,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Controls\PeriodicTaskView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Controls\AddressControl.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

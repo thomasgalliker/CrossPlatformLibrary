@@ -52,6 +52,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Media\Color.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Media\ColorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tools\IPlatformServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools\PeriodicTaskFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tools\PlatformServicesBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\AsyncInline.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\AsyncLock.cs" />

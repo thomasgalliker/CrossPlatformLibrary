@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Forms.Mvvm;
 using CrossPlatformLibrary.Forms.Validation;
+using CrossPlatformLibrary.Tools;
 using SampleApp.Model;
 using SampleApp.Services;
 using SampleApp.Validation;
@@ -38,6 +40,7 @@ namespace SampleApp.ViewModels
         private DateTime? birthdate;
         private bool isSaving;
         private ObservableCollection<ColorResource> themeColors;
+        private DateTime startDate;
 
         public MainViewModel(
             DisplayService displayService,
@@ -52,6 +55,8 @@ namespace SampleApp.ViewModels
             this.User = new UserDto();
             this.Countries = new ObservableCollection<CountryViewModel>();
             this.SuggestedCountries = new ObservableCollection<CountryViewModel>();
+
+            this.PeriodicTask = new PeriodicTaskViewModel();
             this.LoadData();
         }
 
@@ -221,7 +226,7 @@ namespace SampleApp.ViewModels
             this.Country = new CountryViewModel(new CountryDto { Id = 99, Name = "Fantasy Land" });
         }
 
-
+        public PeriodicTaskViewModel PeriodicTask { get; private set; }
 
         public ObservableCollection<ColorResource> ThemeColors
         {
