@@ -31,6 +31,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                 {
                     this.UpdateBorder(customEntry);
                     this.AddRemoveReturnKeyToNumericInput(customEntry);
+                    this.UpdateTextContentType(customEntry);
                 }
             }
         }
@@ -48,6 +49,10 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                 else if (e.PropertyName == nameof(Entry.Keyboard))
                 {
                     this.AddRemoveReturnKeyToNumericInput(customEntry);
+                }
+                else if (e.PropertyName == nameof(CustomEntry.TextContentType))
+                {
+                    this.UpdateTextContentType(customEntry);
                 }
             }
         }
@@ -105,6 +110,30 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             else
             {
                 this.Control.InputAccessoryView = null;
+            }
+        }
+
+        private void UpdateTextContentType(CustomEntry customEntry)
+        {
+            if (customEntry.TextContentType == TextContentType.OneTimeCode)
+            {
+                this.Control.TextContentType = UITextContentType.OneTimeCode;
+            }
+            else if (customEntry.TextContentType == TextContentType.Username)
+            {
+                this.Control.TextContentType = UITextContentType.Username;
+            }
+            else if (customEntry.TextContentType == TextContentType.Password)
+            {
+                this.Control.TextContentType = UITextContentType.Password;
+            }
+            else if (customEntry.TextContentType == TextContentType.NewPassword)
+            {
+                this.Control.TextContentType = UITextContentType.NewPassword;
+            }
+            else
+            {
+                this.Control.TextContentType = null;
             }
         }
     }

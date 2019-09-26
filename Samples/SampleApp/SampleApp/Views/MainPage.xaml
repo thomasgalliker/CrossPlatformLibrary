@@ -155,10 +155,25 @@
                             <controls:CustomEntry
                                 Padding="0"
                                 HideBorder="True"
-                                Keyboard="Telephone"
                                 Placeholder="CustomEntry with HideBorder=&quot;True&quot;"
+                                Text="" />
+                            <controls:CustomEntry
+                                Keyboard="Numeric"
+                                Placeholder="CustomEntry with TextContentType=&quot;OneTimeCode&quot;"
                                 Text=""
                                 TextContentType="OneTimeCode" />
+                            <controls:CustomEntry
+                                Placeholder="CustomEntry with TextContentType=&quot;Username&quot;"
+                                Text=""
+                                TextContentType="Username" />
+                            <controls:CustomEntry
+                                Placeholder="CustomEntry with TextContentType=&quot;Password&quot;"
+                                Text=""
+                                TextContentType="Password" />
+                            <controls:CustomEntry
+                                Placeholder="CustomEntry with TextContentType=&quot;NewPassword&quot;"
+                                Text=""
+                                TextContentType="NewPassword" />
 
                             <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableAutoCompleteView--&gt;" />
                             <controls:ValidatableAutoCompleteView
@@ -283,7 +298,7 @@
                                                     Title="{Binding RefreshButtonText}"
                                                     Command="{Binding RefreshCommand}"
                                                     IsBusy="{Binding IsRefreshing, Mode=OneWay}"
-                                                    IsEnabled="{Binding IsRefreshing, Converter={StaticResource BoolInverter}" />
+                                                    IsEnabled="{Binding IsRefreshing, Converter={StaticResource BoolInverter}}" />
                                                 <controls:DrilldownSwitchView
                                                     Title="{Binding ToggleSwitchButtonText}"
                                                     Command="{Binding ToggleSwitchCommand}"

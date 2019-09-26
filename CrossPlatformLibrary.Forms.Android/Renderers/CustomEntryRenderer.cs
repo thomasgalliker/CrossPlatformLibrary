@@ -40,12 +40,8 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
         private void UpdatePadding(CustomEntry customEntry)
         {
-            var paddingLeft = (int)customEntry.Padding.Left;
-            var paddingTop = (int)customEntry.Padding.Top;
-            var paddingRight = (int)customEntry.Padding.Right;
-            var paddingBottom = (int)customEntry.Padding.Bottom;
-
-            this.Control.SetPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
+            var padding = customEntry.Padding;
+            this.Control.SetPadding((int)padding.Left, (int)padding.Top, (int)padding.Right, (int)padding.Bottom);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
