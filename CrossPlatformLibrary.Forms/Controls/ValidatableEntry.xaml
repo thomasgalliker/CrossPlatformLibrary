@@ -28,7 +28,8 @@
         MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
         Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
         Style="{Binding EntryStyle, Source={x:Reference Control}, Mode=OneWay}"
-        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}" />
+        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}"
+        TextContentType="{Binding TextContentType, Source={x:Reference Control}, Mode=OneWay}" />
 
     <!--  Trailing Icon  -->
     <Image

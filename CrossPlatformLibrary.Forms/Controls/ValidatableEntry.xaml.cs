@@ -197,6 +197,20 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(TrailingIconCommandParameterProperty, value);
         }
 
+        public static readonly BindableProperty TextContentTypeProperty =
+            BindableProperty.Create(
+                nameof(TextContentType),
+                typeof(TextContentType),
+                typeof(ValidatableEntry),
+                default(TextContentType),
+                BindingMode.OneWay);
+
+        public TextContentType TextContentType
+        {
+            get => (TextContentType)this.GetValue(TextContentTypeProperty);
+            set => this.SetValue(TextContentTypeProperty, value);
+        }
+
         public event EventHandler Completed
         {
             add { this.Entry.Completed += value; }
