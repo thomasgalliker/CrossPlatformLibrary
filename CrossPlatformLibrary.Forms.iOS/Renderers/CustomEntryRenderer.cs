@@ -119,6 +119,10 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             {
                 this.Control.TextContentType = UITextContentType.OneTimeCode;
             }
+            else if (customEntry.TextContentType == TextContentType.Name)
+            {
+                this.Control.TextContentType = UITextContentType.Name;
+            }
             else if (customEntry.TextContentType == TextContentType.Username)
             {
                 this.Control.TextContentType = UITextContentType.Username;
@@ -133,7 +137,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             }
             else
             {
-                this.Control.TextContentType = null;
+                //this.Control.TextContentType = new Foundation.NSString();
             }
         }
     }
