@@ -219,7 +219,6 @@
     </Style>
 
     <Style BasedOn="{StaticResource LabelStyle}" TargetType="Label" />
-
     <Style BasedOn="{StaticResource LabelStyle}" TargetType="controls:CustomLabel" />
 
     <Style x:Key="EntryLabelStyle" TargetType="Label">
@@ -266,7 +265,7 @@
         <Setter Property="HeightRequest" Value="{DynamicResource HugeSize}" />
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
         <Setter Property="PlaceholderColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
-        <Setter Property="BackgroundColor" Value="#FFCFD1D3" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource LargeSize}" />
         <Setter Property="FontAttributes" Value="None" />
@@ -277,6 +276,7 @@
     </Style>
 
     <Style BasedOn="{StaticResource EntryStyle}" TargetType="Entry" />
+    <Style BasedOn="{StaticResource EntryStyle}" TargetType="controls:CustomEntry" />
 
     <!--<Style TargetType="controls:CustomSwitch">
         <Setter Property="TintColor" Value="{DynamicResource Primary}" />

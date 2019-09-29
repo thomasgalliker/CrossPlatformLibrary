@@ -61,7 +61,7 @@
         EndColor="LightPink"
         GradientOrientation="Vertical"
         Orientation="Vertical"
-        StartColor="LightBlue">
+        StartColor="LightGray">
         <controls:AlwaysScrollView x:Name="ScrollView">
             <Grid>
                 <Grid IsVisible="{Binding HasViewModelError, Mode=OneWay, Converter={StaticResource BoolInverter}}">
