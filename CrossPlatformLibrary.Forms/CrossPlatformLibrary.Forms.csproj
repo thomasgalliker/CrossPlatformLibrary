@@ -185,7 +185,19 @@
     <None Update="Controls\CustomActivityIndicatorPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <None Update="Controls\DividerLine.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Controls\DrilldownButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\DrilldownButtonCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\DrilldownButtonList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\DrilldownSwitchCell.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Controls\FooterDivider.xaml">
@@ -198,6 +210,9 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Controls\SectionDivider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\ValidatableAutoCompleteView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Controls\ValidatableDatePicker.xaml">
@@ -228,6 +243,18 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Resources\NaturalColors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Resources\UI\GoogleColors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Resources\UI\NaturalColors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Resources\UI\ThemeColorResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Resources\UI\ThemeSpacingResources.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
