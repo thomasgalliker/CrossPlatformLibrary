@@ -19,10 +19,19 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
         {
             base.OnElementChanged(e);
 
-            if (this.Element is CustomLabel customLabel)
+            if (e.NewElement == null)
             {
-                this.UpdateLines(customLabel);
-                this.JustifyText(customLabel);
+                return;
+            }
+
+            var textView = this.Control;
+            if (textView != null)
+            {
+                if (this.Element is CustomLabel customLabel)
+                {
+                    this.UpdateLines(customLabel);
+                    this.JustifyText(customLabel);
+                }
             }
         }
 

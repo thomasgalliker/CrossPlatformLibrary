@@ -1,6 +1,6 @@
-﻿using CrossPlatformLibrary.Forms.Controls;
+﻿using System.ComponentModel;
+using CrossPlatformLibrary.Forms.Controls;
 using CrossPlatformLibrary.Forms.iOS.Renderers;
-using System.ComponentModel;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -15,10 +15,19 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
         {
             base.OnElementChanged(e);
 
-            if (this.Element is CustomLabel customLabel)
+            if (e.NewElement == null)
             {
-                this.UpdateLines(customLabel);
-                this.JustifyText(customLabel);
+                return;
+            }
+
+            var uiLabel = this.Control;
+            if (uiLabel != null)
+            {
+                if (this.Element is CustomLabel customLabel)
+                {
+                    this.UpdateLines(customLabel);
+                    this.JustifyText(customLabel);
+                }
             }
         }
 
