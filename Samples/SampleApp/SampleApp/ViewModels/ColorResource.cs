@@ -11,8 +11,8 @@ namespace SampleApp.ViewModels
             this.Color = colorResource.Value as Color?;
         }
 
-        public string Id { get; set; }
-
-        public Color? Color { get; set; }
+        public string Id { get; }
+      
+        public Color? Color { get; }
     }
 }

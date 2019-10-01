@@ -3,6 +3,7 @@
     x:Class="SampleApp.App"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:CrossPlatformLibrary.Forms.Converters"
     xmlns:themes="clr-namespace:CrossPlatformLibrary.Forms.Themes;assembly=CrossPlatformLibrary.Forms"
     xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
     xmlns:xForms="clr-namespace:CrossPlatformLibrary.Forms;assembly=CrossPlatformLibrary.Forms">
@@ -13,6 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <!--  Converters  -->
+            <converters:ColorToHexStringConverter x:Key="ColorToHexStringConverter" />
             <valueConverters:StringIsNotNullOrEmptyConverter x:Key="StringIsNotNullOrEmptyConverter" />
             <valueConverters:DateTimeConverter x:Key="DateTimeConverter" Format="g" />
             <valueConverters:DateTimeConverter x:Key="ShortDateConverter" Format="d" />

@@ -37,6 +37,7 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="80" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Label
@@ -46,6 +47,12 @@
                                 VerticalOptions="CenterAndExpand" />
                             <Label
                                 Grid.Column="1"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding Color, Converter={StaticResource ColorToHexStringConverter}}"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Column="2"
                                 FontSize="Small"
                                 HorizontalOptions="Start"
                                 Text="{Binding Id}"
@@ -66,7 +73,7 @@
             <Grid>
                 <Grid IsVisible="{Binding HasViewModelError, Mode=OneWay, Converter={StaticResource BoolInverter}}">
                     <StackLayout IsVisible="{Binding IsNotBusy}">
-                        <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.CardSpacing}">
+                        <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
 
                             <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableLabel--&gt;" />
                             <controls:ValidatableLabel
@@ -281,7 +288,7 @@
                                 <controls:StackLayoutZero>
                                     <controls:LabelSection Text="{localization:Translate ListOfSettingsSectionText}" />
                                     <controls:HeaderDivider />
-                                    <controls:DrilldownButtonList BackgroundColor="#BEF5D5F5">
+                                    <controls:DrilldownButtonList>
                                         <controls:DrilldownButtonList.ItemsSource>
                                             <objectModel:ObservableCollection x:TypeArguments="BindableObject">
                                                 <controls:DrilldownButtonView
