@@ -19,6 +19,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             else
             {
                 this.HasShadow = true;
+                this.OutlineColor = Color.White; // BUG: If this is not set, HasShadow has no effect
                 this.BorderColor = Color.Transparent;
                 this.CornerRadius = 6;
 
