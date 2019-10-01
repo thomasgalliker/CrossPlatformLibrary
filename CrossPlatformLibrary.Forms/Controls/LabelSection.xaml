@@ -39,7 +39,10 @@
             Orientation="Vertical"
             VerticalOptions="FillAndExpand">
 
-            <controls:CustomLabel x:Name="Section" Style="{DynamicResource SectionLabelTextStyle}" />
+            <controls:CustomLabel
+                x:Name="Section"
+                BackgroundColor="Transparent"
+                Style="{DynamicResource SectionLabelTextStyle}" />
         </StackLayout>
     </ContentView.Content>
 </ContentView>
