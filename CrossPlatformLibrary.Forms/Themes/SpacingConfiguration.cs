@@ -56,7 +56,6 @@ namespace CrossPlatformLibrary.Forms.Themes
             set => this.SetValue(MediumPaddingProperty, value);
         }
 
-
         public static readonly BindableProperty LargeSpacingProperty = BindableProperty.Create(
             nameof(LargeSpacing),
             typeof(double),
@@ -87,7 +86,22 @@ namespace CrossPlatformLibrary.Forms.Themes
             nameof(CardViewPadding),
             typeof(Thickness),
             typeof(SpacingConfiguration),
-            new Thickness(MediumSpacingDefault, MediumSpacingDefault, MediumSpacingDefault, MediumSpacingDefault));
+            GetDefaultCardViewPadding());
+
+        private static Thickness GetDefaultCardViewPadding()
+        {
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                return new Thickness(MediumSpacingDefault);
+            }
+
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                return new Thickness(LargeSpacingDefault, MediumSpacingDefault);
+            }
+
+            return new Thickness(0);
+        }
 
         public Thickness CardViewPadding
         {
@@ -121,8 +135,6 @@ namespace CrossPlatformLibrary.Forms.Themes
             get => (Thickness)this.GetValue(CardPaddingProperty);
             set => this.SetValue(CardPaddingProperty, value);
         }
-
-
 
         public static readonly BindableProperty CardSpacingProperty = BindableProperty.Create(
             nameof(CardSpacing),
