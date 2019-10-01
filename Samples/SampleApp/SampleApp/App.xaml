@@ -3,9 +3,9 @@
     x:Class="SampleApp.App"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:themes="clr-namespace:CrossPlatformLibrary.Forms.Themes;assembly=CrossPlatformLibrary.Forms"
     xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
-    xmlns:xForms="clr-namespace:CrossPlatformLibrary.Forms;assembly=CrossPlatformLibrary.Forms"
-    xmlns:themes="clr-namespace:CrossPlatformLibrary.Forms.Themes;assembly=CrossPlatformLibrary.Forms">
+    xmlns:xForms="clr-namespace:CrossPlatformLibrary.Forms;assembly=CrossPlatformLibrary.Forms">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -50,15 +50,12 @@
 
             <themes:SpacingConfiguration
                 x:Key="SpacingConfiguration"
-                SmallSpacing="1"
-                MediumSpacing="2"
-                LargeSpacing="4"
-                SmallPadding="1"
-                MediumPadding="2"
                 LargePadding="4"
-                CardPadding="4"
-                CardSpacing="4"
-                CardViewPadding="4" />
+                LargeSpacing="4"
+                MediumPadding="2"
+                MediumSpacing="2"
+                SmallPadding="1"
+                SmallSpacing="1" />
 
             <themes:CrossPlatformLibraryConfiguration
                 x:Key="SampleApp.Theme"

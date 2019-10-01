@@ -16,24 +16,13 @@
         <On Platform="Android" Value="#F5F5F5" />
         <On Platform="iOS" Value="White" />
     </OnPlatform>
-    <OnPlatform x:Key="LabelSectionBackground" x:TypeArguments="Color">
-        <On Platform="Android" Value="White" />
-        <On Platform="iOS" Value="#EFEFF4" />
-    </OnPlatform>
-    <OnPlatform x:Key="CardViewBackgroundColor" x:TypeArguments="Color">
-        <On Platform="Android" Value="#ECEF5F5F5CEC" />
-        <On Platform="iOS" Value="#EFEFF4" />
-    </OnPlatform>
-    <OnPlatform x:Key="CardViewDividerColor" x:TypeArguments="Color">
-        <On Platform="Android" Value="#ECECEC" />
-        <On Platform="iOS" Value="#C8C7CC" />
-    </OnPlatform>
+
     <Color x:Key="ButtonBorder">#C8C7CC</Color>
     <Color x:Key="ListSeparator">#C8C7CC</Color>
 
     <OnPlatform x:Key="CardPadding" x:TypeArguments="Thickness">
-        <On Platform="Android" Value="8,16" />
-        <On Platform="iOS" Value="0,0,0,16" />
+        <On Platform="Android" Value="8, 8, 8, 16" />
+        <On Platform="iOS" Value="0, 0, 0, 16" />
     </OnPlatform>
     <OnPlatform x:Key="CardSpacing" x:TypeArguments="x:Double">
         <On Platform="Android" Value="16" />

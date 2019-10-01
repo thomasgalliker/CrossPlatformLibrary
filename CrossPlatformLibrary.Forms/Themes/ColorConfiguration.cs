@@ -228,5 +228,74 @@ namespace CrossPlatformLibrary.Forms.Themes
             get => (Color)this.GetValue(SurfaceProperty);
             set => this.SetValue(SurfaceProperty, value);
         }
+
+        #region CardView Colors
+
+        public static readonly BindableProperty CardViewDividerColorProperty = BindableProperty.Create(
+            nameof(CardViewDividerColor),
+            typeof(Color),
+            typeof(Color),
+            GetDefaultCardViewDividerColor());
+
+        private static Color GetDefaultCardViewDividerColor()
+        {
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                return Color.FromHex("#ECECEC");
+            }
+
+            return Color.FromHex("#C8C7CC");
+        }
+
+        public Color CardViewDividerColor
+        {
+            get => (Color)this.GetValue(CardViewDividerColorProperty);
+            set => this.SetValue(CardViewDividerColorProperty, value);
+        }
+
+        public static readonly BindableProperty CardViewHeaderBackgroundColorProperty = BindableProperty.Create(
+            nameof(CardViewHeaderBackgroundColor),
+            typeof(Color),
+            typeof(Color),
+            GetDefaultCardViewHeaderBackgroundColor());
+
+        private static Color GetDefaultCardViewHeaderBackgroundColor()
+        {
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                return Color.White;
+            }
+
+            return Color.FromHex("#EFEFF4");
+        }
+
+        public Color CardViewHeaderBackgroundColor
+        {
+            get => (Color)this.GetValue(CardViewHeaderBackgroundColorProperty);
+            set => this.SetValue(CardViewHeaderBackgroundColorProperty, value);
+        }
+        public static readonly BindableProperty CardViewBackgroundColorProperty = BindableProperty.Create(
+            nameof(CardViewBackgroundColor),
+            typeof(Color),
+            typeof(Color),
+            GetDefaultCardViewBackgroundColor());
+
+        private static Color GetDefaultCardViewBackgroundColor()
+        {
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                return Color.FromHex("#F5F5F5");
+            }
+
+            return Color.FromHex("#EFEFF4");
+        }
+
+        public Color CardViewBackgroundColor
+        {
+            get => (Color)this.GetValue(CardViewBackgroundColorProperty);
+            set => this.SetValue(CardViewBackgroundColorProperty, value);
+        }
+
+        #endregion
     }
 }

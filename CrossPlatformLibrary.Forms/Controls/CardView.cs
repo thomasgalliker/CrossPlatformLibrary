@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using CrossPlatformLibrary.Forms.Themes;
+using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
@@ -7,6 +8,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         public CardView()
         {
             this.Padding = 0;
+
             if (Device.RuntimePlatform == Device.iOS)
             {
                 this.HasShadow = false;
@@ -17,8 +19,14 @@ namespace CrossPlatformLibrary.Forms.Controls
             else
             {
                 this.HasShadow = true;
-                this.BorderColor = Color.Gray;
+                this.BorderColor = Color.Transparent;
                 this.CornerRadius = 6;
+
+                // Hack: OnPlatform lacks of support for DynamicResource bindings!
+                if (Device.RuntimePlatform == Device.Android)
+                {
+                    this.SetDynamicResource(Frame.BackgroundColorProperty, ThemeConstants.CardViewStyle.BackgroundColor);
+                }
             }
         }
     }
