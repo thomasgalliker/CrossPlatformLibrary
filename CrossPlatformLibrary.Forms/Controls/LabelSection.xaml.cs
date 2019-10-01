@@ -9,8 +9,11 @@ namespace CrossPlatformLibrary.Forms.Controls
             this.InitializeComponent();
         }
 
-        public static readonly BindableProperty TextProperty = 
-            BindableProperty.Create(nameof(Text), typeof(string), typeof(LabelSection), string.Empty);
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(
+            nameof(Text),
+            typeof(string),
+            typeof(LabelSection),
+            string.Empty);
 
         public string Text
         {
@@ -21,6 +24,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         protected override void OnPropertyChanged(string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
+
             if (propertyName == TextProperty.PropertyName)
             {
                 this.Section.Text = Device.RuntimePlatform == Device.iOS ? this.Text.ToUpperInvariant() : this.Text;
