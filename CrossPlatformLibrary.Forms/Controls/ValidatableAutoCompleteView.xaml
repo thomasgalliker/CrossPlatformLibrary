@@ -1,18 +1,23 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<Grid
+<controls:GridZero
     x:Class="CrossPlatformLibrary.Forms.Controls.ValidatableAutoCompleteView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
-    xmlns:converters="clr-namespace:CrossPlatformLibrary.Forms.Converters;assembly=CrossPlatformLibrary.Forms"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
-    HorizontalOptions="FillAndExpand"
-    VerticalOptions="FillAndExpand"
-    MinimumHeightRequest="48"
     BackgroundColor="Transparent"
-    ColumnSpacing="0"
-    RowSpacing="0">
+    HorizontalOptions="FillAndExpand"
+    MinimumHeightRequest="48"
+    VerticalOptions="FillAndExpand">
+
+    <Grid.Margin>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="Android" Value="-4,0,-4,0" />
+            <On Platform="iOS" Value="0,0,0,0" />
+        </OnPlatform>
+    </Grid.Margin>
+
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
         <RowDefinition Height="Auto" />
@@ -23,16 +28,16 @@
         Grid.Row="0"
         effects:LineColorEffect.ApplyLineColor="True"
         effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
-        IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
-        HeightRequest="48"
-        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}"
-        Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
-        Keyboard="{Binding Keyboard, Source={x:Reference Control}, Mode=OneWay}"
-        Style="{Binding Style, Source={x:Reference Control}, Mode=OneWay}"
-        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
-        MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
+        BackgroundColor="Transparent"
         Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
-        BackgroundColor="Transparent">
+        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
+        HeightRequest="48"
+        IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+        Keyboard="{Binding Keyboard, Source={x:Reference Control}, Mode=OneWay}"
+        MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
+        Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
+        Style="{Binding Style, Source={x:Reference Control}, Mode=OneWay}"
+        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}">
         <Entry.Effects>
             <effects:EntrySelectAllText />
         </Entry.Effects>
@@ -42,33 +47,33 @@
     <Label
         Grid.Row="0"
         HeightRequest="48"
-        IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
-        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}"
-        Style="{DynamicResource EntryLabelStyle}"
         HorizontalTextAlignment="Start"
+        IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
+        Style="{DynamicResource EntryLabelStyle}"
+        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}"
         VerticalTextAlignment="Center" />
 
     <!--  Annotation Text  -->
     <Label
         Grid.Row="0"
-        Text="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
+        BackgroundColor="Transparent"
+        InputTransparent="True"
         IsVisible="{Binding Text, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
         Style="{DynamicResource AnnotationEntryLabelStyle}"
-        BackgroundColor="Transparent"
-        InputTransparent="True" />
+        Text="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}" />
 
     <!--  Validation Error Text  -->
     <Label
         Grid.Row="0"
-        Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}"
-        Style="{DynamicResource ValidationLabelStyle}" />
+        Style="{DynamicResource ValidationLabelStyle}"
+        Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}" />
 
     <controls:StackedList
         x:Name="SuggestionList"
         Grid.Row="1"
+        ItemTemplate="{Binding SuggestedItemTemplate, Source={x:Reference Control}, Mode=OneWay}"
         ItemsSource="{Binding SuggestedItemsSource, Source={x:Reference Control}, Mode=OneWay}"
         SelectedItem="{Binding SelectedItem, Source={x:Reference Control}, Mode=TwoWay}"
-        ItemTemplate="{Binding SuggestedItemTemplate, Source={x:Reference Control}, Mode=OneWay}"
         SelectionMode="Single"
         Style="{DynamicResource SuggestionListStyle}" />
-</Grid>
+</controls:GridZero>

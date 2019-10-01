@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
-    public partial class ValidatableDatePicker : Grid
+    public partial class ValidatableDatePicker : GridZero
     {
         public ValidatableDatePicker()
         {

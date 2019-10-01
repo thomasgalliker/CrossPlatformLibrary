@@ -8,7 +8,7 @@ namespace CrossPlatformLibrary.Forms.Controls
     ///     Similar solution can be found here:
     ///     https://github.com/XamFormsExtended/Xfx.Controls
     /// </summary>
-    public partial class ValidatablePicker : Grid
+    public partial class ValidatablePicker : GridZero
     {
         private const int SelectedIndexDefaultValue = -1;
 

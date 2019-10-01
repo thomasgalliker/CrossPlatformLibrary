@@ -1,52 +1,59 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<Grid
+<controls:GridZero
     x:Class="CrossPlatformLibrary.Forms.Controls.ValidatablePicker"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
+    HeightRequest="48"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="Fill"
-    HeightRequest="48">
+    VerticalOptions="Fill">
+
+    <Grid.Margin>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="Android" Value="-4,0,-4,0" />
+            <On Platform="iOS" Value="0,0,0,0" />
+        </OnPlatform>
+    </Grid.Margin>
 
     <controls:BindablePicker
         Title="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
         Grid.Row="0"
         effects:LineColorEffect.ApplyLineColor="True"
         effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
-        HeightRequest="48"
-        IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
-        Style="{Binding PickerStyle, Source={x:Reference Control}, Mode=OneWay}"
-        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
-        ItemsSource="{Binding ItemsSource, Source={x:Reference Control}}"
         DisplayMemberPath="{Binding DisplayMemberPath, Source={x:Reference Control}}"
+        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
+        HeightRequest="48"
+        HorizontalOptions="FillAndExpand"
+        IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+        ItemsSource="{Binding ItemsSource, Source={x:Reference Control}}"
         NullString="{Binding NullString, Source={x:Reference Control}}"
-        SelectedValuePath="{Binding SelectedValuePath, Source={x:Reference Control}}"
+        SelectedIndex="{Binding SelectedIndex, Source={x:Reference Control}, Mode=TwoWay}"
         SelectedItem="{Binding SelectedItem, Source={x:Reference Control}, Mode=TwoWay}"
         SelectedValue="{Binding SelectedValue, Source={x:Reference Control}, Mode=TwoWay}"
-        SelectedIndex="{Binding SelectedIndex, Source={x:Reference Control}, Mode=TwoWay}"
-        HorizontalOptions="FillAndExpand" />
+        SelectedValuePath="{Binding SelectedValuePath, Source={x:Reference Control}}"
+        Style="{Binding PickerStyle, Source={x:Reference Control}, Mode=OneWay}" />
 
     <!--  Readonly Text  -->
     <Label
         Grid.Row="0"
-        IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
-        Text="{Binding ReadonlyText, Source={x:Reference Control}, Mode=OneWay}"
-        Style="{DynamicResource EntryLabelStyle}"
         HorizontalOptions="StartAndExpand"
+        IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
+        Style="{DynamicResource EntryLabelStyle}"
+        Text="{Binding ReadonlyText, Source={x:Reference Control}, Mode=OneWay}"
         VerticalOptions="Center" />
 
     <!--  Annotation Text  -->
     <Label
         Grid.Row="0"
-        Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}"
+        InputTransparent="True"
         Style="{DynamicResource AnnotationEntryLabelStyle}"
-        InputTransparent="True" />
+        Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}" />
 
     <!--  Validation Error Text  -->
     <Label
         Grid.Row="0"
-        Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}"
-        Style="{DynamicResource ValidationLabelStyle}" />
-</Grid>
+        Style="{DynamicResource ValidationLabelStyle}"
+        Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}" />
+</controls:GridZero>

@@ -8,7 +8,7 @@ namespace CrossPlatformLibrary.Forms.Controls
     /// Similar solution can be found here:
     /// https://github.com/XamFormsExtended/Xfx.Controls
     /// </summary>
-    public partial class ValidatableEditor : Grid
+    public partial class ValidatableEditor : GridZero
     {
         public ValidatableEditor()
         {

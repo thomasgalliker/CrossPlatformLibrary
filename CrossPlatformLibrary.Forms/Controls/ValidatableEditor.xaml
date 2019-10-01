@@ -1,49 +1,53 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Grid 
-    xmlns="http://xamarin.com/schemas/2014/forms" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
-    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<controls:GridZero
     x:Class="CrossPlatformLibrary.Forms.Controls.ValidatableEditor"
-    HorizontalOptions="FillAndExpand"
-    VerticalOptions="FillAndExpand"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
+    x:Name="Control"
     BackgroundColor="Transparent"
-    ColumnSpacing="0"
-    RowSpacing="0"
-    x:Name="Control">
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="FillAndExpand">
+
+    <Grid.Margin>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="Android" Value="-4,0,-4,0" />
+            <On Platform="iOS" Value="0,0,0,0" />
+        </OnPlatform>
+    </Grid.Margin>
+
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
 
-    <controls:CustomEditor 
-        Grid.Row="0"
+    <controls:CustomEditor
         x:Name="Editor"
-        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}"
-        Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
-        Keyboard="{Binding Keyboard, Source={x:Reference Control}, Mode=OneWay}"
-        Style="{Binding Style, Source={x:Reference Control}, Mode=OneWay}"
-        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
-        MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
-        MaxLines="{Binding MaxLines, Source={x:Reference Control}, Mode=OneWay}"
+        Grid.Row="0"
         effects:LineColorEffect.ApplyLineColor="True"
         effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
+        BackgroundColor="Transparent"
         Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
-        BackgroundColor="Transparent">
+        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
+        Keyboard="{Binding Keyboard, Source={x:Reference Control}, Mode=OneWay}"
+        MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
+        MaxLines="{Binding MaxLines, Source={x:Reference Control}, Mode=OneWay}"
+        Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
+        Style="{Binding Style, Source={x:Reference Control}, Mode=OneWay}"
+        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}" />
 
-    </controls:CustomEditor>
-
-    <!--Annotation Text-->
+    <!--  Annotation Text  -->
     <Label
         Grid.Row="0"
-        Text="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
+        BackgroundColor="Transparent"
+        InputTransparent="True"
         IsVisible="{Binding Text, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
         Style="{DynamicResource AnnotationEntryLabelStyle}"
-        BackgroundColor="Transparent"
-        InputTransparent="True"/>
+        Text="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}" />
 
-    <!--Validation Error Text-->
+    <!--  Validation Error Text  -->
     <Label
         Grid.Row="0"
-        Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}"
-        Style="{DynamicResource ValidationLabelStyle}"/>
-</Grid>
+        Style="{DynamicResource ValidationLabelStyle}"
+        Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}" />
+</controls:GridZero>

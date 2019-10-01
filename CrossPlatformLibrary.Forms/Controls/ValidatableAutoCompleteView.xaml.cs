@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
-    public partial class ValidatableAutoCompleteView : Grid
+    public partial class ValidatableAutoCompleteView : GridZero
     {
         private INotifyCollectionChanged sourceCollection;
         private readonly TaskDelayer taskDelayer;
