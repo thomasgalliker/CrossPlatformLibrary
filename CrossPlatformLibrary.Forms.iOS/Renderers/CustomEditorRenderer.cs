@@ -32,8 +32,8 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                 }
             }
 
-            var editorEditText = this.Control;
-            if (editorEditText != null)
+            var uiTextView = this.Control;
+            if (uiTextView != null)
             {
                 if (this.Element is CustomEditor customEditor)
                 {
@@ -63,7 +63,6 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             try
             {
                 base.OnElementPropertyChanged(sender, e);
-
             }
             catch (Exception exception)
             {
@@ -107,22 +106,29 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
 
         private void UpdateLines(CustomEditor customEditor)
         {
-            if (customEditor.MaxLines != CustomEditor.MaxLinesDefault)
+            var uiTextView = this.Control;
+            if (uiTextView != null)
             {
-                this.Control.TextContainer.MaximumNumberOfLines = new nuint((uint)customEditor.MaxLines);
-                this.Control.AlwaysBounceVertical = false;
-                this.Control.Bounces = false;
-                this.Control.ShowsVerticalScrollIndicator = false;
-                this.Control.ShowsHorizontalScrollIndicator = false;
+                if (customEditor.MaxLines != CustomEditor.MaxLinesDefault)
+                {
+                    uiTextView.TextContainer.MaximumNumberOfLines = new nuint((uint)customEditor.MaxLines);
+                    uiTextView.AlwaysBounceVertical = false;
+                    uiTextView.Bounces = false;
+                    uiTextView.ScrollEnabled = false;
+                    uiTextView.ShowsVerticalScrollIndicator = false;
+                    uiTextView.ShowsHorizontalScrollIndicator = false;
+                }
+                else
+                {
+                    uiTextView.TextContainer.MaximumNumberOfLines = 0;
+                    uiTextView.AlwaysBounceVertical = true;
+                    uiTextView.Bounces = true;
+                    uiTextView.ScrollEnabled = true;
+                    uiTextView.ShowsVerticalScrollIndicator = true;
+                    uiTextView.ShowsHorizontalScrollIndicator = true;
+                }
             }
-            else
-            {
-                this.Control.TextContainer.MaximumNumberOfLines = 0;
-                this.Control.AlwaysBounceVertical = true;
-                this.Control.Bounces = true;
-                this.Control.ShowsVerticalScrollIndicator = true;
-                this.Control.ShowsHorizontalScrollIndicator = true;
-            }
+       
         }
     }
 }
