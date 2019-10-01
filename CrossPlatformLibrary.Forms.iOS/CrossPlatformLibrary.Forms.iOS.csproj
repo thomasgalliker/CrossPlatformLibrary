@@ -76,6 +76,7 @@
     <Compile Include="Renderers\ExtendedViewCellRenderer.cs" />
     <Compile Include="Renderers\HyperLinkLabelRenderer.cs" />
     <Compile Include="Renderers\NonScrollableListViewRenderer.cs" />
+    <Compile Include="Renderers\PageRenderer.cs" />
     <Compile Include="Renderers\ShapeView\ShapeViewRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
