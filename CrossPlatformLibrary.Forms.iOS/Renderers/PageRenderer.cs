@@ -1,8 +1,7 @@
-﻿using CrossPlatformLibrary.Forms.iOS.Renderers;
-using UIKit;
+﻿using UIKit;
 using Xamarin.Forms;
 
-[assembly: ExportRenderer(typeof(ContentPage), typeof(PageRenderer))]
+[assembly: ExportRenderer(typeof(ContentPage), typeof(CrossPlatformLibrary.Forms.iOS.Renderers.PageRenderer))]
 
 namespace CrossPlatformLibrary.Forms.iOS.Renderers
 {

@@ -266,6 +266,12 @@ namespace CrossPlatformLibrary.Forms.Themes
                 return Color.White;
             }
 
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                // TODO: Check if Color.Transparent is the better choice
+                return Color.FromHex("#EFEFF4");
+            }
+
             return Color.FromHex("#EFEFF4");
         }
 
@@ -287,9 +293,17 @@ namespace CrossPlatformLibrary.Forms.Themes
                 return Color.FromHex("#F5F5F5");
             }
 
-            return Color.FromHex("#EFEFF4");
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                return Color.White;
+            }
+
+            return Color.White;
         }
 
+        /// <summary>
+        /// The color used as background inside the content area of a <see cref="CrossPlatformLibrary.Forms.Controls.CardView"/>.
+        /// </summary>
         public Color CardViewBackgroundColor
         {
             get => (Color)this.GetValue(CardViewBackgroundColorProperty);
