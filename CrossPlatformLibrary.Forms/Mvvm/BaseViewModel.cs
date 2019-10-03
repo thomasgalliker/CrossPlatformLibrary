@@ -157,7 +157,7 @@ namespace CrossPlatformLibrary.Forms.Mvvm
         protected override void OnPropertyChanged(PropertyChangedEventArgs args)
         {
             base.OnPropertyChanged(args);
-            this.Validation?.ValidateProperty(args.PropertyName);
+            this.Validation?.HandlePropertyChange(args.PropertyName);
         }
     }
 }
