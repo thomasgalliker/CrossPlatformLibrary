@@ -18,28 +18,13 @@ namespace CrossPlatformLibrary.Forms.Themes
             Color.FromHex("#EAEAEA"));
 
         /// <summary>
-        ///     The underlying color of an app’s content.
+        ///     The underlying color of an app's content.
         ///     Typically the background color of scrollable content.
         /// </summary>
         public Color Background
         {
             get => (Color)this.GetValue(BackgroundProperty);
             set => this.SetValue(BackgroundProperty, value);
-        }
-
-        public static readonly BindableProperty ErrorProperty = BindableProperty.Create(
-            nameof(Error),
-            typeof(Color),
-            typeof(Color),
-            Color.FromHex("#B00020"));
-
-        /// <summary>
-        ///     The color used to indicate error status.
-        /// </summary>
-        public Color Error
-        {
-            get => (Color)this.GetValue(ErrorProperty);
-            set => this.SetValue(ErrorProperty, value);
         }
 
         public static readonly BindableProperty OnBackgroundProperty = BindableProperty.Create(
@@ -57,6 +42,21 @@ namespace CrossPlatformLibrary.Forms.Themes
             set => this.SetValue(OnBackgroundProperty, value);
         }
 
+        public static readonly BindableProperty ErrorProperty = BindableProperty.Create(
+            nameof(Error),
+            typeof(Color),
+            typeof(Color),
+            Color.FromHex("#B00020"));
+
+        /// <summary>
+        ///     The color used to indicate error status.
+        /// </summary>
+        public Color Error
+        {
+            get => (Color)this.GetValue(ErrorProperty);
+            set => this.SetValue(ErrorProperty, value);
+        }
+
         public static readonly BindableProperty OnErrorProperty = BindableProperty.Create(
             nameof(OnError),
             typeof(Color),
@@ -72,17 +72,38 @@ namespace CrossPlatformLibrary.Forms.Themes
             set => this.SetValue(OnErrorProperty, value);
         }
 
-        /// <summary>
-        ///     Backing field for the bindable property <see cref="OnPrimary" />.
-        /// </summary>
-        public static readonly BindableProperty OnPrimaryProperty = BindableProperty.Create(nameof(OnPrimary), typeof(Color), typeof(Color), Color.FromHex("#FFFFFF"));
+        public static readonly BindableProperty ErrorBackgroundProperty = BindableProperty.Create(
+            nameof(ErrorBackground),
+            typeof(Color),
+            typeof(Color),
+            Color.FromHex("#FFCCD5"));
 
         /// <summary>
-        ///     Backing field for the bindable property <see cref="OnSecondary" />.
+        ///     The color used as background for error callouts, message boxes, error signs.
         /// </summary>
-        public static readonly BindableProperty OnSecondaryProperty = BindableProperty.Create(nameof(OnSecondary), typeof(Color), typeof(Color), Color.FromHex("#FFFFFF"));
+        public Color ErrorBackground
+        {
+            get => (Color)this.GetValue(ErrorBackgroundProperty);
+            set => this.SetValue(ErrorBackgroundProperty, value);
+        }
 
-        public static readonly BindableProperty OnSurfaceProperty = BindableProperty.Create(nameof(OnSurface), typeof(Color), typeof(Color), Color.FromHex("#000000"));
+        public static readonly BindableProperty OnPrimaryProperty = BindableProperty.Create(
+            nameof(OnPrimary),
+            typeof(Color),
+            typeof(Color),
+            Color.FromHex("#FFFFFF"));
+
+        public static readonly BindableProperty OnSecondaryProperty = BindableProperty.Create(
+            nameof(OnSecondary),
+            typeof(Color),
+            typeof(Color),
+            Color.FromHex("#FFFFFF"));
+
+        public static readonly BindableProperty OnSurfaceProperty = BindableProperty.Create(
+            nameof(OnSurface),
+            typeof(Color),
+            typeof(Color),
+            Color.FromHex("#000000"));
 
         public static readonly BindableProperty PrimaryProperty = BindableProperty.Create(
             nameof(Primary),
@@ -129,24 +150,12 @@ namespace CrossPlatformLibrary.Forms.Themes
             set => this.SetValue(TextColorBrightProperty, value);
         }
 
-        /// <summary>
-        ///     Backing field for the bindable property <see cref="PrimaryVariant" />.
-        /// </summary>
         public static readonly BindableProperty PrimaryVariantProperty = BindableProperty.Create(nameof(PrimaryVariant), typeof(Color), typeof(Color), Color.FromHex("#6200EE"));
 
-        /// <summary>
-        ///     Backing field for the bindable property <see cref="Secondary" />.
-        /// </summary>
         public static readonly BindableProperty SecondaryProperty = BindableProperty.Create(nameof(Secondary), typeof(Color), typeof(Color), default(Color));
 
-        /// <summary>
-        ///     Backing field for the bindable property <see cref="SecondaryVariant" />.
-        /// </summary>
         public static readonly BindableProperty SecondaryVariantProperty = BindableProperty.Create(nameof(SecondaryVariant), typeof(Color), typeof(Color), Color.FromHex("#0400BA"));
 
-        /// <summary>
-        ///     Backing field for the bindable property <see cref="Surface" />.
-        /// </summary>
         public static readonly BindableProperty SurfaceProperty = BindableProperty.Create(nameof(Surface), typeof(Color), typeof(Color), Color.FromHex("#FFFFFF"));
 
         /// <summary>

@@ -71,6 +71,7 @@ namespace CrossPlatformLibrary.Forms.Resources
             this.TryAddColorResource(ThemeConstants.Color.ON_SURFACE, colorConfiguration.OnSurface);
             this.TryAddColorResource(ThemeConstants.Color.ERROR, colorConfiguration.Error);
             this.TryAddColorResource(ThemeConstants.Color.ON_ERROR, colorConfiguration.OnError);
+            this.TryAddColorResource(ThemeConstants.Color.ErrorBackground, colorConfiguration.ErrorBackground);
         }
     }
 }

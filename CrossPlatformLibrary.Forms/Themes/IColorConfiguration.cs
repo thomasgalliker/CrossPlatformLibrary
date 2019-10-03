@@ -26,6 +26,11 @@ namespace CrossPlatformLibrary.Forms.Themes
         Color OnError { get; set; }
 
         /// <summary>
+        ///     The color used as background for error callouts, message boxes, error signs.
+        /// </summary>
+        Color ErrorBackground { get; set; }
+
+        /// <summary>
         ///     Displayed most frequently across your app.
         /// </summary>
         Color Primary { get; set; }
