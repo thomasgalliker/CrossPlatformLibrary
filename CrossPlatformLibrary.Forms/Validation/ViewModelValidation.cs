@@ -16,10 +16,22 @@ namespace CrossPlatformLibrary.Forms.Validation
         private readonly List<IValidation> validations = new List<IValidation>();
         private readonly Dictionary<string, List<string>> errorMessages = new Dictionary<string, List<string>>();
         private static readonly ReadOnlyCollection<string> EmptyErrorsCollection = new ReadOnlyCollection<string>(new List<string>(0));
+        private bool isValidating;
 
         public ViewModelValidation()
         {
+            this.ValidateOnPropertyChange = true;
         }
+
+        /// <summary>
+        /// Validates properties when a change is propagated trough <see cref="INotifyPropertyChanged" />.
+        /// </summary>
+        /// <remarks>
+        /// Default value is <code>True</code>.
+        /// Property validation is only taking place after the validation has been triggered for the first time.
+        /// Use <seealso cref="IsValidAsync"/> to run a validation.
+        /// </remarks>
+        public bool ValidateOnPropertyChange { get; set; }
 
         public ViewModelValidation Errors => this;
 
@@ -88,7 +100,7 @@ namespace CrossPlatformLibrary.Forms.Validation
             this.OnErrorsChanged(string.Empty);
         }
 
-        internal async Task ValidateProperty(string propertyName)
+        private async Task ValidateProperty(string propertyName)
         {
             Debug.WriteLine($"ValidateProperty(propertyName: \"{propertyName}\")");
 
@@ -244,7 +256,17 @@ namespace CrossPlatformLibrary.Forms.Validation
 
         public async Task<bool> IsValidAsync()
         {
-            await this.ValidateAll().ConfigureAwait(false);
+            try
+            {
+                this.isValidating = true;
+
+                await this.ValidateAll().ConfigureAwait(false);
+
+            }
+            finally
+            {
+                this.isValidating = false;
+            }
 
             return !this.HasErrors;
         }
@@ -254,7 +276,17 @@ namespace CrossPlatformLibrary.Forms.Validation
         protected override void OnPropertyChanged(PropertyChangedEventArgs args)
         {
             base.OnPropertyChanged(args);
-            this.ValidateProperty(args.PropertyName);
+            this.HandlePropertyChange(args.PropertyName);
+        }
+
+        internal async void HandlePropertyChange(string propertyName)
+        {
+            if (!(this.isValidating || this.ValidateOnPropertyChange))
+            {
+                return;
+            }
+
+            await this.ValidateProperty(propertyName);
         }
 
         internal void TrySetContext(object baseViewModel)

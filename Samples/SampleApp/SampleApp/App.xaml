@@ -37,16 +37,10 @@
                 x:Key="ColorConfiguration"
                 Background="#EAEAEA"
                 Error="#ff1744"
-                OnBackground="#000000"
-                OnError="#FFFFFF"
-                OnPrimary="#FFFFFF"
-                OnSecondary="#FFFFFF"
-                OnSurface="#000000"
                 Primary="#5714AF"
                 PrimaryVariant="#c7a4f4"
                 Secondary="#17C2BC"
                 SecondaryVariant="#a4f4f2"
-                Surface="#FFFFFF"
                 TextColor="DarkBlue"
                 TextColorBright="DarkGray" />
 

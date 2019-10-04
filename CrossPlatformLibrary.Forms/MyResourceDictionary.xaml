@@ -48,8 +48,8 @@
     <converters:BoolInverter x:Key="BoolInverter" />
     <converters:FirstErrorConverter x:Key="FirstErrorConverter" />
     <converters:NullableDateTimeToFormatConverter x:Key="NullableDateTimeToFormatConverter" />
-
     <converters:PropertyErrorsToColorConverter x:Key="PropertyErrorsToColorConverter" />
+    <converters:ValidationErrorsToStringConverter x:Key="ValidationErrorsToStringConverter" />
 
     <!--  Font Sizes  -->
     <OnPlatform

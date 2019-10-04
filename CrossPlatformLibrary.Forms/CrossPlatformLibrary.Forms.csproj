@@ -83,6 +83,9 @@
     <Compile Update="Controls\DividerLine.xaml.cs">
       <DependentUpon>DividerLine.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Controls\ValidationErrorBox.xaml.cs">
+      <DependentUpon>ValidationErrorBox.xaml</DependentUpon>
+    </Compile>
     <Compile Update="MyResourceDictionary.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -117,6 +120,9 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\DividerLine.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\ValidationErrorBox.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="MyResourceDictionary.xaml">

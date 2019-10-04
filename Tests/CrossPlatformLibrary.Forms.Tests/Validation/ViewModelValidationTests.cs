@@ -122,7 +122,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
         }
 
         [Fact]
-        public async Task ShouldAddValidationFor_IsValidTrue_AutoReevaluate()
+        public async Task ShouldAddValidationFor_IsValidTrue_ValidateOnPropertyChangeOn()
         {
             // Arrange
             var testViewModel = new TestViewModel(this.validationServiceMock.Object)
@@ -130,6 +130,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
                 UserName = "thomas",
                 Email = "thomasbluewin.ch"
             };
+
             var isValid = await testViewModel.Validation.IsValidAsync();
             isValid.Should().BeFalse();
 
@@ -138,6 +139,34 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
 
             // Assert
             testViewModel.Validation.Errors.HasErrors.Should().BeTrue();
+            testViewModel.Validation.Errors[nameof(TestViewModel.Email)].Should().HaveCount(0);
+        }
+        
+        [Fact]
+        public async Task ShouldAddValidationFor_IsValidTrue_ValidateOnPropertyChangeOff()
+        {
+            // Arrange
+            var testViewModel = new TestViewModel(this.validationServiceMock.Object)
+            {
+                UserName = "thomas",
+                Email = "thomasbluewin.ch"
+            };
+            testViewModel.Validation.ValidateOnPropertyChange = false;
+
+            var isValid = await testViewModel.Validation.IsValidAsync();
+            isValid.Should().BeFalse();
+
+            // Act
+            testViewModel.Email = "thomas@bluewin.ch";
+
+            // Assert
+            testViewModel.Validation.Errors.HasErrors.Should().BeTrue(because: "reevaluation of property 'Email' is omitted");
+            testViewModel.Validation.Errors[nameof(TestViewModel.Email)].Should().HaveCount(2);
+
+            var isValid2 = await testViewModel.Validation.IsValidAsync();
+            isValid2.Should().BeTrue();
+
+            testViewModel.Validation.Errors.HasErrors.Should().BeFalse();
             testViewModel.Validation.Errors[nameof(TestViewModel.Email)].Should().HaveCount(0);
         }
 
