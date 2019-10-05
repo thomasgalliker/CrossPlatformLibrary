@@ -234,8 +234,6 @@ namespace CrossPlatformLibrary.Forms.Controls
             add { this.Entry.TextChanged += value; }
             remove { this.Entry.TextChanged -= value; }
         }
-
-
     }
 }
 

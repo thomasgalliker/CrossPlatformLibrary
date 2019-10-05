@@ -44,14 +44,7 @@
                 TextColor="DarkBlue"
                 TextColorBright="DarkGray" />
 
-            <themes:SpacingConfiguration
-                x:Key="SpacingConfiguration"
-                LargePadding="4"
-                LargeSpacing="4"
-                MediumPadding="2"
-                MediumSpacing="2"
-                SmallPadding="1"
-                SmallSpacing="1" />
+            <themes:SpacingConfiguration x:Key="SpacingConfiguration" />
 
             <themes:CrossPlatformLibraryConfiguration
                 x:Key="SampleApp.Theme"

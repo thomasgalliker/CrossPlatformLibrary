@@ -6,12 +6,13 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    Padding="{DynamicResource Theme.Padding.Medium}"
     IsVisible="{Binding Validation.HasErrors}"
     CornerRadius="6"
     BackgroundColor="{DynamicResource Theme.Color.ErrorBackground}"
     BorderColor="{DynamicResource Theme.Color.Error}"
     mc:Ignorable="d">
-    <controls:StackLayoutZero Padding="{DynamicResource Theme.Padding.Medium}" Orientation="Vertical">
+    <controls:StackLayoutZero>
         <controls:CustomLabel
             Text="{Binding Validation.Errors, Converter={StaticResource ValidationErrorsToStringConverter}}"
             LineBreakMode="WordWrap"
