@@ -20,7 +20,7 @@
             Aspect="AspectFit"
             HeightRequest="48"
             HorizontalOptions="Center"
-            Source="{controls:ImageResource CrossPlatformLibrary.Forms.Resources.Images.reload_192x192.png}"
+            Source="{Binding ImageSource, Source={x:Reference Control}}"
             VerticalOptions="End"
             WidthRequest="48" />
 

@@ -7,8 +7,12 @@ namespace CrossPlatformLibrary.Forms.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewModelErrorControl : StackLayoutZero
     {
-        public static readonly BindableProperty ViewModelErrorProperty =
-            BindableProperty.Create(
+        public ViewModelErrorControl()
+        {
+            this.InitializeComponent();
+        }
+
+        public static readonly BindableProperty ViewModelErrorProperty = BindableProperty.Create(
                 nameof(ViewModelError),
                 typeof(ViewModelError),
                 typeof(ViewModelErrorControl),
@@ -20,9 +24,16 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(ViewModelErrorProperty, value);
         }
 
-        public ViewModelErrorControl()
+        public static readonly BindableProperty ImageSourceProperty = BindableProperty.Create(
+            nameof(ImageSource),
+            typeof(ImageSource),
+            typeof(ViewModelErrorControl),
+            ImageSource.FromResource("CrossPlatformLibrary.Forms.Resources.Images.reload_192x192.png"));
+
+        public ImageSource ImageSource
         {
-            this.InitializeComponent();
+            get => (ImageSource)this.GetValue(ImageSourceProperty);
+            set => this.SetValue(ImageSourceProperty, value);
         }
     }
 }
