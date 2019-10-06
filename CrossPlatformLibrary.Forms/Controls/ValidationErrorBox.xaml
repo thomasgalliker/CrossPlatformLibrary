@@ -8,6 +8,7 @@
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     IsVisible="{Binding Validation.HasErrors}"
     CornerRadius="6"
+    HasShadow="False"
     BackgroundColor="{DynamicResource Theme.Color.ErrorBackground}"
     BorderColor="{DynamicResource Theme.Color.Error}"
     mc:Ignorable="d">
