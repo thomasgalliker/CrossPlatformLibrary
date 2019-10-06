@@ -1,16 +1,49 @@
 ﻿using System.ComponentModel;
 using Android.Content;
 using Android.Graphics.Drawables;
+using Android.Views;
 using CrossPlatformLibrary.Forms.Android.Extensions;
 using CrossPlatformLibrary.Forms.Android.Renderers;
 using CrossPlatformLibrary.Forms.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
+[assembly: ExportRenderer(typeof(Button), typeof(CrossPlatformLibrary.Forms.Android.Renderers.ButtonRenderer))]
 [assembly: ExportRenderer(typeof(CustomButton), typeof(CustomButtonRenderer))]
 
 namespace CrossPlatformLibrary.Forms.Android.Renderers
 {
+    /// <summary>
+    /// ButtonRenderer: Implements a workaround for missing Released event if button was released outside the visible area (MotionEventActions.Cancel).
+    /// See here: https://github.com/xamarin/Xamarin.Forms/issues/3523
+    /// </summary>
+    public class ButtonRenderer : Xamarin.Forms.Platform.Android.ButtonRenderer
+    {
+        public ButtonRenderer(Context context) : base(context)
+        {
+        }
+
+        public override bool OnTouchEvent(MotionEvent e)
+        {
+            if (e.Action == MotionEventActions.Cancel)
+            {
+                this.Element.SendReleased();
+            }
+
+            return base.OnTouchEvent(e);
+        }
+
+        public override bool OnInterceptTouchEvent(MotionEvent ev)
+        {
+            if (ev.ActionMasked == MotionEventActions.Cancel)
+            {
+                this.Element.SendReleased();
+            }
+
+            return false;
+        }
+    }
+
     /// <summary>
     ///     Source: http://www.wintellect.com/devcenter/jprosise/supercharging-xamarin-forms-with-custom-renderers-part-1
     /// </summary>
