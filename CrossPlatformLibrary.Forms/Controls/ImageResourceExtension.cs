@@ -10,8 +10,6 @@ namespace CrossPlatformLibrary.Forms.Controls
     {
         public string Source { get; set; }
 
-        public string AssemblyName { get; set; }
-
         private static Assembly targetAssembly;
 
         /// <summary>
