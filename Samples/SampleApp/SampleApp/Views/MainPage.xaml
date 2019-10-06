@@ -449,6 +449,18 @@
                                 IsEnabled="False"
                                 Style="{DynamicResource CustomButtonStyle}"
                                 Text="CustomButtonStyle (Disabled)" />
+                            <controls:CustomButton
+                                Padding="10"
+                                HeightRequest="40"
+                                Style="{DynamicResource CustomButtonStyle}"
+                                Text="Button with Image"
+                                ContentLayout="Left, 20"
+                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.rectangle_magenta_192.png}" />
+                            <ImageButton
+                                Padding="10"
+                                HeightRequest="40"
+                                Aspect="AspectFit"
+                                Source="{controls:ImageResource SampleApp.Resources.Images.rectangle_magenta_192.png}" />
                             <controls:StackLayoutZero Orientation="Vertical">
                                 <Label
                                     FontSize="Micro"
