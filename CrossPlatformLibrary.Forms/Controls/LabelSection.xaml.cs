@@ -29,7 +29,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 
             if (propertyName == TextProperty.PropertyName)
             {
-                this.Section.Text = Device.RuntimePlatform == Device.iOS ? this.Text.ToUpperInvariant() : this.Text;
+                this.Section.Text = Device.RuntimePlatform == Device.iOS ? this.Text?.ToUpperInvariant() : this.Text;
             }
         }
     }
