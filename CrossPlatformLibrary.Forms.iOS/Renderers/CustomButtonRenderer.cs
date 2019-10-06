@@ -53,7 +53,6 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
         }
     }
 
-
     /// <summary>
     ///     Source: http://www.wintellect.com/devcenter/jprosise/supercharging-xamarin-forms-with-custom-renderers-part-1
     /// </summary>
