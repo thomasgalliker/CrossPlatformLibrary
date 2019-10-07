@@ -21,20 +21,5 @@ namespace CrossPlatformLibrary.Forms.Controls
             get => (Func<string, Task<string>>)this.GetValue(EvaluateJavascriptProperty);
             set => this.SetValue(EvaluateJavascriptProperty, value);
         }
-
-        public static readonly BindableProperty DynamicResizeProperty = BindableProperty.Create(
-            nameof(DynamicResize),
-            typeof(bool),
-            typeof(CustomWebView),
-            default(bool));
-
-        /// <summary>
-        /// Determines if the web view should be resized to fit the content.
-        /// </summary>
-        public bool DynamicResize
-        {
-            get => (bool)this.GetValue(DynamicResizeProperty);
-            set => this.SetValue(DynamicResizeProperty, value);
-        }
     }
 }
