@@ -6,26 +6,7 @@
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     BackgroundColor="{DynamicResource CardViewStyle.Header.BackgroundColor}">
     <ContentView.Resources>
-        <ResourceDictionary>
-            <Style
-                x:Key="SectionLabelTextStyle"
-                BaseResourceKey="ListItemDetailTextStyle"
-                TargetType="Label">
-                <Setter Property="LineBreakMode" Value="WordWrap" />
-                <Setter Property="TextColor" Value="{DynamicResource CardViewStyle.Header.TextColor}" />
-                <Setter Property="FontSize">
-                    <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="Android" Value="18" />
-                        <On Platform="iOS" Value="13" />
-                    </OnPlatform>
-                </Setter>
-                <Setter Property="FontFamily">
-                    <OnPlatform x:TypeArguments="x:String">
-                        <On Platform="Android" Value="sans-serif-light" />
-                    </OnPlatform>
-                </Setter>
-            </Style>
-        </ResourceDictionary>
+        <ResourceDictionary />
     </ContentView.Resources>
     <ContentView.Padding>
         <OnPlatform x:TypeArguments="Thickness">
