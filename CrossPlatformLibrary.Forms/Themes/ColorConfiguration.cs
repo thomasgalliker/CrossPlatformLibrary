@@ -262,6 +262,23 @@ namespace CrossPlatformLibrary.Forms.Themes
             set => this.SetValue(CardViewDividerColorProperty, value);
         }
 
+        public static readonly BindableProperty CardViewHeaderTextColorProperty = BindableProperty.Create(
+            nameof(CardViewHeaderTextColor),
+            typeof(Color),
+            typeof(Color),
+            GetDefaultCardViewHeaderTextColor());
+
+        private static Color GetDefaultCardViewHeaderTextColor()
+        {
+            return Color.FromHex("#6D6D72");
+        }
+
+        public Color CardViewHeaderTextColor
+        {
+            get => (Color)this.GetValue(CardViewHeaderTextColorProperty);
+            set => this.SetValue(CardViewHeaderTextColorProperty, value);
+        }
+
         public static readonly BindableProperty CardViewHeaderBackgroundColorProperty = BindableProperty.Create(
             nameof(CardViewHeaderBackgroundColor),
             typeof(Color),
@@ -289,6 +306,7 @@ namespace CrossPlatformLibrary.Forms.Themes
             get => (Color)this.GetValue(CardViewHeaderBackgroundColorProperty);
             set => this.SetValue(CardViewHeaderBackgroundColorProperty, value);
         }
+
         public static readonly BindableProperty CardViewBackgroundColorProperty = BindableProperty.Create(
             nameof(CardViewBackgroundColor),
             typeof(Color),

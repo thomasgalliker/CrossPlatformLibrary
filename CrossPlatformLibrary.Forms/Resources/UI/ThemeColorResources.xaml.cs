@@ -58,12 +58,11 @@ namespace CrossPlatformLibrary.Forms.Resources
 
         private void SetCardViewColors(IColorConfiguration colorConfiguration)
         {
-            this[ThemeConstants.CardViewStyle.TextColor] = Color.FromHex("#6D6D72");
-            this[ThemeConstants.CardViewStyle.BackgroundColor] = colorConfiguration.CardViewBackgroundColor;
+            this[ThemeConstants.CardViewStyle.HeaderTextColor] = colorConfiguration.CardViewHeaderTextColor;
             this[ThemeConstants.CardViewStyle.HeaderBackgroundColor] = colorConfiguration.CardViewHeaderBackgroundColor;
             this[ThemeConstants.CardViewStyle.HeaderDividerColor] = colorConfiguration.CardViewDividerColor;
+            this[ThemeConstants.CardViewStyle.BackgroundColor] = colorConfiguration.CardViewBackgroundColor;
             this[ThemeConstants.CardViewStyle.FooterDividerColor] = colorConfiguration.CardViewDividerColor;
-
         }
 
         private void SetThemeColors(IColorConfiguration colorConfiguration)

@@ -12,7 +12,7 @@
                 BaseResourceKey="ListItemDetailTextStyle"
                 TargetType="Label">
                 <Setter Property="LineBreakMode" Value="WordWrap" />
-                <Setter Property="TextColor" Value="{DynamicResource CardViewStyle.TextColor}" />
+                <Setter Property="TextColor" Value="{DynamicResource CardViewStyle.Header.TextColor}" />
                 <Setter Property="FontSize">
                     <OnPlatform x:TypeArguments="x:Double">
                         <On Platform="Android" Value="18" />
