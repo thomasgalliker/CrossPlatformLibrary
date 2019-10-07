@@ -10,11 +10,11 @@ namespace CrossPlatformLibrary.Forms.Controls
     public class CustomWebView : WebView
     {
         public static BindableProperty EvaluateJavascriptProperty = BindableProperty.Create(
-                nameof(EvaluateJavascript), 
-                typeof(Func<string, Task<string>>),
-                typeof(CustomWebView),
-                null,
-                BindingMode.OneWayToSource);
+            nameof(EvaluateJavascript), 
+            typeof(Func<string, Task<string>>),
+            typeof(CustomWebView),
+            null,
+            BindingMode.OneWayToSource);
 
         public Func<string, Task<string>> EvaluateJavascript
         {
@@ -26,7 +26,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             nameof(DynamicResize),
             typeof(bool),
             typeof(CustomWebView),
-            false);
+            default(bool));
 
         /// <summary>
         /// Determines if the web view should be resized to fit the content.
