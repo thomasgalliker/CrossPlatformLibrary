@@ -4,7 +4,7 @@ using CrossPlatformLibrary.Forms.Extensions;
 using ValueConverters;
 using Xamarin.Forms;
 
-namespace CrossPlatformLibrary.Forms.Converters
+namespace SampleApp.Converters
 {
     internal class ColorToHexStringConverter : ConverterBase
     {

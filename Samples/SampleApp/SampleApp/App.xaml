@@ -3,10 +3,10 @@
     x:Class="SampleApp.App"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:converters="clr-namespace:CrossPlatformLibrary.Forms.Converters"
     xmlns:themes="clr-namespace:CrossPlatformLibrary.Forms.Themes;assembly=CrossPlatformLibrary.Forms"
     xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
-    xmlns:xForms="clr-namespace:CrossPlatformLibrary.Forms;assembly=CrossPlatformLibrary.Forms">
+    xmlns:xForms="clr-namespace:CrossPlatformLibrary.Forms;assembly=CrossPlatformLibrary.Forms"
+    xmlns:converters="clr-namespace:SampleApp.Converters;assembly=SampleApp">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
