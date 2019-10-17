@@ -59,7 +59,7 @@
         Grid.Row="0"
         IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
         Style="{DynamicResource EntryLabelStyle}"
-        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}" />
+        Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}" />
 
     <!--  Annotation Text  -->
     <Label

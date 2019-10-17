@@ -76,13 +76,13 @@ namespace SampleApp.ViewModels
         public int UserId
         {
             get => this.User?.Id ?? 0;
-            set => this.SetProperty(this.User, value, nameof(this.UserId), nameof(this.User.Id));
+            set => this.SetProperty(this.User, value, nameof(this.UserId), nameof(this.User.Id)); // Sync property value based on specified string
         }
 
         public string UserName
         {
             get => this.User?.UserName;
-            set => this.SetProperty(this.User, value);
+            set => this.SetProperty(this.User, value); // Sync property value based on property name
         }
 
         public int UserNameMaxLength
