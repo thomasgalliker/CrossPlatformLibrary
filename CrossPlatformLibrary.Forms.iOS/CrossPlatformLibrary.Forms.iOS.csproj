@@ -58,6 +58,7 @@
     <Compile Include="Effects\TimePickerLineColorEffect.cs" />
     <Compile Include="Effects\UnderlineTextEffect.cs" />
     <Compile Include="Extensions\AlignmentExtensions.cs" />
+    <Compile Include="Extensions\VisualElementExtensions.cs" />
     <Compile Include="Extensions\UITableViewCellExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderers\AlwaysScrollViewRenderer.cs" />
