@@ -16,24 +16,13 @@
         <On Platform="Android" Value="#F5F5F5" />
         <On Platform="iOS" Value="White" />
     </OnPlatform>
-    <OnPlatform x:Key="LabelSectionBackground" x:TypeArguments="Color">
-        <On Platform="Android" Value="White" />
-        <On Platform="iOS" Value="#EFEFF4" />
-    </OnPlatform>
-    <OnPlatform x:Key="CardViewBackgroundColor" x:TypeArguments="Color">
-        <On Platform="Android" Value="#ECEF5F5F5CEC" />
-        <On Platform="iOS" Value="#EFEFF4" />
-    </OnPlatform>
-    <OnPlatform x:Key="CardViewDividerColor" x:TypeArguments="Color">
-        <On Platform="Android" Value="#ECECEC" />
-        <On Platform="iOS" Value="#C8C7CC" />
-    </OnPlatform>
+
     <Color x:Key="ButtonBorder">#C8C7CC</Color>
     <Color x:Key="ListSeparator">#C8C7CC</Color>
 
     <OnPlatform x:Key="CardPadding" x:TypeArguments="Thickness">
-        <On Platform="Android" Value="8,16" />
-        <On Platform="iOS" Value="0,0,0,16" />
+        <On Platform="Android" Value="8, 8, 8, 16" />
+        <On Platform="iOS" Value="0, 0, 0, 16" />
     </OnPlatform>
     <OnPlatform x:Key="CardSpacing" x:TypeArguments="x:Double">
         <On Platform="Android" Value="16" />
@@ -281,6 +270,25 @@
     <!--<Style TargetType="controls:CustomSwitch">
         <Setter Property="TintColor" Value="{DynamicResource Primary}" />
     </Style>-->
+
+    <Style
+        x:Key="SectionLabelTextStyle"
+        BaseResourceKey="ListItemDetailTextStyle"
+        TargetType="Label">
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+        <Setter Property="TextColor" Value="{DynamicResource CardViewStyle.Header.TextColor}" />
+        <Setter Property="FontSize">
+            <OnPlatform x:TypeArguments="x:Double">
+                <On Platform="Android" Value="18" />
+                <On Platform="iOS" Value="13" />
+            </OnPlatform>
+        </Setter>
+        <Setter Property="FontFamily">
+            <OnPlatform x:TypeArguments="x:String">
+                <On Platform="Android" Value="sans-serif-light" />
+            </OnPlatform>
+        </Setter>
+    </Style>
 
     <Style x:Key="LoginEntryStyle" TargetType="Entry">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />

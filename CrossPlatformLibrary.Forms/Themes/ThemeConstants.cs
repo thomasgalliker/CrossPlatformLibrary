@@ -70,6 +70,15 @@
             public const string BackgroundColorDisabled = "DrilldownButtonStyle.BackgroundColor.Disabled";
             public const string BackgroundColorPressed = "DrilldownButtonStyle.BackgroundColor.Pressed";
         }
+        
+        public static class CardViewStyle
+        {
+            public const string HeaderTextColor = "CardViewStyle.Header.TextColor";
+            public const string HeaderBackgroundColor = "CardViewStyle.Header.BackgroundColor";
+            public const string HeaderDividerColor = "CardViewStyle.Header.DividerColor";
+            public const string BackgroundColor = "CardViewStyle.BackgroundColor";
+            public const string FooterDividerColor = "CardViewStyle.Footer.DividerColor";
+        }
 
         public static class Spacings
         {

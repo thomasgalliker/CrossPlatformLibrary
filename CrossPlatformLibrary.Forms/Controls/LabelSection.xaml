@@ -1,36 +1,26 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView 
-    xmlns="http://xamarin.com/schemas/2014/forms" 
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="CrossPlatformLibrary.Forms.Controls.LabelSection"
+    xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
-    BackgroundColor="{DynamicResource LabelSectionBackground}"
-    x:Class="CrossPlatformLibrary.Forms.Controls.LabelSection">
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <Style x:Key="SectionLabelTextStyle" TargetType="Label" BaseResourceKey="ListItemDetailTextStyle">
-                <Setter Property="TextColor" Value="#6D6D72"/>
-                <Setter Property="FontSize">
-                    <OnPlatform x:TypeArguments="x:Double" Android="18" iOS="13" WinPhone="13" x:Key="LabelSectionFontSize" />
-                </Setter>
-                <Setter Property="FontFamily">
-                    <OnPlatform x:TypeArguments="x:String" Android="sans-serif-light" x:Key="SectionLabelFontFamily" />
-                </Setter>
-            </Style>
-        </ResourceDictionary>
-    </ContentView.Resources>
+    BackgroundColor="{DynamicResource CardViewStyle.Header.BackgroundColor}">
     <ContentView.Padding>
-        <OnPlatform x:TypeArguments="Thickness" Android="8,8,8,4" iOS="16,24,16,4" WinPhone="16,16,16,4"/>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="Android" Value="8, 8, 8, 4" />
+            <On Platform="iOS" Value="16, 16, 16, 4" />
+        </OnPlatform>
     </ContentView.Padding>
     <ContentView.Content>
         <StackLayout
+            HorizontalOptions="FillAndExpand"
             Orientation="Vertical"
-            VerticalOptions="FillAndExpand"
-            HorizontalOptions="FillAndExpand">
+            VerticalOptions="FillAndExpand">
 
             <controls:CustomLabel
                 x:Name="Section"
-                Style="{DynamicResource SectionLabelTextStyle}"
-                LineBreakMode="WordWrap"/>
+                BackgroundColor="Transparent"
+                Style="{DynamicResource SectionLabelTextStyle}" />
         </StackLayout>
     </ContentView.Content>
 </ContentView>

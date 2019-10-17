@@ -3,9 +3,10 @@
     x:Class="SampleApp.App"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:themes="clr-namespace:CrossPlatformLibrary.Forms.Themes;assembly=CrossPlatformLibrary.Forms"
     xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
     xmlns:xForms="clr-namespace:CrossPlatformLibrary.Forms;assembly=CrossPlatformLibrary.Forms"
-    xmlns:themes="clr-namespace:CrossPlatformLibrary.Forms.Themes;assembly=CrossPlatformLibrary.Forms">
+    xmlns:converters="clr-namespace:SampleApp.Converters;assembly=SampleApp">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -13,6 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <!--  Converters  -->
+            <converters:ColorToHexStringConverter x:Key="ColorToHexStringConverter" />
             <valueConverters:StringIsNotNullOrEmptyConverter x:Key="StringIsNotNullOrEmptyConverter" />
             <valueConverters:DateTimeConverter x:Key="DateTimeConverter" Format="g" />
             <valueConverters:DateTimeConverter x:Key="ShortDateConverter" Format="d" />
@@ -42,17 +44,7 @@
                 TextColor="DarkBlue"
                 TextColorBright="DarkGray" />
 
-            <themes:SpacingConfiguration
-                x:Key="SpacingConfiguration"
-                SmallSpacing="1"
-                MediumSpacing="2"
-                LargeSpacing="4"
-                SmallPadding="1"
-                MediumPadding="2"
-                LargePadding="4"
-                CardPadding="4"
-                CardSpacing="4"
-                CardViewPadding="4" />
+            <themes:SpacingConfiguration x:Key="SpacingConfiguration" />
 
             <themes:CrossPlatformLibraryConfiguration
                 x:Key="SampleApp.Theme"

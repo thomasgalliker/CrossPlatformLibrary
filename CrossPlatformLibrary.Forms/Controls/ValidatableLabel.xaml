@@ -5,10 +5,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
+    BackgroundColor="Transparent"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="FillAndExpand"
     MinimumHeightRequest="48"
-    BackgroundColor="Transparent">
+    VerticalOptions="FillAndExpand">
+    <Grid.Margin>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="Android" Value="-4,0,-4,0" />
+            <On Platform="iOS" Value="0,0,0,0" />
+        </OnPlatform>
+    </Grid.Margin>
 
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
@@ -18,27 +24,27 @@
     <!--  Annotation Text  -->
     <Label
         Grid.Row="0"
-        Text="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
+        BackgroundColor="Transparent"
+        InputTransparent="True"
         IsVisible="{Binding Text, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
         Style="{DynamicResource AnnotationEntryLabelStyle}"
-        BackgroundColor="Transparent"
-        InputTransparent="True" />
+        Text="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}" />
 
     <controls:CustomLabel
         Grid.Row="1"
-        Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}"
-        Style="{Binding LabelStyle, Source={x:Reference Control}, Mode=OneWay}"
-        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
-        FontAttributes="{Binding FontAttributes, Source={x:Reference Control}, Mode=OneWay}"
-        LineBreakMode="{Binding LineBreakMode, Source={x:Reference Control}, Mode=OneWay}"
         BackgroundColor="Transparent"
+        FontAttributes="{Binding FontAttributes, Source={x:Reference Control}, Mode=OneWay}"
+        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
+        LineBreakMode="{Binding LineBreakMode, Source={x:Reference Control}, Mode=OneWay}"
+        Style="{Binding LabelStyle, Source={x:Reference Control}, Mode=OneWay}"
+        Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}"
         VerticalOptions="StartAndExpand">
         <controls:CustomLabel.Margin>
             <OnPlatform
                 x:TypeArguments="Thickness"
                 Android="4, -4, 0, 4"
-                iOS="0, 0, 0, 0"
-                WinPhone="0, 0, 0, 0" />
+                WinPhone="0, 0, 0, 0"
+                iOS="0, 0, 0, 0" />
         </controls:CustomLabel.Margin>
     </controls:CustomLabel>
 

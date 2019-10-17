@@ -237,5 +237,106 @@ namespace CrossPlatformLibrary.Forms.Themes
             get => (Color)this.GetValue(SurfaceProperty);
             set => this.SetValue(SurfaceProperty, value);
         }
+
+        #region CardView Colors
+
+        public static readonly BindableProperty CardViewDividerColorProperty = BindableProperty.Create(
+            nameof(CardViewDividerColor),
+            typeof(Color),
+            typeof(Color),
+            GetDefaultCardViewDividerColor());
+
+        private static Color GetDefaultCardViewDividerColor()
+        {
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                return Color.FromHex("#ECECEC");
+            }
+
+            return Color.FromHex("#C8C7CC");
+        }
+
+        public Color CardViewDividerColor
+        {
+            get => (Color)this.GetValue(CardViewDividerColorProperty);
+            set => this.SetValue(CardViewDividerColorProperty, value);
+        }
+
+        public static readonly BindableProperty CardViewHeaderTextColorProperty = BindableProperty.Create(
+            nameof(CardViewHeaderTextColor),
+            typeof(Color),
+            typeof(Color),
+            GetDefaultCardViewHeaderTextColor());
+
+        private static Color GetDefaultCardViewHeaderTextColor()
+        {
+            return Color.FromHex("#6D6D72");
+        }
+
+        public Color CardViewHeaderTextColor
+        {
+            get => (Color)this.GetValue(CardViewHeaderTextColorProperty);
+            set => this.SetValue(CardViewHeaderTextColorProperty, value);
+        }
+
+        public static readonly BindableProperty CardViewHeaderBackgroundColorProperty = BindableProperty.Create(
+            nameof(CardViewHeaderBackgroundColor),
+            typeof(Color),
+            typeof(Color),
+            GetDefaultCardViewHeaderBackgroundColor());
+
+        private static Color GetDefaultCardViewHeaderBackgroundColor()
+        {
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                return Color.White;
+            }
+
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                // TODO: Check if Color.Transparent is the better choice
+                return Color.FromHex("#EFEFF4");
+            }
+
+            return Color.FromHex("#EFEFF4");
+        }
+
+        public Color CardViewHeaderBackgroundColor
+        {
+            get => (Color)this.GetValue(CardViewHeaderBackgroundColorProperty);
+            set => this.SetValue(CardViewHeaderBackgroundColorProperty, value);
+        }
+
+        public static readonly BindableProperty CardViewBackgroundColorProperty = BindableProperty.Create(
+            nameof(CardViewBackgroundColor),
+            typeof(Color),
+            typeof(Color),
+            GetDefaultCardViewBackgroundColor());
+
+        private static Color GetDefaultCardViewBackgroundColor()
+        {
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                return Color.FromHex("#F5F5F5");
+            }
+
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                return Color.White;
+            }
+
+            return Color.White;
+        }
+
+        /// <summary>
+        /// The color used as background inside the content area of a <see cref="CrossPlatformLibrary.Forms.Controls.CardView"/>.
+        /// </summary>
+        public Color CardViewBackgroundColor
+        {
+            get => (Color)this.GetValue(CardViewBackgroundColorProperty);
+            set => this.SetValue(CardViewBackgroundColorProperty, value);
+        }
+
+        #endregion
     }
 }

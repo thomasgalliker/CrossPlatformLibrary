@@ -37,6 +37,7 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="80" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Label
@@ -46,6 +47,12 @@
                                 VerticalOptions="CenterAndExpand" />
                             <Label
                                 Grid.Column="1"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding Color, Converter={StaticResource ColorToHexStringConverter}}"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Column="2"
                                 FontSize="Small"
                                 HorizontalOptions="Start"
                                 Text="{Binding Id}"
@@ -66,7 +73,7 @@
             <Grid>
                 <Grid IsVisible="{Binding HasViewModelError, Mode=OneWay, Converter={StaticResource BoolInverter}}">
                     <StackLayout IsVisible="{Binding IsNotBusy}">
-                        <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.CardSpacing}">
+                        <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
 
                             <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableLabel--&gt;" />
                             <controls:ValidatableLabel
@@ -77,6 +84,7 @@
 
                             <Grid>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
@@ -105,8 +113,16 @@
                                     Grid.ColumnSpan="2"
                                     BackgroundColor="MistyRose"
                                     LineBreakMode="WordWrap"
-                                    Placeholder="ValidatableLabel2"
+                                    Placeholder="ValidatableLabel3"
                                     Text="ValidatableLabel with LineBreakMode=WordWrap&#x0a;Multiple lines of text&#x0a;Line 3: More text" />
+                                <controls:ValidatableEntry
+                                    x:Name="ValidatableEntryTest"
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    IsReadonly="{Binding IsToggled, Mode=OneWay}"
+                                    Placeholder="{Binding Text, Source={x:Reference ValidatableEntryTest}}"
+                                    Text="ValidatableEntry's Placeholder sizing test" />
                             </Grid>
 
                             <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableEntry--&gt;" />
@@ -284,7 +300,7 @@
                                 <controls:StackLayoutZero>
                                     <controls:LabelSection Text="{localization:Translate ListOfSettingsSectionText}" />
                                     <controls:HeaderDivider />
-                                    <controls:DrilldownButtonList BackgroundColor="#BEF5D5F5">
+                                    <controls:DrilldownButtonList>
                                         <controls:DrilldownButtonList.ItemsSource>
                                             <objectModel:ObservableCollection x:TypeArguments="BindableObject">
                                                 <controls:DrilldownButtonView
@@ -433,6 +449,18 @@
                                 IsEnabled="False"
                                 Style="{DynamicResource CustomButtonStyle}"
                                 Text="CustomButtonStyle (Disabled)" />
+                            <controls:CustomButton
+                                Padding="10"
+                                HeightRequest="40"
+                                Style="{DynamicResource CustomButtonStyle}"
+                                Text="Button with Image"
+                                ContentLayout="Left, 20"
+                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.rectangle_magenta_192.png}" />
+                            <ImageButton
+                                Padding="10"
+                                HeightRequest="40"
+                                Aspect="AspectFit"
+                                Source="{controls:ImageResource SampleApp.Resources.Images.rectangle_magenta_192.png}" />
                             <controls:StackLayoutZero Orientation="Vertical">
                                 <Label
                                     FontSize="Micro"

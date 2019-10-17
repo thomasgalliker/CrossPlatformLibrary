@@ -4,8 +4,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 {
     public class CustomButton : Button
     {
-        public static readonly BindableProperty BackgroundColorPressedProperty =
-            BindableProperty.Create(
+        public static readonly BindableProperty BackgroundColorPressedProperty = BindableProperty.Create(
                 nameof(BackgroundColorPressed),
                 typeof(Color),
                 typeof(CustomButton),
@@ -17,8 +16,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(BackgroundColorPressedProperty, value);
         }
 
-        public static readonly BindableProperty BorderColorPressedProperty =
-            BindableProperty.Create(
+        public static readonly BindableProperty BorderColorPressedProperty = BindableProperty.Create(
                 nameof(BorderColorPressed),
                 typeof(Color),
                 typeof(CustomButton),
@@ -54,8 +52,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(HorizontalContentAlignmentProperty, value);
         }
 
-        public static readonly BindableProperty AllCapsProperty =
-            BindableProperty.Create(
+        public static readonly BindableProperty AllCapsProperty = BindableProperty.Create(
                 nameof(AllCaps),
                 typeof(bool),
                 typeof(CustomButton),

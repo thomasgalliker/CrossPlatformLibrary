@@ -28,7 +28,7 @@
     <dependencies>
       <group>
 	    <dependency id="CrossPlatformLibrary" version="[$version$,)" />
-        <dependency id="Xamarin.Forms" version="[3.0.0.446417,)" />
+        <dependency id="Xamarin.Forms" version="[3.6.0.344457,)" />
       </group>
     </dependencies>
   </metadata>

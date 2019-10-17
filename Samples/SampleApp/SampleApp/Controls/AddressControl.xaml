@@ -3,17 +3,17 @@
     x:Class="SampleApp.Controls.AddressControl"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:CrossPlatformLibrary.Forms.Behaviors;assembly=CrossPlatformLibrary.Forms"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
-    xmlns:behaviors="clr-namespace:CrossPlatformLibrary.Forms.Behaviors;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control">
 
-    <StackLayout Spacing="0">
+    <controls:StackLayoutZero>
         <controls:CardView>
-            <StackLayout Spacing="0">
+            <controls:StackLayoutZero>
                 <controls:LabelSection Text="{localization:Translate UserProfileAddressCaptionText}" />
                 <controls:HeaderDivider />
-                <Grid Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{StaticResource WindowBackground}">
+                <Grid Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -28,49 +28,49 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
-                        Text="{Binding Street, Mode=TwoWay}"
-                        Placeholder="{localization:Translate UserAddressStreetLabelText}"
                         Keyboard="Text"
-                        ValidationErrors="{Binding Validation.Errors[Street]}"
-                        MaxLength="200" />
+                        MaxLength="200"
+                        Placeholder="{localization:Translate UserAddressStreetLabelText}"
+                        Text="{Binding Street, Mode=TwoWay}"
+                        ValidationErrors="{Binding Validation.Errors[Street]}" />
 
                     <controls:ValidatableEntry
                         Grid.Row="1"
                         Grid.Column="0"
-                        Text="{Binding PostalCode, Mode=TwoWay}"
-                        Placeholder="{localization:Translate UserAddressPostalCodeLabelText}"
                         Keyboard="Numeric"
-                        ValidationErrors="{Binding Validation.Errors[PostalCode]}"
                         MaxLength="4"
-                        Unfocused="ValidatableEntry_OnUnfocused">
+                        Placeholder="{localization:Translate UserAddressPostalCodeLabelText}"
+                        Text="{Binding PostalCode, Mode=TwoWay}"
+                        Unfocused="ValidatableEntry_OnUnfocused"
+                        ValidationErrors="{Binding Validation.Errors[PostalCode]}">
                         <controls:ValidatableEntry.Behaviors>
-                            <behaviors:EventToCommandBehavior EventName="Unfocused" Command="{Binding PostalCodeUnfocusedCommand}" />
+                            <behaviors:EventToCommandBehavior Command="{Binding PostalCodeUnfocusedCommand}" EventName="Unfocused" />
                         </controls:ValidatableEntry.Behaviors>
                     </controls:ValidatableEntry>
 
                     <controls:ValidatableEntry
                         Grid.Row="1"
                         Grid.Column="1"
-                        Text="{Binding Place, Mode=TwoWay}"
-                        Placeholder="{localization:Translate UserAddressPlaceLabelText}"
                         Keyboard="Text"
-                        ValidationErrors="{Binding Validation.Errors[Place]}"
-                        MaxLength="200" />
+                        MaxLength="200"
+                        Placeholder="{localization:Translate UserAddressPlaceLabelText}"
+                        Text="{Binding Place, Mode=TwoWay}"
+                        ValidationErrors="{Binding Validation.Errors[Place]}" />
 
                     <controls:ValidatablePicker
                         Grid.Row="2"
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
-                        Placeholder="{localization:Translate UserAddressCountryLabelText}"
-                        ItemsSource="{Binding Countries}"
                         DisplayMemberPath="Name"
-                        SelectedValuePath="Id"
+                        ItemsSource="{Binding Countries}"
+                        Placeholder="{localization:Translate UserAddressCountryLabelText}"
                         SelectedItem="{Binding Country, Mode=TwoWay}"
+                        SelectedValuePath="Id"
                         ValidationErrors="{Binding Validation.Errors[Country]}" />
 
                 </Grid>
                 <controls:FooterDivider />
-            </StackLayout>
+            </controls:StackLayoutZero>
         </controls:CardView>
-    </StackLayout>
+    </controls:StackLayoutZero>
 </Grid>

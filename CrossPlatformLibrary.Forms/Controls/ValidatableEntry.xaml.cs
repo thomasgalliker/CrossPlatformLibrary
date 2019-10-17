@@ -9,7 +9,7 @@ namespace CrossPlatformLibrary.Forms.Controls
     /// Similar solution can be found here:
     /// https://github.com/XamFormsExtended/Xfx.Controls
     /// </summary>
-    public partial class ValidatableEntry : Grid
+    public partial class ValidatableEntry : GridZero
     {
         public ValidatableEntry()
         {
@@ -234,8 +234,6 @@ namespace CrossPlatformLibrary.Forms.Controls
             add { this.Entry.TextChanged += value; }
             remove { this.Entry.TextChanged -= value; }
         }
-
-
     }
 }
 

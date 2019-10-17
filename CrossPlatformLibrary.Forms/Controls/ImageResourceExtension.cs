@@ -10,13 +10,15 @@ namespace CrossPlatformLibrary.Forms.Controls
     {
         public string Source { get; set; }
 
-        public string AssemblyName { get; set; }
+        private static Assembly targetAssembly;
 
-        private static Assembly ResourceAssembly = null;
-
+        /// <summary>
+        /// Use <seealso cref="Init"/> to define which assembly contains the resources which are resolved using <seealso cref="ImageResourceExtension"/>.
+        /// </summary>
+        /// <param name="resourceAssembly"></param>
         public static void Init(Assembly resourceAssembly)
         {
-            ResourceAssembly = resourceAssembly;
+            targetAssembly = resourceAssembly;
         }
 
         public object ProvideValue(IServiceProvider serviceProvider)
@@ -26,7 +28,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 return null;
             }
 
-            var imageSource = ImageSource.FromResource(this.Source, ResourceAssembly);
+            var imageSource = ImageSource.FromResource(this.Source, targetAssembly);
             return imageSource;
         }
     }

@@ -15,6 +15,7 @@ namespace CrossPlatformLibrary.Forms.Resources
             this.SetThemeColors(colorConfiguration);
             this.SetButtonColors(colorConfiguration);
             this.SetDrilldownButtonColors(colorConfiguration);
+            this.SetCardViewColors(colorConfiguration);
         }
 
         private void SetButtonColors(IColorConfiguration colorConfiguration)
@@ -53,6 +54,15 @@ namespace CrossPlatformLibrary.Forms.Resources
             this[ThemeConstants.DrilldownButtonStyle.BackgroundColorEnabled] = Color.Transparent;
             this[ThemeConstants.DrilldownButtonStyle.BackgroundColorDisabled] = colorConfiguration.SemiTransparentBright;
             this[ThemeConstants.DrilldownButtonStyle.BackgroundColorPressed] = colorConfiguration.SemiTransparentBright;
+        }
+
+        private void SetCardViewColors(IColorConfiguration colorConfiguration)
+        {
+            this[ThemeConstants.CardViewStyle.HeaderTextColor] = colorConfiguration.CardViewHeaderTextColor;
+            this[ThemeConstants.CardViewStyle.HeaderBackgroundColor] = colorConfiguration.CardViewHeaderBackgroundColor;
+            this[ThemeConstants.CardViewStyle.HeaderDividerColor] = colorConfiguration.CardViewDividerColor;
+            this[ThemeConstants.CardViewStyle.BackgroundColor] = colorConfiguration.CardViewBackgroundColor;
+            this[ThemeConstants.CardViewStyle.FooterDividerColor] = colorConfiguration.CardViewDividerColor;
         }
 
         private void SetThemeColors(IColorConfiguration colorConfiguration)

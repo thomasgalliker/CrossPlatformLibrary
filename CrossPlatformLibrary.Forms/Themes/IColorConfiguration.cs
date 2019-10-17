@@ -84,5 +84,13 @@ namespace CrossPlatformLibrary.Forms.Themes
         Color SemiTransparentBright { get; }
 
         Color SemiTransparentDark { get; }
+
+        Color CardViewHeaderTextColor { get; }
+
+        Color CardViewHeaderBackgroundColor { get; }
+
+        Color CardViewDividerColor { get; }
+
+        Color CardViewBackgroundColor { get; }
     }
 }

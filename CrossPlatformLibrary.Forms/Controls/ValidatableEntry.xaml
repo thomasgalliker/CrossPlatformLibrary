@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<Grid
+<controls:GridZero
     x:Class="CrossPlatformLibrary.Forms.Controls.ValidatableEntry"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -7,11 +7,15 @@
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
     BackgroundColor="Transparent"
-    ColumnSpacing="0"
     HeightRequest="48"
     HorizontalOptions="FillAndExpand"
-    RowSpacing="0"
     VerticalOptions="Fill">
+    <Grid.Margin>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="Android" Value="-4,0,-4,0" />
+            <On Platform="iOS" Value="0,0,0,0" />
+        </OnPlatform>
+    </Grid.Margin>
 
     <controls:CustomEntry
         x:Name="Entry"
@@ -71,4 +75,4 @@
         Grid.Row="0"
         Style="{DynamicResource ValidationLabelStyle}"
         Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}" />
-</Grid>
+</controls:GridZero>
