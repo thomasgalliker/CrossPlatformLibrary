@@ -29,8 +29,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string Placeholder
         {
-            get { return (string)this.GetValue(PlaceholderProperty); }
-            set { this.SetValue(PlaceholderProperty, value); }
+            get => (string)this.GetValue(PlaceholderProperty);
+            set => this.SetValue(PlaceholderProperty, value);
         }
 
         public string AnnotationText
@@ -56,8 +56,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public new Style Style
         {
-            get { return (Style)this.GetValue(StyleProperty); }
-            set { this.SetValue(StyleProperty, value); }
+            get => (Style)this.GetValue(StyleProperty);
+            set => this.SetValue(StyleProperty, value);
         }
 
         public static readonly BindableProperty FontFamilyProperty =
@@ -70,8 +70,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string FontFamily
         {
-            get { return (string)this.GetValue(FontFamilyProperty); }
-            set { this.SetValue(FontFamilyProperty, value); }
+            get => (string)this.GetValue(FontFamilyProperty);
+            set => this.SetValue(FontFamilyProperty, value);
         }
 
         public static readonly BindableProperty FontSizeProperty =
@@ -84,8 +84,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public double FontSize
         {
-            get { return (double)this.GetValue(FontSizeProperty); }
-            set { this.SetValue(FontSizeProperty, value); }
+            get => (double)this.GetValue(FontSizeProperty);
+            set => this.SetValue(FontSizeProperty, value);
         }
 
         public static readonly BindableProperty FontAttributesProperty =
@@ -98,8 +98,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public FontAttributes FontAttributes
         {
-            get { return (FontAttributes)this.GetValue(FontAttributesProperty); }
-            set { this.SetValue(FontAttributesProperty, (object)value); }
+            get => (FontAttributes)this.GetValue(FontAttributesProperty);
+            set => this.SetValue(FontAttributesProperty, (object)value);
         }
 
         public static readonly BindableProperty DateProperty =
@@ -120,8 +120,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public DateTime? Date
         {
-            get { return (DateTime?)this.GetValue(DateProperty); }
-            set { this.SetValue(DateProperty, value); }
+            get => (DateTime?)this.GetValue(DateProperty);
+            set => this.SetValue(DateProperty, value);
         }
 
         public static readonly BindableProperty TimeProperty =
@@ -142,8 +142,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public TimeSpan? Time
         {
-            get { return (TimeSpan?)this.GetValue(TimeProperty); }
-            set { this.SetValue(TimeProperty, value); }
+            get => (TimeSpan?)this.GetValue(TimeProperty);
+            set => this.SetValue(TimeProperty, value);
         }
 
         public static readonly BindableProperty IsReadonlyProperty =
@@ -156,8 +156,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public bool IsReadonly
         {
-            get { return (bool)this.GetValue(IsReadonlyProperty); }
-            set { this.SetValue(IsReadonlyProperty, value); }
+            get => (bool)this.GetValue(IsReadonlyProperty);
+            set => this.SetValue(IsReadonlyProperty, value);
         }
 
         public static readonly BindableProperty ReadonlyTextProperty =
@@ -170,8 +170,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string ReadonlyText
         {
-            get { return (string)this.GetValue(ReadonlyTextProperty); }
-            set { this.SetValue(ReadonlyTextProperty, value); }
+            get => (string)this.GetValue(ReadonlyTextProperty);
+            set => this.SetValue(ReadonlyTextProperty, value);
         }
 
         public static readonly BindableProperty ValidationErrorsProperty =
@@ -184,8 +184,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public IEnumerable<string> ValidationErrors
         {
-            get { return (IEnumerable<string>)this.GetValue(ValidationErrorsProperty); }
-            set { this.SetValue(ValidationErrorsProperty, value); }
+            get => (IEnumerable<string>)this.GetValue(ValidationErrorsProperty);
+            set => this.SetValue(ValidationErrorsProperty, value);
         }
     }
 }

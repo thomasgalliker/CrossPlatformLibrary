@@ -47,7 +47,4 @@
                 iOS="0, 0, 0, 0" />
         </controls:CustomLabel.Margin>
     </controls:CustomLabel>
-
-    <!--  Validation Error Text  -->
-    <!--  There is currently no support for validation errors in ValidatableLabel  -->
 </controls:GridZero>

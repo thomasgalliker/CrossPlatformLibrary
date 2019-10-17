@@ -68,8 +68,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public DataTemplateSelector ItemTemplateSelector
         {
-            get { return (DataTemplateSelector)this.GetValue(ItemTemplateSelectorProperty); }
-            set { this.SetValue(ItemTemplateSelectorProperty, value); }
+            get => (DataTemplateSelector)this.GetValue(ItemTemplateSelectorProperty);
+            set => this.SetValue(ItemTemplateSelectorProperty, value);
         }
     }
 }

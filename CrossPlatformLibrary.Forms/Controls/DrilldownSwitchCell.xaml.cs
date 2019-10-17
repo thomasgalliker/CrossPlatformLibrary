@@ -25,7 +25,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Text),
                 typeof(string),
                 typeof(DrilldownSwitchCell),
-                string.Empty,
+                null,
                 BindingMode.OneWay);
 
         public string Text

@@ -34,7 +34,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Text),
                 typeof(string),
                 typeof(ValidatableEntry),
-                string.Empty,
+                null,
                 BindingMode.TwoWay);
 
         public string Text
@@ -48,13 +48,13 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Placeholder),
                 typeof(string),
                 typeof(ValidatableEntry),
-                string.Empty,
+                null,
                 BindingMode.OneWay);
 
         public string Placeholder
         {
-            get { return (string)this.GetValue(PlaceholderProperty); }
-            set { this.SetValue(PlaceholderProperty, value); }
+            get => (string)this.GetValue(PlaceholderProperty);
+            set => this.SetValue(PlaceholderProperty, value);
         }
 
         public static readonly BindableProperty IsReadonlyProperty =
@@ -81,8 +81,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public Keyboard Keyboard
         {
-            get { return (Keyboard)this.GetValue(KeyboardProperty); }
-            set { this.SetValue(KeyboardProperty, value); }
+            get => (Keyboard)this.GetValue(KeyboardProperty);
+            set => this.SetValue(KeyboardProperty, value);
         }
 
         public static readonly BindableProperty IsPasswordProperty =
@@ -95,8 +95,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public bool IsPassword
         {
-            get { return (bool)this.GetValue(IsPasswordProperty); }
-            set { this.SetValue(IsPasswordProperty, value); }
+            get => (bool)this.GetValue(IsPasswordProperty);
+            set => this.SetValue(IsPasswordProperty, value);
         }
 
         public static readonly BindableProperty EntryStyleProperty =
@@ -109,8 +109,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public Style EntryStyle
         {
-            get { return (Style)this.GetValue(EntryStyleProperty); }
-            set { this.SetValue(EntryStyleProperty, value); }
+            get => (Style)this.GetValue(EntryStyleProperty);
+            set => this.SetValue(EntryStyleProperty, value);
         }
 
         public static readonly BindableProperty FontFamilyProperty =
@@ -123,8 +123,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string FontFamily
         {
-            get { return (string)this.GetValue(FontFamilyProperty); }
-            set { this.SetValue(FontFamilyProperty, value); }
+            get => (string)this.GetValue(FontFamilyProperty);
+            set => this.SetValue(FontFamilyProperty, value);
         }
 
         public static readonly BindableProperty MaxLengthProperty =
@@ -137,8 +137,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public int MaxLength
         {
-            get { return (int)this.GetValue(MaxLengthProperty); }
-            set { this.SetValue(MaxLengthProperty, value); }
+            get => (int)this.GetValue(MaxLengthProperty);
+            set => this.SetValue(MaxLengthProperty, value);
         }
 
         public static readonly BindableProperty ValidationErrorsProperty =
@@ -151,8 +151,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public IEnumerable<string> ValidationErrors
         {
-            get { return (IEnumerable<string>)this.GetValue(ValidationErrorsProperty); }
-            set { this.SetValue(ValidationErrorsProperty, value); }
+            get => (IEnumerable<string>)this.GetValue(ValidationErrorsProperty);
+            set => this.SetValue(ValidationErrorsProperty, value);
         }
 
         public static readonly BindableProperty TrailingIconProperty =
@@ -213,26 +213,26 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public event EventHandler Completed
         {
-            add { this.Entry.Completed += value; }
-            remove { this.Entry.Completed -= value; }
+            add => this.Entry.Completed += value;
+            remove => this.Entry.Completed -= value;
         }
 
         public new event EventHandler<FocusEventArgs> Focused
         {
-            add { this.Entry.Focused += value; }
-            remove { this.Entry.Focused -= value; }
+            add => this.Entry.Focused += value;
+            remove => this.Entry.Focused -= value;
         }
 
         public new event EventHandler<FocusEventArgs> Unfocused
         {
-            add { this.Entry.Unfocused += value; }
-            remove { this.Entry.Unfocused -= value; }
+            add => this.Entry.Unfocused += value;
+            remove => this.Entry.Unfocused -= value;
         }
 
         public event EventHandler<TextChangedEventArgs> TextChanged
         {
-            add { this.Entry.TextChanged += value; }
-            remove { this.Entry.TextChanged -= value; }
+            add => this.Entry.TextChanged += value;
+            remove => this.Entry.TextChanged -= value;
         }
     }
 }

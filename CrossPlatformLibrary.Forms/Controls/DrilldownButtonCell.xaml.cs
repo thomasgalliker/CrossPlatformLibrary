@@ -33,7 +33,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Text),
                 typeof(string),
                 typeof(DrilldownButtonCell),
-                string.Empty,
+                null,
                 BindingMode.OneWay);
 
         public string Text

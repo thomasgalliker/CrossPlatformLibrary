@@ -3275,13 +3275,13 @@ namespace CrossPlatformLibrary.Forms.Android
 			public static int main_appbar = 2131230811;
 			
 			// aapt resource value: 0x7F08005C
-			public static int main_scrollview = 2131230812;
+			public static int main_tablayout = 2131230812;
 			
 			// aapt resource value: 0x7F08005D
-			public static int main_tablayout = 2131230813;
+			public static int main_toolbar = 2131230813;
 			
 			// aapt resource value: 0x7F08005E
-			public static int main_toolbar = 2131230814;
+			public static int main_viewpager = 2131230814;
 			
 			// aapt resource value: 0x7F08005F
 			public static int masked = 2131230815;
@@ -3494,154 +3494,151 @@ namespace CrossPlatformLibrary.Forms.Android
 			public static int shellcontent_appbar = 2131230883;
 			
 			// aapt resource value: 0x7F0800A4
-			public static int shellcontent_scrollview = 2131230884;
-			
-			// aapt resource value: 0x7F0800A5
-			public static int shellcontent_toolbar = 2131230885;
+			public static int shellcontent_toolbar = 2131230884;
 			
 			// aapt resource value: 0x7F080004
 			public static int SHIFT = 2131230724;
 			
+			// aapt resource value: 0x7F0800A5
+			public static int shortcut = 2131230885;
+			
 			// aapt resource value: 0x7F0800A6
-			public static int shortcut = 2131230886;
+			public static int showCustom = 2131230886;
 			
 			// aapt resource value: 0x7F0800A7
-			public static int showCustom = 2131230887;
+			public static int showHome = 2131230887;
 			
 			// aapt resource value: 0x7F0800A8
-			public static int showHome = 2131230888;
+			public static int showTitle = 2131230888;
 			
 			// aapt resource value: 0x7F0800A9
-			public static int showTitle = 2131230889;
+			public static int smallLabel = 2131230889;
 			
 			// aapt resource value: 0x7F0800AA
-			public static int smallLabel = 2131230890;
+			public static int snackbar_action = 2131230890;
 			
 			// aapt resource value: 0x7F0800AB
-			public static int snackbar_action = 2131230891;
+			public static int snackbar_text = 2131230891;
 			
 			// aapt resource value: 0x7F0800AC
-			public static int snackbar_text = 2131230892;
+			public static int snap = 2131230892;
 			
 			// aapt resource value: 0x7F0800AD
-			public static int snap = 2131230893;
+			public static int spacer = 2131230893;
 			
 			// aapt resource value: 0x7F0800AE
-			public static int spacer = 2131230894;
+			public static int split_action_bar = 2131230894;
 			
 			// aapt resource value: 0x7F0800AF
-			public static int split_action_bar = 2131230895;
+			public static int src_atop = 2131230895;
 			
 			// aapt resource value: 0x7F0800B0
-			public static int src_atop = 2131230896;
+			public static int src_in = 2131230896;
 			
 			// aapt resource value: 0x7F0800B1
-			public static int src_in = 2131230897;
+			public static int src_over = 2131230897;
 			
 			// aapt resource value: 0x7F0800B2
-			public static int src_over = 2131230898;
+			public static int start = 2131230898;
 			
 			// aapt resource value: 0x7F0800B3
-			public static int start = 2131230899;
+			public static int status_bar_latest_event_content = 2131230899;
 			
 			// aapt resource value: 0x7F0800B4
-			public static int status_bar_latest_event_content = 2131230900;
+			public static int submenuarrow = 2131230900;
 			
 			// aapt resource value: 0x7F0800B5
-			public static int submenuarrow = 2131230901;
-			
-			// aapt resource value: 0x7F0800B6
-			public static int submit_area = 2131230902;
+			public static int submit_area = 2131230901;
 			
 			// aapt resource value: 0x7F080005
 			public static int SYM = 2131230725;
 			
+			// aapt resource value: 0x7F0800B6
+			public static int tabMode = 2131230902;
+			
 			// aapt resource value: 0x7F0800B7
-			public static int tabMode = 2131230903;
+			public static int tag_transition_group = 2131230903;
 			
 			// aapt resource value: 0x7F0800B8
-			public static int tag_transition_group = 2131230904;
+			public static int text = 2131230904;
 			
 			// aapt resource value: 0x7F0800B9
-			public static int text = 2131230905;
-			
-			// aapt resource value: 0x7F0800BA
-			public static int text2 = 2131230906;
-			
-			// aapt resource value: 0x7F0800BE
-			public static int textinput_counter = 2131230910;
-			
-			// aapt resource value: 0x7F0800BF
-			public static int textinput_error = 2131230911;
-			
-			// aapt resource value: 0x7F0800BB
-			public static int textSpacerNoButtons = 2131230907;
-			
-			// aapt resource value: 0x7F0800BC
-			public static int textSpacerNoTitle = 2131230908;
+			public static int text2 = 2131230905;
 			
 			// aapt resource value: 0x7F0800BD
-			public static int text_input_password_toggle = 2131230909;
+			public static int textinput_counter = 2131230909;
+			
+			// aapt resource value: 0x7F0800BE
+			public static int textinput_error = 2131230910;
+			
+			// aapt resource value: 0x7F0800BA
+			public static int textSpacerNoButtons = 2131230906;
+			
+			// aapt resource value: 0x7F0800BB
+			public static int textSpacerNoTitle = 2131230907;
+			
+			// aapt resource value: 0x7F0800BC
+			public static int text_input_password_toggle = 2131230908;
+			
+			// aapt resource value: 0x7F0800BF
+			public static int time = 2131230911;
 			
 			// aapt resource value: 0x7F0800C0
-			public static int time = 2131230912;
+			public static int title = 2131230912;
 			
 			// aapt resource value: 0x7F0800C1
-			public static int title = 2131230913;
+			public static int titleDividerNoCustom = 2131230913;
 			
 			// aapt resource value: 0x7F0800C2
-			public static int titleDividerNoCustom = 2131230914;
+			public static int title_template = 2131230914;
 			
 			// aapt resource value: 0x7F0800C3
-			public static int title_template = 2131230915;
+			public static int top = 2131230915;
 			
 			// aapt resource value: 0x7F0800C4
-			public static int top = 2131230916;
+			public static int topPanel = 2131230916;
 			
 			// aapt resource value: 0x7F0800C5
-			public static int topPanel = 2131230917;
+			public static int touch_outside = 2131230917;
 			
 			// aapt resource value: 0x7F0800C6
-			public static int touch_outside = 2131230918;
+			public static int transition_current_scene = 2131230918;
 			
 			// aapt resource value: 0x7F0800C7
-			public static int transition_current_scene = 2131230919;
+			public static int transition_layout_save = 2131230919;
 			
 			// aapt resource value: 0x7F0800C8
-			public static int transition_layout_save = 2131230920;
+			public static int transition_position = 2131230920;
 			
 			// aapt resource value: 0x7F0800C9
-			public static int transition_position = 2131230921;
+			public static int transition_scene_layoutid_cache = 2131230921;
 			
 			// aapt resource value: 0x7F0800CA
-			public static int transition_scene_layoutid_cache = 2131230922;
+			public static int transition_transform = 2131230922;
 			
 			// aapt resource value: 0x7F0800CB
-			public static int transition_transform = 2131230923;
+			public static int uniform = 2131230923;
 			
 			// aapt resource value: 0x7F0800CC
-			public static int uniform = 2131230924;
+			public static int up = 2131230924;
 			
 			// aapt resource value: 0x7F0800CD
-			public static int up = 2131230925;
+			public static int useLogo = 2131230925;
 			
 			// aapt resource value: 0x7F0800CE
-			public static int useLogo = 2131230926;
+			public static int view_offset_helper = 2131230926;
 			
 			// aapt resource value: 0x7F0800CF
-			public static int view_offset_helper = 2131230927;
+			public static int visible = 2131230927;
 			
 			// aapt resource value: 0x7F0800D0
-			public static int visible = 2131230928;
+			public static int volume_item_container = 2131230928;
 			
 			// aapt resource value: 0x7F0800D1
-			public static int volume_item_container = 2131230929;
+			public static int withText = 2131230929;
 			
 			// aapt resource value: 0x7F0800D2
-			public static int withText = 2131230930;
-			
-			// aapt resource value: 0x7F0800D3
-			public static int wrap_content = 2131230931;
+			public static int wrap_content = 2131230930;
 			
 			static Id()
 			{
@@ -4667,6 +4664,9 @@ namespace CrossPlatformLibrary.Forms.Android
 			
 			// aapt resource value: 0x7F0D00AC
 			public static int CardView_Light = 2131558572;
+			
+			// aapt resource value: 0x7F0D018F
+			public static int collectionViewStyle = 2131558799;
 			
 			// aapt resource value: 0x7F0D00AD
 			public static int Platform_AppCompat = 2131558573;

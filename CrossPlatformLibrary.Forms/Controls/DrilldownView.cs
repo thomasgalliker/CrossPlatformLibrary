@@ -13,8 +13,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string Title
         {
-            get { return (string)this.GetValue(TitleProperty); }
-            set { this.SetValue(TitleProperty, value); }
+            get => (string)this.GetValue(TitleProperty);
+            set => this.SetValue(TitleProperty, value);
         }
 
         public static readonly BindableProperty CommandProperty =

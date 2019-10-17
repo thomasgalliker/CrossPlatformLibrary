@@ -37,7 +37,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Text),
                 typeof(string),
                 typeof(ValidatableAutoCompleteView),
-                string.Empty,
+                null,
                 BindingMode.TwoWay);
 
         public string Text
@@ -51,13 +51,13 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Placeholder),
                 typeof(string),
                 typeof(ValidatableAutoCompleteView),
-                string.Empty,
+                null,
                 BindingMode.OneWay);
 
         public string Placeholder
         {
-            get { return (string)this.GetValue(PlaceholderProperty); }
-            set { this.SetValue(PlaceholderProperty, value); }
+            get => (string)this.GetValue(PlaceholderProperty);
+            set => this.SetValue(PlaceholderProperty, value);
         }
 
         public static readonly BindableProperty IsReadonlyProperty =
@@ -84,8 +84,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public Keyboard Keyboard
         {
-            get { return (Keyboard)this.GetValue(KeyboardProperty); }
-            set { this.SetValue(KeyboardProperty, value); }
+            get => (Keyboard)this.GetValue(KeyboardProperty);
+            set => this.SetValue(KeyboardProperty, value);
         }
 
         public new static readonly BindableProperty StyleProperty =
@@ -98,8 +98,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public new Style Style
         {
-            get { return (Style)this.GetValue(StyleProperty); }
-            set { this.SetValue(StyleProperty, value); }
+            get => (Style)this.GetValue(StyleProperty);
+            set => this.SetValue(StyleProperty, value);
         }
 
         public static readonly BindableProperty FontFamilyProperty =
@@ -112,8 +112,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string FontFamily
         {
-            get { return (string)this.GetValue(FontFamilyProperty); }
-            set { this.SetValue(FontFamilyProperty, value); }
+            get => (string)this.GetValue(FontFamilyProperty);
+            set => this.SetValue(FontFamilyProperty, value);
         }
 
         public static readonly BindableProperty MaxLengthProperty =
@@ -126,8 +126,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public int MaxLength
         {
-            get { return (int)this.GetValue(MaxLengthProperty); }
-            set { this.SetValue(MaxLengthProperty, value); }
+            get => (int)this.GetValue(MaxLengthProperty);
+            set => this.SetValue(MaxLengthProperty, value);
         }
 
         public static readonly BindableProperty ValidationErrorsProperty =
@@ -355,26 +355,26 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public event EventHandler Completed
         {
-            add { this.Entry.Completed += value; }
-            remove { this.Entry.Completed -= value; }
+            add => this.Entry.Completed += value;
+            remove => this.Entry.Completed -= value;
         }
 
         public new event EventHandler<FocusEventArgs> Focused
         {
-            add { this.Entry.Focused += value; }
-            remove { this.Entry.Focused -= value; }
+            add => this.Entry.Focused += value;
+            remove => this.Entry.Focused -= value;
         }
 
         public new event EventHandler<FocusEventArgs> Unfocused
         {
-            add { this.Entry.Unfocused += value; }
-            remove { this.Entry.Unfocused -= value; }
+            add => this.Entry.Unfocused += value;
+            remove => this.Entry.Unfocused -= value;
         }
 
         public event EventHandler<TextChangedEventArgs> TextChanged
         {
-            add { this.Entry.TextChanged += value; }
-            remove { this.Entry.TextChanged -= value; }
+            add => this.Entry.TextChanged += value;
+            remove => this.Entry.TextChanged -= value;
         }
     }
 }

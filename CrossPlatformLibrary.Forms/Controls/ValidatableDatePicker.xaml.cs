@@ -17,7 +17,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Placeholder),
                 typeof(string),
                 typeof(ValidatableDatePicker),
-                string.Empty,
+                null,
                 BindingMode.OneWay,
                 null,
                 OnPlaceholderPropertyChanged);
@@ -30,8 +30,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string Placeholder
         {
-            get { return (string)this.GetValue(PlaceholderProperty); }
-            set { this.SetValue(PlaceholderProperty, value); }
+            get => (string)this.GetValue(PlaceholderProperty);
+            set => this.SetValue(PlaceholderProperty, value);
         }
 
         public string AnnotationText
@@ -57,8 +57,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public new Style Style
         {
-            get { return (Style)this.GetValue(StyleProperty); }
-            set { this.SetValue(StyleProperty, value); }
+            get => (Style)this.GetValue(StyleProperty);
+            set => this.SetValue(StyleProperty, value);
         }
 
         public static readonly BindableProperty FontFamilyProperty =
@@ -71,8 +71,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string FontFamily
         {
-            get { return (string)this.GetValue(FontFamilyProperty); }
-            set { this.SetValue(FontFamilyProperty, value); }
+            get => (string)this.GetValue(FontFamilyProperty);
+            set => this.SetValue(FontFamilyProperty, value);
         }
 
         public static readonly BindableProperty FontSizeProperty =
@@ -85,8 +85,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public double FontSize
         {
-            get { return (double)this.GetValue(FontSizeProperty); }
-            set { this.SetValue(FontSizeProperty, value); }
+            get => (double)this.GetValue(FontSizeProperty);
+            set => this.SetValue(FontSizeProperty, value);
         }
 
         public static readonly BindableProperty FontAttributesProperty =
@@ -99,8 +99,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public FontAttributes FontAttributes
         {
-            get { return (FontAttributes)this.GetValue(FontAttributesProperty); }
-            set { this.SetValue(FontAttributesProperty, (object)value); }
+            get => (FontAttributes)this.GetValue(FontAttributesProperty);
+            set => this.SetValue(FontAttributesProperty, (object)value);
         }
 
         public static readonly BindableProperty DateProperty =

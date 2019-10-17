@@ -43,7 +43,7 @@ namespace CrossPlatformLibrary.Forms.Mvvm
 
         public bool Unlocked
         {
-            get { return this.unlocked; }
+            get => this.unlocked;
             set
             {
                 this.unlocked = value;

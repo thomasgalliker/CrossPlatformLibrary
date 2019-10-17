@@ -37,13 +37,13 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public IEnumerable ItemsSource
         {
-            get { return (IEnumerable)this.GetValue(ItemsSourceProperty); }
-            set { this.SetValue(ItemsSourceProperty, value); }
+            get => (IEnumerable)this.GetValue(ItemsSourceProperty);
+            set => this.SetValue(ItemsSourceProperty, value);
         }
 
         public object SelectedItem
         {
-            get { return this.GetValue(SelectedItemProperty); }
+            get => this.GetValue(SelectedItemProperty);
             set
             {
                 if (this.SelectedItem != value)
@@ -56,7 +56,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public object SelectedValue
         {
-            get { return this.GetValue(SelectedValueProperty); }
+            get => this.GetValue(SelectedValueProperty);
             set
             {
                 this.SetValue(SelectedValueProperty, value);
@@ -74,8 +74,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string SelectedValuePath
         {
-            get { return (string)this.GetValue(SelectedValuePathProperty); }
-            set { this.SetValue(SelectedValuePathProperty, value); }
+            get => (string)this.GetValue(SelectedValuePathProperty);
+            set => this.SetValue(SelectedValuePathProperty, value);
         }
 
         public static readonly BindableProperty DisplayMemberPathProperty =

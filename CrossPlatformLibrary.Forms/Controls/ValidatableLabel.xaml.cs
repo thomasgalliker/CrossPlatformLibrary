@@ -15,7 +15,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Text),
                 typeof(string),
                 typeof(ValidatableLabel),
-                string.Empty,
+                null,
                 BindingMode.OneWay);
 
         public string Text
@@ -29,13 +29,13 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Placeholder),
                 typeof(string),
                 typeof(ValidatableLabel),
-                string.Empty,
+                null,
                 BindingMode.OneWay);
 
         public string Placeholder
         {
-            get { return (string)this.GetValue(PlaceholderProperty); }
-            set { this.SetValue(PlaceholderProperty, value); }
+            get => (string)this.GetValue(PlaceholderProperty);
+            set => this.SetValue(PlaceholderProperty, value);
         }
 
         public static readonly BindableProperty LabelStyleProperty =
@@ -48,8 +48,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public Style LabelStyle
         {
-            get { return (Style)this.GetValue(LabelStyleProperty); }
-            set { this.SetValue(LabelStyleProperty, value); }
+            get => (Style)this.GetValue(LabelStyleProperty);
+            set => this.SetValue(LabelStyleProperty, value);
         }
 
         public static readonly BindableProperty FontFamilyProperty =

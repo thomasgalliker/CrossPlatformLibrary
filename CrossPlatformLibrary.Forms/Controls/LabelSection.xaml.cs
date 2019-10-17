@@ -15,7 +15,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             nameof(Text),
             typeof(string),
             typeof(LabelSection),
-            string.Empty);
+            null);
 
         public string Text
         {

@@ -23,46 +23,25 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public ShapeType ShapeType
         {
-            get
-            {
-                return (ShapeType)this.GetValue(ShapeTypeProperty);
-            }
-            set
-            {
-                this.SetValue(ShapeTypeProperty, value);
-            }
+            get => (ShapeType)this.GetValue(ShapeTypeProperty);
+            set => this.SetValue(ShapeTypeProperty, value);
         }
 
         public Color StrokeColor
         {
-            get
-            {
-                return (Color)this.GetValue(StrokeColorProperty);
-            }
-            set
-            {
-                this.SetValue(StrokeColorProperty, value);
-            }
+            get => (Color)this.GetValue(StrokeColorProperty);
+            set => this.SetValue(StrokeColorProperty, value);
         }
 
         public float StrokeWidth
         {
-            get
-            {
-                return (float)this.GetValue(StrokeWidthProperty);
-            }
-            set
-            {
-                this.SetValue(StrokeWidthProperty, value);
-            }
+            get => (float)this.GetValue(StrokeWidthProperty);
+            set => this.SetValue(StrokeWidthProperty, value);
         }
 
         public float IndicatorPercentage
         {
-            get
-            {
-                return (float)this.GetValue(IndicatorPercentageProperty);
-            }
+            get => (float)this.GetValue(IndicatorPercentageProperty);
             set
             {
                 if (this.ShapeType != ShapeType.CircleIndicator) throw new ArgumentException("Can only specify this property with CircleIndicator");
@@ -72,10 +51,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public float CornerRadius
         {
-            get
-            {
-                return (float)this.GetValue(CornerRadiusProperty);
-            }
+            get => (float)this.GetValue(CornerRadiusProperty);
             set
             {
                 if (this.ShapeType != ShapeType.Box) throw new ArgumentException("Can only specify this property with Box");
@@ -85,14 +61,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public Thickness Padding
         {
-            get
-            {
-                return (Thickness)this.GetValue(PaddingProperty);
-            }
-            set
-            {
-                this.SetValue(PaddingProperty, value);
-            }
+            get => (Thickness)this.GetValue(PaddingProperty);
+            set => this.SetValue(PaddingProperty, value);
         }
     }
 }

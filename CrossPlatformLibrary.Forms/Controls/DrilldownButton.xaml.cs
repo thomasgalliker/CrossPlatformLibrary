@@ -25,7 +25,7 @@ namespace CrossPlatformLibrary.Forms.Controls
              nameof(Text),
              typeof(string),
              typeof(DrilldownButton),
-             string.Empty,
+             null,
              BindingMode.OneWay);
 
         public string Text

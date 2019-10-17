@@ -47,15 +47,9 @@ namespace CrossPlatformLibrary.Forms.Controls
             this._children.CopyTo(array, arrayIndex);
         }
 
-        public int Count
-        {
-            get { return this._children.Count; }
-        }
+        public int Count => this._children.Count;
 
-        bool ICollection<T>.IsReadOnly
-        {
-            get { return false; }
-        }
+        bool ICollection<T>.IsReadOnly => false;
 
         public bool Remove(T item)
         {
@@ -84,8 +78,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public T this[int index]
         {
-            get { return this._children[index]; }
-            set { this._children[index] = value; }
+            get => this._children[index];
+            set => this._children[index] = value;
         }
 
         public void RemoveAt(int index)
@@ -95,8 +89,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public event NotifyCollectionChangedEventHandler CollectionChanged
         {
-            add { this._children.CollectionChanged += value; }
-            remove { this._children.CollectionChanged -= value; }
+            add => this._children.CollectionChanged += value;
+            remove => this._children.CollectionChanged -= value;
         }
 
         public void Add(IEnumerable<T> items)

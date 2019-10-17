@@ -21,8 +21,8 @@ namespace CrossPlatformLibrary.Forms.Controls
             BindableProperty.Create(
                 nameof(Placeholder),
                 typeof(string),
-                typeof(ValidatablePicker),
-                string.Empty,
+                typeof(ValidatablePicker), 
+                null,
                 BindingMode.OneWay,
                 null,
                 OnPlaceholderPropertyChanged);
@@ -76,8 +76,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string FontFamily
         {
-            get { return (string)this.GetValue(FontFamilyProperty); }
-            set { this.SetValue(FontFamilyProperty, value); }
+            get => (string)this.GetValue(FontFamilyProperty);
+            set => this.SetValue(FontFamilyProperty, value);
         }
 
         public static readonly BindableProperty FontSizeProperty =
@@ -90,8 +90,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public double FontSize
         {
-            get { return (double)this.GetValue(FontSizeProperty); }
-            set { this.SetValue(FontSizeProperty, value); }
+            get => (double)this.GetValue(FontSizeProperty);
+            set => this.SetValue(FontSizeProperty, value);
         }
 
         public static readonly BindableProperty FontAttributesProperty =
@@ -104,8 +104,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public FontAttributes FontAttributes
         {
-            get { return (FontAttributes)this.GetValue(FontAttributesProperty); }
-            set { this.SetValue(FontAttributesProperty, (object)value); }
+            get => (FontAttributes)this.GetValue(FontAttributesProperty);
+            set => this.SetValue(FontAttributesProperty, (object)value);
         }
 
         public static readonly BindableProperty ItemsSourceProperty =
@@ -127,8 +127,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public IEnumerable ItemsSource
         {
-            get { return (IEnumerable)this.GetValue(ItemsSourceProperty); }
-            set { this.SetValue(ItemsSourceProperty, value); }
+            get => (IEnumerable)this.GetValue(ItemsSourceProperty);
+            set => this.SetValue(ItemsSourceProperty, value);
         }
 
         public static readonly BindableProperty SelectedItemProperty =
@@ -247,8 +247,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public bool IsReadonly
         {
-            get { return (bool)this.GetValue(IsReadonlyProperty); }
-            set { this.SetValue(IsReadonlyProperty, value); }
+            get => (bool)this.GetValue(IsReadonlyProperty);
+            set => this.SetValue(IsReadonlyProperty, value);
         }
 
         public static readonly BindableProperty ReadonlyTextProperty =
@@ -271,7 +271,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 }
                 return readonlyText;
             }
-            set { this.SetValue(ReadonlyTextProperty, value); }
+            set => this.SetValue(ReadonlyTextProperty, value);
         }
 
         public static readonly BindableProperty ValidationErrorsProperty =
@@ -284,8 +284,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public IEnumerable<string> ValidationErrors
         {
-            get { return (IEnumerable<string>)this.GetValue(ValidationErrorsProperty); }
-            set { this.SetValue(ValidationErrorsProperty, value); }
+            get => (IEnumerable<string>)this.GetValue(ValidationErrorsProperty);
+            set => this.SetValue(ValidationErrorsProperty, value);
         }
     }
 }

@@ -76,7 +76,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Placeholder),
                 typeof(string),
                 typeof(ExtendedDatePicker),
-                string.Empty,
+                null,
                 BindingMode.OneWay);
 
         public static readonly BindableProperty PlaceholderTextColorProperty =
@@ -88,7 +88,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public DateTime? NullableDate
         {
-            get { return (DateTime?)this.GetValue(NullableDateProperty); }
+            get => (DateTime?)this.GetValue(NullableDateProperty);
             set
             {
                 if (value != this.NullableDate)
@@ -101,32 +101,32 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public Font Font
         {
-            get { return (Font)this.GetValue(FontProperty); }
-            set { this.SetValue(FontProperty, value); }
+            get => (Font)this.GetValue(FontProperty);
+            set => this.SetValue(FontProperty, value);
         }
 
         public TextAlignment XAlign
         {
-            get { return (TextAlignment)this.GetValue(XAlignProperty); }
-            set { this.SetValue(XAlignProperty, value); }
+            get => (TextAlignment)this.GetValue(XAlignProperty);
+            set => this.SetValue(XAlignProperty, value);
         }
 
         public bool HasBorder
         {
-            get { return (bool)this.GetValue(HasBorderProperty); }
-            set { this.SetValue(HasBorderProperty, value); }
+            get => (bool)this.GetValue(HasBorderProperty);
+            set => this.SetValue(HasBorderProperty, value);
         }
 
         public string Placeholder
         {
-            get { return (string)this.GetValue(PlaceholderProperty); }
-            set { this.SetValue(PlaceholderProperty, value); }
+            get => (string)this.GetValue(PlaceholderProperty);
+            set => this.SetValue(PlaceholderProperty, value);
         }
 
         public Color PlaceholderTextColor
         {
-            get { return (Color)this.GetValue(PlaceholderTextColorProperty); }
-            set { this.SetValue(PlaceholderTextColorProperty, value); }
+            get => (Color)this.GetValue(PlaceholderTextColorProperty);
+            set => this.SetValue(PlaceholderTextColorProperty, value);
         }
 
         protected override void OnBindingContextChanged()
