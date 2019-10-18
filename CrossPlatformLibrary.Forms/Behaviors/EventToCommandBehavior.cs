@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Input;
+using CrossPlatformLibrary.Extensions;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Behaviors
@@ -72,6 +74,8 @@ namespace CrossPlatformLibrary.Forms.Behaviors
 
         private void RegisterEvent(string name)
         {
+            Debug.WriteLine($"EventToCommandBehavior.RegisterEvent(name={name})");
+
             if (string.IsNullOrWhiteSpace(name))
             {
                 return;
@@ -83,13 +87,15 @@ namespace CrossPlatformLibrary.Forms.Behaviors
                 throw new ArgumentException($"EventToCommandBehavior: Can't register the '{this.EventName}' event.");
             }
 
-            var methodInfo = typeof(EventToCommandBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
+            var methodInfo = typeof(EventToCommandBehavior).GetTypeInfo().GetDeclaredMethod(nameof(this.OnEvent));
             this.eventHandler = methodInfo.CreateDelegate(eventInfo.EventHandlerType, this);
             eventInfo.AddEventHandler(this.AssociatedObject, this.eventHandler);
         }
 
         private void DeregisterEvent(string name)
         {
+            Debug.WriteLine($"EventToCommandBehavior.DeregisterEvent(name={name})");
+
             if (string.IsNullOrWhiteSpace(name))
             {
                 return;
@@ -112,6 +118,8 @@ namespace CrossPlatformLibrary.Forms.Behaviors
 
         void OnEvent(object sender, object eventArgs)
         {
+            Debug.WriteLine($"EventToCommandBehavior.OnEvent(sender={sender?.GetType().GetFormattedName() ?? "<null>"}, eventArgs={eventArgs?.GetType().GetFormattedName() ?? "<null>"})");
+
             if (this.Command == null)
             {
                 return;
