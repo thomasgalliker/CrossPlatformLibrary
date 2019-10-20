@@ -71,7 +71,6 @@
     <Compile Include="Renderers\CustomSearchBarRenderer.cs" />
     <Compile Include="Renderers\CustomSwitchRenderer.cs" />
     <Compile Include="Renderers\CustomTextCellRenderer.cs" />
-    <Compile Include="Renderers\CustomWebViewRenderer.cs" />
     <Compile Include="Renderers\ExtendedDatePickerRenderer.cs" />
     <Compile Include="Renderers\ExtendedTimePickerRenderer.cs" />
     <Compile Include="Renderers\ExtendedViewCellRenderer.cs" />
