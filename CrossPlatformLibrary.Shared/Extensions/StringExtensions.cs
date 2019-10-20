@@ -268,6 +268,18 @@ namespace CrossPlatformLibrary.Extensions
                     toSearch);
         }
 
+        /// <summary>Returns a value indicating whether a specified substring <paramref name="value"/> occurs within the source string <paramref name="source"/>.</summary>
+        /// <param name="source">The source string.</param>
+        /// <param name="value">The string to seek.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies the rules for the search.</param>
+        /// <returns>true if the <paramref name="value">value</paramref> parameter occurs within this string, or if <paramref name="value">value</paramref> is the empty string (""); otherwise, false.</returns>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="value">value</paramref> is null.</exception>
+        /// <exception cref="T:System.ArgumentException"><paramref name="comparisonType">comparisonType</paramref> is not a valid <see cref="T:System.StringComparison"></see> value.</exception>
+        public static bool Contains(this string source, string value, StringComparison comparisonType)
+        {
+            return source?.IndexOf(value, comparisonType) >= 0;
+        }
+
         /// <summary>
         /// Checks if any of the given strings is contained in source string.
         /// </summary>
