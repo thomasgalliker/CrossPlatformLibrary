@@ -281,14 +281,24 @@ namespace CrossPlatformLibrary.Extensions
         }
 
         /// <summary>
-        /// Checks if any of the given strings is contained in source string.
+        /// Checks if any of the given strings <paramref name="strings"/> is contained in source string <paramref name="source"/>.
         /// </summary>
         /// <param name="source">The source string.</param>
         /// <param name="strings">The enumeration of strings to be compared against the source string.</param>
-        /// <returns></returns>
         public static bool ContainsAny(this string source, IEnumerable<string> strings)
         {
             return strings.Any(s => source.Contains(s));
+        }
+
+        /// <summary>
+        /// Checks if any of the given strings <paramref name="strings"/> is contained in source string <paramref name="source"/>.
+        /// </summary>
+        /// <param name="source">The source string.</param>
+        /// <param name="strings">The enumeration of strings to be compared against the source string.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies the rules for the search.</param>
+        public static bool ContainsAny(this string source, IEnumerable<string> strings, StringComparison comparisonType)
+        {
+            return strings.Any(s => source.Contains(s, comparisonType));
         }
 
         public static bool StartsWithAny(this string source, IEnumerable<string> strings)
