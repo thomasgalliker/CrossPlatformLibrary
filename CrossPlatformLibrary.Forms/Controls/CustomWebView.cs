@@ -9,11 +9,6 @@ namespace CrossPlatformLibrary.Forms.Controls
     /// </summary>
     public class CustomWebView : WebView
     {
-        public CustomWebView()
-        {
-            this.EvaluateJavascript = s => this.EvaluateJavaScriptAsync(s);
-        }
-
         public static BindableProperty EvaluateJavascriptProperty = BindableProperty.Create(
             nameof(EvaluateJavascript), 
             typeof(Func<string, Task<string>>),
