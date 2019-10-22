@@ -68,9 +68,11 @@
         EndColor="LightPink"
         GradientOrientation="Vertical"
         Orientation="Vertical"
-        StartColor="LightGray">
+        StartColor="LightGray"
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand">
 
-        <controls:GridZero>
+        <controls:GridZero VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>

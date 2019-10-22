@@ -40,7 +40,6 @@ namespace SampleApp.ViewModels
         private DateTime? birthdate;
         private bool isSaving;
         private ObservableCollection<ColorResource> themeColors;
-        private DateTime startDate;
 
         public MainViewModel(
             DisplayService displayService,
@@ -299,7 +298,7 @@ namespace SampleApp.ViewModels
         {
             this.IsBusy = true;
             this.ViewModelError = ViewModelError.None;
-            await Task.Delay(1000);
+            await Task.Delay(3000);
 
             try
             {
