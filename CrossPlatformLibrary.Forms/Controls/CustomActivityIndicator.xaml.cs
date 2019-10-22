@@ -10,6 +10,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         public CustomActivityIndicator()
         {
             this.InitializeComponent();
+            ((VisualElement)this.Control).BackgroundColor = Color.Transparent;
 
             // Hack: OnPlatform lacks of support for DynamicResource bindings!
             if (Device.RuntimePlatform == Device.Android)
@@ -43,6 +44,34 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             get => (Style)this.GetValue(LabelStyleProperty);
             set => this.SetValue(LabelStyleProperty, value);
+        }
+
+        public new static readonly BindableProperty BackgroundColorProperty = 
+            BindableProperty.Create(
+                nameof(BackgroundColor),
+                typeof(Color),
+                typeof(CustomActivityIndicator),
+                Color.Default,
+                BindingMode.OneWay);
+
+        public new Color BackgroundColor
+        {
+            get => (Color)this.GetValue(CustomActivityIndicator.BackgroundColorProperty);
+            set => this.SetValue(CustomActivityIndicator.BackgroundColorProperty, value);
+        }
+
+        public static readonly BindableProperty CornerRadiusProperty =
+            BindableProperty.Create(
+                nameof(CornerRadius), 
+                typeof(CornerRadius), 
+                typeof(CustomActivityIndicator),
+                new CornerRadius(),
+                BindingMode.OneWay);
+
+        public CornerRadius CornerRadius
+        {
+            get => (CornerRadius)this.GetValue(CornerRadiusProperty);
+            set => this.SetValue(CornerRadiusProperty, (object)value);
         }
     }
 }

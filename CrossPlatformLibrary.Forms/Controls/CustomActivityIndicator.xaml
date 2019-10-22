@@ -6,28 +6,38 @@
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control">
 
-    <controls:StackLayoutZero
-        Spacing="{DynamicResource Theme.Spacing.Medium}"
-        HorizontalOptions="CenterAndExpand"
-        VerticalOptions="CenterAndExpand">
-        <StackLayout.Orientation>
-            <OnPlatform x:TypeArguments="StackOrientation">
-                <On Platform="Android" Value="Vertical" />
-                <On Platform="iOS" Value="Horizontal" />
-            </OnPlatform>
-        </StackLayout.Orientation>
+    <controls:GridZero HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+        <BoxView
+            BackgroundColor="{Binding Source={x:Reference Control}, Path=BackgroundColor}"
+            CornerRadius="{Binding Source={x:Reference Control}, Path=CornerRadius}"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />
 
-        <ActivityIndicator
-            x:Name="ActivityIndicator"
-            BackgroundColor="Transparent"
-            IsRunning="{Binding IsVisible, Source={x:Reference Control}}">
-            <ActivityIndicator.WidthRequest>
-                <OnPlatform x:TypeArguments="x:Double">
-                    <On Platform="Android" Value="100" />
-                    <On Platform="iOS" Value="24" />
+        <controls:StackLayoutZero Padding="{Binding Source={x:Reference Control}, Path=Padding}" Spacing="{DynamicResource Theme.Spacing.Medium}">
+            <StackLayout.Orientation>
+                <OnPlatform x:TypeArguments="StackOrientation">
+                    <On Platform="Android" Value="Vertical" />
+                    <On Platform="iOS" Value="Horizontal" />
                 </OnPlatform>
-            </ActivityIndicator.WidthRequest>
-        </ActivityIndicator>
-        <Label Text="{Binding Caption, Source={x:Reference Control}}" Style="{Binding LabelStyle, Source={x:Reference Control}}" />
-    </controls:StackLayoutZero>
+            </StackLayout.Orientation>
+
+            <!--  ActivityIndicator  -->
+            <ActivityIndicator
+                x:Name="ActivityIndicator"
+                BackgroundColor="Transparent"
+                IsRunning="{Binding IsVisible, Source={x:Reference Control}}">
+                <ActivityIndicator.WidthRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android" Value="100" />
+                        <On Platform="iOS" Value="24" />
+                    </OnPlatform>
+                </ActivityIndicator.WidthRequest>
+            </ActivityIndicator>
+
+            <!--  Caption  -->
+            <Label Text="{Binding Caption, Source={x:Reference Control}}" Style="{Binding LabelStyle, Source={x:Reference Control}}" />
+
+        </controls:StackLayoutZero>
+    </controls:GridZero>
+
 </ContentView>
