@@ -4,12 +4,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
-    x:Name="Control"
-    HorizontalOptions="FillAndExpand"
-    VerticalOptions="FillAndExpand">
+    x:Name="Control">
 
-    <StackLayout
-        Margin="0"
+    <controls:StackLayoutZero
         Padding="{DynamicResource Theme.Padding.Large}"
         BackgroundColor="Transparent"
         HorizontalOptions="CenterAndExpand"
@@ -25,17 +22,15 @@
             WidthRequest="48" />
 
         <controls:CustomLabel
-            BackgroundColor="Transparent"
+            Style="{Binding LabelStyle, Source={x:Reference Control}}"
             FontSize="{DynamicResource LargeSize}"
             HorizontalOptions="StartAndExpand"
             HorizontalTextAlignment="Center"
             LineBreakMode="WordWrap"
-            Text="{Binding ViewModelError.Text, Source={x:Reference Control}}"
-            VerticalOptions="CenterAndExpand"
-            VerticalTextAlignment="Start" />
+            Text="{Binding ViewModelError.Text, Source={x:Reference Control}}" />
 
         <StackLayout.GestureRecognizers>
             <TapGestureRecognizer Command="{Binding ViewModelError.Command, Source={x:Reference Control}}" />
         </StackLayout.GestureRecognizers>
-    </StackLayout>
+    </controls:StackLayoutZero>
 </controls:StackLayoutZero>

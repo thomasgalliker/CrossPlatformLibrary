@@ -242,6 +242,42 @@
 
     <Style BasedOn="{StaticResource HyperLinkLabelStyle}" TargetType="controls:HyperLinkLabel" />
 
+    <!--  CustomActivityIndicator Default Style  -->
+    <Style
+        x:Key="CustomActivityIndicatorLabelStyle"
+        TargetType="Label"
+        BasedOn="{StaticResource LabelStyle}">
+        <Setter Property="FontSize" Value="{DynamicResource LargeSize}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+    </Style>
+    <Style TargetType="controls:CustomActivityIndicator">
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="Padding" Value="{DynamicResource Theme.Padding.Small}" />
+        <Setter Property="LabelStyle" Value="{StaticResource CustomActivityIndicatorLabelStyle}" />
+    </Style>
+
+    <!--  ViewModelErrorControl Default Style  -->
+    <Style
+        x:Key="ViewModelErrorControlLabelStyle"
+        TargetType="Label"
+        BasedOn="{StaticResource LabelStyle}">
+        <Setter Property="FontSize" Value="{DynamicResource LargeSize}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+    </Style>
+    <Style TargetType="controls:ViewModelErrorControl">
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="Padding" Value="{DynamicResource Theme.Padding.Small}" />
+        <Setter Property="LabelStyle" Value="{StaticResource ViewModelErrorControlLabelStyle}" />
+    </Style>
+
     <Style
         x:Key="CustomListItemDetailTextStyle"
         BaseResourceKey="ListItemDetailTextStyle"

@@ -35,5 +35,19 @@ namespace CrossPlatformLibrary.Forms.Controls
             get => (ImageSource)this.GetValue(ImageSourceProperty);
             set => this.SetValue(ImageSourceProperty, value);
         }
+
+        public static readonly BindableProperty LabelStyleProperty =
+            BindableProperty.Create(
+                nameof(LabelStyle),
+                typeof(Style),
+                typeof(ViewModelErrorControl),
+                default(Style),
+                BindingMode.OneWay);
+
+        public Style LabelStyle
+        {
+            get => (Style)this.GetValue(LabelStyleProperty);
+            set => this.SetValue(LabelStyleProperty, value);
+        }
     }
 }

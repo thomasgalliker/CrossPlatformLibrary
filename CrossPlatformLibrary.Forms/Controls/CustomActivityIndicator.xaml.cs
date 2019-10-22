@@ -1,12 +1,11 @@
-﻿using CrossPlatformLibrary.Forms.Resources;
-using CrossPlatformLibrary.Forms.Themes;
+﻿using CrossPlatformLibrary.Forms.Themes;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CustomActivityIndicator : StackLayout
+    public partial class CustomActivityIndicator : StackLayoutZero
     {
         public CustomActivityIndicator()
         {
@@ -30,6 +29,20 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             get => (string)this.GetValue(CaptionProperty);
             set => this.SetValue(CaptionProperty, value);
+        }
+
+        public static readonly BindableProperty LabelStyleProperty =
+            BindableProperty.Create(
+                nameof(LabelStyle),
+                typeof(Style),
+                typeof(CustomActivityIndicator),
+                default(Style),
+                BindingMode.OneWay);
+
+        public Style LabelStyle
+        {
+            get => (Style)this.GetValue(LabelStyleProperty);
+            set => this.SetValue(LabelStyleProperty, value);
         }
     }
 }

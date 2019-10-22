@@ -28,7 +28,7 @@ namespace SampleApp
             // Initialize CrossPlatformLibrary.Forms
             CrossPlatformLibrary.Forms.CrossPlatformLibrary.Init(this, "SampleApp.Theme");
 
-            this.MainPage = new MainPage();
+            this.MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()

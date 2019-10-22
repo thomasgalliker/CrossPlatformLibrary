@@ -1,13 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<StackLayout
+<controls:StackLayoutZero
     x:Class="CrossPlatformLibrary.Forms.Controls.CustomActivityIndicator"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Name="Control"
-    Padding="{DynamicResource Theme.Padding.Small}"
-    BackgroundColor="Transparent"
-    HorizontalOptions="CenterAndExpand"
-    VerticalOptions="CenterAndExpand">
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    x:Name="Control">
 
     <StackLayout.Orientation>
         <OnPlatform x:TypeArguments="StackOrientation">
@@ -27,15 +24,5 @@
             </OnPlatform>
         </ActivityIndicator.WidthRequest>
     </ActivityIndicator>
-    <Label
-        BackgroundColor="Transparent"
-        FontAttributes="Bold"
-        Text="{Binding Caption, Source={x:Reference Control}}">
-        <Label.HorizontalOptions>
-            <OnPlatform x:TypeArguments="LayoutOptions">
-                <On Platform="Android" Value="Center" />
-                <On Platform="iOS" Value="StartAndExpand" />
-            </OnPlatform>
-        </Label.HorizontalOptions>
-    </Label>
-</StackLayout>
+    <Label Text="{Binding Caption, Source={x:Reference Control}}" Style="{Binding LabelStyle, Source={x:Reference Control}}" />
+</controls:StackLayoutZero>
