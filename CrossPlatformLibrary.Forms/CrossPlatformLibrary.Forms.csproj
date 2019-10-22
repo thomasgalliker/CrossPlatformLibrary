@@ -83,6 +83,9 @@
     <Compile Update="Controls\DividerLine.xaml.cs">
       <DependentUpon>DividerLine.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Controls\ErrorBox.xaml.cs">
+      <DependentUpon>ErrorBox.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Controls\ValidationErrorBox.xaml.cs">
       <DependentUpon>ValidationErrorBox.xaml</DependentUpon>
     </Compile>

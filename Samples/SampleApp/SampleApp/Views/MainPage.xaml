@@ -252,6 +252,9 @@
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo User Controls: PeriodicTaskView--&gt;" />
                                 <userControls:PeriodicTaskView BindingContext="{Binding PeriodicTask}" />
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo User Controls: ErrorBox--&gt;" />
+                                <controls:ErrorBox Text="Some error message" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo User Controls: ValidationErrorBox--&gt;" />
                                 <controls:ValidationErrorBox Validation="{Binding Validation}" />
 
