@@ -5,7 +5,7 @@ using Xamarin.Forms.Xaml;
 namespace CrossPlatformLibrary.Forms.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CustomActivityIndicator : StackLayoutZero
+    public partial class CustomActivityIndicator : ContentView
     {
         public CustomActivityIndicator()
         {

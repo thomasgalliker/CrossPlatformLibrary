@@ -251,12 +251,15 @@
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="VerticalOptions" Value="Start" />
         <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="LineBreakMode" Value="WordWrap" />
     </Style>
     <Style x:Key="CustomActivityIndicatorStyle" TargetType="controls:CustomActivityIndicator">
+        <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-        <Setter Property="Padding" Value="{DynamicResource Theme.Padding.Small}" />
+        <Setter Property="Padding" Value="{DynamicResource Theme.Padding.Large}" />
         <Setter Property="LabelStyle" Value="{StaticResource CustomActivityIndicatorLabelStyle}" />
     </Style>
     <Style TargetType="controls:CustomActivityIndicator" BasedOn="{StaticResource CustomActivityIndicatorStyle}" />
@@ -270,12 +273,15 @@
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="VerticalOptions" Value="Start" />
         <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="LineBreakMode" Value="WordWrap" />
     </Style>
     <Style x:Key="ViewModelErrorControlStyle" TargetType="controls:ViewModelErrorControl">
+        <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="FillAndExpand" />
-        <Setter Property="Padding" Value="{DynamicResource Theme.Padding.Small}" />
+        <Setter Property="Padding" Value="{DynamicResource Theme.Padding.Large}" />
         <Setter Property="LabelStyle" Value="{StaticResource ViewModelErrorControlLabelStyle}" />
     </Style>
     <Style TargetType="controls:ViewModelErrorControl" BasedOn="{StaticResource ViewModelErrorControlStyle}" />

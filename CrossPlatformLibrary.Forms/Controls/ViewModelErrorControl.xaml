@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<controls:StackLayoutZero
+<ContentView
     x:Class="CrossPlatformLibrary.Forms.Controls.ViewModelErrorControl"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -7,10 +7,9 @@
     x:Name="Control">
 
     <controls:StackLayoutZero
-        Padding="{DynamicResource Theme.Padding.Large}"
-        BackgroundColor="Transparent"
-        HorizontalOptions="CenterAndExpand"
+        Spacing="{DynamicResource Theme.Spacing.Medium}"
         Orientation="Vertical"
+        HorizontalOptions="CenterAndExpand"
         VerticalOptions="CenterAndExpand">
 
         <Image
@@ -33,4 +32,4 @@
             <TapGestureRecognizer Command="{Binding ViewModelError.Command, Source={x:Reference Control}}" />
         </StackLayout.GestureRecognizers>
     </controls:StackLayoutZero>
-</controls:StackLayoutZero>
+</ContentView>

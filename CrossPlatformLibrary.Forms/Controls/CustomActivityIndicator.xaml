@@ -1,28 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<controls:StackLayoutZero
+<ContentView
     x:Class="CrossPlatformLibrary.Forms.Controls.CustomActivityIndicator"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control">
 
-    <StackLayout.Orientation>
-        <OnPlatform x:TypeArguments="StackOrientation">
-            <On Platform="Android" Value="Vertical" />
-            <On Platform="iOS" Value="Horizontal" />
-        </OnPlatform>
-    </StackLayout.Orientation>
-
-    <ActivityIndicator
-        x:Name="ActivityIndicator"
-        BackgroundColor="Transparent"
-        IsRunning="{Binding IsVisible, Source={x:Reference Control}}">
-        <ActivityIndicator.WidthRequest>
-            <OnPlatform x:TypeArguments="x:Double">
-                <On Platform="Android" Value="100" />
-                <On Platform="iOS" Value="24" />
+    <controls:StackLayoutZero
+        Spacing="{DynamicResource Theme.Spacing.Medium}"
+        HorizontalOptions="CenterAndExpand"
+        VerticalOptions="CenterAndExpand">
+        <StackLayout.Orientation>
+            <OnPlatform x:TypeArguments="StackOrientation">
+                <On Platform="Android" Value="Vertical" />
+                <On Platform="iOS" Value="Horizontal" />
             </OnPlatform>
-        </ActivityIndicator.WidthRequest>
-    </ActivityIndicator>
-    <Label Text="{Binding Caption, Source={x:Reference Control}}" Style="{Binding LabelStyle, Source={x:Reference Control}}" />
-</controls:StackLayoutZero>
+        </StackLayout.Orientation>
+
+        <ActivityIndicator
+            x:Name="ActivityIndicator"
+            BackgroundColor="Transparent"
+            IsRunning="{Binding IsVisible, Source={x:Reference Control}}">
+            <ActivityIndicator.WidthRequest>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="Android" Value="100" />
+                    <On Platform="iOS" Value="24" />
+                </OnPlatform>
+            </ActivityIndicator.WidthRequest>
+        </ActivityIndicator>
+        <Label Text="{Binding Caption, Source={x:Reference Control}}" Style="{Binding LabelStyle, Source={x:Reference Control}}" />
+    </controls:StackLayoutZero>
+</ContentView>
