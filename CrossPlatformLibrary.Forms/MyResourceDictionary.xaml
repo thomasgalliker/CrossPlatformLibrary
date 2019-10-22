@@ -257,8 +257,8 @@
     </Style>
     <Style x:Key="CustomActivityIndicatorStyle" TargetType="controls:CustomActivityIndicator">
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
-        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="Padding" Value="{DynamicResource Theme.Padding.Large}" />
         <Setter Property="LabelStyle" Value="{StaticResource CustomActivityIndicatorLabelStyle}" />
     </Style>
@@ -279,8 +279,8 @@
     </Style>
     <Style x:Key="ViewModelErrorControlStyle" TargetType="controls:ViewModelErrorControl">
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="Padding" Value="{DynamicResource Theme.Padding.Large}" />
         <Setter Property="LabelStyle" Value="{StaticResource ViewModelErrorControlLabelStyle}" />
     </Style>
