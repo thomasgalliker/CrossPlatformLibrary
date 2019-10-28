@@ -209,9 +209,10 @@ namespace CrossPlatformLibrary.Forms.Controls
                 }
             }
 
-            if (this.SearchCommand.CanExecute(searchText))
+            var searchCommand = this.SearchCommand;
+            if (searchCommand != null && searchCommand.CanExecute(searchText))
             {
-                this.SearchCommand.Execute(searchText);
+                searchCommand.Execute(searchText);
             }
         }
 
