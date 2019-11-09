@@ -95,6 +95,9 @@
     <Compile Update="Resources\UI\GoogleColors.xaml.cs">
       <DependentUpon>GoogleColors.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Resources\UI\ThemeFontResources.xaml.cs">
+      <DependentUpon>ThemeFontResources.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Resources\UI\ThemeSpacingResources.xaml.cs">
       <DependentUpon>ThemeSpacingResources.xaml</DependentUpon>
     </Compile>
@@ -177,6 +180,9 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\UI\ThemeColorResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\UI\ThemeFontResources.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\UI\ThemeSpacingResources.xaml">

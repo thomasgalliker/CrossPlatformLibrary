@@ -52,64 +52,70 @@
     <converters:ValidationErrorsToStringConverter x:Key="ValidationErrorsToStringConverter" />
 
     <!--  Font Sizes  -->
-    <OnPlatform
-        x:Key="LittleSize"
-        x:TypeArguments="x:Double"
-        Android="12"
-        WinPhone="12"
-        iOS="11" />
+    <!--  Named font sizes. Source: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/text/fonts  -->
+    <OnPlatform x:Key="Theme.FontSize.Default" x:TypeArguments="x:Double">
+        <On Platform="iOS" Value="16" />
+        <On Platform="Android" Value="14" />
+        <On Platform="UWP" Value="14" />
+    </OnPlatform>
 
-    <OnPlatform
-        x:Key="MidMediumSize"
-        x:TypeArguments="x:Double"
-        Android="14"
-        WinPhone="14"
-        iOS="12" />
+    <OnPlatform x:Key="FontSizeMicro" x:TypeArguments="x:Double">
+        <On Platform="iOS" Value="11" />
+        <On Platform="Android" Value="10" />
+        <On Platform="UWP" Value="15.667" />
+    </OnPlatform>
 
-    <OnPlatform
-        x:Key="MediumSize"
-        x:TypeArguments="x:Double"
-        Android="16"
-        WinPhone="16"
-        iOS="14" />
+    <OnPlatform x:Key="FontSizeSmall" x:TypeArguments="x:Double">
+        <On Platform="iOS" Value="13" />
+        <On Platform="Android" Value="14" />
+        <On Platform="UWP" Value="18.667" />
+    </OnPlatform>
 
-    <OnPlatform
-        x:Key="LargeSize"
-        x:TypeArguments="x:Double"
-        Android="18"
-        WinPhone="18"
-        iOS="16" />
+    <OnPlatform x:Key="FontSizeMedium" x:TypeArguments="x:Double">
+        <On Platform="iOS" Value="16" />
+        <On Platform="Android" Value="17" />
+        <On Platform="UWP" Value="22.667" />
+    </OnPlatform>
 
-    <OnPlatform
-        x:Key="LargerSize"
-        x:TypeArguments="x:Double"
-        Android="20"
-        WinPhone="20"
-        iOS="18" />
+    <OnPlatform x:Key="FontSizeLarge" x:TypeArguments="x:Double">
+        <On Platform="iOS" Value="20" />
+        <On Platform="Android" Value="22" />
+        <On Platform="UWP" Value="32" />
+    </OnPlatform>
 
-    <OnPlatform
-        x:Key="BigSize"
-        x:TypeArguments="x:Double"
-        Android="24"
-        WinPhone="24"
-        iOS="20" />
+    <OnPlatform x:Key="FontSizeBody" x:TypeArguments="x:Double">
+        <On Platform="iOS" Value="17" />
+        <On Platform="Android" Value="16" />
+        <On Platform="UWP" Value="14" />
+    </OnPlatform>
 
-    <OnPlatform
-        x:Key="ExtraBigSize"
-        x:TypeArguments="x:Double"
-        Android="32"
-        WinPhone="32"
-        iOS="24" />
+    <OnPlatform x:Key="FontSizeHeader" x:TypeArguments="x:Double">
+        <On Platform="iOS" Value="16" />
+        <On Platform="Android" Value="96" />
+        <On Platform="UWP" Value="46" />
+    </OnPlatform>
 
-    <OnPlatform
-        x:Key="HugeSize"
-        x:TypeArguments="x:Double"
-        Android="48"
-        WinPhone="48"
-        iOS="32" />
+    <OnPlatform x:Key="FontSizeTitle" x:TypeArguments="x:Double">
+        <On Platform="iOS" Value="28" />
+        <On Platform="Android" Value="24" />
+        <On Platform="UWP" Value="24" />
+    </OnPlatform>
 
+    <OnPlatform x:Key="FontSizeSubtitle" x:TypeArguments="x:Double">
+        <On Platform="iOS" Value="22" />
+        <On Platform="Android" Value="16" />
+        <On Platform="UWP" Value="20" />
+    </OnPlatform>
+
+    <OnPlatform x:Key="FontSizeCaption" x:TypeArguments="x:Double">
+        <On Platform="iOS" Value="12" />
+        <On Platform="Android" Value="12" />
+        <On Platform="UWP" Value="12" />
+    </OnPlatform>
+
+    <!--  Font Families  -->
     <OnPlatform
-        x:Key="FontFamily"
+        x:Key="FontFamilyDefault"
         x:TypeArguments="x:String"
         Android="Droid Sans"
         iOS="sans-serif" />
@@ -130,8 +136,9 @@
         <Setter Property="BorderColorPressed" Value="{DynamicResource CustomButtonStyle.BorderColor.Pressed}" />
         <Setter Property="BorderWidth" Value="2" />
         <Setter Property="CornerRadius" Value="20" />
-        <Setter Property="FontSize" Value="{DynamicResource LargeSize}" />
-        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Button}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Button}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Button}" />
     </Style>
 
     <Style BasedOn="{StaticResource CustomButtonStyle}" TargetType="controls:CustomButton" />
@@ -197,9 +204,9 @@
     <Style x:Key="LabelStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource MediumSize}" />
-        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Body}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Body}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Body}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
@@ -213,9 +220,9 @@
     <Style x:Key="EntryLabelStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource LargeSize}" />
-        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Entry}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Entry}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Entry}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="Opacity" Value="1.0" />
@@ -247,7 +254,7 @@
         x:Key="CustomActivityIndicatorLabelStyle"
         TargetType="Label"
         BasedOn="{StaticResource LabelStyle}">
-        <Setter Property="FontSize" Value="{DynamicResource LargeSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="VerticalOptions" Value="Start" />
         <Setter Property="HorizontalOptions" Value="Center" />
@@ -270,7 +277,7 @@
         x:Key="ViewModelErrorControlLabelStyle"
         TargetType="Label"
         BasedOn="{StaticResource LabelStyle}">
-        <Setter Property="FontSize" Value="{DynamicResource LargeSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="VerticalOptions" Value="Start" />
         <Setter Property="HorizontalOptions" Value="Center" />
@@ -296,12 +303,11 @@
     </Style>
 
     <Style x:Key="EntryStyle" TargetType="Entry">
-        <Setter Property="HeightRequest" Value="{DynamicResource HugeSize}" />
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
         <Setter Property="PlaceholderColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource LargeSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDefault}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
         <Setter Property="FontAttributes" Value="None" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
@@ -338,7 +344,7 @@
     <Style x:Key="LoginEntryStyle" TargetType="Entry">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
         <Setter Property="PlaceholderColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
-        <Setter Property="FontSize" Value="{StaticResource LargerSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="FontAttributes" Value="None" />
         <Setter Property="Opacity" Value="1" />
@@ -349,8 +355,8 @@
 
     <Style x:Key="EditorStyle" TargetType="Editor">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
-        <Setter Property="FontFamily" Value="{DynamicResource FontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource LargeSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDefault}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
         <Setter Property="FontAttributes" Value="None" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="Opacity" Value="1.0" />
@@ -365,8 +371,8 @@
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
         <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
-        <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
-        <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyDefault}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
         <Setter Property="FontAttributes" Value="None" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
@@ -431,12 +437,12 @@
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="FontAttributes" Value="None" />
         <Setter Property="FontFamily" Value="HelveticaNeue-Thin" />
-        <Setter Property="FontSize" Value="{StaticResource HugeSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeTitle}" />
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
     </Style>
 
     <Style x:Key="ValidationLabelStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeSmall}" />
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.Error}" />
         <Setter Property="FontAttributes" Value="Italic" />
         <Setter Property="Margin">
@@ -460,7 +466,7 @@
     </Style>
 
     <Style x:Key="AnnotationEntryLabelStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeSmall}" />
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
         <Setter Property="FontAttributes" Value="None" />
         <Setter Property="VerticalOptions" Value="StartAndExpand" />

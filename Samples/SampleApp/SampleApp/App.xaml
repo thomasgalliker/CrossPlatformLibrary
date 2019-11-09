@@ -15,6 +15,8 @@
 
             <!--  Converters  -->
             <converters:ColorToHexStringConverter x:Key="ColorToHexStringConverter" />
+            <converters:ColorInverter x:Key="ColorInverter" />
+            <converters:FontElementToStringConverter x:Key="FontElementToStringConverter" />
             <valueConverters:StringIsNotNullOrEmptyConverter x:Key="StringIsNotNullOrEmptyConverter" />
             <valueConverters:DateTimeConverter x:Key="DateTimeConverter" Format="g" />
             <valueConverters:DateTimeConverter x:Key="ShortDateConverter" Format="d" />
@@ -46,10 +48,35 @@
 
             <themes:SpacingConfiguration x:Key="SpacingConfiguration" />
 
+            <OnPlatform x:Key="FontFamilyCourierNew" x:TypeArguments="x:String">
+                <On Platform="Android" Value="monospace" />
+                <On Platform="iOS" Value="Courier New" />
+            </OnPlatform>
+
+            <themes:FontElement
+                x:Key="CustomTitleFont"
+                FontSize="{StaticResource Theme.FontSize.Default}"
+                FontAttributes="Bold" />
+
+            <themes:FontElement
+                x:Key="CustomButtonFont"
+                FontFamily="{StaticResource FontFamilyCourierNew}"
+                FontSize="{StaticResource Theme.FontSize.Default}"
+                FontAttributes="Bold,Italic" />
+
+            <themes:FontElement x:Key="CustomDefaultFont" FontSize="{StaticResource FontSizeMedium}" />
+
+            <themes:FontConfiguration
+                x:Key="FontConfiguration"
+                Title="{StaticResource CustomTitleFont}"
+                Button="{StaticResource CustomButtonFont}"
+                Default="{StaticResource CustomDefaultFont}" />
+
             <themes:CrossPlatformLibraryConfiguration
                 x:Key="SampleApp.Theme"
                 ColorConfiguration="{StaticResource ColorConfiguration}"
-                SpacingConfiguration="{StaticResource SpacingConfiguration}" />
+                SpacingConfiguration="{StaticResource SpacingConfiguration}"
+                FontConfiguration="{StaticResource FontConfiguration}" />
 
         </ResourceDictionary>
 

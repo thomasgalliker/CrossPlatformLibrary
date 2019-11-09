@@ -10,6 +10,7 @@
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
     xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
     xmlns:userControls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
+    xmlns:views="clr-namespace:SampleApp.Views;assembly=SampleApp"
     x:Name="Page">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -31,36 +32,117 @@
                     </ViewCell.View>
                 </ViewCell>
             </DataTemplate>
+
             <DataTemplate x:Key="ColorResourceItemTemplate">
                 <ViewCell>
                     <ViewCell.View>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50" />
-                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Label
                                 Grid.Column="0"
-                                BackgroundColor="{Binding Color}"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="CenterAndExpand" />
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding ResourceType}"
+                                VerticalOptions="CenterAndExpand"
+                                LineBreakMode="CharacterWrap" />
                             <Label
                                 Grid.Column="1"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
-                                Text="{Binding Color, Converter={StaticResource ColorToHexStringConverter}}"
+                                Text="{Binding Value, Converter={StaticResource ColorToHexStringConverter}}"
+                                TextColor="{Binding Value, Converter={StaticResource ColorInverter}}"
+                                BackgroundColor="{Binding Value}"
+                                HorizontalOptions="FillAndExpand"
                                 VerticalOptions="Center" />
                             <Label
                                 Grid.Column="2"
                                 FontSize="Small"
+                                Text="{Binding Key}"
                                 HorizontalOptions="Start"
-                                Text="{Binding Id}"
-                                VerticalOptions="Center" />
+                                VerticalOptions="CenterAndExpand" />
                         </Grid>
                     </ViewCell.View>
                 </ViewCell>
             </DataTemplate>
+
+            <DataTemplate x:Key="FontResourceItemTemplate">
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Grid.Column="0"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding ResourceType}"
+                                VerticalOptions="CenterAndExpand"
+                                LineBreakMode="CharacterWrap" />
+                            <Label
+                                Grid.Column="1"
+                                Text="{Binding Value, Converter={StaticResource FontElementToStringConverter}}"
+                                FontFamily="{Binding Value.FontFamily}"
+                                FontSize="{Binding Value.FontSize}"
+                                FontAttributes="{Binding Value.FontAttributes}"
+                                HorizontalOptions="StartAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                LineBreakMode="WordWrap" />
+                            <Label
+                                Grid.Column="2"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding Key}"
+                                VerticalOptions="CenterAndExpand" />
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="GenericResourceItemTemplate">
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Grid.Column="0"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding ResourceType}"
+                                VerticalOptions="CenterAndExpand"
+                                LineBreakMode="CharacterWrap" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding Value}"
+                                VerticalOptions="CenterAndExpand"
+                                LineBreakMode="CharacterWrap" />
+                            <Label
+                                Grid.Column="2"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding Key}"
+                                VerticalOptions="CenterAndExpand" />
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+
+            <views:ResourceItemTemplateSelector
+                x:Key="ResourceItemTemplateSelector"
+                ColorTemplate="{StaticResource ColorResourceItemTemplate}"
+                FontTemplate="{StaticResource FontResourceItemTemplate}"
+                GenericTemplate="{StaticResource GenericResourceItemTemplate}" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -358,8 +440,8 @@
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo StackedList (Vertical)--&gt;" />
                                 <controls:StackedList
-                                    ItemTemplate="{StaticResource ColorResourceItemTemplate}"
-                                    ItemsSource="{Binding ThemeColors, Mode=OneWay}"
+                                    ItemTemplate="{StaticResource ResourceItemTemplateSelector}"
+                                    ItemsSource="{Binding ThemeResources}"
                                     ListOrientation="Vertical"
                                     SelectionMode="None" />
 

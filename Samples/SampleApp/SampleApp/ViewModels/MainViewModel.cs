@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace SampleApp.ViewModels
         private int userNameMaxLength;
         private DateTime? birthdate;
         private bool isSaving;
-        private ObservableCollection<ColorResource> themeColors;
+        private ObservableCollection<ResourceViewModel> themeResources;
 
         public MainViewModel(
             DisplayService displayService,
@@ -227,10 +228,10 @@ namespace SampleApp.ViewModels
 
         public PeriodicTaskViewModel PeriodicTask { get; private set; }
 
-        public ObservableCollection<ColorResource> ThemeColors
+        public ObservableCollection<ResourceViewModel> ThemeResources
         {
-            get => this.themeColors;
-            private set => this.SetProperty(ref this.themeColors, value, nameof(this.ThemeColors));
+            get => this.themeResources;
+            private set => this.SetProperty(ref this.themeResources, value, nameof(this.ThemeResources));
         }
 
 
@@ -333,10 +334,11 @@ namespace SampleApp.ViewModels
                 this.Countries.Clear();
                 this.Countries.AddRange(countryDtos.Select(c => new CountryViewModel(c)).Prepend(defaultCountryViewModel));
 
-                this.ThemeColors = App.Current.Resources.MergedDictionaries.SelectMany(md => md)
-                    .Where(r => r.Value is Color)
-                    .Select(c => new ColorResource(c))
-                    .OrderBy(c => c.Id)
+                this.ThemeResources = Application.Current.Resources.MergedDictionaries.SelectMany(md => md)
+                    //.Where(r => r.Value is Color)
+                    .Select(kvp => new ResourceViewModel(kvp))
+                    .OrderBy(vm => vm.ResourceType)
+                    .ThenBy(vm => vm.Key)
                     .ToObservableCollection();
 
                 //this.Notes = $"Test test test{Environment.NewLine}Line 2 text text text";
@@ -349,6 +351,26 @@ namespace SampleApp.ViewModels
 
             this.IsBusy = false;
         }
+
+        //private class ValueComparer : IComparer<Type>
+        //{
+        //    public int Compare(Type x, Type y)
+        //    {
+        //        if (y == null)
+        //        {
+        //            return 1;
+        //        }
+                
+        //        if (x == null)
+        //        {
+        //            return -1;
+        //        }
+
+        //        return string.Compare(x.Name, y.Name, StringComparison.InvariantCultureIgnoreCase);
+        //    }
+        //}
+
+  
 
         protected override ViewModelValidation SetupValidation()
         {

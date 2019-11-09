@@ -109,88 +109,9 @@ namespace CrossPlatformLibrary.Forms
         {
             this.applicationResources.MergedDictionaries.Add(new ThemeColorResources(this.config.ColorConfiguration ?? new ColorConfiguration()));
             this.applicationResources.MergedDictionaries.Add(new ThemeSpacingResources(this.config.SpacingConfiguration ?? new SpacingConfiguration()));
+            this.applicationResources.MergedDictionaries.Add(new ThemeFontResources(this.config.FontConfiguration ?? new FontConfiguration()));
         }
 
-        /// <summary>
-        ///     Static class that contains the current CrossPlatformLibrary color values.
-        /// </summary>
-        //public static class Color
-        //{
-        //    /// <summary>
-        //    ///     The underlying color of an app’s content.
-        //    ///     Typically the background color of scrollable content.
-        //    /// </summary>
-        //    public static Xamarin.Forms.Color Background => GetResource<Xamarin.Forms.Color>(ThemeConstants.Color.BACKGROUND);
-
-        //    /// <summary>
-        //    ///     The color used to indicate error status.
-        //    /// </summary>
-        //    public static Xamarin.Forms.Color Error => GetResource<Xamarin.Forms.Color>(ThemeConstants.Color.ERROR);
-
-        //    /// <summary>
-        //    ///     A color that passes accessibility guidelines for text/iconography when drawn on top of
-        //    ///     <see cref="CrossPlatformLibraryColorConfiguration.Background" />.
-        //    /// </summary>
-        //    public static Xamarin.Forms.Color OnBackground => GetResource<Xamarin.Forms.Color>(ThemeConstants.Color.ON_BACKGROUND);
-
-        //    /// <summary>
-        //    ///     A color that passes accessibility guidelines for text/iconography when drawn on top of
-        //    ///     <see cref="CrossPlatformLibraryColorConfiguration.Error" />.
-        //    /// </summary>
-        //    public static Xamarin.Forms.Color OnError => GetResource<Xamarin.Forms.Color>(ThemeConstants.Color.ON_ERROR);
-
-        //    /// <summary>
-        //    ///     A color that passes accessibility guidelines for text/iconography when drawn on top of
-        //    ///     <see cref="CrossPlatformLibraryColorConfiguration.Primary" />.
-        //    /// </summary>
-        //    public static Xamarin.Forms.Color OnPrimary => GetResource<Xamarin.Forms.Color>(ThemeConstants.Color.ON_PRIMARY);
-
-        //    /// <summary>
-        //    ///     A color that passes accessibility guidelines for text/iconography when drawn on top of
-        //    ///     <see cref="CrossPlatformLibraryColorConfiguration.Secondary" />.
-        //    /// </summary>
-        //    public static Xamarin.Forms.Color OnSecondary => GetResource<Xamarin.Forms.Color>(ThemeConstants.Color.ON_SECONDARY);
-
-        //    /// <summary>
-        //    ///     A color that passes accessibility guidelines for text/iconography when drawn on top of
-        //    ///     <see cref="CrossPlatformLibraryColorConfiguration.Surface" />
-        //    /// </summary>
-        //    public static Xamarin.Forms.Color OnSurface => GetResource<Xamarin.Forms.Color>(ThemeConstants.Color.ON_SURFACE);
-
-        //    /// <summary>
-        //    ///     Displayed most frequently across your app.
-        //    /// </summary>
-        //    public static Xamarin.Forms.Color Primary => GetResource<Xamarin.Forms.Color>(ThemeConstants.Color.PRIMARY);
-
-        //    /// <summary>
-        //    ///     A tonal variation of <see cref="CrossPlatformLibraryColorConfiguration.Primary" />.
-        //    /// </summary>
-        //    public static Xamarin.Forms.Color PrimaryVariant => GetResource<Xamarin.Forms.Color>(ThemeConstants.Color.PRIMARY_VARIANT);
-
-        //    /// <summary>
-        //    ///     Accents select parts of your UI.
-        //    ///     If not provided, use <see cref="CrossPlatformLibraryColorConfiguration.Primary" />.
-        //    /// </summary>
-        //    public static Xamarin.Forms.Color Secondary => GetSecondaryColor();
-
-        //    //TODO: Make configurations bindable.
-        //    private static Xamarin.Forms.Color GetSecondaryColor()
-        //    {
-        //        var color = GetResource<Xamarin.Forms.Color>(ThemeConstants.Color.SECONDARY);
-
-        //        return color.IsDefault ? Xamarin.Forms.Color.FromHex("#6200EE") : color;
-        //    }
-
-        //    /// <summary>
-        //    ///     A tonal variation of <see cref="CrossPlatformLibraryColorConfiguration.Secondary" />.
-        //    /// </summary>
-        //    public static Xamarin.Forms.Color SecondaryVariant => GetResource<Xamarin.Forms.Color>(ThemeConstants.Color.SECONDARY_VARIANT);
-
-        //    /// <summary>
-        //    ///     The color of surfaces such as cards, sheets, menus.
-        //    /// </summary>
-        //    public static Xamarin.Forms.Color Surface => GetResource<Xamarin.Forms.Color>(ThemeConstants.Color.SURFACE);
-        //}
 
         /// <summary>
         ///     Static class that contains the current CrossPlatformLibrary font family values.

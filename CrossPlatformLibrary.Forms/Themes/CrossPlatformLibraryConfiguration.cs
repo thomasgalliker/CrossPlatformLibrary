@@ -25,7 +25,7 @@ namespace CrossPlatformLibrary.Forms.Themes
         public static readonly BindableProperty SpacingConfigurationProperty =
             BindableProperty.Create(
                 nameof(SpacingConfiguration),
-                typeof(SpacingConfiguration),
+                typeof(ISpacingConfiguration),
                 typeof(CrossPlatformLibraryConfiguration));
 
         /// <summary>
@@ -36,12 +36,20 @@ namespace CrossPlatformLibrary.Forms.Themes
             get => (ISpacingConfiguration)this.GetValue(SpacingConfigurationProperty);
             set => this.SetValue(SpacingConfigurationProperty, value);
         }
-    }
 
-    public interface ITheme
-    {
-        IColorConfiguration ColorConfiguration { get; set; }
+        public static readonly BindableProperty FontConfigurationProperty =
+            BindableProperty.Create(
+                nameof(FontConfiguration),
+                typeof(IFontConfiguration),
+                typeof(CrossPlatformLibraryConfiguration));
 
-        ISpacingConfiguration SpacingConfiguration { get; set; }
+        /// <summary>
+        /// Gets or sets the font configuration of the theme.
+        /// </summary>
+        public IFontConfiguration FontConfiguration
+        {
+            get => (IFontConfiguration)this.GetValue(FontConfigurationProperty);
+            set => this.SetValue(FontConfigurationProperty, value);
+        }
     }
 }

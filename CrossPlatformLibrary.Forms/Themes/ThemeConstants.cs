@@ -1,12 +1,12 @@
 ﻿namespace CrossPlatformLibrary.Forms.Themes
 {
     /// <summary>
-    ///     Static class that contains constant key values of Material resources.
+    ///     Static class that contains constant theme resource keys.
     /// </summary>
     public static class ThemeConstants
     {
         /// <summary>
-        ///     The Material color resource.
+        ///     Color resource keys.
         /// </summary>
         public static class Color
         {
@@ -70,7 +70,7 @@
             public const string BackgroundColorDisabled = "DrilldownButtonStyle.BackgroundColor.Disabled";
             public const string BackgroundColorPressed = "DrilldownButtonStyle.BackgroundColor.Pressed";
         }
-        
+
         public static class CardViewStyle
         {
             public const string HeaderTextColor = "CardViewStyle.Header.TextColor";
@@ -80,6 +80,9 @@
             public const string FooterDividerColor = "CardViewStyle.Footer.DividerColor";
         }
 
+        /// <summary>
+        ///     Spacing resource keys.
+        /// </summary>
         public static class Spacings
         {
             public const string SmallSpacing = "Theme.Spacing.Small";
@@ -88,6 +91,9 @@
             public const string CardSpacing = "Theme.Spacing.CardSpacing";
         }
 
+        /// <summary>
+        ///     Padding resource keys.
+        /// </summary>
         public static class Paddings
         {
             public const string SmallPadding = "Theme.Padding.Small";
@@ -97,38 +103,40 @@
             public const string CardPadding = "Theme.Padding.CardPadding";
         }
 
-
         /// <summary>
-        ///     The Material font resource.
+        ///     FontFamily resource keys.
         /// </summary>
         public static class FontFamily
         {
-            public const string H1 = "Theme.FontFamily.H1";
-            public const string H2 = "Theme.FontFamily.H2";
-            public const string H3 = "Theme.FontFamily.H3";
-            public const string H4 = "Theme.FontFamily.H4";
-            public const string H5 = "Theme.FontFamily.H5";
-            public const string H6 = "Theme.FontFamily.H6";
-            public const string SUBTITLE1 = "Theme.FontFamily.Subtitle1";
-            public const string SUBTITLE2 = "Theme.FontFamily.Subtitle2";
-            public const string BODY1 = "Theme.FontFamily.Body1";
-            public const string BODY2 = "Theme.FontFamily.Body2";
-            public const string BUTTON = "Theme.FontFamily.Button";
-            public const string CAPTION = "Theme.FontFamily.Caption";
-            public const string OVERLINE = "Theme.FontFamily.Overline";
+            public const string Default = "Theme.FontFamily.Default";
+            public const string Body = "Theme.FontFamily.Body";
+            public const string Title = "Theme.FontFamily.Title";
+            public const string Button = "Theme.FontFamily.Button";
+            public const string Entry = "Theme.FontFamily.Entry";
         }
 
-        internal const string MATERIAL_FONTSIZE_BODY1 = "Theme.FontSize.Body1";
-        internal const string MATERIAL_FONTSIZE_BODY2 = "Theme.FontSize.Body2";
-        internal const string MATERIAL_FONTSIZE_BUTTON = "Theme.FontSize.Button";
-        internal const string MATERIAL_FONT_BODY1 = "Theme.TypeScale.Body1";
-        internal const string MATERIAL_FONT_BODY2 = "Theme.TypeScale.Body2";
-        internal const string MATERIAL_FONT_BUTTON = "Theme.TypeScale.Button";
-        internal const string MATERIAL_BUTTON_CORNERRADIUS = "Theme.Button.CornerRadius";
-        internal const string MATERIAL_BUTTON_OUTLINED_BORDERWIDTH = "Theme.Button.Outlined.BorderWidth";
-        internal const string MATERIAL_BUTTON_HEIGHT = "Theme.Button.Height";
-        internal const string MATERIAL_BUTTON_OUTLINED_BORDERCOLOR = "Theme.Button.Outlined.BorderColor";
-        internal const string MATERIAL_FONTATTRIBUTE_BOLD = "Theme.FontAttribute.Bold";
-        internal const string MATERIAL_LINEHEIGHT = "Theme.LineHeight";
+        /// <summary>
+        ///     FontSize resource keys.
+        /// </summary>
+        public static class FontSize
+        {
+            public const string Default = "Theme.FontSize.Default";
+            public const string Body = "Theme.FontSize.Body";
+            public const string Title = "Theme.FontSize.Title";
+            public const string Button = "Theme.FontSize.Button";
+            public const string Entry = "Theme.FontSize.Entry";
+        }
+
+        /// <summary>
+        ///     FontSize resource keys.
+        /// </summary>
+        public static class FontAttributes
+        {
+            public const string Default = "Theme.FontAttributes.Default";
+            public const string Body = "Theme.FontAttributes.Body";
+            public const string Title = "Theme.FontAttributes.Title";
+            public const string Button = "Theme.FontAttributes.Button";
+            public const string Entry = "Theme.FontAttributes.Entry";
+        }
     }
 }
