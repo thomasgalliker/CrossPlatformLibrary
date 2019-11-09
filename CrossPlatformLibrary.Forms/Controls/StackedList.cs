@@ -46,7 +46,15 @@ namespace CrossPlatformLibrary.Forms.Controls
             nameof(ItemTemplate),
             typeof(DataTemplate),
             typeof(StackedList),
-            default(DataTemplate));
+            default(DataTemplate),
+            BindingMode.OneWay,
+            propertyChanged: OnItemTemplatePropertyChanged);
+
+        private static void OnItemTemplatePropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            var itemsLayout = (StackedList)bindable;
+            itemsLayout.SetItems();
+        }
 
         public ICommand SelectedCommand
         {
@@ -172,7 +180,11 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         protected virtual View GetItemView(object item)
         {
-            var content = this.ItemTemplate.CreateContent();
+            var dataTemplate = this.ItemTemplate is DataTemplateSelector dataTemplateSelector
+                ? dataTemplateSelector.SelectTemplate(item, null)
+                : this.ItemTemplate;
+
+            var content = dataTemplate.CreateContent();
             View view;
             if (content is ViewCell viewCell)
             {

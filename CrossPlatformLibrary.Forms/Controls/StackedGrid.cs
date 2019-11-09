@@ -163,7 +163,11 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         protected virtual View GetItemView(object item)
         {
-            var content = this.ItemTemplate.CreateContent();
+            var dataTemplate = this.ItemTemplate is DataTemplateSelector dataTemplateSelector
+                ? dataTemplateSelector.SelectTemplate(item, null)
+                : this.ItemTemplate;
+
+            var content = dataTemplate.CreateContent();
             View view;
             if (content is ViewCell viewCell)
             {
