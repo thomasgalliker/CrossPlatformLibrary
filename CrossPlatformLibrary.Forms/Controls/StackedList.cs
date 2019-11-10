@@ -46,15 +46,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             nameof(ItemTemplate),
             typeof(DataTemplate),
             typeof(StackedList),
-            default(DataTemplate),
-            BindingMode.OneWay,
-            propertyChanged: OnItemTemplatePropertyChanged);
-
-        private static void OnItemTemplatePropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
-        {
-            var itemsLayout = (StackedList)bindable;
-            itemsLayout.SetItems();
-        }
+            default(DataTemplate));
 
         public ICommand SelectedCommand
         {
