@@ -1,9 +1,8 @@
 ﻿using SampleApp.Model;
-using Xamarin.Forms;
 
 namespace SampleApp.ViewModels
 {
-    public class CountryViewModel : BindableObject
+    public class CountryViewModel
     {
         public CountryViewModel(CountryDto countryDto)
         {

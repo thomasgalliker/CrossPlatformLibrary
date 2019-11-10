@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Forms.Mvvm;
 using CrossPlatformLibrary.Forms.Validation;
-using CrossPlatformLibrary.Tools;
 using SampleApp.Model;
 using SampleApp.Services;
 using SampleApp.Validation;
@@ -335,10 +332,9 @@ namespace SampleApp.ViewModels
                 this.Countries.AddRange(countryDtos.Select(c => new CountryViewModel(c)).Prepend(defaultCountryViewModel));
 
                 this.ThemeResources = Application.Current.Resources.MergedDictionaries.SelectMany(md => md)
-                    //.Where(r => r.Value is Color)
                     .Select(kvp => new ResourceViewModel(kvp))
-                    .OrderBy(vm => vm.ResourceType)
-                    .ThenBy(vm => vm.Key)
+                    .OrderBy(vm => vm.Key)
+                    //.ThenBy(vm => vm.Key)
                     .ToObservableCollection();
 
                 //this.Notes = $"Test test test{Environment.NewLine}Line 2 text text text";
@@ -360,7 +356,7 @@ namespace SampleApp.ViewModels
         //        {
         //            return 1;
         //        }
-                
+
         //        if (x == null)
         //        {
         //            return -1;
@@ -370,7 +366,7 @@ namespace SampleApp.ViewModels
         //    }
         //}
 
-  
+
 
         protected override ViewModelValidation SetupValidation()
         {
