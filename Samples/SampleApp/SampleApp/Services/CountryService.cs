@@ -19,6 +19,7 @@ namespace SampleApp.Services
             // Add an Accept header for JSON format.
             this.httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
+
         public async Task<IEnumerable<CountryDto>> GetAllAsync()
         {
             var response = await this.httpClient.GetAsync("https://restcountries.eu/rest/v2/all");
