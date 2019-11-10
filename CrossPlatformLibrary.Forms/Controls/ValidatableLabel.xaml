@@ -33,8 +33,6 @@
     <controls:CustomLabel
         Grid.Row="1"
         BackgroundColor="Transparent"
-        FontAttributes="{Binding FontAttributes, Source={x:Reference Control}, Mode=OneWay}"
-        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
         LineBreakMode="{Binding LineBreakMode, Source={x:Reference Control}, Mode=OneWay}"
         Style="{Binding LabelStyle, Source={x:Reference Control}, Mode=OneWay}"
         Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}"
