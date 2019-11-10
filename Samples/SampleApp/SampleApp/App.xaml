@@ -57,12 +57,20 @@
 
             <themes:FontElement x:Key="CustomDefaultFont" FontSize="{StaticResource Theme.FontSize.Medium}" />
 
-            <themes:FontConfiguration x:Key="FontConfiguration" Button="{StaticResource CustomButtonFont}">
+            <themes:DefaultFontSizeConfiguration x:Key="FontSizeConfiguration">
+                <themes:DefaultFontSizeConfiguration.Medium>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="iOS" Value="28" />
+                        <On Platform="Android" Value="24" />
+                        <On Platform="UWP" Value="24" />
+                    </OnPlatform>
+                </themes:DefaultFontSizeConfiguration.Medium>
+            </themes:DefaultFontSizeConfiguration>
 
-                <!--<themes:FontConfiguration.Body1>
-                    <themes:FontElement FontFamily="{DynamicResource Theme.FontFamily.Monospace}" FontSize="24" />
-                </themes:FontConfiguration.Body1>-->
-            </themes:FontConfiguration>
+            <themes:FontConfiguration
+                x:Key="FontConfiguration"
+                Button="{StaticResource CustomButtonFont}"
+                FontSizes="{StaticResource FontSizeConfiguration}" />
 
             <themes:CrossPlatformLibraryConfiguration
                 x:Key="SampleApp.Theme"

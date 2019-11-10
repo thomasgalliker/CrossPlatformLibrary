@@ -130,7 +130,10 @@
         /// </summary>
         public static class FontSizes
         {
+            public const string Micro = "Theme.FontSize.Micro";
+            public const string Small = "Theme.FontSize.Small";
             public const string Medium = "Theme.FontSize.Medium";
+            public const string Large = "Theme.FontSize.Large";
 
             public const string Body1 = "Theme.FontSize.Body1";
             public const string Body2 = "Theme.FontSize.Body2";

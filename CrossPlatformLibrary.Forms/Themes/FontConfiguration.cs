@@ -11,9 +11,15 @@ namespace CrossPlatformLibrary.Forms.Themes
         public static readonly BindableProperty FontSizesProperty =
             BindableProperty.Create(
                 nameof(FontSizes),
-                typeof(ICollection<FontSize>),
+                typeof(IFontSizeConfiguration),
                 typeof(FontConfiguration),
-                CreateDefaultFontSizes());
+                new DefaultFontSizeConfiguration());
+
+        public IFontSizeConfiguration FontSizes
+        {
+            get => (IFontSizeConfiguration)this.GetValue(FontSizesProperty);
+            set => this.SetValue(FontSizesProperty, value);
+        }
 
         public static readonly BindableProperty Body1Property =
             BindableProperty.Create(
@@ -21,26 +27,6 @@ namespace CrossPlatformLibrary.Forms.Themes
                 typeof(FontElement),
                 typeof(FontConfiguration),
                 null);
-
-        private static FontElement CreateDefaultBody1()
-        {
-            if (Device.RuntimePlatform == Device.iOS)
-            {
-                return new FontElement { FontSize = 17 };
-            }
-
-            if (Device.RuntimePlatform == Device.Android)
-            {
-                return new FontElement { FontSize = 17 };
-            }
-
-            if (Device.RuntimePlatform == Device.UWP)
-            {
-                return new FontElement { FontSize = 17 };
-            }
-
-            return new FontElement { FontSize = 17 };
-        }
 
         /// <summary>
         ///     Body 1 font family, used for long-form writing and small text sizes.
@@ -278,28 +264,6 @@ namespace CrossPlatformLibrary.Forms.Themes
         {
             get => (FontElement)this.GetValue(Subtitle2Property);
             set => this.SetValue(Subtitle2Property, value);
-        }
-
-        public ICollection<FontSize> FontSizes
-        {
-            get => (ICollection<FontSize>)this.GetValue(FontSizesProperty);
-            set => this.SetValue(FontSizesProperty, value);
-        }
-
-        private static ICollection<FontSize> CreateDefaultFontSizes()
-        {
-            if (Device.RuntimePlatform == Device.iOS)
-            {
-                return new List<FontSize>
-                {
-                    //new FontSize { Key = ThemeConstants.FontSizes.Body1, Value = 16 }
-                };
-            }
-
-            return new List<FontSize>
-            {
-                //new FontSize { Key = ThemeConstants.FontSizes.Default, Value = 14 }
-            };
         }
     }
 }

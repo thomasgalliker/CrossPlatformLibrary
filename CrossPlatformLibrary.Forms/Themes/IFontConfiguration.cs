@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-
 namespace CrossPlatformLibrary.Forms.Themes
 {
     public interface IFontConfiguration
     {
+        IFontSizeConfiguration FontSizes { get; set; }
+
         FontElement Body1 { get; set; }
 
         FontElement Body2 { get; set; }
@@ -29,8 +29,6 @@ namespace CrossPlatformLibrary.Forms.Themes
         FontElement Subtitle1 { get; set; }
 
         FontElement Subtitle2 { get; set; }
-
-        ICollection<FontSize> FontSizes { get; set; }
     }
 
     public class FontSize

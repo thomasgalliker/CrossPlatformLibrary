@@ -1,5 +1,5 @@
 ﻿using CrossPlatformLibrary.Forms.Themes;
-using CrossPlatformLibrary.Forms.Utils;
+using CrossPlatformLibrary.Forms.Tools;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,7 +12,16 @@ namespace CrossPlatformLibrary.Forms.Resources
         {
             this.InitializeComponent();
 
+            this.SetFontSizes(fontConfiguration);
             this.SetFonts(fontConfiguration);
+        }
+
+        private void SetFontSizes(IFontConfiguration fontConfiguration)
+        {
+            this[ThemeConstants.FontSizes.Micro] = fontConfiguration.FontSizes.Micro;
+            this[ThemeConstants.FontSizes.Small] = fontConfiguration.FontSizes.Small;
+            this[ThemeConstants.FontSizes.Medium] = fontConfiguration.FontSizes.Medium;
+            this[ThemeConstants.FontSizes.Large] = fontConfiguration.FontSizes.Large;
         }
 
         private void SetFonts(IFontConfiguration fontConfiguration)
@@ -89,7 +98,7 @@ namespace CrossPlatformLibrary.Forms.Resources
                 return fontElement.FontSize;
             }
 
-            return PlatformHelper.GetValue<double>(this[ThemeConstants.FontSizes.Medium]);
+            return (double)this[ThemeConstants.FontSizes.Medium];
         }
 
         private static FontAttributes TryGetFontAttributes(FontElement fontElement)

@@ -52,12 +52,6 @@
     <converters:ValidationErrorsToStringConverter x:Key="ValidationErrorsToStringConverter" />
 
     <!--  Font Sizes  -->
-    <!--  Named font sizes. Source: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/text/fonts  -->
-    <OnPlatform x:Key="Theme.FontSize.Default" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="16" />
-        <On Platform="Android" Value="14" />
-        <On Platform="UWP" Value="14" />
-    </OnPlatform>
 
     <OnPlatform x:Key="Theme.FontSize.Micro" x:TypeArguments="x:Double">
         <On Platform="iOS" Value="11" />
