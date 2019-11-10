@@ -1,20 +1,42 @@
+using System.Collections.Generic;
+
 namespace CrossPlatformLibrary.Forms.Themes
 {
     public interface IFontConfiguration
     {
-        /// <summary>
-        ///     Default font family, used for long-form writing and small text sizes.
-        /// </summary>
-        FontElement Default { get; set; }
+        FontElement Body1 { get; set; }
 
-        /// <summary>
-        ///     Button font family, used by different types of buttons.
-        /// </summary>
+        FontElement Body2 { get; set; }
+
         FontElement Button { get; set; }
 
-        /// <summary>
-        ///     Caption font family, used for annotations or to introduce a headline text.
-        /// </summary>
-        FontElement Title { get; set; }
+        FontElement Caption { get; set; }
+
+        FontElement H1 { get; set; }
+
+        FontElement H2 { get; set; }
+
+        FontElement H3 { get; set; }
+
+        FontElement H4 { get; set; }
+
+        FontElement H5 { get; set; }
+
+        FontElement H6 { get; set; }
+
+        FontElement Overline { get; set; }
+
+        FontElement Subtitle1 { get; set; }
+
+        FontElement Subtitle2 { get; set; }
+
+        ICollection<FontSize> FontSizes { get; set; }
+    }
+
+    public class FontSize
+    {
+        public string Key { get; set; }
+
+        public double Value { get; set; }
     }
 }

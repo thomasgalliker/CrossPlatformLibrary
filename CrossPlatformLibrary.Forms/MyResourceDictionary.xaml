@@ -59,19 +59,19 @@
         <On Platform="UWP" Value="14" />
     </OnPlatform>
 
-    <OnPlatform x:Key="FontSizeMicro" x:TypeArguments="x:Double">
+    <OnPlatform x:Key="Theme.FontSize.Micro" x:TypeArguments="x:Double">
         <On Platform="iOS" Value="11" />
         <On Platform="Android" Value="10" />
         <On Platform="UWP" Value="15.667" />
     </OnPlatform>
 
-    <OnPlatform x:Key="FontSizeSmall" x:TypeArguments="x:Double">
+    <OnPlatform x:Key="Theme.FontSize.Small" x:TypeArguments="x:Double">
         <On Platform="iOS" Value="13" />
         <On Platform="Android" Value="14" />
         <On Platform="UWP" Value="18.667" />
     </OnPlatform>
 
-    <OnPlatform x:Key="FontSizeMedium" x:TypeArguments="x:Double">
+    <OnPlatform x:Key="Theme.FontSize.Medium" x:TypeArguments="x:Double">
         <On Platform="iOS" Value="16" />
         <On Platform="Android" Value="17" />
         <On Platform="UWP" Value="22.667" />
@@ -113,18 +113,6 @@
         <On Platform="UWP" Value="12" />
     </OnPlatform>
 
-    <!--  Font Families  -->
-    <OnPlatform
-        x:Key="FontFamilyDefault"
-        x:TypeArguments="x:String"
-        Android="Droid Sans"
-        iOS="sans-serif" />
-
-    <OnPlatform
-        x:Key="FontFamilyCourierNew"
-        x:TypeArguments="x:String"
-        Android="monospace"
-        iOS="Courier New" />
 
     <!--  Styles  -->
     <!--  CustomButton Base Style  -->
@@ -134,11 +122,11 @@
         <Setter Property="BackgroundColorPressed" Value="{DynamicResource CustomButtonStyle.BackgroundColor.Pressed}" />
         <Setter Property="BorderColor" Value="{DynamicResource CustomButtonStyle.BorderColor.Enabled}" />
         <Setter Property="BorderColorPressed" Value="{DynamicResource CustomButtonStyle.BorderColor.Pressed}" />
-        <Setter Property="BorderWidth" Value="2" />
-        <Setter Property="CornerRadius" Value="20" />
         <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Button}" />
         <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Button}" />
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Button}" />
+        <Setter Property="BorderWidth" Value="2" />
+        <Setter Property="CornerRadius" Value="20" />
     </Style>
 
     <Style BasedOn="{StaticResource CustomButtonStyle}" TargetType="controls:CustomButton" />
@@ -203,10 +191,10 @@
     <!--  LabelStyle  -->
     <Style x:Key="LabelStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Body1}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Body1}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Body1}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Body}" />
-        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Body}" />
-        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Body}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
@@ -254,7 +242,8 @@
         x:Key="CustomActivityIndicatorLabelStyle"
         TargetType="Label"
         BasedOn="{StaticResource LabelStyle}">
-        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Body1}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Body1}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="VerticalOptions" Value="Start" />
         <Setter Property="HorizontalOptions" Value="Center" />
@@ -277,7 +266,8 @@
         x:Key="ViewModelErrorControlLabelStyle"
         TargetType="Label"
         BasedOn="{StaticResource LabelStyle}">
-        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Body1}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Body1}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="VerticalOptions" Value="Start" />
         <Setter Property="HorizontalOptions" Value="Center" />
@@ -306,9 +296,9 @@
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
         <Setter Property="PlaceholderColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDefault}" />
-        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
-        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Body1}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Body1}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Body1}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
         <Setter Property="Opacity" Value="1.0" />
@@ -341,23 +331,11 @@
         </Setter>
     </Style>
 
-    <Style x:Key="LoginEntryStyle" TargetType="Entry">
-        <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
-        <Setter Property="PlaceholderColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
-        <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}" />
-        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="FontAttributes" Value="None" />
-        <Setter Property="Opacity" Value="1" />
-        <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
-        <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
-        <!--  TODO: obsolete?  -->
-    </Style>
-
     <Style x:Key="EditorStyle" TargetType="Editor">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
-        <Setter Property="FontFamily" Value="{DynamicResource FontFamilyDefault}" />
-        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
-        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Body1}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Body1}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Body1}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="Opacity" Value="1.0" />
     </Style>
@@ -371,9 +349,9 @@
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
         <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
-        <Setter Property="FontFamily" Value="{StaticResource FontFamilyDefault}" />
-        <Setter Property="FontSize" Value="{DynamicResource FontSizeMedium}" />
-        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Body1}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Body1}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Body1}" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="Opacity" Value="1.0" />
@@ -432,19 +410,11 @@
 
     <Style BasedOn="{StaticResource ExtendedTimePickerStyle}" TargetType="controls:ExtendedTimePicker" />
 
-    <Style x:Key="TitleLabelStyle" TargetType="Label">
-        <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="HorizontalOptions" Value="Center" />
-        <Setter Property="FontAttributes" Value="None" />
-        <Setter Property="FontFamily" Value="HelveticaNeue-Thin" />
-        <Setter Property="FontSize" Value="{DynamicResource FontSizeTitle}" />
-        <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
-    </Style>
-
     <Style x:Key="ValidationLabelStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="{StaticResource FontSizeSmall}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Overline}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Overline}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Overline}" />
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.Error}" />
-        <Setter Property="FontAttributes" Value="Italic" />
         <Setter Property="Margin">
             <OnPlatform
                 x:TypeArguments="Thickness"
@@ -466,9 +436,10 @@
     </Style>
 
     <Style x:Key="AnnotationEntryLabelStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="{DynamicResource FontSizeSmall}" />
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
-        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Overline}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Overline}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Overline}" />
         <Setter Property="VerticalOptions" Value="StartAndExpand" />
         <Setter Property="HorizontalOptions" Value="StartAndExpand" />
         <Setter Property="LineBreakMode" Value="TailTruncation" />

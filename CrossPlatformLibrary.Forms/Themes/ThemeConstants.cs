@@ -106,25 +106,45 @@
         /// <summary>
         ///     FontFamily resource keys.
         /// </summary>
-        public static class FontFamily
+    
+        public static class FontFamilies
         {
             public const string Default = "Theme.FontFamily.Default";
-            public const string Body = "Theme.FontFamily.Body";
-            public const string Title = "Theme.FontFamily.Title";
+            public const string Body1 = "Theme.FontFamily.Body1";
+            public const string Body2 = "Theme.FontFamily.Body2";
             public const string Button = "Theme.FontFamily.Button";
-            public const string Entry = "Theme.FontFamily.Entry";
+            public const string Caption = "Theme.FontFamily.Caption";
+            public const string H1 = "Theme.FontFamily.H1";
+            public const string H2 = "Theme.FontFamily.H2";
+            public const string H3 = "Theme.FontFamily.H3";
+            public const string H4 = "Theme.FontFamily.H4";
+            public const string H5 = "Theme.FontFamily.H5";
+            public const string H6 = "Theme.FontFamily.H6";
+            public const string Overline = "Theme.FontFamily.Overline";
+            public const string Subtitle1 = "Theme.FontFamily.Subtitle1";
+            public const string Subtitle2 = "Theme.FontFamily.Subtitle2";
         }
 
         /// <summary>
         ///     FontSize resource keys.
         /// </summary>
-        public static class FontSize
+        public static class FontSizes
         {
-            public const string Default = "Theme.FontSize.Default";
-            public const string Body = "Theme.FontSize.Body";
-            public const string Title = "Theme.FontSize.Title";
+            public const string Medium = "Theme.FontSize.Medium";
+
+            public const string Body1 = "Theme.FontSize.Body1";
+            public const string Body2 = "Theme.FontSize.Body2";
             public const string Button = "Theme.FontSize.Button";
-            public const string Entry = "Theme.FontSize.Entry";
+            public const string Caption = "Theme.FontSize.Caption";
+            public const string H1 = "Theme.FontSize.H1";
+            public const string H2 = "Theme.FontSize.H2";
+            public const string H3 = "Theme.FontSize.H3";
+            public const string H4 = "Theme.FontSize.H4";
+            public const string H5 = "Theme.FontSize.H5";
+            public const string H6 = "Theme.FontSize.H6";
+            public const string Overline = "Theme.FontSize.Overline";
+            public const string Subtitle1 = "Theme.FontSize.Subtitle1";
+            public const string Subtitle2 = "Theme.FontSize.Subtitle2";
         }
 
         /// <summary>
@@ -132,11 +152,19 @@
         /// </summary>
         public static class FontAttributes
         {
-            public const string Default = "Theme.FontAttributes.Default";
-            public const string Body = "Theme.FontAttributes.Body";
-            public const string Title = "Theme.FontAttributes.Title";
+            public const string Body1 = "Theme.FontAttributes.Body1";
+            public const string Body2 = "Theme.FontAttributes.Body2";
             public const string Button = "Theme.FontAttributes.Button";
-            public const string Entry = "Theme.FontAttributes.Entry";
+            public const string Caption = "Theme.FontAttributes.Caption";
+            public const string H1 = "Theme.FontAttributes.H1";
+            public const string H2 = "Theme.FontAttributes.H2";
+            public const string H3 = "Theme.FontAttributes.H3";
+            public const string H4 = "Theme.FontAttributes.H4";
+            public const string H5 = "Theme.FontAttributes.H5";
+            public const string H6 = "Theme.FontAttributes.H6";
+            public const string Overline = "Theme.FontAttributes.Overline";
+            public const string Subtitle1 = "Theme.FontAttributes.Subtitle1";
+            public const string Subtitle2 = "Theme.FontAttributes.Subtitle2";
         }
     }
 }

@@ -48,35 +48,27 @@
 
             <themes:SpacingConfiguration x:Key="SpacingConfiguration" />
 
-            <OnPlatform x:Key="FontFamilyCourierNew" x:TypeArguments="x:String">
-                <On Platform="Android" Value="monospace" />
-                <On Platform="iOS" Value="Courier New" />
-            </OnPlatform>
-
             <themes:FontElement
                 x:Key="CustomTitleFont"
-                FontSize="{StaticResource Theme.FontSize.Default}"
+                FontSize="{DynamicResource Theme.FontSize.Small}"
                 FontAttributes="Bold" />
 
-            <themes:FontElement
-                x:Key="CustomButtonFont"
-                FontFamily="{StaticResource FontFamilyCourierNew}"
-                FontSize="{StaticResource Theme.FontSize.Default}"
-                FontAttributes="Bold,Italic" />
+            <themes:FontElement x:Key="CustomButtonFont" FontAttributes="Bold" />
 
-            <themes:FontElement x:Key="CustomDefaultFont" FontSize="{StaticResource FontSizeMedium}" />
+            <themes:FontElement x:Key="CustomDefaultFont" FontSize="{StaticResource Theme.FontSize.Medium}" />
 
-            <themes:FontConfiguration
-                x:Key="FontConfiguration"
-                Title="{StaticResource CustomTitleFont}"
-                Button="{StaticResource CustomButtonFont}"
-                Default="{StaticResource CustomDefaultFont}" />
+            <themes:FontConfiguration x:Key="FontConfiguration" Button="{StaticResource CustomButtonFont}">
+
+                <!--<themes:FontConfiguration.Body1>
+                    <themes:FontElement FontFamily="{DynamicResource Theme.FontFamily.Monospace}" FontSize="24" />
+                </themes:FontConfiguration.Body1>-->
+            </themes:FontConfiguration>
 
             <themes:CrossPlatformLibraryConfiguration
                 x:Key="SampleApp.Theme"
+                FontConfiguration="{StaticResource FontConfiguration}"
                 ColorConfiguration="{StaticResource ColorConfiguration}"
-                SpacingConfiguration="{StaticResource SpacingConfiguration}"
-                FontConfiguration="{StaticResource FontConfiguration}" />
+                SpacingConfiguration="{StaticResource SpacingConfiguration}" />
 
         </ResourceDictionary>
 

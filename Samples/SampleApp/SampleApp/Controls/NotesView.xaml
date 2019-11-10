@@ -36,7 +36,7 @@
                 <Label
                     Grid.Row="1"
                     BackgroundColor="Transparent"
-                    FontSize="{DynamicResource FontSizeSmall}"
+                    FontSize="{DynamicResource Theme.FontSize.Small}"
                     HorizontalOptions="EndAndExpand"
                     HorizontalTextAlignment="End"
                     IsVisible="{Binding Notes, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"
