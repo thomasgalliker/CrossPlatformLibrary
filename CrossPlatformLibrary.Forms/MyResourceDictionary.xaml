@@ -90,16 +90,29 @@
 
 
     <!--  Styles  -->
-    <!--  CustomButton Base Style  -->
-    <Style x:Key="CustomButtonStyle" TargetType="controls:CustomButton">
+    <!--  Button Style  -->
+    <Style x:Key="ButtonStyle" TargetType="Button">
         <Setter Property="TextColor" Value="{DynamicResource CustomButtonStyle.TextColor}" />
         <Setter Property="BackgroundColor" Value="{DynamicResource CustomButtonStyle.BackgroundColor.Enabled}" />
-        <Setter Property="BackgroundColorPressed" Value="{DynamicResource CustomButtonStyle.BackgroundColor.Pressed}" />
-        <Setter Property="BorderColor" Value="{DynamicResource CustomButtonStyle.BorderColor.Enabled}" />
-        <Setter Property="BorderColorPressed" Value="{DynamicResource CustomButtonStyle.BorderColor.Pressed}" />
         <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Button}" />
         <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Button}" />
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Button}" />
+    </Style>
+    <Style BasedOn="{StaticResource ButtonStyle}" TargetType="Button" />
+
+    <Style x:Key="ImageButtonStyle" TargetType="ImageButton">
+        <Setter Property="BackgroundColor" Value="{DynamicResource CustomButtonStyle.BackgroundColor.Enabled}" />
+    </Style>
+    <Style BasedOn="{StaticResource ImageButtonStyle}" TargetType="ImageButton" />
+
+    <!--  CustomButton Base Style  -->
+    <Style
+        x:Key="CustomButtonStyle"
+        TargetType="controls:CustomButton"
+        BasedOn="{StaticResource ButtonStyle}">
+        <Setter Property="BackgroundColorPressed" Value="{DynamicResource CustomButtonStyle.BackgroundColor.Pressed}" />
+        <Setter Property="BorderColor" Value="{DynamicResource CustomButtonStyle.BorderColor.Enabled}" />
+        <Setter Property="BorderColorPressed" Value="{DynamicResource CustomButtonStyle.BorderColor.Pressed}" />
         <Setter Property="BorderWidth" Value="2" />
         <Setter Property="CornerRadius" Value="20" />
     </Style>
