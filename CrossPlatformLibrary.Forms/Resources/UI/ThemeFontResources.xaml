@@ -6,12 +6,6 @@
 
     <!--  Font Families  -->
     <OnPlatform
-        x:Key="Theme.FontFamily.Default"
-        x:TypeArguments="x:String"
-        Android="Droid Sans"
-        iOS="sans-serif" />
-
-    <OnPlatform
         x:Key="Theme.FontFamily.Monospace"
         x:TypeArguments="x:String"
         Android="monospace"

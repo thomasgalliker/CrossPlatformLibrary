@@ -33,6 +33,22 @@ namespace CrossPlatformLibrary.Forms.Themes
             set => this.SetValue(FontSizesProperty, value);
         }
 
+        public static readonly BindableProperty SectionLabelProperty =
+            BindableProperty.Create(
+                nameof(SectionLabel),
+                typeof(FontElement),
+                typeof(FontConfiguration),
+                null);
+
+        /// <summary>
+        ///     Section Label font, used as header font in card views.
+        /// </summary>
+        public FontElement SectionLabel
+        {
+            get => (FontElement)this.GetValue(SectionLabelProperty);
+            set => this.SetValue(SectionLabelProperty, value);
+        }
+
         public static readonly BindableProperty Body1Property =
             BindableProperty.Create(
                 nameof(Body1),
@@ -41,7 +57,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 null);
 
         /// <summary>
-        ///     Body 1 font family, used for long-form writing and small text sizes.
+        ///     Body 1 font, used for long-form writing and small text sizes.
         /// </summary>
         public FontElement Body1
         {
@@ -57,7 +73,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 null);
 
         /// <summary>
-        ///     Body 2 font family, used for long-form writing and small text sizes.
+        ///     Body 2 font, used for long-form writing and small text sizes.
         /// </summary>
         public FontElement Body2
         {
@@ -79,7 +95,7 @@ namespace CrossPlatformLibrary.Forms.Themes
         }
 
         /// <summary>
-        ///     Caption font family, used for annotations or to introduce a headline text.
+        ///     Caption font, used for annotations or to introduce a headline text.
         /// </summary>
         public static readonly BindableProperty CaptionProperty =
             BindableProperty.Create(
@@ -102,7 +118,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 null);
 
         /// <summary>
-        ///     Headline 1 font family, used by large text on the screen.
+        ///     Headline 1 font, used by large text on the screen.
         /// </summary>
         public FontElement H1
         {
@@ -118,7 +134,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 null);
 
         /// <summary>
-        ///     Headline 2 font family, used by large text on the screen.
+        ///     Headline 2 font, used by large text on the screen.
         /// </summary>
         public FontElement H2
         {
@@ -134,7 +150,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 null);
 
         /// <summary>
-        ///     Headline 3 font family, used by large text on the screen.
+        ///     Headline 3 font, used by large text on the screen.
         /// </summary>
         public FontElement H3
         {
@@ -150,7 +166,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 null);
 
         /// <summary>
-        ///     Headline 4 font family, used by large text on the screen.
+        ///     Headline 4 font, used by large text on the screen.
         /// </summary>
         public FontElement H4
         {
@@ -166,7 +182,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 null);
 
         /// <summary>
-        ///     Headline 5 font family, used by large text on the screen.
+        ///     Headline 5 font, used by large text on the screen.
         /// </summary>
         public FontElement H5
         {
@@ -182,7 +198,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 null);
 
         /// <summary>
-        ///     Headline 6 font family, used by large text on the screen.
+        ///     Headline 6 font, used by large text on the screen.
         /// </summary>
         public FontElement H6
         {
@@ -198,7 +214,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 null);
 
         /// <summary>
-        ///     Overline font family, used for annotations or to introduce a headline text.
+        ///     Overline font, used for annotations or to introduce a headline text.
         /// </summary>
         public FontElement Overline
         {
@@ -214,7 +230,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 null);
 
         /// <summary>
-        ///     Subtitle 1 font family, used by medium-emphasis text.
+        ///     Subtitle 1 font, used by medium-emphasis text.
         /// </summary>
         public FontElement Subtitle1
         {
@@ -230,7 +246,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 null);
 
         /// <summary>
-        ///     Subtitle 2 font family, used by medium-emphasis text.
+        ///     Subtitle 2 font, used by medium-emphasis text.
         /// </summary>
         public FontElement Subtitle2
         {

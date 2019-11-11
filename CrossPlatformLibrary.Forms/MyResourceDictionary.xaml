@@ -320,21 +320,13 @@
 
     <Style
         x:Key="SectionLabelTextStyle"
-        BaseResourceKey="ListItemDetailTextStyle"
-        TargetType="Label">
+        TargetType="Label"
+        BasedOn="{StaticResource LabelStyle}">
         <Setter Property="LineBreakMode" Value="WordWrap" />
         <Setter Property="TextColor" Value="{DynamicResource CardViewStyle.Header.TextColor}" />
-        <Setter Property="FontSize">
-            <OnPlatform x:TypeArguments="x:Double">
-                <On Platform="Android" Value="18" />
-                <On Platform="iOS" Value="13" />
-            </OnPlatform>
-        </Setter>
-        <Setter Property="FontFamily">
-            <OnPlatform x:TypeArguments="x:String">
-                <On Platform="Android" Value="sans-serif-light" />
-            </OnPlatform>
-        </Setter>
+        <Setter Property="FontFamily" Value="{DynamicResource CardViewStyle.Header.FontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource CardViewStyle.Header.FontSize}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource CardViewStyle.Header.FontAttributes}" />
     </Style>
 
     <Style x:Key="EditorStyle" TargetType="Editor">

@@ -59,13 +59,17 @@
                 <On Platform="iOS" Value="Oswald-Medium" />
             </OnPlatform>
 
+            <!--  Overrides the all font-related properties  -->
             <themes:FontElement
-                x:Key="CustomTitleFont"
-                FontSize="{DynamicResource Theme.FontSize.Small}"
-                FontAttributes="Bold" />
+                x:Key="DebugFont"
+                FontFamily="{StaticResource SampleApp.FontFamily.OswaldLight}"
+                FontSize="99"
+                FontAttributes="Bold,Italic" />
 
+            <!--  Overrides the FontAttributes property only  -->
             <themes:FontElement x:Key="CustomButtonFont" FontAttributes="Bold" />
 
+            <!--  Create a custom FontSizeConfiguration to adjust the predefined named font sizes  -->
             <themes:DefaultFontSizeConfiguration x:Key="FontSizeConfiguration">
                 <!--<themes:DefaultFontSizeConfiguration.Medium>
                     <OnPlatform x:TypeArguments="x:Double">

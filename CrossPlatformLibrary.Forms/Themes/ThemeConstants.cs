@@ -74,6 +74,9 @@
         public static class CardViewStyle
         {
             public const string HeaderTextColor = "CardViewStyle.Header.TextColor";
+            public const string HeaderFontFamily = "CardViewStyle.Header.FontFamily";
+            public const string HeaderFontSize = "CardViewStyle.Header.FontSize";
+            public const string HeaderFontAttributes = "CardViewStyle.Header.FontAttributes";
             public const string HeaderBackgroundColor = "CardViewStyle.Header.BackgroundColor";
             public const string HeaderDividerColor = "CardViewStyle.Header.DividerColor";
             public const string BackgroundColor = "CardViewStyle.BackgroundColor";

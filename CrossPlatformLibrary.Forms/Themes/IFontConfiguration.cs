@@ -6,6 +6,8 @@ namespace CrossPlatformLibrary.Forms.Themes
 
         IFontSizeConfiguration FontSizes { get; set; }
 
+        FontElement SectionLabel { get; set; }
+
         FontElement Body1 { get; set; }
 
         FontElement Body2 { get; set; }

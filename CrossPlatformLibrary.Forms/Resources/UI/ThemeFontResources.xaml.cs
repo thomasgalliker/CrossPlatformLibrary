@@ -1,6 +1,7 @@
 ﻿using System;
 using CrossPlatformLibrary.Forms.Extensions;
 using CrossPlatformLibrary.Forms.Themes;
+using CrossPlatformLibrary.Forms.Tools;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -29,7 +30,7 @@ namespace CrossPlatformLibrary.Forms.Resources
 
         private void SetFonts(IFontConfiguration fontConfiguration)
         {
-            this[ThemeConstants.FontFamily.Default] = fontConfiguration.DefaultFontFamily;
+            this[ThemeConstants.FontFamily.Default] = fontConfiguration.DefaultFontFamily; // TODO Needs initialization? ?? PlatformHelper.OnPlatformValue((Device.iOS, () => "sans-serif"), (Device.Android, () => "Droid Sans"));
 
             this[ThemeConstants.FontFamily.Body1] = TryGetFontFamily(fontConfiguration.Body1, fontConfiguration.DefaultFontFamily);
             this[ThemeConstants.FontSize.Body1] = TryGetFontSize(fontConfiguration.Body1, fontConfiguration.FontSizes.Medium);
@@ -82,6 +83,10 @@ namespace CrossPlatformLibrary.Forms.Resources
             this[ThemeConstants.FontFamily.Subtitle2] = TryGetFontFamily(fontConfiguration.Subtitle2, fontConfiguration.DefaultFontFamily);
             this[ThemeConstants.FontSize.Subtitle2] = TryGetFontSize(fontConfiguration.Subtitle2, fontConfiguration.FontSizes.Small);
             this[ThemeConstants.FontAttributes.Subtitle2] = TryGetFontAttributes(fontConfiguration.Subtitle2);
+
+            this[ThemeConstants.CardViewStyle.HeaderFontFamily] = TryGetFontFamily(fontConfiguration.SectionLabel, fontConfiguration.DefaultFontFamily);
+            this[ThemeConstants.CardViewStyle.HeaderFontSize] = TryGetFontSize(fontConfiguration.SectionLabel, PlatformHelper.OnPlatformValue((Device.iOS, () => 13d), (Device.Android, () => 18d)));
+            this[ThemeConstants.CardViewStyle.HeaderFontAttributes] = TryGetFontAttributes(fontConfiguration.SectionLabel);
         }
 
         private static string TryGetFontFamily(FontElement fontElement, string @default)
