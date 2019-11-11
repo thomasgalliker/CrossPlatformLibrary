@@ -52,25 +52,6 @@
     <converters:ValidationErrorsToStringConverter x:Key="ValidationErrorsToStringConverter" />
 
     <!--  Font Sizes  -->
-
-    <OnPlatform x:Key="Theme.FontSize.Micro" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="11" />
-        <On Platform="Android" Value="10" />
-        <On Platform="UWP" Value="15.667" />
-    </OnPlatform>
-
-    <OnPlatform x:Key="Theme.FontSize.Small" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="13" />
-        <On Platform="Android" Value="14" />
-        <On Platform="UWP" Value="18.667" />
-    </OnPlatform>
-
-    <OnPlatform x:Key="Theme.FontSize.Medium" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="16" />
-        <On Platform="Android" Value="17" />
-        <On Platform="UWP" Value="22.667" />
-    </OnPlatform>
-
     <OnPlatform x:Key="FontSizeLarge" x:TypeArguments="x:Double">
         <On Platform="iOS" Value="20" />
         <On Platform="Android" Value="22" />
@@ -219,8 +200,26 @@
         <!--<Setter Property="HeightRequest" Value="48" />-->
     </Style>
 
+    <!--  Validatable Controls  -->
     <Style TargetType="controls:ValidatableLabel">
         <Setter Property="LabelStyle" Value="{DynamicResource EntryLabelStyle}" />
+    </Style>
+
+    <Style TargetType="controls:ValidatableAutoCompleteView">
+        <Setter Property="EntryStyle" Value="{DynamicResource EntryStyle}" />
+    </Style>
+
+    <Style TargetType="controls:ValidatablePicker">
+        <Setter Property="PickerStyle" Value="{DynamicResource PickerStyle}" />
+    </Style>
+
+    <Style TargetType="controls:ValidatableDatePicker">
+        <Setter Property="PickerStyle" Value="{DynamicResource PickerStyle}" />
+    </Style>
+
+    <Style TargetType="controls:ValidatableDateTimePicker">
+        <Setter Property="DatePickerStyle" Value="{DynamicResource PickerStyle}" />
+        <Setter Property="TimePickerStyle" Value="{DynamicResource PickerStyle}" />
     </Style>
 
     <!--  HyperLinkLabelStyle  -->

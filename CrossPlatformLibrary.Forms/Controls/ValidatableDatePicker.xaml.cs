@@ -47,62 +47,6 @@ namespace CrossPlatformLibrary.Forms.Controls
             }
         }
 
-        public new static readonly BindableProperty StyleProperty =
-            BindableProperty.Create(
-                nameof(Style),
-                typeof(Style),
-                typeof(ValidatableDatePicker),
-                default(Style),
-                BindingMode.OneWay);
-
-        public new Style Style
-        {
-            get => (Style)this.GetValue(StyleProperty);
-            set => this.SetValue(StyleProperty, value);
-        }
-
-        public static readonly BindableProperty FontFamilyProperty =
-            BindableProperty.Create(
-                nameof(FontFamily),
-                typeof(string),
-                typeof(ValidatableDatePicker),
-                default(string),
-                BindingMode.OneWay);
-
-        public string FontFamily
-        {
-            get => (string)this.GetValue(FontFamilyProperty);
-            set => this.SetValue(FontFamilyProperty, value);
-        }
-
-        public static readonly BindableProperty FontSizeProperty =
-            BindableProperty.Create(
-                nameof(FontSize),
-                typeof(double),
-                typeof(ValidatableDatePicker),
-                Font.Default.FontSize,
-                BindingMode.OneWay);
-
-        public double FontSize
-        {
-            get => (double)this.GetValue(FontSizeProperty);
-            set => this.SetValue(FontSizeProperty, value);
-        }
-
-        public static readonly BindableProperty FontAttributesProperty =
-            BindableProperty.Create(
-                nameof(FontAttributes),
-                typeof(FontAttributes),
-                typeof(ValidatableDatePicker),
-                FontAttributes.None,
-                BindingMode.OneWay);
-
-        public FontAttributes FontAttributes
-        {
-            get => (FontAttributes)this.GetValue(FontAttributesProperty);
-            set => this.SetValue(FontAttributesProperty, (object)value);
-        }
-
         public static readonly BindableProperty DateProperty =
             BindableProperty.Create(
                 nameof(Date),

@@ -95,6 +95,12 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <BundleResource Include="Resources\Fonts\Oswald-Bold.ttf" />
+    <BundleResource Include="Resources\Fonts\Oswald-ExtraLight.ttf" />
+    <BundleResource Include="Resources\Fonts\Oswald-Light.ttf" />
+    <BundleResource Include="Resources\Fonts\Oswald-Medium.ttf" />
+    <BundleResource Include="Resources\Fonts\Oswald-Regular.ttf" />
+    <BundleResource Include="Resources\Fonts\Oswald-SemiBold.ttf" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

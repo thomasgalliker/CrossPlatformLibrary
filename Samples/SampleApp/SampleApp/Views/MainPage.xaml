@@ -11,7 +11,8 @@
     xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
     xmlns:userControls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
     xmlns:views="clr-namespace:SampleApp.Views;assembly=SampleApp"
-    x:Name="Page">
+    x:Name="Page"
+    Title="CrossPlatformLibrary Sample App">
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="AutoCompleteSuggestionItemTemplate">
@@ -444,6 +445,88 @@
                                     ItemsSource="{Binding ThemeResources}"
                                     ListOrientation="Vertical"
                                     SelectionMode="None" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo FontFamily, FontSize, FontAttributes--&gt;" />
+                                <StackLayout x:Name="FontDemoStackLayout" Orientation="Vertical">
+                                    <Label
+                                        Text="Body1"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Body1}"
+                                        FontSize="{DynamicResource Theme.FontSize.Body1}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Body1}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Body2"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Body2}"
+                                        FontSize="{DynamicResource Theme.FontSize.Body2}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Body2}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Button"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Button}"
+                                        FontSize="{DynamicResource Theme.FontSize.Button}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Button}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Caption"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Caption}"
+                                        FontSize="{DynamicResource Theme.FontSize.Caption}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Caption}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="H1"
+                                        FontFamily="{DynamicResource Theme.FontFamily.H1}"
+                                        FontSize="{DynamicResource Theme.FontSize.H1}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.H1}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="H2"
+                                        FontFamily="{DynamicResource Theme.FontFamily.H2}"
+                                        FontSize="{DynamicResource Theme.FontSize.H2}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.H2}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="H3"
+                                        FontFamily="{DynamicResource Theme.FontFamily.H3}"
+                                        FontSize="{DynamicResource Theme.FontSize.H3}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.H3}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="H4"
+                                        FontFamily="{DynamicResource Theme.FontFamily.H4}"
+                                        FontSize="{DynamicResource Theme.FontSize.H4}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.H4}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="H5"
+                                        FontFamily="{DynamicResource Theme.FontFamily.H5}"
+                                        FontSize="{DynamicResource Theme.FontSize.H5}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.H5}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="H6"
+                                        FontFamily="{DynamicResource Theme.FontFamily.H6}"
+                                        FontSize="{DynamicResource Theme.FontSize.H6}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.H6}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Overline"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Overline}"
+                                        FontSize="{DynamicResource Theme.FontSize.Overline}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Overline}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Subtitle1"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Subtitle1}"
+                                        FontSize="{DynamicResource Theme.FontSize.Subtitle1}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Subtitle1}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Subtitle2"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Subtitle2}"
+                                        FontSize="{DynamicResource Theme.FontSize.Subtitle2}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Subtitle2}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                </StackLayout>
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo NoBarsScrollViewer--&gt;" />
                                 <controls:NoBarsScrollViewer Orientation="Horizontal">

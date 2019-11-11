@@ -3,6 +3,7 @@ using System.Linq;
 using CrossPlatformLibrary.Forms.Tools;
 using FluentAssertions;
 using Xamarin.Forms;
+using Xamarin.Forms.Mocks;
 using Xunit;
 
 namespace CrossPlatformLibrary.Forms.Tests.Tools
@@ -11,7 +12,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Tools
     {
         public PlatformHelperTests()
         {
-            Xamarin.Forms.Mocks.MockForms.Init();
+            MockForms.Init();
         }
 
         [Fact]
@@ -19,7 +20,6 @@ namespace CrossPlatformLibrary.Forms.Tests.Tools
         {
             // Act
             Action action = () => PlatformHelper.RunOnPlatform();
-
 
             // Assert
             action.Should().NotThrow();
@@ -37,12 +37,11 @@ namespace CrossPlatformLibrary.Forms.Tests.Tools
             // Act
             PlatformHelper.RunOnPlatform(
                 (Device.iOS, () => { iosCalls++; }
-            ),
+                ),
                 (Device.Android, () => { androidCalls++; }
-            ),
+                ),
                 (currentRuntimePlatform, () => { currentRuntimePlatformCalls++; }
-            ));
-
+                ));
 
             // Assert
             currentRuntimePlatformCalls.Should().Be(1);
@@ -62,18 +61,15 @@ namespace CrossPlatformLibrary.Forms.Tests.Tools
             // Act
             PlatformHelper.RunOnPlatform(
                 (Device.iOS, () => { iosCalls++; }
-            ),
+                ),
                 (Device.Android, () => { androidCalls++; }
-            ),
+                ),
                 (currentRuntimePlatform, () => { currentRuntimePlatformCalls++; }
-            ),
+                ),
                 (currentRuntimePlatform, () => { currentRuntimePlatformCalls++; }
-            ),
+                ),
                 (currentRuntimePlatform, () => { currentRuntimePlatformCalls++; }
-            ));
-
-
-
+                ));
 
             // Assert
             currentRuntimePlatformCalls.Should().Be(3);

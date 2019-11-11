@@ -66,48 +66,6 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(PickerStyleProperty, value);
         }
 
-        public static readonly BindableProperty FontFamilyProperty =
-            BindableProperty.Create(
-                nameof(FontFamily),
-                typeof(string),
-                typeof(ValidatablePicker),
-                default(string),
-                BindingMode.OneWay);
-
-        public string FontFamily
-        {
-            get => (string)this.GetValue(FontFamilyProperty);
-            set => this.SetValue(FontFamilyProperty, value);
-        }
-
-        public static readonly BindableProperty FontSizeProperty =
-            BindableProperty.Create(
-                nameof(FontSize),
-                typeof(double),
-                typeof(ValidatablePicker),
-                Font.Default.FontSize,
-                BindingMode.OneWay);
-
-        public double FontSize
-        {
-            get => (double)this.GetValue(FontSizeProperty);
-            set => this.SetValue(FontSizeProperty, value);
-        }
-
-        public static readonly BindableProperty FontAttributesProperty =
-            BindableProperty.Create(
-                nameof(FontAttributes),
-                typeof(FontAttributes),
-                typeof(ValidatablePicker),
-                FontAttributes.None,
-                BindingMode.OneWay);
-
-        public FontAttributes FontAttributes
-        {
-            get => (FontAttributes)this.GetValue(FontAttributesProperty);
-            set => this.SetValue(FontAttributesProperty, (object)value);
-        }
-
         public static readonly BindableProperty ItemsSourceProperty =
             BindableProperty.Create(
                 nameof(ItemsSource),

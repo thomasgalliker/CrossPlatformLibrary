@@ -62,8 +62,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\Fonts\Oswald-Bold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Oswald-ExtraLight.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Oswald-Light.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Oswald-Medium.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Oswald-Regular.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Oswald-SemiBold.ttf" />
     <None Include="Resources\AboutResources.txt" />
-    <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>

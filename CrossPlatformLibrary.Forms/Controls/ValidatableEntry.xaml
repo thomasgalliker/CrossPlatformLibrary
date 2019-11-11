@@ -24,7 +24,6 @@
         effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
         BackgroundColor="Transparent"
         Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
-        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
         HeightRequest="48"
         IsPassword="{Binding IsPassword, Source={x:Reference Control}, Mode=OneWay}"
         IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"

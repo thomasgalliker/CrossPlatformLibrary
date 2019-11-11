@@ -48,6 +48,17 @@
 
             <themes:SpacingConfiguration x:Key="SpacingConfiguration" />
 
+            <!--  Fonts  -->
+            <OnPlatform x:Key="SampleApp.FontFamily.OswaldLight" x:TypeArguments="x:String">
+                <On Platform="Android" Value="Fonts/Oswald-Light.ttf#Oswald Light" />
+                <On Platform="iOS" Value="Oswald-Light" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="SampleApp.FontFamily.OswaldMedium" x:TypeArguments="x:String">
+                <On Platform="Android" Value="Fonts/Oswald-Medium.ttf#Oswald Medium" />
+                <On Platform="iOS" Value="Oswald-Medium" />
+            </OnPlatform>
+
             <themes:FontElement
                 x:Key="CustomTitleFont"
                 FontSize="{DynamicResource Theme.FontSize.Small}"
@@ -55,20 +66,19 @@
 
             <themes:FontElement x:Key="CustomButtonFont" FontAttributes="Bold" />
 
-            <themes:FontElement x:Key="CustomDefaultFont" FontSize="{StaticResource Theme.FontSize.Medium}" />
-
             <themes:DefaultFontSizeConfiguration x:Key="FontSizeConfiguration">
-                <themes:DefaultFontSizeConfiguration.Medium>
+                <!--<themes:DefaultFontSizeConfiguration.Medium>
                     <OnPlatform x:TypeArguments="x:Double">
                         <On Platform="iOS" Value="28" />
                         <On Platform="Android" Value="24" />
                         <On Platform="UWP" Value="24" />
                     </OnPlatform>
-                </themes:DefaultFontSizeConfiguration.Medium>
+                </themes:DefaultFontSizeConfiguration.Medium>-->
             </themes:DefaultFontSizeConfiguration>
 
             <themes:FontConfiguration
                 x:Key="FontConfiguration"
+                DefaultFontFamily="{StaticResource SampleApp.FontFamily.OswaldMedium}"
                 Button="{StaticResource CustomButtonFont}"
                 FontSizes="{StaticResource FontSizeConfiguration}" />
 

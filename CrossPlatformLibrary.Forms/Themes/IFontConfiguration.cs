@@ -2,6 +2,8 @@ namespace CrossPlatformLibrary.Forms.Themes
 {
     public interface IFontConfiguration
     {
+        string DefaultFontFamily { get; set; }
+
         IFontSizeConfiguration FontSizes { get; set; }
 
         FontElement Body1 { get; set; }

@@ -11,7 +11,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 nameof(FontFamily),
                 typeof(string),
                 typeof(FontElement),
-                Font.Default.FontFamily);
+                null);
 
         public string FontFamily
         {
@@ -24,7 +24,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 nameof(FontSize),
                 typeof(double),
                 typeof(FontElement),
-                Font.Default.FontSize);
+                0d);
 
         [TypeConverter(typeof(FontSizeConverter))]
         public double FontSize
@@ -38,14 +38,12 @@ namespace CrossPlatformLibrary.Forms.Themes
                 nameof(FontAttributes),
                 typeof(FontAttributes),
                 typeof(FontElement),
-                Font.Default.FontAttributes);
+                FontAttributes.None);
 
         public FontAttributes FontAttributes
         {
             get => (FontAttributes)this.GetValue(FontAttributesProperty);
             set => this.SetValue(FontAttributesProperty, value);
         }
-
-
     }
 }

@@ -30,13 +30,12 @@
         effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
         BackgroundColor="Transparent"
         Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
-        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
         HeightRequest="48"
         IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
         Keyboard="{Binding Keyboard, Source={x:Reference Control}, Mode=OneWay}"
         MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
         Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
-        Style="{Binding Style, Source={x:Reference Control}, Mode=OneWay}"
+        Style="{Binding EntryStyle, Source={x:Reference Control}, Mode=OneWay}"
         Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}">
         <Entry.Effects>
             <effects:EntrySelectAllText />

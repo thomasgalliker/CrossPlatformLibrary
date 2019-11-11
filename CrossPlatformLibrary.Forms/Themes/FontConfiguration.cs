@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using CrossPlatformLibrary.Forms.Extensions;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Themes
@@ -8,6 +8,19 @@ namespace CrossPlatformLibrary.Forms.Themes
     /// </summary>
     public sealed class FontConfiguration : BindableObject, IFontConfiguration
     {
+        public static readonly BindableProperty DefaultFontFamilyProperty =
+            BindableProperty.Create(
+                nameof(DefaultFontFamily),
+                typeof(string),
+                typeof(FontConfiguration),
+                null);
+
+        public string DefaultFontFamily
+        {
+            get => (string)this.GetValue(DefaultFontFamilyProperty);
+            set => this.SetValue(DefaultFontFamilyProperty, value);
+        }
+
         public static readonly BindableProperty FontSizesProperty =
             BindableProperty.Create(
                 nameof(FontSizes),
@@ -59,26 +72,6 @@ namespace CrossPlatformLibrary.Forms.Themes
                 typeof(FontElement),
                 typeof(FontConfiguration),
                 null);
-
-        private static FontElement CreateDefaultFontElement()
-        {
-            if (Device.RuntimePlatform == Device.iOS)
-            {
-                return new FontElement { FontSize = 17 };
-            }
-
-            if (Device.RuntimePlatform == Device.Android)
-            {
-                return new FontElement { FontSize = 14 };
-            }
-            
-            if (Device.RuntimePlatform == Device.UWP)
-            {
-                return new FontElement { FontSize = 14 };
-            }
-
-            return new FontElement { FontSize = 16 };
-        }
 
         public FontElement Button
         {
@@ -203,27 +196,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 nameof(Overline),
                 typeof(FontElement),
                 typeof(FontConfiguration),
-                CreateDefaultOverline());
-
-        private static FontElement CreateDefaultOverline()
-        {
-            if (Device.RuntimePlatform == Device.iOS)
-            {
-                return new FontElement { FontSize = 12 };
-            }
-
-            if (Device.RuntimePlatform == Device.Android)
-            {
-                return new FontElement { FontSize = 12 };
-            }
-
-            if (Device.RuntimePlatform == Device.UWP)
-            {
-                return new FontElement { FontSize = 12 };
-            }
-
-            return new FontElement { FontSize = 12 };
-        }
+                null);
 
         /// <summary>
         ///     Overline font family, used for annotations or to introduce a headline text.

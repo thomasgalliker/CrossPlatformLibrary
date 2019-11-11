@@ -23,7 +23,6 @@
         effects:LineColorEffect.ApplyLineColor="True"
         effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
         DisplayMemberPath="{Binding DisplayMemberPath, Source={x:Reference Control}}"
-        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
         HeightRequest="48"
         HorizontalOptions="FillAndExpand"
         IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"

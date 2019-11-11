@@ -5,8 +5,8 @@ using Xamarin.Forms;
 namespace CrossPlatformLibrary.Forms.Controls
 {
     /// <summary>
-    /// Similar solution can be found here:
-    /// https://github.com/XamFormsExtended/Xfx.Controls
+    ///     Similar solution can be found here:
+    ///     https://github.com/XamFormsExtended/Xfx.Controls
     /// </summary>
     public partial class ValidatableEditor : GridZero
     {
@@ -70,32 +70,17 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(KeyboardProperty, value);
         }
 
-        public new static readonly BindableProperty StyleProperty =
+        public static readonly BindableProperty EditorStyleProperty =
             BindableProperty.Create(
-                nameof(Style),
+                nameof(EditorStyle),
                 typeof(Style),
                 typeof(ValidatableEditor),
-                default(Style),
-                BindingMode.OneWay);
+                default(Style));
 
-        public new Style Style
+        public Style EditorStyle
         {
-            get => (Style)this.GetValue(StyleProperty);
-            set => this.SetValue(StyleProperty, value);
-        }
-
-        public static readonly BindableProperty FontFamilyProperty =
-            BindableProperty.Create(
-                nameof(FontFamily),
-                typeof(string),
-                typeof(ValidatableEditor),
-                default(string),
-                BindingMode.OneWay);
-
-        public string FontFamily
-        {
-            get => (string)this.GetValue(FontFamilyProperty);
-            set => this.SetValue(FontFamilyProperty, value);
+            get => (Style)this.GetValue(EditorStyleProperty);
+            set => this.SetValue(EditorStyleProperty, value);
         }
 
         public static readonly BindableProperty MaxLengthProperty =
@@ -163,8 +148,5 @@ namespace CrossPlatformLibrary.Forms.Controls
             add => this.Editor.TextChanged += value;
             remove => this.Editor.TextChanged -= value;
         }
-
-
     }
 }
-

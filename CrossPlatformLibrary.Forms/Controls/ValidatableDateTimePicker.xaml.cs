@@ -46,60 +46,30 @@ namespace CrossPlatformLibrary.Forms.Controls
             }
         }
 
-        public new static readonly BindableProperty StyleProperty =
+        public static readonly BindableProperty DatePickerStyleProperty =
             BindableProperty.Create(
-                nameof(Style),
+                nameof(DatePickerStyle),
                 typeof(Style),
                 typeof(ValidatableDateTimePicker),
-                default(Style),
-                BindingMode.OneWay);
+                default(Style));
 
-        public new Style Style
+        public Style DatePickerStyle
         {
-            get => (Style)this.GetValue(StyleProperty);
-            set => this.SetValue(StyleProperty, value);
+            get => (Style)this.GetValue(DatePickerStyleProperty);
+            set => this.SetValue(DatePickerStyleProperty, value);
         }
 
-        public static readonly BindableProperty FontFamilyProperty =
+        public static readonly BindableProperty TimePickerStyleProperty =
             BindableProperty.Create(
-                nameof(FontFamily),
-                typeof(string),
+                nameof(TimePickerStyle),
+                typeof(Style),
                 typeof(ValidatableDateTimePicker),
-                default(string),
-                BindingMode.OneWay);
+                default(Style));
 
-        public string FontFamily
+        public Style TimePickerStyle
         {
-            get => (string)this.GetValue(FontFamilyProperty);
-            set => this.SetValue(FontFamilyProperty, value);
-        }
-
-        public static readonly BindableProperty FontSizeProperty =
-            BindableProperty.Create(
-                nameof(FontSize),
-                typeof(double),
-                typeof(ValidatableDateTimePicker),
-                Font.Default.FontSize,
-                BindingMode.OneWay);
-
-        public double FontSize
-        {
-            get => (double)this.GetValue(FontSizeProperty);
-            set => this.SetValue(FontSizeProperty, value);
-        }
-
-        public static readonly BindableProperty FontAttributesProperty =
-            BindableProperty.Create(
-                nameof(FontAttributes),
-                typeof(FontAttributes),
-                typeof(ValidatableDateTimePicker),
-                FontAttributes.None,
-                BindingMode.OneWay);
-
-        public FontAttributes FontAttributes
-        {
-            get => (FontAttributes)this.GetValue(FontAttributesProperty);
-            set => this.SetValue(FontAttributesProperty, (object)value);
+            get => (Style)this.GetValue(TimePickerStyleProperty);
+            set => this.SetValue(TimePickerStyleProperty, value);
         }
 
         public static readonly BindableProperty DateProperty =

@@ -88,32 +88,17 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(KeyboardProperty, value);
         }
 
-        public new static readonly BindableProperty StyleProperty =
+        public new static readonly BindableProperty EntryStyleProperty =
             BindableProperty.Create(
-                nameof(Style),
+                nameof(EntryStyle),
                 typeof(Style),
                 typeof(ValidatableAutoCompleteView),
-                default(Style),
-                BindingMode.OneWay);
+                default(Style));
 
-        public new Style Style
+        public Style EntryStyle
         {
-            get => (Style)this.GetValue(StyleProperty);
-            set => this.SetValue(StyleProperty, value);
-        }
-
-        public static readonly BindableProperty FontFamilyProperty =
-            BindableProperty.Create(
-                nameof(FontFamily),
-                typeof(string),
-                typeof(ValidatableAutoCompleteView),
-                default(string),
-                BindingMode.OneWay);
-
-        public string FontFamily
-        {
-            get => (string)this.GetValue(FontFamilyProperty);
-            set => this.SetValue(FontFamilyProperty, value);
+            get => (Style)this.GetValue(EntryStyleProperty);
+            set => this.SetValue(EntryStyleProperty, value);
         }
 
         public static readonly BindableProperty MaxLengthProperty =

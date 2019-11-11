@@ -107,9 +107,10 @@
         ///     FontFamily resource keys.
         /// </summary>
     
-        public static class FontFamilies
+        public static class FontFamily
         {
             public const string Default = "Theme.FontFamily.Default";
+
             public const string Body1 = "Theme.FontFamily.Body1";
             public const string Body2 = "Theme.FontFamily.Body2";
             public const string Button = "Theme.FontFamily.Button";
@@ -128,12 +129,14 @@
         /// <summary>
         ///     FontSize resource keys.
         /// </summary>
-        public static class FontSizes
+        public static class FontSize
         {
             public const string Micro = "Theme.FontSize.Micro";
             public const string Small = "Theme.FontSize.Small";
             public const string Medium = "Theme.FontSize.Medium";
             public const string Large = "Theme.FontSize.Large";
+            public const string XLarge = "Theme.FontSize.XLarge";
+            public const string XXLarge = "Theme.FontSize.XXLarge";
 
             public const string Body1 = "Theme.FontSize.Body1";
             public const string Body2 = "Theme.FontSize.Body2";
