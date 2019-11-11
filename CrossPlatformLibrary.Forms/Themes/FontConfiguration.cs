@@ -1,5 +1,4 @@
-﻿using CrossPlatformLibrary.Forms.Extensions;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Themes
 {

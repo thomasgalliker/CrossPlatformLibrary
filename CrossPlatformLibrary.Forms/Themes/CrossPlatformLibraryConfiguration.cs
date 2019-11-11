@@ -3,7 +3,7 @@ using Xamarin.Forms;
 namespace CrossPlatformLibrary.Forms.Themes
 {
     /// <summary>
-    /// Class that provides the theme configuration that will be applied in the current App.
+    ///     Class that provides the theme configuration that will be applied in the current App.
     /// </summary>
     public class CrossPlatformLibraryConfiguration : BindableObject, ITheme
     {
@@ -14,7 +14,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 typeof(CrossPlatformLibraryConfiguration));
 
         /// <summary>
-        /// Gets or sets the color configuration of the theme.
+        ///     Gets or sets the color configuration of the theme.
         /// </summary>
         public IColorConfiguration ColorConfiguration
         {
@@ -29,7 +29,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 typeof(CrossPlatformLibraryConfiguration));
 
         /// <summary>
-        /// Gets or sets the spacing configuration of the theme.
+        ///     Gets or sets the spacing configuration of the theme.
         /// </summary>
         public ISpacingConfiguration SpacingConfiguration
         {
@@ -44,7 +44,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 typeof(CrossPlatformLibraryConfiguration));
 
         /// <summary>
-        /// Gets or sets the font configuration of the theme.
+        ///     Gets or sets the font configuration of the theme.
         /// </summary>
         public IFontConfiguration FontConfiguration
         {
