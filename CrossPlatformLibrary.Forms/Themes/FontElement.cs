@@ -4,8 +4,6 @@ namespace CrossPlatformLibrary.Forms.Themes
 {
     public class FontElement : BindableObject
     {
-        public static readonly FontElement Default = new FontElement();
-
         public static readonly BindableProperty FontFamilyProperty =
             BindableProperty.Create(
                 nameof(FontFamily),
