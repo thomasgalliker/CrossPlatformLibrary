@@ -25,6 +25,9 @@
             public const string ON_SURFACE = "Theme.Color.OnSurface";
             public const string ON_ERROR = "Theme.Color.OnError";
             public const string ErrorBackground = "Theme.Color.ErrorBackground";
+
+            public const string SemiTransparentBright = "Theme.Color.SemiTransparentBright";
+            public const string SemiTransparentDark = "Theme.Color.SemiTransparentDark";
         }
 
         public static class CustomButtonStyle
