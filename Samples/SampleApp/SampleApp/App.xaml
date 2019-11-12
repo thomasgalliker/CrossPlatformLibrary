@@ -59,6 +59,9 @@
                 <On Platform="iOS" Value="Oswald-Medium" />
             </OnPlatform>
 
+            <!--  Sets the default font configuration which serves as fallback for all fonts  -->
+            <themes:FontElement x:Key="DefaultFont" FontFamily="{StaticResource SampleApp.FontFamily.OswaldMedium}" />
+
             <!--  Overrides the all font-related properties  -->
             <themes:FontElement
                 x:Key="DebugFont"
@@ -82,7 +85,7 @@
 
             <themes:FontConfiguration
                 x:Key="FontConfiguration"
-                DefaultFontFamily="{StaticResource SampleApp.FontFamily.OswaldMedium}"
+                Default="{StaticResource DefaultFont}"
                 Button="{StaticResource CustomButtonFont}"
                 FontSizes="{StaticResource FontSizeConfiguration}" />
 

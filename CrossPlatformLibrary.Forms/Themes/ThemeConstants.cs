@@ -144,6 +144,7 @@
             public const string XLarge = "Theme.FontSize.XLarge";
             public const string XXLarge = "Theme.FontSize.XXLarge";
 
+            public const string Default = "Theme.FontSize.Default";
             public const string Body1 = "Theme.FontSize.Body1";
             public const string Body2 = "Theme.FontSize.Body2";
             public const string Button = "Theme.FontSize.Button";
@@ -166,6 +167,7 @@
         /// </summary>
         public static class FontAttributes
         {
+            public const string Default = "Theme.FontAttributes.Default";
             public const string Body1 = "Theme.FontAttributes.Body1";
             public const string Body2 = "Theme.FontAttributes.Body2";
             public const string Button = "Theme.FontAttributes.Button";

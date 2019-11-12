@@ -7,19 +7,6 @@ namespace CrossPlatformLibrary.Forms.Themes
     /// </summary>
     public sealed class FontConfiguration : BindableObject, IFontConfiguration
     {
-        public static readonly BindableProperty DefaultFontFamilyProperty =
-            BindableProperty.Create(
-                nameof(DefaultFontFamily),
-                typeof(string),
-                typeof(FontConfiguration),
-                null);
-
-        public string DefaultFontFamily
-        {
-            get => (string)this.GetValue(DefaultFontFamilyProperty);
-            set => this.SetValue(DefaultFontFamilyProperty, value);
-        }
-
         public static readonly BindableProperty FontSizesProperty =
             BindableProperty.Create(
                 nameof(FontSizes),
@@ -31,6 +18,19 @@ namespace CrossPlatformLibrary.Forms.Themes
         {
             get => (IFontSizeConfiguration)this.GetValue(FontSizesProperty);
             set => this.SetValue(FontSizesProperty, value);
+        }
+
+        public static readonly BindableProperty DefaultProperty =
+            BindableProperty.Create(
+                nameof(Default),
+                typeof(FontElement),
+                typeof(FontConfiguration),
+                null);
+
+        public FontElement Default
+        {
+            get => (FontElement)this.GetValue(DefaultProperty);
+            set => this.SetValue(DefaultProperty, value);
         }
 
         public static readonly BindableProperty SectionLabelProperty =

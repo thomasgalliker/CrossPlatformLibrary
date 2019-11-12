@@ -395,9 +395,10 @@
                                     NavigateCommand="{Binding MailNavigateCommand}"
                                     Text="{Binding AdminEmailAddress, Mode=OneWay}"
                                     TintColor="Red" />
+                                <controls:HyperLinkLabel NavigateUri="mailto:anothermail@someaddress.com" Text="Click here: anothermail@someaddress.com" />
                                 <controls:HyperLinkLabel
-                                    NavigateUri="mailto:anothermail@someaddress.com"
-                                    Text="Click here: anothermail@someaddress.com"
+                                    NavigateUri="http://www.thomasgalliker.ch"
+                                    Text="Click here to navigate to www.thomasgalliker.ch"
                                     TextColor="Black"
                                     TintColor="BlueViolet" />
 
