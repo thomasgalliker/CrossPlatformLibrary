@@ -372,10 +372,38 @@
         x:Key="ExtendedTimePickerStyle"
         BasedOn="{StaticResource TimePickerStyle}"
         TargetType="controls:ExtendedTimePicker">
-        <Setter Property="PlaceholderTextColor" Value="{DynamicResource Theme.Color.TextColor}" />
+        <Setter Property="PlaceholderTextColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
     </Style>
 
     <Style BasedOn="{StaticResource ExtendedTimePickerStyle}" TargetType="controls:ExtendedTimePicker" />
+
+    <Style x:Key="SearchBarStyle" TargetType="SearchBar">
+        <Setter Property="PlaceholderColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
+                            <Setter Property="CancelButtonColor" Value="{DynamicResource Theme.Color.TextColor}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
+                            <Setter Property="CancelButtonColor" Value="Transparent" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style BasedOn="{StaticResource SearchBarStyle}" TargetType="SearchBar" />
 
     <Style x:Key="ValidationLabelStyle" TargetType="Label">
         <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Caption}" />

@@ -286,6 +286,24 @@
                                     Text=""
                                     TextContentType="NewPassword" />
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo SearchBar--&gt;" />
+                                <SearchBar
+                                    IsEnabled="True"
+                                    Placeholder=""
+                                    Text="SearchBar with Text" />
+                                <SearchBar
+                                    IsEnabled="False"
+                                    Placeholder=""
+                                    Text="SearchBar with Text (Disabled)" />
+                                <SearchBar
+                                    IsEnabled="True"
+                                    Placeholder="SearchBar Placeholder"
+                                    Text="" />
+                                <SearchBar
+                                    IsEnabled="False"
+                                    Placeholder="SearchBar Placeholder (Disabled)"
+                                    Text="" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableAutoCompleteView--&gt;" />
                                 <controls:ValidatableAutoCompleteView
                                     x:Name="AutoCompleteView"
