@@ -211,6 +211,9 @@
     <Style x:Key="HyperLinkLabelStyle" TargetType="controls:HyperLinkLabel">
         <Setter Property="TintColor" Value="Blue" />
         <Setter Property="TextDecorations" Value="Underline" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Body1}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Body1}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Body1}" />
     </Style>
 
     <Style BasedOn="{StaticResource HyperLinkLabelStyle}" TargetType="controls:HyperLinkLabel" />
