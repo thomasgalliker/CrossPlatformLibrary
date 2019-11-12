@@ -140,6 +140,7 @@
         public static class FontSize
         {
             public const string Micro = "Theme.FontSize.Micro";
+            public const string XSmall = "Theme.FontSize.XSmall";
             public const string Small = "Theme.FontSize.Small";
             public const string MidMedium = "Theme.FontSize.MidMedium";
             public const string Medium = "Theme.FontSize.Medium";

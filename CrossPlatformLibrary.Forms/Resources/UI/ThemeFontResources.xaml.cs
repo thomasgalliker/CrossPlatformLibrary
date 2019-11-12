@@ -21,6 +21,7 @@ namespace CrossPlatformLibrary.Forms.Resources
         private void SetFontSizes(IFontConfiguration fontConfiguration)
         {
             this[ThemeConstants.FontSize.Micro] = fontConfiguration.FontSizes.Micro;
+            this[ThemeConstants.FontSize.XSmall] = fontConfiguration.FontSizes.XSmall;
             this[ThemeConstants.FontSize.Small] = fontConfiguration.FontSizes.Small;
             this[ThemeConstants.FontSize.MidMedium] = fontConfiguration.FontSizes.MidMedium;
             this[ThemeConstants.FontSize.Medium] = fontConfiguration.FontSizes.Medium;
