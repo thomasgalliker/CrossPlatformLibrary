@@ -61,6 +61,29 @@ namespace CrossPlatformLibrary.Forms.Themes
             set => this.SetValue(MicroProperty, value);
         }
 
+        public static readonly BindableProperty XSmallProperty =
+            BindableProperty.Create(
+                nameof(XSmall),
+                typeof(double),
+                typeof(DefaultFontSizeConfiguration),
+                GetXSmallDefaultValue());
+
+        private static double GetXSmallDefaultValue()
+        {
+            var microSize = Device.GetNamedSize(NamedSize.Micro, typeof(DefaultFontSizeConfiguration));
+            var smallSize = Device.GetNamedSize(NamedSize.Small, typeof(DefaultFontSizeConfiguration));
+
+            var xSmallSize = microSize + (smallSize - microSize) / 2;
+            return xSmallSize;
+        }
+
+        [TypeConverter(typeof(FontSizeConverter))]
+        public double XSmall
+        {
+            get => (double)this.GetValue(XSmallProperty);
+            set => this.SetValue(XSmallProperty, value);
+        }
+
         public static readonly BindableProperty SmallProperty =
             BindableProperty.Create(
                 nameof(Small),
@@ -73,6 +96,29 @@ namespace CrossPlatformLibrary.Forms.Themes
         {
             get => (double)this.GetValue(SmallProperty);
             set => this.SetValue(SmallProperty, value);
+        }
+
+        public static readonly BindableProperty MidMediumProperty =
+            BindableProperty.Create(
+                nameof(MidMedium),
+                typeof(double),
+                typeof(DefaultFontSizeConfiguration),
+                GetMidMediumDefaultValue());
+
+        private static double GetMidMediumDefaultValue()
+        {
+            var smallSize = Device.GetNamedSize(NamedSize.Small, typeof(DefaultFontSizeConfiguration));
+            var mediumSize = Device.GetNamedSize(NamedSize.Medium, typeof(DefaultFontSizeConfiguration));
+
+            var midMediumSize = smallSize + (mediumSize - smallSize) / 2;
+            return midMediumSize;
+        }
+
+        [TypeConverter(typeof(FontSizeConverter))]
+        public double MidMedium
+        {
+            get => (double)this.GetValue(MidMediumProperty);
+            set => this.SetValue(MidMediumProperty, value);
         }
 
         public static readonly BindableProperty MediumProperty =

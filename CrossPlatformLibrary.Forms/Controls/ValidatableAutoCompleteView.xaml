@@ -74,5 +74,5 @@
         ItemsSource="{Binding SuggestedItemsSource, Source={x:Reference Control}, Mode=OneWay}"
         SelectedItem="{Binding SelectedItem, Source={x:Reference Control}, Mode=TwoWay}"
         SelectionMode="Single"
-        Style="{DynamicResource SuggestionListStyle}" />
+        Style="{Binding SuggestionListStyle, Source={x:Reference Control}, Mode=OneWay}" />
 </controls:GridZero>

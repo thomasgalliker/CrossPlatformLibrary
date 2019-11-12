@@ -10,7 +10,11 @@ namespace CrossPlatformLibrary.Forms.Themes
     {
         double Micro { get; set; }
 
+        double XSmall { get; set; }
+
         double Small { get; set; }
+
+        double MidMedium { get; set; }
 
         double Medium { get; set; }
 

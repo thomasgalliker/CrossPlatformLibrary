@@ -22,6 +22,7 @@ namespace CrossPlatformLibrary.Forms.Resources
         {
             this[ThemeConstants.FontSize.Micro] = fontConfiguration.FontSizes.Micro;
             this[ThemeConstants.FontSize.Small] = fontConfiguration.FontSizes.Small;
+            this[ThemeConstants.FontSize.MidMedium] = fontConfiguration.FontSizes.MidMedium;
             this[ThemeConstants.FontSize.Medium] = fontConfiguration.FontSizes.Medium;
             this[ThemeConstants.FontSize.Large] = fontConfiguration.FontSizes.Large;
             this[ThemeConstants.FontSize.XLarge] = fontConfiguration.FontSizes.XLarge;
@@ -33,7 +34,7 @@ namespace CrossPlatformLibrary.Forms.Resources
             this[ThemeConstants.FontFamily.Default] = fontConfiguration.DefaultFontFamily; // TODO Needs initialization? ?? PlatformHelper.OnPlatformValue((Device.iOS, () => "sans-serif"), (Device.Android, () => "Droid Sans"));
 
             this[ThemeConstants.FontFamily.Body1] = TryGetFontFamily(fontConfiguration.Body1, fontConfiguration.DefaultFontFamily);
-            this[ThemeConstants.FontSize.Body1] = TryGetFontSize(fontConfiguration.Body1, fontConfiguration.FontSizes.Medium);
+            this[ThemeConstants.FontSize.Body1] = TryGetFontSize(fontConfiguration.Body1, fontConfiguration.FontSizes.MidMedium);
             this[ThemeConstants.FontAttributes.Body1] = TryGetFontAttributes(fontConfiguration.Body1);
 
             this[ThemeConstants.FontFamily.Body2] = TryGetFontFamily(fontConfiguration.Body2, fontConfiguration.DefaultFontFamily);
@@ -43,9 +44,13 @@ namespace CrossPlatformLibrary.Forms.Resources
             this[ThemeConstants.FontFamily.Button] = TryGetFontFamily(fontConfiguration.Button, fontConfiguration.DefaultFontFamily);
             this[ThemeConstants.FontSize.Button] = TryGetFontSize(fontConfiguration.Button, fontConfiguration.FontSizes.Medium);
             this[ThemeConstants.FontAttributes.Button] = TryGetFontAttributes(fontConfiguration.Button);
+            
+            this[ThemeConstants.FontFamily.Input] = TryGetFontFamily(fontConfiguration.Input, fontConfiguration.DefaultFontFamily);
+            this[ThemeConstants.FontSize.Input] = TryGetFontSize(fontConfiguration.Input, fontConfiguration.FontSizes.Medium);
+            this[ThemeConstants.FontAttributes.Input] = TryGetFontAttributes(fontConfiguration.Input);
 
             this[ThemeConstants.FontFamily.Caption] = TryGetFontFamily(fontConfiguration.Caption, fontConfiguration.DefaultFontFamily);
-            this[ThemeConstants.FontSize.Caption] = TryGetFontSize(fontConfiguration.Caption, fontConfiguration.FontSizes.Micro);
+            this[ThemeConstants.FontSize.Caption] = TryGetFontSize(fontConfiguration.Caption, fontConfiguration.FontSizes.XSmall);
             this[ThemeConstants.FontAttributes.Caption] = TryGetFontAttributes(fontConfiguration.Caption);
 
             this[ThemeConstants.FontFamily.H1] = TryGetFontFamily(fontConfiguration.H1, fontConfiguration.DefaultFontFamily);
@@ -76,9 +81,13 @@ namespace CrossPlatformLibrary.Forms.Resources
             this[ThemeConstants.FontSize.Overline] = TryGetFontSize(fontConfiguration.Overline, fontConfiguration.FontSizes.Micro);
             this[ThemeConstants.FontAttributes.Overline] = TryGetFontAttributes(fontConfiguration.Overline);
 
+            this[ThemeConstants.FontFamily.Title] = TryGetFontFamily(fontConfiguration.Title, fontConfiguration.DefaultFontFamily);
+            this[ThemeConstants.FontSize.Title] = TryGetFontSize(fontConfiguration.Title, fontConfiguration.FontSizes.Medium);
+            this[ThemeConstants.FontAttributes.Title] = TryGetFontAttributes(fontConfiguration.Title, FontAttributes.Bold);
+            
             this[ThemeConstants.FontFamily.Subtitle1] = TryGetFontFamily(fontConfiguration.Subtitle1, fontConfiguration.DefaultFontFamily);
-            this[ThemeConstants.FontSize.Subtitle1] = TryGetFontSize(fontConfiguration.Subtitle1, fontConfiguration.FontSizes.Medium);
-            this[ThemeConstants.FontAttributes.Subtitle1] = TryGetFontAttributes(fontConfiguration.Subtitle1);
+            this[ThemeConstants.FontSize.Subtitle1] = TryGetFontSize(fontConfiguration.Subtitle1, fontConfiguration.FontSizes.MidMedium);
+            this[ThemeConstants.FontAttributes.Subtitle1] = TryGetFontAttributes(fontConfiguration.Subtitle1, FontAttributes.Bold);
 
             this[ThemeConstants.FontFamily.Subtitle2] = TryGetFontFamily(fontConfiguration.Subtitle2, fontConfiguration.DefaultFontFamily);
             this[ThemeConstants.FontSize.Subtitle2] = TryGetFontSize(fontConfiguration.Subtitle2, fontConfiguration.FontSizes.Small);
@@ -106,9 +115,9 @@ namespace CrossPlatformLibrary.Forms.Resources
             return @default;
         }
 
-        private static FontAttributes TryGetFontAttributes(FontElement fontElement)
+        private static FontAttributes TryGetFontAttributes(FontElement fontElement, FontAttributes @default = FontAttributes.None)
         {
-            return fontElement?.FontAttributes ?? FontAttributes.None;
+            return fontElement?.FontAttributes ?? @default;
         }
     }
 }

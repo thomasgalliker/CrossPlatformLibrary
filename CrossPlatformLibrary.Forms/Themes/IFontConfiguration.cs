@@ -14,6 +14,8 @@ namespace CrossPlatformLibrary.Forms.Themes
 
         FontElement Button { get; set; }
 
+        FontElement Input { get; set; }
+
         FontElement Caption { get; set; }
 
         FontElement H1 { get; set; }
@@ -29,6 +31,8 @@ namespace CrossPlatformLibrary.Forms.Themes
         FontElement H6 { get; set; }
 
         FontElement Overline { get; set; }
+
+        FontElement Title { get; set; }
 
         FontElement Subtitle1 { get; set; }
 

@@ -51,44 +51,6 @@
     <converters:PropertyErrorsToColorConverter x:Key="PropertyErrorsToColorConverter" />
     <converters:ValidationErrorsToStringConverter x:Key="ValidationErrorsToStringConverter" />
 
-    <!--  Font Sizes  -->
-    <OnPlatform x:Key="FontSizeLarge" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="20" />
-        <On Platform="Android" Value="22" />
-        <On Platform="UWP" Value="32" />
-    </OnPlatform>
-
-    <OnPlatform x:Key="FontSizeBody" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="17" />
-        <On Platform="Android" Value="16" />
-        <On Platform="UWP" Value="14" />
-    </OnPlatform>
-
-    <OnPlatform x:Key="FontSizeHeader" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="16" />
-        <On Platform="Android" Value="96" />
-        <On Platform="UWP" Value="46" />
-    </OnPlatform>
-
-    <OnPlatform x:Key="FontSizeTitle" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="28" />
-        <On Platform="Android" Value="24" />
-        <On Platform="UWP" Value="24" />
-    </OnPlatform>
-
-    <OnPlatform x:Key="FontSizeSubtitle" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="22" />
-        <On Platform="Android" Value="16" />
-        <On Platform="UWP" Value="20" />
-    </OnPlatform>
-
-    <OnPlatform x:Key="FontSizeCaption" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="12" />
-        <On Platform="Android" Value="12" />
-        <On Platform="UWP" Value="12" />
-    </OnPlatform>
-
-
     <!--  Styles  -->
     <!--  Button Style  -->
     <Style x:Key="ButtonStyle" TargetType="Button">
@@ -179,14 +141,13 @@
     <!--  LabelStyle  -->
     <Style x:Key="LabelStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Body1}" />
         <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Body1}" />
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Body1}" />
-        <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
-        <Setter Property="Opacity" Value="1.0" />
         <Setter Property="LineBreakMode" Value="TailTruncation" />
     </Style>
 
@@ -196,19 +157,18 @@
     <Style x:Key="EntryLabelStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Entry}" />
-        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Entry}" />
-        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Entry}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="Opacity" Value="1.0" />
         <Setter Property="LineBreakMode" Value="TailTruncation" />
         <Setter Property="Margin">
-            <OnPlatform
-                x:TypeArguments="Thickness"
-                Android="4, 0, 0, 0"
-                WinPhone="0, 0, 0, 0"
-                iOS="0, 0, 0, 0" />
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="0" />
+                <On Platform="Android" Value="4,0,0,0" />
+                <On Platform="UWP" Value="0" />
+            </OnPlatform>
         </Setter>
         <!--<Setter Property="HeightRequest" Value="48" />-->
     </Style>
@@ -220,6 +180,18 @@
 
     <Style TargetType="controls:ValidatableAutoCompleteView">
         <Setter Property="EntryStyle" Value="{DynamicResource EntryStyle}" />
+        <Setter Property="SuggestionListStyle">
+            <Style TargetType="controls:StackedList">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="Margin">
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="0" />
+                        <On Platform="Android" Value="4,0,4,0" />
+                        <On Platform="UWP" Value="0" />
+                    </OnPlatform>
+                </Setter>
+            </Style>
+        </Setter>
     </Style>
 
     <Style TargetType="controls:ValidatablePicker">
@@ -248,9 +220,9 @@
         x:Key="CustomActivityIndicatorLabelStyle"
         TargetType="Label"
         BasedOn="{StaticResource LabelStyle}">
-        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Body1}" />
-        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Body1}" />
-        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Title}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Title}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Title}" />
         <Setter Property="VerticalOptions" Value="Start" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
@@ -272,9 +244,9 @@
         x:Key="ViewModelErrorControlLabelStyle"
         TargetType="Label"
         BasedOn="{StaticResource LabelStyle}">
-        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Body1}" />
-        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Body1}" />
-        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Title}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Title}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Title}" />
         <Setter Property="VerticalOptions" Value="Start" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
@@ -302,9 +274,9 @@
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
         <Setter Property="PlaceholderColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Body1}" />
-        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Body1}" />
-        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Body1}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
         <Setter Property="Opacity" Value="1.0" />
@@ -331,9 +303,9 @@
 
     <Style x:Key="EditorStyle" TargetType="Editor">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
-        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Body1}" />
-        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Body1}" />
-        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Body1}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="Opacity" Value="1.0" />
     </Style>
@@ -347,12 +319,11 @@
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
         <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
-        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Body1}" />
-        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Body1}" />
-        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Body1}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="Opacity" Value="1.0" />
         <Setter Property="HeightRequest" Value="48" />
     </Style>
 
@@ -371,7 +342,6 @@
     <Style x:Key="DatePickerStyle" TargetType="DatePicker">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="Opacity" Value="1.0" />
         <Setter Property="HeightRequest" Value="48" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
         <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
@@ -391,7 +361,6 @@
     <Style x:Key="TimePickerStyle" TargetType="TimePicker">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="Opacity" Value="1.0" />
         <Setter Property="HeightRequest" Value="48" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
         <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
@@ -409,44 +378,34 @@
     <Style BasedOn="{StaticResource ExtendedTimePickerStyle}" TargetType="controls:ExtendedTimePicker" />
 
     <Style x:Key="ValidationLabelStyle" TargetType="Label">
-        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Overline}" />
-        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Overline}" />
-        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Overline}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Caption}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Caption}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Caption}" />
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.Error}" />
+        <Setter Property="LineBreakMode" Value="TailTruncation" />
         <Setter Property="Margin">
-            <OnPlatform
-                x:TypeArguments="Thickness"
-                Android="4, 0, 0, -44"
-                WinPhone="0, 34, 0, 0"
-                iOS="0, 34, 0, 0" />
-        </Setter>
-    </Style>
-
-    <Style x:Key="SuggestionListStyle" TargetType="controls:StackedList">
-        <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="Margin">
-            <OnPlatform
-                x:TypeArguments="Thickness"
-                Android="4, 0, 4, 0"
-                WinPhone="0, 0, 0, 0"
-                iOS="0, 0, 0, 0" />
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="0, 34, 0, 0" />
+                <On Platform="Android" Value="4,0,0,-44" />
+                <On Platform="UWP" Value="0, 34, 0, 0" />
+            </OnPlatform>
         </Setter>
     </Style>
 
     <Style x:Key="AnnotationEntryLabelStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
-        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Overline}" />
-        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Overline}" />
-        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Overline}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Caption}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Caption}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Caption}" />
         <Setter Property="VerticalOptions" Value="StartAndExpand" />
         <Setter Property="HorizontalOptions" Value="StartAndExpand" />
         <Setter Property="LineBreakMode" Value="TailTruncation" />
         <Setter Property="Margin">
-            <OnPlatform
-                x:TypeArguments="Thickness"
-                Android="4, 0, 0, 0"
-                WinPhone="0, 0, 0, 0"
-                iOS="0, 0, 0, 0" />
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="0" />
+                <On Platform="Android" Value="4,0,0,0" />
+                <On Platform="UWP" Value="0" />
+            </OnPlatform>
         </Setter>
     </Style>
 </ResourceDictionary>

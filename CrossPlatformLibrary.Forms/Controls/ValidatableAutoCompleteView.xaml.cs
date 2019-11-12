@@ -88,7 +88,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(KeyboardProperty, value);
         }
 
-        public new static readonly BindableProperty EntryStyleProperty =
+        public static readonly BindableProperty EntryStyleProperty =
             BindableProperty.Create(
                 nameof(EntryStyle),
                 typeof(Style),
@@ -99,6 +99,19 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             get => (Style)this.GetValue(EntryStyleProperty);
             set => this.SetValue(EntryStyleProperty, value);
+        }
+
+        public static readonly BindableProperty SuggestionListStyleProperty =
+            BindableProperty.Create(
+                nameof(SuggestionListStyle),
+                typeof(Style),
+                typeof(ValidatableAutoCompleteView),
+                default(Style));
+
+        public Style SuggestionListStyle
+        {
+            get => (Style)this.GetValue(SuggestionListStyleProperty);
+            set => this.SetValue(SuggestionListStyleProperty, value);
         }
 
         public static readonly BindableProperty MaxLengthProperty =

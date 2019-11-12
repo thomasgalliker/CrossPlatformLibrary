@@ -15,7 +15,7 @@
     Title="CrossPlatformLibrary Sample App">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="AutoCompleteSuggestionItemTemplate">
+            <DataTemplate x:Key="CountryItemTemplate">
                 <ViewCell Height="30">
                     <ViewCell.View>
                         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -253,7 +253,6 @@
 
                                 <controls:CustomLabel Text="Enter name:" />
                                 <controls:CustomLabel
-                                    FontSize="Small"
                                     HorizontalOptions="Start"
                                     JustifyText="True"
                                     LineBreakMode="WordWrap"
@@ -296,7 +295,7 @@
                                     SearchCommand="{Binding AutoCompleteSearchCommand}"
                                     SearchCommandDelay="{x:Static local:App.SearchCommandDelay}"
                                     SelectedItem="{Binding Country, Mode=TwoWay}"
-                                    SuggestedItemTemplate="{StaticResource AutoCompleteSuggestionItemTemplate}"
+                                    SuggestedItemTemplate="{StaticResource CountryItemTemplate}"
                                     SuggestedItemsSource="{Binding SuggestedCountries, Mode=OneWay}"
                                     Text="{Binding CountrySearchText, Mode=TwoWay}"
                                     TextChanged="AutoCompleteView_OnTextChanged"
@@ -433,7 +432,7 @@
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo StackedList (Horizontal)--&gt;" />
                                 <controls:StackedList
-                                    ItemTemplate="{StaticResource AutoCompleteSuggestionItemTemplate}"
+                                    ItemTemplate="{StaticResource CountryItemTemplate}"
                                     ItemsSource="{Binding Countries, Mode=OneWay}"
                                     ListOrientation="Horizontal"
                                     SelectedItem="{Binding Country, Mode=TwoWay}"
@@ -446,8 +445,74 @@
                                     ListOrientation="Vertical"
                                     SelectionMode="None" />
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ListView--&gt;" />
+                                <ListView
+                                    x:Name="ListViewCountries"
+                                    BackgroundColor="LightGray"
+                                    CachingStrategy="RetainElement"
+                                    HasUnevenRows="true"
+                                    IsPullToRefreshEnabled="true"
+                                    IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
+                                    ItemTemplate="{StaticResource CountryItemTemplate}"
+                                    ItemsSource="{Binding Countries}"
+                                    RefreshCommand="{Binding RefreshCommand}"
+                                    SeparatorVisibility="None"
+                                    HeightRequest="150">
+                                    <ListView.Behaviors>
+                                        <behaviors:EventToCommandBehavior
+                                            Command="{Binding BindingContext.SelectCountryCommand, Source={x:Reference Page}}"
+                                            CommandParameter="{Binding Source={x:Reference ListViewCountries}, Path=SelectedItem}"
+                                            EventName="ItemTapped" />
+                                    </ListView.Behaviors>
+                                </ListView>
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo FontFamily, FontSize, FontAttributes--&gt;" />
                                 <StackLayout x:Name="FontDemoStackLayout" Orientation="Vertical">
+                                    <Label
+                                        Text="Theme.FontSize.Micro"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Default}"
+                                        FontSize="{DynamicResource Theme.FontSize.Micro}"
+                                        FontAttributes="None"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Theme.FontSize.Small"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Default}"
+                                        FontSize="{DynamicResource Theme.FontSize.Small}"
+                                        FontAttributes="None"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Theme.FontSize.MidMedium"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Default}"
+                                        FontSize="{DynamicResource Theme.FontSize.MidMedium}"
+                                        FontAttributes="None"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Theme.FontSize.Medium"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Default}"
+                                        FontSize="{DynamicResource Theme.FontSize.Medium}"
+                                        FontAttributes="None"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Theme.FontSize.Large"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Default}"
+                                        FontSize="{DynamicResource Theme.FontSize.Large}"
+                                        FontAttributes="None"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Theme.FontSize.XLarge"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Default}"
+                                        FontSize="{DynamicResource Theme.FontSize.XLarge}"
+                                        FontAttributes="None"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Theme.FontSize.XXLarge"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Default}"
+                                        FontSize="{DynamicResource Theme.FontSize.XXLarge}"
+                                        FontAttributes="None"
+                                        Style="{StaticResource DemoLabelStyle}" />
+
+                                    <controls:DividerLine />
+
                                     <Label
                                         Text="Body1"
                                         FontFamily="{DynamicResource Theme.FontFamily.Body1}"
@@ -467,10 +532,10 @@
                                         FontAttributes="{DynamicResource Theme.FontAttributes.Button}"
                                         Style="{StaticResource DemoLabelStyle}" />
                                     <Label
-                                        Text="Caption"
-                                        FontFamily="{DynamicResource Theme.FontFamily.Caption}"
-                                        FontSize="{DynamicResource Theme.FontSize.Caption}"
-                                        FontAttributes="{DynamicResource Theme.FontAttributes.Caption}"
+                                        Text="Input"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Input}"
+                                        FontSize="{DynamicResource Theme.FontSize.Input}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Input}"
                                         Style="{StaticResource DemoLabelStyle}" />
                                     <Label
                                         Text="H1"
@@ -509,10 +574,22 @@
                                         FontAttributes="{DynamicResource Theme.FontAttributes.H6}"
                                         Style="{StaticResource DemoLabelStyle}" />
                                     <Label
+                                        Text="Caption"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Caption}"
+                                        FontSize="{DynamicResource Theme.FontSize.Caption}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Caption}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
                                         Text="Overline"
                                         FontFamily="{DynamicResource Theme.FontFamily.Overline}"
                                         FontSize="{DynamicResource Theme.FontSize.Overline}"
                                         FontAttributes="{DynamicResource Theme.FontAttributes.Overline}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Title"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Title}"
+                                        FontSize="{DynamicResource Theme.FontSize.Title}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Title}"
                                         Style="{StaticResource DemoLabelStyle}" />
                                     <Label
                                         Text="Subtitle1"

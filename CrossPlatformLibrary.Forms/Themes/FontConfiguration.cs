@@ -94,6 +94,22 @@ namespace CrossPlatformLibrary.Forms.Themes
             set => this.SetValue(ButtonProperty, value);
         }
 
+        public static readonly BindableProperty InputProperty =
+            BindableProperty.Create(
+                nameof(Input),
+                typeof(FontElement),
+                typeof(FontConfiguration),
+                null);
+
+        /// <summary>
+        /// Input font, used for all kinds of user input fields (text entry, auto-complete entry, pickers, etc...).
+        /// </summary>
+        public FontElement Input
+        {
+            get => (FontElement)this.GetValue(InputProperty);
+            set => this.SetValue(InputProperty, value);
+        }
+
         /// <summary>
         ///     Caption font, used for annotations or to introduce a headline text.
         /// </summary>
@@ -220,6 +236,22 @@ namespace CrossPlatformLibrary.Forms.Themes
         {
             get => (FontElement)this.GetValue(OverlineProperty);
             set => this.SetValue(OverlineProperty, value);
+        }
+
+        public static readonly BindableProperty TitleProperty =
+            BindableProperty.Create(
+                nameof(Title),
+                typeof(FontElement),
+                typeof(FontConfiguration),
+                null);
+
+        /// <summary>
+        ///     Title font, used by as page title, list group headers, loading indicators.
+        /// </summary>
+        public FontElement Title
+        {
+            get => (FontElement)this.GetValue(TitleProperty);
+            set => this.SetValue(TitleProperty, value);
         }
 
         public static readonly BindableProperty Subtitle1Property =

@@ -213,6 +213,14 @@ namespace SampleApp.ViewModels
         {
             await this.displayService.DisplayAlert("CalloutCommand", $"parameter: {parameter}");
         }
+        
+
+        public ICommand SelectCountryCommand => new Command<CountryViewModel>(this.OnSelectCountry);
+
+        private async void OnSelectCountry(CountryViewModel parameter)
+        {
+            await this.displayService.DisplayAlert("SelectCountryCommand", $"country: {parameter.Name ?? "null"}");
+        }
 
         public ICommand SetFantasyLandCommand => new Command(this.OnSetFantasyLand);
 
@@ -311,7 +319,7 @@ namespace SampleApp.ViewModels
                 this.RaisePropertyChanged(nameof(this.RefreshButtonText));
 
                 // Demo dynamic adjustment of MaxLength binding
-                this.UserNameMaxLength = Math.Max(10, ++this.UserNameMaxLength);
+                this.UserNameMaxLength = Math.Max(2, ++this.UserNameMaxLength);
 
                 this.LogContent = this.logContent + Environment.NewLine + $"{DateTime.Now:G} LoadData called";
                 if (this.numberOfLoads % 2 == 0)
@@ -348,26 +356,6 @@ namespace SampleApp.ViewModels
             this.IsBusy = false;
         }
 
-        //private class ValueComparer : IComparer<Type>
-        //{
-        //    public int Compare(Type x, Type y)
-        //    {
-        //        if (y == null)
-        //        {
-        //            return 1;
-        //        }
-
-        //        if (x == null)
-        //        {
-        //            return -1;
-        //        }
-
-        //        return string.Compare(x.Name, y.Name, StringComparison.InvariantCultureIgnoreCase);
-        //    }
-        //}
-
-
-
         protected override ViewModelValidation SetupValidation()
         {
             var viewModelValidation = new ViewModelValidation();
@@ -394,10 +382,7 @@ namespace SampleApp.ViewModels
             };
         }
 
-        public string RefreshButtonText
-        {
-            get { return $"Refresh {this.numberOfLoads}"; }
-        }
+        public string RefreshButtonText => $"Refresh {this.numberOfLoads}";
 
         public bool IsToggled
         {
