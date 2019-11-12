@@ -11,11 +11,34 @@ namespace CrossPlatformLibrary.Forms.Controls
             this.InitializeComponent();
         }
 
-        public static readonly BindableProperty TextProperty = BindableProperty.Create(
+        public static readonly BindableProperty TextProperty =
+            BindableProperty.Create(
             nameof(Text),
             typeof(string),
             typeof(LabelSection),
-            null);
+            null,
+            BindingMode.OneWay,
+            null,
+            OnTextPropertyChanged);
+
+        private static void OnTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var labelSection = (LabelSection)bindable;
+
+            string newText;
+            if(newValue is string newStringValue)
+            {
+                newText = Device.RuntimePlatform == Device.iOS 
+                    ? newStringValue.ToUpperInvariant()
+                    : newStringValue;
+            }
+            else
+            {
+                newText = null;
+            }
+
+            labelSection.Section.Text = newText;
+        }
 
         public string Text
         {
@@ -23,14 +46,17 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(TextProperty, value);
         }
 
-        protected override void OnPropertyChanged(string propertyName = null)
-        {
-            base.OnPropertyChanged(propertyName);
+        public static readonly BindableProperty LabelStyleProperty =
+            BindableProperty.Create(
+                nameof(LabelStyle),
+                typeof(Style),
+                typeof(LabelSection),
+                default(Style));
 
-            if (propertyName == TextProperty.PropertyName)
-            {
-                this.Section.Text = Device.RuntimePlatform == Device.iOS ? this.Text?.ToUpperInvariant() : this.Text;
-            }
+        public Style LabelStyle
+        {
+            get => (Style)this.GetValue(LabelStyleProperty);
+            set => this.SetValue(LabelStyleProperty, value);
         }
     }
 }

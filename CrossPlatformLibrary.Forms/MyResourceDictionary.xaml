@@ -293,17 +293,6 @@
         <Setter Property="TintColor" Value="{DynamicResource Primary}" />
     </Style>-->
 
-    <Style
-        x:Key="SectionLabelTextStyle"
-        TargetType="Label"
-        BasedOn="{StaticResource LabelStyle}">
-        <Setter Property="LineBreakMode" Value="WordWrap" />
-        <Setter Property="TextColor" Value="{DynamicResource CardViewStyle.Header.TextColor}" />
-        <Setter Property="FontFamily" Value="{DynamicResource CardViewStyle.Header.FontFamily}" />
-        <Setter Property="FontSize" Value="{DynamicResource CardViewStyle.Header.FontSize}" />
-        <Setter Property="FontAttributes" Value="{DynamicResource CardViewStyle.Header.FontAttributes}" />
-    </Style>
-
     <Style x:Key="EditorStyle" TargetType="Editor">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
         <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
@@ -407,6 +396,21 @@
     </Style>
 
     <Style BasedOn="{StaticResource SearchBarStyle}" TargetType="SearchBar" />
+
+    <Style
+        x:Key="SectionLabelTextStyle"
+        TargetType="Label"
+        BasedOn="{StaticResource LabelStyle}">
+        <Setter Property="TextColor" Value="{DynamicResource CardViewStyle.Header.TextColor}" />
+        <Setter Property="FontFamily" Value="{DynamicResource CardViewStyle.Header.FontFamily}" />
+        <Setter Property="FontSize" Value="{DynamicResource CardViewStyle.Header.FontSize}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource CardViewStyle.Header.FontAttributes}" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+    </Style>
+
+    <Style TargetType="controls:LabelSection">
+        <Setter Property="LabelStyle" Value="{DynamicResource SectionLabelTextStyle}" />
+    </Style>
 
     <Style x:Key="ValidationLabelStyle" TargetType="Label">
         <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Caption}" />
