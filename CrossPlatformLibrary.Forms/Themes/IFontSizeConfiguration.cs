@@ -23,5 +23,7 @@ namespace CrossPlatformLibrary.Forms.Themes
         double XLarge { get; set; }
 
         double XXLarge { get; set; }
+
+        double XXXLarge { get; set; }
     }
 }

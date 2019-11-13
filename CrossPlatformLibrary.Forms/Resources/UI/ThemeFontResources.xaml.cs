@@ -28,6 +28,7 @@ namespace CrossPlatformLibrary.Forms.Resources
             this[ThemeConstants.FontSize.Large] = fontConfiguration.FontSizes.Large;
             this[ThemeConstants.FontSize.XLarge] = fontConfiguration.FontSizes.XLarge;
             this[ThemeConstants.FontSize.XXLarge] = fontConfiguration.FontSizes.XXLarge;
+            this[ThemeConstants.FontSize.XXXLarge] = fontConfiguration.FontSizes.XXXLarge;
         }
 
         private void SetFonts(IFontConfiguration fontConfiguration)

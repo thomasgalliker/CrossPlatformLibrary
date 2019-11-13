@@ -93,7 +93,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 nameof(XLarge),
                 typeof(double),
                 typeof(DefaultFontSizeConfiguration),
-                defaultValue: 26.0d);
+                defaultValue: 28.0d);
 
         [TypeConverter(typeof(FontSizeConverter))]
         public double XLarge
@@ -107,13 +107,27 @@ namespace CrossPlatformLibrary.Forms.Themes
                 nameof(XXLarge),
                 typeof(double),
                 typeof(DefaultFontSizeConfiguration),
-                defaultValue: 30.0d);
+                defaultValue: 34.0d);
 
         [TypeConverter(typeof(FontSizeConverter))]
         public double XXLarge
         {
             get => (double)this.GetValue(XXLargeProperty);
             set => this.SetValue(XXLargeProperty, value);
+        }
+
+        public static readonly BindableProperty XXXLargeProperty =
+            BindableProperty.Create(
+                nameof(XXXLarge),
+                typeof(double),
+                typeof(DefaultFontSizeConfiguration),
+                defaultValue: 48.0d);
+
+        [TypeConverter(typeof(FontSizeConverter))]
+        public double XXXLarge
+        {
+            get => (double)this.GetValue(XXXLargeProperty);
+            set => this.SetValue(XXXLargeProperty, value);
         }
     }
 }

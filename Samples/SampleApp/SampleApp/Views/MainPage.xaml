@@ -543,6 +543,12 @@
                                         FontSize="{DynamicResource Theme.FontSize.XXLarge}"
                                         FontAttributes="None"
                                         Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Theme.FontSize.XXXLarge"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Default}"
+                                        FontSize="{DynamicResource Theme.FontSize.XXXLarge}"
+                                        FontAttributes="None"
+                                        Style="{StaticResource DemoLabelStyle}" />
 
                                     <controls:DividerLine />
 

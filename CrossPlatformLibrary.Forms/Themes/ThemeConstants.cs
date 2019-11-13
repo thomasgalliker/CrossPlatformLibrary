@@ -147,6 +147,7 @@
             public const string Large = "Theme.FontSize.Large";
             public const string XLarge = "Theme.FontSize.XLarge";
             public const string XXLarge = "Theme.FontSize.XXLarge";
+            public const string XXXLarge = "Theme.FontSize.XXXLarge";
 
             public const string Default = "Theme.FontSize.Default";
             public const string Body1 = "Theme.FontSize.Body1";
