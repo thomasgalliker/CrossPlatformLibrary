@@ -9,7 +9,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 nameof(Micro),
                 typeof(double),
                 typeof(DefaultFontSizeConfiguration),
-                Device.GetNamedSize(NamedSize.Micro, typeof(DefaultFontSizeConfiguration)));
+                defaultValue: 10.0d);
 
         [TypeConverter(typeof(FontSizeConverter))]
         public double Micro
@@ -23,16 +23,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 nameof(XSmall),
                 typeof(double),
                 typeof(DefaultFontSizeConfiguration),
-                GetXSmallDefaultValue());
-
-        private static double GetXSmallDefaultValue()
-        {
-            var microSize = Device.GetNamedSize(NamedSize.Micro, typeof(DefaultFontSizeConfiguration));
-            var smallSize = Device.GetNamedSize(NamedSize.Small, typeof(DefaultFontSizeConfiguration));
-
-            var xSmallSize = microSize + (smallSize - microSize) / 2;
-            return xSmallSize;
-        }
+                defaultValue: 12.0d);
 
         [TypeConverter(typeof(FontSizeConverter))]
         public double XSmall
@@ -46,7 +37,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 nameof(Small),
                 typeof(double),
                 typeof(DefaultFontSizeConfiguration),
-                Device.GetNamedSize(NamedSize.Small, typeof(DefaultFontSizeConfiguration)));
+                defaultValue: 14.0d);
 
         [TypeConverter(typeof(FontSizeConverter))]
         public double Small
@@ -60,16 +51,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 nameof(MidMedium),
                 typeof(double),
                 typeof(DefaultFontSizeConfiguration),
-                GetMidMediumDefaultValue());
-
-        private static double GetMidMediumDefaultValue()
-        {
-            var smallSize = Device.GetNamedSize(NamedSize.Small, typeof(DefaultFontSizeConfiguration));
-            var mediumSize = Device.GetNamedSize(NamedSize.Medium, typeof(DefaultFontSizeConfiguration));
-
-            var midMediumSize = smallSize + (mediumSize - smallSize) / 2;
-            return midMediumSize;
-        }
+                defaultValue: 16.0d);
 
         [TypeConverter(typeof(FontSizeConverter))]
         public double MidMedium
@@ -83,7 +65,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 nameof(Medium),
                 typeof(double),
                 typeof(DefaultFontSizeConfiguration),
-                Device.GetNamedSize(NamedSize.Medium, typeof(DefaultFontSizeConfiguration)));
+                defaultValue: 18.0d);
 
         [TypeConverter(typeof(FontSizeConverter))]
         public double Medium
@@ -97,7 +79,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 nameof(Large),
                 typeof(double),
                 typeof(DefaultFontSizeConfiguration),
-                Device.GetNamedSize(NamedSize.Large, typeof(DefaultFontSizeConfiguration)));
+                defaultValue: 22.0d);
 
         [TypeConverter(typeof(FontSizeConverter))]
         public double Large
@@ -111,16 +93,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 nameof(XLarge),
                 typeof(double),
                 typeof(DefaultFontSizeConfiguration),
-                GetDefaultXLarge());
-
-        private static double GetDefaultXLarge()
-        {
-            var mediumSize = Device.GetNamedSize(NamedSize.Medium, typeof(DefaultFontSizeConfiguration));
-            var largeSize = Device.GetNamedSize(NamedSize.Large, typeof(DefaultFontSizeConfiguration));
-
-            var xLargeSize = largeSize + (largeSize - mediumSize);
-            return xLargeSize;
-        }
+                defaultValue: 26.0d);
 
         [TypeConverter(typeof(FontSizeConverter))]
         public double XLarge
@@ -134,16 +107,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 nameof(XXLarge),
                 typeof(double),
                 typeof(DefaultFontSizeConfiguration),
-                GetDefaultXXLarge());
-
-        private static double GetDefaultXXLarge()
-        {
-            var mediumSize = Device.GetNamedSize(NamedSize.Medium, typeof(DefaultFontSizeConfiguration));
-            var largeSize = Device.GetNamedSize(NamedSize.Large, typeof(DefaultFontSizeConfiguration));
-
-            var xLargeSize = largeSize + 2 * (largeSize - mediumSize);
-            return xLargeSize;
-        }
+                defaultValue: 30.0d);
 
         [TypeConverter(typeof(FontSizeConverter))]
         public double XXLarge
