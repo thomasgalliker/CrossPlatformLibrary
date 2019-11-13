@@ -4,49 +4,6 @@ namespace CrossPlatformLibrary.Forms.Themes
 {
     public class DefaultFontSizeConfiguration : BindableObject, IFontSizeConfiguration
     {
-        /*
-         *
-         *   <OnPlatform x:Key="LittleSize" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="11.0"/>
-        <On Platform="Android" Value="12.0"/>
-    </OnPlatform>
-
-    <OnPlatform x:Key="MidMediumSize" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="12.0"/>
-        <On Platform="Android" Value="14.0"/>
-    </OnPlatform>
-
-    <OnPlatform x:Key="MediumSize" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="14.0"/>
-        <On Platform="Android" Value="16.0"/>
-    </OnPlatform>
-
-    <OnPlatform x:Key="LargeSize" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="16.0"/>
-        <On Platform="Android" Value="18.0"/>
-    </OnPlatform>
-
-    <OnPlatform x:Key="LargerSize" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="18.0"/>
-        <On Platform="Android" Value="20.0"/>
-    </OnPlatform>
-
-    <OnPlatform x:Key="BigSize" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="20.0"/>
-        <On Platform="Android" Value="24.0"/>
-    </OnPlatform>
-
-    <OnPlatform x:Key="ExtraBigSize" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="24.0"/>
-        <On Platform="Android" Value="32.0"/>
-    </OnPlatform>
-
-    <OnPlatform x:Key="HugeSize" x:TypeArguments="x:Double">
-        <On Platform="iOS" Value="32.0"/>
-        <On Platform="Android" Value="48.0"/>
-    </OnPlatform>
-         *
-         * */
         public static readonly BindableProperty MicroProperty =
             BindableProperty.Create(
                 nameof(Micro),

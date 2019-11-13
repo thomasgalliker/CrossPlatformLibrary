@@ -3,7 +3,7 @@
 namespace CrossPlatformLibrary.Forms.Themes
 {
     /// <summary>
-    ///     Class that provides font configuration based on https://material.io/design/typography.
+    ///     Font configuration with named fonts, based on ideas behind https://material.io/design/typography.
     /// </summary>
     public sealed class FontConfiguration : BindableObject, IFontConfiguration
     {

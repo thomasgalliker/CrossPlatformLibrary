@@ -1,5 +1,8 @@
 namespace CrossPlatformLibrary.Forms.Themes
 {
+    /// <summary>
+    ///     Font configuration with named fonts, based on ideas behind https://material.io/design/typography.
+    /// </summary>
     public interface IFontConfiguration
     {
         IFontSizeConfiguration FontSizes { get; set; }
