@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="SampleApp.MainPage"
+    x:Class="SampleApp.Views.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:CrossPlatformLibrary.Forms.Behaviors;assembly=CrossPlatformLibrary.Forms"
@@ -499,29 +499,8 @@
                                     ListOrientation="Vertical"
                                     SelectionMode="None" />
 
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ListView--&gt;" />
-                                <ListView
-                                    x:Name="ListViewCountries"
-                                    BackgroundColor="LightGray"
-                                    CachingStrategy="RetainElement"
-                                    HasUnevenRows="true"
-                                    IsPullToRefreshEnabled="true"
-                                    IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
-                                    ItemTemplate="{StaticResource CountryItemTemplate}"
-                                    ItemsSource="{Binding Countries}"
-                                    RefreshCommand="{Binding RefreshCommand}"
-                                    SeparatorVisibility="None"
-                                    HeightRequest="150">
-                                    <ListView.Behaviors>
-                                        <behaviors:EventToCommandBehavior
-                                            Command="{Binding BindingContext.SelectCountryCommand, Source={x:Reference Page}}"
-                                            CommandParameter="{Binding Source={x:Reference ListViewCountries}, Path=SelectedItem}"
-                                            EventName="ItemTapped" />
-                                    </ListView.Behaviors>
-                                </ListView>
-
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo FontFamily, FontSize, FontAttributes--&gt;" />
-                                <StackLayout x:Name="FontDemoStackLayout" Orientation="Vertical">
+                                <StackLayout Orientation="Vertical">
                                     <Label
                                         Text="Theme.FontSize.Micro"
                                         FontFamily="{DynamicResource Theme.FontFamily.Default}"
@@ -658,6 +637,31 @@
                                         FontAttributes="{DynamicResource Theme.FontAttributes.Subtitle2}"
                                         Style="{StaticResource DemoLabelStyle}" />
                                 </StackLayout>
+
+                                <controls:DividerLine />
+
+                                <Button Text="Dump Resources" Command="{Binding DumpResourcesCommand}" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ListView--&gt;" />
+                                <ListView
+                                    x:Name="ListViewCountries"
+                                    BackgroundColor="LightGray"
+                                    CachingStrategy="RetainElement"
+                                    HasUnevenRows="true"
+                                    IsPullToRefreshEnabled="true"
+                                    IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
+                                    ItemTemplate="{StaticResource CountryItemTemplate}"
+                                    ItemsSource="{Binding Countries}"
+                                    RefreshCommand="{Binding RefreshCommand}"
+                                    SeparatorVisibility="None"
+                                    HeightRequest="150">
+                                    <ListView.Behaviors>
+                                        <behaviors:EventToCommandBehavior
+                                            Command="{Binding BindingContext.SelectCountryCommand, Source={x:Reference Page}}"
+                                            CommandParameter="{Binding Source={x:Reference ListViewCountries}, Path=SelectedItem}"
+                                            EventName="ItemTapped" />
+                                    </ListView.Behaviors>
+                                </ListView>
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo NoBarsScrollViewer--&gt;" />
                                 <controls:NoBarsScrollViewer Orientation="Horizontal">

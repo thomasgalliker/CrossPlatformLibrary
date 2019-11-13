@@ -25,6 +25,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="ObjectDumper.NET" Version="2.4.19218.1" />
     <PackageReference Include="ValueConverters.Forms" Version="2.0.19091.2" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.848062" />
   </ItemGroup>
 

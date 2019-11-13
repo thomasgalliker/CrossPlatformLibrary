@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using CrossPlatformLibrary.Extensions;
@@ -9,15 +11,18 @@ using CrossPlatformLibrary.Forms.Validation;
 using SampleApp.Model;
 using SampleApp.Services;
 using SampleApp.Validation;
+using SampleApp.Views;
 using Xamarin.Forms;
 
 namespace SampleApp.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        private readonly DisplayService displayService;
+        private readonly INavigationService navigationService;
+        private readonly IDisplayService displayService;
         private readonly ICountryService countryService;
         private readonly IValidationService validationService;
+        private readonly IEmailService emailService;
         private CountryViewModel country;
         private string notes;
         private string adminEmailAddress;
@@ -40,13 +45,17 @@ namespace SampleApp.ViewModels
         private ObservableCollection<ResourceViewModel> themeResources;
 
         public MainViewModel(
-            DisplayService displayService,
+            INavigationService navigationService,
+            IDisplayService displayService,
             ICountryService countryService,
-            IValidationService validationService)
+            IValidationService validationService,
+            IEmailService emailService)
         {
+            this.navigationService = navigationService;
             this.displayService = displayService;
             this.countryService = countryService;
             this.validationService = validationService;
+            this.emailService = emailService;
 
             this.ViewModelError = ViewModelError.None;
             this.User = new UserDto();
@@ -193,11 +202,39 @@ namespace SampleApp.ViewModels
             }
         }
 
+        public ICommand DumpResourcesCommand => new Command(this.OnDumpResources);
+        private async void OnDumpResources()
+        {
+            try
+            {
+                var sb = new StringBuilder();
+                foreach (var resourceViewModel in this.ThemeResources)
+                {
+                    sb.AppendLine($"{resourceViewModel.ResourceType};{resourceViewModel.Key};{resourceViewModel.Value}");
+                }
+
+                var resourcesDump = sb.ToString();
+
+                await this.emailService.SendEmail("Send Mail", resourcesDump, new List<string> { this.AdminEmailAddress });
+            }
+            catch (Exception ex)
+            {
+                await this.displayService.DisplayAlert("Email Error", $"Failed to send mail: {ex}");
+            }
+        }
+
         public ICommand MailNavigateCommand => new Command(this.OnMailNavigate);
 
-        private void OnMailNavigate()
+        private async void OnMailNavigate()
         {
-            Console.WriteLine($"Send mail to {this.AdminEmailAddress}");
+            try
+            {
+                await this.emailService.SendEmail("Send Mail", "Some text....", new List<string> { this.AdminEmailAddress });
+            }
+            catch (Exception ex)
+            {
+                await this.displayService.DisplayAlert("Email Error", $"Failed to send mail: {ex}");
+            }
         }
 
         public ICommand PostalCodeUnfocusedCommand => new Command(this.OnPostalCodeUnfocused);
@@ -213,7 +250,7 @@ namespace SampleApp.ViewModels
         {
             await this.displayService.DisplayAlert("CalloutCommand", $"parameter: {parameter}");
         }
-        
+
 
         public ICommand SelectCountryCommand => new Command<CountryViewModel>(this.OnSelectCountry);
 
