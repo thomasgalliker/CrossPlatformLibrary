@@ -12,6 +12,8 @@ namespace SampleApp.Views
 
         public DataTemplate FontTemplate { get; set; }
 
+        public DataTemplate ThicknessTemplate { get; set; }
+
         public DataTemplate GenericTemplate { get; set; }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
@@ -27,6 +29,11 @@ namespace SampleApp.Views
                 if (type == typeof(FontElement))
                 {
                     return this.FontTemplate;
+                }
+                
+                if (type == typeof(Thickness))
+                {
+                    return this.ThicknessTemplate;
                 }
             }
 

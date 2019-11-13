@@ -17,6 +17,7 @@
             <converters:ColorToHexStringConverter x:Key="ColorToHexStringConverter" />
             <converters:ColorInverter x:Key="ColorInverter" />
             <converters:FontElementToStringConverter x:Key="FontElementToStringConverter" />
+            <converters:ThicknessToStringConverter x:Key="ThicknessToStringConverter" />
             <valueConverters:StringIsNotNullOrEmptyConverter x:Key="StringIsNotNullOrEmptyConverter" />
             <valueConverters:DateTimeConverter x:Key="DateTimeConverter" Format="g" />
             <valueConverters:DateTimeConverter x:Key="ShortDateConverter" Format="d" />
