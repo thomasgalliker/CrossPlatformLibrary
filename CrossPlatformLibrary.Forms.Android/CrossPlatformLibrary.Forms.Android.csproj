@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrossPlatformLibrary.cs" />
     <Compile Include="Effects\BorderEffect.cs" />
     <Compile Include="Effects\EntrySelectAllText.cs" />
     <Compile Include="Effects\DatePickerLineColorEffect.cs" />
@@ -97,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CrossPlatformLibrary.Android\CrossPlatformLibrary.Android.csproj">
@@ -108,7 +110,6 @@
       <Name>CrossPlatformLibrary.Forms</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -92,6 +92,7 @@
 
             <themes:CrossPlatformLibraryConfiguration
                 x:Key="SampleApp.Theme"
+                FontConfiguration="{StaticResource FontConfiguration}"
                 ColorConfiguration="{StaticResource ColorConfiguration}"
                 SpacingConfiguration="{StaticResource SpacingConfiguration}" />
 

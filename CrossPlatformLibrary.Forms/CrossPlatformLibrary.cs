@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using CrossPlatformLibrary.Forms.Resources;
+using CrossPlatformLibrary.Forms.Services;
 using CrossPlatformLibrary.Forms.Themes;
 using CrossPlatformLibrary.Forms.Themes.Extensions;
 using Xamarin.Forms;
@@ -12,25 +13,15 @@ namespace CrossPlatformLibrary.Forms
     /// </summary>
     public class CrossPlatformLibrary
     {
+        private static IFontConverter fontConverter = new NullFontConverter();
+
         private readonly ITheme config;
         private readonly ResourceDictionary applicationResources;
 
-        internal CrossPlatformLibrary(Application app, ITheme config)
+        private CrossPlatformLibrary(Application app, ITheme config)
         {
             this.applicationResources = app.Resources;
             this.config = config ?? GetDefaultConfiguration();
-        }
-
-        internal CrossPlatformLibrary(Application app, string key)
-        {
-            this.applicationResources = app.Resources;
-            this.config = app.Resources.ResolveTheme<ITheme>(key);
-        }
-
-        internal CrossPlatformLibrary(Application app)
-        {
-            this.applicationResources = app.Resources;
-            this.config = GetDefaultConfiguration();
         }
 
         private static CrossPlatformLibraryConfiguration GetDefaultConfiguration()
@@ -42,28 +33,27 @@ namespace CrossPlatformLibrary.Forms
         }
 
         /// <summary>
-        ///     Configures the current app's resources by merging pre-defined CrossPlatformLibrary resources and creating new
-        ///     resources based on the <see cref="CrossPlatformLibraryConfiguration" />'s properties.
+        /// Sets the <seealso cref="IFontConverter"/> which is used to scale font sizes.
+        /// </summary>
+        /// <param name="converter"></param>
+        public static void SetFontConverter(IFontConverter converter)
+        {
+            fontConverter = converter ?? throw new ArgumentNullException(nameof(converter));
+        }
+
+        /// <summary>
+        ///     Configures the current app's resources by merging pre-defined CrossPlatformLibrary resources.
         /// </summary>
         /// <param name="app">The cross-platform mobile application that is running.</param>
-        /// <param name="crossPlatformLibraryResource">The configuration.</param>
         /// <exception cref="ArgumentNullException" />
-        public static void Init(Application app, ITheme crossPlatformLibraryResource)
+        public static void Init(Application app)
         {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
             }
 
-            if (crossPlatformLibraryResource == null)
-            {
-                throw new ArgumentNullException(nameof(crossPlatformLibraryResource));
-            }
-
-            var stopwatch = Stopwatch.StartNew();
-            var crossPlatformLibrary = new CrossPlatformLibrary(app, crossPlatformLibraryResource);
-            crossPlatformLibrary.MergeCrossPlatformLibraryDictionaries();
-            Debug.WriteLine($"Init finished in {stopwatch.Elapsed.TotalMilliseconds:F0}ms");
+            Init(app, GetDefaultConfiguration());
         }
 
         /// <summary>
@@ -89,25 +79,32 @@ namespace CrossPlatformLibrary.Forms
             }
 
             var stopwatch = Stopwatch.StartNew();
-            var crossPlatformLibrary = new CrossPlatformLibrary(app, key);
-            crossPlatformLibrary.MergeCrossPlatformLibraryDictionaries();
-            Debug.WriteLine($"Init finished in {stopwatch.Elapsed.TotalMilliseconds:F0}ms");
+            var theme = app.Resources.ResolveTheme<ITheme>(key);
+            Init(app, theme);
+            Debug.WriteLine($"Init with key='{key}' finished in {stopwatch.Elapsed.TotalMilliseconds:F0}ms");
         }
 
         /// <summary>
-        ///     Configures the current app's resources by merging pre-defined CrossPlatformLibrary resources.
+        ///     Configures the current app's resources by merging pre-defined CrossPlatformLibrary resources and creating new
+        ///     resources based on the <see cref="CrossPlatformLibraryConfiguration" />'s properties.
         /// </summary>
         /// <param name="app">The cross-platform mobile application that is running.</param>
+        /// <param name="theme">The configuration.</param>
         /// <exception cref="ArgumentNullException" />
-        public static void Init(Application app)
+        public static void Init(Application app, ITheme theme)
         {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
             }
 
+            if (theme == null)
+            {
+                throw new ArgumentNullException(nameof(theme));
+            }
+
             var stopwatch = Stopwatch.StartNew();
-            var crossPlatformLibrary = new CrossPlatformLibrary(app);
+            var crossPlatformLibrary = new CrossPlatformLibrary(app, theme);
             crossPlatformLibrary.MergeCrossPlatformLibraryDictionaries();
             Debug.WriteLine($"Init finished in {stopwatch.Elapsed.TotalMilliseconds:F0}ms");
         }
@@ -116,7 +113,7 @@ namespace CrossPlatformLibrary.Forms
         {
             this.applicationResources.MergedDictionaries.Add(new ThemeColorResources(this.config.ColorConfiguration ?? new ColorConfiguration()));
             this.applicationResources.MergedDictionaries.Add(new ThemeSpacingResources(this.config.SpacingConfiguration ?? new SpacingConfiguration()));
-            this.applicationResources.MergedDictionaries.Add(new ThemeFontResources(this.config.FontConfiguration ?? new FontConfiguration()));
+            this.applicationResources.MergedDictionaries.Add(new ThemeFontResources(this.config.FontConfiguration ?? new FontConfiguration(), fontConverter));
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossPlatformLibrary", "CrossPlatformLibrary\CrossPlatformLibrary.csproj", "{A6FCEF44-D2BA-42C7-B3CB-13667BCD7B54}"
 EndProject
@@ -43,11 +43,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossPlatformLibrary.Tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleConsoleApp", "Samples\SampleConsoleApp\SampleConsoleApp.csproj", "{79D586BA-B455-4B84-994B-3DE2AD2FFF04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.Forms.Tests", "Tests\CrossPlatformLibrary.Forms.Tests\CrossPlatformLibrary.Forms.Tests.csproj", "{9E1E031D-D2BF-4D40-B867-D5439D204326}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossPlatformLibrary.Forms.Tests", "Tests\CrossPlatformLibrary.Forms.Tests\CrossPlatformLibrary.Forms.Tests.csproj", "{9E1E031D-D2BF-4D40-B867-D5439D204326}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{145fbb92-fd2f-4c5b-8560-ec0830c8c271}*SharedItemsImports = 4
 		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{651016a2-9700-4f09-a9da-8d4563ac0c7b}*SharedItemsImports = 4
 		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{9061e23b-3329-4ccf-8d69-61faa11bb380}*SharedItemsImports = 13
 		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{ac987deb-1a08-40bf-b996-360c7fdaebdc}*SharedItemsImports = 4
@@ -759,7 +758,7 @@ Global
 		{9E1E031D-D2BF-4D40-B867-D5439D204326} = {82600A24-8220-4C54-9EE6-EFF590F0104F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {FBB7B9FD-D594-483C-8A6F-7A6101F73C5D}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal

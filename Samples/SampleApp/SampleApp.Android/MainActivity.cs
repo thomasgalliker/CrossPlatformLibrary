@@ -8,7 +8,7 @@ using Xamarin.Forms.Platform.Android;
 
 namespace SampleApp.Droid
 {
-    [Activity(Label = "SampleApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "SampleApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.FontScale)]
     public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -20,6 +20,10 @@ namespace SampleApp.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             HyperLinkLabelRenderer.Init();
             Forms.Init(this, savedInstanceState);
+
+            // Use custom IFontConverter implementation in order to scale all font sizes
+            //global::CrossPlatformLibrary.Forms.CrossPlatformLibrary.SetFontConverter(new SampleApp.Droid.Services.CustomFontSizeConverter());
+
             this.LoadApplication(new App());
         }
 

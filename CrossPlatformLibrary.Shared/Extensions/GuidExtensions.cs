@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace InvoiceScanner.Extensions
+namespace CrossPlatformLibrary.Extensions
 {
     public static class GuidExtensions
     {

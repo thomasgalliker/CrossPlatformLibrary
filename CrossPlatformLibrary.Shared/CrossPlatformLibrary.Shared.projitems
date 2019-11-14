@@ -13,7 +13,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrapping\Bootstrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrapping\BootstrappingException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bootstrapping\IBootstrapper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CrossPlatformLibrary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dispatching\DispatcherExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dispatching\IDispatcherService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ExceptionHandling\AsyncSynchronizationContext.cs" />
@@ -26,6 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumeratorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\GuidExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\IntegerExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\RandomExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TimeSpanExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TypeExtensions.cs" />

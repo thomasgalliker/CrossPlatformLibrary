@@ -1,6 +1,7 @@
 ﻿using System;
-using CrossPlatformLibrary.Forms.Extensions;
+using CrossPlatformLibrary.Forms.Services;
 using CrossPlatformLibrary.Forms.Themes;
+using CrossPlatformLibrary.Forms.Themes.Extensions;
 using CrossPlatformLibrary.Forms.Tools;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -8,101 +9,116 @@ using Xamarin.Forms.Xaml;
 namespace CrossPlatformLibrary.Forms.Resources
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ThemeFontResources : ResourceDictionary
+    public partial class ThemeFontResources : ResourceDictionary, IDisposable
     {
-        public ThemeFontResources(IFontConfiguration fontConfiguration)
+        private readonly IFontConfiguration fontConfiguration;
+        private readonly IFontConverter fontConverter;
+
+        internal ThemeFontResources(IFontConfiguration fontConfiguration, IFontConverter fontConverter)
         {
             this.InitializeComponent();
 
-            this.SetFontSizes(fontConfiguration);
-            this.SetFonts(fontConfiguration);
+            this.fontConfiguration = fontConfiguration;
+            this.fontConverter = fontConverter;
+            this.fontConverter.FontScalingChanged += this.FontConverterUIContentSizeChanged;
+
+            var fontSizes = this.fontConverter.GetScaledFontSizes(this.fontConfiguration.FontSizes);
+            this.SetFontSizes(fontSizes);
+            this.SetFonts(fontSizes);
         }
 
-        private void SetFontSizes(IFontConfiguration fontConfiguration)
+        private void FontConverterUIContentSizeChanged(object sender, EventArgs e)
         {
-            this[ThemeConstants.FontSize.Micro] = fontConfiguration.FontSizes.Micro;
-            this[ThemeConstants.FontSize.XSmall] = fontConfiguration.FontSizes.XSmall;
-            this[ThemeConstants.FontSize.Small] = fontConfiguration.FontSizes.Small;
-            this[ThemeConstants.FontSize.MidMedium] = fontConfiguration.FontSizes.MidMedium;
-            this[ThemeConstants.FontSize.Medium] = fontConfiguration.FontSizes.Medium;
-            this[ThemeConstants.FontSize.Large] = fontConfiguration.FontSizes.Large;
-            this[ThemeConstants.FontSize.XLarge] = fontConfiguration.FontSizes.XLarge;
-            this[ThemeConstants.FontSize.XXLarge] = fontConfiguration.FontSizes.XXLarge;
-            this[ThemeConstants.FontSize.XXXLarge] = fontConfiguration.FontSizes.XXXLarge;
+            var fontSizes = this.fontConverter.GetScaledFontSizes(this.fontConfiguration.FontSizes);
+            this.SetFontSizes(fontSizes);
+            this.SetFonts(fontSizes);
         }
 
-        private void SetFonts(IFontConfiguration fontConfiguration)
+        private void SetFontSizes(IFontSizeConfiguration fontSizes)
         {
-            var defaultFontFamily = TryGetFontFamily(fontConfiguration.Default, null);
-            var defaultFontSize = TryGetFontSize(fontConfiguration.Default, 0d);
-            var defaultFontAttributes = TryGetFontAttributes(fontConfiguration.Default);
+            this[ThemeConstants.FontSize.Micro] = this.fontConverter.GetScaledFontSize(fontSizes.Micro);
+            this[ThemeConstants.FontSize.XSmall] = this.fontConverter.GetScaledFontSize(fontSizes.XSmall);
+            this[ThemeConstants.FontSize.Small] = this.fontConverter.GetScaledFontSize(fontSizes.Small);
+            this[ThemeConstants.FontSize.MidMedium] = this.fontConverter.GetScaledFontSize(fontSizes.MidMedium);
+            this[ThemeConstants.FontSize.Medium] = this.fontConverter.GetScaledFontSize(fontSizes.Medium);
+            this[ThemeConstants.FontSize.Large] = this.fontConverter.GetScaledFontSize(fontSizes.Large);
+            this[ThemeConstants.FontSize.XLarge] = this.fontConverter.GetScaledFontSize(fontSizes.XLarge);
+            this[ThemeConstants.FontSize.XXLarge] = this.fontConverter.GetScaledFontSize(fontSizes.XXLarge);
+            this[ThemeConstants.FontSize.XXXLarge] = this.fontConverter.GetScaledFontSize(fontSizes.XXXLarge);
+        }
+
+        private void SetFonts(IFontSizeConfiguration fontSizes)
+        {
+            var defaultFontFamily = TryGetFontFamily(this.fontConfiguration.Default, null);
+            var defaultFontSize = TryGetFontSize(this.fontConfiguration.Default, 0d);
+            var defaultFontAttributes = TryGetFontAttributes(this.fontConfiguration.Default);
             this[ThemeConstants.FontFamily.Default] = defaultFontFamily;
             this[ThemeConstants.FontSize.Default] = defaultFontSize;
             this[ThemeConstants.FontAttributes.Default] = defaultFontAttributes;
 
-            this[ThemeConstants.FontFamily.Body1] = TryGetFontFamily(fontConfiguration.Body1, defaultFontFamily);
-            this[ThemeConstants.FontSize.Body1] = TryGetFontSize(fontConfiguration.Body1, fontConfiguration.FontSizes.MidMedium);
-            this[ThemeConstants.FontAttributes.Body1] = TryGetFontAttributes(fontConfiguration.Body1, defaultFontAttributes);
+            this[ThemeConstants.FontFamily.Body1] = TryGetFontFamily(this.fontConfiguration.Body1, defaultFontFamily);
+            this[ThemeConstants.FontSize.Body1] = TryGetFontSize(this.fontConfiguration.Body1, fontSizes.MidMedium);
+            this[ThemeConstants.FontAttributes.Body1] = TryGetFontAttributes(this.fontConfiguration.Body1, defaultFontAttributes);
 
-            this[ThemeConstants.FontFamily.Body2] = TryGetFontFamily(fontConfiguration.Body2, defaultFontFamily);
-            this[ThemeConstants.FontSize.Body2] = TryGetFontSize(fontConfiguration.Body2, fontConfiguration.FontSizes.Small);
-            this[ThemeConstants.FontAttributes.Body2] = TryGetFontAttributes(fontConfiguration.Body2, defaultFontAttributes);
+            this[ThemeConstants.FontFamily.Body2] = TryGetFontFamily(this.fontConfiguration.Body2, defaultFontFamily);
+            this[ThemeConstants.FontSize.Body2] = TryGetFontSize(this.fontConfiguration.Body2, fontSizes.Small);
+            this[ThemeConstants.FontAttributes.Body2] = TryGetFontAttributes(this.fontConfiguration.Body2, defaultFontAttributes);
 
-            this[ThemeConstants.FontFamily.Button] = TryGetFontFamily(fontConfiguration.Button, defaultFontFamily);
-            this[ThemeConstants.FontSize.Button] = TryGetFontSize(fontConfiguration.Button, fontConfiguration.FontSizes.Medium);
-            this[ThemeConstants.FontAttributes.Button] = TryGetFontAttributes(fontConfiguration.Button, defaultFontAttributes);
-            
-            this[ThemeConstants.FontFamily.Input] = TryGetFontFamily(fontConfiguration.Input, defaultFontFamily);
-            this[ThemeConstants.FontSize.Input] = TryGetFontSize(fontConfiguration.Input, fontConfiguration.FontSizes.Medium);
-            this[ThemeConstants.FontAttributes.Input] = TryGetFontAttributes(fontConfiguration.Input, defaultFontAttributes);
+            this[ThemeConstants.FontFamily.Button] = TryGetFontFamily(this.fontConfiguration.Button, defaultFontFamily);
+            this[ThemeConstants.FontSize.Button] = TryGetFontSize(this.fontConfiguration.Button, fontSizes.Medium);
+            this[ThemeConstants.FontAttributes.Button] = TryGetFontAttributes(this.fontConfiguration.Button, defaultFontAttributes);
 
-            this[ThemeConstants.FontFamily.Caption] = TryGetFontFamily(fontConfiguration.Caption, defaultFontFamily);
-            this[ThemeConstants.FontSize.Caption] = TryGetFontSize(fontConfiguration.Caption, fontConfiguration.FontSizes.XSmall);
-            this[ThemeConstants.FontAttributes.Caption] = TryGetFontAttributes(fontConfiguration.Caption, defaultFontAttributes);
+            this[ThemeConstants.FontFamily.Input] = TryGetFontFamily(this.fontConfiguration.Input, defaultFontFamily);
+            this[ThemeConstants.FontSize.Input] = TryGetFontSize(this.fontConfiguration.Input, fontSizes.Medium);
+            this[ThemeConstants.FontAttributes.Input] = TryGetFontAttributes(this.fontConfiguration.Input, defaultFontAttributes);
 
-            this[ThemeConstants.FontFamily.H1] = TryGetFontFamily(fontConfiguration.H1, defaultFontFamily);
-            this[ThemeConstants.FontSize.H1] = TryGetFontSize(fontConfiguration.H1, 96d);
-            this[ThemeConstants.FontAttributes.H1] = TryGetFontAttributes(fontConfiguration.H1, defaultFontAttributes);
+            this[ThemeConstants.FontFamily.Caption] = TryGetFontFamily(this.fontConfiguration.Caption, defaultFontFamily);
+            this[ThemeConstants.FontSize.Caption] = TryGetFontSize(this.fontConfiguration.Caption, fontSizes.XSmall);
+            this[ThemeConstants.FontAttributes.Caption] = TryGetFontAttributes(this.fontConfiguration.Caption, defaultFontAttributes);
 
-            this[ThemeConstants.FontFamily.H2] = TryGetFontFamily(fontConfiguration.H2, defaultFontFamily);
-            this[ThemeConstants.FontSize.H2] = TryGetFontSize(fontConfiguration.H2, 60d);
-            this[ThemeConstants.FontAttributes.H2] = TryGetFontAttributes(fontConfiguration.H2, defaultFontAttributes);
+            this[ThemeConstants.FontFamily.H1] = TryGetFontFamily(this.fontConfiguration.H1, defaultFontFamily);
+            this[ThemeConstants.FontSize.H1] = TryGetFontSize(this.fontConfiguration.H1, 96d);
+            this[ThemeConstants.FontAttributes.H1] = TryGetFontAttributes(this.fontConfiguration.H1, defaultFontAttributes);
 
-            this[ThemeConstants.FontFamily.H3] = TryGetFontFamily(fontConfiguration.H3, defaultFontFamily);
-            this[ThemeConstants.FontSize.H3] = TryGetFontSize(fontConfiguration.H3, 48d);
-            this[ThemeConstants.FontAttributes.H3] = TryGetFontAttributes(fontConfiguration.H3, defaultFontAttributes);
+            this[ThemeConstants.FontFamily.H2] = TryGetFontFamily(this.fontConfiguration.H2, defaultFontFamily);
+            this[ThemeConstants.FontSize.H2] = TryGetFontSize(this.fontConfiguration.H2, 60d);
+            this[ThemeConstants.FontAttributes.H2] = TryGetFontAttributes(this.fontConfiguration.H2, defaultFontAttributes);
 
-            this[ThemeConstants.FontFamily.H4] = TryGetFontFamily(fontConfiguration.H4, defaultFontFamily);
-            this[ThemeConstants.FontSize.H4] = TryGetFontSize(fontConfiguration.H4, 34d);
-            this[ThemeConstants.FontAttributes.H4] = TryGetFontAttributes(fontConfiguration.H4, defaultFontAttributes);
+            this[ThemeConstants.FontFamily.H3] = TryGetFontFamily(this.fontConfiguration.H3, defaultFontFamily);
+            this[ThemeConstants.FontSize.H3] = TryGetFontSize(this.fontConfiguration.H3, 48d);
+            this[ThemeConstants.FontAttributes.H3] = TryGetFontAttributes(this.fontConfiguration.H3, defaultFontAttributes);
 
-            this[ThemeConstants.FontFamily.H5] = TryGetFontFamily(fontConfiguration.H5, defaultFontFamily);
-            this[ThemeConstants.FontSize.H5] = TryGetFontSize(fontConfiguration.H5, 24d);
-            this[ThemeConstants.FontAttributes.H5] = TryGetFontAttributes(fontConfiguration.H5, defaultFontAttributes);
+            this[ThemeConstants.FontFamily.H4] = TryGetFontFamily(this.fontConfiguration.H4, defaultFontFamily);
+            this[ThemeConstants.FontSize.H4] = TryGetFontSize(this.fontConfiguration.H4, 34d);
+            this[ThemeConstants.FontAttributes.H4] = TryGetFontAttributes(this.fontConfiguration.H4, defaultFontAttributes);
 
-            this[ThemeConstants.FontFamily.H6] = TryGetFontFamily(fontConfiguration.H6, defaultFontFamily);
-            this[ThemeConstants.FontSize.H6] = TryGetFontSize(fontConfiguration.H6, 20d);
-            this[ThemeConstants.FontAttributes.H6] = TryGetFontAttributes(fontConfiguration.H6, defaultFontAttributes);
+            this[ThemeConstants.FontFamily.H5] = TryGetFontFamily(this.fontConfiguration.H5, defaultFontFamily);
+            this[ThemeConstants.FontSize.H5] = TryGetFontSize(this.fontConfiguration.H5, 24d);
+            this[ThemeConstants.FontAttributes.H5] = TryGetFontAttributes(this.fontConfiguration.H5, defaultFontAttributes);
 
-            this[ThemeConstants.FontFamily.Overline] = TryGetFontFamily(fontConfiguration.Overline, defaultFontFamily);
-            this[ThemeConstants.FontSize.Overline] = TryGetFontSize(fontConfiguration.Overline, fontConfiguration.FontSizes.Micro);
-            this[ThemeConstants.FontAttributes.Overline] = TryGetFontAttributes(fontConfiguration.Overline, defaultFontAttributes);
+            this[ThemeConstants.FontFamily.H6] = TryGetFontFamily(this.fontConfiguration.H6, defaultFontFamily);
+            this[ThemeConstants.FontSize.H6] = TryGetFontSize(this.fontConfiguration.H6, 20d);
+            this[ThemeConstants.FontAttributes.H6] = TryGetFontAttributes(this.fontConfiguration.H6, defaultFontAttributes);
 
-            this[ThemeConstants.FontFamily.Title] = TryGetFontFamily(fontConfiguration.Title, defaultFontFamily);
-            this[ThemeConstants.FontSize.Title] = TryGetFontSize(fontConfiguration.Title, fontConfiguration.FontSizes.Medium);
-            this[ThemeConstants.FontAttributes.Title] = TryGetFontAttributes(fontConfiguration.Title, FontAttributes.Bold);
-            
-            this[ThemeConstants.FontFamily.Subtitle1] = TryGetFontFamily(fontConfiguration.Subtitle1, defaultFontFamily);
-            this[ThemeConstants.FontSize.Subtitle1] = TryGetFontSize(fontConfiguration.Subtitle1, fontConfiguration.FontSizes.MidMedium);
-            this[ThemeConstants.FontAttributes.Subtitle1] = TryGetFontAttributes(fontConfiguration.Subtitle1, FontAttributes.Bold);
+            this[ThemeConstants.FontFamily.Overline] = TryGetFontFamily(this.fontConfiguration.Overline, defaultFontFamily);
+            this[ThemeConstants.FontSize.Overline] = TryGetFontSize(this.fontConfiguration.Overline, fontSizes.Micro);
+            this[ThemeConstants.FontAttributes.Overline] = TryGetFontAttributes(this.fontConfiguration.Overline, defaultFontAttributes);
 
-            this[ThemeConstants.FontFamily.Subtitle2] = TryGetFontFamily(fontConfiguration.Subtitle2, defaultFontFamily);
-            this[ThemeConstants.FontSize.Subtitle2] = TryGetFontSize(fontConfiguration.Subtitle2, fontConfiguration.FontSizes.Small);
-            this[ThemeConstants.FontAttributes.Subtitle2] = TryGetFontAttributes(fontConfiguration.Subtitle2, defaultFontAttributes);
+            this[ThemeConstants.FontFamily.Title] = TryGetFontFamily(this.fontConfiguration.Title, defaultFontFamily);
+            this[ThemeConstants.FontSize.Title] = TryGetFontSize(this.fontConfiguration.Title, fontSizes.Medium);
+            this[ThemeConstants.FontAttributes.Title] = TryGetFontAttributes(this.fontConfiguration.Title, FontAttributes.Bold);
 
-            this[ThemeConstants.CardViewStyle.HeaderFontFamily] = TryGetFontFamily(fontConfiguration.SectionLabel, defaultFontFamily);
-            this[ThemeConstants.CardViewStyle.HeaderFontSize] = TryGetFontSize(fontConfiguration.SectionLabel, PlatformHelper.OnPlatformValue((Device.iOS, () => 13d), (Device.Android, () => 18d)));
-            this[ThemeConstants.CardViewStyle.HeaderFontAttributes] = TryGetFontAttributes(fontConfiguration.SectionLabel, defaultFontAttributes);
+            this[ThemeConstants.FontFamily.Subtitle1] = TryGetFontFamily(this.fontConfiguration.Subtitle1, defaultFontFamily);
+            this[ThemeConstants.FontSize.Subtitle1] = TryGetFontSize(this.fontConfiguration.Subtitle1, fontSizes.MidMedium);
+            this[ThemeConstants.FontAttributes.Subtitle1] = TryGetFontAttributes(this.fontConfiguration.Subtitle1, FontAttributes.Bold);
+
+            this[ThemeConstants.FontFamily.Subtitle2] = TryGetFontFamily(this.fontConfiguration.Subtitle2, defaultFontFamily);
+            this[ThemeConstants.FontSize.Subtitle2] = TryGetFontSize(this.fontConfiguration.Subtitle2, fontSizes.Small);
+            this[ThemeConstants.FontAttributes.Subtitle2] = TryGetFontAttributes(this.fontConfiguration.Subtitle2, defaultFontAttributes);
+
+            this[ThemeConstants.CardViewStyle.HeaderFontFamily] = TryGetFontFamily(this.fontConfiguration.SectionLabel, defaultFontFamily);
+            this[ThemeConstants.CardViewStyle.HeaderFontSize] = TryGetFontSize(this.fontConfiguration.SectionLabel, PlatformHelper.OnPlatformValue((Device.iOS, () => 13d), (Device.Android, () => 18d)));
+            this[ThemeConstants.CardViewStyle.HeaderFontAttributes] = TryGetFontAttributes(this.fontConfiguration.SectionLabel, defaultFontAttributes);
         }
 
         private static string TryGetFontFamily(FontElement fontElement, string @default)
@@ -125,6 +141,11 @@ namespace CrossPlatformLibrary.Forms.Resources
         private static FontAttributes TryGetFontAttributes(FontElement fontElement, FontAttributes @default = FontAttributes.None)
         {
             return fontElement?.FontAttributes ?? @default;
+        }
+
+        public void Dispose()
+        {
+            this.fontConverter?.Dispose();
         }
     }
 }
