@@ -16,22 +16,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="CountryItemTemplate">
-                <ViewCell Height="30">
-                    <ViewCell.View>
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                            <Label
-                                HorizontalOptions="Start"
-                                Style="{DynamicResource EntryLabelStyle}"
-                                Text="{Binding Name}"
-                                VerticalOptions="Center" />
-                            <BoxView
-                                BackgroundColor="{DynamicResource ListSeparator}"
-                                HeightRequest="1"
-                                HorizontalOptions="FillAndExpand" />
-
-                        </StackLayout>
-                    </ViewCell.View>
-                </ViewCell>
+                <views:CountryViewCell />
             </DataTemplate>
 
             <DataTemplate x:Key="ColorResourceItemTemplate">
@@ -660,6 +645,7 @@
                                     ItemsSource="{Binding Countries}"
                                     RefreshCommand="{Binding RefreshCommand}"
                                     SeparatorVisibility="None"
+                                    SelectionMode="Single"
                                     HeightRequest="150">
                                     <ListView.Behaviors>
                                         <behaviors:EventToCommandBehavior

@@ -69,6 +69,7 @@
     <Compile Include="Extensions\VisualElementExtensions.cs" />
     <Compile Include="Renderers\CustomSwitchRenderer.cs" />
     <Compile Include="Renderers\CustomWebViewRenderer.cs" />
+    <Compile Include="Renderers\ExtendedViewCellRenderer.cs" />
     <Compile Include="Renderers\GradientStackLayoutRenderer.cs" />
     <Compile Include="Renderers\CustomButtonRenderer.cs" />
     <Compile Include="Renderers\CustomEditorRenderer.cs" />

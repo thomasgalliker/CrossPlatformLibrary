@@ -47,26 +47,23 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
         /// <summary>
         ///     Set background color according to IsSelected state.
         /// </summary>
-        private void UpdateBackgroundColor(object viewCell, bool isSelected)
+        private void UpdateBackgroundColor(ExtendedViewCell extendedViewCell, bool isSelected)
         {
-            if (viewCell is ExtendedViewCell extendedViewCell)
+            if (isSelected)
             {
-                if (isSelected)
+                this.uiTableViewCell.SelectionStyle = UITableViewCellSelectionStyle.Default;
+                this.uiTableViewCell.SelectedBackgroundView = new UIView
                 {
-                    this.uiTableViewCell.SelectionStyle = UITableViewCellSelectionStyle.Default;
-                    this.uiTableViewCell.SelectedBackgroundView = new UIView
-                    {
-                        BackgroundColor = extendedViewCell.SelectedBackgroundColor.ToUIColor()
-                    };
-                }
-                else
+                    BackgroundColor = extendedViewCell.SelectedBackgroundColor.ToUIColor()
+                };
+            }
+            else
+            {
+                this.uiTableViewCell.SelectionStyle = UITableViewCellSelectionStyle.None;
+                this.uiTableViewCell.SelectedBackgroundView = new UIView
                 {
-                    this.uiTableViewCell.SelectionStyle = UITableViewCellSelectionStyle.None;
-                    this.uiTableViewCell.SelectedBackgroundView = new UIView
-                    {
-                        BackgroundColor = this.unselectedBackground
-                    };
-                }
+                    BackgroundColor = this.unselectedBackground
+                };
             }
         }
     }
