@@ -1,6 +1,6 @@
 ﻿using System;
+using CrossPlatformLibrary.Extensions;
 using FluentAssertions;
-using InvoiceScanner.Extensions;
 using Xunit;
 
 namespace CrossPlatformLibrary.Tests.Extensions
