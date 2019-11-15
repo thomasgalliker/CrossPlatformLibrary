@@ -376,11 +376,11 @@ namespace SampleApp.ViewModels
                 this.Countries.Clear();
                 this.Countries.AddRange(countryDtos.Select(c => new CountryViewModel(c)).Prepend(defaultCountryViewModel));
 
-                //this.ThemeResources = Application.Current.Resources.MergedDictionaries.SelectMany(md => md)
-                //    .Select(kvp => new ResourceViewModel(kvp))
-                //    .OrderBy(vm => vm.Key)
-                //    //.ThenBy(vm => vm.Key)
-                //    .ToObservableCollection();
+                this.ThemeResources = Application.Current.Resources.MergedDictionaries.SelectMany(md => md)
+                    .Select(kvp => new ResourceViewModel(kvp))
+                    .OrderBy(vm => vm.Key)
+                    //.ThenBy(vm => vm.Key)
+                    .ToObservableCollection();
 
                 //this.Notes = $"Test test test{Environment.NewLine}Line 2 text text text";
                 this.AdminEmailAddress = "thomas@bluewin.ch";
