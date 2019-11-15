@@ -163,25 +163,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         protected virtual View GetItemView(object item)
         {
-            var dataTemplate = this.ItemTemplate is DataTemplateSelector dataTemplateSelector
-                ? dataTemplateSelector.SelectTemplate(item, null)
-                : this.ItemTemplate;
-
-            var content = dataTemplate.CreateContent();
-            View view;
-            if (content is ViewCell viewCell)
-            {
-                view = viewCell.View;
-            }
-            else
-            {
-                view = content as View;
-                if (view == null)
-                {
-                    throw new Exception("ItemTemplate must either be a View or a ViewCell");
-                }
-            }
-
+            var view = BindingHelper.CreateContent(this.ItemTemplate, item, this);
             view.BindingContext = item;
 
             var gesture = new TapGestureRecognizer { Command = this.innerSelectedCommand, CommandParameter = view };
@@ -193,7 +175,11 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         private void AddGesture(View view, TapGestureRecognizer gesture)
         {
-            view.GestureRecognizers.Add(gesture);
+            var gestures = view.GestureRecognizers;
+            if (!gestures.Contains(gesture))
+            {
+                view.GestureRecognizers.Add(gesture);
+            }
 
             var layout = view as Layout<View>;
 

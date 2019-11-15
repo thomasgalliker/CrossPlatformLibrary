@@ -477,12 +477,17 @@
                                     SelectedItem="{Binding Country, Mode=TwoWay}"
                                     SelectionMode="None" />
 
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo StackedList (Vertical)--&gt;" />
-                                <controls:StackedList
-                                    ItemTemplate="{StaticResource ResourceItemTemplateSelector}"
-                                    ItemsSource="{Binding ThemeResources}"
-                                    ListOrientation="Vertical"
-                                    SelectionMode="None" />
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo StackedGrid --&gt;" />
+                                <controls:StackedGrid
+                                    ItemTemplate="{StaticResource CountryItemTemplate}"
+                                    ItemsSource="{Binding Countries, Mode=OneWay}"
+                                    SelectedItem="{Binding Country, Mode=TwoWay}" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo BindableStackLayout--&gt;" />
+                                <controls:BindableStackLayout
+                                    ItemTemplate="{StaticResource CountryItemTemplate}"
+                                    ItemsSource="{Binding Countries}"
+                                    Orientation="Vertical" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ListView--&gt;" />
                                 <ListView
@@ -783,6 +788,12 @@
                                         LineBreakMode="CharacterWrap"
                                         Text="{Binding CanExecuteLoadDataButtonCommand, StringFormat='CanExecuteLoadDataButtonCommand={0}'}" />
                                 </controls:StackLayoutZero>
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Debug App Resources--&gt;" />
+                                <controls:BindableStackLayout
+                                    ItemTemplate="{StaticResource ResourceItemTemplateSelector}"
+                                    ItemsSource="{Binding ThemeResources}"
+                                    Orientation="Vertical" />
 
                             </StackLayout>
 

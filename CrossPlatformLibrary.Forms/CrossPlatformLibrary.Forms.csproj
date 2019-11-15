@@ -50,6 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Controls\BindableStackLayout.cs~RF4856c3b.TMP" />
     <None Remove="CrossPlatformLibrary.Forms.csproj.DotSettings" />
     <None Remove="Resources\Images\reload_192x192.png" />
   </ItemGroup>
