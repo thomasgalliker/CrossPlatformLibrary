@@ -47,7 +47,7 @@ namespace CrossPlatformLibrary.Tools
         {
             var folder = await StorageFolder.GetFolderFromPathAsync(Windows.ApplicationModel.Package.Current.InstalledLocation.Path);
             var files = await folder.GetFilesAsync();
-            return files.Where(f => f.Name.StartsWithAny(CrossPlatformLibrary.AssemblyNamespaces) && f.Name.EndsWith(DllFileExtension));
+            return files.Where(f => f.Name.StartsWithAny(new[]{"CrossPlatformLibrary"}) && f.Name.EndsWith(DllFileExtension));
         }
 
         private Assembly LoadAssembly(IStorageFile dllFile)
