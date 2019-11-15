@@ -484,6 +484,46 @@
                                     ListOrientation="Vertical"
                                     SelectionMode="None" />
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ListView--&gt;" />
+                                <ListView
+                                    x:Name="ListViewCountries"
+                                    BackgroundColor="Transparent"
+                                    CachingStrategy="RetainElement"
+                                    HasUnevenRows="true"
+                                    IsPullToRefreshEnabled="true"
+                                    IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
+                                    ItemTemplate="{StaticResource CountryItemTemplate}"
+                                    ItemsSource="{Binding Countries}"
+                                    RefreshCommand="{Binding RefreshCommand}"
+                                    SeparatorVisibility="None"
+                                    SelectionMode="Single"
+                                    HeightRequest="150">
+                                    <ListView.Behaviors>
+                                        <behaviors:EventToCommandBehavior
+                                            Command="{Binding BindingContext.SelectCountryCommand, Source={x:Reference Page}}"
+                                            CommandParameter="{Binding Source={x:Reference ListViewCountries}, Path=SelectedItem}"
+                                            EventName="ItemTapped" />
+                                    </ListView.Behaviors>
+                                </ListView>
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo NoBarsScrollViewer--&gt;" />
+                                <controls:NoBarsScrollViewer Orientation="Horizontal">
+                                    <controls:StackLayoutZero Orientation="Horizontal">
+                                        <Label
+                                            BackgroundColor="LightGreen"
+                                            Text="Label Green &gt;&gt;&gt;"
+                                            WidthRequest="333" />
+                                        <Label
+                                            BackgroundColor="LightCoral"
+                                            Text="&lt;&lt;&lt; Label Red &gt;&gt;&gt;"
+                                            WidthRequest="333" />
+                                        <Label
+                                            BackgroundColor="LightBlue"
+                                            Text="&lt;&lt;&lt; Label Blue"
+                                            WidthRequest="333" />
+                                    </controls:StackLayoutZero>
+                                </controls:NoBarsScrollViewer>
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo FontFamily, FontSize, FontAttributes--&gt;" />
                                 <StackLayout Orientation="Vertical">
                                     <Label
@@ -632,46 +672,6 @@
                                 <controls:DividerLine />
 
                                 <Button Text="Dump Resources" Command="{Binding DumpResourcesCommand}" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ListView--&gt;" />
-                                <ListView
-                                    x:Name="ListViewCountries"
-                                    BackgroundColor="LightGray"
-                                    CachingStrategy="RetainElement"
-                                    HasUnevenRows="true"
-                                    IsPullToRefreshEnabled="true"
-                                    IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
-                                    ItemTemplate="{StaticResource CountryItemTemplate}"
-                                    ItemsSource="{Binding Countries}"
-                                    RefreshCommand="{Binding RefreshCommand}"
-                                    SeparatorVisibility="None"
-                                    SelectionMode="Single"
-                                    HeightRequest="150">
-                                    <ListView.Behaviors>
-                                        <behaviors:EventToCommandBehavior
-                                            Command="{Binding BindingContext.SelectCountryCommand, Source={x:Reference Page}}"
-                                            CommandParameter="{Binding Source={x:Reference ListViewCountries}, Path=SelectedItem}"
-                                            EventName="ItemTapped" />
-                                    </ListView.Behaviors>
-                                </ListView>
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo NoBarsScrollViewer--&gt;" />
-                                <controls:NoBarsScrollViewer Orientation="Horizontal">
-                                    <controls:StackLayoutZero Orientation="Horizontal">
-                                        <Label
-                                            BackgroundColor="LightGreen"
-                                            Text="Label Green &gt;&gt;&gt;"
-                                            WidthRequest="333" />
-                                        <Label
-                                            BackgroundColor="LightCoral"
-                                            Text="&lt;&lt;&lt; Label Red &gt;&gt;&gt;"
-                                            WidthRequest="333" />
-                                        <Label
-                                            BackgroundColor="LightBlue"
-                                            Text="&lt;&lt;&lt; Label Blue"
-                                            WidthRequest="333" />
-                                    </controls:StackLayoutZero>
-                                </controls:NoBarsScrollViewer>
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo FrameZero--&gt;" />
                                 <controls:FrameZero>
