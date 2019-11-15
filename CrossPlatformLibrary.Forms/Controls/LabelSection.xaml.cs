@@ -72,7 +72,10 @@ namespace CrossPlatformLibrary.Forms.Controls
                 ? text?.ToUpperInvariant()
                 : text;
 
-            labelSection.Section.Text = newText;
+            if (labelSection.Section is Label label)
+            {
+                label.Text = newText;
+            }
         }
 
         public static readonly BindableProperty LabelStyleProperty =
