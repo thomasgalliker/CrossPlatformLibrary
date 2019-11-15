@@ -25,25 +25,54 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             var labelSection = (LabelSection)bindable;
 
-            string newText;
-            if(newValue is string newStringValue)
-            {
-                newText = Device.RuntimePlatform == Device.iOS 
-                    ? newStringValue.ToUpperInvariant()
-                    : newStringValue;
-            }
-            else
-            {
-                newText = null;
-            }
-
-            labelSection.Section.Text = newText;
+            UpdateSectionText(labelSection, newValue as string, labelSection.IsTextUpperCase);
         }
 
         public string Text
         {
             get => (string)this.GetValue(TextProperty);
             set => this.SetValue(TextProperty, value);
+        }
+
+        public static readonly BindableProperty IsTextUpperCaseProperty =
+            BindableProperty.Create(
+                nameof(IsTextUpperCase),
+                typeof(bool),
+                typeof(LabelSection),
+                GetPlatformDefaultIsTextUpperCase(),
+                BindingMode.OneWay,
+                null,
+                OnIsTextUpperCasePropertyChanged);
+
+        private static void OnIsTextUpperCasePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (!(newValue is bool upperCase))
+            {
+                return;
+            }
+
+            var labelSection = (LabelSection)bindable;
+            UpdateSectionText(labelSection, labelSection.Text, upperCase);
+        }
+
+        private static bool GetPlatformDefaultIsTextUpperCase()
+        {
+            return Device.RuntimePlatform == Device.iOS;
+        }
+
+        public bool IsTextUpperCase
+        {
+            get => (bool)this.GetValue(IsTextUpperCaseProperty);
+            set => this.SetValue(IsTextUpperCaseProperty, value);
+        }
+
+        private static void UpdateSectionText(LabelSection labelSection, string text, bool isUpperCase)
+        {
+            var newText = isUpperCase
+                ? text?.ToUpperInvariant()
+                : text;
+
+            labelSection.Section.Text = newText;
         }
 
         public static readonly BindableProperty LabelStyleProperty =

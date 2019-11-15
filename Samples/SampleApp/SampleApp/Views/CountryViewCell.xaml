@@ -5,8 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:xControls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
-    xmlns:iOsSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-    iOsSpecific:Cell.DefaultBackgroundColor="Transparent"
     IsSelected="{Binding IsSelected, Mode=TwoWay}"
     SelectedBackgroundColor="Magenta">
 
@@ -19,7 +17,7 @@
     </ViewCell.ContextActions>
 
     <ViewCell.View>
-        <xControls:StackLayoutZero Padding="0,2,0,2">
+        <xControls:StackLayoutZero Padding="0,4,0,4">
             <xControls:StackLayoutZero
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
