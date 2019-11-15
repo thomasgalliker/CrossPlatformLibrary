@@ -10,7 +10,7 @@
     <StackLayout Spacing="0">
         <controls:CardView>
             <StackLayout Spacing="0">
-                <controls:LabelSection Text="{localization:Translate PeriodicTaskCaptionText}" />
+                <controls:LabelSection Text="{localization:Translate PeriodicTaskCaptionText}" IsTextUpperCase="False" />
                 <controls:HeaderDivider />
                 <Grid Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
                     <Grid.ColumnDefinitions>
