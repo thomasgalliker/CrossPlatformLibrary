@@ -30,7 +30,7 @@
                     Keyboard="Chat"
                     MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
                     MaxLines="3"
-                    Placeholder="{localization:Translate ComplexNotesLabelText}"
+                    Placeholder="Placeholder of ValidatableEditor (inside user control)"
                     Text="{Binding Notes, Mode=TwoWay}"
                     ValidationErrors="{Binding Errors[Notes]}" />
                 <Label

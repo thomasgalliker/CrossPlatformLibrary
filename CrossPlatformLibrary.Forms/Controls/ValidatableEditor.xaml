@@ -33,7 +33,15 @@
         MaxLines="{Binding MaxLines, Source={x:Reference Control}, Mode=OneWay}"
         Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
         Style="{Binding EditorStyle, Source={x:Reference Control}, Mode=OneWay}"
-        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}" />
+        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}">
+
+        <controls:CustomEditor.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+                <!--  Editor in iOS has some nasty padding around UITextView  -->
+                <On Platform="iOS" Value="-4,0,-4,0" />
+            </OnPlatform>
+        </controls:CustomEditor.Margin>
+    </controls:CustomEditor>
 
     <!--  Annotation Text  -->
     <Label
