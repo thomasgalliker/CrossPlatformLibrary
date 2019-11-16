@@ -194,6 +194,14 @@
         </Setter>
     </Style>
 
+    <Style TargetType="controls:ValidatableEntry">
+        <Setter Property="EntryStyle" Value="{DynamicResource EntryStyle}" />
+    </Style>
+
+    <Style TargetType="controls:ValidatableEditor">
+        <Setter Property="EditorStyle" Value="{DynamicResource EditorStyle}" />
+    </Style>
+
     <Style TargetType="controls:ValidatablePicker">
         <Setter Property="PickerStyle" Value="{DynamicResource PickerStyle}" />
     </Style>
@@ -299,7 +307,6 @@
         <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="Opacity" Value="1.0" />
     </Style>
 
     <Style BasedOn="{StaticResource EditorStyle}" TargetType="Editor" />
