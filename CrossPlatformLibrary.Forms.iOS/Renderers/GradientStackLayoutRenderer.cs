@@ -11,6 +11,8 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
 {
     public class GradientStackLayoutRenderer : VisualElementRenderer<StackLayout>
     {
+        private CAGradientLayer gradientLayer;
+
         public override void Draw(CGRect rect)
         {
             base.Draw(rect);
@@ -20,21 +22,33 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                 var startColor = gradientStackLayout.StartColor.ToCGColor();
                 var endColor = gradientStackLayout.EndColor.ToCGColor();
 
-                var gradientLayer = new CAGradientLayer();
+                this.gradientLayer = new CAGradientLayer();
 
                 if (gradientStackLayout.GradientOrientation == StackOrientation.Horizontal)
                 {
-                    gradientLayer.StartPoint = new CGPoint(0, 0.5);
-                    gradientLayer.EndPoint = new CGPoint(1, 0.5);
+                    this.gradientLayer.StartPoint = new CGPoint(0, 0.5);
+                    this.gradientLayer.EndPoint = new CGPoint(1, 0.5);
                 }
 
-                gradientLayer.Frame = rect;
-                gradientLayer.Colors = new[]
+                this.gradientLayer.Frame = rect;
+                this.gradientLayer.Colors = new[]
                 {
                     startColor, endColor
                 };
 
-                this.NativeView.Layer.InsertSublayer(gradientLayer, 0);
+                this.NativeView.Layer.InsertSublayer(this.gradientLayer, 0);
+            }
+        }
+
+        public override void LayoutSublayersOfLayer(CALayer layer)
+        {
+            base.LayoutSublayersOfLayer(layer);
+
+            if (this.gradientLayer != null)
+            {
+                // Adjust the frame size of the gradient layer
+                // e.g. in case of an orientation change
+                this.gradientLayer.Frame = layer.Bounds;
             }
         }
     }
