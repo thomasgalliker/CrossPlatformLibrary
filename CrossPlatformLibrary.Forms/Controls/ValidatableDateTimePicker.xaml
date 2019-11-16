@@ -37,7 +37,7 @@
             HorizontalOptions="FillAndExpand"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
             NullableDate="{Binding Date, Source={x:Reference Control}, Mode=TwoWay}"
-            Style="{Binding TimePickerStyle, Source={x:Reference Control}, Mode=OneWay}" />
+            Style="{Binding DatePickerStyle, Source={x:Reference Control}, Mode=OneWay}" />
 
         <controls:ExtendedTimePicker
             Grid.Column="1"
