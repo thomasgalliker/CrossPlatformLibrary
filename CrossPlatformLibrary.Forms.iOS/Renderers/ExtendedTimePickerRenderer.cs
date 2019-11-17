@@ -9,12 +9,13 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(ExtendedTimePicker), typeof(ExtendedTimePickerRenderer))]
+
 namespace CrossPlatformLibrary.Forms.iOS.Renderers
 {
     /// <summary>
-    ///  Extended TimePicker Renderer for Nullable Values
-    ///  Via: https://forums.xamarin.com/discussion/20028/datepicker-possible-to-bind-to-nullable-date-value
-    ///  Via: https://github.com/XLabs/Xamarin-Forms-Labs/wiki/ExtendedEntry
+    ///     Extended TimePicker Renderer for Nullable Values
+    ///     Via: https://forums.xamarin.com/discussion/20028/datepicker-possible-to-bind-to-nullable-date-value
+    ///     Via: https://github.com/XLabs/Xamarin-Forms-Labs/wiki/ExtendedEntry
     /// </summary>
     public class ExtendedTimePickerRenderer : TimePickerRenderer
     {
@@ -22,11 +23,8 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
         {
             base.OnElementChanged(e);
 
-            var view = this.Element as ExtendedTimePicker;
-
-            if (view != null)
+            if (this.Element is ExtendedTimePicker view)
             {
-                this.SetFont(view);
                 this.SetTextAlignment(view);
                 this.SetBorder(view);
                 this.SetNullableText(view);
@@ -42,24 +40,28 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
 
             var view = (ExtendedTimePicker)this.Element;
 
-            if (e.PropertyName == ExtendedTimePicker.FontProperty.PropertyName)
-                this.SetFont(view);
-            else if (e.PropertyName == ExtendedTimePicker.XAlignProperty.PropertyName)
+            if (e.PropertyName == ExtendedTimePicker.XAlignProperty.PropertyName)
+            {
                 this.SetTextAlignment(view);
+            }
             else if (e.PropertyName == ExtendedTimePicker.HasBorderProperty.PropertyName)
+            {
                 this.SetBorder(view);
+            }
             else if (e.PropertyName == ExtendedTimePicker.NullableTimeProperty.PropertyName || e.PropertyName == TimePicker.FormatProperty.PropertyName)
             {
                 this.SetNullableText(view);
             }
             else if (e.PropertyName == ExtendedTimePicker.PlaceholderTextColorProperty.PropertyName)
+            {
                 this.SetPlaceholderTextColor(view);
+            }
 
             this.ResizeHeight();
         }
 
         /// <summary>
-        /// Sets the text alignment.
+        ///     Sets the text alignment.
         /// </summary>
         /// <param name="view">The view.</param>
         private void SetTextAlignment(ExtendedTimePicker view)
@@ -79,24 +81,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
         }
 
         /// <summary>
-        /// Sets the font.
-        /// </summary>
-        /// <param name="view">The view.</param>
-        private void SetFont(ExtendedTimePicker view)
-        {
-            UIFont uiFont;
-            if (view.Font != Font.Default && (uiFont = view.Font.ToUIFont()) != null)
-            {
-                this.Control.Font = uiFont;
-            }
-            else if (view.Font == Font.Default)
-            {
-                this.Control.Font = UIFont.SystemFontOfSize(17f);
-            }
-        }
-
-        /// <summary>
-        /// Sets the border.
+        ///     Sets the border.
         /// </summary>
         /// <param name="view">The view.</param>
         private void SetBorder(ExtendedTimePicker view)
@@ -105,7 +90,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
         }
 
         /// <summary>
-        /// Set text based on nullable value
+        ///     Set text based on nullable value
         /// </summary>
         /// <param name="view"></param>
         private void SetNullableText(ExtendedTimePicker view)
@@ -127,14 +112,16 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
         }
 
         /// <summary>
-        /// Resizes the height.
+        ///     Resizes the height.
         /// </summary>
         private void ResizeHeight()
         {
-            if (this.Element.HeightRequest >= 0) return;
+            if (this.Element.HeightRequest >= 0)
+            {
+                return;
+            }
 
-            var height = Math.Max(this.Bounds.Height,
-                new UITextField { Font = this.Control.Font }.IntrinsicContentSize.Height) * 2;
+            var height = Math.Max(this.Bounds.Height, new UITextField { Font = this.Control.Font }.IntrinsicContentSize.Height) * 2;
 
             this.Control.Frame = new CGRect(0.0f, 0.0f, (nfloat)this.Element.Width, (nfloat)height);
 
@@ -142,7 +129,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
         }
 
         /// <summary>
-        /// Sets the color of the placeholder text.
+        ///     Sets the color of the placeholder text.
         /// </summary>
         /// <param name="view">The view.</param>
         private void SetPlaceholderTextColor(ExtendedTimePicker view)

@@ -380,13 +380,11 @@
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ValidatableEditor--&gt;" />
                                 <Editor
-                                    BackgroundColor="Magenta"
                                     IsEnabled="True"
                                     MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
                                     Placeholder="Placeholder of Editor"
                                     Text="{Binding Notes, Mode=TwoWay}" />
                                 <controls:CustomEditor
-                                    BackgroundColor="Magenta"
                                     IsEnabled="True"
                                     MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
                                     Placeholder="Placeholder of CustomEditor"

@@ -80,13 +80,6 @@ namespace CrossPlatformLibrary.Forms.Controls
             }
         }
 
-        /// <summary> /// Gets or sets the Font of the text /// </summary> 
-        public Font Font
-        {
-            get => (Font)this.GetValue(FontProperty);
-            set => this.SetValue(FontProperty, value);
-        }
-
         /// <summary>
         /// Gets or sets the X alignment of the text
         /// </summary>

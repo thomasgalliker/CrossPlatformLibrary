@@ -6,9 +6,9 @@ using CrossPlatformLibrary.Forms.Android.Renderers;
 using CrossPlatformLibrary.Forms.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using TimePicker = Xamarin.Forms.TimePicker;
 
 [assembly: ExportRenderer(typeof(ExtendedTimePicker), typeof(ExtendedTimePickerRenderer))]
+
 namespace CrossPlatformLibrary.Forms.Android.Renderers
 {
     public class ExtendedTimePickerRenderer : TimePickerRenderer
@@ -23,7 +23,6 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
             if (this.Element is ExtendedTimePicker view)
             {
-                this.SetFont(view);
                 this.SetTextAlignment(view);
                 // SetBorder(view);
                 this.SetNullableText(view);
@@ -38,10 +37,10 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
             var view = (ExtendedTimePicker)this.Element;
 
-            if (e.PropertyName == ExtendedTimePicker.FontProperty.PropertyName)
-                this.SetFont(view);
-            else if (e.PropertyName == ExtendedTimePicker.XAlignProperty.PropertyName)
+            if (e.PropertyName == ExtendedTimePicker.XAlignProperty.PropertyName)
+            {
                 this.SetTextAlignment(view);
+            }
             // else if (e.PropertyName == ExtendedTimePicker.HasBorderProperty.PropertyName)
             //  SetBorder(view);
             else if (e.PropertyName == ExtendedTimePicker.NullableTimeProperty.PropertyName || e.PropertyName == TimePicker.FormatProperty.PropertyName)
@@ -49,14 +48,17 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
                 this.SetNullableText(view);
             }
             else if (e.PropertyName == ExtendedTimePicker.PlaceholderProperty.PropertyName)
+            {
                 this.SetPlaceholder(view);
+            }
             else if (e.PropertyName == ExtendedTimePicker.PlaceholderTextColorProperty.PropertyName)
+            {
                 this.SetPlaceholderTextColor(view);
-
+            }
         }
 
         /// <summary>
-        /// Sets the text alignment.
+        ///     Sets the text alignment.
         /// </summary>
         /// <param name="view">The view.</param>
         private void SetTextAlignment(ExtendedTimePicker view)
@@ -76,20 +78,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
         }
 
         /// <summary>
-        /// Sets the font.
-        /// </summary>
-        /// <param name="view">The view.</param>
-        private void SetFont(ExtendedTimePicker view)
-        {
-            if (view.Font != Font.Default)
-            {
-                this.Control.TextSize = view.Font.ToScaledPixel();
-                this.Control.Typeface = view.Font.ToTypeface();
-            }
-        }
-
-        /// <summary>
-        /// Set text based on nullable value
+        ///     Set text based on nullable value
         /// </summary>
         /// <param name="view"></param>
         private void SetNullableText(ExtendedTimePicker view)
@@ -110,7 +99,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
         }
 
         /// <summary>
-        /// Set the placeholder
+        ///     Set the placeholder
         /// </summary>
         /// <param name="view"></param>
         private void SetPlaceholder(ExtendedTimePicker view)
@@ -119,7 +108,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
         }
 
         /// <summary>
-        /// Sets the color of the placeholder text.
+        ///     Sets the color of the placeholder text.
         /// </summary>
         /// <param name="view">The view.</param>
         private void SetPlaceholderTextColor(ExtendedTimePicker view)
