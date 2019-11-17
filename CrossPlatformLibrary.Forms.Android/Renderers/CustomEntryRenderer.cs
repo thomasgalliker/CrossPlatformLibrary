@@ -13,6 +13,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
     public class CustomEntryRenderer : EntryRenderer
     {
         private Drawable originalBackground = null;
+        private Thickness? originalPadding;
 
         public CustomEntryRenderer(Context context) : base(context)
         {
@@ -32,16 +33,9 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
             {
                 if (this.Element is CustomEntry customEntry)
                 {
-                    this.UpdatePadding(customEntry);
                     this.UpdateBorder(customEntry);
                 }
             }
-        }
-
-        private void UpdatePadding(CustomEntry customEntry)
-        {
-            var padding = customEntry.Padding;
-            this.Control.SetPadding((int)padding.Left, (int)padding.Top, (int)padding.Right, (int)padding.Bottom);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -50,11 +44,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
             if (this.Element is CustomEntry customEntry)
             {
-                if (e.PropertyName == CustomEntry.PaddingProperty.PropertyName)
-                {
-                    this.UpdatePadding(customEntry);
-                }
-                else if (e.PropertyName == CustomEntry.HideBorderProperty.PropertyName)
+                if (e.PropertyName == CustomEntry.HideBorderProperty.PropertyName)
                 {
                     this.UpdateBorder(customEntry);
                 }
@@ -65,11 +55,24 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
         {
             if (customEntry.HideBorder)
             {
+                this.originalPadding = new Thickness(left: this.Control.PaddingLeft, top: this.Control.PaddingTop, right: this.Control.PaddingRight, bottom: this.Control.PaddingBottom);
+                this.Control.SetPadding(0, 0, 0, 0);
+
                 this.originalBackground = this.Control.Background;
                 this.Control.Background = null;
             }
             else
             {
+                if (this.originalPadding != null)
+                {
+                    var p = this.originalPadding.Value;
+                    var left = (int)p.Left;
+                    var top = (int)p.Top;
+                    var right = (int)p.Right;
+                    var bottom = (int)p.Bottom;
+                    this.Control.SetPadding(left, top, right, bottom);
+                }
+
                 if (this.originalBackground != null)
                 {
                     this.Control.Background = this.originalBackground;
