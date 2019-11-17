@@ -8,8 +8,7 @@
     x:Name="Control"
     BackgroundColor="Transparent"
     HorizontalOptions="FillAndExpand"
-    MinimumHeightRequest="48"
-    VerticalOptions="FillAndExpand">
+    VerticalOptions="StartAndExpand">
 
     <Grid.Margin>
         <OnPlatform x:TypeArguments="Thickness">

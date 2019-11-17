@@ -191,6 +191,16 @@
                         <StackLayout IsVisible="{Binding IsNotBusy}">
                             <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomLabel--&gt;" />
+                                <Label Text="Label" />
+                                <controls:CustomLabel Text="CustomLabel" />
+                                <controls:CustomLabel
+                                    HorizontalOptions="Start"
+                                    JustifyText="True"
+                                    LineBreakMode="WordWrap"
+                                    Text="CustomLabel with JustifyText=&quot;True&quot;: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam."
+                                    VerticalOptions="Start" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableLabel--&gt;" />
                                 <controls:ValidatableLabel
                                     BackgroundColor="Transparent"
@@ -198,10 +208,8 @@
                                     Placeholder="ValidatableLabel1"
                                     Text="ValidatableLabel without Style" />
 
-                                <Grid>
+                                <controls:GridZero>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
@@ -220,26 +228,59 @@
                                         Grid.Row="0"
                                         Grid.Column="1"
                                         BackgroundColor="LightGoldenrodYellow"
-                                        IsReadonly="{Binding IsToggled, Mode=OneWay}"
+                                        IsReadonly="True"
                                         Placeholder="ValidatableEntry IsReadonly=True"
                                         Text="ValidatableEntry IsReadonly=True" />
-                                    <controls:ValidatableLabel
-                                        Grid.Row="1"
+                                </controls:GridZero>
+
+                                <controls:ValidatableLabel
+                                    LineBreakMode="WordWrap"
+                                    Placeholder="ValidatableLabel3"
+                                    Text="ValidatableLabel with LineBreakMode=WordWrap&#x0a;Multiple lines of text&#x0a;Line 3: More text" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomEntry--&gt;" />
+                                <controls:GridZero>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:CustomEntry
+                                        Grid.Row="0"
                                         Grid.Column="0"
-                                        Grid.ColumnSpan="2"
-                                        BackgroundColor="MistyRose"
-                                        LineBreakMode="WordWrap"
-                                        Placeholder="ValidatableLabel3"
-                                        Text="ValidatableLabel with LineBreakMode=WordWrap&#x0a;Multiple lines of text&#x0a;Line 3: More text" />
-                                    <controls:ValidatableEntry
-                                        x:Name="ValidatableEntryTest"
-                                        Grid.Row="2"
-                                        Grid.Column="0"
-                                        Grid.ColumnSpan="2"
-                                        IsReadonly="{Binding IsToggled, Mode=OneWay}"
-                                        Placeholder="{Binding Text, Source={x:Reference ValidatableEntryTest}}"
-                                        Text="ValidatableEntry's Placeholder sizing test" />
-                                </Grid>
+                                        Text="CustomEntry"
+                                        Placeholder="CustomEntry" />
+                                    <Entry
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Text="Xamarin.Forms.Entry"
+                                        Placeholder="Xamarin.Forms.Entry" />
+                                </controls:GridZero>
+
+                                <controls:CustomEntry
+                                    HideBorder="True"
+                                    Placeholder="CustomEntry with HideBorder=&quot;True&quot;"
+                                    Text=""
+                                    BackgroundColor="LightGoldenrodYellow" />
+                                <controls:CustomEntry
+                                    Keyboard="Numeric"
+                                    Placeholder="CustomEntry with TextContentType=&quot;OneTimeCode&quot;"
+                                    Text=""
+                                    TextContentType="OneTimeCode" />
+                                <controls:CustomEntry
+                                    Placeholder="CustomEntry with TextContentType=&quot;Username&quot;"
+                                    Text=""
+                                    TextContentType="Username" />
+                                <controls:CustomEntry
+                                    Placeholder="CustomEntry with TextContentType=&quot;Password&quot;"
+                                    Text=""
+                                    TextContentType="Password" />
+                                <controls:CustomEntry
+                                    Placeholder="CustomEntry with TextContentType=&quot;NewPassword&quot;"
+                                    Text=""
+                                    TextContentType="NewPassword" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableEntry--&gt;" />
                                 <Grid>
@@ -269,42 +310,11 @@
                                         Placeholder="Xamarin.Forms.Entry"
                                         Text="{Binding UserName, Mode=TwoWay}" />
                                 </Grid>
-
-
-                                <controls:CustomLabel Text="Enter name:" />
-                                <controls:CustomLabel
-                                    HorizontalOptions="Start"
-                                    JustifyText="True"
-                                    LineBreakMode="WordWrap"
-                                    Text="Justified Text in a CustomLabel: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam."
-                                    VerticalOptions="Start" />
-
-                                <controls:CustomEntry
-                                    Padding="0"
-                                    HideBorder="{Binding IsToggled}"
-                                    Text="Android EditText sets Padding=&quot;0&quot;" />
-                                <controls:CustomEntry
-                                    Padding="0"
-                                    HideBorder="True"
-                                    Placeholder="CustomEntry with HideBorder=&quot;True&quot;"
-                                    Text="" />
-                                <controls:CustomEntry
-                                    Keyboard="Numeric"
-                                    Placeholder="CustomEntry with TextContentType=&quot;OneTimeCode&quot;"
-                                    Text=""
-                                    TextContentType="OneTimeCode" />
-                                <controls:CustomEntry
-                                    Placeholder="CustomEntry with TextContentType=&quot;Username&quot;"
-                                    Text=""
-                                    TextContentType="Username" />
-                                <controls:CustomEntry
-                                    Placeholder="CustomEntry with TextContentType=&quot;Password&quot;"
-                                    Text=""
-                                    TextContentType="Password" />
-                                <controls:CustomEntry
-                                    Placeholder="CustomEntry with TextContentType=&quot;NewPassword&quot;"
-                                    Text=""
-                                    TextContentType="NewPassword" />
+                                <controls:ValidatableEntry
+                                    x:Name="ValidatableEntryTest"
+                                    IsReadonly="{Binding IsToggled, Mode=OneWay}"
+                                    Placeholder="{Binding Text, Source={x:Reference ValidatableEntryTest}}"
+                                    Text="ValidatableEntry's Placeholder sizing test" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo SearchBar--&gt;" />
                                 <SearchBar
