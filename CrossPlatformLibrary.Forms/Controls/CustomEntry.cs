@@ -18,6 +18,21 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(HideBorderProperty, value);
         }
 
+        public static readonly BindableProperty RemovePaddingProperty =
+            BindableProperty.Create(
+                nameof(RemovePadding),
+                typeof(bool),
+                typeof(CustomEntry),
+                false,
+                BindingMode.OneWay
+            );
+
+        public bool RemovePadding
+        {
+            get => (bool)this.GetValue(RemovePaddingProperty);
+            set => this.SetValue(RemovePaddingProperty, value);
+        }
+
         public static readonly BindableProperty TextContentTypeProperty =
             BindableProperty.Create(
                 nameof(TextContentType),
