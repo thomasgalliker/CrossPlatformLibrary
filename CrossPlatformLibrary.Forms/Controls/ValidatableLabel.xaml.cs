@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
@@ -60,6 +61,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 LineBreakMode.TailTruncation,
                 BindingMode.OneWay);
 
+        [Obsolete("Use LabelStyle instead")]
         public LineBreakMode LineBreakMode
         {
             get => (LineBreakMode)this.GetValue(LineBreakModeProperty);
