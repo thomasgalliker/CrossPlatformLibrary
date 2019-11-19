@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using CrossPlatformLibrary.Forms.Tools;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
@@ -10,6 +11,9 @@ namespace CrossPlatformLibrary.Forms.Controls
         public ValidatableDatePicker()
         {
             this.InitializeComponent();
+            this.DebugLayoutBounds();
+
+            PlatformHelper.RunOnPlatform((Device.Android, () => { this.DatePicker.HeightRequest = -1; }));
         }
 
         public static readonly BindableProperty PlaceholderProperty =
@@ -19,8 +23,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 typeof(ValidatableDatePicker),
                 null,
                 BindingMode.OneWay,
-                null,
-                OnPlaceholderPropertyChanged);
+                propertyChanged: OnPlaceholderPropertyChanged);
 
         private static void OnPlaceholderPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
@@ -146,6 +149,11 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             get => (Style)this.GetValue(PickerStyleProperty);
             set => this.SetValue(PickerStyleProperty, value);
+        }
+
+        private void AnnotationLabel_OnSizeChanged(object sender, EventArgs e)
+        {
+            this.AnnotationRow.Resize(this.AnnotationLabel, 4);
         }
     }
 }

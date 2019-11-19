@@ -18,6 +18,7 @@
             <converters:ColorInverter x:Key="ColorInverter" />
             <converters:FontElementToStringConverter x:Key="FontElementToStringConverter" />
             <converters:ThicknessToStringConverter x:Key="ThicknessToStringConverter" />
+            <converters:RandomValidationErrorsConverter x:Key="RandomValidationErrorsConverter" />
             <valueConverters:StringIsNotNullOrEmptyConverter x:Key="StringIsNotNullOrEmptyConverter" />
             <valueConverters:DateTimeConverter x:Key="DateTimeConverter" Format="g" />
             <valueConverters:DateTimeConverter x:Key="ShortDateConverter" Format="d" />
@@ -25,6 +26,7 @@
             <!--  Colors  -->
             <Color x:Key="Primary">#ff70fc</Color>
             <Color x:Key="Accent">#73e5c6</Color>
+            <Color x:Key="SemiMagenta">#7Fff3399</Color>
 
             <!--  Styles  -->
             <Style x:Key="DemoLabelStyle" TargetType="Label">
@@ -92,7 +94,6 @@
 
             <themes:CrossPlatformLibraryConfiguration
                 x:Key="SampleApp.Theme"
-                FontConfiguration="{StaticResource FontConfiguration}"
                 ColorConfiguration="{StaticResource ColorConfiguration}"
                 SpacingConfiguration="{StaticResource SpacingConfiguration}" />
 

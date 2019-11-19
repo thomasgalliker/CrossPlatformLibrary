@@ -11,12 +11,6 @@ namespace CrossPlatformLibrary.Forms.Controls
     public class ExtendedTimePicker : TimePicker
     {
         /// <summary>
-        /// The font property
-        /// </summary>
-        public static readonly BindableProperty FontProperty =
-            BindableProperty.Create("Font", typeof(Font), typeof(ExtendedTimePicker), new Font());
-
-        /// <summary>
         /// The NullableTime property
         /// </summary>
         public static readonly BindableProperty NullableTimeProperty =

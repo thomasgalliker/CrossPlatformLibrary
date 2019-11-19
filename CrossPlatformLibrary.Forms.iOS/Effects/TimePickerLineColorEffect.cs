@@ -49,8 +49,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
 
         private void Initialize()
         {
-            var datePicker = this.Element as TimePicker;
-            if (datePicker != null)
+            if (this.Element is TimePicker datePicker)
             {
                 this.Control.Bounds = new CGRect(0, 0, datePicker.Width, datePicker.Height);
             }

@@ -52,7 +52,7 @@
         VerticalTextAlignment="Center" />
 
     <!--  Annotation Text  -->
-    <Label
+    <controls:CustomLabel
         Grid.Row="0"
         BackgroundColor="Transparent"
         InputTransparent="True"
@@ -61,7 +61,7 @@
         Text="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}" />
 
     <!--  Validation Error Text  -->
-    <Label
+    <controls:CustomLabel
         Grid.Row="0"
         Style="{DynamicResource ValidationLabelStyle}"
         Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}" />

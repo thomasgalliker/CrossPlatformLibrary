@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using CoreAnimation;
 using CoreGraphics;
@@ -49,9 +50,10 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
 
         private void Initialize()
         {
-            if (this.Element is Entry entry)
+            if (this.Element is VisualElement visualElement)
             {
-                this.Control.Bounds = new CGRect(0, 0, entry.Width, entry.Height);
+                Debug.WriteLine($"EntryLineColorEffect: Initialize --> Width={visualElement.Width}, Height={visualElement.Height}");
+                this.Control.Bounds = new CGRect(0, 0, visualElement.Width, visualElement.Height);
             }
         }
 
@@ -72,7 +74,9 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
                 this.control.BorderStyle = UITextBorderStyle.None;
             }
 
-            lineLayer.Frame = new CGRect(0f, this.Control.Frame.Height - 13f, this.Control.Bounds.Width, 1f);
+            var lineY = this.Control.Frame.Height * 0.9;
+            lineLayer.Frame = new CGRect(0f, lineY, this.Control.Bounds.Width, 1f);
+            Debug.WriteLine($"EntryLineColorEffect: Control.Frame: H:{this.Control.Bounds.Height} W:{this.Control.Bounds.Width} --> lineLayer.Frame: Y:{lineLayer.Frame.Y}");
             lineLayer.BorderColor = LineColorEffect.GetLineColor(this.Element).ToCGColor();
             this.control.TintColor = this.control.TextColor;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using CoreAnimation;
 using CoreGraphics;
@@ -49,8 +50,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
 
         private void Initialize()
         {
-            var datePicker = this.Element as DatePicker;
-            if (datePicker != null)
+            if (this.Element is DatePicker datePicker)
             {
                 this.Control.Bounds = new CGRect(0, 0, datePicker.Width, datePicker.Height);
             }
@@ -67,15 +67,20 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
 
             if (lineLayer == null)
             {
-                lineLayer = new BorderLineLayer();
-                lineLayer.MasksToBounds = true;
-                lineLayer.BorderWidth = 1.0f;
+                lineLayer = new BorderLineLayer
+                {
+                    MasksToBounds = true, 
+                    BorderWidth = 1.0f
+                };
                 this.control.Layer.AddSublayer(lineLayer);
                 this.control.BorderStyle = UITextBorderStyle.None;
             }
 
-            lineLayer.Frame = new CGRect(0f, this.Control.Frame.Height - 13f, this.Control.Bounds.Width, 1f);
+            var lineY = this.Control.Frame.Height * 0.9;
+            lineLayer.Frame = new CGRect(0f, lineY, this.Control.Bounds.Width, 1f);
+            Debug.WriteLine($"DatePickerLineColorEffect: Control.Frame: H:{this.Control.Bounds.Height} W:{this.Control.Bounds.Width} --> lineLayer.Frame: Y:{lineLayer.Frame.Y}");
             lineLayer.BorderColor = LineColorEffect.GetLineColor(this.Element).ToCGColor();
+            this.control.TintColor = this.control.TextColor;
         }
 
         private class BorderLineLayer : CALayer

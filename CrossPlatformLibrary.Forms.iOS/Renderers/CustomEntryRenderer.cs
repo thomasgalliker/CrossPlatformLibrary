@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using CrossPlatformLibrary.Forms.Controls;
 using CrossPlatformLibrary.Forms.iOS.Renderers;
@@ -24,6 +25,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             var uiTextField = this.Control;
             if (uiTextField != null)
             {
+                //uiTextField.SizeToFit();
                 uiTextField.SpellCheckingType = UITextSpellCheckingType.No; // No Spellchecking
                 uiTextField.AutocorrectionType = UITextAutocorrectionType.No; // No Autocorrection
 
@@ -32,6 +34,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                     this.UpdateBorder(customEntry);
                     this.AddRemoveReturnKeyToNumericInput(customEntry);
                     this.UpdateTextContentType(customEntry);
+                    this.SizeToFit(customEntry);
                 }
             }
         }
@@ -40,20 +43,43 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (this.Element is CustomEntry customEntry)
+
+            if (e.PropertyName == CustomEntry.HideBorderProperty.PropertyName)
             {
-                if (e.PropertyName == CustomEntry.HideBorderProperty.PropertyName)
+                if (this.Element is CustomEntry customEntry)
                 {
                     this.UpdateBorder(customEntry);
                 }
-                else if (e.PropertyName == nameof(Entry.Keyboard))
+            }
+            else if (e.PropertyName == nameof(Entry.Keyboard))
+            {
+                if (this.Element is CustomEntry customEntry)
                 {
                     this.AddRemoveReturnKeyToNumericInput(customEntry);
                 }
-                else if (e.PropertyName == nameof(CustomEntry.TextContentType))
+            }
+            else if (e.PropertyName == nameof(CustomEntry.TextContentType))
+            {
+                if (this.Element is CustomEntry customEntry)
                 {
                     this.UpdateTextContentType(customEntry);
                 }
+            }
+            else if (e.PropertyName == nameof(CustomEntry.HeightRequest))
+            {
+                if (this.Element is CustomEntry customEntry)
+                {
+                    this.SizeToFit(customEntry);
+                }
+            }
+        }
+
+        private void SizeToFit(CustomEntry customEntry)
+        {
+            Debug.WriteLine($"CustomEntryRenderer: SizeToFit --> HeightRequest={customEntry.HeightRequest}");
+            if (customEntry.HeightRequest < 0)
+            {
+                //this.Control.SizeToFit();
             }
         }
 

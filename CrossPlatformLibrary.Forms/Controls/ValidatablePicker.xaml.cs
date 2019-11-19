@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
@@ -15,6 +17,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         public ValidatablePicker()
         {
             this.InitializeComponent();
+            this.DebugLayoutBounds();
         }
 
         public static readonly BindableProperty PlaceholderProperty =
@@ -244,6 +247,11 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             get => (IEnumerable<string>)this.GetValue(ValidationErrorsProperty);
             set => this.SetValue(ValidationErrorsProperty, value);
+        }
+
+        private void AnnotationLabel_OnSizeChanged(object sender, EventArgs e)
+        {
+            this.AnnotationRow.Resize(this.AnnotationLabel, 10);
         }
     }
 }

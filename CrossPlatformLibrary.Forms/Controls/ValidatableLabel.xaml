@@ -5,43 +5,34 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
-    BackgroundColor="Transparent"
+    BackgroundColor="{DynamicResource Theme.Color.SemiTransparentBright}"
     HorizontalOptions="FillAndExpand"
     VerticalOptions="StartAndExpand">
-    <Grid.Margin>
-        <OnPlatform x:TypeArguments="Thickness">
-            <On Platform="Android" Value="-4,0,-4,0" />
-            <On Platform="iOS" Value="0,0,0,0" />
-        </OnPlatform>
-    </Grid.Margin>
 
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
+        <RowDefinition Height="8" />
         <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
 
     <!--  Annotation Text  -->
-    <Label
+    <controls:CustomLabel
         Grid.Row="0"
+        Grid.RowSpan="2"
         BackgroundColor="Transparent"
         InputTransparent="True"
+        RemovePadding="True"
         IsVisible="{Binding Text, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
         Style="{DynamicResource AnnotationEntryLabelStyle}"
         Text="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}" />
 
     <controls:CustomLabel
         Grid.Row="1"
+        Grid.RowSpan="2"
         BackgroundColor="Transparent"
+        RemovePadding="True"
         LineBreakMode="{Binding LineBreakMode, Source={x:Reference Control}, Mode=OneWay}"
         Style="{Binding LabelStyle, Source={x:Reference Control}, Mode=OneWay}"
         Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}"
-        VerticalOptions="StartAndExpand">
-        <controls:CustomLabel.Margin>
-            <OnPlatform
-                x:TypeArguments="Thickness"
-                Android="4, -4, 0, 4"
-                WinPhone="0, 0, 0, 0"
-                iOS="0, 0, 0, 0" />
-        </controls:CustomLabel.Margin>
-    </controls:CustomLabel>
+        VerticalOptions="StartAndExpand" />
 </controls:GridZero>

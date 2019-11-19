@@ -260,8 +260,32 @@
                                 </controls:GridZero>
 
                                 <controls:CustomEntry
+                                    effects:LineColorEffect.ApplyLineColor="True"
+                                    effects:LineColorEffect.LineColor="Yellow"
+                                    Placeholder="CustomEntry with LineColorEffect"
+                                    Text=""
+                                    BackgroundColor="LightGreen" />
+
+                                <controls:CustomEntry
+                                    Margin="0"
+                                    effects:LineColorEffect.ApplyLineColor="True"
+                                    effects:LineColorEffect.LineColor="Magenta"
+                                    Placeholder="CustomEntry with LineColorEffect"
+                                    Text=""
+                                    BackgroundColor="LightSalmon"
+                                    VerticalOptions="StartAndExpand"
+                                    HorizontalOptions="FillAndExpand"
+                                    HorizontalTextAlignment="Start"
+                                    Style="{DynamicResource EntryStyle}" />
+
+                                <controls:CustomEntry
                                     HideBorder="True"
                                     Placeholder="CustomEntry with HideBorder=&quot;True&quot;"
+                                    Text=""
+                                    BackgroundColor="LightGoldenrodYellow" />
+                                <controls:CustomEntry
+                                    RemovePadding="True"
+                                    Placeholder="CustomEntry with RemovePadding=&quot;True&quot;"
                                     Text=""
                                     BackgroundColor="LightGoldenrodYellow" />
                                 <controls:CustomEntry
@@ -311,10 +335,15 @@
                                         Text="{Binding UserName, Mode=TwoWay}" />
                                 </Grid>
                                 <controls:ValidatableEntry
-                                    x:Name="ValidatableEntryTest"
+                                    x:Name="ValidatableEntryTest1"
                                     IsReadonly="{Binding IsToggled, Mode=OneWay}"
-                                    Placeholder="{Binding Text, Source={x:Reference ValidatableEntryTest}}"
+                                    Placeholder="{Binding Text, Source={x:Reference ValidatableEntryTest1}}"
                                     Text="ValidatableEntry's Placeholder sizing test" />
+                                <controls:ValidatableEntry
+                                    x:Name="ValidatableEntryTest2"
+                                    Placeholder="ValidatableEntry with ValidationErrors"
+                                    Text="ValidatableEntry with ValidationErrors"
+                                    ValidationErrors="{Binding Source={x:Reference ValidatableEntryTest2}, Path=Text, Converter={StaticResource RandomValidationErrorsConverter}}" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo SearchBar--&gt;" />
                                 <SearchBar
@@ -351,6 +380,7 @@
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatablePicker--&gt;" />
                                 <controls:ValidatablePicker
+                                    x:Name="ValidatablePickerTest1"
                                     DisplayMemberPath="Name"
                                     IsReadonly="{Binding IsToggled, Mode=OneWay}"
                                     ItemsSource="{Binding Countries}"
@@ -358,15 +388,38 @@
                                     Placeholder="ValidatablePicker by Country.Name"
                                     SelectedItem="{Binding Country, Mode=TwoWay}"
                                     ValidationErrors="{Binding Validation.Errors[CountrySearchText]}" />
+
+                                <controls:ValidatablePicker
+                                    x:Name="ValidatablePickerTest2"
+                                    ItemsSource="{Binding Countries}"
+                                    Placeholder="ValidatablePicker with ValidationErrors"
+                                    SelectedItem="{Binding Country, Mode=TwoWay}"
+                                    ValidationErrors="{Binding Source={x:Reference ValidatablePickerTest2}, Path=SelectedItem, Converter={StaticResource RandomValidationErrorsConverter}}" />
+
                                 <Button Command="{Binding SetFantasyLandCommand}" Text="Select non-existing 'Fantasy Land'" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableDatePicker--&gt;" />
                                 <controls:ValidatableDatePicker
                                     Date="{Binding Birthdate, Mode=TwoWay}"
                                     IsReadonly="{Binding IsToggled, Mode=OneWay}"
-                                    Placeholder="Birthdate with ValidatableDatePicker"
+                                    Placeholder="ValidatableDatePicker"
                                     ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
                                     ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
+
+                                <controls:ValidatableDatePicker
+                                    Date="{Binding Birthdate, Mode=TwoWay}"
+                                    IsReadonly="True"
+                                    Placeholder="ValidatableDatePicker IsReadonly=&quot;True&quot;"
+                                    ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
+                                    ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
+
+                                <controls:ValidatableDatePicker
+                                    x:Name="ValidatableDatePickerTest2"
+                                    Date="{Binding Birthdate, Mode=TwoWay}"
+                                    IsReadonly="{Binding IsToggled, Mode=OneWay}"
+                                    Placeholder="ValidatableDatePicker with ValidationErrors"
+                                    ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
+                                    ValidationErrors="{Binding Source={x:Reference ValidatableDatePickerTest2}, Path=Date, Converter={StaticResource RandomValidationErrorsConverter}}" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableDateTimePicker--&gt;" />
                                 <controls:ValidatableDateTimePicker

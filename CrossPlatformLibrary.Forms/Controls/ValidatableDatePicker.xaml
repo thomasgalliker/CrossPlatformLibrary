@@ -6,60 +6,71 @@
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
-    BackgroundColor="Transparent"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="StartAndExpand">
+    VerticalOptions="StartAndExpand"
+    IsClippedToBounds="True">
 
-    <Grid.Margin>
-        <OnPlatform x:TypeArguments="Thickness">
-            <On Platform="Android" Value="-4,0,-4,0" />
-            <On Platform="iOS" Value="0,0,0,0" />
-        </OnPlatform>
-    </Grid.Margin>
+    <Grid.RowDefinitions>
+        <RowDefinition x:Name="AnnotationRow" Height="10" />
+        <RowDefinition x:Name="ContentRow" Height="Auto" />
+        <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
 
-    <Grid
+    <!--  Annotation Text  -->
+    <controls:CustomLabel
+        x:Name="AnnotationLabel"
         Grid.Row="0"
-        Margin="0"
-        Padding="0"
-        ColumnSpacing="5"
-        HeightRequest="48"
-        HorizontalOptions="FillAndExpand"
-        RowSpacing="0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        Grid.RowSpan="2"
+        x:FieldModifier="internal"
+        InputTransparent="True"
+        RemovePadding="True"
+        Style="{DynamicResource AnnotationEntryLabelStyle}"
+        Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}"
+        SizeChanged="AnnotationLabel_OnSizeChanged">
+        <Label.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="Android" Value="0,0,0,0" />
+                <On Platform="iOS" Value="0,-2,0,-2" />
+            </OnPlatform>
+        </Label.Margin>
+    </controls:CustomLabel>
+
+    <controls:GridZero Grid.Row="1">
         <controls:ExtendedDatePicker
-            Grid.Column="0"
+            x:Name="DatePicker"
+            x:FieldModifier="internal"
             effects:LineColorEffect.ApplyLineColor="True"
             effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
-            Format="{Binding Date, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource NullableDateTimeToFormatConverter}}"
+            VerticalOptions="StartAndExpand"
             HorizontalOptions="FillAndExpand"
+            Format="{Binding Date, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource NullableDateTimeToFormatConverter}}"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
             NullableDate="{Binding Date, Source={x:Reference Control}, Mode=TwoWay}"
             Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
             Style="{Binding PickerStyle, Source={x:Reference Control}, Mode=OneWay}"
-            ValidityRange="{Binding ValidityRange, Source={x:Reference Control}, Mode=OneWay}" />
-    </Grid>
+            ValidityRange="{Binding ValidityRange, Source={x:Reference Control}, Mode=OneWay}">
+            <DatePicker.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android" Value="-4,0,-4,0" />
+                    <On Platform="iOS" Value="0,0,0,0" />
+                </OnPlatform>
+            </DatePicker.Margin>
+        </controls:ExtendedDatePicker>
 
-    <!--  Readonly Text  -->
-    <Label
-        Grid.Row="0"
-        HorizontalOptions="StartAndExpand"
-        IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
-        Style="{DynamicResource EntryLabelStyle}"
-        Text="{Binding ReadonlyText, Source={x:Reference Control}, Mode=OneWay}"
-        VerticalOptions="Center" />
-
-    <!--  Annotation Text  -->
-    <Label
-        Grid.Row="0"
-        InputTransparent="True"
-        Style="{DynamicResource AnnotationEntryLabelStyle}"
-        Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}" />
+        <!--  Readonly Text  -->
+        <controls:CustomLabel
+            Margin="0"
+            IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
+            Style="{DynamicResource EntryLabelStyle}"
+            RemovePadding="True"
+            Text="{Binding ReadonlyText, Source={x:Reference Control}, Mode=OneWay}" />
+    </controls:GridZero>
 
     <!--  Validation Error Text  -->
-    <Label
-        Grid.Row="0"
+    <controls:CustomLabel
+        x:Name="ErrorLabel"
+        Grid.Row="2"
         Style="{DynamicResource ValidationLabelStyle}"
+        IsVisible="{Binding Text, Source={x:Reference ErrorLabel}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
         Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}" />
 </controls:GridZero>
