@@ -25,7 +25,6 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             var uiTextField = this.Control;
             if (uiTextField != null)
             {
-                //uiTextField.SizeToFit();
                 uiTextField.SpellCheckingType = UITextSpellCheckingType.No; // No Spellchecking
                 uiTextField.AutocorrectionType = UITextAutocorrectionType.No; // No Autocorrection
 
@@ -34,7 +33,6 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                     this.UpdateBorder(customEntry);
                     this.AddRemoveReturnKeyToNumericInput(customEntry);
                     this.UpdateTextContentType(customEntry);
-                    this.SizeToFit(customEntry);
                 }
             }
         }
@@ -64,22 +62,6 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                 {
                     this.UpdateTextContentType(customEntry);
                 }
-            }
-            else if (e.PropertyName == nameof(CustomEntry.HeightRequest))
-            {
-                if (this.Element is CustomEntry customEntry)
-                {
-                    this.SizeToFit(customEntry);
-                }
-            }
-        }
-
-        private void SizeToFit(CustomEntry customEntry)
-        {
-            Debug.WriteLine($"CustomEntryRenderer: SizeToFit --> HeightRequest={customEntry.HeightRequest}");
-            if (customEntry.HeightRequest < 0)
-            {
-                //this.Control.SizeToFit();
             }
         }
 
