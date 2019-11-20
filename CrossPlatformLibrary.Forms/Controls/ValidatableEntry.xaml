@@ -11,8 +11,8 @@
     IsClippedToBounds="True">
 
     <Grid.RowDefinitions>
-        <RowDefinition x:Name="AnnotationRow" Height="10" />
-        <RowDefinition x:Name="ContentRow" Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
         <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
 
@@ -20,22 +20,14 @@
     <controls:CustomLabel
         x:Name="AnnotationLabel"
         Grid.Row="0"
-        Grid.RowSpan="2"
+        Margin="0"
         x:FieldModifier="internal"
         InputTransparent="True"
         RemovePadding="True"
         Style="{DynamicResource AnnotationEntryLabelStyle}"
-        Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}"
-        SizeChanged="AnnotationLabel_OnSizeChanged">
-        <Label.Margin>
-            <OnPlatform x:TypeArguments="Thickness">
-                <On Platform="Android" Value="0,0,0,0" />
-                <On Platform="iOS" Value="0,-2,0,-2" />
-            </OnPlatform>
-        </Label.Margin>
-    </controls:CustomLabel>
+        Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}" />
 
-    <controls:GridZero Grid.Row="1">
+    <controls:GridZero Grid.Row="1" IsClippedToBounds="True">
         <controls:CustomEntry
             x:Name="Entry"
             x:FieldModifier="internal"
@@ -55,8 +47,8 @@
             TextContentType="{Binding TextContentType, Source={x:Reference Control}, Mode=OneWay}">
             <Entry.Margin>
                 <OnPlatform x:TypeArguments="Thickness">
-                    <On Platform="Android" Value="-4,0,-4,0" />
-                    <On Platform="iOS" Value="0,0,0,0" />
+                    <On Platform="Android" Value="-4,-10,-4,-6" />
+                    <On Platform="iOS" Value="0,-10,0,-6" />
                 </OnPlatform>
             </Entry.Margin>
         </controls:CustomEntry>
@@ -80,7 +72,9 @@
 
         <!--  Readonly Text  -->
         <controls:CustomLabel
+            x:Name="ReadonlyLabel"
             Margin="0"
+            x:FieldModifier="internal"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
             Style="{DynamicResource EntryLabelStyle}"
             RemovePadding="True"

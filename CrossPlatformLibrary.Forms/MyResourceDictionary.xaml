@@ -173,6 +173,8 @@
     </Style>
 
     <!--  Validatable Controls  -->
+    <x:Double x:Key="MinimumHeight.Input">48</x:Double>
+
     <Style TargetType="controls:ValidatableLabel">
         <Setter Property="LabelStyle" Value="{DynamicResource EntryLabelStyle}" />
     </Style>
@@ -289,6 +291,7 @@
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="controls:MinimumHeight.Value" Value="{StaticResource MinimumHeight.Input}" />
     </Style>
 
     <Style BasedOn="{StaticResource EntryStyle}" TargetType="Entry" />
@@ -304,6 +307,7 @@
         <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="controls:MinimumHeight.Value" Value="{StaticResource MinimumHeight.Input}" />
     </Style>
 
     <Style BasedOn="{StaticResource EditorStyle}" TargetType="Editor" />
@@ -320,6 +324,7 @@
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="controls:MinimumHeight.Value" Value="{StaticResource MinimumHeight.Input}" />
     </Style>
 
     <Style BasedOn="{StaticResource PickerStyle}" TargetType="Picker" />
@@ -327,10 +332,7 @@
     <Style
         x:Key="BindablePickerStyle"
         BasedOn="{StaticResource PickerStyle}"
-        TargetType="controls:BindablePicker">
-        <!--<Setter Property="PlaceholderTextColor" Value="{DynamicResource Theme.Color.TextColorBright}" />-->
-    </Style>
-
+        TargetType="controls:BindablePicker" />
     <Style BasedOn="{StaticResource BindablePickerStyle}" TargetType="controls:BindablePicker" />
 
 
@@ -339,6 +341,7 @@
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
         <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
+        <Setter Property="controls:MinimumHeight.Value" Value="{StaticResource MinimumHeight.Input}" />
     </Style>
 
     <Style BasedOn="{StaticResource DatePickerStyle}" TargetType="DatePicker" />
@@ -357,6 +360,7 @@
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
         <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
+        <Setter Property="controls:MinimumHeight.Value" Value="{StaticResource MinimumHeight.Input}" />
     </Style>
 
     <Style BasedOn="{StaticResource TimePickerStyle}" TargetType="TimePicker" />
@@ -376,6 +380,7 @@
         <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
         <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
+        <Setter Property="controls:MinimumHeight.Value" Value="{StaticResource MinimumHeight.Input}" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">

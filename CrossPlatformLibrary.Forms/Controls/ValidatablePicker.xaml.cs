@@ -24,7 +24,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             BindableProperty.Create(
                 nameof(Placeholder),
                 typeof(string),
-                typeof(ValidatablePicker), 
+                typeof(ValidatablePicker),
                 null,
                 BindingMode.OneWay,
                 null,
@@ -247,11 +247,6 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             get => (IEnumerable<string>)this.GetValue(ValidationErrorsProperty);
             set => this.SetValue(ValidationErrorsProperty, value);
-        }
-
-        private void AnnotationLabel_OnSizeChanged(object sender, EventArgs e)
-        {
-            this.AnnotationRow.Resize(this.AnnotationLabel, 10);
         }
     }
 }

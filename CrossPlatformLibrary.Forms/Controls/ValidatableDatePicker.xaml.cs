@@ -150,10 +150,5 @@ namespace CrossPlatformLibrary.Forms.Controls
             get => (Style)this.GetValue(PickerStyleProperty);
             set => this.SetValue(PickerStyleProperty, value);
         }
-
-        private void AnnotationLabel_OnSizeChanged(object sender, EventArgs e)
-        {
-            this.AnnotationRow.Resize(this.AnnotationLabel, 4);
-        }
     }
 }

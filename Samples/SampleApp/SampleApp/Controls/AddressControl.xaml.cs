@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using System.Diagnostics;
 using Xamarin.Forms.Xaml;
 
 namespace SampleApp.Controls
@@ -11,8 +12,16 @@ namespace SampleApp.Controls
             this.InitializeComponent();
         }
 
-        private void ValidatableEntry_OnUnfocused(object sender, FocusEventArgs e)
+        private void AddressControl_OnSizeChanged(object sender, EventArgs e)
         {
+            var x = (AddressControl)sender;
+            Debug.WriteLine($"AddressControl_OnSizeChanged: H:{x.Height}, W:{x.Width}");
+        }
+
+        private void AddressControl_OnLayoutChanged(object sender, EventArgs e)
+        {
+            var x = (AddressControl)sender;
+            Debug.WriteLine($"AddressControl_OnLayoutChanged: H:{x.Height}, W:{x.Width}");
         }
     }
 }

@@ -3,14 +3,14 @@ using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
-    internal static class DebugHelper
+    public static class DebugHelper
     {
-        public static bool Enabled = false;
+        public static bool ShowLayoutBounds = false;
 
         [Conditional("DEBUG")]
         internal static void DebugLayoutBounds(this ValidatableEntry element, bool debug = true)
         {
-            if (!Enabled || !debug)
+            if (!ShowLayoutBounds || !debug)
             {
                 return;
             }
@@ -18,12 +18,14 @@ namespace CrossPlatformLibrary.Forms.Controls
             element.SetDynamicResource(VisualElement.BackgroundColorProperty, "Theme.Color.SemiTransparentBright");
             element.AnnotationLabel.SetValue(VisualElement.BackgroundColorProperty, Color.Yellow);
             element.Entry.SetDynamicResource(VisualElement.BackgroundColorProperty, "Theme.Color.SemiTransparentDark");
+            element.ReadonlyLabel.SetDynamicResource(VisualElement.BackgroundColorProperty, "Theme.Color.SemiTransparentDark");
+            //element.ErrorLabel.SetDynamicResource(VisualElement.BackgroundColorProperty, "Theme.Color.SemiTransparentDark");
         }
 
         [Conditional("DEBUG")]
         internal static void DebugLayoutBounds(this ValidatablePicker element, bool debug = true)
         {
-            if (!Enabled || !debug)
+            if (!ShowLayoutBounds || !debug)
             {
                 return;
             }
@@ -31,12 +33,13 @@ namespace CrossPlatformLibrary.Forms.Controls
             element.SetDynamicResource(VisualElement.BackgroundColorProperty, "Theme.Color.SemiTransparentBright");
             element.AnnotationLabel.SetValue(VisualElement.BackgroundColorProperty, Color.Yellow);
             element.Picker.SetDynamicResource(VisualElement.BackgroundColorProperty, "Theme.Color.SemiTransparentDark");
+            element.ReadonlyLabel.SetDynamicResource(VisualElement.BackgroundColorProperty, "Theme.Color.SemiTransparentDark");
         }
 
         [Conditional("DEBUG")]
         internal static void DebugLayoutBounds(this ValidatableDatePicker element, bool debug = true)
         {
-            if (!Enabled || !debug)
+            if (!ShowLayoutBounds || !debug)
             {
                 return;
             }
@@ -44,12 +47,13 @@ namespace CrossPlatformLibrary.Forms.Controls
             element.SetDynamicResource(VisualElement.BackgroundColorProperty, "Theme.Color.SemiTransparentBright");
             element.AnnotationLabel.SetValue(VisualElement.BackgroundColorProperty, Color.Yellow);
             element.DatePicker.SetDynamicResource(VisualElement.BackgroundColorProperty, "Theme.Color.SemiTransparentDark");
+            element.ReadonlyLabel.SetDynamicResource(VisualElement.BackgroundColorProperty, "Theme.Color.SemiTransparentDark");
         }
 
         [Conditional("DEBUG")]
         internal static void DebugLayoutBounds(this ValidatableDateTimePicker element, bool debug = true)
         {
-            if (!Enabled || !debug)
+            if (!ShowLayoutBounds || !debug)
             {
                 return;
             }

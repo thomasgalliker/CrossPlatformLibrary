@@ -251,11 +251,6 @@ namespace CrossPlatformLibrary.Forms.Controls
             add => this.Entry.TextChanged += value;
             remove => this.Entry.TextChanged -= value;
         }
-
-        private void AnnotationLabel_OnSizeChanged(object sender, EventArgs e)
-        {
-            this.AnnotationRow.Resize(this.AnnotationLabel, 0);
-        }
     }
 }
 

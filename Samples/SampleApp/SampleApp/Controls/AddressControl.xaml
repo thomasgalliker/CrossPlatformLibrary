@@ -6,7 +6,7 @@
     xmlns:behaviors="clr-namespace:CrossPlatformLibrary.Forms.Behaviors;assembly=CrossPlatformLibrary.Forms"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
-    x:Name="Control">
+    x:Name="Control" SizeChanged="AddressControl_OnSizeChanged" LayoutChanged="AddressControl_OnLayoutChanged">
 
     <controls:StackLayoutZero>
         <controls:CardView>
@@ -41,7 +41,6 @@
                         MaxLength="4"
                         Placeholder="{localization:Translate UserAddressPostalCodeLabelText}"
                         Text="{Binding PostalCode, Mode=TwoWay}"
-                        Unfocused="ValidatableEntry_OnUnfocused"
                         ValidationErrors="{Binding Validation.Errors[PostalCode]}">
                         <controls:ValidatableEntry.Behaviors>
                             <behaviors:EventToCommandBehavior Command="{Binding PostalCodeUnfocusedCommand}" EventName="Unfocused" />
