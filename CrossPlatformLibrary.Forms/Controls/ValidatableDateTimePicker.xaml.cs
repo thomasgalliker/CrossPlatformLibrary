@@ -165,7 +165,6 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         private void AnnotationLabel_OnSizeChanged(object sender, EventArgs e)
         {
-            this.AnnotationRow.Resize(this.AnnotationLabel, 4);
         }
     }
 }
