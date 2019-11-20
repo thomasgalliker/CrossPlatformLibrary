@@ -35,8 +35,6 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                 this.SetBorder(view);
                 this.SetNullableText(view);
                 this.SetPlaceholder(view);
-
-                this.ResizeHeight();
             }
         }
 
@@ -66,8 +64,6 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             {
                 this.SetPlaceholder(view);
             }
-
-            this.ResizeHeight();
         }
 
         /// <summary>
@@ -114,23 +110,6 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             {
                 this.Control.Text = string.Empty;
             }
-        }
-
-        /// <summary>
-        ///     Resizes the height.
-        /// </summary>
-        private void ResizeHeight()
-        {
-            if (this.Element.HeightRequest >= 0)
-            {
-                return;
-            }
-
-            var height = Math.Max(this.Bounds.Height, new UITextField { Font = this.Control.Font }.IntrinsicContentSize.Height) * 2;
-
-            this.Control.Frame = new CGRect(0.0f, 0.0f, (nfloat)this.Element.Width, (nfloat)height);
-
-            this.Element.HeightRequest = height;
         }
 
         /// <summary>
