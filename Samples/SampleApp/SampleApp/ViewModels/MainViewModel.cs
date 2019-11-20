@@ -153,8 +153,14 @@ namespace SampleApp.ViewModels
             {
                 var filteredViewModels = this.Countries.Where(c => c.Name != null && c.Name.StartsWith(searchText, StringComparison.InvariantCultureIgnoreCase))
                     .OrderBy(c => c.Name)
-                    .Take(10);
+                    .Take(10)
+                    .ToList();
                 this.SuggestedCountries.AddRange(filteredViewModels);
+
+                if(!filteredViewModels.Any())
+                {
+                    this.Validation.AddErrorMessageForProperty("CountrySearchText", "No results found!");
+                }
             }
         }
 

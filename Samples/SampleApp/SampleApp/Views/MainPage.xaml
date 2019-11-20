@@ -381,7 +381,7 @@
                                     x:Name="AutoCompleteView"
                                     DisplayMemberPath="Name"
                                     IsReadonly="{Binding IsToggled, Mode=OneWay}"
-                                    Placeholder="AutoComplete by Country.Name"
+                                    Placeholder="ValidatableAutoCompleteView"
                                     SearchCommand="{Binding AutoCompleteSearchCommand}"
                                     SearchCommandDelay="{x:Static local:App.SearchCommandDelay}"
                                     SelectedItem="{Binding Country, Mode=TwoWay}"
