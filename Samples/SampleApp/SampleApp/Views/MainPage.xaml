@@ -391,6 +391,27 @@
                                     TextChanged="AutoCompleteView_OnTextChanged"
                                     ValidationErrors="{Binding Validation.Errors[CountrySearchText]}" />
 
+                                <controls:GridZero>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:ValidatableAutoCompleteView
+                                        DisplayMemberPath="Name"
+                                        BackgroundColor="Aquamarine"
+                                        Placeholder="ValidatableAutoCompleteView"
+                                        Text="ValidatableAutoCompleteView" />
+                                    <controls:ValidatableEntry
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        BackgroundColor="LightGoldenrodYellow"
+                                        Placeholder="ValidatableEntry"
+                                        Text="ValidatableEntry" />
+                                </controls:GridZero>
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatablePicker--&gt;" />
                                 <controls:ValidatablePicker
                                     x:Name="ValidatablePickerTest1"

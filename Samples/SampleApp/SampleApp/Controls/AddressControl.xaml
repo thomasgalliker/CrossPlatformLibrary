@@ -6,7 +6,9 @@
     xmlns:behaviors="clr-namespace:CrossPlatformLibrary.Forms.Behaviors;assembly=CrossPlatformLibrary.Forms"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
-    x:Name="Control" SizeChanged="AddressControl_OnSizeChanged" LayoutChanged="AddressControl_OnLayoutChanged">
+    x:Name="Control"
+    SizeChanged="AddressControl_OnSizeChanged"
+    LayoutChanged="AddressControl_OnLayoutChanged">
 
     <controls:StackLayoutZero>
         <controls:CardView>
