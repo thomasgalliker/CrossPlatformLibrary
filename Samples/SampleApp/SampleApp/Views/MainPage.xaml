@@ -204,12 +204,12 @@
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableLabel--&gt;" />
                                 <controls:ValidatableLabel
                                     BackgroundColor="Transparent"
-                                    LineBreakMode="TailTruncation"
-                                    Placeholder="ValidatableLabel1"
-                                    Text="ValidatableLabel without Style" />
+                                    Placeholder="ValidatableLabel Placeholder"
+                                    Text="ValidatableLabel Text" />
 
                                 <controls:GridZero>
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
@@ -220,23 +220,39 @@
                                         Grid.Row="0"
                                         Grid.Column="0"
                                         BackgroundColor="Aquamarine"
-                                        LabelStyle="{DynamicResource EntryLabelStyle}"
-                                        LineBreakMode="NoWrap"
-                                        Placeholder="ValidatableLabel2"
-                                        Text="ValidatableLabel with Style" />
+                                        Placeholder="ValidatableLabel"
+                                        Text="ValidatableLabel" />
                                     <controls:ValidatableEntry
                                         Grid.Row="0"
                                         Grid.Column="1"
                                         BackgroundColor="LightGoldenrodYellow"
+                                        Placeholder="ValidatableEntry"
+                                        Text="ValidatableEntry" />
+                                    <controls:ValidatableLabel
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        BackgroundColor="Aquamarine"
+                                        Placeholder="ValidatableLabel"
+                                        Text="ValidatableLabel" />
+                                    <controls:ValidatableEntry
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        BackgroundColor="LightGoldenrodYellow"
                                         IsReadonly="True"
-                                        Placeholder="ValidatableEntry IsReadonly=True"
-                                        Text="ValidatableEntry IsReadonly=True" />
+                                        Placeholder="ValidatableEntry"
+                                        Text="ValidatableEntry IsReadonly=&quot;True&quot;" />
                                 </controls:GridZero>
 
                                 <controls:ValidatableLabel
-                                    LineBreakMode="WordWrap"
-                                    Placeholder="ValidatableLabel3"
-                                    Text="ValidatableLabel with LineBreakMode=WordWrap&#x0a;Multiple lines of text&#x0a;Line 3: More text" />
+                                    BackgroundColor="LightBlue"
+                                    Placeholder="ValidatableLabel Placeholder"
+                                    Text="ValidatableLabel with custom LabelStyle which sets LineBreakMode to &quot;WordWrap&quot;&#x0a;Multiple lines of text&#x0a;Line 3: More text">
+                                    <controls:ValidatableLabel.LabelStyle>
+                                        <Style TargetType="Label" BaseResourceKey="EntryLabelStyle">
+                                            <Setter Property="LineBreakMode" Value="WordWrap" />
+                                        </Style>
+                                    </controls:ValidatableLabel.LabelStyle>
+                                </controls:ValidatableLabel>
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomEntry--&gt;" />
                                 <controls:GridZero>
