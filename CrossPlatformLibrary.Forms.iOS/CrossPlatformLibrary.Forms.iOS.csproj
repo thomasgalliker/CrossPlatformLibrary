@@ -51,6 +51,7 @@
     <Compile Include="Effects\Effects.cs" />
     <Compile Include="Effects\EntryLineColorEffect.cs" />
     <Compile Include="Effects\EntrySelectAllText.cs" />
+    <Compile Include="Effects\LineColorEffectBase.cs" />
     <Compile Include="Effects\LongPressedEffect.cs" />
     <Compile Include="Effects\PickerLineColorEffect.cs" />
     <Compile Include="Effects\SafeAreaBottomPaddingEffect.cs" />
