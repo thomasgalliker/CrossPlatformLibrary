@@ -27,6 +27,7 @@
         Style="{DynamicResource AnnotationEntryLabelStyle}"
         Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}" />
 
+    <!--  Entry  -->
     <controls:GridZero Grid.Row="1" IsClippedToBounds="True">
         <controls:CustomEntry
             x:Name="Entry"
