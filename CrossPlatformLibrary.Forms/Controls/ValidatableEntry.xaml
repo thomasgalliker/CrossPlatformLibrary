@@ -74,12 +74,18 @@
         <!--  Readonly Text  -->
         <controls:CustomLabel
             x:Name="ReadonlyLabel"
-            Margin="0"
             x:FieldModifier="internal"
+            RemovePadding="True"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
             Style="{DynamicResource EntryLabelStyle}"
-            RemovePadding="True"
-            Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}" />
+            Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}">
+            <Label.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android" Value="0,2,0,0" />
+                    <On Platform="iOS" Value="0,2,0,0" />
+                </OnPlatform>
+            </Label.Margin>
+        </controls:CustomLabel>
     </controls:GridZero>
 
     <!--  Validation Error Text  -->

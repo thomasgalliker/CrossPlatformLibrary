@@ -10,7 +10,6 @@
 
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
-        <RowDefinition Height="8" />
         <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
 
@@ -18,22 +17,28 @@
     <controls:CustomLabel
         x:Name="AnnotationLabel"
         Grid.Row="0"
-        Grid.RowSpan="2"
         Margin="0"
         x:FieldModifier="internal"
         InputTransparent="True"
         RemovePadding="True"
-        IsVisible="{Binding Text, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
         Style="{DynamicResource AnnotationEntryLabelStyle}"
-        Text="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}" />
+        Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}" />
 
-    <controls:CustomLabel
-        Grid.Row="1"
-        Grid.RowSpan="2"
-        BackgroundColor="Transparent"
-        RemovePadding="True"
-        LineBreakMode="{Binding LineBreakMode, Source={x:Reference Control}, Mode=OneWay}"
-        Style="{Binding LabelStyle, Source={x:Reference Control}, Mode=OneWay}"
-        Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}"
-        VerticalOptions="StartAndExpand" />
+    <!--  Label  -->
+    <controls:GridZero Grid.Row="1" IsClippedToBounds="True">
+        <controls:CustomLabel
+            x:Name="Label"
+            x:FieldModifier="internal"
+            RemovePadding="True"
+            Style="{Binding LabelStyle, Source={x:Reference Control}, Mode=OneWay}"
+            Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}">
+            <Label.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android" Value="0,2,0,0" />
+                    <On Platform="iOS" Value="0,2,0,0" />
+                </OnPlatform>
+            </Label.Margin>
+        </controls:CustomLabel>
+    </controls:GridZero>
+
 </controls:GridZero>

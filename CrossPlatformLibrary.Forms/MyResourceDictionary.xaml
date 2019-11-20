@@ -52,6 +52,8 @@
     <converters:ValidationErrorsToStringConverter x:Key="ValidationErrorsToStringConverter" />
 
     <!--  Styles  -->
+    <x:Double x:Key="MinimumHeight.Input">48</x:Double>
+
     <!--  Button Style  -->
     <Style x:Key="ButtonStyle" TargetType="Button">
         <Setter Property="TextColor" Value="{DynamicResource CustomButtonStyle.TextColor}" />
@@ -163,18 +165,27 @@
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="LineBreakMode" Value="TailTruncation" />
-        <Setter Property="Margin">
-            <OnPlatform x:TypeArguments="Thickness">
-                <On Platform="iOS" Value="0" />
-                <On Platform="Android" Value="0,0,0,0" />
-                <On Platform="UWP" Value="0" />
-            </OnPlatform>
-        </Setter>
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="controls:MinimumHeight.Value" Value="32" />
     </Style>
 
-    <!--  Validatable Controls  -->
-    <x:Double x:Key="MinimumHeight.Input">48</x:Double>
+    <!--  EntryStyle  -->
+    <Style x:Key="EntryStyle" TargetType="Entry">
+        <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
+        <Setter Property="PlaceholderColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="controls:MinimumHeight.Value" Value="{StaticResource MinimumHeight.Input}" />
+    </Style>
 
+    <Style BasedOn="{StaticResource EntryStyle}" TargetType="Entry" />
+    <Style BasedOn="{StaticResource EntryStyle}" TargetType="controls:CustomEntry" />
+
+    <!--  Validatable Controls  -->
     <Style TargetType="controls:ValidatableLabel">
         <Setter Property="LabelStyle" Value="{DynamicResource EntryLabelStyle}" />
     </Style>
@@ -281,21 +292,6 @@
         <Setter Property="FontSize" Value="{DynamicResource ListItemDetailTextStyleSize}" />
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
     </Style>
-
-    <Style x:Key="EntryStyle" TargetType="Entry">
-        <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
-        <Setter Property="PlaceholderColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
-        <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
-        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
-        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
-        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-        <Setter Property="controls:MinimumHeight.Value" Value="{StaticResource MinimumHeight.Input}" />
-    </Style>
-
-    <Style BasedOn="{StaticResource EntryStyle}" TargetType="Entry" />
-    <Style BasedOn="{StaticResource EntryStyle}" TargetType="controls:CustomEntry" />
 
     <!--<Style TargetType="controls:CustomSwitch">
         <Setter Property="TintColor" Value="{DynamicResource Primary}" />
