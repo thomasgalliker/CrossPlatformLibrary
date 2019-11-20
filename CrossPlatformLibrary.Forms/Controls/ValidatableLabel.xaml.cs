@@ -8,7 +8,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         public ValidatableLabel()
         {
             this.InitializeComponent();
-            //this.SetDynamicResource(LabelStyleProperty, "EntryLabelStyle");
+            this.DebugLayoutBounds();
         }
 
         public static readonly BindableProperty TextProperty =

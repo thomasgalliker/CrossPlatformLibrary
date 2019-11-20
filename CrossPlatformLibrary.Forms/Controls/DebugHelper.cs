@@ -23,6 +23,18 @@ namespace CrossPlatformLibrary.Forms.Controls
         }
 
         [Conditional("DEBUG")]
+        internal static void DebugLayoutBounds(this ValidatableLabel element, bool debug = true)
+        {
+            if (!ShowLayoutBounds || !debug)
+            {
+                return;
+            }
+
+            element.SetDynamicResource(VisualElement.BackgroundColorProperty, "Theme.Color.SemiTransparentBright");
+            element.AnnotationLabel.SetValue(VisualElement.BackgroundColorProperty, Color.Yellow);
+        }
+
+        [Conditional("DEBUG")]
         internal static void DebugLayoutBounds(this ValidatablePicker element, bool debug = true)
         {
             if (!ShowLayoutBounds || !debug)
