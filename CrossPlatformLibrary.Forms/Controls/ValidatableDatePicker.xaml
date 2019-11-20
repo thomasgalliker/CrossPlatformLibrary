@@ -26,7 +26,7 @@
         Style="{DynamicResource AnnotationEntryLabelStyle}"
         Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}" />
 
-    <controls:GridZero Grid.Row="1" IsClippedToBounds="False">
+    <controls:GridZero Grid.Row="1" IsClippedToBounds="True">
         <controls:ExtendedDatePicker
             x:Name="DatePicker"
             x:FieldModifier="internal"

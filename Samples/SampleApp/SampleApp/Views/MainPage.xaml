@@ -465,6 +465,26 @@
                                     ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
                                     ValidationErrors="{Binding Source={x:Reference ValidatableDatePickerTest2}, Path=Date, Converter={StaticResource RandomValidationErrorsConverter}}" />
 
+                                <controls:GridZero>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:ValidatableDatePicker
+                                        BackgroundColor="Aquamarine"
+                                        Date="{x:Null}"
+                                        Placeholder="ValidatableDatePicker" />
+                                    <controls:ValidatableEntry
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        BackgroundColor="LightGoldenrodYellow"
+                                        Placeholder="ValidatableEntry"
+                                        Text="" />
+                                </controls:GridZero>
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ExtendedTimePicker--&gt;" />
                                 <controls:ExtendedTimePicker
                                     Format="t"
