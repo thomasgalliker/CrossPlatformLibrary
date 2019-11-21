@@ -45,11 +45,10 @@
             <controls:CustomEditor.Margin>
                 <OnPlatform x:TypeArguments="Thickness">
                     <!--<On Platform="Android" Value="-4,-10,-4,-6" />-->
-                    <On Platform="iOS" Value="-5,-9,-5,-5" />
+                    <On Platform="iOS" Value="-5,-9,-5,-7" />
                 </OnPlatform>
             </controls:CustomEditor.Margin>
         </controls:CustomEditor>
-
     </controls:GridZero>
 
     <!--  Validation Error Text  -->
