@@ -27,7 +27,7 @@
     <!--  Label  -->
     <controls:GridZero Grid.Row="1" IsClippedToBounds="True">
         <controls:CustomLabel
-            x:Name="Label"
+            x:Name="ReadonlyLabel"
             x:FieldModifier="internal"
             RemovePadding="True"
             Style="{Binding LabelStyle, Source={x:Reference Control}, Mode=OneWay}"
@@ -35,7 +35,7 @@
             <Label.Margin>
                 <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="Android" Value="0,2,0,0" />
-                    <On Platform="iOS" Value="0,2,0,0" />
+                    <On Platform="iOS" Value="0,0,0,0" />
                 </OnPlatform>
             </Label.Margin>
         </controls:CustomLabel>
