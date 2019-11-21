@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
-using CrossPlatformLibrary.Forms.Tools;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
@@ -16,8 +15,6 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             this.InitializeComponent();
             this.DebugLayoutBounds();
-
-            PlatformHelper.RunOnPlatform((Device.Android, () => { this.Entry.HeightRequest = -1; }));
         }
 
         public new void Focus()

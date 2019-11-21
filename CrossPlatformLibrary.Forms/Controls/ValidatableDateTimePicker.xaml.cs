@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using CrossPlatformLibrary.Forms.Tools;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
@@ -11,9 +10,6 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             this.InitializeComponent();
             this.DebugLayoutBounds();
-
-            PlatformHelper.RunOnPlatform((Device.Android, () => { this.DatePicker.HeightRequest = -1; }));
-            PlatformHelper.RunOnPlatform((Device.Android, () => { this.TimePicker.HeightRequest = -1; }));
         }
 
         public static readonly BindableProperty PlaceholderProperty =
