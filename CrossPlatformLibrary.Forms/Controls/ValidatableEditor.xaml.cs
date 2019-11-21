@@ -4,15 +4,12 @@ using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
-    /// <summary>
-    ///     Similar solution can be found here:
-    ///     https://github.com/XamFormsExtended/Xfx.Controls
-    /// </summary>
     public partial class ValidatableEditor : GridZero
     {
         public ValidatableEditor()
         {
             this.InitializeComponent();
+            this.DebugLayoutBounds();
         }
 
         public new void Focus()
@@ -34,12 +31,19 @@ namespace CrossPlatformLibrary.Forms.Controls
                 typeof(string),
                 typeof(ValidatableEditor),
                 null,
-                BindingMode.TwoWay);
+                BindingMode.TwoWay,
+                propertyChanged: OnTextPropertyChanged);
 
         public string Text
         {
             get => (string)this.GetValue(TextProperty);
             set => this.SetValue(TextProperty, value);
+        }
+
+        private static void OnTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var validatableEditor = (ValidatableEditor)bindable;
+            validatableEditor.OnPropertyChanged(nameof(validatableEditor.AnnotationText));
         }
 
         public static readonly BindableProperty PlaceholderProperty =
@@ -48,12 +52,32 @@ namespace CrossPlatformLibrary.Forms.Controls
                 typeof(string),
                 typeof(ValidatableEditor),
                 null,
-                BindingMode.OneWay);
+                BindingMode.OneWay,
+                propertyChanged: OnPlaceholderPropertyChanged);
 
         public string Placeholder
         {
             get => (string)this.GetValue(PlaceholderProperty);
             set => this.SetValue(PlaceholderProperty, value);
+        }
+
+        private static void OnPlaceholderPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var entry = (ValidatableEditor)bindable;
+            entry.OnPropertyChanged(nameof(entry.AnnotationText));
+        }
+
+        public string AnnotationText
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.Text))
+                {
+                    return this.Placeholder;
+                }
+
+                return " ";
+            }
         }
 
         public static readonly BindableProperty KeyboardProperty =

@@ -6,55 +6,57 @@
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
-    BackgroundColor="Transparent"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="FillAndExpand">
-
-    <Grid.Margin>
-        <OnPlatform x:TypeArguments="Thickness">
-            <On Platform="Android" Value="-4,0,-4,0" />
-            <On Platform="iOS" Value="0,0,0,0" />
-        </OnPlatform>
-    </Grid.Margin>
+    VerticalOptions="StartAndExpand"
+    IsClippedToBounds="True">
 
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
-
-    <controls:CustomEditor
-        x:Name="Editor"
-        Grid.Row="0"
-        effects:LineColorEffect.ApplyLineColor="True"
-        effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
-        BackgroundColor="Transparent"
-        Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
-        Keyboard="{Binding Keyboard, Source={x:Reference Control}, Mode=OneWay}"
-        MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
-        MaxLines="{Binding MaxLines, Source={x:Reference Control}, Mode=OneWay}"
-        Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
-        Style="{Binding EditorStyle, Source={x:Reference Control}, Mode=OneWay}"
-        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}">
-
-        <controls:CustomEditor.Margin>
-            <OnPlatform x:TypeArguments="Thickness">
-                <!--  Editor in iOS has some nasty padding around UITextView  -->
-                <On Platform="iOS" Value="-4,0,-4,0" />
-            </OnPlatform>
-        </controls:CustomEditor.Margin>
-    </controls:CustomEditor>
 
     <!--  Annotation Text  -->
     <controls:CustomLabel
+        x:Name="AnnotationLabel"
         Grid.Row="0"
-        BackgroundColor="Transparent"
+        Margin="0"
+        x:FieldModifier="internal"
         InputTransparent="True"
-        IsVisible="{Binding Text, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
+        RemovePadding="True"
         Style="{DynamicResource AnnotationEntryLabelStyle}"
-        Text="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}" />
+        Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}" />
+
+    <!--  Editor  -->
+    <controls:GridZero Grid.Row="1" IsClippedToBounds="True">
+        <controls:CustomEditor
+            x:Name="Editor"
+            x:FieldModifier="internal"
+            effects:LineColorEffect.ApplyLineColor="True"
+            effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
+            Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
+            Keyboard="{Binding Keyboard, Source={x:Reference Control}, Mode=OneWay}"
+            MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
+            MaxLines="{Binding MaxLines, Source={x:Reference Control}, Mode=OneWay}"
+            Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
+            Style="{Binding EditorStyle, Source={x:Reference Control}, Mode=OneWay}"
+            Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}">
+
+            <controls:CustomEditor.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <!--<On Platform="Android" Value="-4,-10,-4,-6" />-->
+                    <On Platform="iOS" Value="-5,-9,-5,-5" />
+                </OnPlatform>
+            </controls:CustomEditor.Margin>
+        </controls:CustomEditor>
+
+    </controls:GridZero>
 
     <!--  Validation Error Text  -->
     <controls:CustomLabel
-        Grid.Row="0"
+        x:Name="ErrorLabel"
+        Grid.Row="2"
         Style="{DynamicResource ValidationLabelStyle}"
+        IsVisible="{Binding Text, Source={x:Reference ErrorLabel}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
         Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}" />
 </controls:GridZero>

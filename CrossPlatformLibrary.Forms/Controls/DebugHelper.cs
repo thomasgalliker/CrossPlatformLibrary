@@ -90,5 +90,18 @@ namespace CrossPlatformLibrary.Forms.Controls
             element.TimePicker.SetDynamicResource(VisualElement.BackgroundColorProperty, "Theme.Color.SemiTransparentDark");
             element.ReadonlyLabel.SetDynamicResource(VisualElement.BackgroundColorProperty, "Theme.Color.SemiTransparentDark");
         }
+
+        [Conditional("DEBUG")]
+        internal static void DebugLayoutBounds(this ValidatableEditor element, bool debug = true)
+        {
+            if (!ShowLayoutBounds || !debug)
+            {
+                return;
+            }
+
+            element.SetDynamicResource(VisualElement.BackgroundColorProperty, "Theme.Color.SemiTransparentBright");
+            element.AnnotationLabel.SetValue(VisualElement.BackgroundColorProperty, Color.Yellow);
+            element.Editor.SetDynamicResource(VisualElement.BackgroundColorProperty, "Theme.Color.SemiTransparentDark");
+        }
     }
 }
