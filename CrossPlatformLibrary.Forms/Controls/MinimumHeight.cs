@@ -128,6 +128,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         [Conditional("DEBUG")]
         private static void Log(object element, string message)
         {
+            var type = element.GetType();
             Debug.WriteLine($"MinimumHeight for {type.GetFormattedName()}: {message}");
         }
     }
