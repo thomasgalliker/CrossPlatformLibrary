@@ -162,9 +162,5 @@ namespace CrossPlatformLibrary.Forms.Controls
             get => (IEnumerable<string>)this.GetValue(ValidationErrorsProperty);
             set => this.SetValue(ValidationErrorsProperty, value);
         }
-
-        private void AnnotationLabel_OnSizeChanged(object sender, EventArgs e)
-        {
-        }
     }
 }

@@ -11,8 +11,8 @@
     IsClippedToBounds="True">
 
     <Grid.RowDefinitions>
-        <RowDefinition x:Name="AnnotationRow" Height="10" />
-        <RowDefinition x:Name="ContentRow" Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
         <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
 
@@ -20,22 +20,16 @@
     <controls:CustomLabel
         x:Name="AnnotationLabel"
         Grid.Row="0"
-        Grid.RowSpan="2"
         x:FieldModifier="internal"
         InputTransparent="True"
         RemovePadding="True"
         Style="{DynamicResource AnnotationEntryLabelStyle}"
-        Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}"
-        SizeChanged="AnnotationLabel_OnSizeChanged">
-        <Label.Margin>
-            <OnPlatform x:TypeArguments="Thickness">
-                <On Platform="Android" Value="0,0,0,0" />
-                <On Platform="iOS" Value="0,-2,0,-2" />
-            </OnPlatform>
-        </Label.Margin>
-    </controls:CustomLabel>
+        Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}" />
 
-    <controls:GridZero Grid.Row="1" ColumnSpacing="{DynamicResource Theme.Spacing.Medium}">
+    <controls:GridZero
+        Grid.Row="1"
+        IsClippedToBounds="True"
+        ColumnSpacing="6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="140" />
             <ColumnDefinition Width="*" />
@@ -52,11 +46,12 @@
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
             NullableDate="{Binding Date, Source={x:Reference Control}, Mode=TwoWay}"
             Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
-            Style="{Binding DatePickerStyle, Source={x:Reference Control}, Mode=OneWay}">
+            Style="{Binding DatePickerStyle, Source={x:Reference Control}, Mode=OneWay}"
+            ValidityRange="{Binding ValidityRange, Source={x:Reference Control}, Mode=OneWay}">
             <DatePicker.Margin>
                 <OnPlatform x:TypeArguments="Thickness">
-                    <On Platform="Android" Value="-4,0,-4,0" />
-                    <On Platform="iOS" Value="0,0,0,0" />
+                    <On Platform="Android" Value="-4,-10,-4,-6" />
+                    <On Platform="iOS" Value="0,-10,0,-6" />
                 </OnPlatform>
             </DatePicker.Margin>
         </controls:ExtendedDatePicker>
@@ -71,21 +66,22 @@
             HorizontalOptions="FillAndExpand"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
             NullableTime="{Binding Time, Source={x:Reference Control}, Mode=TwoWay}"
-            Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
             Style="{Binding TimePickerStyle, Source={x:Reference Control}, Mode=OneWay}">
             <TimePicker.Margin>
                 <OnPlatform x:TypeArguments="Thickness">
-                    <On Platform="Android" Value="-4,0,-4,0" />
-                    <On Platform="iOS" Value="0,0,0,0" />
+                    <On Platform="Android" Value="-4,-10,-4,-6" />
+                    <On Platform="iOS" Value="0,-10,0,-6" />
                 </OnPlatform>
             </TimePicker.Margin>
         </controls:ExtendedTimePicker>
 
         <!--  Readonly Text  -->
         <controls:CustomLabel
+            x:Name="ReadonlyLabel"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Margin="0"
+            x:FieldModifier="internal"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
             Style="{DynamicResource EntryLabelStyle}"
             RemovePadding="True"
