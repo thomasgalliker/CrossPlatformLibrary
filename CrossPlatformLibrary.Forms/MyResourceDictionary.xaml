@@ -334,6 +334,9 @@
 
     <Style x:Key="DatePickerStyle" TargetType="DatePicker">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
         <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
@@ -353,6 +356,9 @@
 
     <Style x:Key="TimePickerStyle" TargetType="TimePicker">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
         <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
