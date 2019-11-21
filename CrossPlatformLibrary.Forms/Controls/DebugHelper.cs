@@ -5,7 +5,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 {
     public static class DebugHelper
     {
-        public static bool ShowLayoutBounds = true;
+        public static bool ShowLayoutBounds = false;
 
         [Conditional("DEBUG")]
         internal static void DebugLayoutBounds(this ValidatableEntry element, bool debug = true)
