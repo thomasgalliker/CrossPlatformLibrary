@@ -64,7 +64,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
 
             if (this.Element is VisualElement visualElement && visualElement.Height > 0)
             {
-                var lineY = Math.Max(visualElement.Height - 8, visualElement.Height * 0.87) - 1;
+                var lineY = Math.Min(visualElement.Height - 10, visualElement.Height * 0.87);
                 lineLayer.Frame = new CGRect(0f, lineY, visualElement.Width, 1f);
                 this.Log($"visualElement: H:{visualElement.Height} W:{visualElement.Width} --> lineLayer.Frame: Y:{lineLayer.Frame.Y}");
                 lineLayer.BorderColor = LineColorEffect.GetLineColor(this.Element).ToCGColor();
