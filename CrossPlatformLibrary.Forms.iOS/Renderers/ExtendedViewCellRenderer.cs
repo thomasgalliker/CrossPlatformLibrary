@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using CrossPlatformLibrary.Forms.Controls;
+﻿using CrossPlatformLibrary.Forms.Controls;
 using CrossPlatformLibrary.Forms.iOS.Renderers;
 using UIKit;
 using Xamarin.Forms;
@@ -11,63 +10,20 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
 {
     public class ExtendedViewCellRenderer : ViewCellRenderer
     {
-        private UITableViewCell uiTableViewCell;
-        private UIColor unselectedBackground;
-
-        public override UITableViewCell GetCell(Cell cell, UITableViewCell reusableCell, UITableView tv)
+        public override UITableViewCell GetCell(Cell item, UITableViewCell reusableCell, UITableView tv)
         {
-            this.uiTableViewCell = base.GetCell(cell, reusableCell, tv);
+            var cell = base.GetCell(item, reusableCell, tv);
+            cell.SelectionStyle = UITableViewCellSelectionStyle.None;
 
-            this.unselectedBackground = this.uiTableViewCell.SelectedBackgroundView.BackgroundColor;
-
-            if (cell is ExtendedViewCell extendedViewCell)
+            if (item is ExtendedViewCell extendedViewCell)
             {
-                extendedViewCell.PropertyChanged -= this.ExtendedViewCell_PropertyChanged;
-                extendedViewCell.PropertyChanged += this.ExtendedViewCell_PropertyChanged;
-
-                this.UpdateBackgroundColor(extendedViewCell, extendedViewCell.IsSelected);
-            }
-
-            return this.uiTableViewCell;
-        }
-
-        private void ExtendedViewCell_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (!(sender is ExtendedViewCell extendedViewCell))
-            {
-                return;
-            }
-
-            if (e.PropertyName == ExtendedViewCell.IsSelectedProperty.PropertyName)
-            {
-                this.UpdateBackgroundColor(extendedViewCell, extendedViewCell.IsSelected);
-            }
-        }
-
-        /// <summary>
-        ///     Set background color according to IsSelected state.
-        /// </summary>
-        private void UpdateBackgroundColor(object viewCell, bool isSelected)
-        {
-            if (viewCell is ExtendedViewCell extendedViewCell)
-            {
-                if (isSelected)
+                cell.SelectedBackgroundView = new UIView
                 {
-                    this.uiTableViewCell.SelectionStyle = UITableViewCellSelectionStyle.Default;
-                    this.uiTableViewCell.SelectedBackgroundView = new UIView
-                    {
-                        BackgroundColor = extendedViewCell.SelectedBackgroundColor.ToUIColor()
-                    };
-                }
-                else
-                {
-                    this.uiTableViewCell.SelectionStyle = UITableViewCellSelectionStyle.None;
-                    this.uiTableViewCell.SelectedBackgroundView = new UIView
-                    {
-                        BackgroundColor = this.unselectedBackground
-                    };
-                }
+                    BackgroundColor = extendedViewCell.SelectedBackgroundColor.ToUIColor()
+                };
             }
+
+            return cell;
         }
     }
 }

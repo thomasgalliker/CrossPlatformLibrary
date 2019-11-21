@@ -5,7 +5,7 @@ using SampleApp.Validation;
 using SampleApp.ViewModels;
 using Xamarin.Forms;
 
-namespace SampleApp
+namespace SampleApp.Views
 {
     public partial class MainPage : ContentPage
     {
@@ -18,7 +18,9 @@ namespace SampleApp
                 var displayService = new DisplayService((t, m) => this.DisplayAlert(t, m, "OK"));
                 var countryService = new CountryServiceMock();
                 var validationService = new ValidationService();
-                this.BindingContext = new MainViewModel(displayService, countryService, validationService);
+                var emailService = new EmailService();
+                var navigationService = new NavigationService(this);
+                this.BindingContext = new MainViewModel(navigationService, displayService, countryService, validationService, emailService);
             }
             catch (Exception e)
             {
@@ -33,21 +35,23 @@ namespace SampleApp
         }
     }
 
-    public class DisplayService : IDisplayService
+    public class NavigationService : INavigationService
     {
-        private readonly Func<string, string, Task> alertAction;
+        private readonly Page currentPage;
 
-        public DisplayService(Func<string, string, Task> alertAction)
+        public NavigationService(Page page)
         {
-            this.alertAction = alertAction;
+            this.currentPage = page;
         }
-        public async Task DisplayAlert(string title, string message)
+
+        public Task PushAsync(Page page)
         {
-            await this.alertAction(title, message);
+            return this.currentPage.Navigation.PushAsync(page);
         }
     }
-    public interface IDisplayService
+
+    public interface INavigationService
     {
-        Task DisplayAlert(string title, string message);
+        Task PushAsync(Page page);
     }
 }

@@ -150,13 +150,33 @@ namespace CrossPlatformLibrary.Forms.Themes
             set => this.SetValue(TextColorBrightProperty, value);
         }
 
-        public static readonly BindableProperty PrimaryVariantProperty = BindableProperty.Create(nameof(PrimaryVariant), typeof(Color), typeof(Color), Color.FromHex("#6200EE"));
+        public static readonly BindableProperty PrimaryVariantProperty =
+            BindableProperty.Create(
+                nameof(PrimaryVariant),
+                typeof(Color),
+                typeof(Color),
+                Color.FromHex("#6200EE"));
 
-        public static readonly BindableProperty SecondaryProperty = BindableProperty.Create(nameof(Secondary), typeof(Color), typeof(Color), default(Color));
+        public static readonly BindableProperty SecondaryProperty =
+            BindableProperty.Create(
+                nameof(Secondary),
+                typeof(Color),
+                typeof(Color),
+                default(Color));
 
-        public static readonly BindableProperty SecondaryVariantProperty = BindableProperty.Create(nameof(SecondaryVariant), typeof(Color), typeof(Color), Color.FromHex("#0400BA"));
+        public static readonly BindableProperty SecondaryVariantProperty =
+            BindableProperty.Create(
+                nameof(SecondaryVariant),
+                typeof(Color),
+                typeof(Color),
+                Color.FromHex("#0400BA"));
 
-        public static readonly BindableProperty SurfaceProperty = BindableProperty.Create(nameof(Surface), typeof(Color), typeof(Color), Color.FromHex("#FFFFFF"));
+        public static readonly BindableProperty SurfaceProperty =
+            BindableProperty.Create(
+                nameof(Surface),
+                typeof(Color),
+                typeof(Color),
+                Color.FromHex("#FFFFFF"));
 
         /// <summary>
         ///     A color that passes accessibility guidelines for text/iconography when drawn on top of <see cref="Primary" />.
@@ -240,11 +260,12 @@ namespace CrossPlatformLibrary.Forms.Themes
 
         #region CardView Colors
 
-        public static readonly BindableProperty CardViewDividerColorProperty = BindableProperty.Create(
-            nameof(CardViewDividerColor),
-            typeof(Color),
-            typeof(Color),
-            GetDefaultCardViewDividerColor());
+        public static readonly BindableProperty CardViewDividerColorProperty =
+            BindableProperty.Create(
+                nameof(CardViewDividerColor),
+                typeof(Color),
+                typeof(Color),
+                GetDefaultCardViewDividerColor());
 
         private static Color GetDefaultCardViewDividerColor()
         {
@@ -262,11 +283,12 @@ namespace CrossPlatformLibrary.Forms.Themes
             set => this.SetValue(CardViewDividerColorProperty, value);
         }
 
-        public static readonly BindableProperty CardViewHeaderTextColorProperty = BindableProperty.Create(
-            nameof(CardViewHeaderTextColor),
-            typeof(Color),
-            typeof(Color),
-            GetDefaultCardViewHeaderTextColor());
+        public static readonly BindableProperty CardViewHeaderTextColorProperty =
+            BindableProperty.Create(
+                nameof(CardViewHeaderTextColor),
+                typeof(Color),
+                typeof(Color),
+                GetDefaultCardViewHeaderTextColor());
 
         private static Color GetDefaultCardViewHeaderTextColor()
         {
@@ -279,11 +301,12 @@ namespace CrossPlatformLibrary.Forms.Themes
             set => this.SetValue(CardViewHeaderTextColorProperty, value);
         }
 
-        public static readonly BindableProperty CardViewHeaderBackgroundColorProperty = BindableProperty.Create(
-            nameof(CardViewHeaderBackgroundColor),
-            typeof(Color),
-            typeof(Color),
-            GetDefaultCardViewHeaderBackgroundColor());
+        public static readonly BindableProperty CardViewHeaderBackgroundColorProperty =
+            BindableProperty.Create(
+                nameof(CardViewHeaderBackgroundColor),
+                typeof(Color),
+                typeof(Color),
+                GetDefaultCardViewHeaderBackgroundColor());
 
         private static Color GetDefaultCardViewHeaderBackgroundColor()
         {
@@ -307,11 +330,12 @@ namespace CrossPlatformLibrary.Forms.Themes
             set => this.SetValue(CardViewHeaderBackgroundColorProperty, value);
         }
 
-        public static readonly BindableProperty CardViewBackgroundColorProperty = BindableProperty.Create(
-            nameof(CardViewBackgroundColor),
-            typeof(Color),
-            typeof(Color),
-            GetDefaultCardViewBackgroundColor());
+        public static readonly BindableProperty CardViewBackgroundColorProperty =
+            BindableProperty.Create(
+                nameof(CardViewBackgroundColor),
+                typeof(Color),
+                typeof(Color),
+                GetDefaultCardViewBackgroundColor());
 
         private static Color GetDefaultCardViewBackgroundColor()
         {
@@ -329,7 +353,8 @@ namespace CrossPlatformLibrary.Forms.Themes
         }
 
         /// <summary>
-        /// The color used as background inside the content area of a <see cref="CrossPlatformLibrary.Forms.Controls.CardView"/>.
+        ///     The color used as background inside the content area of a
+        ///     <see cref="CrossPlatformLibrary.Forms.Controls.CardView" />.
         /// </summary>
         public Color CardViewBackgroundColor
         {

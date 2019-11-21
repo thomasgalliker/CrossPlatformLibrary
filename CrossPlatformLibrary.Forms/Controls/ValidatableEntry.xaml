@@ -7,9 +7,8 @@
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
     BackgroundColor="Transparent"
-    HeightRequest="48"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="Fill">
+    VerticalOptions="StartAndExpand">
     <Grid.Margin>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="Android" Value="-4,0,-4,0" />
@@ -24,7 +23,6 @@
         effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
         BackgroundColor="Transparent"
         Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
-        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
         HeightRequest="48"
         IsPassword="{Binding IsPassword, Source={x:Reference Control}, Mode=OneWay}"
         IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
@@ -57,6 +55,7 @@
     <!--  Readonly Text  -->
     <Label
         Grid.Row="0"
+        HeightRequest="48"
         IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
         Style="{DynamicResource EntryLabelStyle}"
         Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}" />

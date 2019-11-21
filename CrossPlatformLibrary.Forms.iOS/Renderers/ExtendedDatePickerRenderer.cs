@@ -31,7 +31,6 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
 
             if (this.Element is ExtendedDatePicker view)
             {
-                this.SetFont(view);
                 this.SetTextAlignment(view);
                 this.SetBorder(view);
                 this.SetNullableText(view);
@@ -47,11 +46,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
 
             var view = (ExtendedDatePicker)this.Element;
 
-            if (e.PropertyName == ExtendedDatePicker.FontProperty.PropertyName)
-            {
-                this.SetFont(view);
-            }
-            else if (e.PropertyName == ExtendedDatePicker.XAlignProperty.PropertyName)
+            if (e.PropertyName == ExtendedDatePicker.XAlignProperty.PropertyName)
             {
                 this.SetTextAlignment(view);
             }
@@ -92,23 +87,6 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                 case TextAlignment.Start:
                     this.Control.TextAlignment = UITextAlignment.Left;
                     break;
-            }
-        }
-
-        /// <summary>
-        ///     Sets the font.
-        /// </summary>
-        /// <param name="view">The view.</param>
-        private void SetFont(ExtendedDatePicker view)
-        {
-            UIFont uiFont;
-            if (view.Font != Font.Default && (uiFont = view.Font.ToUIFont()) != null)
-            {
-                this.Control.Font = uiFont;
-            }
-            else if (view.Font == Font.Default)
-            {
-                this.Control.Font = UIFont.SystemFontOfSize(17f);
             }
         }
 

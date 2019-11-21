@@ -6,8 +6,9 @@
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
+    BackgroundColor="Transparent"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="Fill">
+    VerticalOptions="StartAndExpand">
 
     <Grid.Margin>
         <OnPlatform x:TypeArguments="Thickness">
@@ -32,11 +33,12 @@
             Grid.Column="0"
             effects:LineColorEffect.ApplyLineColor="True"
             effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
+            Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
             Format="{Binding Date, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource NullableDateTimeToFormatConverter}}"
             HorizontalOptions="FillAndExpand"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
             NullableDate="{Binding Date, Source={x:Reference Control}, Mode=TwoWay}"
-            Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}" />
+            Style="{Binding DatePickerStyle, Source={x:Reference Control}, Mode=OneWay}" />
 
         <controls:ExtendedTimePicker
             Grid.Column="1"
@@ -45,7 +47,8 @@
             Format="{Binding Time, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource NullableDateTimeToFormatConverter}}"
             HorizontalOptions="FillAndExpand"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
-            NullableTime="{Binding Time, Source={x:Reference Control}, Mode=TwoWay}" />
+            NullableTime="{Binding Time, Source={x:Reference Control}, Mode=TwoWay}"
+            Style="{Binding TimePickerStyle, Source={x:Reference Control}, Mode=OneWay}" />
     </Grid>
 
     <!--  Readonly Text  -->

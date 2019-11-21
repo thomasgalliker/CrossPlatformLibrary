@@ -1,25 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Forms.Mvvm;
 using CrossPlatformLibrary.Forms.Validation;
-using CrossPlatformLibrary.Tools;
 using SampleApp.Model;
 using SampleApp.Services;
 using SampleApp.Validation;
+using SampleApp.Views;
 using Xamarin.Forms;
 
 namespace SampleApp.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        private readonly DisplayService displayService;
+        private readonly INavigationService navigationService;
+        private readonly IDisplayService displayService;
         private readonly ICountryService countryService;
         private readonly IValidationService validationService;
+        private readonly IEmailService emailService;
         private CountryViewModel country;
         private string notes;
         private string adminEmailAddress;
@@ -39,16 +42,20 @@ namespace SampleApp.ViewModels
         private int userNameMaxLength;
         private DateTime? birthdate;
         private bool isSaving;
-        private ObservableCollection<ColorResource> themeColors;
+        private ObservableCollection<ResourceViewModel> themeResources;
 
         public MainViewModel(
-            DisplayService displayService,
+            INavigationService navigationService,
+            IDisplayService displayService,
             ICountryService countryService,
-            IValidationService validationService)
+            IValidationService validationService,
+            IEmailService emailService)
         {
+            this.navigationService = navigationService;
             this.displayService = displayService;
             this.countryService = countryService;
             this.validationService = validationService;
+            this.emailService = emailService;
 
             this.ViewModelError = ViewModelError.None;
             this.User = new UserDto();
@@ -195,11 +202,39 @@ namespace SampleApp.ViewModels
             }
         }
 
+        public ICommand DumpResourcesCommand => new Command(this.OnDumpResources);
+        private async void OnDumpResources()
+        {
+            try
+            {
+                var sb = new StringBuilder();
+                foreach (var resourceViewModel in this.ThemeResources)
+                {
+                    sb.AppendLine($"{resourceViewModel.ResourceType};{resourceViewModel.Key};{resourceViewModel.Value}");
+                }
+
+                var resourcesDump = sb.ToString();
+
+                await this.emailService.SendEmail("Send Mail", resourcesDump, new List<string> { this.AdminEmailAddress });
+            }
+            catch (Exception ex)
+            {
+                await this.displayService.DisplayAlert("Email Error", $"Failed to send mail: {ex}");
+            }
+        }
+
         public ICommand MailNavigateCommand => new Command(this.OnMailNavigate);
 
-        private void OnMailNavigate()
+        private async void OnMailNavigate()
         {
-            Console.WriteLine($"Send mail to {this.AdminEmailAddress}");
+            try
+            {
+                await this.emailService.SendEmail("Send Mail", "Some text....", new List<string> { this.AdminEmailAddress });
+            }
+            catch (Exception ex)
+            {
+                await this.displayService.DisplayAlert("Email Error", $"Failed to send mail: {ex}");
+            }
         }
 
         public ICommand PostalCodeUnfocusedCommand => new Command(this.OnPostalCodeUnfocused);
@@ -216,6 +251,14 @@ namespace SampleApp.ViewModels
             await this.displayService.DisplayAlert("CalloutCommand", $"parameter: {parameter}");
         }
 
+
+        public ICommand SelectCountryCommand => new Command<CountryViewModel>(this.OnSelectCountry);
+
+        private async void OnSelectCountry(CountryViewModel parameter)
+        {
+            await this.displayService.DisplayAlert("SelectCountryCommand", $"country: {parameter.Name ?? "null"}");
+        }
+
         public ICommand SetFantasyLandCommand => new Command(this.OnSetFantasyLand);
 
         private void OnSetFantasyLand()
@@ -227,10 +270,10 @@ namespace SampleApp.ViewModels
 
         public PeriodicTaskViewModel PeriodicTask { get; private set; }
 
-        public ObservableCollection<ColorResource> ThemeColors
+        public ObservableCollection<ResourceViewModel> ThemeResources
         {
-            get => this.themeColors;
-            private set => this.SetProperty(ref this.themeColors, value, nameof(this.ThemeColors));
+            get => this.themeResources;
+            private set => this.SetProperty(ref this.themeResources, value, nameof(this.ThemeResources));
         }
 
 
@@ -313,7 +356,7 @@ namespace SampleApp.ViewModels
                 this.RaisePropertyChanged(nameof(this.RefreshButtonText));
 
                 // Demo dynamic adjustment of MaxLength binding
-                this.UserNameMaxLength = Math.Max(10, ++this.UserNameMaxLength);
+                this.UserNameMaxLength = Math.Max(2, ++this.UserNameMaxLength);
 
                 this.LogContent = this.logContent + Environment.NewLine + $"{DateTime.Now:G} LoadData called";
                 if (this.numberOfLoads % 2 == 0)
@@ -333,10 +376,10 @@ namespace SampleApp.ViewModels
                 this.Countries.Clear();
                 this.Countries.AddRange(countryDtos.Select(c => new CountryViewModel(c)).Prepend(defaultCountryViewModel));
 
-                this.ThemeColors = App.Current.Resources.MergedDictionaries.SelectMany(md => md)
-                    .Where(r => r.Value is Color)
-                    .Select(c => new ColorResource(c))
-                    .OrderBy(c => c.Id)
+                this.ThemeResources = Application.Current.Resources.MergedDictionaries.SelectMany(md => md)
+                    .Select(kvp => new ResourceViewModel(kvp))
+                    .OrderBy(vm => vm.Key)
+                    //.ThenBy(vm => vm.Key)
                     .ToObservableCollection();
 
                 //this.Notes = $"Test test test{Environment.NewLine}Line 2 text text text";
@@ -376,10 +419,7 @@ namespace SampleApp.ViewModels
             };
         }
 
-        public string RefreshButtonText
-        {
-            get { return $"Refresh {this.numberOfLoads}"; }
-        }
+        public string RefreshButtonText => $"Refresh {this.numberOfLoads}";
 
         public bool IsToggled
         {

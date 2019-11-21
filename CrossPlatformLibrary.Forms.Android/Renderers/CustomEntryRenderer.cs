@@ -12,7 +12,8 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 {
     public class CustomEntryRenderer : EntryRenderer
     {
-        private Drawable originalBackground = null;
+        private Drawable originalBackground;
+        private Thickness? originalPadding;
 
         public CustomEntryRenderer(Context context) : base(context)
         {
@@ -32,36 +33,33 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
             {
                 if (this.Element is CustomEntry customEntry)
                 {
-                    this.UpdatePadding(customEntry);
-                    this.UpdateBorder(customEntry);
+                    this.HideBorder(customEntry);
+                    this.RemovePadding(customEntry);
                 }
             }
-        }
-
-        private void UpdatePadding(CustomEntry customEntry)
-        {
-            var padding = customEntry.Padding;
-            this.Control.SetPadding((int)padding.Left, (int)padding.Top, (int)padding.Right, (int)padding.Bottom);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (this.Element is CustomEntry customEntry)
+            if (e.PropertyName == CustomEntry.HideBorderProperty.PropertyName)
             {
-                if (e.PropertyName == CustomEntry.PaddingProperty.PropertyName)
+                if (this.Element is CustomEntry customEntry)
                 {
-                    this.UpdatePadding(customEntry);
+                    this.HideBorder(customEntry);
                 }
-                else if (e.PropertyName == CustomEntry.HideBorderProperty.PropertyName)
+            }
+            else if (e.PropertyName == CustomEntry.RemovePaddingProperty.PropertyName)
+            {
+                if (this.Element is CustomEntry customEntry)
                 {
-                    this.UpdateBorder(customEntry);
+                    this.RemovePadding(customEntry);
                 }
             }
         }
 
-        private void UpdateBorder(CustomEntry customEntry)
+        private void HideBorder(CustomEntry customEntry)
         {
             if (customEntry.HideBorder)
             {
@@ -75,6 +73,30 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
                     this.Control.Background = this.originalBackground;
                     this.originalBackground = null;
                 }
+            }
+        }
+
+        private void RemovePadding(CustomEntry customEntry)
+        {
+            if (customEntry.RemovePadding)
+            {
+                this.originalPadding = new Thickness(left: this.Control.PaddingLeft, top: this.Control.PaddingTop, right: this.Control.PaddingRight, bottom: this.Control.PaddingBottom);
+                this.Control.SetPadding(0, 0, 0, 0);
+                this.Control.SetIncludeFontPadding(false);
+            }
+            else
+            {
+                if (this.originalPadding != null)
+                {
+                    var p = this.originalPadding.Value;
+                    var left = (int)p.Left;
+                    var top = (int)p.Top;
+                    var right = (int)p.Right;
+                    var bottom = (int)p.Bottom;
+                    this.Control.SetPadding(left, top, right, bottom);
+                }
+
+                this.Control.SetIncludeFontPadding(true);
             }
         }
     }

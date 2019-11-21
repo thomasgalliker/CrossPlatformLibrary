@@ -45,6 +45,7 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrossPlatformLibrary.cs" />
     <Compile Include="Effects\BorderEffect.cs" />
     <Compile Include="Effects\DatePickerLineColorEffect.cs" />
     <Compile Include="Effects\Effects.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Renderers\NonScrollableListViewRenderer.cs" />
     <Compile Include="Renderers\PageRenderer.cs" />
     <Compile Include="Renderers\ShapeView\ShapeViewRenderer.cs" />
+    <Compile Include="Services\FontConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CrossPlatformLibrary.Forms\CrossPlatformLibrary.Forms.csproj">

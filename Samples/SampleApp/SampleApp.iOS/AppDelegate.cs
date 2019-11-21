@@ -1,4 +1,5 @@
 ﻿using CrossPlatformLibrary.Forms.iOS.Renderers;
+using CrossPlatformLibrary.Forms.iOS.Services;
 using Foundation;
 using UIKit;
 using Xamarin.Forms;
@@ -23,6 +24,7 @@ namespace SampleApp.iOS
         {
             Forms.Init();
             HyperLinkLabelRenderer.Init();
+            CrossPlatformLibrary.Forms.iOS.CrossPlatformLibrary.Init();
             this.LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

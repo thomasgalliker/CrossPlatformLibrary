@@ -6,8 +6,9 @@
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
+    BackgroundColor="Transparent"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="Fill">
+    VerticalOptions="StartAndExpand">
 
     <Grid.Margin>
         <OnPlatform x:TypeArguments="Thickness">

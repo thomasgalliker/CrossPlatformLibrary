@@ -113,20 +113,6 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(EntryStyleProperty, value);
         }
 
-        public static readonly BindableProperty FontFamilyProperty =
-            BindableProperty.Create(
-                nameof(FontFamily),
-                typeof(string),
-                typeof(ValidatableEntry),
-                default(string),
-                BindingMode.OneWay);
-
-        public string FontFamily
-        {
-            get => (string)this.GetValue(FontFamilyProperty);
-            set => this.SetValue(FontFamilyProperty, value);
-        }
-
         public static readonly BindableProperty MaxLengthProperty =
             BindableProperty.Create(
                 nameof(MaxLength),

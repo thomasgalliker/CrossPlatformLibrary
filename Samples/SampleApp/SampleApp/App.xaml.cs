@@ -3,6 +3,7 @@ using CrossPlatformLibrary.Forms.Controls;
 using CrossPlatformLibrary.Forms.Localization;
 using CrossPlatformLibrary.Localization;
 using SampleApp.Resources;
+using SampleApp.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

@@ -15,6 +15,9 @@
 
             <!--  Converters  -->
             <converters:ColorToHexStringConverter x:Key="ColorToHexStringConverter" />
+            <converters:ColorInverter x:Key="ColorInverter" />
+            <converters:FontElementToStringConverter x:Key="FontElementToStringConverter" />
+            <converters:ThicknessToStringConverter x:Key="ThicknessToStringConverter" />
             <valueConverters:StringIsNotNullOrEmptyConverter x:Key="StringIsNotNullOrEmptyConverter" />
             <valueConverters:DateTimeConverter x:Key="DateTimeConverter" Format="g" />
             <valueConverters:DateTimeConverter x:Key="ShortDateConverter" Format="d" />
@@ -46,8 +49,50 @@
 
             <themes:SpacingConfiguration x:Key="SpacingConfiguration" />
 
+            <!--  Fonts  -->
+            <OnPlatform x:Key="SampleApp.FontFamily.OswaldLight" x:TypeArguments="x:String">
+                <On Platform="Android" Value="Fonts/Oswald-Light.ttf#Oswald Light" />
+                <On Platform="iOS" Value="Oswald-Light" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="SampleApp.FontFamily.OswaldMedium" x:TypeArguments="x:String">
+                <On Platform="Android" Value="Fonts/Oswald-Medium.ttf#Oswald Medium" />
+                <On Platform="iOS" Value="Oswald-Medium" />
+            </OnPlatform>
+
+            <!--  Sets the default font configuration which serves as fallback for all fonts  -->
+            <themes:FontElement x:Key="DefaultFont" FontFamily="{StaticResource SampleApp.FontFamily.OswaldMedium}" />
+
+            <!--  Overrides the all font-related properties  -->
+            <themes:FontElement
+                x:Key="DebugFont"
+                FontFamily="{StaticResource SampleApp.FontFamily.OswaldLight}"
+                FontSize="99"
+                FontAttributes="Bold,Italic" />
+
+            <!--  Overrides the FontAttributes property only  -->
+            <themes:FontElement x:Key="CustomButtonFont" FontAttributes="Bold" />
+
+            <!--  Create a custom FontSizeConfiguration to adjust the predefined named font sizes  -->
+            <themes:DefaultFontSizeConfiguration x:Key="FontSizeConfiguration">
+                <!--<themes:DefaultFontSizeConfiguration.Medium>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="iOS" Value="28" />
+                        <On Platform="Android" Value="24" />
+                        <On Platform="UWP" Value="24" />
+                    </OnPlatform>
+                </themes:DefaultFontSizeConfiguration.Medium>-->
+            </themes:DefaultFontSizeConfiguration>
+
+            <themes:FontConfiguration
+                x:Key="FontConfiguration"
+                Default="{StaticResource DefaultFont}"
+                Button="{StaticResource CustomButtonFont}"
+                FontSizes="{StaticResource FontSizeConfiguration}" />
+
             <themes:CrossPlatformLibraryConfiguration
                 x:Key="SampleApp.Theme"
+                FontConfiguration="{StaticResource FontConfiguration}"
                 ColorConfiguration="{StaticResource ColorConfiguration}"
                 SpacingConfiguration="{StaticResource SpacingConfiguration}" />
 

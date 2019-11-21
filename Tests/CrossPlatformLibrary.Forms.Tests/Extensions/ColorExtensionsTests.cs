@@ -30,26 +30,39 @@ namespace CrossPlatformLibrary.Forms.Tests.Extensions
         public void ShouldInvert()
         {
             // Arrange
-            var color = Color.FromHex("#FF0000");
-
-            // Act
-            var invertedColor = color.Invert();
-
-            // Assert
-            invertedColor.Should().Be(Color.FromHex("#00FFFF"));
-        }
-
-        [Fact]
-        public void ShouldInvert_WithAlpha()
-        {
-            // Arrange
             var color = Color.FromHex("#55FF0000");
 
             // Act
             var invertedColor = color.Invert();
 
             // Assert
+            invertedColor.Should().Be(Color.FromHex("#FF00FFFF"));
+        }
+
+        [Fact]
+        public void ShouldInvert_WithAlphaNull()
+        {
+            // Arrange
+            var color = Color.FromHex("#55FF0000");
+
+            // Act
+            var invertedColor = color.Invert(alpha: null);
+
+            // Assert
             invertedColor.Should().Be(Color.FromHex("#5500FFFF"));
+        }
+
+        [Fact]
+        public void ShouldInvert_WithAlphaOne()
+        {
+            // Arrange
+            var color = Color.FromHex("#55FF0000");
+
+            // Act
+            var invertedColor = color.Invert(alpha: 1.0d);
+
+            // Assert
+            invertedColor.Should().Be(Color.FromHex("#FF00FFFF"));
         }
     }
 }

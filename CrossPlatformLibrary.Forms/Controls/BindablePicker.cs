@@ -144,7 +144,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 
                 foreach (var item in (IEnumerable)newValue)
                 {
-                    object propValue = null;
+                    object propValue;
                     if (hasDisplayMemberPath)
                     {
                         propValue = BindingHelper.GetDisplayMember(item, displayMemberPath);
@@ -269,15 +269,17 @@ namespace CrossPlatformLibrary.Forms.Controls
             {
                 foreach (var item in e.NewItems)
                 {
+                    object propValue;
                     if (hasDisplayMemberPath)
                     {
-                        var displayMemberString = BindingHelper.GetDisplayMemberString(item, displayMemberPath);
-                        this.Items.Add(displayMemberString);
+                        propValue = BindingHelper.GetDisplayMember(item, displayMemberPath);
                     }
                     else
                     {
-                        this.Items.Add(item == null ? this.NullString : item.ToString());
+                        propValue = item;
                     }
+
+                    this.Items.Add(propValue == null ? this.NullString : propValue.ToString());
                 }
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)

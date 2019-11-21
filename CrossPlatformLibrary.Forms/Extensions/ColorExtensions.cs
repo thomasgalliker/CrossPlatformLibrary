@@ -14,8 +14,23 @@ namespace CrossPlatformLibrary.Forms.Extensions
         }
 
         /// <summary>
+        /// Inverts the R-G-B parts of <paramref name="color"/> with <paramref name="alpha"/>.
+        /// </summary>
+        /// <param name="color">The input color.</param>
+        /// <param name="alpha">The alpha value of the returned color. If null, the alpha value of <paramref name="color"/> is used.</param>
+        /// <returns>An inverted color.</returns>
+        public static Color Invert(this Color color, double? alpha)
+        {
+            var r = 255 - (int)(255 * color.R);
+            var g = 255 - (int)(255 * color.G);
+            var b = 255 - (int)(255 * color.B);
+            var a = alpha ?? color.A;
+
+            return Color.FromRgba(r, g, b, a);
+        }
+
+        /// <summary>
         /// Inverts the R-G-B parts of <paramref name="color"/>.
-        /// The Alpha channel remains the same as in <paramref name="color"/>.
         /// </summary>
         /// <param name="color">The input color.</param>
         /// <returns>An inverted color.</returns>
@@ -25,7 +40,7 @@ namespace CrossPlatformLibrary.Forms.Extensions
             var g = 255 - (int)(255 * color.G);
             var b = 255 - (int)(255 * color.B);
 
-            return Color.FromRgba(r, g, b, color.A);
+            return Color.FromRgb(r, g, b);
         }
     }
 }

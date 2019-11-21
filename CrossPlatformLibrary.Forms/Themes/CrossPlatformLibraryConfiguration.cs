@@ -3,7 +3,7 @@ using Xamarin.Forms;
 namespace CrossPlatformLibrary.Forms.Themes
 {
     /// <summary>
-    /// Class that provides the theme configuration that will be applied in the current App.
+    ///     Class that provides the theme configuration that will be applied in the current App.
     /// </summary>
     public class CrossPlatformLibraryConfiguration : BindableObject, ITheme
     {
@@ -14,7 +14,7 @@ namespace CrossPlatformLibrary.Forms.Themes
                 typeof(CrossPlatformLibraryConfiguration));
 
         /// <summary>
-        /// Gets or sets the color configuration of the theme.
+        ///     Gets or sets the color configuration of the theme.
         /// </summary>
         public IColorConfiguration ColorConfiguration
         {
@@ -25,23 +25,31 @@ namespace CrossPlatformLibrary.Forms.Themes
         public static readonly BindableProperty SpacingConfigurationProperty =
             BindableProperty.Create(
                 nameof(SpacingConfiguration),
-                typeof(SpacingConfiguration),
+                typeof(ISpacingConfiguration),
                 typeof(CrossPlatformLibraryConfiguration));
 
         /// <summary>
-        /// Gets or sets the spacing configuration of the theme.
+        ///     Gets or sets the spacing configuration of the theme.
         /// </summary>
         public ISpacingConfiguration SpacingConfiguration
         {
             get => (ISpacingConfiguration)this.GetValue(SpacingConfigurationProperty);
             set => this.SetValue(SpacingConfigurationProperty, value);
         }
-    }
 
-    public interface ITheme
-    {
-        IColorConfiguration ColorConfiguration { get; set; }
+        public static readonly BindableProperty FontConfigurationProperty =
+            BindableProperty.Create(
+                nameof(FontConfiguration),
+                typeof(IFontConfiguration),
+                typeof(CrossPlatformLibraryConfiguration));
 
-        ISpacingConfiguration SpacingConfiguration { get; set; }
+        /// <summary>
+        ///     Gets or sets the font configuration of the theme.
+        /// </summary>
+        public IFontConfiguration FontConfiguration
+        {
+            get => (IFontConfiguration)this.GetValue(FontConfigurationProperty);
+            set => this.SetValue(FontConfigurationProperty, value);
+        }
     }
 }

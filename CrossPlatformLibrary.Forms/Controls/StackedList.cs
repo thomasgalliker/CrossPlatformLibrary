@@ -46,15 +46,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             nameof(ItemTemplate),
             typeof(DataTemplate),
             typeof(StackedList),
-            default(DataTemplate),
-            BindingMode.OneWay,
-            propertyChanged: OnItemTemplatePropertyChanged);
-
-        private static void OnItemTemplatePropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
-        {
-            var itemsLayout = (StackedList)bindable;
-            itemsLayout.SetItems();
-        }
+            default(DataTemplate));
 
         public ICommand SelectedCommand
         {
@@ -180,25 +172,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         protected virtual View GetItemView(object item)
         {
-            var dataTemplate = this.ItemTemplate is DataTemplateSelector dataTemplateSelector
-                ? dataTemplateSelector.SelectTemplate(item, null)
-                : this.ItemTemplate;
-
-            var content = dataTemplate.CreateContent();
-            View view;
-            if (content is ViewCell viewCell)
-            {
-                view = viewCell.View;
-            }
-            else
-            {
-                view = content as View;
-                if (view == null)
-                {
-                    throw new Exception("ItemTemplate must either be a View or a ViewCell");
-                }
-            }
-
+            var view = BindingHelper.CreateContent(this.ItemTemplate, item, this);
             view.BindingContext = item;
 
             var gesture = new TapGestureRecognizer { Command = this.innerSelectedCommand, CommandParameter = view };
@@ -210,7 +184,11 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         private void AddGesture(View view, TapGestureRecognizer gesture)
         {
-            view.GestureRecognizers.Add(gesture);
+            var gestures = view.GestureRecognizers;
+            if (!gestures.Contains(gesture))
+            {
+                view.GestureRecognizers.Add(gesture);
+            }
 
             var layout = view as Layout<View>;
 
@@ -224,14 +202,6 @@ namespace CrossPlatformLibrary.Forms.Controls
                 this.AddGesture(child, gesture);
             }
         }
-
-        //protected override void OnPropertyChanged(string propertyName = null)
-        //{
-        //    if (propertyName == StackedList.ItemsSourceProperty.PropertyName)
-        //    {
-        //        this.SetItems();
-        //    }
-        //}
 
         private static void OnSelectedItemChanged(BindableObject bindable, object oldValue, object newValue)
         {

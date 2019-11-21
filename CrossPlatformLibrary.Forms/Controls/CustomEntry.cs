@@ -4,32 +4,6 @@ namespace CrossPlatformLibrary.Forms.Controls
 {
     public class CustomEntry : Entry
     {
-        private static Thickness DefaultPadding = default(Thickness);
-        private static Thickness AndroidPadding = new Thickness(left: 12, top: 30, right: 12, bottom: 33);
-
-        public static readonly BindableProperty PaddingProperty =
-            BindableProperty.Create(
-                nameof(Padding),
-                typeof(Thickness),
-                typeof(CustomEntry),
-                GetPlatformDefaultPadding());
-
-        private static Thickness GetPlatformDefaultPadding()
-        {
-            if (Device.RuntimePlatform == Device.Android)
-            {
-                return AndroidPadding;
-            }
-
-            return DefaultPadding;
-        }
-
-        public Thickness Padding
-        {
-            get => (Thickness)this.GetValue(PaddingProperty);
-            set => this.SetValue(PaddingProperty, value);
-        }
-
         public static readonly BindableProperty HideBorderProperty =
             BindableProperty.Create(
                 nameof(HideBorder),
@@ -42,6 +16,21 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             get => (bool)this.GetValue(HideBorderProperty);
             set => this.SetValue(HideBorderProperty, value);
+        }
+
+        public static readonly BindableProperty RemovePaddingProperty =
+            BindableProperty.Create(
+                nameof(RemovePadding),
+                typeof(bool),
+                typeof(CustomEntry),
+                false,
+                BindingMode.OneWay
+            );
+
+        public bool RemovePadding
+        {
+            get => (bool)this.GetValue(RemovePaddingProperty);
+            set => this.SetValue(RemovePaddingProperty, value);
         }
 
         public static readonly BindableProperty TextContentTypeProperty =

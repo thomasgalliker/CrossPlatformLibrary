@@ -6,9 +6,9 @@
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
-    HeightRequest="48"
+    BackgroundColor="Transparent"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="Fill">
+    VerticalOptions="StartAndExpand">
 
     <Grid.Margin>
         <OnPlatform x:TypeArguments="Thickness">
@@ -23,7 +23,6 @@
         effects:LineColorEffect.ApplyLineColor="True"
         effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
         DisplayMemberPath="{Binding DisplayMemberPath, Source={x:Reference Control}}"
-        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
         HeightRequest="48"
         HorizontalOptions="FillAndExpand"
         IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"

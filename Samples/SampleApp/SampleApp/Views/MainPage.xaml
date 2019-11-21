@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="SampleApp.MainPage"
+    x:Class="SampleApp.Views.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:CrossPlatformLibrary.Forms.Behaviors;assembly=CrossPlatformLibrary.Forms"
@@ -10,57 +10,160 @@
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
     xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
     xmlns:userControls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
-    x:Name="Page">
+    xmlns:views="clr-namespace:SampleApp.Views;assembly=SampleApp"
+    x:Name="Page"
+    Title="CrossPlatformLibrary Sample App">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="AutoCompleteSuggestionItemTemplate">
-                <ViewCell Height="30">
-                    <ViewCell.View>
-                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                            <Label
-                                HorizontalOptions="Start"
-                                Style="{DynamicResource EntryLabelStyle}"
-                                Text="{Binding Name}"
-                                VerticalOptions="Center" />
-                            <BoxView
-                                BackgroundColor="{DynamicResource ListSeparator}"
-                                HeightRequest="1"
-                                HorizontalOptions="FillAndExpand" />
-
-                        </StackLayout>
-                    </ViewCell.View>
-                </ViewCell>
+            <DataTemplate x:Key="CountryItemTemplate">
+                <views:CountryViewCell />
             </DataTemplate>
+
             <DataTemplate x:Key="ColorResourceItemTemplate">
                 <ViewCell>
                     <ViewCell.View>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50" />
-                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Label
                                 Grid.Column="0"
-                                BackgroundColor="{Binding Color}"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="CenterAndExpand" />
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding ResourceType}"
+                                VerticalOptions="CenterAndExpand"
+                                LineBreakMode="CharacterWrap" />
                             <Label
                                 Grid.Column="1"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
-                                Text="{Binding Color, Converter={StaticResource ColorToHexStringConverter}}"
+                                Text="{Binding Value, Converter={StaticResource ColorToHexStringConverter}}"
+                                TextColor="{Binding Value, Converter={StaticResource ColorInverter}}"
+                                BackgroundColor="{Binding Value}"
+                                HorizontalOptions="FillAndExpand"
                                 VerticalOptions="Center" />
                             <Label
                                 Grid.Column="2"
                                 FontSize="Small"
+                                Text="{Binding Key}"
                                 HorizontalOptions="Start"
-                                Text="{Binding Id}"
-                                VerticalOptions="Center" />
+                                VerticalOptions="CenterAndExpand" />
                         </Grid>
                     </ViewCell.View>
                 </ViewCell>
             </DataTemplate>
+
+            <DataTemplate x:Key="FontResourceItemTemplate">
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Grid.Column="0"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding ResourceType}"
+                                VerticalOptions="CenterAndExpand"
+                                LineBreakMode="CharacterWrap" />
+                            <Label
+                                Grid.Column="1"
+                                Text="{Binding Value, Converter={StaticResource FontElementToStringConverter}}"
+                                FontFamily="{Binding Value.FontFamily}"
+                                FontSize="{Binding Value.FontSize}"
+                                FontAttributes="{Binding Value.FontAttributes}"
+                                HorizontalOptions="StartAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                LineBreakMode="WordWrap" />
+                            <Label
+                                Grid.Column="2"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding Key}"
+                                VerticalOptions="CenterAndExpand" />
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ThicknessItemTemplate">
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Grid.Column="0"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding ResourceType}"
+                                VerticalOptions="CenterAndExpand"
+                                LineBreakMode="CharacterWrap" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding Value, Converter={StaticResource ThicknessToStringConverter}}"
+                                VerticalOptions="CenterAndExpand"
+                                LineBreakMode="CharacterWrap" />
+                            <Label
+                                Grid.Column="2"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding Key}"
+                                VerticalOptions="CenterAndExpand" />
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="GenericResourceItemTemplate">
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Grid.Column="0"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding ResourceType}"
+                                VerticalOptions="CenterAndExpand"
+                                LineBreakMode="CharacterWrap" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding Value}"
+                                VerticalOptions="CenterAndExpand"
+                                LineBreakMode="CharacterWrap" />
+                            <Label
+                                Grid.Column="2"
+                                FontSize="Small"
+                                HorizontalOptions="Start"
+                                Text="{Binding Key}"
+                                VerticalOptions="CenterAndExpand" />
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+
+            <views:ResourceItemTemplateSelector
+                x:Key="ResourceItemTemplateSelector"
+                ColorTemplate="{StaticResource ColorResourceItemTemplate}"
+                FontTemplate="{StaticResource FontResourceItemTemplate}"
+                ThicknessTemplate="{StaticResource ThicknessItemTemplate}"
+                GenericTemplate="{StaticResource GenericResourceItemTemplate}" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -88,6 +191,16 @@
                         <StackLayout IsVisible="{Binding IsNotBusy}">
                             <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomLabel--&gt;" />
+                                <Label Text="Label" />
+                                <controls:CustomLabel Text="CustomLabel" />
+                                <controls:CustomLabel
+                                    HorizontalOptions="Start"
+                                    JustifyText="True"
+                                    LineBreakMode="WordWrap"
+                                    Text="CustomLabel with JustifyText=&quot;True&quot;: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam."
+                                    VerticalOptions="Start" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableLabel--&gt;" />
                                 <controls:ValidatableLabel
                                     BackgroundColor="Transparent"
@@ -95,10 +208,8 @@
                                     Placeholder="ValidatableLabel1"
                                     Text="ValidatableLabel without Style" />
 
-                                <Grid>
+                                <controls:GridZero>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
@@ -117,26 +228,59 @@
                                         Grid.Row="0"
                                         Grid.Column="1"
                                         BackgroundColor="LightGoldenrodYellow"
-                                        IsReadonly="{Binding IsToggled, Mode=OneWay}"
+                                        IsReadonly="True"
                                         Placeholder="ValidatableEntry IsReadonly=True"
                                         Text="ValidatableEntry IsReadonly=True" />
-                                    <controls:ValidatableLabel
-                                        Grid.Row="1"
+                                </controls:GridZero>
+
+                                <controls:ValidatableLabel
+                                    LineBreakMode="WordWrap"
+                                    Placeholder="ValidatableLabel3"
+                                    Text="ValidatableLabel with LineBreakMode=WordWrap&#x0a;Multiple lines of text&#x0a;Line 3: More text" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomEntry--&gt;" />
+                                <controls:GridZero>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <controls:CustomEntry
+                                        Grid.Row="0"
                                         Grid.Column="0"
-                                        Grid.ColumnSpan="2"
-                                        BackgroundColor="MistyRose"
-                                        LineBreakMode="WordWrap"
-                                        Placeholder="ValidatableLabel3"
-                                        Text="ValidatableLabel with LineBreakMode=WordWrap&#x0a;Multiple lines of text&#x0a;Line 3: More text" />
-                                    <controls:ValidatableEntry
-                                        x:Name="ValidatableEntryTest"
-                                        Grid.Row="2"
-                                        Grid.Column="0"
-                                        Grid.ColumnSpan="2"
-                                        IsReadonly="{Binding IsToggled, Mode=OneWay}"
-                                        Placeholder="{Binding Text, Source={x:Reference ValidatableEntryTest}}"
-                                        Text="ValidatableEntry's Placeholder sizing test" />
-                                </Grid>
+                                        Text="CustomEntry"
+                                        Placeholder="CustomEntry" />
+                                    <Entry
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Text="Xamarin.Forms.Entry"
+                                        Placeholder="Xamarin.Forms.Entry" />
+                                </controls:GridZero>
+
+                                <controls:CustomEntry
+                                    HideBorder="True"
+                                    Placeholder="CustomEntry with HideBorder=&quot;True&quot;"
+                                    Text=""
+                                    BackgroundColor="LightGoldenrodYellow" />
+                                <controls:CustomEntry
+                                    Keyboard="Numeric"
+                                    Placeholder="CustomEntry with TextContentType=&quot;OneTimeCode&quot;"
+                                    Text=""
+                                    TextContentType="OneTimeCode" />
+                                <controls:CustomEntry
+                                    Placeholder="CustomEntry with TextContentType=&quot;Username&quot;"
+                                    Text=""
+                                    TextContentType="Username" />
+                                <controls:CustomEntry
+                                    Placeholder="CustomEntry with TextContentType=&quot;Password&quot;"
+                                    Text=""
+                                    TextContentType="Password" />
+                                <controls:CustomEntry
+                                    Placeholder="CustomEntry with TextContentType=&quot;NewPassword&quot;"
+                                    Text=""
+                                    TextContentType="NewPassword" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableEntry--&gt;" />
                                 <Grid>
@@ -166,43 +310,29 @@
                                         Placeholder="Xamarin.Forms.Entry"
                                         Text="{Binding UserName, Mode=TwoWay}" />
                                 </Grid>
+                                <controls:ValidatableEntry
+                                    x:Name="ValidatableEntryTest"
+                                    IsReadonly="{Binding IsToggled, Mode=OneWay}"
+                                    Placeholder="{Binding Text, Source={x:Reference ValidatableEntryTest}}"
+                                    Text="ValidatableEntry's Placeholder sizing test" />
 
-
-                                <controls:CustomLabel Text="Enter name:" />
-                                <controls:CustomLabel
-                                    FontSize="Small"
-                                    HorizontalOptions="Start"
-                                    JustifyText="True"
-                                    LineBreakMode="WordWrap"
-                                    Text="Justified Text in a CustomLabel: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam."
-                                    VerticalOptions="Start" />
-
-                                <controls:CustomEntry
-                                    Padding="0"
-                                    HideBorder="{Binding IsToggled}"
-                                    Text="Android EditText sets Padding=&quot;0&quot;" />
-                                <controls:CustomEntry
-                                    Padding="0"
-                                    HideBorder="True"
-                                    Placeholder="CustomEntry with HideBorder=&quot;True&quot;"
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo SearchBar--&gt;" />
+                                <SearchBar
+                                    IsEnabled="True"
+                                    Placeholder=""
+                                    Text="SearchBar with Text" />
+                                <SearchBar
+                                    IsEnabled="False"
+                                    Placeholder=""
+                                    Text="SearchBar with Text (Disabled)" />
+                                <SearchBar
+                                    IsEnabled="True"
+                                    Placeholder="SearchBar Placeholder"
                                     Text="" />
-                                <controls:CustomEntry
-                                    Keyboard="Numeric"
-                                    Placeholder="CustomEntry with TextContentType=&quot;OneTimeCode&quot;"
-                                    Text=""
-                                    TextContentType="OneTimeCode" />
-                                <controls:CustomEntry
-                                    Placeholder="CustomEntry with TextContentType=&quot;Username&quot;"
-                                    Text=""
-                                    TextContentType="Username" />
-                                <controls:CustomEntry
-                                    Placeholder="CustomEntry with TextContentType=&quot;Password&quot;"
-                                    Text=""
-                                    TextContentType="Password" />
-                                <controls:CustomEntry
-                                    Placeholder="CustomEntry with TextContentType=&quot;NewPassword&quot;"
-                                    Text=""
-                                    TextContentType="NewPassword" />
+                                <SearchBar
+                                    IsEnabled="False"
+                                    Placeholder="SearchBar Placeholder (Disabled)"
+                                    Text="" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableAutoCompleteView--&gt;" />
                                 <controls:ValidatableAutoCompleteView
@@ -213,7 +343,7 @@
                                     SearchCommand="{Binding AutoCompleteSearchCommand}"
                                     SearchCommandDelay="{x:Static local:App.SearchCommandDelay}"
                                     SelectedItem="{Binding Country, Mode=TwoWay}"
-                                    SuggestedItemTemplate="{StaticResource AutoCompleteSuggestionItemTemplate}"
+                                    SuggestedItemTemplate="{StaticResource CountryItemTemplate}"
                                     SuggestedItemsSource="{Binding SuggestedCountries, Mode=OneWay}"
                                     Text="{Binding CountrySearchText, Mode=TwoWay}"
                                     TextChanged="AutoCompleteView_OnTextChanged"
@@ -246,18 +376,29 @@
                                     ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
                                     ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
 
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo User Controls: AddressControl--&gt;" />
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: AddressControl--&gt;" />
                                 <userControls:AddressControl BindingContext="{Binding .}" />
 
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo User Controls: PeriodicTaskView--&gt;" />
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: PeriodicTaskView--&gt;" />
                                 <userControls:PeriodicTaskView BindingContext="{Binding PeriodicTask}" />
 
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo User Controls: ErrorBox--&gt;" />
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ErrorBox--&gt;" />
                                 <controls:ErrorBox Text="Some error message" />
 
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo User Controls: ValidationErrorBox--&gt;" />
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ValidationErrorBox--&gt;" />
                                 <controls:ValidationErrorBox Validation="{Binding Validation}" />
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ValidatableEditor--&gt;" />
+                                <Editor
+                                    IsEnabled="True"
+                                    MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
+                                    Placeholder="Placeholder of Editor"
+                                    Text="{Binding Notes, Mode=TwoWay}" />
+                                <controls:CustomEditor
+                                    IsEnabled="True"
+                                    MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
+                                    Placeholder="Placeholder of CustomEditor"
+                                    Text="{Binding Notes, Mode=TwoWay}" />
                                 <Grid>
                                     <controls:ValidatableEditor
                                         BackgroundColor="LightYellow"
@@ -265,7 +406,7 @@
                                         IsEnabled="True"
                                         MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
                                         MaxLines="3"
-                                        Placeholder="{localization:Translate SimpleNotesLabelText}"
+                                        Placeholder="Placeholder of ValidatableEditor"
                                         Text="{Binding Notes, Mode=TwoWay}"
                                         ValidationErrors="{Binding Errors[Notes]}">
                                         <controls:ValidatableEditor.Keyboard>
@@ -295,9 +436,10 @@
                                     NavigateCommand="{Binding MailNavigateCommand}"
                                     Text="{Binding AdminEmailAddress, Mode=OneWay}"
                                     TintColor="Red" />
+                                <controls:HyperLinkLabel NavigateUri="mailto:anothermail@someaddress.com" Text="Click here: anothermail@someaddress.com" />
                                 <controls:HyperLinkLabel
-                                    NavigateUri="mailto:anothermail@someaddress.com"
-                                    Text="Click here: anothermail@someaddress.com"
+                                    NavigateUri="http://www.thomasgalliker.ch"
+                                    Text="Click here to navigate to www.thomasgalliker.ch"
                                     TextColor="Black"
                                     TintColor="BlueViolet" />
 
@@ -350,18 +492,45 @@
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo StackedList (Horizontal)--&gt;" />
                                 <controls:StackedList
-                                    ItemTemplate="{StaticResource AutoCompleteSuggestionItemTemplate}"
+                                    ItemTemplate="{StaticResource CountryItemTemplate}"
                                     ItemsSource="{Binding Countries, Mode=OneWay}"
                                     ListOrientation="Horizontal"
                                     SelectedItem="{Binding Country, Mode=TwoWay}"
                                     SelectionMode="None" />
 
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo StackedList (Vertical)--&gt;" />
-                                <controls:StackedList
-                                    ItemTemplate="{StaticResource ColorResourceItemTemplate}"
-                                    ItemsSource="{Binding ThemeColors, Mode=OneWay}"
-                                    ListOrientation="Vertical"
-                                    SelectionMode="None" />
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo StackedGrid --&gt;" />
+                                <controls:StackedGrid
+                                    ItemTemplate="{StaticResource CountryItemTemplate}"
+                                    ItemsSource="{Binding Countries, Mode=OneWay}"
+                                    SelectedItem="{Binding Country, Mode=TwoWay}" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo BindableStackLayout--&gt;" />
+                                <controls:BindableStackLayout
+                                    ItemTemplate="{StaticResource CountryItemTemplate}"
+                                    ItemsSource="{Binding Countries}"
+                                    Orientation="Vertical" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ListView--&gt;" />
+                                <ListView
+                                    x:Name="ListViewCountries"
+                                    BackgroundColor="Transparent"
+                                    CachingStrategy="RetainElement"
+                                    HasUnevenRows="true"
+                                    IsPullToRefreshEnabled="true"
+                                    IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
+                                    ItemTemplate="{StaticResource CountryItemTemplate}"
+                                    ItemsSource="{Binding Countries}"
+                                    RefreshCommand="{Binding RefreshCommand}"
+                                    SeparatorVisibility="None"
+                                    SelectionMode="Single"
+                                    HeightRequest="150">
+                                    <ListView.Behaviors>
+                                        <behaviors:EventToCommandBehavior
+                                            Command="{Binding BindingContext.SelectCountryCommand, Source={x:Reference Page}}"
+                                            CommandParameter="{Binding Source={x:Reference ListViewCountries}, Path=SelectedItem}"
+                                            EventName="ItemTapped" />
+                                    </ListView.Behaviors>
+                                </ListView>
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo NoBarsScrollViewer--&gt;" />
                                 <controls:NoBarsScrollViewer Orientation="Horizontal">
@@ -380,6 +549,155 @@
                                             WidthRequest="333" />
                                     </controls:StackLayoutZero>
                                 </controls:NoBarsScrollViewer>
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo FontFamily, FontSize, FontAttributes--&gt;" />
+                                <StackLayout Orientation="Vertical">
+                                    <Label
+                                        Text="Theme.FontSize.Micro"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Default}"
+                                        FontSize="{DynamicResource Theme.FontSize.Micro}"
+                                        FontAttributes="None"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Theme.FontSize.Small"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Default}"
+                                        FontSize="{DynamicResource Theme.FontSize.Small}"
+                                        FontAttributes="None"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Theme.FontSize.MidMedium"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Default}"
+                                        FontSize="{DynamicResource Theme.FontSize.MidMedium}"
+                                        FontAttributes="None"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Theme.FontSize.Medium"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Default}"
+                                        FontSize="{DynamicResource Theme.FontSize.Medium}"
+                                        FontAttributes="None"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Theme.FontSize.Large"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Default}"
+                                        FontSize="{DynamicResource Theme.FontSize.Large}"
+                                        FontAttributes="None"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Theme.FontSize.XLarge"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Default}"
+                                        FontSize="{DynamicResource Theme.FontSize.XLarge}"
+                                        FontAttributes="None"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Theme.FontSize.XXLarge"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Default}"
+                                        FontSize="{DynamicResource Theme.FontSize.XXLarge}"
+                                        FontAttributes="None"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Theme.FontSize.XXXLarge"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Default}"
+                                        FontSize="{DynamicResource Theme.FontSize.XXXLarge}"
+                                        FontAttributes="None"
+                                        Style="{StaticResource DemoLabelStyle}" />
+
+                                    <controls:DividerLine />
+
+                                    <Label
+                                        Text="Body1"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Body1}"
+                                        FontSize="{DynamicResource Theme.FontSize.Body1}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Body1}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Body2"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Body2}"
+                                        FontSize="{DynamicResource Theme.FontSize.Body2}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Body2}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Button"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Button}"
+                                        FontSize="{DynamicResource Theme.FontSize.Button}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Button}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Input"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Input}"
+                                        FontSize="{DynamicResource Theme.FontSize.Input}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Input}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="H1"
+                                        FontFamily="{DynamicResource Theme.FontFamily.H1}"
+                                        FontSize="{DynamicResource Theme.FontSize.H1}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.H1}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="H2"
+                                        FontFamily="{DynamicResource Theme.FontFamily.H2}"
+                                        FontSize="{DynamicResource Theme.FontSize.H2}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.H2}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="H3"
+                                        FontFamily="{DynamicResource Theme.FontFamily.H3}"
+                                        FontSize="{DynamicResource Theme.FontSize.H3}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.H3}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="H4"
+                                        FontFamily="{DynamicResource Theme.FontFamily.H4}"
+                                        FontSize="{DynamicResource Theme.FontSize.H4}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.H4}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="H5"
+                                        FontFamily="{DynamicResource Theme.FontFamily.H5}"
+                                        FontSize="{DynamicResource Theme.FontSize.H5}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.H5}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="H6"
+                                        FontFamily="{DynamicResource Theme.FontFamily.H6}"
+                                        FontSize="{DynamicResource Theme.FontSize.H6}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.H6}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Caption"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Caption}"
+                                        FontSize="{DynamicResource Theme.FontSize.Caption}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Caption}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Overline"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Overline}"
+                                        FontSize="{DynamicResource Theme.FontSize.Overline}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Overline}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Title"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Title}"
+                                        FontSize="{DynamicResource Theme.FontSize.Title}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Title}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Subtitle1"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Subtitle1}"
+                                        FontSize="{DynamicResource Theme.FontSize.Subtitle1}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Subtitle1}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                    <Label
+                                        Text="Subtitle2"
+                                        FontFamily="{DynamicResource Theme.FontFamily.Subtitle2}"
+                                        FontSize="{DynamicResource Theme.FontSize.Subtitle2}"
+                                        FontAttributes="{DynamicResource Theme.FontAttributes.Subtitle2}"
+                                        Style="{StaticResource DemoLabelStyle}" />
+                                </StackLayout>
+
+                                <controls:DividerLine />
+
+                                <Button Text="Dump Resources" Command="{Binding DumpResourcesCommand}" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo FrameZero--&gt;" />
                                 <controls:FrameZero>
@@ -491,6 +809,12 @@
                                         LineBreakMode="CharacterWrap"
                                         Text="{Binding CanExecuteLoadDataButtonCommand, StringFormat='CanExecuteLoadDataButtonCommand={0}'}" />
                                 </controls:StackLayoutZero>
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Debug App Resources--&gt;" />
+                                <controls:BindableStackLayout
+                                    ItemTemplate="{StaticResource ResourceItemTemplateSelector}"
+                                    ItemsSource="{Binding ThemeResources}"
+                                    Orientation="Vertical" />
 
                             </StackLayout>
 

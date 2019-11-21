@@ -8,6 +8,7 @@ using Xamarin.Forms.Platform.Android;
 using DatePickerRenderer = CrossPlatformLibrary.Forms.Android.Renderers.DatePickerRenderer;
 
 [assembly: ExportRenderer(typeof(DatePicker), typeof(DatePickerRenderer))]
+
 namespace CrossPlatformLibrary.Forms.Android.Renderers
 {
     [Preserve(AllMembers = true)]

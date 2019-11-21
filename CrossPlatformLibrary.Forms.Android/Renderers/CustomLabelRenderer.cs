@@ -11,6 +11,8 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 {
     public class CustomLabelRenderer : Xamarin.Forms.Platform.Android.LabelRenderer
     {
+        private Thickness? originalPadding;
+
         public CustomLabelRenderer(Context context) : base(context)
         {
         }
@@ -30,7 +32,8 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
                 if (this.Element is CustomLabel customLabel)
                 {
                     this.UpdateLines(customLabel);
-                    this.JustifyText(customLabel);
+                    this.JustifyText(customLabel); 
+                    this.RemovePadding(customLabel);
                 }
             }
         }
@@ -51,6 +54,13 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
                 if (this.Element is CustomLabel customLabel)
                 {
                     this.JustifyText(customLabel);
+                }
+            }
+            else if (e.PropertyName == CustomLabel.RemovePaddingProperty.PropertyName)
+            {
+                if (this.Element is CustomLabel customLabel)
+                {
+                    this.RemovePadding(customLabel);
                 }
             }
         }
@@ -82,6 +92,30 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
             else
             {
                 // TODO How to switch back?
+            }
+        }
+
+        private void RemovePadding(CustomLabel customLabel)
+        {
+            if (customLabel.RemovePadding)
+            {
+                this.originalPadding = new Thickness(left: this.Control.PaddingLeft, top: this.Control.PaddingTop, right: this.Control.PaddingRight, bottom: this.Control.PaddingBottom);
+                this.Control.SetPadding(0, 0, 0, 0);
+                this.Control.SetIncludeFontPadding(false);
+            }
+            else
+            {
+                if (this.originalPadding != null)
+                {
+                    var p = this.originalPadding.Value;
+                    var left = (int)p.Left;
+                    var top = (int)p.Top;
+                    var right = (int)p.Right;
+                    var bottom = (int)p.Bottom;
+                    this.Control.SetPadding(left, top, right, bottom);
+                }
+
+                this.Control.SetIncludeFontPadding(true);
             }
         }
     }

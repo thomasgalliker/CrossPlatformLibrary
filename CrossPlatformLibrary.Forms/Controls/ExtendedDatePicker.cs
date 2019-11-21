@@ -99,12 +99,6 @@ namespace CrossPlatformLibrary.Forms.Controls
             }
         }
 
-        public Font Font
-        {
-            get => (Font)this.GetValue(FontProperty);
-            set => this.SetValue(FontProperty, value);
-        }
-
         public TextAlignment XAlign
         {
             get => (TextAlignment)this.GetValue(XAlignProperty);

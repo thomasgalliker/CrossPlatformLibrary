@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="CrossPlatformLibrary.Forms.Resources.ThemeFontResources"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!--  Font Families  -->
+    <OnPlatform
+        x:Key="Theme.FontFamily.Monospace"
+        x:TypeArguments="x:String"
+        Android="monospace"
+        iOS="Courier New" />
+
+</ResourceDictionary>

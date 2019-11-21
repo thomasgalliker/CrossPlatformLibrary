@@ -48,7 +48,7 @@ namespace CrossPlatformLibrary.Tools
         {
             var folder = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
             var files = folder.GetFiles();
-            return files.Where(f => f.Name.StartsWithAny(CrossPlatformLibrary.AssemblyNamespaces) && f.Name.EndsWith(DllFileExtension));
+            return files.Where(f => f.Name.StartsWithAny(new []{ "CrossPlatformLibrary" }) && f.Name.EndsWith(DllFileExtension));
         }
 
         private Assembly LoadAssembly(FileInfo dllFile)

@@ -20,7 +20,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
     [Preserve(AllMembers = true)]
     public class ExtendedDatePickerRenderer : DatePickerRenderer
     {
-        public new static async void Init()
+        public static new async void Init()
         {
             var now = DateTime.Now;
         }
@@ -35,7 +35,6 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
             if (this.Element is ExtendedDatePicker view)
             {
-                this.SetFont(view);
                 this.SetTextAlignment(view);
                 // SetBorder(view);
                 this.SetNullableText(view);
@@ -50,11 +49,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
             var view = (ExtendedDatePicker)this.Element;
 
-            if (e.PropertyName == ExtendedDatePicker.FontProperty.PropertyName)
-            {
-                this.SetFont(view);
-            }
-            else if (e.PropertyName == ExtendedDatePicker.XAlignProperty.PropertyName)
+            if (e.PropertyName == ExtendedDatePicker.XAlignProperty.PropertyName)
             {
                 this.SetTextAlignment(view);
             }
@@ -91,19 +86,6 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
                 case Xamarin.Forms.TextAlignment.Start:
                     this.Control.Gravity = GravityFlags.Start;
                     break;
-            }
-        }
-
-        /// <summary>
-        ///     Sets the font.
-        /// </summary>
-        /// <param name="view">The view.</param>
-        private void SetFont(ExtendedDatePicker view)
-        {
-            if (view.Font != Font.Default)
-            {
-                this.Control.TextSize = view.Font.ToScaledPixel();
-                this.Control.Typeface = view.Font.ToTypeface();
             }
         }
 
