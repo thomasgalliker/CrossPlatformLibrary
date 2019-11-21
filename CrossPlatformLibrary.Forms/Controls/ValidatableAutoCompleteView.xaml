@@ -75,6 +75,8 @@
     <controls:StackedList
         x:Name="SuggestionList"
         Grid.Row="2"
+        Margin="0"
+        BackgroundColor="Magenta"
         ItemTemplate="{Binding SuggestedItemTemplate, Source={x:Reference Control}, Mode=OneWay}"
         ItemsSource="{Binding SuggestedItemsSource, Source={x:Reference Control}, Mode=OneWay}"
         SelectedItem="{Binding SelectedItem, Source={x:Reference Control}, Mode=TwoWay}"
