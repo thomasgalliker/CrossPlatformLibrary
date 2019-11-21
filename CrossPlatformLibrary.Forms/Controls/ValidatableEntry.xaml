@@ -82,7 +82,7 @@
             <Label.Margin>
                 <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="Android" Value="0,2,0,0" />
-                    <On Platform="iOS" Value="0,2,0,0" />
+                    <On Platform="iOS" Value="0,0,0,0" />
                 </OnPlatform>
             </Label.Margin>
         </controls:CustomLabel>
