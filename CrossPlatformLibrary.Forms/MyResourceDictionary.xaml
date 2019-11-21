@@ -164,7 +164,7 @@
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="LineBreakMode" Value="TailTruncation" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="controls:MinimumHeight.Value" Value="32" />
     </Style>
