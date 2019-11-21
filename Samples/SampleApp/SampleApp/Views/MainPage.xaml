@@ -540,36 +540,65 @@
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ValidationErrorBox--&gt;" />
                                 <controls:ValidationErrorBox Validation="{Binding Validation}" />
 
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ValidatableEditor--&gt;" />
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: CustomEditor--&gt;" />
                                 <Editor
-                                    IsEnabled="True"
                                     MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
-                                    Placeholder="Placeholder of Editor"
+                                    Placeholder="Xamarin.Forms.Editor"
                                     Text="{Binding Notes, Mode=TwoWay}" />
                                 <controls:CustomEditor
-                                    IsEnabled="True"
                                     MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
-                                    Placeholder="Placeholder of CustomEditor"
+                                    Placeholder="CustomEditor"
                                     Text="{Binding Notes, Mode=TwoWay}" />
-                                <Grid>
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ValidatableEditor--&gt;" />
+                                <controls:ValidatableEditor
+                                    x:Name="ValidatableEditorTest1"
+                                    Placeholder="ValidatableEditor"
+                                    Text=""
+                                    ValidationErrors="{Binding Source={x:Reference ValidatableEditorTest1}, Path=Text, Converter={StaticResource RandomValidationErrorsConverter}}" />
+                                <controls:ValidatableEditor
+                                    x:Name="ValidatableEditorTest2"
+                                    Placeholder="ValidatableEditor"
+                                    Text="ValidatableEditor with Text: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam."
+                                    ValidationErrors="{Binding Source={x:Reference ValidatableEditorTest2}, Path=Text, Converter={StaticResource RandomValidationErrorsConverter}}" />
+                                <controls:ValidatableEditor
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
+                                    MaxLines="3"
+                                    Placeholder="ValidatableEditor with MaxLength/MaxLines"
+                                    Text="{Binding Notes, Mode=TwoWay}"
+                                    ValidationErrors="{Binding Errors[Notes]}">
+                                    <controls:ValidatableEditor.Keyboard>
+                                        <Keyboard x:FactoryMethod="Create">
+                                            <x:Arguments>
+                                                <KeyboardFlags>CapitalizeSentence,Spellcheck</KeyboardFlags>
+                                            </x:Arguments>
+                                        </Keyboard>
+                                    </controls:ValidatableEditor.Keyboard>
+                                </controls:ValidatableEditor>
+
+                                <controls:GridZero>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
                                     <controls:ValidatableEditor
-                                        BackgroundColor="LightYellow"
-                                        HorizontalOptions="FillAndExpand"
-                                        IsEnabled="True"
-                                        MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
-                                        MaxLines="3"
-                                        Placeholder="Placeholder of ValidatableEditor"
-                                        Text="{Binding Notes, Mode=TwoWay}"
-                                        ValidationErrors="{Binding Errors[Notes]}">
-                                        <controls:ValidatableEditor.Keyboard>
-                                            <Keyboard x:FactoryMethod="Create">
-                                                <x:Arguments>
-                                                    <KeyboardFlags>CapitalizeSentence,Spellcheck</KeyboardFlags>
-                                                </x:Arguments>
-                                            </Keyboard>
-                                        </controls:ValidatableEditor.Keyboard>
-                                    </controls:ValidatableEditor>
-                                </Grid>
+                                        Grid.Column="0"
+                                        BackgroundColor="Aquamarine"
+                                        Placeholder="ValidatableEditor"
+                                        Text="" />
+                                    <controls:ValidatableEntry
+                                        Grid.Column="1"
+                                        BackgroundColor="LightGoldenrodYellow"
+                                        Placeholder="ValidatableEntry"
+                                        Text="" />
+                                </controls:GridZero>
+                                <Grid />
 
                                 <userControls:NotesView BindingContext="{Binding .}" />
 
