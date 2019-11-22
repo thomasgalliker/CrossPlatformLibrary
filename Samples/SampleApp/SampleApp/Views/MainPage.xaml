@@ -591,6 +591,7 @@
                                         Grid.Column="0"
                                         BackgroundColor="Aquamarine"
                                         Placeholder="ValidatableEditor"
+                                        HidePlaceholder="False"
                                         Text="" />
                                     <controls:ValidatableEntry
                                         Grid.Column="1"
