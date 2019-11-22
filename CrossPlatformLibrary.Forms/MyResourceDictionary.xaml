@@ -302,6 +302,7 @@
         <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
         <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="controls:MinimumHeight.Value" Value="{StaticResource MinimumHeight.Input}" />
     </Style>
@@ -330,7 +331,6 @@
         BasedOn="{StaticResource PickerStyle}"
         TargetType="controls:BindablePicker" />
     <Style BasedOn="{StaticResource BindablePickerStyle}" TargetType="controls:BindablePicker" />
-
 
     <Style x:Key="DatePickerStyle" TargetType="DatePicker">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
