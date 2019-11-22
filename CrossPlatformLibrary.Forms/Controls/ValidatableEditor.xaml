@@ -25,6 +25,7 @@
         InputTransparent="True"
         RemovePadding="True"
         Style="{DynamicResource AnnotationEntryLabelStyle}"
+        IsVisible="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"
         Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}" />
 
     <!--  Editor  -->

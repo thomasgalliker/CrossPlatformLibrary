@@ -67,6 +67,27 @@ namespace CrossPlatformLibrary.Forms.Controls
             entry.OnPropertyChanged(nameof(entry.AnnotationText));
         }
 
+        public static readonly BindableProperty HidePlaceholderProperty =
+            BindableProperty.Create(
+                nameof(HidePlaceholder),
+                typeof(bool),
+                typeof(ValidatableEditor),
+                true,
+                BindingMode.OneWay,
+                propertyChanged: OnHidePlaceholderPropertyChanged);
+
+        public bool HidePlaceholder
+        {
+            get => (bool)this.GetValue(HidePlaceholderProperty);
+            set => this.SetValue(HidePlaceholderProperty, value);
+        }
+
+        private static void OnHidePlaceholderPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var entry = (ValidatableEditor)bindable;
+            entry.OnPropertyChanged(nameof(entry.AnnotationText));
+        }
+
         public string AnnotationText
         {
             get
@@ -76,7 +97,9 @@ namespace CrossPlatformLibrary.Forms.Controls
                     return this.Placeholder;
                 }
 
-                return " ";
+                // If HidePlaceholder is true, the returned AnnotationText is null
+                // which means, the Placeholder label is not visible if Text is empty
+                return this.HidePlaceholder ? null : " ";
             }
         }
 
