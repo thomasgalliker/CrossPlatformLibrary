@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace CrossPlatformLibrary.Extensions
 {
@@ -53,6 +55,18 @@ namespace CrossPlatformLibrary.Extensions
                     yield return element;
                 }
             }
+        }
+
+        /// <summary>
+        ///     Returns all elements of the given <seealso cref="source" /> distinct by <seealso cref="keySelector" />.
+        /// </summary>
+        /// <typeparam name="TSource">Type of the source sequence.</typeparam>
+        /// <typeparam name="TKey">Type of the selected element.</typeparam>
+        /// <param name="source">Source collection.</param>
+        /// <param name="keySelector">Key selector.</param>
+        public static IQueryable<TSource> DistinctBy<TSource, TKey>(this IQueryable<TSource> source, Expression<Func<TSource, TKey>> keySelector, IEqualityComparer<TKey> comparer = null)
+        {
+            return Queryable.Select(Queryable.GroupBy(source, keySelector, comparer), g => g.First());
         }
     }
 }

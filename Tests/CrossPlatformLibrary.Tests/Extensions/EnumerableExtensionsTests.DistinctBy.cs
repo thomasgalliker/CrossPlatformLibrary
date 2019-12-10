@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Tests.Stubs;
 using FluentAssertions;
@@ -36,7 +37,7 @@ namespace CrossPlatformLibrary.Tests.Extensions
         public void ShouldReturnDistinctBy_PropertyInteger()
         {
             // Arrange
-            var source = new[] { "first", "second", "third", "fourth", "fifth" };
+            var source = new[] { "first", "second", "third", "fourth", "fifth" }.AsQueryable();
 
             // Act
             var distinct = source.DistinctBy(word => word.Length);
