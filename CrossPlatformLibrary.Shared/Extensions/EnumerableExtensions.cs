@@ -7,7 +7,7 @@ using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Extensions
 {
-    public static class EnumerableExtensions
+    public  static partial class EnumerableExtensions
     {
         private static readonly Random Rng = new Random();
 
