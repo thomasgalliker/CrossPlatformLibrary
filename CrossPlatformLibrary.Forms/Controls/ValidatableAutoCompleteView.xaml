@@ -79,7 +79,7 @@
         Padding="0"
         ColumnSpacing="0"
         RowSpacing="0"
-        Spacing="0"
+        Spacing="{Binding SuggestedItemsSpacing, Source={x:Reference Control}, Mode=OneWay}"
         ItemTemplate="{Binding SuggestedItemTemplate, Source={x:Reference Control}, Mode=OneWay}"
         ItemsSource="{Binding SuggestedItemsSource, Source={x:Reference Control}, Mode=OneWay}"
         SelectedItem="{Binding SelectedItem, Source={x:Reference Control}, Mode=TwoWay}"

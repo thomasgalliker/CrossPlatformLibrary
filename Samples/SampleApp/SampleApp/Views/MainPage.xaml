@@ -387,6 +387,7 @@
                                     SelectedItem="{Binding Country, Mode=TwoWay}"
                                     SuggestedItemTemplate="{StaticResource CountryItemTemplate}"
                                     SuggestedItemsSource="{Binding SuggestedCountries, Mode=OneWay}"
+                                    SuggestedItemsSpacing="20"
                                     Text="{Binding CountrySearchText, Mode=TwoWay}"
                                     TextChanged="AutoCompleteView_OnTextChanged"
                                     ValidationErrors="{Binding Validation.Errors[CountrySearchText]}" />
@@ -678,7 +679,8 @@
                                     ItemsSource="{Binding Countries, Mode=OneWay}"
                                     ListOrientation="Horizontal"
                                     SelectedItem="{Binding Country, Mode=TwoWay}"
-                                    SelectionMode="None" />
+                                    SelectionMode="None"
+                                    Spacing="0" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo StackedGrid --&gt;" />
                                 <controls:StackedGrid

@@ -18,7 +18,27 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public StackOrientation ListOrientation { get; set; }
 
-        public double Spacing { get; set; }
+        public static readonly BindableProperty SpacingProperty =
+            BindableProperty.Create(
+                nameof(Spacing),
+                typeof(double),
+                typeof(StackedList),
+                6.0d,
+                BindingMode.OneWay,propertyChanged: OnSpacingPropertyChanged);
+
+        private static void OnSpacingPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            if (bindable is StackedList stackedList && stackedList.itemsStackLayout != null && newvalue is double newValue)
+            {
+                stackedList.itemsStackLayout.Spacing = newValue;
+            }
+        }
+
+        public double Spacing
+        {
+            get => (double)this.GetValue(SpacingProperty);
+            set => this.SetValue(SpacingProperty, value);
+        }
 
         public static readonly BindableProperty SelectedCommandProperty = BindableProperty.Create(
             nameof(SelectedCommand),
@@ -93,7 +113,6 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public StackedList()
         {
-            this.Spacing = 5;
             this.scrollView = new NoBarsScrollViewer();
             this.itemsStackLayout = new StackLayout
             {

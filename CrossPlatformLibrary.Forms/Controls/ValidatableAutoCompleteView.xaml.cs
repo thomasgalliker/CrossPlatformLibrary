@@ -365,6 +365,18 @@ namespace CrossPlatformLibrary.Forms.Controls
             get => (DataTemplate)this.GetValue(SuggestedItemTemplateProperty);
             set => this.SetValue(SuggestedItemTemplateProperty, value);
         }
+        
+        public static readonly BindableProperty SuggestedItemsSpacingProperty = BindableProperty.Create(
+            nameof(SuggestedItemsSpacing),
+            typeof(double),
+            typeof(ValidatableAutoCompleteView),
+            6.0);
+
+        public double SuggestedItemsSpacing
+        {
+            get => (double)this.GetValue(SuggestedItemsSpacingProperty);
+            set => this.SetValue(SuggestedItemsSpacingProperty, value);
+        }
 
         public static readonly BindableProperty DisplayMemberPathProperty =
             BindableProperty.Create(
