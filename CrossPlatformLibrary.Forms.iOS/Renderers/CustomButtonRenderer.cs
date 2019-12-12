@@ -1,8 +1,8 @@
-﻿using System;
-using System.ComponentModel;
-using CrossPlatformLibrary.Forms.Controls;
+﻿using CrossPlatformLibrary.Forms.Controls;
 using CrossPlatformLibrary.Forms.iOS.Extensions;
 using CrossPlatformLibrary.Forms.iOS.Renderers;
+using System;
+using System.ComponentModel;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -67,10 +67,9 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                 var button = this.Control;
                 if (button != null)
                 {
-                    button.LineBreakMode = UILineBreakMode.TailTruncation;
-
                     this.UpdateHorizontalAlignment(customButton);
                     this.UpdateVerticalAlignment(customButton);
+                    this.UpdateLineBreakMode(customButton);
                 }
             }
         }
@@ -93,6 +92,33 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                     this.UpdateHorizontalAlignment(customButton);
                 }
             }
+            else if (e.PropertyName == CustomButton.LineBreakModeProperty.PropertyName)
+            {
+                if (this.Element is CustomButton customButton)
+                {
+                    this.UpdateLineBreakMode(customButton);
+                }
+            }
+        }
+
+        private void UpdateLineBreakMode(CustomButton customButton)
+        {
+            var lineBreakMode = customButton.LineBreakMode;
+            var uiLineBreakMode = lineBreakMode.ToUILineBreakMode();
+            this.Control.TitleLabel.LineBreakMode = uiLineBreakMode;
+
+            if (lineBreakMode == LineBreakMode.WordWrap || lineBreakMode == LineBreakMode.CharacterWrap)
+            {
+                this.Control.TitleLabel.Lines = 0;
+            }
+            else
+            {
+                this.Control.TitleLabel.Lines = 1;
+            }
+
+            //this.Control.TitleEdgeInsets = new UIEdgeInsets(
+            //    (nfloat)customButton.Padding.Top, (nfloat)customButton.Padding.Left,
+            //    (nfloat)customButton.Padding.Bottom, (nfloat)customButton.Padding.Right);
         }
 
         private void UpdateHorizontalAlignment(CustomButton customButton)

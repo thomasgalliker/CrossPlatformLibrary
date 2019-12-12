@@ -387,7 +387,7 @@
                                     SelectedItem="{Binding Country, Mode=TwoWay}"
                                     SuggestedItemTemplate="{StaticResource CountryItemTemplate}"
                                     SuggestedItemsSource="{Binding SuggestedCountries, Mode=OneWay}"
-                                    SuggestedItemsSpacing="20"
+                                    SuggestedItemsSpacing="{DynamicResource Theme.Spacing.Small}"
                                     Text="{Binding CountrySearchText, Mode=TwoWay}"
                                     TextChanged="AutoCompleteView_OnTextChanged"
                                     ValidationErrors="{Binding Validation.Errors[CountrySearchText]}" />
@@ -993,6 +993,29 @@
                                         LineBreakMode="CharacterWrap"
                                         Text="{Binding CanExecuteLoadDataButtonCommand, StringFormat='CanExecuteLoadDataButtonCommand={0}'}" />
                                 </controls:StackLayoutZero>
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomButton (LineBreakMode)--&gt;" />
+                                <controls:CustomButton Padding="16" Text="CustomButton with a lot of text so that we can demonstrate the LineBreakMode" />
+                                <controls:CustomButton
+                                    Padding="16"
+                                    LineBreakMode="HeadTruncation"
+                                    Text="CustomButton with a lot of text so that we can demonstrate the LineBreakMode" />
+                                <controls:CustomButton
+                                    Padding="16"
+                                    LineBreakMode="MiddleTruncation"
+                                    Text="CustomButton with a lot of text so that we can demonstrate the LineBreakMode" />
+                                <controls:CustomButton
+                                    Padding="16"
+                                    LineBreakMode="TailTruncation"
+                                    Text="CustomButton with a lot of text so that we can demonstrate the LineBreakMode" />
+                                <controls:CustomButton
+                                    Padding="16"
+                                    LineBreakMode="WordWrap"
+                                    Text="CustomButton with a lot of text so that we can demonstrate the LineBreakMode" />
+                                <controls:CustomButton
+                                    Padding="16"
+                                    LineBreakMode="CharacterWrap"
+                                    Text="CustomButton with a lot of text so that we can demonstrate the LineBreakMode" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Debug App Resources--&gt;" />
                                 <controls:BindableStackLayout
