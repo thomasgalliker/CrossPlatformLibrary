@@ -20,6 +20,16 @@
     <Color x:Key="ButtonBorder">#C8C7CC</Color>
     <Color x:Key="ListSeparator">#C8C7CC</Color>
 
+    <OnPlatform x:Key="Theme.DividerLine.Small" x:TypeArguments="x:Double">
+        <On Platform="Android" Value="0.1" />
+        <On Platform="iOS" Value="0.5" />
+    </OnPlatform>
+
+    <OnPlatform x:Key="Theme.DividerLine.Medium" x:TypeArguments="x:Double">
+        <On Platform="Android" Value="1" />
+        <On Platform="iOS" Value="1" />
+    </OnPlatform>
+
     <OnPlatform x:Key="CardPadding" x:TypeArguments="Thickness">
         <On Platform="Android" Value="8, 8, 8, 16" />
         <On Platform="iOS" Value="0, 0, 0, 16" />
