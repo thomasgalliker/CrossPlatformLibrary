@@ -17,7 +17,6 @@
         <On Platform="iOS" Value="White" />
     </OnPlatform>
 
-    <Color x:Key="ButtonBorder">#C8C7CC</Color>
     <Color x:Key="ListSeparator">#C8C7CC</Color>
 
     <OnPlatform x:Key="Theme.DividerLine.Small" x:TypeArguments="x:Double">
