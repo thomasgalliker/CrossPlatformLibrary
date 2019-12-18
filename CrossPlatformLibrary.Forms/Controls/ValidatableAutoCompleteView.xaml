@@ -7,10 +7,11 @@
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="StartAndExpand"
-    IsClippedToBounds="True">
+    IsClippedToBounds="True"
+    VerticalOptions="StartAndExpand">
 
     <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
         <RowDefinition Height="Auto" />
         <RowDefinition Height="Auto" />
         <RowDefinition Height="Auto" />
@@ -29,19 +30,19 @@
     <controls:GridZero Grid.Row="1" IsClippedToBounds="True">
         <controls:CustomEntry
             x:Name="Entry"
-            x:FieldModifier="internal"
             effects:LineColorEffect.ApplyLineColor="True"
             effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
-            VerticalOptions="StartAndExpand"
+            x:FieldModifier="internal"
+            Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
             HorizontalOptions="FillAndExpand"
             HorizontalTextAlignment="Start"
-            Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
             Keyboard="{Binding Keyboard, Source={x:Reference Control}, Mode=OneWay}"
             MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
             Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
             Style="{Binding EntryStyle, Source={x:Reference Control}, Mode=OneWay}"
-            Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}">
+            Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}"
+            VerticalOptions="StartAndExpand">
             <Entry.Effects>
                 <effects:EntrySelectAllText />
             </Entry.Effects>
@@ -59,8 +60,8 @@
             Margin="0"
             x:FieldModifier="internal"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
-            Style="{DynamicResource EntryLabelStyle}"
             RemovePadding="True"
+            Style="{DynamicResource EntryLabelStyle}"
             Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}" />
     </controls:GridZero>
 
@@ -68,21 +69,21 @@
     <controls:CustomLabel
         x:Name="ErrorLabel"
         Grid.Row="2"
-        Style="{DynamicResource ValidationLabelStyle}"
         IsVisible="{Binding Text, Source={x:Reference ErrorLabel}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
+        Style="{DynamicResource ValidationLabelStyle}"
         Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}" />
 
     <controls:StackedList
         x:Name="SuggestionList"
-        Grid.Row="2"
+        Grid.Row="3"
         Margin="0"
         Padding="0"
         ColumnSpacing="0"
-        RowSpacing="0"
-        Spacing="{Binding SuggestedItemsSpacing, Source={x:Reference Control}, Mode=OneWay}"
         ItemTemplate="{Binding SuggestedItemTemplate, Source={x:Reference Control}, Mode=OneWay}"
         ItemsSource="{Binding SuggestedItemsSource, Source={x:Reference Control}, Mode=OneWay}"
+        RowSpacing="0"
         SelectedItem="{Binding SelectedItem, Source={x:Reference Control}, Mode=TwoWay}"
         SelectionMode="Single"
+        Spacing="{Binding SuggestedItemsSpacing, Source={x:Reference Control}, Mode=OneWay}"
         Style="{Binding SuggestionListStyle, Source={x:Reference Control}, Mode=OneWay}" />
 </controls:GridZero>
