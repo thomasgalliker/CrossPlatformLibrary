@@ -159,7 +159,7 @@ namespace SampleApp.ViewModels
 
                 if(!filteredViewModels.Any())
                 {
-                    this.Validation.AddErrorMessageForProperty("CountrySearchText", "No results found!");
+                    this.Validation.AddErrorMessageForProperty(nameof(this.Country), "No results found!");
                 }
             }
         }
@@ -272,6 +272,7 @@ namespace SampleApp.ViewModels
             // Since none of the Countries are IEquitable<> to "Fantasy Land", the UI controls binding to Country
             // need to react properly: Bindable Picker switches to state 'nothing selected'.
             this.Country = new CountryViewModel(new CountryDto { Id = 99, Name = "Fantasy Land" });
+            this.Validation.AddErrorMessageForProperty(nameof(this.Country), "Fantasy Land does not exist, it's fiction!");
         }
 
         public PeriodicTaskViewModel PeriodicTask { get; private set; }
