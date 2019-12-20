@@ -87,5 +87,18 @@ namespace CrossPlatformLibrary.Forms.Controls
             get => (bool)this.GetValue(AllCapsProperty);
             set => this.SetValue(AllCapsProperty, value);
         }
+
+        public static readonly BindableProperty ElevationProperty = 
+            BindableProperty.Create(
+                nameof(Elevation),
+                typeof(float),
+                typeof(CustomButton),
+                4.0f);
+
+        public float Elevation
+        {
+            get => (float)this.GetValue(ElevationProperty);
+            set => this.SetValue(ElevationProperty, value);
+        }
     }
 }

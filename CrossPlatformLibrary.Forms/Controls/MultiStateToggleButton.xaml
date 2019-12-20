@@ -36,14 +36,14 @@
                             CommandParameter="{Binding CommandParameter}"
                             TextColor="{Binding IsSelected, Converter={StaticResource BoolToSelectedTextColorConverter}}"
                             BackgroundColor="{Binding IsSelected, Converter={StaticResource BoolToSelectedBackgroundColorConverter}}"
-                            Style="{DynamicResource ButtonStyle}"
+                            BorderColor="Transparent"
+                            BorderColorPressed="Transparent"
+                            BackgroundColorPressed="Transparent"
+                            BorderWidth="0"
+                            CornerRadius="0"
+                            Elevation="0"
+                            Style="{StaticResource ButtonStyle}"
                             HorizontalContentAlignment="Start">
-
-                            <!--<Button.Margin>
-                                <OnPlatform x:TypeArguments="Thickness">
-                                    <On Platform="Android" Value="-1" />
-                                </OnPlatform>
-                            </Button.Margin>-->
 
                             <Button.Padding>
                                 <OnPlatform x:TypeArguments="Thickness">
@@ -74,7 +74,7 @@
         Margin="1"
         CornerRadius="{Binding Source={x:Reference Control}, Path=CornerRadius}"
         IsClippedToBounds="True">
-        <controls:StackLayoutZero Margin="-1" BackgroundColor="Magenta">
+        <controls:StackLayoutZero Margin="-1" BackgroundColor="Transparent">
             <controls:BindableStackLayout
                 Orientation="Horizontal"
                 Padding="1"
