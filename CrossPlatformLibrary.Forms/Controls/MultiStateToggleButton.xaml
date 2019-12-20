@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Frame
+    x:Class="CrossPlatformLibrary.Forms.Controls.MultiStateToggleButton"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:converters="clr-namespace:CrossPlatformLibrary.Forms.Converters"
+    x:Name="Control"
+    mc:Ignorable="d">
+    <Frame.Resources>
+        <ResourceDictionary>
+            <converters:BoolToColorConverter
+                x:Key="BoolToSelectedTextColorConverter"
+                FalseValue="{Binding Source={x:Reference Control}, Path=ButtonTextColor}"
+                TrueValue="{Binding Source={x:Reference Control}, Path=SelectedButtonTextColor}" />
+
+            <converters:BoolToColorConverter
+                x:Key="BoolToSelectedBackgroundColorConverter"
+                FalseValue="{Binding Source={x:Reference Control}, Path=ButtonBackgroundColor}"
+                TrueValue="{Binding Source={x:Reference Control}, Path=SelectedButtonBackgroundColor}" />
+
+            <DataTemplate x:Key="ButtonTemplate">
+                <ViewCell>
+                    <Button
+                        Text="{Binding Title}"
+                        Clicked="Button_OnClicked"
+                        Command="{Binding Command}"
+                        CommandParameter="{Binding CommandParameter}"
+                        TextColor="{Binding IsSelected, Converter={StaticResource BoolToSelectedTextColorConverter}}"
+                        BackgroundColor="{Binding IsSelected, Converter={StaticResource BoolToSelectedBackgroundColorConverter}}" />
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Frame.Resources>
+    <controls:StackLayoutZero IsClippedToBounds="True">
+        <controls:BindableStackLayout
+            Orientation="Horizontal"
+            Spacing="{DynamicResource Theme.Padding.Medium}"
+            ItemTemplate="{StaticResource ButtonTemplate}"
+            ItemsSource="{Binding Source={x:Reference Control}, Path=ItemsSource}" />
+    </controls:StackLayoutZero>
+</Frame>

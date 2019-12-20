@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AutomaticButtonText" xml:space="preserve">
+    <value>Auto</value>
+  </data>
   <data name="CountdownLabelText" xml:space="preserve">
     <value>Countdown</value>
   </data>
   <data name="LoadingText" xml:space="preserve">
     <value>Loading...</value>
+  </data>
+  <data name="OffButtonText" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="OnButtonText" xml:space="preserve">
+    <value>On</value>
   </data>
   <data name="PeriodicTaskCaptionText" xml:space="preserve">
     <value>PeriodicTaskFactory</value>

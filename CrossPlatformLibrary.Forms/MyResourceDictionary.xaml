@@ -63,6 +63,26 @@
     <!--  Styles  -->
     <x:Double x:Key="MinimumHeight.Input">48</x:Double>
 
+    <!--  MultiStateToggleButton Base Style  -->
+    <Style x:Key="MultiStateToggleButtonStyle" TargetType="controls:MultiStateToggleButton">
+        <Setter Property="BackgroundColor" Value="{DynamicResource CustomButtonStyle.BackgroundColor.Enabled}" />
+        <Setter Property="BorderColor" Value="{DynamicResource CustomButtonStyle.BorderColor.Enabled}" />
+
+        <Setter Property="ButtonTextColor" Value="{DynamicResource CustomButtonStyle.TextColor}" />
+        <Setter Property="ButtonBackgroundColor" Value="{DynamicResource CustomButtonStyle.BackgroundColor.Enabled}" />
+        <Setter Property="SelectedButtonTextColor" Value="{DynamicResource CustomButtonStyle.TextColor}" />
+        <Setter Property="SelectedButtonBackgroundColor" Value="{DynamicResource CustomButtonStyle.BackgroundColor.Disabled}" />
+
+        <Setter Property="BorderColor" Value="{DynamicResource CustomButtonStyle.BorderColor.Enabled}" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="HasShadow" Value="False" />
+        <Setter Property="Padding" Value="{DynamicResource Theme.Padding.Medium}" />
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+        <Setter Property="VerticalOptions" Value="StartAndExpand" />
+    </Style>
+
+    <Style BasedOn="{StaticResource MultiStateToggleButtonStyle}" TargetType="controls:MultiStateToggleButton" />
+
     <!--  Button Style  -->
     <Style x:Key="ButtonStyle" TargetType="Button">
         <Setter Property="TextColor" Value="{DynamicResource CustomButtonStyle.TextColor}" />

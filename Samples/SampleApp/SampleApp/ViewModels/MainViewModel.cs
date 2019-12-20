@@ -43,6 +43,8 @@ namespace SampleApp.ViewModels
         private DateTime? birthdate;
         private bool isSaving;
         private ObservableCollection<ResourceViewModel> themeResources;
+        private bool isMultiToggleButtonOn = true;
+        private bool isMultiToggleButtonOff;
 
         public MainViewModel(
             INavigationService navigationService,
@@ -449,6 +451,18 @@ namespace SampleApp.ViewModels
                 return this.toggleSwitchCommand ??
                        (this.toggleSwitchCommand = new Command(() => { this.IsToggled = !this.IsToggled; }));
             }
+        }
+
+        public bool IsMultiToggleButtonOn
+        {
+            get => this.isMultiToggleButtonOn;
+            set => this.SetProperty(ref this.isMultiToggleButtonOn, value, nameof(this.IsMultiToggleButtonOn));
+        }
+
+        public bool IsMultiToggleButtonOff
+        {
+            get => this.isMultiToggleButtonOff;
+            set => this.SetProperty(ref this.isMultiToggleButtonOff, value, nameof(this.IsMultiToggleButtonOff));
         }
     }
 }

@@ -61,6 +61,15 @@ namespace SampleApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto.
+        /// </summary>
+        internal static string AutomaticButtonText {
+            get {
+                return ResourceManager.GetString("AutomaticButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Countdown.
         /// </summary>
         internal static string CountdownLabelText {
@@ -75,6 +84,24 @@ namespace SampleApp.Resources {
         internal static string LoadingText {
             get {
                 return ResourceManager.GetString("LoadingText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Off.
+        /// </summary>
+        internal static string OffButtonText {
+            get {
+                return ResourceManager.GetString("OffButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On.
+        /// </summary>
+        internal static string OnButtonText {
+            get {
+                return ResourceManager.GetString("OnButtonText", resourceCulture);
             }
         }
         
