@@ -17,6 +17,18 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(TitleProperty, value);
         }
 
+        public static readonly BindableProperty ImageSourceProperty =
+            BindableProperty.Create(
+                nameof(ImageSource),
+                typeof(ImageSource),
+                typeof(MultiToggleButtonView));
+
+        public ImageSource ImageSource
+        {
+            get => (ImageSource)this.GetValue(ImageSourceProperty);
+            set => this.SetValue(ImageSourceProperty, value);
+        }
+
         public static readonly BindableProperty CommandProperty =
             BindableProperty.Create(
                 nameof(Command),

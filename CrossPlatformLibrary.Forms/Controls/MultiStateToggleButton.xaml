@@ -23,15 +23,48 @@
                 FalseValue="{Binding Source={x:Reference Control}, Path=ButtonBackgroundColor}"
                 TrueValue="{Binding Source={x:Reference Control}, Path=SelectedButtonBackgroundColor}" />
 
-            <DataTemplate x:Key="ButtonTemplate">
+            <DataTemplate x:Key="MultiStateToggleButtonCell">
                 <ViewCell>
-                    <Button
-                        Text="{Binding Title}"
-                        Clicked="Button_OnClicked"
-                        Command="{Binding Command}"
-                        CommandParameter="{Binding CommandParameter}"
-                        TextColor="{Binding IsSelected, Converter={StaticResource BoolToSelectedTextColorConverter}}"
-                        BackgroundColor="{Binding IsSelected, Converter={StaticResource BoolToSelectedBackgroundColorConverter}}" />
+                    <controls:GridZero>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <controls:CustomButton
+                            Text="{Binding Title}"
+                            Clicked="Button_OnClicked"
+                            Command="{Binding Command}"
+                            CommandParameter="{Binding CommandParameter}"
+                            TextColor="{Binding IsSelected, Converter={StaticResource BoolToSelectedTextColorConverter}}"
+                            BackgroundColor="{Binding IsSelected, Converter={StaticResource BoolToSelectedBackgroundColorConverter}}"
+                            Style="{DynamicResource ButtonStyle}"
+                            HorizontalContentAlignment="Start">
+
+                            <!--<Button.Margin>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="Android" Value="-1" />
+                                </OnPlatform>
+                            </Button.Margin>-->
+
+                            <Button.Padding>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="Android" Value="40, 0, 0, 0" />
+                                    <On Platform="iOS" Value="40, 0, 0, 0" />
+                                </OnPlatform>
+                            </Button.Padding>
+                        </controls:CustomButton>
+                        <Image
+                            Margin="8,0,8,0"
+                            HeightRequest="24"
+                            WidthRequest="24"
+                            HorizontalOptions="StartAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            Source="{Binding ImageSource, Mode=OneWay}"
+                            Aspect="AspectFit" />
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Command, Mode=OneWay}" CommandParameter="{Binding CommandParameter, Mode=OneWay}" />
+                        </Grid.GestureRecognizers>
+                    </controls:GridZero>
                 </ViewCell>
             </DataTemplate>
         </ResourceDictionary>
@@ -41,12 +74,12 @@
         Margin="1"
         CornerRadius="{Binding Source={x:Reference Control}, Path=CornerRadius}"
         IsClippedToBounds="True">
-        <controls:StackLayoutZero Margin="-1">
+        <controls:StackLayoutZero Margin="-1" BackgroundColor="Magenta">
             <controls:BindableStackLayout
                 Orientation="Horizontal"
                 Padding="1"
                 Spacing="{Binding Source={x:Reference Control}, Path=Spacing}"
-                ItemTemplate="{StaticResource ButtonTemplate}"
+                ItemTemplate="{StaticResource MultiStateToggleButtonCell}"
                 ItemsSource="{Binding Source={x:Reference Control}, Path=ItemsSource}" />
         </controls:StackLayoutZero>
     </controls:FrameZero>
