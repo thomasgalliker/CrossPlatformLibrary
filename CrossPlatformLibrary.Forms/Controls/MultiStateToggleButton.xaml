@@ -8,7 +8,9 @@
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:converters="clr-namespace:CrossPlatformLibrary.Forms.Converters"
     x:Name="Control"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Margin="2"
+    IsClippedToBounds="True">
     <Frame.Resources>
         <ResourceDictionary>
             <converters:BoolToColorConverter
@@ -34,11 +36,18 @@
             </DataTemplate>
         </ResourceDictionary>
     </Frame.Resources>
-    <controls:StackLayoutZero IsClippedToBounds="True">
-        <controls:BindableStackLayout
-            Orientation="Horizontal"
-            Spacing="{DynamicResource Theme.Padding.Medium}"
-            ItemTemplate="{StaticResource ButtonTemplate}"
-            ItemsSource="{Binding Source={x:Reference Control}, Path=ItemsSource}" />
-    </controls:StackLayoutZero>
+    <controls:FrameZero
+        Padding="0"
+        Margin="1"
+        CornerRadius="{Binding Source={x:Reference Control}, Path=CornerRadius}"
+        IsClippedToBounds="True">
+        <controls:StackLayoutZero Margin="-1">
+            <controls:BindableStackLayout
+                Orientation="Horizontal"
+                Padding="1"
+                Spacing="{Binding Source={x:Reference Control}, Path=Spacing}"
+                ItemTemplate="{StaticResource ButtonTemplate}"
+                ItemsSource="{Binding Source={x:Reference Control}, Path=ItemsSource}" />
+        </controls:StackLayoutZero>
+    </controls:FrameZero>
 </Frame>

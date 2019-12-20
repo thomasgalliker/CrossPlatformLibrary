@@ -57,6 +57,20 @@ namespace CrossPlatformLibrary.Forms.Controls
             //}
         }
 
+        public static readonly BindableProperty SpacingProperty =
+            BindableProperty.Create(
+                nameof(Spacing),
+                typeof(double),
+                typeof(MultiStateToggleButton),
+                6.0d,
+                BindingMode.OneWay);
+
+        public double Spacing
+        {
+            get => (double)this.GetValue(SpacingProperty);
+            set => this.SetValue(SpacingProperty, value);
+        }
+
         public static readonly BindableProperty ButtonTextColorProperty =
             BindableProperty.Create(
                 nameof(ButtonTextColor),

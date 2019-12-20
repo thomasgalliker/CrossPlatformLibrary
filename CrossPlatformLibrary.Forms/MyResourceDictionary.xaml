@@ -74,9 +74,10 @@
         <Setter Property="SelectedButtonBackgroundColor" Value="{DynamicResource CustomButtonStyle.BackgroundColor.Disabled}" />
 
         <Setter Property="BorderColor" Value="{DynamicResource CustomButtonStyle.BorderColor.Enabled}" />
-        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="CornerRadius" Value="8" />
         <Setter Property="HasShadow" Value="False" />
-        <Setter Property="Padding" Value="{DynamicResource Theme.Padding.Medium}" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Spacing" Value="{DynamicResource Theme.Padding.Medium}" />
         <Setter Property="HorizontalOptions" Value="StartAndExpand" />
         <Setter Property="VerticalOptions" Value="StartAndExpand" />
     </Style>
