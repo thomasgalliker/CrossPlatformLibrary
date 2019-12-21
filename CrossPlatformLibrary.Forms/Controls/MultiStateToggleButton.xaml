@@ -9,7 +9,7 @@
     xmlns:converters="clr-namespace:CrossPlatformLibrary.Forms.Converters"
     x:Name="Control"
     mc:Ignorable="d"
-    Margin="2"
+    Margin="0"
     IsClippedToBounds="True">
     <Frame.Resources>
         <ResourceDictionary>
@@ -70,9 +70,10 @@
             </DataTemplate>
         </ResourceDictionary>
     </Frame.Resources>
+
     <controls:FrameZero
         Padding="0"
-        Margin="1"
+        Margin="0"
         CornerRadius="{Binding Source={x:Reference Control}, Path=CornerRadius}"
         IsClippedToBounds="True">
         <controls:StackLayoutZero Margin="-1" BackgroundColor="Transparent">
