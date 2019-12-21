@@ -195,7 +195,7 @@
                                 <controls:MultiStateToggleButton SelectedButtonBackgroundColor="LightYellow" Spacing="0">
                                     <controls:MultiStateToggleButton.ItemsSource>
                                         <objectModel:ObservableCollection x:TypeArguments="BindableObject">
-                                            <!--<controls:MultiToggleButtonView Title="{localization:Translate AutomaticButtonText}" ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}" />-->
+                                            <controls:MultiToggleButtonView Title="{localization:Translate AutomaticButtonText}" ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}" />
                                             <controls:MultiToggleButtonView
                                                 Title="{localization:Translate OnButtonText}"
                                                 ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"

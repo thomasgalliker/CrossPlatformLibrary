@@ -47,8 +47,8 @@
 
                             <Button.Padding>
                                 <OnPlatform x:TypeArguments="Thickness">
-                                    <On Platform="Android" Value="40, 0, 0, 0" />
-                                    <On Platform="iOS" Value="40, 0, 0, 0" />
+                                    <On Platform="Android" Value="40, 0, 8, 0" />
+                                    <On Platform="iOS" Value="40, 0, 8, 0" />
                                 </OnPlatform>
                             </Button.Padding>
                         </controls:CustomButton>
@@ -59,7 +59,8 @@
                             HorizontalOptions="StartAndExpand"
                             VerticalOptions="CenterAndExpand"
                             Source="{Binding ImageSource, Mode=OneWay}"
-                            Aspect="AspectFit" />
+                            Aspect="AspectFit"
+                            InputTransparent="True" />
 
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Command, Mode=OneWay}" CommandParameter="{Binding CommandParameter, Mode=OneWay}" />
