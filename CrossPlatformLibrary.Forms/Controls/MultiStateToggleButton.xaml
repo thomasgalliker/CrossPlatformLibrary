@@ -73,7 +73,7 @@
 
     <controls:FrameZero
         Padding="0"
-        Margin="0"
+        Margin="1"
         CornerRadius="{Binding Source={x:Reference Control}, Path=CornerRadius}"
         IsClippedToBounds="True">
         <controls:StackLayoutZero Margin="-1" BackgroundColor="Transparent">
