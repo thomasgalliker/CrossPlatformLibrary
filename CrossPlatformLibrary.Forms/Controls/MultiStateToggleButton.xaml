@@ -13,6 +13,7 @@
     IsClippedToBounds="True">
     <Frame.Resources>
         <ResourceDictionary>
+            <converters:AddConverter x:Key="AddConverter" Value="-0.5" />
             <converters:BoolToColorConverter
                 x:Key="BoolToSelectedTextColorConverter"
                 FalseValue="{Binding Source={x:Reference Control}, Path=ButtonTextColor}"
@@ -74,7 +75,7 @@
     <controls:FrameZero
         Padding="0"
         Margin="1"
-        CornerRadius="{Binding Source={x:Reference Control}, Path=CornerRadius}"
+        CornerRadius="{Binding Source={x:Reference Control}, Path=CornerRadius, Converter={StaticResource AddConverter}}"
         IsClippedToBounds="True">
         <controls:StackLayoutZero Margin="-1" BackgroundColor="Transparent">
             <controls:BindableStackLayout

@@ -192,6 +192,23 @@
                             <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo MultiStateToggleButton--&gt;" />
+                                <controls:MultiStateToggleButton>
+                                    <controls:MultiStateToggleButton.ItemsSource>
+                                        <objectModel:ObservableCollection x:TypeArguments="BindableObject">
+                                            <controls:MultiToggleButtonView
+                                                Title="{localization:Translate OnButtonText}"
+                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
+                                                Command="{Binding MultiToggleCommand}"
+                                                IsSelected="{Binding IsMultiToggleButtonOn, Mode=TwoWay}" />
+                                            <controls:MultiToggleButtonView
+                                                Title="{localization:Translate OffButtonText}"
+                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
+                                                Command="{Binding MultiToggleCommand}"
+                                                IsSelected="{Binding IsMultiToggleButtonOff, Mode=TwoWay}" />
+                                        </objectModel:ObservableCollection>
+                                    </controls:MultiStateToggleButton.ItemsSource>
+                                </controls:MultiStateToggleButton>
+
                                 <controls:MultiStateToggleButton
                                     SelectedButtonBackgroundColor="Black"
                                     Spacing="0"
