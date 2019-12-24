@@ -6,6 +6,11 @@ using Xamarin.Forms.Xaml;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
+    /// <summary>
+    ///     Button control with multiple toggle states (also known as 'Segmented Control').
+    ///     Source:
+    ///     https://ux.stackexchange.com/questions/75399/how-should-a-multi-state-toggle-slider-with-more-than-two-states-be-implemented
+    /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MultiStateToggleButton : Frame
     {
