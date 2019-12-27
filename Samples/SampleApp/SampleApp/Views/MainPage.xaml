@@ -340,11 +340,15 @@
                                     Placeholder="CustomEntry with RemovePadding=&quot;True&quot;"
                                     RemovePadding="True"
                                     Text="" />
+
                                 <controls:CustomEntry
-                                    Keyboard="Numeric"
-                                    Placeholder="CustomEntry with TextContentType=&quot;OneTimeCode&quot;"
+                                    Placeholder="CustomEntry with TextContentType=&quot;FirstName&quot;"
                                     Text=""
-                                    TextContentType="OneTimeCode" />
+                                    TextContentType="FirstName" />
+                                <controls:CustomEntry
+                                    Placeholder="CustomEntry with TextContentType=&quot;LastName&quot;"
+                                    Text=""
+                                    TextContentType="LastName" />
                                 <controls:CustomEntry
                                     Placeholder="CustomEntry with TextContentType=&quot;Username&quot;"
                                     Text=""
@@ -357,6 +361,11 @@
                                     Placeholder="CustomEntry with TextContentType=&quot;NewPassword&quot;"
                                     Text=""
                                     TextContentType="NewPassword" />
+                                <controls:CustomEntry
+                                    Keyboard="Numeric"
+                                    Placeholder="CustomEntry with TextContentType=&quot;OneTimeCode&quot;"
+                                    Text=""
+                                    TextContentType="OneTimeCode" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableEntry--&gt;" />
                                 <Grid>

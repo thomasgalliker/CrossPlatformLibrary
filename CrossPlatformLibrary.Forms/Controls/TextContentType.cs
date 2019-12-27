@@ -4,7 +4,8 @@
     {
         Default,
         OneTimeCode,
-        Name,
+        FirstName,
+        LastName,
         Username,
         Password,
         NewPassword,

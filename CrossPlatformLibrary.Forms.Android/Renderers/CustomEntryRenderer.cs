@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using Android.Content;
 using Android.Graphics.Drawables;
+using Android.OS;
+using Android.Views;
 using CrossPlatformLibrary.Forms.Android.Renderers;
 using CrossPlatformLibrary.Forms.Controls;
 using Xamarin.Forms;
@@ -35,6 +37,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
                 {
                     this.HideBorder(customEntry);
                     this.RemovePadding(customEntry);
+                    this.UpdateTextContentType(customEntry);
                 }
             }
         }
@@ -55,6 +58,13 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
                 if (this.Element is CustomEntry customEntry)
                 {
                     this.RemovePadding(customEntry);
+                }
+            }
+            else if (e.PropertyName == nameof(CustomEntry.TextContentTypeProperty.PropertyName))
+            {
+                if (this.Element is CustomEntry customEntry)
+                {
+                    this.UpdateTextContentType(customEntry);
                 }
             }
         }
@@ -98,6 +108,55 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
                 this.Control.SetIncludeFontPadding(true);
             }
+        }
+
+        private void UpdateTextContentType(CustomEntry customEntry)
+        {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
+            {
+                var textView = this.Control;
+                if (customEntry.TextContentType == TextContentType.Default)
+                {
+                    textView.SetAutofillHints(autofillHints: null);
+                    textView.ImportantForAutofill = ImportantForAutofill.No;
+                }
+                else
+                {
+                    var autofillHints = MapTextContentType(customEntry.TextContentType);
+                    textView.SetAutofillHints(autofillHints);
+                    textView.ImportantForAutofill = ImportantForAutofill.Yes;
+                }
+            }
+        }
+
+        private static string[] MapTextContentType(TextContentType textContentType)
+        {
+            if (textContentType == TextContentType.OneTimeCode)
+            {
+                return new[] { "otp", "one-time-code" };
+            }
+            else if (textContentType == TextContentType.FirstName)
+            {
+                return new[] { "firstname", "first-name", "givenname", "given-name", "cc-given-name" };
+            }
+            else if (textContentType == TextContentType.LastName)
+            {
+                return new[] { "lastname", "last-name", "familyname", "family-name" };
+            }
+            else if (textContentType == TextContentType.Username)
+            {
+                return new[] { "userName" };
+            }
+            else if (textContentType == TextContentType.Password)
+            {
+                return new[] { "password" };
+            }
+            else if (textContentType == TextContentType.NewPassword)
+            {
+                return new[] { "new-password" };
+            }
+
+            return new[] { string.Empty };
         }
     }
 }

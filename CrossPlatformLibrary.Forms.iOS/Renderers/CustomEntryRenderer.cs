@@ -127,9 +127,13 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             {
                 this.Control.TextContentType = UITextContentType.OneTimeCode;
             }
-            else if (customEntry.TextContentType == TextContentType.Name)
+            else if (customEntry.TextContentType == TextContentType.FirstName)
             {
-                this.Control.TextContentType = UITextContentType.Name;
+                this.Control.TextContentType = UITextContentType.GivenName;
+            }
+            else if (customEntry.TextContentType == TextContentType.LastName)
+            {
+                this.Control.TextContentType = UITextContentType.FamilyName;
             }
             else if (customEntry.TextContentType == TextContentType.Username)
             {
