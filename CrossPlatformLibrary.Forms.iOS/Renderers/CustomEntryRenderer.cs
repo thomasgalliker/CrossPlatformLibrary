@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using CrossPlatformLibrary.Forms.Controls;
 using CrossPlatformLibrary.Forms.iOS.Renderers;
+using Foundation;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -123,33 +124,47 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
 
         private void UpdateTextContentType(CustomEntry customEntry)
         {
-            if (customEntry.TextContentType == TextContentType.OneTimeCode)
+            var textContentType = this.MapTextContentType(customEntry.TextContentType);
+            this.Control.TextContentType = textContentType;
+        }
+
+        private NSString MapTextContentType(TextContentType textContentType)
+        {
+            if (textContentType == TextContentType.OneTimeCode)
             {
-                this.Control.TextContentType = UITextContentType.OneTimeCode;
+                return UITextContentType.OneTimeCode;
             }
-            else if (customEntry.TextContentType == TextContentType.FirstName)
+            else if (textContentType == TextContentType.FirstName)
             {
-                this.Control.TextContentType = UITextContentType.GivenName;
+                return UITextContentType.GivenName;
             }
-            else if (customEntry.TextContentType == TextContentType.LastName)
+            else if (textContentType == TextContentType.LastName)
             {
-                this.Control.TextContentType = UITextContentType.FamilyName;
+                return UITextContentType.FamilyName;
             }
-            else if (customEntry.TextContentType == TextContentType.Username)
+            else if (textContentType == TextContentType.Username)
             {
-                this.Control.TextContentType = UITextContentType.Username;
+                return UITextContentType.Username;
             }
-            else if (customEntry.TextContentType == TextContentType.Password)
+            else if (textContentType == TextContentType.EmailAddress)
             {
-                this.Control.TextContentType = UITextContentType.Password;
+                return UITextContentType.EmailAddress;
             }
-            else if (customEntry.TextContentType == TextContentType.NewPassword)
+            else if (textContentType == TextContentType.PhoneNumber)
             {
-                this.Control.TextContentType = UITextContentType.NewPassword;
+                return UITextContentType.TelephoneNumber;
+            }
+            else if (textContentType == TextContentType.Password)
+            {
+                return UITextContentType.Password;
+            }
+            else if (textContentType == TextContentType.NewPassword)
+            {
+                return UITextContentType.NewPassword;
             }
             else
             {
-                //this.Control.TextContentType = new Foundation.NSString();
+                return new Foundation.NSString();
             }
         }
     }

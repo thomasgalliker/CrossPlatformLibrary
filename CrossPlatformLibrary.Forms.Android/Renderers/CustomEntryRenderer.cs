@@ -7,6 +7,7 @@ using CrossPlatformLibrary.Forms.Android.Renderers;
 using CrossPlatformLibrary.Forms.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using View = Android.Views.View;
 
 [assembly: ExportRenderer(typeof(Entry), typeof(CustomEntryRenderer))]
 
@@ -14,6 +15,15 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 {
     public class CustomEntryRenderer : EntryRenderer
     {
+        private static readonly string[] AutofillHintOneTimeCode = { "otp", "one-time-code" };
+        private static readonly string[] AutofillHintFirstName = { "firstname", "first-name", "givenname", "given-name", "cc-given-name" };
+        private static readonly string[] AutofillHintLastName = { "lastname", "last-name", "familyname", "family-name", "cc-family-name" };
+        private new static readonly string[] AutofillHintUsername = { View.AutofillHintUsername };
+        private new static readonly string[] AutofillHintEmailAddress = { View.AutofillHintEmailAddress, "email" };
+        private new static readonly string[] AutofillHintPhone = { View.AutofillHintPhone, "tel" };
+        private new static readonly string[] AutofillHintPassword = { View.AutofillHintPassword };
+        private static readonly string[] AutofillHintNewPassword = { "new-password" };
+
         private Drawable originalBackground;
         private Thickness? originalPadding;
 
@@ -131,29 +141,40 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
         private static string[] MapTextContentType(TextContentType textContentType)
         {
+            // Some mapping names are taken von Android's View constants while others come from here:
+            // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete
+
             if (textContentType == TextContentType.OneTimeCode)
             {
-                return new[] { "otp", "one-time-code" };
+                return AutofillHintOneTimeCode;
             }
             else if (textContentType == TextContentType.FirstName)
             {
-                return new[] { "firstname", "first-name", "givenname", "given-name", "cc-given-name" };
+                return AutofillHintFirstName;
             }
             else if (textContentType == TextContentType.LastName)
             {
-                return new[] { "lastname", "last-name", "familyname", "family-name" };
+                return AutofillHintLastName;
             }
             else if (textContentType == TextContentType.Username)
             {
-                return new[] { "userName" };
+                return AutofillHintUsername;
+            }
+            else if (textContentType == TextContentType.EmailAddress)
+            {
+                return AutofillHintEmailAddress;
+            }
+            else if (textContentType == TextContentType.PhoneNumber)
+            {
+                return AutofillHintPhone;
             }
             else if (textContentType == TextContentType.Password)
             {
-                return new[] { "password" };
+                return AutofillHintPassword;
             }
             else if (textContentType == TextContentType.NewPassword)
             {
-                return new[] { "new-password" };
+                return AutofillHintNewPassword;
             }
 
             return new[] { string.Empty };
