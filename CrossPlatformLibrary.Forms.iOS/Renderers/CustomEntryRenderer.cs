@@ -124,8 +124,11 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
 
         private void UpdateTextContentType(CustomEntry customEntry)
         {
-            var textContentType = this.MapTextContentType(customEntry.TextContentType);
-            this.Control.TextContentType = textContentType;
+            if (UIDevice.CurrentDevice.CheckSystemVersion(11, 0))
+            {
+                var textContentType = this.MapTextContentType(customEntry.TextContentType);
+                this.Control.TextContentType = textContentType;
+            }
         }
 
         private NSString MapTextContentType(TextContentType textContentType)
