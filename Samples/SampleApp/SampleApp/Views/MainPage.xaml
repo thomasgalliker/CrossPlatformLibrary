@@ -352,15 +352,26 @@
                                 <controls:CustomEntry
                                     Placeholder="CustomEntry with TextContentType=&quot;Username&quot;"
                                     Text=""
-                                    TextContentType="Username" />
+                                    TextContentType="Username"
+                                    Keyboard="Email" />
+                                <controls:CustomEntry
+                                    Placeholder="CustomEntry with TextContentType=&quot;EmailAddress&quot;"
+                                    Text=""
+                                    TextContentType="EmailAddress" />
+                                <controls:CustomEntry
+                                    Placeholder="CustomEntry with TextContentType=&quot;PhoneNumber&quot;"
+                                    Text=""
+                                    TextContentType="PhoneNumber" />
                                 <controls:CustomEntry
                                     Placeholder="CustomEntry with TextContentType=&quot;Password&quot;"
                                     Text=""
-                                    TextContentType="Password" />
+                                    TextContentType="Password"
+                                    IsPassword="True" />
                                 <controls:CustomEntry
                                     Placeholder="CustomEntry with TextContentType=&quot;NewPassword&quot;"
                                     Text=""
-                                    TextContentType="NewPassword" />
+                                    TextContentType="NewPassword"
+                                    IsPassword="True" />
                                 <controls:CustomEntry
                                     Keyboard="Numeric"
                                     Placeholder="CustomEntry with TextContentType=&quot;OneTimeCode&quot;"
