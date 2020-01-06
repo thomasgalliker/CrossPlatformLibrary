@@ -1,10 +1,13 @@
-﻿using System.ComponentModel;
+﻿using Android.Animation;
 using Android.Content;
 using Android.Graphics.Drawables;
+using Android.OS;
+using Android.Support.V4.View;
 using Android.Views;
 using CrossPlatformLibrary.Forms.Android.Extensions;
 using CrossPlatformLibrary.Forms.Android.Renderers;
 using CrossPlatformLibrary.Forms.Controls;
+using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -65,6 +68,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
                 this.UpdateAlignment(customButton);
                 this.UpdateAllCaps(customButton);
+                this.UpdateElevation(customButton);
             }
         }
 
@@ -103,41 +107,64 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
             if (this.Element is CustomButton customButton && this.Control is global::Android.Widget.Button button)
             {
+                if (e.PropertyName == VisualElement.IsEnabledProperty.PropertyName)
                 {
-                    if (e.PropertyName == VisualElement.IsEnabledProperty.PropertyName)
-                    {
-                        // For some reasons we have to redraw the button background
-                        // if IsEnabled is changed
-                        button.Background = this.CreateDrawable(customButton);
-                    }
-                    else if (e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName)
-                    {
-                        this.normalDrawable.SetColor(customButton.BackgroundColor.ToAndroid());
-                    }
-                    else if (e.PropertyName == CustomButton.BackgroundColorPressedProperty.PropertyName)
-                    {
-                        this.pressedDrawable.SetColor(customButton.BackgroundColorPressed.ToAndroid());
-                    }
-                    else if (e.PropertyName == Button.CornerRadiusProperty.PropertyName)
-                    {
-                        this.normalDrawable.SetCornerRadius(customButton.CornerRadius);
-                        this.pressedDrawable.SetCornerRadius(customButton.CornerRadius);
-                    }
-                    else if (e.PropertyName == Button.BorderWidthProperty.PropertyName || e.PropertyName == Button.BorderColorProperty.PropertyName
-                                                                                       || e.PropertyName == CustomButton.BorderColorPressedProperty.PropertyName)
-                    {
-                        this.normalDrawable.SetStroke((int)customButton.BorderWidth, customButton.BorderColor.ToAndroid());
-                        this.pressedDrawable.SetStroke((int)customButton.BorderWidth, customButton.BorderColorPressed.ToAndroid());
-                    }
-                    else if (e.PropertyName == CustomButton.VerticalContentAlignmentProperty.PropertyName || e.PropertyName == CustomButton.HorizontalContentAlignmentProperty.PropertyName)
-                    {
-                        this.UpdateAlignment(customButton);
-                    }
-                    else if (e.PropertyName == CustomButton.AllCapsProperty.PropertyName || e.PropertyName == Button.TextProperty.PropertyName)
-                    {
-                        this.UpdateAllCaps(customButton);
-                    }
+                    // For some reasons we have to redraw the button background
+                    // if IsEnabled is changed
+                    button.Background = this.CreateDrawable(customButton);
                 }
+                else if (e.PropertyName == VisualElement.BackgroundColorProperty.PropertyName)
+                {
+                    this.normalDrawable.SetColor(customButton.BackgroundColor.ToAndroid());
+                }
+                else if (e.PropertyName == CustomButton.BackgroundColorPressedProperty.PropertyName)
+                {
+                    this.pressedDrawable.SetColor(customButton.BackgroundColorPressed.ToAndroid());
+                }
+                else if (e.PropertyName == Button.CornerRadiusProperty.PropertyName)
+                {
+                    this.normalDrawable.SetCornerRadius(customButton.CornerRadius);
+                    this.pressedDrawable.SetCornerRadius(customButton.CornerRadius);
+                }
+                else if (e.PropertyName == Button.BorderWidthProperty.PropertyName || e.PropertyName == Button.BorderColorProperty.PropertyName
+                                                                                   || e.PropertyName == CustomButton.BorderColorPressedProperty.PropertyName)
+                {
+                    this.normalDrawable.SetStroke((int)customButton.BorderWidth, customButton.BorderColor.ToAndroid());
+                    this.pressedDrawable.SetStroke((int)customButton.BorderWidth, customButton.BorderColorPressed.ToAndroid());
+                }
+                else if (e.PropertyName == CustomButton.VerticalContentAlignmentProperty.PropertyName || e.PropertyName == CustomButton.HorizontalContentAlignmentProperty.PropertyName)
+                {
+                    this.UpdateAlignment(customButton);
+                }
+                else if (e.PropertyName == CustomButton.AllCapsProperty.PropertyName || e.PropertyName == Button.TextProperty.PropertyName)
+                {
+                    this.UpdateAllCaps(customButton);
+                }
+                else if (e.PropertyName == CustomButton.ElevationProperty.PropertyName)
+                {
+                    this.UpdateElevation(customButton);
+                }
+            }
+        }
+
+        private void UpdateElevation(CustomButton customButton)
+        {
+            if (Build.VERSION.SdkInt > BuildVersionCodes.Lollipop)
+            {
+                // If Elevation is 0, we reset the StateListAnimator
+                // This removes all elevation animation from the button
+                if (customButton.Elevation == 0)
+                {
+                    Control.StateListAnimator = new StateListAnimator();
+                }
+
+                // Set the elevation manually
+                ViewCompat.SetElevation(this, customButton.Elevation);
+                ViewCompat.SetElevation(Control, customButton.Elevation);
+            }
+            else
+            {
+                Control.Elevation = customButton.Elevation;
             }
         }
 

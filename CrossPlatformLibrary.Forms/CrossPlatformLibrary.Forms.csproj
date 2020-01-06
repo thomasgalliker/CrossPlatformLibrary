@@ -50,7 +50,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Controls\BindableStackLayout.cs~RF4856c3b.TMP" />
     <None Remove="CrossPlatformLibrary.Forms.csproj.DotSettings" />
     <None Remove="Resources\Images\reload_192x192.png" />
   </ItemGroup>
@@ -74,6 +73,9 @@
   <ItemGroup>
     <Compile Update="Controls\DrilldownSwitchCell.xaml.cs">
       <DependentUpon>DrilldownSwitchCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\MultiStateToggleButton.xaml.cs">
+      <DependentUpon>MultiStateToggleButton.xaml</DependentUpon>
     </Compile>
     <Compile Update="Controls\ValidatableEditor.xaml.cs">
       <DependentUpon>ValidatableEditor.xaml</DependentUpon>

@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Frame
+    x:Class="CrossPlatformLibrary.Forms.Controls.MultiStateToggleButton"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:converters="clr-namespace:CrossPlatformLibrary.Forms.Converters"
+    x:Name="Control"
+    mc:Ignorable="d"
+    Margin="0"
+    IsClippedToBounds="True">
+    <Frame.Resources>
+        <ResourceDictionary>
+            <converters:AddConverter x:Key="AddConverter" Value="-0.5" />
+            <converters:BoolToColorConverter
+                x:Key="BoolToSelectedTextColorConverter"
+                FalseValue="{Binding Source={x:Reference Control}, Path=ButtonTextColor}"
+                TrueValue="{Binding Source={x:Reference Control}, Path=SelectedButtonTextColor}" />
+
+            <converters:BoolToColorConverter
+                x:Key="BoolToSelectedBackgroundColorConverter"
+                FalseValue="{Binding Source={x:Reference Control}, Path=ButtonBackgroundColor}"
+                TrueValue="{Binding Source={x:Reference Control}, Path=SelectedButtonBackgroundColor}" />
+
+            <DataTemplate x:Key="MultiStateToggleButtonCell">
+                <ViewCell>
+                    <controls:GridZero>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <controls:CustomButton
+                            Text="{Binding Title}"
+                            Clicked="Button_OnClicked"
+                            Command="{Binding Command}"
+                            CommandParameter="{Binding CommandParameter}"
+                            TextColor="{Binding IsSelected, Converter={StaticResource BoolToSelectedTextColorConverter}}"
+                            BackgroundColor="{Binding IsSelected, Converter={StaticResource BoolToSelectedBackgroundColorConverter}}"
+                            BorderColor="Transparent"
+                            BorderColorPressed="Transparent"
+                            BackgroundColorPressed="Transparent"
+                            BorderWidth="0"
+                            CornerRadius="0"
+                            Elevation="0"
+                            Style="{StaticResource ButtonStyle}"
+                            HorizontalContentAlignment="Start">
+
+                            <Button.Padding>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="Android" Value="40, 0, 8, 0" />
+                                    <On Platform="iOS" Value="40, 0, 8, 0" />
+                                </OnPlatform>
+                            </Button.Padding>
+                        </controls:CustomButton>
+                        <Image
+                            Margin="8,0,8,0"
+                            HeightRequest="24"
+                            WidthRequest="24"
+                            HorizontalOptions="StartAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            Source="{Binding ImageSource, Mode=OneWay}"
+                            Aspect="AspectFit"
+                            InputTransparent="True" />
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Command, Mode=OneWay}" CommandParameter="{Binding CommandParameter, Mode=OneWay}" />
+                        </Grid.GestureRecognizers>
+                    </controls:GridZero>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Frame.Resources>
+
+    <controls:FrameZero
+        Padding="0"
+        Margin="1"
+        CornerRadius="{Binding Source={x:Reference Control}, Path=CornerRadius, Converter={StaticResource AddConverter}}"
+        IsClippedToBounds="True">
+        <controls:StackLayoutZero Margin="-1" BackgroundColor="Transparent">
+            <controls:BindableStackLayout
+                Orientation="Horizontal"
+                Padding="1"
+                Spacing="{Binding Source={x:Reference Control}, Path=Spacing}"
+                ItemTemplate="{StaticResource MultiStateToggleButtonCell}"
+                ItemsSource="{Binding Source={x:Reference Control}, Path=ItemsSource}" />
+        </controls:StackLayoutZero>
+    </controls:FrameZero>
+</Frame>

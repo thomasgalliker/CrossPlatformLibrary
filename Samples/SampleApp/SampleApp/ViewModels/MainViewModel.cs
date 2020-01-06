@@ -43,6 +43,8 @@ namespace SampleApp.ViewModels
         private DateTime? birthdate;
         private bool isSaving;
         private ObservableCollection<ResourceViewModel> themeResources;
+        private bool isMultiToggleButtonOn = true;
+        private bool isMultiToggleButtonOff;
 
         public MainViewModel(
             INavigationService navigationService,
@@ -153,8 +155,14 @@ namespace SampleApp.ViewModels
             {
                 var filteredViewModels = this.Countries.Where(c => c.Name != null && c.Name.StartsWith(searchText, StringComparison.InvariantCultureIgnoreCase))
                     .OrderBy(c => c.Name)
-                    .Take(10);
+                    .Take(10)
+                    .ToList();
                 this.SuggestedCountries.AddRange(filteredViewModels);
+
+                if(!filteredViewModels.Any())
+                {
+                    this.Validation.AddErrorMessageForProperty(nameof(this.Country), "No results found!");
+                }
             }
         }
 
@@ -266,6 +274,7 @@ namespace SampleApp.ViewModels
             // Since none of the Countries are IEquitable<> to "Fantasy Land", the UI controls binding to Country
             // need to react properly: Bindable Picker switches to state 'nothing selected'.
             this.Country = new CountryViewModel(new CountryDto { Id = 99, Name = "Fantasy Land" });
+            this.Validation.AddErrorMessageForProperty(nameof(this.Country), "Fantasy Land does not exist, it's fiction!");
         }
 
         public PeriodicTaskViewModel PeriodicTask { get; private set; }
@@ -376,11 +385,11 @@ namespace SampleApp.ViewModels
                 this.Countries.Clear();
                 this.Countries.AddRange(countryDtos.Select(c => new CountryViewModel(c)).Prepend(defaultCountryViewModel));
 
-                this.ThemeResources = Application.Current.Resources.MergedDictionaries.SelectMany(md => md)
-                    .Select(kvp => new ResourceViewModel(kvp))
-                    .OrderBy(vm => vm.Key)
-                    //.ThenBy(vm => vm.Key)
-                    .ToObservableCollection();
+                //this.ThemeResources = Application.Current.Resources.MergedDictionaries.SelectMany(md => md)
+                //    .Select(kvp => new ResourceViewModel(kvp))
+                //    .OrderBy(vm => vm.Key)
+                //    //.ThenBy(vm => vm.Key)
+                //    .ToObservableCollection();
 
                 //this.Notes = $"Test test test{Environment.NewLine}Line 2 text text text";
                 this.AdminEmailAddress = "thomas@bluewin.ch";
@@ -442,6 +451,18 @@ namespace SampleApp.ViewModels
                 return this.toggleSwitchCommand ??
                        (this.toggleSwitchCommand = new Command(() => { this.IsToggled = !this.IsToggled; }));
             }
+        }
+
+        public bool IsMultiToggleButtonOn
+        {
+            get => this.isMultiToggleButtonOn;
+            set => this.SetProperty(ref this.isMultiToggleButtonOn, value, nameof(this.IsMultiToggleButtonOn));
+        }
+
+        public bool IsMultiToggleButtonOff
+        {
+            get => this.isMultiToggleButtonOff;
+            set => this.SetProperty(ref this.isMultiToggleButtonOff, value, nameof(this.IsMultiToggleButtonOff));
         }
     }
 }

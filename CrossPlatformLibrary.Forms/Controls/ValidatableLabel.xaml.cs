@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
@@ -8,7 +7,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         public ValidatableLabel()
         {
             this.InitializeComponent();
-            //this.SetDynamicResource(LabelStyleProperty, "EntryLabelStyle");
+            this.DebugLayoutBounds();
         }
 
         public static readonly BindableProperty TextProperty =
@@ -16,13 +15,17 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Text),
                 typeof(string),
                 typeof(ValidatableLabel),
-                null,
-                BindingMode.OneWay);
-
+                propertyChanged: OnTextPropertyChanged);
         public string Text
         {
             get => (string)this.GetValue(TextProperty);
             set => this.SetValue(TextProperty, value);
+        }
+
+        private static void OnTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var validatableLabel = (ValidatableLabel)bindable;
+            validatableLabel.OnPropertyChanged(nameof(validatableLabel.AnnotationText));
         }
 
         public static readonly BindableProperty PlaceholderProperty =
@@ -30,13 +33,31 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Placeholder),
                 typeof(string),
                 typeof(ValidatableLabel),
-                null,
-                BindingMode.OneWay);
+                propertyChanged: OnPlaceholderPropertyChanged);
 
         public string Placeholder
         {
             get => (string)this.GetValue(PlaceholderProperty);
             set => this.SetValue(PlaceholderProperty, value);
+        }
+
+        private static void OnPlaceholderPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var validatableLabel = (ValidatableLabel)bindable;
+            validatableLabel.OnPropertyChanged(nameof(validatableLabel.AnnotationText));
+        }
+
+        public string AnnotationText
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.Text))
+                {
+                    return this.Placeholder;
+                }
+
+                return " ";
+            }
         }
 
         public static readonly BindableProperty LabelStyleProperty =
@@ -51,21 +72,6 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             get => (Style)this.GetValue(LabelStyleProperty);
             set => this.SetValue(LabelStyleProperty, value);
-        }
-
-        public static readonly BindableProperty LineBreakModeProperty =
-            BindableProperty.Create(
-                nameof(LineBreakMode),
-                typeof(LineBreakMode),
-                typeof(ValidatableLabel),
-                LineBreakMode.TailTruncation,
-                BindingMode.OneWay);
-
-        [Obsolete("Use LabelStyle instead")]
-        public LineBreakMode LineBreakMode
-        {
-            get => (LineBreakMode)this.GetValue(LineBreakModeProperty);
-            set => this.SetValue(LineBreakModeProperty, value);
         }
     }
 }

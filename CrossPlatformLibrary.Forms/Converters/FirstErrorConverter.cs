@@ -10,7 +10,7 @@ namespace CrossPlatformLibrary.Forms.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var errors = value as ICollection<string>;
+            var errors = value as IEnumerable<string>;
             return errors?.FirstOrDefault();
         }
 

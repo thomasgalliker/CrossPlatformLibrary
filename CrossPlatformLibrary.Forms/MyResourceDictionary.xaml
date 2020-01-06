@@ -17,8 +17,17 @@
         <On Platform="iOS" Value="White" />
     </OnPlatform>
 
-    <Color x:Key="ButtonBorder">#C8C7CC</Color>
     <Color x:Key="ListSeparator">#C8C7CC</Color>
+
+    <OnPlatform x:Key="Theme.DividerLine.Small" x:TypeArguments="x:Double">
+        <On Platform="Android" Value="0.1" />
+        <On Platform="iOS" Value="0.5" />
+    </OnPlatform>
+
+    <OnPlatform x:Key="Theme.DividerLine.Medium" x:TypeArguments="x:Double">
+        <On Platform="Android" Value="1" />
+        <On Platform="iOS" Value="1" />
+    </OnPlatform>
 
     <OnPlatform x:Key="CardPadding" x:TypeArguments="Thickness">
         <On Platform="Android" Value="8, 8, 8, 16" />
@@ -52,6 +61,29 @@
     <converters:ValidationErrorsToStringConverter x:Key="ValidationErrorsToStringConverter" />
 
     <!--  Styles  -->
+    <x:Double x:Key="MinimumHeight.Input">48</x:Double>
+
+    <!--  MultiStateToggleButton Base Style  -->
+    <Style x:Key="MultiStateToggleButtonStyle" TargetType="controls:MultiStateToggleButton">
+        <Setter Property="BackgroundColor" Value="{DynamicResource CustomButtonStyle.BackgroundColor.Enabled}" />
+        <Setter Property="BorderColor" Value="{DynamicResource CustomButtonStyle.BorderColor.Enabled}" />
+
+        <Setter Property="ButtonTextColor" Value="{DynamicResource CustomButtonStyle.TextColor}" />
+        <Setter Property="ButtonBackgroundColor" Value="{DynamicResource CustomButtonStyle.BackgroundColor.Enabled}" />
+        <Setter Property="SelectedButtonTextColor" Value="{DynamicResource CustomButtonStyle.TextColor}" />
+        <Setter Property="SelectedButtonBackgroundColor" Value="{DynamicResource CustomButtonStyle.BackgroundColor.Disabled}" />
+
+        <Setter Property="BorderColor" Value="{DynamicResource CustomButtonStyle.BorderColor.Enabled}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="HasShadow" Value="False" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Spacing" Value="{DynamicResource Theme.Padding.Medium}" />
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+        <Setter Property="VerticalOptions" Value="StartAndExpand" />
+    </Style>
+
+    <Style BasedOn="{StaticResource MultiStateToggleButtonStyle}" TargetType="controls:MultiStateToggleButton" />
+
     <!--  Button Style  -->
     <Style x:Key="ButtonStyle" TargetType="Button">
         <Setter Property="TextColor" Value="{DynamicResource CustomButtonStyle.TextColor}" />
@@ -162,16 +194,26 @@
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="LineBreakMode" Value="TailTruncation" />
-        <Setter Property="Margin">
-            <OnPlatform x:TypeArguments="Thickness">
-                <On Platform="iOS" Value="0" />
-                <On Platform="Android" Value="4,0,0,0" />
-                <On Platform="UWP" Value="0" />
-            </OnPlatform>
-        </Setter>
-        <!--<Setter Property="HeightRequest" Value="48" />-->
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="controls:MinimumHeight.Value" Value="32" />
     </Style>
+
+    <!--  EntryStyle  -->
+    <Style x:Key="EntryStyle" TargetType="Entry">
+        <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
+        <Setter Property="PlaceholderColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="controls:MinimumHeight.Value" Value="{StaticResource MinimumHeight.Input}" />
+    </Style>
+
+    <Style BasedOn="{StaticResource EntryStyle}" TargetType="Entry" />
+    <Style BasedOn="{StaticResource EntryStyle}" TargetType="controls:CustomEntry" />
 
     <!--  Validatable Controls  -->
     <Style TargetType="controls:ValidatableLabel">
@@ -281,22 +323,6 @@
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
     </Style>
 
-    <Style x:Key="EntryStyle" TargetType="Entry">
-        <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
-        <Setter Property="PlaceholderColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
-        <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
-        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
-        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
-        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-        <Setter Property="Opacity" Value="1.0" />
-        <Setter Property="HeightRequest" Value="48" />
-    </Style>
-
-    <Style BasedOn="{StaticResource EntryStyle}" TargetType="Entry" />
-    <Style BasedOn="{StaticResource EntryStyle}" TargetType="controls:CustomEntry" />
-
     <!--<Style TargetType="controls:CustomSwitch">
         <Setter Property="TintColor" Value="{DynamicResource Primary}" />
     </Style>-->
@@ -306,7 +332,9 @@
         <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
         <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="controls:MinimumHeight.Value" Value="{StaticResource MinimumHeight.Input}" />
     </Style>
 
     <Style BasedOn="{StaticResource EditorStyle}" TargetType="Editor" />
@@ -323,7 +351,7 @@
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="HeightRequest" Value="48" />
+        <Setter Property="controls:MinimumHeight.Value" Value="{StaticResource MinimumHeight.Input}" />
     </Style>
 
     <Style BasedOn="{StaticResource PickerStyle}" TargetType="Picker" />
@@ -331,19 +359,18 @@
     <Style
         x:Key="BindablePickerStyle"
         BasedOn="{StaticResource PickerStyle}"
-        TargetType="controls:BindablePicker">
-        <!--<Setter Property="PlaceholderTextColor" Value="{DynamicResource Theme.Color.TextColorBright}" />-->
-    </Style>
-
+        TargetType="controls:BindablePicker" />
     <Style BasedOn="{StaticResource BindablePickerStyle}" TargetType="controls:BindablePicker" />
-
 
     <Style x:Key="DatePickerStyle" TargetType="DatePicker">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="HeightRequest" Value="48" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
         <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
+        <Setter Property="controls:MinimumHeight.Value" Value="{StaticResource MinimumHeight.Input}" />
     </Style>
 
     <Style BasedOn="{StaticResource DatePickerStyle}" TargetType="DatePicker" />
@@ -359,10 +386,13 @@
 
     <Style x:Key="TimePickerStyle" TargetType="TimePicker">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
+        <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
+        <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
+        <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="HeightRequest" Value="48" />
         <Setter Property="effects:LineColorEffect.ApplyLineColor" Value="True" />
         <Setter Property="effects:LineColorEffect.LineColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
+        <Setter Property="controls:MinimumHeight.Value" Value="{StaticResource MinimumHeight.Input}" />
     </Style>
 
     <Style BasedOn="{StaticResource TimePickerStyle}" TargetType="TimePicker" />
@@ -382,6 +412,7 @@
         <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Input}" />
         <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Input}" />
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Input}" />
+        <Setter Property="controls:MinimumHeight.Value" Value="{StaticResource MinimumHeight.Input}" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
@@ -419,35 +450,29 @@
         <Setter Property="LabelStyle" Value="{DynamicResource SectionLabelTextStyle}" />
     </Style>
 
-    <Style x:Key="ValidationLabelStyle" TargetType="Label">
+    <Style x:Key="ValidationLabelStyle" TargetType="controls:CustomLabel">
+        <Setter Property="TextColor" Value="{DynamicResource Theme.Color.Error}" />
         <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Caption}" />
         <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Caption}" />
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Caption}" />
-        <Setter Property="TextColor" Value="{DynamicResource Theme.Color.Error}" />
-        <Setter Property="LineBreakMode" Value="TailTruncation" />
-        <Setter Property="Margin">
-            <OnPlatform x:TypeArguments="Thickness">
-                <On Platform="iOS" Value="0, 34, 0, 0" />
-                <On Platform="Android" Value="4,0,0,-44" />
-                <On Platform="UWP" Value="0, 34, 0, 0" />
-            </OnPlatform>
-        </Setter>
+        <Setter Property="VerticalOptions" Value="StartAndExpand" />
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Start" />
+        <Setter Property="RemovePadding" Value="True" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
     </Style>
 
-    <Style x:Key="AnnotationEntryLabelStyle" TargetType="Label">
+    <Style x:Key="AnnotationEntryLabelStyle" TargetType="controls:CustomLabel">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
         <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Caption}" />
         <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Caption}" />
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Caption}" />
         <Setter Property="VerticalOptions" Value="StartAndExpand" />
         <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="End" />
+        <Setter Property="RemovePadding" Value="True" />
         <Setter Property="LineBreakMode" Value="TailTruncation" />
-        <Setter Property="Margin">
-            <OnPlatform x:TypeArguments="Thickness">
-                <On Platform="iOS" Value="0" />
-                <On Platform="Android" Value="4,0,0,0" />
-                <On Platform="UWP" Value="0" />
-            </OnPlatform>
-        </Setter>
     </Style>
 </ResourceDictionary>

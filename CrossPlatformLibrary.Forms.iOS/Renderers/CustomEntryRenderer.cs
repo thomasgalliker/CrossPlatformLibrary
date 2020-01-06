@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using CrossPlatformLibrary.Forms.Controls;
 using CrossPlatformLibrary.Forms.iOS.Renderers;
+using Foundation;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -40,17 +42,24 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (this.Element is CustomEntry customEntry)
+
+            if (e.PropertyName == CustomEntry.HideBorderProperty.PropertyName)
             {
-                if (e.PropertyName == CustomEntry.HideBorderProperty.PropertyName)
+                if (this.Element is CustomEntry customEntry)
                 {
                     this.UpdateBorder(customEntry);
                 }
-                else if (e.PropertyName == nameof(Entry.Keyboard))
+            }
+            else if (e.PropertyName == nameof(Entry.Keyboard))
+            {
+                if (this.Element is CustomEntry customEntry)
                 {
                     this.AddRemoveReturnKeyToNumericInput(customEntry);
                 }
-                else if (e.PropertyName == nameof(CustomEntry.TextContentType))
+            }
+            else if (e.PropertyName == nameof(CustomEntry.TextContentType))
+            {
+                if (this.Element is CustomEntry customEntry)
                 {
                     this.UpdateTextContentType(customEntry);
                 }
@@ -115,29 +124,50 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
 
         private void UpdateTextContentType(CustomEntry customEntry)
         {
-            if (customEntry.TextContentType == TextContentType.OneTimeCode)
+            if (UIDevice.CurrentDevice.CheckSystemVersion(11, 0))
             {
-                this.Control.TextContentType = UITextContentType.OneTimeCode;
+                var textContentType = this.MapTextContentType(customEntry.TextContentType);
+                this.Control.TextContentType = textContentType;
             }
-            else if (customEntry.TextContentType == TextContentType.Name)
+        }
+
+        private NSString MapTextContentType(TextContentType textContentType)
+        {
+            if (textContentType == TextContentType.OneTimeCode)
             {
-                this.Control.TextContentType = UITextContentType.Name;
+                return UITextContentType.OneTimeCode;
             }
-            else if (customEntry.TextContentType == TextContentType.Username)
+            else if (textContentType == TextContentType.FirstName)
             {
-                this.Control.TextContentType = UITextContentType.Username;
+                return UITextContentType.GivenName;
             }
-            else if (customEntry.TextContentType == TextContentType.Password)
+            else if (textContentType == TextContentType.LastName)
             {
-                this.Control.TextContentType = UITextContentType.Password;
+                return UITextContentType.FamilyName;
             }
-            else if (customEntry.TextContentType == TextContentType.NewPassword)
+            else if (textContentType == TextContentType.Username)
             {
-                this.Control.TextContentType = UITextContentType.NewPassword;
+                return UITextContentType.Username;
+            }
+            else if (textContentType == TextContentType.EmailAddress)
+            {
+                return UITextContentType.EmailAddress;
+            }
+            else if (textContentType == TextContentType.PhoneNumber)
+            {
+                return UITextContentType.TelephoneNumber;
+            }
+            else if (textContentType == TextContentType.Password)
+            {
+                return UITextContentType.Password;
+            }
+            else if (textContentType == TextContentType.NewPassword)
+            {
+                return UITextContentType.NewPassword;
             }
             else
             {
-                //this.Control.TextContentType = new Foundation.NSString();
+                return new Foundation.NSString();
             }
         }
     }

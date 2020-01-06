@@ -7,7 +7,7 @@ using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Extensions
 {
-    public static class EnumerableExtensions
+    public  static partial class EnumerableExtensions
     {
         private static readonly Random Rng = new Random();
 
@@ -277,6 +277,23 @@ namespace CrossPlatformLibrary.Extensions
                 yield return elements[swapIndex];
                 elements[swapIndex] = elements[i];
             }
+        }
+
+        /// <summary>
+        /// Finds duplicates in a given collection <seealso cref="source"/>.
+        /// </summary>
+        /// <typeparam name="T">The collection item type.</typeparam>
+        /// <param name="source">The source collection.</param>
+        /// <param name="propertySelector">Property selector.</param>
+        /// <param name="numberOfDuplicates">The least number of duplicates.</param>
+        /// <returns></returns>
+        public static IEnumerable<T> FindDuplicates<T>(this IEnumerable<T> source, Func<T, object> propertySelector, int numberOfDuplicates = 2)
+        {
+            var skip = numberOfDuplicates - 1;
+            return source
+                .GroupBy(propertySelector)
+                .Where(g => g.Skip(skip).Any())
+                .SelectMany(g => g);
         }
     }
 }

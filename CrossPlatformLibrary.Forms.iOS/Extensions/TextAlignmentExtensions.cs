@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.iOS.Extensions
 {
-    public static class AlignmentExtensions
+    public static class TextAlignmentExtensions
     {
         public static UIControlContentVerticalAlignment ToContentVerticalAlignment(this TextAlignment alignment)
         {

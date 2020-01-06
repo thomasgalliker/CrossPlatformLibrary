@@ -11,13 +11,6 @@ namespace CrossPlatformLibrary.Forms.Controls
     /// </summary>
     public class ExtendedDatePicker : DatePicker
     {
-        public static readonly BindableProperty FontProperty =
-            BindableProperty.Create(
-                nameof(Font),
-                typeof(Font),
-                typeof(ExtendedDatePicker),
-                new Font());
-
         public static readonly BindableProperty NullableDateProperty =
             BindableProperty.Create(
                 nameof(NullableDate),

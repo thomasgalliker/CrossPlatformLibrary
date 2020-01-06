@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
@@ -29,17 +30,17 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public static readonly BindableProperty ItemsSourceProperty =
             BindableProperty.Create(
-                propertyName: nameof(ItemsSource),
-                returnType: typeof(IEnumerable<object>),
-                declaringType: typeof(BindableStackLayout),
+                nameof(ItemsSource),
+                typeof(IEnumerable),
+                typeof(BindableStackLayout),
                 propertyChanged: OnItemsSourceChanged);
 
         /// <summary>
         ///     Gets or sets the collection of view models to bind to the item views.
         /// </summary>
-        public IEnumerable<object> ItemsSource
+        public IEnumerable ItemsSource
         {
-            get => (IEnumerable<object>)this.GetValue(ItemsSourceProperty);
+            get => (IEnumerable)this.GetValue(ItemsSourceProperty);
             set => this.SetValue(ItemsSourceProperty, value);
         }
 

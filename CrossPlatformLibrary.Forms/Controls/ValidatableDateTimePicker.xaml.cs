@@ -9,6 +9,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         public ValidatableDateTimePicker()
         {
             this.InitializeComponent();
+            this.DebugLayoutBounds();
         }
 
         public static readonly BindableProperty PlaceholderProperty =

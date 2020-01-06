@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
@@ -15,13 +17,14 @@ namespace CrossPlatformLibrary.Forms.Controls
         public ValidatablePicker()
         {
             this.InitializeComponent();
+            this.DebugLayoutBounds();
         }
 
         public static readonly BindableProperty PlaceholderProperty =
             BindableProperty.Create(
                 nameof(Placeholder),
                 typeof(string),
-                typeof(ValidatablePicker), 
+                typeof(ValidatablePicker),
                 null,
                 BindingMode.OneWay,
                 null,

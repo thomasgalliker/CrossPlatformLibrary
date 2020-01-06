@@ -4,7 +4,21 @@ namespace CrossPlatformLibrary.Forms.Controls
 {
     public class CustomButton : Button
     {
-        public static readonly BindableProperty BackgroundColorPressedProperty = BindableProperty.Create(
+        public static readonly BindableProperty LineBreakModeProperty = 
+            BindableProperty.Create(
+                nameof(LineBreakMode),
+                typeof(LineBreakMode),
+                typeof(CustomButton),
+                LineBreakMode.MiddleTruncation);
+
+        public LineBreakMode LineBreakMode
+        {
+            get => (LineBreakMode)this.GetValue(LineBreakModeProperty);
+            set => this.SetValue(LineBreakModeProperty, value);
+        }
+
+        public static readonly BindableProperty BackgroundColorPressedProperty = 
+            BindableProperty.Create(
                 nameof(BackgroundColorPressed),
                 typeof(Color),
                 typeof(CustomButton),
@@ -72,6 +86,19 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             get => (bool)this.GetValue(AllCapsProperty);
             set => this.SetValue(AllCapsProperty, value);
+        }
+
+        public static readonly BindableProperty ElevationProperty = 
+            BindableProperty.Create(
+                nameof(Elevation),
+                typeof(float),
+                typeof(CustomButton),
+                4.0f);
+
+        public float Elevation
+        {
+            get => (float)this.GetValue(ElevationProperty);
+            set => this.SetValue(ElevationProperty, value);
         }
     }
 }

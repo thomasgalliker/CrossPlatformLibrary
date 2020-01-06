@@ -10,6 +10,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         public ValidatableDatePicker()
         {
             this.InitializeComponent();
+            this.DebugLayoutBounds();
         }
 
         public static readonly BindableProperty PlaceholderProperty =
@@ -19,8 +20,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 typeof(ValidatableDatePicker),
                 null,
                 BindingMode.OneWay,
-                null,
-                OnPlaceholderPropertyChanged);
+                propertyChanged: OnPlaceholderPropertyChanged);
 
         private static void OnPlaceholderPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {

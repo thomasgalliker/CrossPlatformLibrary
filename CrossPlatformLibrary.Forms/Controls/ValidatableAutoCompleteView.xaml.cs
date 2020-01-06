@@ -16,6 +16,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         public ValidatableAutoCompleteView()
         {
             this.InitializeComponent();
+            this.DebugLayoutBounds();
             this.taskDelayer = new TaskDelayer();
         }
 
@@ -38,12 +39,19 @@ namespace CrossPlatformLibrary.Forms.Controls
                 typeof(string),
                 typeof(ValidatableAutoCompleteView),
                 null,
-                BindingMode.TwoWay);
+                BindingMode.TwoWay,
+                propertyChanged: OnTextPropertyChanged);
 
         public string Text
         {
             get => (string)this.GetValue(TextProperty);
             set => this.SetValue(TextProperty, value);
+        }
+
+        private static void OnTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var validatableAutoCompleteView = (ValidatableAutoCompleteView)bindable;
+            validatableAutoCompleteView.OnPropertyChanged(nameof(validatableAutoCompleteView.AnnotationText));
         }
 
         public static readonly BindableProperty PlaceholderProperty =
@@ -52,12 +60,32 @@ namespace CrossPlatformLibrary.Forms.Controls
                 typeof(string),
                 typeof(ValidatableAutoCompleteView),
                 null,
-                BindingMode.OneWay);
+                BindingMode.OneWay,
+                propertyChanged: OnPlaceholderPropertyChanged);
 
         public string Placeholder
         {
             get => (string)this.GetValue(PlaceholderProperty);
             set => this.SetValue(PlaceholderProperty, value);
+        }
+
+        private static void OnPlaceholderPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var validatableAutoCompleteView = (ValidatableAutoCompleteView)bindable;
+            validatableAutoCompleteView.OnPropertyChanged(nameof(validatableAutoCompleteView.AnnotationText));
+        }
+
+        public string AnnotationText
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.Text))
+                {
+                    return this.Placeholder;
+                }
+
+                return " ";
+            }
         }
 
         public static readonly BindableProperty IsReadonlyProperty =
@@ -336,6 +364,18 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             get => (DataTemplate)this.GetValue(SuggestedItemTemplateProperty);
             set => this.SetValue(SuggestedItemTemplateProperty, value);
+        }
+        
+        public static readonly BindableProperty SuggestedItemsSpacingProperty = BindableProperty.Create(
+            nameof(SuggestedItemsSpacing),
+            typeof(double),
+            typeof(ValidatableAutoCompleteView),
+            6.0);
+
+        public double SuggestedItemsSpacing
+        {
+            get => (double)this.GetValue(SuggestedItemsSpacingProperty);
+            set => this.SetValue(SuggestedItemsSpacingProperty, value);
         }
 
         public static readonly BindableProperty DisplayMemberPathProperty =
