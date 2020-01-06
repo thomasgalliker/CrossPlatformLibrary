@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
+using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Forms.Effects;
+using CrossPlatformLibrary.Internals;
 using Foundation;
 using UIKit;
 using Xamarin.Forms;
@@ -13,11 +15,19 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
 {
     public class SafeAreaPaddingEffect : PlatformEffect
     {
+        private readonly ITracer tracer;
         private Thickness? originalPadding;
         private NSObject orientationObserver;
 
+        public SafeAreaPaddingEffect()
+        {
+            this.tracer = Tracer.Current;
+        }
+
         protected override void OnAttached()
         {
+            this.tracer.Info($"SafeAreaPaddingEffect.OnAttached");
+
             this.orientationObserver = NSNotificationCenter.DefaultCenter.AddObserver(UIApplication.DidChangeStatusBarOrientationNotification, this.DeviceOrientationDidChange);
             UIDevice.CurrentDevice.BeginGeneratingDeviceOrientationNotifications();
 
@@ -26,6 +36,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
 
         private void DeviceOrientationDidChange(NSNotification obj)
         {
+            this.tracer.Info($"SafeAreaPaddingEffect.DeviceOrientationDidChange");
             this.UpdatePadding();
         }
 
@@ -53,6 +64,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
                 }
 
                 layout.Padding = this.GetSafeAreaPadding(this.originalPadding.Value, safeAreaInsets, includeStatusBar);
+                this.tracer.Info($"SafeAreaPaddingEffect.SetSafeArea set {element.GetType().GetFormattedName()}.Padding={{{layout.Padding.Left}, {layout.Padding.Top}, {layout.Padding.Right}, {layout.Padding.Bottom}}}");
             }
 
             if (element is Page page)
@@ -63,6 +75,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
                 }
 
                 page.Padding = this.GetSafeAreaPadding(this.originalPadding.Value, safeAreaInsets, includeStatusBar);
+                this.tracer.Info($"SafeAreaPaddingEffect.SetSafeArea set {element.GetType().GetFormattedName()}.Padding={{{page.Padding.Left}, {page.Padding.Top}, {page.Padding.Right}, {page.Padding.Bottom}}}");
             }
         }
 
@@ -101,7 +114,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
             return safeAreaPadding;
         }
 
-        private static bool GetHasInsets(UIEdgeInsets insets)
+        private bool GetHasInsets(UIEdgeInsets insets)
         {
             bool hasInsets;
             var orientation = UIApplication.SharedApplication.StatusBarOrientation;
@@ -120,12 +133,14 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
                     break;
             }
 
-            Debug.WriteLine($"hasInsets={hasInsets}");
+            this.tracer.Info($"SafeAreaPaddingEffect.GetHasInsets returns hasInsets={hasInsets}");
             return hasInsets;
         }
 
         protected override void OnDetached()
         {
+            this.tracer.Info($"SafeAreaPaddingEffect.OnDetached");
+
             if (this.Element is Layout layout && this.originalPadding != null)
             {
                 layout.Padding = this.originalPadding.Value;
