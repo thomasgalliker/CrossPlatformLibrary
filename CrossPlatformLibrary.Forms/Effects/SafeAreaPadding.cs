@@ -71,32 +71,32 @@ namespace CrossPlatformLibrary.Forms.Effects
             }
         }
 
-        static void AttachEffect(BindableObject element)
+        static void AttachEffect(BindableObject bindableObject)
         {
-            if (!(element is IElementController controller) || controller == null || controller.EffectIsAttached(EffectName))
+            if (!(bindableObject is IElementController controller) || controller == null || controller.EffectIsAttached(EffectName))
             {
                 return;
             }
 
-            if (element is Element elm)
+            if (bindableObject is Element element)
             {
-                elm.Effects.Add(Effect.Resolve(EffectName));
+                element.Effects.Add(Effect.Resolve(EffectName));
             }
         }
 
-        static void DetachEffect(BindableObject element)
+        static void DetachEffect(BindableObject bindableObject)
         {
-            if (!(element is IElementController controller) || controller == null || !controller.EffectIsAttached(EffectName))
+            if (!(bindableObject is IElementController controller) || controller == null || !controller.EffectIsAttached(EffectName))
             {
                 return;
             }
 
-            if (element is Element elm)
+            if (bindableObject is Element element)
             {
-                var toRemove = elm.Effects.FirstOrDefault(e => e.ResolveId == Effect.Resolve(EffectName).ResolveId);
+                var toRemove = element.Effects.FirstOrDefault(e => e.ResolveId == Effect.Resolve(EffectName).ResolveId);
                 if (toRemove != null)
                 {
-                    elm.Effects.Remove(toRemove);
+                    element.Effects.Remove(toRemove);
                 }
             }
         }
