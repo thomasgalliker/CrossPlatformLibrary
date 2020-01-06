@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace CrossPlatformLibrary.Internals
 {
@@ -14,12 +13,12 @@ namespace CrossPlatformLibrary.Internals
 
         public void Write(Category category, string message)
         {
-            Debug.WriteLine(message);
+            System.Diagnostics.Debug.WriteLine($"{DateTime.UtcNow}|{this.name}|{category}|{message}[EOL]");
         }
 
         public void Write(Category category, Exception exception, string message)
         {
-            Debug.WriteLine(message);
+            System.Diagnostics.Debug.WriteLine($"{DateTime.UtcNow}|{this.name}|{category}|{message}|{exception}[EOL]");
         }
     }
 }

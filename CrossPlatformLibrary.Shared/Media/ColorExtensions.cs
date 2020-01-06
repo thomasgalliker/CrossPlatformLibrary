@@ -7,7 +7,7 @@ namespace CrossPlatformLibrary.Media
     public static class ColorExtensions // TODO: integrate this code into Color.cs
     {
         private static readonly Random Randomizer = new Random();
-        private static readonly ITracer tracer = Tracer.Create("ColorExtensions");
+        private static readonly ITracer tracer = Tracer.Current;
 
         public static Color GetContrast(this Color source, bool preserveOpacity)
         {

@@ -62,7 +62,4 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\RandomUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\TaskDelayer.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Internals\Tracing\" />
-  </ItemGroup>
 </Project>
