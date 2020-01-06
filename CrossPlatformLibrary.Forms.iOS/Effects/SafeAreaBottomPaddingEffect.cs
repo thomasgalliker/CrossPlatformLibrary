@@ -1,21 +1,20 @@
 ﻿using CrossPlatformLibrary.Forms.iOS.Effects;
-using UIKit;
 using Xamarin.Forms;
 
 [assembly: ExportEffect(typeof(SafeAreaBottomPaddingEffect), nameof(SafeAreaBottomPaddingEffect))]
 
 namespace CrossPlatformLibrary.Forms.iOS.Effects
 {
+    /// <summary>
+    ///     Adds safe-area padding to the bottom of the UI element.
+    /// </summary>
     public class SafeAreaBottomPaddingEffect : SafeAreaPaddingEffect
     {
-        protected override Thickness GetPadding(Thickness padding, UIEdgeInsets insets)
+        protected override Thickness GetSafeAreaPadding(Thickness originalPadding, Thickness safeAreaInsets, bool includeStatusBar)
         {
-            return new Thickness(padding.Left + insets.Left, padding.Top, padding.Right, padding.Bottom + insets.Bottom);
-        }
-
-        protected override Thickness GetDefaultPadding(Thickness padding)
-        {
-            return new Thickness(padding.Left, padding.Top, padding.Right, padding.Bottom + 20);
+            var safeAreaPadding = base.GetSafeAreaPadding(originalPadding, safeAreaInsets, includeStatusBar: false);
+            safeAreaPadding.Top = 0;
+            return safeAreaPadding;
         }
     }
 }

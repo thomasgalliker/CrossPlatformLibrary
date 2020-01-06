@@ -12,7 +12,12 @@
     xmlns:userControls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
     xmlns:views="clr-namespace:SampleApp.Views;assembly=SampleApp"
     x:Name="Page"
-    Title="CrossPlatformLibrary Sample App">
+    Title="CrossPlatformLibrary Sample App"
+    BackgroundColor="SlateGray"
+    effects:SafeAreaPadding.EnableSafeAreaPadding="{Binding IsMultiToggleButtonOn}"
+    effects:SafeAreaPadding.ShouldIncludeStatusBar="True"
+    effects:SafeAreaPadding.SafeAreaInsets="10, 10, 10, 10">
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="CountryItemTemplate">
@@ -180,11 +185,21 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
+            <!--  Demo: Adds safe-area padding to the top of the Grid  -->
+            <Grid.Effects>
+                <effects:SafeAreaTopPaddingEffect />
+            </Grid.Effects>
+
             <controls:GridZero IsVisible="{Binding IsNotBusyAndHasNoViewModelError}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
+
+                <!--  Demo: Adds safe-area padding to the bottom of the Grid  -->
+                <Grid.Effects>
+                    <effects:SafeAreaBottomPaddingEffect />
+                </Grid.Effects>
 
                 <controls:AlwaysScrollView x:Name="ScrollView">
                     <Grid>
