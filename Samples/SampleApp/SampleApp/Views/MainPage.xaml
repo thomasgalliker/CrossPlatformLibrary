@@ -14,9 +14,7 @@
     x:Name="Page"
     Title="CrossPlatformLibrary Sample App"
     BackgroundColor="SlateGray"
-    effects:SafeAreaPadding.EnableSafeAreaPadding="{Binding IsMultiToggleButtonOn}"
-    effects:SafeAreaPadding.ShouldIncludeStatusBar="True"
-    effects:SafeAreaPadding.SafeAreaInsets="10, 10, 10, 10">
+    effects:SafeAreaPadding.Layout="Top,Bottom">
 
     <ContentPage.Resources>
         <ResourceDictionary>
