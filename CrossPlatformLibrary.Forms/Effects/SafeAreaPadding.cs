@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CrossPlatformLibrary.Internals;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Effects
@@ -73,6 +74,7 @@ namespace CrossPlatformLibrary.Forms.Effects
 
         static void AttachEffect(BindableObject bindableObject)
         {
+            Tracer.Current.Debug($"AttachEffect for {bindableObject?.GetType().Name}...");
             if (!(bindableObject is IElementController controller) || controller == null || controller.EffectIsAttached(EffectName))
             {
                 return;
@@ -81,11 +83,13 @@ namespace CrossPlatformLibrary.Forms.Effects
             if (bindableObject is Element element)
             {
                 element.Effects.Add(Effect.Resolve(EffectName));
+                Tracer.Current.Debug($"AttachEffect added for {bindableObject?.GetType().Name}...");
             }
         }
 
         static void DetachEffect(BindableObject bindableObject)
         {
+            Tracer.Current.Debug($"DetachEffect for {bindableObject?.GetType().Name}...");
             if (!(bindableObject is IElementController controller) || controller == null || !controller.EffectIsAttached(EffectName))
             {
                 return;
@@ -97,10 +101,10 @@ namespace CrossPlatformLibrary.Forms.Effects
                 if (toRemove != null)
                 {
                     element.Effects.Remove(toRemove);
+                    Tracer.Current.Debug($"DetachEffect removed for {bindableObject?.GetType().Name}...");
                 }
             }
         }
-
 
         public static IPlatformElementConfiguration<Xamarin.Forms.PlatformConfiguration.iOS, Element> UseSafeArea(this IPlatformElementConfiguration<Xamarin.Forms.PlatformConfiguration.iOS, Element> config, bool includeStatusBar)
         {
