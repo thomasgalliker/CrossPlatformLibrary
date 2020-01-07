@@ -26,7 +26,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
 
         protected override void OnAttached()
         {
-            this.tracer.Info($"SafeAreaPaddingEffect.OnAttached");
+            this.tracer.Info($"SafeAreaPaddingEffect.OnAttached to {this.Element?.GetType().GetFormattedName()}");
 
             this.orientationObserver = NSNotificationCenter.DefaultCenter.AddObserver(UIApplication.DidChangeStatusBarOrientationNotification, this.DeviceOrientationDidChange);
             UIDevice.CurrentDevice.BeginGeneratingDeviceOrientationNotifications();
@@ -36,7 +36,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
 
         private void DeviceOrientationDidChange(NSNotification obj)
         {
-            this.tracer.Info($"SafeAreaPaddingEffect.DeviceOrientationDidChange");
+            this.tracer.Info($"SafeAreaPaddingEffect.DeviceOrientationDidChange on {this.Element?.GetType().GetFormattedName()}");
             this.UpdatePadding();
         }
 
@@ -133,13 +133,13 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
                     break;
             }
 
-            this.tracer.Info($"SafeAreaPaddingEffect.GetHasInsets returns hasInsets={hasInsets}");
+            this.tracer.Info($"SafeAreaPaddingEffect.GetHasInsets returns hasInsets={hasInsets} for {this.Element.GetType().GetFormattedName()}");
             return hasInsets;
         }
 
         protected override void OnDetached()
         {
-            this.tracer.Info($"SafeAreaPaddingEffect.OnDetached");
+            this.tracer.Info($"SafeAreaPaddingEffect.OnDetached from {this.Element?.GetType().GetFormattedName()}");
 
             if (this.Element is Layout layout && this.originalPadding != null)
             {
