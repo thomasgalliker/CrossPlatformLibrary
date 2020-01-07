@@ -150,6 +150,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
                 page.Padding = this.originalPadding.Value;
             }
 
+            this.originalPadding = null;
             NSNotificationCenter.DefaultCenter.RemoveObserver(this.orientationObserver);
         }
 
