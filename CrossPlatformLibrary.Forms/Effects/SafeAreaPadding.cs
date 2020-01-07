@@ -8,13 +8,6 @@ namespace CrossPlatformLibrary.Forms.Effects
     {
         public static readonly string EffectName = $"{Effects.Prefix}.{nameof(SafeAreaPaddingEffect)}";
 
-        public static readonly BindableProperty ShouldIncludeStatusBarProperty =
-            BindableProperty.CreateAttached(
-                "ShouldIncludeStatusBar",
-                typeof(bool),
-                typeof(SafeAreaPadding),
-                false);
-
         public static readonly BindableProperty EnableSafeAreaPaddingProperty =
             BindableProperty.CreateAttached(
                 "EnableSafeAreaPadding",
@@ -23,22 +16,22 @@ namespace CrossPlatformLibrary.Forms.Effects
                 false,
                 propertyChanged: OnEnableSafeAreaPadding);
 
-        public static readonly BindableProperty SafeAreaInsetsProperty =
-            BindableProperty.CreateAttached(
-                "SafeAreaInsets",
-                typeof(Thickness),
-                typeof(SafeAreaPadding),
-                new Thickness(0, 0, 0, 0));
-
-        public static bool GetShouldIncludeStatusBar(BindableObject element)
+        public static bool GetEnableSafeAreaPadding(BindableObject element)
         {
-            return (bool)element.GetValue(ShouldIncludeStatusBarProperty);
+            return (bool)element.GetValue(EnableSafeAreaPaddingProperty);
         }
 
         public static void SetEnableSafeAreaPadding(BindableObject element, bool value)
         {
             element.SetValue(EnableSafeAreaPaddingProperty, value);
         }
+
+        public static readonly BindableProperty SafeAreaInsetsProperty =
+            BindableProperty.CreateAttached(
+                "SafeAreaInsets",
+                typeof(Thickness),
+                typeof(SafeAreaPadding),
+                new Thickness(0, 0, 0, 0));
 
         public static Thickness GetSafeAreaInsets(BindableObject element)
         {
@@ -50,9 +43,16 @@ namespace CrossPlatformLibrary.Forms.Effects
             element.SetValue(SafeAreaInsetsProperty, value);
         }
 
-        public static bool GetEnableSafeAreaPadding(BindableObject element)
+        public static readonly BindableProperty ShouldIncludeStatusBarProperty =
+            BindableProperty.CreateAttached(
+                "ShouldIncludeStatusBar",
+                typeof(bool),
+                typeof(SafeAreaPadding),
+                false);
+
+        public static bool GetShouldIncludeStatusBar(BindableObject element)
         {
-            return (bool)element.GetValue(EnableSafeAreaPaddingProperty);
+            return (bool)element.GetValue(ShouldIncludeStatusBarProperty);
         }
 
         public static void SetShouldIncludeStatusBar(BindableObject element, bool value)
