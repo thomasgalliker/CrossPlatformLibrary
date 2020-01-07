@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace CrossPlatformLibrary.Forms.Effects
 {

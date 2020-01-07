@@ -1,6 +1,7 @@
-﻿using CrossPlatformLibrary.Forms.iOS.Effects;
+﻿using CrossPlatformLibrary.Forms.Effects;
 using CrossPlatformLibrary.Internals;
 using Xamarin.Forms;
+using SafeAreaBottomPaddingEffect = CrossPlatformLibrary.Forms.iOS.Effects.SafeAreaBottomPaddingEffect;
 
 [assembly: ExportEffect(typeof(SafeAreaBottomPaddingEffect), nameof(SafeAreaBottomPaddingEffect))]
 
@@ -12,16 +13,17 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
     public class SafeAreaBottomPaddingEffect : SafeAreaPaddingEffect
     {
         private readonly ITracer tracer;
+        private readonly SafeAreaPaddingLayout safeAreaPaddingLayout;
 
         public SafeAreaBottomPaddingEffect()
         {
             this.tracer = Tracer.Current;
+            this.safeAreaPaddingLayout = new SafeAreaPaddingLayout(SafeAreaPaddingLayout.PaddingPosition.Bottom);
         }
 
-        protected override Thickness GetSafeAreaPadding(Thickness originalPadding, Thickness safeAreaInsets, bool includeStatusBar)
+        protected override Thickness GetSafeAreaPadding(Thickness originalPadding, SafeAreaPaddingLayout _, Thickness safeAreaInsets, bool includeStatusBar)
         {
-            var safeAreaPadding = base.GetSafeAreaPadding(originalPadding, safeAreaInsets, includeStatusBar: false);
-            safeAreaPadding.Top = 0;
+            var safeAreaPadding = base.GetSafeAreaPadding(originalPadding, this.safeAreaPaddingLayout, safeAreaInsets, includeStatusBar: false);
 
             this.tracer.Info($"SafeAreaBottomPaddingEffect.GetSafeAreaPadding returns safeAreaPadding={{{safeAreaPadding.Left}, {safeAreaPadding.Top}, {safeAreaPadding.Right}, {safeAreaPadding.Bottom}}}");
             return safeAreaPadding;

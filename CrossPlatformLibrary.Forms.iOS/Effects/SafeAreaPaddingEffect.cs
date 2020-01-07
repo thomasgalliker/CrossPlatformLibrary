@@ -1,5 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Forms.Effects;
 using CrossPlatformLibrary.Internals;
@@ -18,6 +21,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
         private readonly ITracer tracer;
         private Thickness? originalPadding;
         private NSObject orientationObserver;
+        private Dictionary<UIInterfaceOrientation, UIEdgeInsets> insetsOrientationMapping = new Dictionary<UIInterfaceOrientation, UIEdgeInsets>();
 
         public SafeAreaPaddingEffect()
         {
@@ -54,7 +58,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
             }
         }
 
-        private void SetSafeArea(Element element, Thickness safeAreaInsets, bool includeStatusBar)
+        private void SetSafeArea(Element element, SafeAreaPaddingLayout safeAreaPaddingLayout, Thickness safeAreaInsets, bool includeStatusBar)
         {
             if (element is Layout layout)
             {
@@ -63,7 +67,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
                     this.originalPadding = layout.Padding;
                 }
 
-                layout.Padding = this.GetSafeAreaPadding(this.originalPadding.Value, safeAreaInsets, includeStatusBar);
+                layout.Padding = this.GetSafeAreaPadding(this.originalPadding.Value, safeAreaPaddingLayout, safeAreaInsets, includeStatusBar);
                 this.tracer.Info($"SafeAreaPaddingEffect.SetSafeArea set {element.GetType().GetFormattedName()}.Padding={{{layout.Padding.Left}, {layout.Padding.Top}, {layout.Padding.Right}, {layout.Padding.Bottom}}}");
             }
 
@@ -74,27 +78,41 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
                     this.originalPadding = page.Padding;
                 }
 
-                page.Padding = this.GetSafeAreaPadding(this.originalPadding.Value, safeAreaInsets, includeStatusBar);
+                page.Padding = this.GetSafeAreaPadding(this.originalPadding.Value, safeAreaPaddingLayout, safeAreaInsets, includeStatusBar);
                 this.tracer.Info($"SafeAreaPaddingEffect.SetSafeArea set {element.GetType().GetFormattedName()}.Padding={{{page.Padding.Left}, {page.Padding.Top}, {page.Padding.Right}, {page.Padding.Bottom}}}");
             }
         }
 
         private void UpdatePadding()
         {
+            this.tracer.Info($"SafeAreaPaddingEffect.UpdatePadding for {this.Element.GetType().GetFormattedName()}");
+            var layout = SafeAreaPadding.GetLayout(this.Element);
             var safeAreaInsets = SafeAreaPadding.GetSafeAreaInsets(this.Element);
             var includeStatusBar = SafeAreaPadding.GetShouldIncludeStatusBar(this.Element);
-            this.SetSafeArea(this.Element, safeAreaInsets, includeStatusBar);
+            this.SetSafeArea(this.Element, layout, safeAreaInsets, includeStatusBar);
         }
 
-        protected virtual Thickness GetSafeAreaPadding(Thickness originalPadding, Thickness safeAreaInsets, bool includeStatusBar)
+        protected virtual Thickness GetSafeAreaPadding(Thickness originalPadding, SafeAreaPaddingLayout safeAreaPaddingLayout, Thickness safeAreaInsets, bool includeStatusBar)
         {
-            var insets = this.SafeAreaInsets;
-            bool hasInsets = GetHasInsets(insets);
+            var orientation = UIApplication.SharedApplication.StatusBarOrientation;
+            UIEdgeInsets insets;
+            //bool hasInsets;
+            if (insetsOrientationMapping.TryGetValue(orientation, out var cachedInsets))
+            {
+                insets = cachedInsets;
+            }
+            else
+            {
+                insets = this.SafeAreaInsets;
+                insetsOrientationMapping.Add(orientation, insets);
+
+                //hasInsets = GetHasInsets(orientation, insets);
+            }
 
             int topPadding = includeStatusBar ? (int)(UIApplication.SharedApplication?.StatusBarFrame.Height ?? 20.0) : 0;
 
             Thickness safeAreaPadding;
-            if (hasInsets) // iPhone X
+            //if (hasInsets) // iPhone X
             {
                 safeAreaPadding = new Thickness(
                     originalPadding.Left + insets.Left + safeAreaInsets.Left,
@@ -102,22 +120,27 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
                     originalPadding.Right + insets.Right + safeAreaInsets.Right,
                     originalPadding.Bottom + insets.Bottom + safeAreaInsets.Bottom);
             }
-            else
+            //else
+            //{
+            //    safeAreaPadding = new Thickness(
+            //        originalPadding.Left,
+            //        originalPadding.Top + topPadding,
+            //        originalPadding.Right,
+            //        originalPadding.Bottom);
+            //}
+
+            if (safeAreaPaddingLayout != null)
             {
-                safeAreaPadding = new Thickness(
-                    originalPadding.Left,
-                    originalPadding.Top + topPadding,
-                    originalPadding.Right,
-                    originalPadding.Bottom);
+                safeAreaPadding = safeAreaPaddingLayout.Transform(safeAreaPadding);
             }
 
             return safeAreaPadding;
         }
 
-        private bool GetHasInsets(UIEdgeInsets insets)
+        private bool GetHasInsets(UIInterfaceOrientation orientation, UIEdgeInsets insets)
         {
             bool hasInsets;
-            var orientation = UIApplication.SharedApplication.StatusBarOrientation;
+            
             switch (orientation)
             {
                 case UIInterfaceOrientation.Portrait:

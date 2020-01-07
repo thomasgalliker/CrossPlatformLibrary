@@ -25,6 +25,36 @@ namespace CrossPlatformLibrary.Forms.Effects
         {
             element.SetValue(EnableSafeAreaPaddingProperty, value);
         }
+        
+        public static readonly BindableProperty LayoutProperty =
+            BindableProperty.CreateAttached(
+                "Layout",
+                typeof(SafeAreaPaddingLayout),
+                typeof(SafeAreaPadding),
+                null,
+                propertyChanged: OnSafeAreaPaddingLayoutChanged);
+
+        private static void OnSafeAreaPaddingLayoutChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (newValue is SafeAreaPaddingLayout layout && layout.Positions.Any())
+            {
+                AttachEffect(bindable);
+            }
+            else
+            {
+                DetachEffect(bindable);
+            }
+        }
+
+        public static SafeAreaPaddingLayout GetLayout(BindableObject element)
+        {
+            return (SafeAreaPaddingLayout)element.GetValue(LayoutProperty);
+        }
+
+        public static void SetLayout(BindableObject element, SafeAreaPaddingLayout value)
+        {
+            element.SetValue(LayoutProperty, value);
+        }
 
         public static readonly BindableProperty SafeAreaInsetsProperty =
             BindableProperty.CreateAttached(
