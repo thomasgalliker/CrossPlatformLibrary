@@ -10,7 +10,7 @@ namespace CrossPlatformLibrary.Forms.Effects
     [TypeConverter(typeof(SafeAreaPaddingLayoutConverter))]
     public sealed class SafeAreaPaddingLayout
     {
-        private static readonly PaddingPosition[] All = Enum.GetValues(typeof(PaddingPosition)).OfType<SafeAreaPaddingLayout.PaddingPosition>().ToArray();
+        private static readonly PaddingPosition[] All = Enum.GetValues(typeof(PaddingPosition)).OfType<PaddingPosition>().ToArray();
 
         public SafeAreaPaddingLayout(params PaddingPosition[] positions)
         {
@@ -37,19 +37,19 @@ namespace CrossPlatformLibrary.Forms.Effects
             var notPresentPositions = All.Except(this.Positions);
             foreach (var paddingPosition in notPresentPositions)
             {
-                if (paddingPosition == SafeAreaPaddingLayout.PaddingPosition.Left)
+                if (paddingPosition == PaddingPosition.Left)
                 {
                     padding.Left = 0;
                 }
-                else if (paddingPosition == SafeAreaPaddingLayout.PaddingPosition.Top)
+                else if (paddingPosition == PaddingPosition.Top)
                 {
                     padding.Top = 0;
                 }
-                else if (paddingPosition == SafeAreaPaddingLayout.PaddingPosition.Right)
+                else if (paddingPosition == PaddingPosition.Right)
                 {
                     padding.Right = 0;
                 }
-                else if (paddingPosition == SafeAreaPaddingLayout.PaddingPosition.Bottom)
+                else if (paddingPosition == PaddingPosition.Bottom)
                 {
                     padding.Bottom = 0;
                 }

@@ -15,13 +15,27 @@ namespace CrossPlatformLibrary.Forms.Tests.Effects
         {
             // Arrange
             var safeAreaPaddingLayout = new SafeAreaPaddingLayout();
-            var paddingInput = new Thickness(10);
+            var paddingInput = new Thickness(10, 10, 10, 10);
 
             // Act
             var paddingOutput = safeAreaPaddingLayout.Transform(paddingInput);
 
             // Assert
-            paddingOutput.Should().BeEquivalentTo(new Thickness(10, 10, 10, 10));
+            paddingOutput.Should().BeEquivalentTo(new Thickness(0, 0, 0, 0));
+        }
+
+        [Fact]
+        public void ShouldTransformLayoutPositionsToPadding_Left()
+        {
+            // Arrange
+            var safeAreaPaddingLayout = new SafeAreaPaddingLayout(SafeAreaPaddingLayout.PaddingPosition.Left);
+            var paddingInput = new Thickness(10, 10, 10, 10);
+
+            // Act
+            var paddingOutput = safeAreaPaddingLayout.Transform(paddingInput);
+
+            // Assert
+            paddingOutput.Should().BeEquivalentTo(new Thickness(10, 0, 0, 0));
         }
 
         [Fact]
