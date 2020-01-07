@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CrossPlatformLibrary.Forms.Effects;
+﻿using CrossPlatformLibrary.Forms.Effects;
 using FluentAssertions;
 using Xamarin.Forms;
 using Xunit;

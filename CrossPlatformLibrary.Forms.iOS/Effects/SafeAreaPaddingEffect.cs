@@ -18,10 +18,10 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
 {
     public class SafeAreaPaddingEffect : PlatformEffect
     {
+        private readonly Dictionary<UIInterfaceOrientation, UIEdgeInsets> orientationToInsetsMapping = new Dictionary<UIInterfaceOrientation, UIEdgeInsets>();
         private readonly ITracer tracer;
         private Thickness? originalPadding;
         private NSObject orientationObserver;
-        private Dictionary<UIInterfaceOrientation, UIEdgeInsets> insetsOrientationMapping = new Dictionary<UIInterfaceOrientation, UIEdgeInsets>();
 
         public SafeAreaPaddingEffect()
         {
@@ -49,6 +49,10 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
             base.OnElementPropertyChanged(args);
 
             if (args.PropertyName == SafeAreaPadding.SafeAreaInsetsProperty.PropertyName)
+            {
+                this.UpdatePadding();
+            }
+            else if (args.PropertyName == SafeAreaPadding.LayoutProperty.PropertyName)
             {
                 this.UpdatePadding();
             }
@@ -97,14 +101,14 @@ namespace CrossPlatformLibrary.Forms.iOS.Effects
             var orientation = UIApplication.SharedApplication.StatusBarOrientation;
             UIEdgeInsets insets;
             //bool hasInsets;
-            if (insetsOrientationMapping.TryGetValue(orientation, out var cachedInsets))
+            if (this.orientationToInsetsMapping.TryGetValue(orientation, out var cachedInsets))
             {
                 insets = cachedInsets;
             }
             else
             {
                 insets = this.SafeAreaInsets;
-                insetsOrientationMapping.Add(orientation, insets);
+                this.orientationToInsetsMapping.Add(orientation, insets);
 
                 //hasInsets = GetHasInsets(orientation, insets);
             }
