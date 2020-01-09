@@ -50,6 +50,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 }
 
                 control.segmentedItems = segmentedItems;
+                control.BindableStackLayout.ItemsSource = control.segmentedItems.ToList();
             }
         }
 
