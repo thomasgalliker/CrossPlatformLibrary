@@ -14,8 +14,6 @@ namespace CrossPlatformLibrary.Forms.Converters
         {
             if (value is IEnumerable enumerable)
             {
-                var list = enumerable.CreateList();
-
                 var segmentedItems = new List<StatusSegment>();
                 foreach (var item in enumerable)
                 {

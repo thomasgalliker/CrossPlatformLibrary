@@ -139,5 +139,31 @@ namespace CrossPlatformLibrary.Forms.Controls
             get => (object)this.GetValue(SelectionEndProperty);
             set => this.SetValue(SelectionEndProperty, value);
         }
+
+        public static readonly BindableProperty IndicatorForegroundColorProperty =
+            BindableProperty.Create(
+                nameof(IndicatorForegroundColor),
+                typeof(Color),
+                typeof(SegmentedStatusIndicator),
+                Color.Default);
+
+        public Color IndicatorForegroundColor
+        {
+            get => (Color)this.GetValue(IndicatorForegroundColorProperty);
+            set => this.SetValue(IndicatorForegroundColorProperty, value);
+        }
+
+        public static readonly BindableProperty IndicatorBackgroundColorProperty =
+            BindableProperty.Create(
+                nameof(IndicatorBackgroundColor),
+                typeof(Color),
+                typeof(SegmentedStatusIndicator),
+                Color.Default);
+
+        public Color IndicatorBackgroundColor
+        {
+            get => (Color)this.GetValue(IndicatorBackgroundColorProperty);
+            set => this.SetValue(IndicatorBackgroundColorProperty, value);
+        }
     }
 }

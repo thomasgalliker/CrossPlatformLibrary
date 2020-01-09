@@ -9,14 +9,28 @@
 
     <Grid.Resources>
         <ResourceDictionary>
-            <converters:Part1ToColorConverter x:Key="Part1ToColorConverter" />
-            <converters:Part2ToColorConverter x:Key="Part2ToColorConverter" />
-            <converters:Part3ToColorConverter x:Key="Part3ToColorConverter" />
+            <converters:Part1ToColorConverter
+                x:Key="Part1ToColorConverter"
+                TrueValue="{Binding Source={x:Reference Control}, Path=IndicatorForegroundColor}"
+                FalseValue="{Binding Source={x:Reference Control}, Path=IndicatorBackgroundColor}" />
+            <converters:Part2ToColorConverter
+                x:Key="Part2ToColorConverter"
+                TrueValue="{Binding Source={x:Reference Control}, Path=IndicatorForegroundColor}"
+                FalseValue="{Binding Source={x:Reference Control}, Path=IndicatorBackgroundColor}" />
+            <converters:Part3ToColorConverter
+                x:Key="Part3ToColorConverter"
+                TrueValue="{Binding Source={x:Reference Control}, Path=IndicatorForegroundColor}"
+                FalseValue="{Binding Source={x:Reference Control}, Path=IndicatorBackgroundColor}" />
 
             <DataTemplate x:Key="StatusCell">
                 <ViewCell>
-                    <controls:StackLayoutZero Orientation="Horizontal" BackgroundColor="Transparent">
-                        <controls:StackLayoutZero WidthRequest="48" Orientation="Vertical">
+                    <controls:GridZero>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="48" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <controls:StackLayoutZero Grid.Column="0" Orientation="Vertical">
 
                             <!--  Start Section  -->
                             <BoxView
@@ -51,7 +65,7 @@
 
                         </controls:StackLayoutZero>
 
-                        <controls:GridZero>
+                        <controls:GridZero Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -59,21 +73,21 @@
 
                             <controls:CustomLabel
                                 Grid.Row="0"
-                                Text="{Binding Payload.Name, Mode=OneWay}"
+                                Text="{Binding Payload.Title, Mode=OneWay}"
                                 FontSize="{DynamicResource Theme.FontSize.MidMedium}"
                                 LineBreakMode="WordWrap"
                                 RemovePadding="True" />
                             <Label
                                 Grid.Row="1"
-                                Text="{Binding Payload.ArrivalTime}"
+                                Text="{Binding Payload.Description}"
                                 FontSize="{DynamicResource Theme.FontSize.XSmall}"
                                 LineBreakMode="WordWrap" />
                         </controls:GridZero>
 
-                        <StackLayout.GestureRecognizers>
+                        <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Command, Mode=OneWay}" CommandParameter="{Binding CommandParameter, Mode=OneWay}" />
-                        </StackLayout.GestureRecognizers>
-                    </controls:StackLayoutZero>
+                        </Grid.GestureRecognizers>
+                    </controls:GridZero>
                 </ViewCell>
             </DataTemplate>
         </ResourceDictionary>

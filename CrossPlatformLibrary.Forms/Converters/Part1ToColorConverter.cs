@@ -4,9 +4,9 @@ using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Converters
 {
-    internal class Part1ToColorConverter : IValueConverter
+    internal class Part1ToColorConverter : BoolToColorConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is StatusSegment statusSegment)
             {
@@ -16,47 +16,37 @@ namespace CrossPlatformLibrary.Forms.Converters
                 }
                 else if (statusSegment.IsMiddleElement || (statusSegment.IsEndElement && !statusSegment.IsStartElement))
                 {
-                    return Color.Red;
+                    return this.TrueValue;
                 }
 
-                return Color.LightSlateGray;
+                return this.FalseValue;
             }
 
             return Color.Transparent;
         }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return value;
-        }
     }
 
-    internal class Part2ToColorConverter : IValueConverter
+    internal class Part2ToColorConverter : BoolToColorConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is StatusSegment statusSegment)
             {
                 if (statusSegment.IsStartElement || statusSegment.IsMiddleElement || statusSegment.IsEndElement)
                 {
-                    return Color.Red;
+                    return this.TrueValue;
                 }
 
-                return Color.LightSlateGray;
+                return this.FalseValue;
             }
 
             return Color.Transparent;
         }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return value;
-        }
     }
 
-    internal class Part3ToColorConverter : IValueConverter
+    internal class Part3ToColorConverter : BoolToColorConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is StatusSegment statusSegment)
             {
@@ -66,18 +56,13 @@ namespace CrossPlatformLibrary.Forms.Converters
                 }
                 else if ((statusSegment.IsStartElement && !statusSegment.IsEndElement) || statusSegment.IsMiddleElement)
                 {
-                    return Color.Red;
+                    return this.TrueValue;
                 }
 
-                return Color.LightSlateGray;
+                return this.FalseValue;
             }
 
             return Color.Transparent;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return value;
         }
     }
 }

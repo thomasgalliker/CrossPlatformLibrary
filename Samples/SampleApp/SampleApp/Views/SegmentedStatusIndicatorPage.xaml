@@ -21,7 +21,9 @@
                 <controls:SegmentedStatusIndicator
                     ItemsSource="{Binding BusStops, Converter={StaticResource SegmentedItemsWrapperConverter}}"
                     SelectionStart="{Binding FirstStop}"
-                    SelectionEnd="{Binding CurrentStop}" />
+                    SelectionEnd="{Binding CurrentStop}"
+                    IndicatorForegroundColor="Black"
+                    IndicatorBackgroundColor="LightGray" />
 
                 <Label Text="Select FirstStop:" FontSize="Micro" />
                 <controls:GridZero>

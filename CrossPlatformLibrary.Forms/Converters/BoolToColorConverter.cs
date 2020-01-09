@@ -32,7 +32,7 @@ namespace CrossPlatformLibrary.Forms.Converters
             set => this.SetValue(FalseValueProperty, value);
         }
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is bool b && b == true)
             {

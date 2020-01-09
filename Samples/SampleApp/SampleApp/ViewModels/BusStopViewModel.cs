@@ -7,17 +7,17 @@ namespace SampleApp.ViewModels
     [DebuggerDisplay("BusStop: {this.Id}")]
     public class BusStopViewModel : BindableBase
     {
-        public BusStopViewModel(int id, string name, DateTime arrivalTime)
+        public BusStopViewModel(int id, string title, DateTime arrivalTime)
         {
             this.Id = id;
-            this.Name = name;
-            this.ArrivalTime = arrivalTime;
+            this.Title = title;
+            this.Description = $"{arrivalTime:t}";
         }
 
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Title { get; set; }
 
-        public DateTime ArrivalTime { get; }
+        public string Description { get; set; }
     }
 }

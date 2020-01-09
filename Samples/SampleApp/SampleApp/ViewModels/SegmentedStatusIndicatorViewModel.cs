@@ -23,7 +23,7 @@ namespace SampleApp.ViewModels
         {
             this.BusStops = new List<BusStopViewModel>
             {
-                new BusStopViewModel(1, "Stop 1", new DateTime(2000, 1, 1, 10, 15, 00, DateTimeKind.Utc)),
+                new BusStopViewModel(1, "Stop 1: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.", new DateTime(2000, 1, 1, 10, 15, 00, DateTimeKind.Utc)),
                 new BusStopViewModel(2, "Stop 2", new DateTime(2000, 1, 1, 10, 25, 00, DateTimeKind.Utc)),
                 new BusStopViewModel(3, "Stop 3", new DateTime(2000, 1, 1, 10, 30, 00, DateTimeKind.Utc)),
                 new BusStopViewModel(4, "Stop 4", new DateTime(2000, 1, 1, 10, 35, 00, DateTimeKind.Utc)),
