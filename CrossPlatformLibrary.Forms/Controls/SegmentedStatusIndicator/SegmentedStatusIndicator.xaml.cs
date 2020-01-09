@@ -1,0 +1,152 @@
+﻿using System;
+using System.Collections;
+using System.Linq;
+using CrossPlatformLibrary.Extensions;
+using CrossPlatformLibrary.Forms.Converters;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace CrossPlatformLibrary.Forms.Controls
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class SegmentedStatusIndicator : GridZero
+    {
+        public SegmentedStatusIndicator()
+        {
+            this.InitializeComponent();
+        }
+
+        public static readonly BindableProperty ItemsSourceProperty =
+            BindableProperty.Create(
+                nameof(ItemsSource),
+                typeof(IEnumerable),
+                typeof(SegmentedStatusIndicator),
+                null,
+                BindingMode.OneWay,
+                propertyChanged: OnItemsSourcePropertyChanged);
+
+        private static void OnItemsSourcePropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            if (newvalue is IEnumerable enumerable && bindable is SegmentedStatusIndicator segmentedStatusIndicator)
+            {
+                //var list = enumerable.CreateList().OfType<object>();
+                //segmentedStatusIndicator.SelectionStart = list.FirstOrDefault();
+                //segmentedStatusIndicator.SelectionEnd = list.LastOrDefault();
+            }
+
+        }
+
+        public IEnumerable ItemsSource
+        {
+            get => (IEnumerable)this.GetValue(ItemsSourceProperty);
+            set => this.SetValue(ItemsSourceProperty, value);
+        }
+
+        public static readonly BindableProperty SelectionStartProperty =
+            BindableProperty.Create(
+                nameof(SelectionStart),
+                typeof(object),
+                typeof(SegmentedStatusIndicator),
+                null,
+                BindingMode.OneWay,
+                propertyChanged: OnSelectionStartPropertyChanged);
+
+        private static void OnSelectionStartPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            var control = (SegmentedStatusIndicator)bindable;
+
+            foreach (var item in control.ItemsSource)
+            {
+
+                if (item is StatusSegment statusSegment)
+                {
+                    statusSegment.IsStartElement = statusSegment.Payload == newvalue;
+                }
+            }
+
+            if (control.SelectionEnd != null)
+            {
+                UpdateMiddleElement(control);
+            }
+
+            control.ItemsSource = control.ItemsSource.CreateList();
+        }
+
+        public object SelectionStart
+        {
+            get => (object)this.GetValue(SelectionStartProperty);
+            set => this.SetValue(SelectionStartProperty, value);
+        }
+
+        public static readonly BindableProperty SelectionEndProperty =
+            BindableProperty.Create(
+                nameof(SelectionEnd),
+                typeof(object),
+                typeof(SegmentedStatusIndicator),
+                null,
+                BindingMode.OneWay,
+                propertyChanged: OnSelectionEndPropertyChanged);
+
+        private static void OnSelectionEndPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            var control = (SegmentedStatusIndicator)bindable;
+
+            foreach (var item in control.ItemsSource)
+            {
+                if (item is StatusSegment statusSegment)
+                {
+                    statusSegment.IsEndElement = statusSegment.Payload == newvalue;
+                }
+            }
+
+            UpdateMiddleElement(control);
+
+            control.ItemsSource = control.ItemsSource.CreateList();
+        }
+
+        private static void UpdateMiddleElement(SegmentedStatusIndicator control)
+        {
+            var hasStartElement = false;
+            var hasEndElement = false;
+            foreach (var item in control.ItemsSource)
+            {
+                if (item is StatusSegment statusSegment)
+                {
+                    if (statusSegment.IsStartElement)
+                    {
+                        if (statusSegment.IsEndElement)
+                        {
+                            break;
+                        }
+
+                        statusSegment.IsMiddleElement = false;
+                        hasStartElement = true;
+                        continue;
+                    }
+
+                    if (statusSegment.IsEndElement)
+                    {
+                        statusSegment.IsMiddleElement = false;
+                        hasEndElement = true;
+                        continue;
+                    }
+
+                    if (hasStartElement && !hasEndElement)
+                    {
+                        statusSegment.IsMiddleElement = true;
+                    }
+                    else
+                    {
+                        statusSegment.IsMiddleElement = false;
+                    }
+                }
+            }
+        }
+
+        public object SelectionEnd
+        {
+            get => (object)this.GetValue(SelectionEndProperty);
+            set => this.SetValue(SelectionEndProperty, value);
+        }
+    }
+}

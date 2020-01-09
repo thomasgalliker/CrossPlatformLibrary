@@ -204,6 +204,11 @@
                         <StackLayout IsVisible="{Binding IsNotBusy}">
                             <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
 
+                                <Button
+                                    Text="SegmentedStatusIndicatorPage"
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="SegmentedStatusIndicatorPage" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo MultiStateToggleButton--&gt;" />
                                 <controls:MultiStateToggleButton>
                                     <controls:MultiStateToggleButton.ItemsSource>

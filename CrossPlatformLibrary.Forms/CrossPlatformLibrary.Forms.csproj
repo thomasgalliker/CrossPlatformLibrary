@@ -74,7 +74,10 @@
     <Compile Update="Controls\DrilldownSwitchCell.xaml.cs">
       <DependentUpon>DrilldownSwitchCell.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Controls\MultiStateToggleButton.xaml.cs">
+    <Compile Update="Controls\SegmentedStatusIndicator\SegmentedStatusIndicator.xaml.cs">
+      <DependentUpon>SegmentedStatusIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\MultiStateToggleButton\MultiStateToggleButton.xaml.cs">
       <DependentUpon>MultiStateToggleButton.xaml</DependentUpon>
     </Compile>
     <Compile Update="Controls\ValidatableEditor.xaml.cs">

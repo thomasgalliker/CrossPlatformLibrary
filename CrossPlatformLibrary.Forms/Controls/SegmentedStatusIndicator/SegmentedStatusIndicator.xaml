@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<controls:GridZero
+    x:Class="CrossPlatformLibrary.Forms.Controls.SegmentedStatusIndicator"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:converters="clr-namespace:CrossPlatformLibrary.Forms.Converters"
+    x:Name="Control">
+
+    <Grid.Resources>
+        <ResourceDictionary>
+            <converters:Part1ToColorConverter x:Key="Part1ToColorConverter" />
+            <converters:Part2ToColorConverter x:Key="Part2ToColorConverter" />
+            <converters:Part3ToColorConverter x:Key="Part3ToColorConverter" />
+
+            <DataTemplate x:Key="StatusCell">
+                <ViewCell>
+                    <controls:StackLayoutZero Orientation="Horizontal" BackgroundColor="Black">
+                        <controls:StackLayoutZero WidthRequest="48" Orientation="Vertical">
+
+                            <!--  Start Section  -->
+                            <BoxView
+                                Grid.Row="0"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                WidthRequest="2"
+                                HeightRequest="8"
+                                Color="{Binding ., Converter={StaticResource Part1ToColorConverter}}"
+                                Margin="0" />
+
+                            <!--  Middle Section  -->
+                            <BoxView
+                                Grid.Row="1"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                CornerRadius="8"
+                                HeightRequest="16"
+                                WidthRequest="16"
+                                Color="{Binding ., Converter={StaticResource Part2ToColorConverter}}"
+                                Margin="0" />
+
+                            <!--  End Section  -->
+                            <BoxView
+                                Grid.Row="2"
+                                HorizontalOptions="Center"
+                                VerticalOptions="FillAndExpand"
+                                WidthRequest="2"
+                                HeightRequest="0"
+                                Color="{Binding ., Converter={StaticResource Part3ToColorConverter}}"
+                                Margin="0" />
+
+                        </controls:StackLayoutZero>
+
+                        <controls:GridZero>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <controls:CustomLabel
+                                Grid.Row="0"
+                                Text="{Binding Payload.Name, Mode=OneWay}"
+                                FontSize="{DynamicResource Theme.FontSize.MidMedium}"
+                                LineBreakMode="WordWrap"
+                                RemovePadding="True" />
+                            <Label
+                                Grid.Row="1"
+                                Text="{Binding Payload.ArrivalTime}"
+                                FontSize="{DynamicResource Theme.FontSize.XSmall}"
+                                LineBreakMode="WordWrap" />
+                        </controls:GridZero>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Command, Mode=OneWay}" CommandParameter="{Binding CommandParameter, Mode=OneWay}" />
+                        </StackLayout.GestureRecognizers>
+                    </controls:StackLayoutZero>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Grid.Resources>
+
+    <controls:BindableStackLayout
+        x:Name="List"
+        Orientation="Vertical"
+        Padding="0"
+        Spacing="0"
+        ItemTemplate="{StaticResource StatusCell}"
+        ItemsSource="{Binding Source={x:Reference Control}, Path=ItemsSource}" />
+</controls:GridZero>

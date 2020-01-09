@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:converters="clr-namespace:CrossPlatformLibrary.Forms.Converters;assembly=CrossPlatformLibrary.Forms"
+    mc:Ignorable="d"
+    x:Class="SampleApp.Views.SegmentedStatusIndicatorPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:SegmentedItemsWrapperConverter x:Key="SegmentedItemsWrapperConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <controls:StackLayoutZero>
+
+        <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo SegmentedStatusIndicator--&gt;" />
+        <controls:SegmentedStatusIndicator
+            ItemsSource="{Binding BusStops, Converter={StaticResource SegmentedItemsWrapperConverter}}"
+            SelectionStart="{Binding FirstStop}"
+            SelectionEnd="{Binding CurrentStop}" />
+
+    </controls:StackLayoutZero>
+</ContentPage>
