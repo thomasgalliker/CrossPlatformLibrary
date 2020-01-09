@@ -33,29 +33,35 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Button
                         Grid.Column="0"
+                        Text="Null"
+                        Command="{Binding SelectFirstStopCommand}"
+                        CommandParameter="Null" />
+                    <Button
+                        Grid.Column="1"
                         Text="1"
                         Command="{Binding SelectFirstStopCommand}"
                         CommandParameter="1" />
                     <Button
-                        Grid.Column="1"
+                        Grid.Column="2"
                         Text="2"
                         Command="{Binding SelectFirstStopCommand}"
                         CommandParameter="2" />
                     <Button
-                        Grid.Column="2"
+                        Grid.Column="3"
                         Text="3"
                         Command="{Binding SelectFirstStopCommand}"
                         CommandParameter="3" />
                     <Button
-                        Grid.Column="3"
+                        Grid.Column="4"
                         Text="4"
                         Command="{Binding SelectFirstStopCommand}"
                         CommandParameter="4" />
                     <Button
-                        Grid.Column="4"
+                        Grid.Column="5"
                         Text="5"
                         Command="{Binding SelectFirstStopCommand}"
                         CommandParameter="5" />
@@ -69,29 +75,35 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Button
                         Grid.Column="0"
+                        Text="Null"
+                        Command="{Binding SelectCurrentStopCommand}"
+                        CommandParameter="Null" />
+                    <Button
+                        Grid.Column="1"
                         Text="1"
                         Command="{Binding SelectCurrentStopCommand}"
                         CommandParameter="1" />
                     <Button
-                        Grid.Column="1"
+                        Grid.Column="2"
                         Text="2"
                         Command="{Binding SelectCurrentStopCommand}"
                         CommandParameter="2" />
                     <Button
-                        Grid.Column="2"
+                        Grid.Column="3"
                         Text="3"
                         Command="{Binding SelectCurrentStopCommand}"
                         CommandParameter="3" />
                     <Button
-                        Grid.Column="3"
+                        Grid.Column="4"
                         Text="4"
                         Command="{Binding SelectCurrentStopCommand}"
                         CommandParameter="4" />
                     <Button
-                        Grid.Column="4"
+                        Grid.Column="5"
                         Text="5"
                         Command="{Binding SelectCurrentStopCommand}"
                         CommandParameter="5" />

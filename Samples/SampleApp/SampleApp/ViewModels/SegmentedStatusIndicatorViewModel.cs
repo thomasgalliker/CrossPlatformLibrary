@@ -30,8 +30,8 @@ namespace SampleApp.ViewModels
                 new BusStopViewModel(5, "Stop 5", new DateTime(2000, 1, 1, 10, 40, 00, DateTimeKind.Utc)),
             }.ToObservableCollection();
 
-            this.FirstStop = this.BusStops.ElementAt(0);
-            this.CurrentStop = this.BusStops.ElementAt(0);
+            this.FirstStop = this.BusStops.ElementAt(1);
+            this.CurrentStop = this.BusStops.ElementAt(3);
         }
 
         public ObservableCollection<BusStopViewModel> BusStops

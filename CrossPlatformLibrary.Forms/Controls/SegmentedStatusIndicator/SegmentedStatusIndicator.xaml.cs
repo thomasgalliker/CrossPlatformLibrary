@@ -56,6 +56,10 @@ namespace CrossPlatformLibrary.Forms.Controls
             {
                 UpdateMiddleElement(control);
             }
+            else
+            {
+                ResetMiddleElement(control);
+            }
 
             control.ItemsSource = control.ItemsSource.CreateList();
         }
@@ -84,13 +88,31 @@ namespace CrossPlatformLibrary.Forms.Controls
                 statusSegment.IsEndElement = statusSegment.Payload == newvalue;
             }
 
-            UpdateMiddleElement(control);
+            if (newvalue != null)
+            {
+                UpdateMiddleElement(control);
+            }
+            else
+            {
+                ResetMiddleElement(control);
+            }
+        
 
             control.ItemsSource = control.ItemsSource.CreateList();
         }
 
+        private static void ResetMiddleElement(SegmentedStatusIndicator control)
+        {
+            foreach (var statusSegment in control.ItemsSource.OfType<StatusSegment>())
+            {
+                statusSegment.IsMiddleElement = false;
+            }
+        }
+
         private static void UpdateMiddleElement(SegmentedStatusIndicator control)
         {
+            ResetMiddleElement(control);
+
             var hasStartElement = false;
             var hasEndElement = false;
             foreach (var statusSegment in control.ItemsSource.OfType<StatusSegment>())
