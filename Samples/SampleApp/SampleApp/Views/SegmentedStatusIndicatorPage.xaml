@@ -5,21 +5,15 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
-    xmlns:converters="clr-namespace:CrossPlatformLibrary.Forms.Converters;assembly=CrossPlatformLibrary.Forms"
     mc:Ignorable="d"
     x:Class="SampleApp.Views.SegmentedStatusIndicatorPage">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:SegmentedItemsWrapperConverter x:Key="SegmentedItemsWrapperConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
     <controls:AlwaysScrollView>
         <Grid>
             <StackLayout>
                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo SegmentedStatusIndicator--&gt;" />
                 <controls:SegmentedStatusIndicator
-                    ItemsSource="{Binding BusStops, Converter={StaticResource SegmentedItemsWrapperConverter}}"
+                    ItemsSource="{Binding BusStops}"
                     SelectionStart="{Binding FirstStop}"
                     SelectionEnd="{Binding CurrentStop}"
                     IndicatorForegroundColor="Black"

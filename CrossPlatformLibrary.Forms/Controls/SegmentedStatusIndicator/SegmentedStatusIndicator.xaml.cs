@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
-using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Forms.Converters;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,6 +10,8 @@ namespace CrossPlatformLibrary.Forms.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SegmentedStatusIndicator : GridZero
     {
+        private List<StatusSegment> segmentedItems = new List<StatusSegment>();
+
         public SegmentedStatusIndicator()
         {
             this.InitializeComponent();
@@ -22,7 +23,35 @@ namespace CrossPlatformLibrary.Forms.Controls
                 typeof(IEnumerable),
                 typeof(SegmentedStatusIndicator),
                 null,
-                BindingMode.OneWay);
+                BindingMode.OneWay,
+                propertyChanged: OnItemsSourcePropertyChanged);
+
+        private static void OnItemsSourcePropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            if (newvalue is IEnumerable enumerable)
+            {
+                var control = (SegmentedStatusIndicator)bindable;
+                var segmentedItems = new List<StatusSegment>();
+                foreach (var item in enumerable)
+                {
+                    segmentedItems.Add(new StatusSegment(item));
+                }
+
+                var first = segmentedItems.FirstOrDefault();
+                if (first != null)
+                {
+                    first.IsFirstElement = true;
+                }
+
+                var last = segmentedItems.LastOrDefault();
+                if (last != null)
+                {
+                    last.IsLastElement = true;
+                }
+
+                control.segmentedItems = segmentedItems;
+            }
+        }
 
         public IEnumerable ItemsSource
         {
@@ -43,13 +72,9 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             var control = (SegmentedStatusIndicator)bindable;
 
-            foreach (var item in control.ItemsSource)
+            foreach (var statusSegment in control.segmentedItems)
             {
-
-                if (item is StatusSegment statusSegment)
-                {
-                    statusSegment.IsStartElement = statusSegment.Payload == newvalue;
-                }
+                statusSegment.IsStartElement = statusSegment.Payload == newvalue;
             }
 
             if (control.SelectionEnd != null)
@@ -61,7 +86,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 ResetMiddleElement(control);
             }
 
-            control.ItemsSource = control.ItemsSource.CreateList();
+            control.BindableStackLayout.ItemsSource = control.segmentedItems.ToList();
         }
 
         public object SelectionStart
@@ -83,7 +108,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             var control = (SegmentedStatusIndicator)bindable;
 
-            foreach (var statusSegment in control.ItemsSource.OfType<StatusSegment>())
+            foreach (var statusSegment in control.segmentedItems)
             {
                 statusSegment.IsEndElement = statusSegment.Payload == newvalue;
             }
@@ -96,14 +121,13 @@ namespace CrossPlatformLibrary.Forms.Controls
             {
                 ResetMiddleElement(control);
             }
-        
 
-            control.ItemsSource = control.ItemsSource.CreateList();
+            control.BindableStackLayout.ItemsSource = control.segmentedItems.ToList();
         }
 
         private static void ResetMiddleElement(SegmentedStatusIndicator control)
         {
-            foreach (var statusSegment in control.ItemsSource.OfType<StatusSegment>())
+            foreach (var statusSegment in control.segmentedItems)
             {
                 statusSegment.IsMiddleElement = false;
             }
@@ -115,7 +139,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 
             var hasStartElement = false;
             var hasEndElement = false;
-            foreach (var statusSegment in control.ItemsSource.OfType<StatusSegment>())
+            foreach (var statusSegment in control.segmentedItems)
             {
                 if (statusSegment.IsStartElement)
                 {
@@ -126,6 +150,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                         //throw new InvalidOperationException($"End element must not be before start element.");
                         break;
                     }
+
                     if (statusSegment.IsEndElement)
                     {
                         // If StartElement is the same as EndElement,

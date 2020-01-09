@@ -94,10 +94,9 @@
     </Grid.Resources>
 
     <controls:BindableStackLayout
-        x:Name="List"
+        x:Name="BindableStackLayout"
         Orientation="Vertical"
         Padding="0"
         Spacing="0"
-        ItemTemplate="{StaticResource StatusCell}"
-        ItemsSource="{Binding Source={x:Reference Control}, Path=ItemsSource}" />
+        ItemTemplate="{StaticResource StatusCell}" />
 </controls:GridZero>
