@@ -72,7 +72,7 @@ namespace SampleApp.ViewModels
             {
             }
 
-            this.CurrentStop = null;
+            //this.CurrentStop = null;
             this.FirstStop = this.BusStops.FirstOrDefault(b => b.Id == stopId);
         }
         

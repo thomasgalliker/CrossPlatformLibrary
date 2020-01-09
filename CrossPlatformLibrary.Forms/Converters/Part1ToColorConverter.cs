@@ -14,7 +14,7 @@ namespace CrossPlatformLibrary.Forms.Converters
                 {
                     return Color.Transparent;
                 }
-                else if (statusSegment.IsMiddleElement || statusSegment.IsEndElement)
+                else if (statusSegment.IsMiddleElement || (statusSegment.IsEndElement && !statusSegment.IsStartElement))
                 {
                     return Color.Red;
                 }

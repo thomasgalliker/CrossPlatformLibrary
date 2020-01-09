@@ -15,7 +15,7 @@
 
             <DataTemplate x:Key="StatusCell">
                 <ViewCell>
-                    <controls:StackLayoutZero Orientation="Horizontal" BackgroundColor="Black">
+                    <controls:StackLayoutZero Orientation="Horizontal" BackgroundColor="Transparent">
                         <controls:StackLayoutZero WidthRequest="48" Orientation="Vertical">
 
                             <!--  Start Section  -->

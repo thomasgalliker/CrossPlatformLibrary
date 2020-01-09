@@ -22,19 +22,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 typeof(IEnumerable),
                 typeof(SegmentedStatusIndicator),
                 null,
-                BindingMode.OneWay,
-                propertyChanged: OnItemsSourcePropertyChanged);
-
-        private static void OnItemsSourcePropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
-        {
-            if (newvalue is IEnumerable enumerable && bindable is SegmentedStatusIndicator segmentedStatusIndicator)
-            {
-                //var list = enumerable.CreateList().OfType<object>();
-                //segmentedStatusIndicator.SelectionStart = list.FirstOrDefault();
-                //segmentedStatusIndicator.SelectionEnd = list.LastOrDefault();
-            }
-
-        }
+                BindingMode.OneWay);
 
         public IEnumerable ItemsSource
         {
@@ -91,12 +79,9 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             var control = (SegmentedStatusIndicator)bindable;
 
-            foreach (var item in control.ItemsSource)
+            foreach (var statusSegment in control.ItemsSource.OfType<StatusSegment>())
             {
-                if (item is StatusSegment statusSegment)
-                {
-                    statusSegment.IsEndElement = statusSegment.Payload == newvalue;
-                }
+                statusSegment.IsEndElement = statusSegment.Payload == newvalue;
             }
 
             UpdateMiddleElement(control);
@@ -108,37 +93,43 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             var hasStartElement = false;
             var hasEndElement = false;
-            foreach (var item in control.ItemsSource)
+            foreach (var statusSegment in control.ItemsSource.OfType<StatusSegment>())
             {
-                if (item is StatusSegment statusSegment)
+                if (statusSegment.IsStartElement)
                 {
-                    if (statusSegment.IsStartElement)
+                    if (hasEndElement)
                     {
-                        if (statusSegment.IsEndElement)
-                        {
-                            break;
-                        }
-
-                        statusSegment.IsMiddleElement = false;
-                        hasStartElement = true;
-                        continue;
+                        // If the StartElement comes after the EndElement,
+                        // we stop any further marking of MiddleElements as this is an inconsistent situation
+                        //throw new InvalidOperationException($"End element must not be before start element.");
+                        break;
                     }
-
                     if (statusSegment.IsEndElement)
                     {
-                        statusSegment.IsMiddleElement = false;
-                        hasEndElement = true;
-                        continue;
+                        // If StartElement is the same as EndElement,
+                        // we don't have to mark any MiddleElements
+                        break;
                     }
 
-                    if (hasStartElement && !hasEndElement)
-                    {
-                        statusSegment.IsMiddleElement = true;
-                    }
-                    else
-                    {
-                        statusSegment.IsMiddleElement = false;
-                    }
+                    statusSegment.IsMiddleElement = false;
+                    hasStartElement = true;
+                    continue;
+                }
+
+                if (statusSegment.IsEndElement)
+                {
+                    statusSegment.IsMiddleElement = false;
+                    hasEndElement = true;
+                    continue;
+                }
+
+                if (hasStartElement && !hasEndElement)
+                {
+                    statusSegment.IsMiddleElement = true;
+                }
+                else
+                {
+                    statusSegment.IsMiddleElement = false;
                 }
             }
         }
