@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using CrossPlatformLibrary.Mvvm;
 
 namespace SampleApp.ViewModels
 {
+    [DebuggerDisplay("BusStop: {this.Id}")]
     public class BusStopViewModel : BindableBase
     {
         public BusStopViewModel(int id, string name, DateTime arrivalTime)
