@@ -9,6 +9,8 @@
 
     <Grid.Resources>
         <ResourceDictionary>
+            <converters:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter" />
+
             <converters:Part1ToColorConverter
                 x:Key="Part1ToColorConverter"
                 TrueValue="{Binding Source={x:Reference Control}, Path=IndicatorForegroundColor}"
@@ -32,7 +34,7 @@
 
                         <controls:GridZero Grid.Column="0">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="8" />
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
@@ -42,8 +44,8 @@
                                 Grid.Row="0"
                                 HorizontalOptions="Center"
                                 VerticalOptions="Start"
-                                WidthRequest="2"
-                                HeightRequest="8"
+                                WidthRequest="{Binding Source={x:Reference Control}, Path=LineWidth}"
+                                HeightRequest="{Binding Source={x:Reference Control}, Path=LineLengthPart1}"
                                 Color="{Binding ., Converter={StaticResource Part1ToColorConverter}}"
                                 Margin="0" />
 
@@ -52,9 +54,9 @@
                                 Grid.Row="1"
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center"
-                                CornerRadius="8"
                                 HeightRequest="16"
                                 WidthRequest="16"
+                                CornerRadius="8"
                                 Color="{Binding ., Converter={StaticResource Part2ToColorConverter}}"
                                 Margin="0" />
                             <Image
@@ -72,7 +74,7 @@
                                 Grid.Row="2"
                                 HorizontalOptions="Center"
                                 VerticalOptions="FillAndExpand"
-                                WidthRequest="2"
+                                WidthRequest="{Binding Source={x:Reference Control}, Path=LineWidth}"
                                 HeightRequest="0"
                                 Color="{Binding ., Converter={StaticResource Part3ToColorConverter}}"
                                 Margin="0" />
@@ -83,6 +85,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="{Binding Source={x:Reference Control}, Path=Spacing, Converter={StaticResource DoubleToGridLengthConverter}}" />
                             </Grid.RowDefinitions>
 
                             <controls:CustomLabel

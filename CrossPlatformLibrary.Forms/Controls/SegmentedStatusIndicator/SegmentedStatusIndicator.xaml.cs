@@ -213,5 +213,47 @@ namespace CrossPlatformLibrary.Forms.Controls
             get => (Color)this.GetValue(IndicatorBackgroundColorProperty);
             set => this.SetValue(IndicatorBackgroundColorProperty, value);
         }
+
+        public static readonly BindableProperty LineWidthProperty =
+            BindableProperty.Create(
+                nameof(LineWidth),
+                typeof(double),
+                typeof(SegmentedStatusIndicator),
+                2.0d,
+                BindingMode.OneWay);
+
+        public double LineWidth
+        {
+            get => (double)this.GetValue(LineWidthProperty);
+            set => this.SetValue(LineWidthProperty, value);
+        }
+
+        public static readonly BindableProperty LineLengthPart1Property =
+            BindableProperty.Create(
+                nameof(LineLengthPart1),
+                typeof(double),
+                typeof(SegmentedStatusIndicator),
+                8.0d,
+                BindingMode.OneWay);
+
+        public double LineLengthPart1
+        {
+            get => (double)this.GetValue(LineLengthPart1Property);
+            set => this.SetValue(LineLengthPart1Property, value);
+        }
+
+        public static readonly BindableProperty SpacingProperty =
+            BindableProperty.Create(
+                nameof(Spacing),
+                typeof(double),
+                typeof(SegmentedStatusIndicator),
+                6.0d,
+                BindingMode.OneWay);
+
+        public double Spacing
+        {
+            get => (double)this.GetValue(SpacingProperty);
+            set => this.SetValue(SpacingProperty, value);
+        }
     }
 }

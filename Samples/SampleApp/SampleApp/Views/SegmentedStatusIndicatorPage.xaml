@@ -17,7 +17,10 @@
                     SelectionStart="{Binding FirstStop}"
                     SelectionEnd="{Binding CurrentStop}"
                     IndicatorForegroundColor="Black"
-                    IndicatorBackgroundColor="LightGray" />
+                    IndicatorBackgroundColor="LightGray"
+                    LineWidth="2"
+                    LineLengthPart1="6"
+                    Spacing="10" />
 
                 <Label Text="Select FirstStop:" FontSize="Micro" />
                 <controls:GridZero>
