@@ -54,17 +54,17 @@
                                 Grid.Row="1"
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center"
-                                HeightRequest="16"
-                                WidthRequest="16"
-                                CornerRadius="8"
+                                HeightRequest="{Binding Source={x:Reference Control}, Path=PointSize}"
+                                WidthRequest="{Binding Source={x:Reference Control}, Path=PointSize}"
+                                CornerRadius="{Binding Source={x:Reference Control}, Path=PointCornerRadius}"
                                 Color="{Binding ., Converter={StaticResource Part2ToColorConverter}}"
                                 Margin="0" />
                             <Image
                                 Grid.Row="1"
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center"
-                                HeightRequest="16"
-                                WidthRequest="16"
+                                HeightRequest="{Binding Source={x:Reference Control}, Path=PointSize}"
+                                WidthRequest="{Binding Source={x:Reference Control}, Path=PointSize}"
                                 Source="{Binding Payload.ImageSource, Mode=OneWay}"
                                 Aspect="AspectFit"
                                 InputTransparent="True" />

@@ -20,6 +20,8 @@
                     IndicatorBackgroundColor="LightGray"
                     LineWidth="2"
                     LineLengthPart1="6"
+                    PointSize="16"
+                    PointCornerRadius="8"
                     Spacing="10" />
 
                 <Label Text="Select FirstStop:" FontSize="Micro" />

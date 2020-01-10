@@ -242,6 +242,34 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(LineLengthPart1Property, value);
         }
 
+        public static readonly BindableProperty PointSizeProperty =
+            BindableProperty.Create(
+                nameof(PointSize),
+                typeof(double),
+                typeof(SegmentedStatusIndicator),
+                16.0d,
+                BindingMode.OneWay);
+
+        public double PointSize
+        {
+            get => (double)this.GetValue(PointSizeProperty);
+            set => this.SetValue(PointSizeProperty, value);
+        }
+
+        public static readonly BindableProperty PointCornerRadiusProperty =
+            BindableProperty.Create(
+                nameof(PointCornerRadius),
+                typeof(double),
+                typeof(SegmentedStatusIndicator),
+                8.0d,
+                BindingMode.OneWay);
+
+        public double PointCornerRadius
+        {
+            get => (double)this.GetValue(PointCornerRadiusProperty);
+            set => this.SetValue(PointCornerRadiusProperty, value);
+        }
+
         public static readonly BindableProperty SpacingProperty =
             BindableProperty.Create(
                 nameof(Spacing),
