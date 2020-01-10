@@ -30,7 +30,12 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <controls:StackLayoutZero Grid.Column="0" Orientation="Vertical">
+                        <controls:GridZero Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="8" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
 
                             <!--  Start Section  -->
                             <BoxView
@@ -52,6 +57,15 @@
                                 WidthRequest="16"
                                 Color="{Binding ., Converter={StaticResource Part2ToColorConverter}}"
                                 Margin="0" />
+                            <Image
+                                Grid.Row="1"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                HeightRequest="16"
+                                WidthRequest="16"
+                                Source="{Binding Payload.ImageSource, Mode=OneWay}"
+                                Aspect="AspectFit"
+                                InputTransparent="True" />
 
                             <!--  End Section  -->
                             <BoxView
@@ -63,7 +77,7 @@
                                 Color="{Binding ., Converter={StaticResource Part3ToColorConverter}}"
                                 Margin="0" />
 
-                        </controls:StackLayoutZero>
+                        </controls:GridZero>
 
                         <controls:GridZero Grid.Column="1">
                             <Grid.RowDefinitions>

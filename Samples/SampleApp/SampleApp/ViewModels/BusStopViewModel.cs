@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using CrossPlatformLibrary.Mvvm;
+using Xamarin.Forms;
 
 namespace SampleApp.ViewModels
 {
@@ -19,5 +20,7 @@ namespace SampleApp.ViewModels
         public string Title { get; set; }
 
         public string Description { get; set; }
+
+        public ImageSource ImageSource { get; set; }
     }
 }

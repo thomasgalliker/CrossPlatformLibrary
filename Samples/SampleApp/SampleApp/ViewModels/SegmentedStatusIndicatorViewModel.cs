@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Mvvm;
@@ -32,6 +31,7 @@ namespace SampleApp.ViewModels
 
             this.FirstStop = this.BusStops.ElementAt(1);
             this.CurrentStop = this.BusStops.ElementAt(3);
+            this.CurrentStop.ImageSource = ImageSource.FromResource("SampleApp.Resources.Images.chevron_right_grey_192x192.png", this.GetType());
         }
 
         public ObservableCollection<BusStopViewModel> BusStops
@@ -72,7 +72,6 @@ namespace SampleApp.ViewModels
             {
             }
 
-            //this.CurrentStop = null;
             this.FirstStop = this.BusStops.FirstOrDefault(b => b.Id == stopId);
         }
         

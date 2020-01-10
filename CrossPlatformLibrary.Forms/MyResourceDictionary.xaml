@@ -55,6 +55,8 @@
     <converters:DebugConverter x:Key="DebugConverter" />
     <converters:IsNotEmptyConverter x:Key="IsNotEmptyConverter" />
     <converters:BoolInverter x:Key="BoolInverter" />
+    <converters:NullToBoolConverter x:Key="NullToTrueConverter" />
+    <converters:NullToBoolConverter x:Key="NullToFalseConverter" Inverted="True" />
     <converters:FirstErrorConverter x:Key="FirstErrorConverter" />
     <converters:NullableDateTimeToFormatConverter x:Key="NullableDateTimeToFormatConverter" />
     <converters:PropertyErrorsToColorConverter x:Key="PropertyErrorsToColorConverter" />
