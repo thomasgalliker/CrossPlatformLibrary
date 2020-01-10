@@ -8,12 +8,39 @@
     mc:Ignorable="d"
     x:Class="SampleApp.Views.SegmentedStatusIndicatorPage">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="BusStopDataTemplate">
+                <controls:GridZero>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <!--<RowDefinition Height="{Binding Source={x:Reference Control}, Path=Spacing, Converter={StaticResource DoubleToGridLengthConverter}}" />-->
+                    </Grid.RowDefinitions>
+
+                    <controls:CustomLabel
+                        Grid.Row="0"
+                        Text="{Binding Title, Mode=OneWay}"
+                        FontSize="{DynamicResource Theme.FontSize.MidMedium}"
+                        LineBreakMode="WordWrap"
+                        RemovePadding="True" />
+                    <Label
+                        Grid.Row="1"
+                        Text="{Binding Description}"
+                        FontSize="{DynamicResource Theme.FontSize.XSmall}"
+                        LineBreakMode="WordWrap" />
+                </controls:GridZero>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <controls:AlwaysScrollView>
         <Grid>
             <StackLayout>
                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo SegmentedStatusIndicator--&gt;" />
                 <controls:SegmentedStatusIndicator
                     ItemsSource="{Binding BusStops}"
+                    ItemTemplate="{StaticResource BusStopDataTemplate}"
                     SelectionStart="{Binding FirstStop}"
                     SelectionEnd="{Binding CurrentStop}"
                     IndicatorForegroundColor="Black"
@@ -22,7 +49,7 @@
                     LineLengthPart1="6"
                     PointSize="16"
                     PointCornerRadius="8"
-                    Spacing="10" />
+                    Spacing="30" />
 
                 <Label Text="Select FirstStop:" FontSize="Micro" />
                 <controls:GridZero>

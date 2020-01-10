@@ -17,6 +17,19 @@ namespace CrossPlatformLibrary.Forms.Controls
             this.InitializeComponent();
         }
 
+        public static readonly BindableProperty ItemTemplateProperty =
+            BindableProperty.Create(
+                propertyName: nameof(ItemTemplate),
+                returnType: typeof(DataTemplate),
+                declaringType: typeof(SegmentedStatusIndicator),
+                defaultValue: default(DataTemplate));
+
+        public DataTemplate ItemTemplate
+        {
+            get => (DataTemplate)this.GetValue(ItemTemplateProperty);
+            set => this.SetValue(ItemTemplateProperty, value);
+        }
+
         public static readonly BindableProperty ItemsSourceProperty =
             BindableProperty.Create(
                 nameof(ItemsSource),
