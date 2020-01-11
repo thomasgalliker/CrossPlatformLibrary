@@ -45,7 +45,6 @@ namespace SampleApp.ViewModels
         private ObservableCollection<ResourceViewModel> themeResources;
         private bool isMultiToggleButtonOn = true;
         private bool isMultiToggleButtonOff;
-        private ObservableCollection<BusStopViewModel> busStops;
         private ICommand navigateToPageCommand;
 
         public MainViewModel(
@@ -65,7 +64,6 @@ namespace SampleApp.ViewModels
             this.User = new UserDto();
             this.Countries = new ObservableCollection<CountryViewModel>();
             this.SuggestedCountries = new ObservableCollection<CountryViewModel>();
-            this.BusStops = new ObservableCollection<BusStopViewModel>();
 
             this.PeriodicTask = new PeriodicTaskViewModel();
             this.LoadData();
@@ -137,12 +135,6 @@ namespace SampleApp.ViewModels
                     Console.WriteLine($"CountrySearchText changed: {value}");
                 }
             }
-        }
-
-        public ObservableCollection<BusStopViewModel> BusStops
-        {
-            get => this.busStops;
-            private set => this.SetProperty(ref this.busStops, value, nameof(this.BusStops));
         }
 
         public ICommand NavigateToPageCommand
@@ -419,14 +411,6 @@ namespace SampleApp.ViewModels
                 this.Countries.Clear();
                 this.Countries.AddRange(countryDtos.Select(c => new CountryViewModel(c)).Prepend(defaultCountryViewModel));
                 
-                this.BusStops.Clear();
-                this.BusStops = new List<BusStopViewModel>
-                {
-                    new BusStopViewModel(1, "Stop 1", new DateTime(2000, 1, 1, 10, 15, 00, DateTimeKind.Utc)),
-                    new BusStopViewModel(2, "Stop 2", new DateTime(2000, 1, 1, 10, 25, 00, DateTimeKind.Utc)),
-                    new BusStopViewModel(3, "Stop 3", new DateTime(2000, 1, 1, 10, 30, 00, DateTimeKind.Utc)),
-                }.ToObservableCollection();
-
                 //this.ThemeResources = Application.Current.Resources.MergedDictionaries.SelectMany(md => md)
                 //    .Select(kvp => new ResourceViewModel(kvp))
                 //    .OrderBy(vm => vm.Key)
