@@ -8,11 +8,11 @@ namespace SampleApp.ViewModels
     [DebuggerDisplay("BusStop: {this.Id}")]
     public class BusStopViewModel : BindableBase
     {
-        public BusStopViewModel(int id, string title, DateTime arrivalTime)
+        public BusStopViewModel(int id, string title, DateTime? arrivalTime)
         {
             this.Id = id;
             this.Title = title;
-            this.Description = $"{arrivalTime:t}";
+            this.Description = arrivalTime != null ? $"{arrivalTime:t}" : null;
         }
 
         public int Id { get; set; }

@@ -15,7 +15,6 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <!--<RowDefinition Height="{Binding Source={x:Reference Control}, Path=Spacing, Converter={StaticResource DoubleToGridLengthConverter}}" />-->
                     </Grid.RowDefinitions>
 
                     <controls:CustomLabel
@@ -28,6 +27,7 @@
                         Grid.Row="1"
                         Text="{Binding Description}"
                         FontSize="{DynamicResource Theme.FontSize.XSmall}"
+                        IsVisible="{Binding Description, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"
                         LineBreakMode="WordWrap" />
                 </controls:GridZero>
             </DataTemplate>
