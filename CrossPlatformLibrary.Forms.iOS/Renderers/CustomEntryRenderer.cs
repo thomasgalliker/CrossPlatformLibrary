@@ -26,9 +26,6 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             var uiTextField = this.Control;
             if (uiTextField != null)
             {
-                uiTextField.SpellCheckingType = UITextSpellCheckingType.No; // No Spellchecking
-                uiTextField.AutocorrectionType = UITextAutocorrectionType.No; // No Autocorrection
-
                 if (this.Element is CustomEntry customEntry)
                 {
                     this.UpdateBorder(customEntry);
