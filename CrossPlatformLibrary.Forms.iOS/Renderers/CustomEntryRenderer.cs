@@ -126,12 +126,12 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
         {
             if (UIDevice.CurrentDevice.CheckSystemVersion(11, 0))
             {
-                var textContentType = this.MapTextContentType(customEntry.TextContentType);
+                var textContentType = MapTextContentType(customEntry.TextContentType);
                 this.Control.TextContentType = textContentType;
             }
         }
 
-        private NSString MapTextContentType(TextContentType textContentType)
+        private static NSString MapTextContentType(TextContentType textContentType)
         {
             if (textContentType == TextContentType.OneTimeCode)
             {
