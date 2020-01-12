@@ -123,49 +123,66 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
         {
             if (UIDevice.CurrentDevice.CheckSystemVersion(11, 0))
             {
-                var textContentType = MapTextContentType(customEntry.TextContentType);
+                var (textContentType, keyboardType, autocapitalizationType, autocorrectionType) = MapTextContentType(customEntry.TextContentType);
                 this.Control.TextContentType = textContentType;
+               
+                if (keyboardType != null)
+                {
+                    this.Control.KeyboardType = keyboardType.Value;
+                }
+
+                if (autocapitalizationType != null)
+                {
+                    this.Control.AutocapitalizationType = autocapitalizationType.Value;
+                }
+
+                if (autocorrectionType != null)
+                {
+                    this.Control.AutocorrectionType = autocorrectionType.Value;
+                }
             }
         }
 
-        private static NSString MapTextContentType(TextContentType textContentType)
+        private static (NSString, UIKeyboardType?, UITextAutocapitalizationType?, UITextAutocorrectionType?) MapTextContentType(TextContentType textContentType)
         {
-            if (textContentType == TextContentType.OneTimeCode)
+            if (textContentType == TextContentType.Default)
             {
-                return UITextContentType.OneTimeCode;
+                return (new NSString(), null, null, null);
+            }
+            else if (textContentType == TextContentType.OneTimeCode)
+            {
+                return (UITextContentType.OneTimeCode, UIKeyboardType.NumberPad, UITextAutocapitalizationType.None, UITextAutocorrectionType.No);
             }
             else if (textContentType == TextContentType.FirstName)
             {
-                return UITextContentType.GivenName;
+                return (UITextContentType.GivenName, null, null, null);
             }
             else if (textContentType == TextContentType.LastName)
             {
-                return UITextContentType.FamilyName;
+                return (UITextContentType.FamilyName, null, null, null);
             }
             else if (textContentType == TextContentType.Username)
             {
-                return UITextContentType.Username;
+                return (UITextContentType.Username, null, UITextAutocapitalizationType.None, UITextAutocorrectionType.No);
             }
             else if (textContentType == TextContentType.EmailAddress)
             {
-                return UITextContentType.EmailAddress;
+                return (UITextContentType.EmailAddress, null, UITextAutocapitalizationType.None, UITextAutocorrectionType.No);
             }
             else if (textContentType == TextContentType.PhoneNumber)
             {
-                return UITextContentType.TelephoneNumber;
+                return (UITextContentType.TelephoneNumber, UIKeyboardType.NumberPad, UITextAutocapitalizationType.None, UITextAutocorrectionType.No);
             }
             else if (textContentType == TextContentType.Password)
             {
-                return UITextContentType.Password;
+                return (UITextContentType.Password, null, UITextAutocapitalizationType.None, UITextAutocorrectionType.No);
             }
             else if (textContentType == TextContentType.NewPassword)
             {
-                return UITextContentType.NewPassword;
+                return (UITextContentType.NewPassword, null, UITextAutocapitalizationType.None, UITextAutocorrectionType.No);
             }
-            else
-            {
-                return new Foundation.NSString();
-            }
+
+            return (null, null, null, null);
         }
     }
 }
