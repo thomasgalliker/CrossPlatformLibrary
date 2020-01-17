@@ -119,6 +119,10 @@ namespace CrossPlatformLibrary.Forms.Resources
             this[ThemeConstants.CardViewStyle.HeaderFontFamily] = TryGetFontFamily(this.fontConfiguration.SectionLabel, defaultFontFamily);
             this[ThemeConstants.CardViewStyle.HeaderFontSize] = TryGetFontSize(this.fontConfiguration.SectionLabel, PlatformHelper.OnPlatformValue((Device.iOS, () => 13d), (Device.Android, () => 18d)));
             this[ThemeConstants.CardViewStyle.HeaderFontAttributes] = TryGetFontAttributes(this.fontConfiguration.SectionLabel, defaultFontAttributes);
+
+            this[ThemeConstants.CardViewStyle.FooterFontFamily] = TryGetFontFamily(this.fontConfiguration.FooterSection, defaultFontFamily);
+            this[ThemeConstants.CardViewStyle.FooterFontSize] = TryGetFontSize(this.fontConfiguration.FooterSection, fontSizes.XSmall);
+            this[ThemeConstants.CardViewStyle.FooterFontAttributes] = TryGetFontAttributes(this.fontConfiguration.FooterSection, defaultFontAttributes);
         }
 
         private static string TryGetFontFamily(FontElement fontElement, string @default)

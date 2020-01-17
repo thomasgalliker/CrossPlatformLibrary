@@ -204,10 +204,17 @@
                         <StackLayout IsVisible="{Binding IsNotBusy}">
                             <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: SegmentedStatusIndicator--&gt;" />
                                 <Button
                                     Text="SegmentedStatusIndicatorPage"
                                     Command="{Binding NavigateToPageCommand}"
                                     CommandParameter="SegmentedStatusIndicatorPage" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: CardView--&gt;" />
+                                <Button
+                                    Text="CardViewPage"
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="CardViewPage" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo MultiStateToggleButton--&gt;" />
                                 <controls:MultiStateToggleButton>
@@ -604,12 +611,6 @@
                                             Text="" />
                                     </controls:GridZero>
                                 </controls:AlwaysScrollView>
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: AddressControl--&gt;" />
-                                <userControls:AddressControl BindingContext="{Binding .}" HeightRequest="340" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: PeriodicTaskView--&gt;" />
-                                <userControls:PeriodicTaskView BindingContext="{Binding PeriodicTask}" HeightRequest="270" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ErrorBox--&gt;" />
                                 <controls:ErrorBox Text="Some error message" />

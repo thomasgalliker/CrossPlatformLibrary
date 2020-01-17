@@ -65,7 +65,6 @@ namespace SampleApp.ViewModels
             this.Countries = new ObservableCollection<CountryViewModel>();
             this.SuggestedCountries = new ObservableCollection<CountryViewModel>();
 
-            this.PeriodicTask = new PeriodicTaskViewModel();
             this.LoadData();
         }
 
@@ -153,6 +152,10 @@ namespace SampleApp.ViewModels
             {
                 case nameof(SegmentedStatusIndicatorPage):
                     page = new SegmentedStatusIndicatorPage{BindingContext = new SegmentedStatusIndicatorViewModel()};
+                    break;
+                    
+                case nameof(CardViewPage):
+                    page = new CardViewPage { BindingContext = new CardViewViewModel()};
                     break;
 
                 default:
@@ -302,8 +305,6 @@ namespace SampleApp.ViewModels
             this.Country = new CountryViewModel(new CountryDto { Id = 99, Name = "Fantasy Land" });
             this.Validation.AddErrorMessageForProperty(nameof(this.Country), "Fantasy Land does not exist, it's fiction!");
         }
-
-        public PeriodicTaskViewModel PeriodicTask { get; private set; }
 
         public ObservableCollection<ResourceViewModel> ThemeResources
         {

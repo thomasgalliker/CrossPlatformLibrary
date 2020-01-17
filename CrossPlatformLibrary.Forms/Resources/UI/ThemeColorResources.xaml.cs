@@ -62,6 +62,7 @@ namespace CrossPlatformLibrary.Forms.Resources
             this[ThemeConstants.CardViewStyle.HeaderBackgroundColor] = colorConfiguration.CardViewHeaderBackgroundColor;
             this[ThemeConstants.CardViewStyle.HeaderDividerColor] = colorConfiguration.CardViewDividerColor;
             this[ThemeConstants.CardViewStyle.BackgroundColor] = colorConfiguration.CardViewBackgroundColor;
+            this[ThemeConstants.CardViewStyle.FooterTextColor] = colorConfiguration.CardViewFooterTextColor;
             this[ThemeConstants.CardViewStyle.FooterDividerColor] = colorConfiguration.CardViewDividerColor;
         }
 

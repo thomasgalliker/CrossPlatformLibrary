@@ -49,6 +49,9 @@
     <Compile Update="Views\CountryViewCell.xaml.cs">
       <DependentUpon>CountryViewCell.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\CardViewPage.xaml.cs">
+      <DependentUpon>CardViewPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -86,5 +89,9 @@
     <None Update="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\SegmentedStatusIndicator\" />
   </ItemGroup>
 </Project>

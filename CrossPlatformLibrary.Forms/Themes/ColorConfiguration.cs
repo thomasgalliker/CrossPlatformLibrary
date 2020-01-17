@@ -300,6 +300,24 @@ namespace CrossPlatformLibrary.Forms.Themes
             get => (Color)this.GetValue(CardViewHeaderTextColorProperty);
             set => this.SetValue(CardViewHeaderTextColorProperty, value);
         }
+        
+        public static readonly BindableProperty CardViewFooterTextColorProperty =
+            BindableProperty.Create(
+                nameof(CardViewFooterTextColor),
+                typeof(Color),
+                typeof(Color),
+                GetDefaultCardViewFooterTextColor());
+
+        private static Color GetDefaultCardViewFooterTextColor()
+        {
+            return Color.FromHex("#6D6D72");
+        }
+
+        public Color CardViewFooterTextColor
+        {
+            get => (Color)this.GetValue(CardViewFooterTextColorProperty);
+            set => this.SetValue(CardViewFooterTextColorProperty, value);
+        }
 
         public static readonly BindableProperty CardViewHeaderBackgroundColorProperty =
             BindableProperty.Create(

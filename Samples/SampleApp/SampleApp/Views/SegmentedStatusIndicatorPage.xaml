@@ -6,7 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     mc:Ignorable="d"
-    x:Class="SampleApp.Views.SegmentedStatusIndicatorPage">
+    x:Class="SampleApp.Views.SegmentedStatusIndicatorPage"
+    BackgroundColor="{DynamicResource WindowBackgroundTable}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -36,7 +37,7 @@
 
     <controls:AlwaysScrollView>
         <Grid>
-            <StackLayout>
+            <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo SegmentedStatusIndicator--&gt;" />
                 <controls:SegmentedStatusIndicator
                     ItemsSource="{Binding BusStops}"

@@ -88,6 +88,8 @@ namespace CrossPlatformLibrary.Forms.Themes
         Color CardViewHeaderTextColor { get; }
 
         Color CardViewHeaderBackgroundColor { get; }
+        
+        Color CardViewFooterTextColor { get; }
 
         Color CardViewDividerColor { get; }
 
