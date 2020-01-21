@@ -20,6 +20,9 @@ namespace CrossPlatformLibrary.Localization
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
 
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
             this.OnLocaleChanged(cultureInfo);
         }
 
