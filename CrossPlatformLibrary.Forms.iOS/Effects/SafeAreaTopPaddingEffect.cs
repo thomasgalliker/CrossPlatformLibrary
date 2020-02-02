@@ -1,21 +1,32 @@
-﻿using CrossPlatformLibrary.Forms.iOS.Effects;
-using UIKit;
+﻿using CrossPlatformLibrary.Forms.Effects;
+using CrossPlatformLibrary.Internals;
 using Xamarin.Forms;
+using SafeAreaTopPaddingEffect = CrossPlatformLibrary.Forms.iOS.Effects.SafeAreaTopPaddingEffect;
 
 [assembly: ExportEffect(typeof(SafeAreaTopPaddingEffect), nameof(SafeAreaTopPaddingEffect))]
 
 namespace CrossPlatformLibrary.Forms.iOS.Effects
 {
+    /// <summary>
+    ///     Adds safe-area padding to the top of the UI element.
+    /// </summary>
     public class SafeAreaTopPaddingEffect : SafeAreaPaddingEffect
     {
-        protected override Thickness GetPadding(Thickness padding, UIEdgeInsets insets)
+        private readonly ITracer tracer;
+        private readonly SafeAreaPaddingLayout safeAreaPaddingLayout;
+
+        public SafeAreaTopPaddingEffect()
         {
-            return new Thickness(padding.Left + insets.Left, padding.Top + insets.Top, padding.Right + insets.Right, padding.Bottom);
+            this.tracer = Tracer.Current;
+            this.safeAreaPaddingLayout = new SafeAreaPaddingLayout(SafeAreaPaddingLayout.PaddingPosition.Top);
         }
 
-        protected override Thickness GetDefaultPadding(Thickness padding)
+        protected override Thickness GetSafeAreaPadding(Thickness originalPadding, SafeAreaPaddingLayout _, Thickness safeAreaInsets, bool includeStatusBar)
         {
-            return new Thickness(padding.Left, padding.Top, padding.Right, padding.Bottom);
+            var safeAreaPadding = base.GetSafeAreaPadding(originalPadding, this.safeAreaPaddingLayout, safeAreaInsets, includeStatusBar);
+
+            this.tracer.Info($"SafeAreaTopPaddingEffect.GetSafeAreaPadding returns safeAreaPadding={{{safeAreaPadding.Left}, {safeAreaPadding.Top}, {safeAreaPadding.Right}, {safeAreaPadding.Bottom}}}");
+            return safeAreaPadding;
         }
     }
 }

@@ -30,12 +30,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TimeSpanExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TypeExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Category.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\DebugTracer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\ITracer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Tracing\Category.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Tracing\DebugTracer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Tracing\ITracer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Guard.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\Tracer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internals\TracerExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Tracing\Tracer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\Tracing\TracerExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC\IContainerExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC\IIocContainer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC\IResolvedParameter.cs" />
