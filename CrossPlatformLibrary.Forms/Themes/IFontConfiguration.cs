@@ -10,6 +10,8 @@ namespace CrossPlatformLibrary.Forms.Themes
         FontElement Default { get; set; }
 
         FontElement SectionLabel { get; set; }
+        
+        FontElement FooterSection { get; set; }
 
         FontElement Body1 { get; set; }
 

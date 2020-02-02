@@ -49,6 +49,9 @@
     <Compile Update="Views\CountryViewCell.xaml.cs">
       <DependentUpon>CountryViewCell.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\CardViewPage.xaml.cs">
+      <DependentUpon>CardViewPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -64,6 +67,9 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Views\CountryViewCell.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SegmentedStatusIndicatorPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
@@ -83,5 +89,9 @@
     <None Update="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\SegmentedStatusIndicator\" />
   </ItemGroup>
 </Project>

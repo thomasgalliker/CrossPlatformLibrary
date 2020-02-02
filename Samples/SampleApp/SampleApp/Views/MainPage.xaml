@@ -204,6 +204,18 @@
                         <StackLayout IsVisible="{Binding IsNotBusy}">
                             <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: SegmentedStatusIndicator--&gt;" />
+                                <Button
+                                    Text="SegmentedStatusIndicatorPage"
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="SegmentedStatusIndicatorPage" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: CardView--&gt;" />
+                                <Button
+                                    Text="CardViewPage"
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="CardViewPage" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo MultiStateToggleButton--&gt;" />
                                 <controls:MultiStateToggleButton>
                                     <controls:MultiStateToggleButton.ItemsSource>
@@ -354,41 +366,31 @@
                                     RemovePadding="True"
                                     Text="" />
 
-                                <controls:CustomEntry
-                                    Placeholder="CustomEntry with TextContentType=&quot;FirstName&quot;"
-                                    Text=""
-                                    TextContentType="FirstName" />
-                                <controls:CustomEntry
-                                    Placeholder="CustomEntry with TextContentType=&quot;LastName&quot;"
-                                    Text=""
-                                    TextContentType="LastName" />
+                                <controls:CustomEntry Placeholder="CustomEntry with TextContentType=&quot;FirstName&quot;" TextContentType="FirstName" />
+                                <controls:CustomEntry Placeholder="CustomEntry with TextContentType=&quot;LastName&quot;" TextContentType="LastName" />
                                 <controls:CustomEntry
                                     Placeholder="CustomEntry with TextContentType=&quot;Username&quot;"
-                                    Text=""
                                     TextContentType="Username"
                                     Keyboard="Email" />
                                 <controls:CustomEntry
                                     Placeholder="CustomEntry with TextContentType=&quot;EmailAddress&quot;"
-                                    Text=""
+                                    Keyboard="Email"
                                     TextContentType="EmailAddress" />
                                 <controls:CustomEntry
                                     Placeholder="CustomEntry with TextContentType=&quot;PhoneNumber&quot;"
-                                    Text=""
+                                    Keyboard="Telephone"
                                     TextContentType="PhoneNumber" />
                                 <controls:CustomEntry
                                     Placeholder="CustomEntry with TextContentType=&quot;Password&quot;"
-                                    Text=""
                                     TextContentType="Password"
                                     IsPassword="True" />
                                 <controls:CustomEntry
                                     Placeholder="CustomEntry with TextContentType=&quot;NewPassword&quot;"
-                                    Text=""
                                     TextContentType="NewPassword"
                                     IsPassword="True" />
                                 <controls:CustomEntry
                                     Keyboard="Numeric"
                                     Placeholder="CustomEntry with TextContentType=&quot;OneTimeCode&quot;"
-                                    Text=""
                                     TextContentType="OneTimeCode" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableEntry--&gt;" />
@@ -609,12 +611,6 @@
                                             Text="" />
                                     </controls:GridZero>
                                 </controls:AlwaysScrollView>
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: AddressControl--&gt;" />
-                                <userControls:AddressControl BindingContext="{Binding .}" HeightRequest="340" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: PeriodicTaskView--&gt;" />
-                                <userControls:PeriodicTaskView BindingContext="{Binding PeriodicTask}" HeightRequest="270" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ErrorBox--&gt;" />
                                 <controls:ErrorBox Text="Some error message" />

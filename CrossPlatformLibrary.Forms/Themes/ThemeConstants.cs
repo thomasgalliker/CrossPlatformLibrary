@@ -84,6 +84,11 @@
             public const string HeaderDividerColor = "CardViewStyle.Header.DividerColor";
             public const string BackgroundColor = "CardViewStyle.BackgroundColor";
             public const string FooterDividerColor = "CardViewStyle.Footer.DividerColor";
+
+            public const string FooterTextColor = "CardViewStyle.Footer.TextColor";
+            public const string FooterFontFamily = "CardViewStyle.Footer.FontFamily";
+            public const string FooterFontSize = "CardViewStyle.Footer.FontSize";
+            public const string FooterFontAttributes = "CardViewStyle.Footer.FontAttributes";
         }
 
         /// <summary>

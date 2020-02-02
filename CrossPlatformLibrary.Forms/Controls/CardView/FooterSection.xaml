@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="CrossPlatformLibrary.Forms.Controls.FooterSection"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls"
+    x:Name="Control">
+
+    <controls:StackLayoutZero Orientation="Vertical">
+        <BoxView BackgroundColor="{DynamicResource CardViewStyle.Footer.DividerColor}" HorizontalOptions="FillAndExpand">
+            <BoxView.IsVisible>
+                <OnPlatform x:TypeArguments="x:Boolean">
+                    <On Platform="Android" Value="True" />
+                    <On Platform="iOS" Value="False" />
+                </OnPlatform>
+            </BoxView.IsVisible>
+            <BoxView.HeightRequest>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="Android" Value="1" />
+                    <On Platform="iOS" Value="0.5" />
+                </OnPlatform>
+            </BoxView.HeightRequest>
+        </BoxView>
+
+        <controls:StackLayoutZero Padding="{DynamicResource Theme.Padding.CardViewPadding}">
+            <controls:CustomLabel Text="{Binding Source={x:Reference Control}, Path=Text}" Style="{DynamicResource FooterSectionLabelStyle}" />
+        </controls:StackLayoutZero>
+    </controls:StackLayoutZero>
+</ContentView>

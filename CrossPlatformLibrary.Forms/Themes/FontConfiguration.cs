@@ -41,12 +41,28 @@ namespace CrossPlatformLibrary.Forms.Themes
                 null);
 
         /// <summary>
-        ///     Section Label font, used as header font in card views.
+        ///     Section label font, used as header font in card views.
         /// </summary>
         public FontElement SectionLabel
         {
             get => (FontElement)this.GetValue(SectionLabelProperty);
             set => this.SetValue(SectionLabelProperty, value);
+        }
+        
+        public static readonly BindableProperty FooterSectionProperty =
+            BindableProperty.Create(
+                nameof(FooterSection),
+                typeof(FontElement),
+                typeof(FontConfiguration),
+                null);
+
+        /// <summary>
+        ///     Footer label, used as footer text in card views.
+        /// </summary>
+        public FontElement FooterSection
+        {
+            get => (FontElement)this.GetValue(FooterSectionProperty);
+            set => this.SetValue(FooterSectionProperty, value);
         }
 
         public static readonly BindableProperty Body1Property =

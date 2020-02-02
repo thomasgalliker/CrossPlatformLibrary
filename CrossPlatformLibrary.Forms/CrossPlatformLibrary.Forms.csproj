@@ -71,10 +71,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\CardView\FooterSection.xaml.cs">
+      <DependentUpon>FooterSection.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Controls\DrilldownSwitchCell.xaml.cs">
       <DependentUpon>DrilldownSwitchCell.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Controls\MultiStateToggleButton.xaml.cs">
+    <Compile Update="Controls\SegmentedStatusIndicator\SegmentedStatusIndicator.xaml.cs">
+      <DependentUpon>SegmentedStatusIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\MultiStateToggleButton\MultiStateToggleButton.xaml.cs">
       <DependentUpon>MultiStateToggleButton.xaml</DependentUpon>
     </Compile>
     <Compile Update="Controls\ValidatableEditor.xaml.cs">
@@ -113,6 +119,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Controls\CardView\FooterSection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Controls\DrilldownSwitchCell.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
@@ -149,16 +158,16 @@
     <EmbeddedResource Update="Controls\DrilldownButton.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\FooterDivider.xaml">
+    <EmbeddedResource Update="Controls\CardView\FooterDivider.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\HeaderDivider.xaml">
+    <EmbeddedResource Update="Controls\CardView\HeaderDivider.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\LabelSection.xaml">
+    <EmbeddedResource Update="Controls\CardView\LabelSection.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\SectionDivider.xaml">
+    <EmbeddedResource Update="Controls\CardView\SectionDivider.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\ValidatableDatePicker.xaml">

@@ -45,6 +45,7 @@ namespace SampleApp.ViewModels
         private ObservableCollection<ResourceViewModel> themeResources;
         private bool isMultiToggleButtonOn = true;
         private bool isMultiToggleButtonOff;
+        private ICommand navigateToPageCommand;
 
         public MainViewModel(
             INavigationService navigationService,
@@ -64,7 +65,6 @@ namespace SampleApp.ViewModels
             this.Countries = new ObservableCollection<CountryViewModel>();
             this.SuggestedCountries = new ObservableCollection<CountryViewModel>();
 
-            this.PeriodicTask = new PeriodicTaskViewModel();
             this.LoadData();
         }
 
@@ -110,7 +110,7 @@ namespace SampleApp.ViewModels
             get => this.countries;
             private set => this.SetProperty(ref this.countries, value, nameof(this.Countries));
         }
-
+        
         public ObservableCollection<CountryViewModel> SuggestedCountries { get; }
 
         public CountryViewModel Country
@@ -134,6 +134,35 @@ namespace SampleApp.ViewModels
                     Console.WriteLine($"CountrySearchText changed: {value}");
                 }
             }
+        }
+
+        public ICommand NavigateToPageCommand
+        {
+            get
+            {
+                return this.navigateToPageCommand ??
+                       (this.navigateToPageCommand = new Command<string>(async (s) => await this.OnNavigateToPage(s)));
+            }
+        }
+
+        private async Task OnNavigateToPage(string pageName)
+        {
+            Page page = null;
+            switch (pageName)
+            {
+                case nameof(SegmentedStatusIndicatorPage):
+                    page = new SegmentedStatusIndicatorPage{BindingContext = new SegmentedStatusIndicatorViewModel()};
+                    break;
+                    
+                case nameof(CardViewPage):
+                    page = new CardViewPage { BindingContext = new CardViewViewModel()};
+                    break;
+
+                default:
+                    throw new NotSupportedException($"Page is not known");
+            }
+
+            await this.navigationService.PushAsync(page);
         }
 
         public ICommand AutoCompleteSearchCommand
@@ -277,8 +306,6 @@ namespace SampleApp.ViewModels
             this.Validation.AddErrorMessageForProperty(nameof(this.Country), "Fantasy Land does not exist, it's fiction!");
         }
 
-        public PeriodicTaskViewModel PeriodicTask { get; private set; }
-
         public ObservableCollection<ResourceViewModel> ThemeResources
         {
             get => this.themeResources;
@@ -384,7 +411,7 @@ namespace SampleApp.ViewModels
                 // Set countries one after the other
                 this.Countries.Clear();
                 this.Countries.AddRange(countryDtos.Select(c => new CountryViewModel(c)).Prepend(defaultCountryViewModel));
-
+                
                 //this.ThemeResources = Application.Current.Resources.MergedDictionaries.SelectMany(md => md)
                 //    .Select(kvp => new ResourceViewModel(kvp))
                 //    .OrderBy(vm => vm.Key)

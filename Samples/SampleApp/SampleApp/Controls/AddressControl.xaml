@@ -71,6 +71,7 @@
 
                 </Grid>
                 <controls:FooterDivider />
+                <controls:FooterSection Text="FooterSection can be used after FooterDivider to give additional information to the content of the CardView." />
             </controls:StackLayoutZero>
         </controls:CardView>
     </controls:StackLayoutZero>
