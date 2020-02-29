@@ -33,7 +33,7 @@ namespace SampleApp.ViewModels
         private UserDto user;
         private string logContent;
         private ICommand toggleSwitchCommand;
-        private bool isToggled;
+        private bool isReadonly;
         private ICommand longPressCommand;
         private ICommand normalPressCommand;
         private string countrySearchText;
@@ -153,9 +153,13 @@ namespace SampleApp.ViewModels
                 case nameof(SegmentedStatusIndicatorPage):
                     page = new SegmentedStatusIndicatorPage{BindingContext = new SegmentedStatusIndicatorViewModel()};
                     break;
-                    
+
                 case nameof(CardViewPage):
-                    page = new CardViewPage { BindingContext = new CardViewViewModel()};
+                    page = new CardViewPage { BindingContext = new CardViewViewModel() };
+                    break;
+
+                case nameof(DrilldownButtonListPage):
+                    page = new DrilldownButtonListPage { BindingContext = new DrilldownButtonListViewModel() };
                     break;
 
                 default:
@@ -389,7 +393,6 @@ namespace SampleApp.ViewModels
                 this.UserId = 2;
 
                 this.numberOfLoads++;
-                this.RaisePropertyChanged(nameof(this.RefreshButtonText));
 
                 // Demo dynamic adjustment of MaxLength binding
                 this.UserNameMaxLength = Math.Max(2, ++this.UserNameMaxLength);
@@ -455,28 +458,18 @@ namespace SampleApp.ViewModels
             };
         }
 
-        public string RefreshButtonText => $"Refresh {this.numberOfLoads}";
-
-        public bool IsToggled
+        public bool IsReadonly
         {
-            get => this.isToggled;
-            set
-            {
-                if (this.SetProperty(ref this.isToggled, value, nameof(this.IsToggled)))
-                {
-                    this.RaisePropertyChanged(nameof(this.ToggleSwitchButtonText));
-                }
-            }
+            get => this.isReadonly;
+            set => this.SetProperty(ref this.isReadonly, value, nameof(this.IsReadonly));
         }
-
-        public string ToggleSwitchButtonText => this.IsToggled ? "IsToggled: Yes" : "IsToggled: No";
 
         public ICommand ToggleSwitchCommand
         {
             get
             {
                 return this.toggleSwitchCommand ??
-                       (this.toggleSwitchCommand = new Command(() => { this.IsToggled = !this.IsToggled; }));
+                       (this.toggleSwitchCommand = new Command(() => { this.IsReadonly = !this.IsReadonly; }));
             }
         }
 

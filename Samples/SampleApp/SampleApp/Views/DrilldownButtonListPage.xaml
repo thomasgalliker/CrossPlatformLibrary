@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xControls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:controls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
+    xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
+    xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
+    mc:Ignorable="d"
+    x:Class="SampleApp.Views.DrilldownButtonListPage"
+    BackgroundColor="{DynamicResource WindowBackgroundTable}"
+    Title="Drilldown Buttons">
+
+    <xControls:AlwaysScrollView>
+        <xControls:GridZero>
+            <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
+
+                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo DrilldownButton--&gt;" />
+                <xControls:DrilldownButton
+                    Command="{Binding MailNavigateCommand}"
+                    ImageSource="{xControls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
+                    Text="{localization:Translate SingleButtonText}" />
+
+                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo DrilldownButtonList--&gt;" />
+                <xControls:CardView Padding="0,0,0,16">
+                    <xControls:StackLayoutZero>
+                        <xControls:LabelSection Text="{localization:Translate ListOfSettingsSectionText}" />
+                        <xControls:HeaderDivider />
+                        <xControls:DrilldownButtonList BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
+                            <xControls:DrilldownButtonList.ItemsSource>
+                                <objectModel:ObservableCollection x:TypeArguments="BindableObject">
+                                    <xControls:DrilldownButtonView
+                                        Title="DrilldownButtonCell (Enabled)"
+                                        Command="{Binding NavigateToLogCommand}"
+                                        ImageSource="{xControls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
+                                        IsEnabled="True" />
+                                    <xControls:DrilldownButtonView
+                                        Title="DrilldownButtonCell (Disabled)"
+                                        Command="{Binding NavigateToLogCommand}"
+                                        ImageSource="{xControls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
+                                        IsEnabled="False" />
+                                    <xControls:DrilldownButtonView
+                                        Title="{Binding RefreshButtonText}"
+                                        Command="{Binding RefreshCommand}"
+                                        IsBusy="{Binding IsRefreshing, Mode=OneWay}"
+                                        IsEnabled="{Binding IsRefreshing, Converter={StaticResource BoolInverter}}" />
+                                    <xControls:DrilldownSwitchView
+                                        Title="{Binding ToggleSwitchButtonText}"
+                                        Command="{Binding ToggleSwitchCommand}"
+                                        IsEnabled="True"
+                                        IsToggled="{Binding IsToggled, Mode=TwoWay}" />
+                                </objectModel:ObservableCollection>
+                            </xControls:DrilldownButtonList.ItemsSource>
+                        </xControls:DrilldownButtonList>
+                        <!--  DrilldownButtonList can be closed without a FooterDivider  -->
+                        <!--<controls:FooterDivider />-->
+                    </xControls:StackLayoutZero>
+                </xControls:CardView>
+
+                <xControls:CardView Padding="0,0,0,16">
+                    <xControls:StackLayoutZero>
+                        <xControls:LabelSection Text="{localization:Translate AboutSectionText}" />
+                        <xControls:HeaderDivider />
+
+                        <xControls:GridZero
+                            Padding="{DynamicResource Theme.Padding.CardViewPadding}"
+                            BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}"
+                            RowSpacing="{DynamicResource Theme.Spacing.Small}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <xControls:CustomLabel
+                                Grid.Row="0"
+                                LineBreakMode="WordWrap"
+                                Text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam." />
+                        </xControls:GridZero>
+
+                        <xControls:DividerLine />
+                        <xControls:DrilldownButtonList BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
+                            <xControls:DrilldownButtonList.ItemsSource>
+                                <objectModel:ObservableCollection x:TypeArguments="BindableObject">
+                                    <xControls:DrilldownButtonView
+                                        Title="{localization:Translate TermsAndConditionsButtonText}"
+                                        Command="{Binding NavigateToTermsAndConditionsCommand}"
+                                        ImageSource="{xControls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
+                                        IsBusy="{Binding IsNavigatingToTermsAndConditions}"
+                                        IsEnabled="{Binding IsNavigatingToTermsAndConditions, Converter={StaticResource BoolInverter}}" />
+                                    <xControls:DrilldownButtonView
+                                        Title="{localization:Translate PrivacyPolicyButtonText}"
+                                        Command="{Binding NavigateToPrivacyPolicyCommand}"
+                                        ImageSource="{xControls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
+                                        IsBusy="{Binding IsNavigatingToPrivacyPolicy}"
+                                        IsEnabled="{Binding IsNavigatingToPrivacyPolicy, Converter={StaticResource BoolInverter}}" />
+                                </objectModel:ObservableCollection>
+                            </xControls:DrilldownButtonList.ItemsSource>
+                        </xControls:DrilldownButtonList>
+                        <xControls:DividerLine />
+                        <xControls:FooterDivider />
+                    </xControls:StackLayoutZero>
+                </xControls:CardView>
+
+            </StackLayout>
+        </xControls:GridZero>
+    </xControls:AlwaysScrollView>
+</ContentPage>

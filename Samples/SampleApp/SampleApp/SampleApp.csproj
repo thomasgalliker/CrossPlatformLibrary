@@ -46,6 +46,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\DrilldownButtonListPage.xaml.cs">
+      <DependentUpon>DrilldownButtonListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\CountryViewCell.xaml.cs">
       <DependentUpon>CountryViewCell.xaml</DependentUpon>
     </Compile>

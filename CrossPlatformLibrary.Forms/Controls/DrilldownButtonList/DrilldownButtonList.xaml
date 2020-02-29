@@ -5,7 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-    x:Name="Control">
+    x:Name="Control"
+    BackgroundColor="Transparent"
+    VerticalOptions="StartAndExpand"
+    HorizontalOptions="FillAndExpand">
 
     <Grid.Resources>
         <ResourceDictionary>
