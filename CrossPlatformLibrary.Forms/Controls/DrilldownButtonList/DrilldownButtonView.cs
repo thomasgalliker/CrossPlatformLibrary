@@ -2,7 +2,7 @@
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
-    public class DrilldownButtonView : DrilldownView
+    public class DrilldownButtonView : DrilldownView, IDrilldownButtonView
     {
         public static readonly BindableProperty ImageSourceProperty =
             BindableProperty.Create(

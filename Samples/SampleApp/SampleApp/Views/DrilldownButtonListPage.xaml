@@ -5,7 +5,6 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:xControls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
-    xmlns:controls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
     xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
     mc:Ignorable="d"
@@ -23,7 +22,7 @@
                     ImageSource="{xControls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
                     Text="{localization:Translate SingleButtonText}" />
 
-                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo DrilldownButtonList--&gt;" />
+                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo DrilldownButtonList with static ItemsSource--&gt;" />
                 <xControls:CardView Padding="0,0,0,16">
                     <xControls:StackLayoutZero>
                         <xControls:LabelSection Text="{localization:Translate ListOfSettingsSectionText}" />
@@ -56,6 +55,26 @@
                         </xControls:DrilldownButtonList>
                         <!--  DrilldownButtonList can be closed without a FooterDivider  -->
                         <!--<controls:FooterDivider />-->
+                    </xControls:StackLayoutZero>
+                </xControls:CardView>
+
+                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo DrilldownButtonList with dynamic ItemsSource--&gt;" />
+                <xControls:CardView Padding="0,0,0,16">
+                    <xControls:StackLayoutZero>
+                        <xControls:LabelSection Text="{localization:Translate ListOfSettingsSectionText}" />
+                        <xControls:HeaderDivider />
+                        <xControls:DrilldownButtonList ItemsSource="{Binding DrilldownItems, Mode=OneWay}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
+                            <xControls:DrilldownButtonList.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <xControls:StackLayoutZero>
+                                            <Label Text="Custom ItemTemplate" TextColor="LightBlue" />
+                                            <Label Text="{Binding Title}" BackgroundColor="LightBlue" />
+                                        </xControls:StackLayoutZero>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </xControls:DrilldownButtonList.ItemTemplate>
+                        </xControls:DrilldownButtonList>
                     </xControls:StackLayoutZero>
                 </xControls:CardView>
 

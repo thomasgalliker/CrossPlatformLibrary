@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
-    public class DrilldownView : BindableObject
+    public class DrilldownView : BindableObject, IDrilldownView
     {
         public static readonly BindableProperty TitleProperty =
             BindableProperty.Create(

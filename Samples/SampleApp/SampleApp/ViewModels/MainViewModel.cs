@@ -159,7 +159,7 @@ namespace SampleApp.ViewModels
                     break;
 
                 case nameof(DrilldownButtonListPage):
-                    page = new DrilldownButtonListPage { BindingContext = new DrilldownButtonListViewModel() };
+                    page = new DrilldownButtonListPage { BindingContext = new DrilldownButtonListViewModel(this.displayService) };
                     break;
 
                 default:

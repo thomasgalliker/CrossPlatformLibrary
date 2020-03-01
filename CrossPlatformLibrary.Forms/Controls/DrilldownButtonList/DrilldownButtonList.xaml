@@ -12,27 +12,120 @@
 
     <Grid.Resources>
         <ResourceDictionary>
+
+            <ControlTemplate x:Key="DrilldownControlTemplate">
+                <controls:GridZero>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <controls:CustomButton
+                        HorizontalContentAlignment="Start"
+                        VerticalContentAlignment="Center"
+                        AllCaps="False"
+                        Command="{Binding Command, Mode=OneWay}"
+                        CommandParameter="{Binding CommandParameter, Mode=OneWay}"
+                        CornerRadius="0"
+                        FontAttributes="None"
+                        FontSize="{DynamicResource LargeSize}"
+                        HorizontalOptions="FillAndExpand"
+                        IsEnabled="{Binding IsEnabled, Mode=OneWay}"
+                        Style="{DynamicResource DrilldownButtonStyle}"
+                        Text="{Binding ., Mode=OneWay, Converter={StaticResource DebugConverter}}"
+                        VerticalOptions="StartAndExpand">
+
+                        <controls:CustomButton.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="Android" Value="-1" />
+                            </OnPlatform>
+                        </controls:CustomButton.Margin>
+
+                        <controls:CustomButton.Padding>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="Android" Value="8, 0, 0, 0" />
+                                <On Platform="iOS" Value="16, 0, 0, 0" />
+                            </OnPlatform>
+                        </controls:CustomButton.Padding>
+
+                    </controls:CustomButton>
+
+                    <controls:GridZero InputTransparent="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <ContentPresenter Grid.Column="0" InputTransparent="True">
+                            <ContentPresenter.Padding>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="Android" Value="8, 0, 0, 0" />
+                                    <On Platform="iOS" Value="16, 0, 0, 0" />
+                                </OnPlatform>
+                            </ContentPresenter.Padding>
+                        </ContentPresenter>
+
+                        <Image
+                            Grid.Column="1"
+                            Margin="0,0,8,0"
+                            HeightRequest="24"
+                            HorizontalOptions="EndAndExpand"
+                            IsVisible="{Binding IsBusy, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+                            Source="{Binding ImageSource, Mode=OneWay}"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="24" />
+
+                        <ActivityIndicator
+                            Grid.Column="1"
+                            x:Name="ActivityIndicator"
+                            Margin="0,0,8,0"
+                            HorizontalOptions="EndAndExpand"
+                            IsRunning="{Binding IsBusy, Mode=OneWay}"
+                            IsVisible="{Binding IsBusy, Mode=OneWay}"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="24" />
+                    </controls:GridZero>
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Command, Mode=OneWay}" CommandParameter="{Binding CommandParameter, Mode=OneWay}" />
+                    </Grid.GestureRecognizers>
+                </controls:GridZero>
+
+            </ControlTemplate>
+
+            <DataTemplate x:Key="CustomDrilldownTemplate">
+                <controls:ExtendedViewCell SelectedBackgroundColor="{DynamicResource DrilldownButtonStyle.BackgroundColor.Pressed}">
+                    <ContentView ControlTemplate="{StaticResource DrilldownControlTemplate}">
+                        <controls:ContentControl BindingContext="{Binding .}" ItemTemplate="{Binding Source={x:Reference Control}, Path=ItemTemplate}" />
+                    </ContentView>
+                </controls:ExtendedViewCell>
+            </DataTemplate>
+
             <DataTemplate x:Key="DrilldownButtonCell">
                 <controls:DrilldownButtonCell />
             </DataTemplate>
+
             <DataTemplate x:Key="DrilldownSwitchCell">
                 <controls:DrilldownSwitchCell />
             </DataTemplate>
+
             <controls:DrilldownCellTemplateSelector
                 x:Key="DrilldownCellTemplateSelector"
                 DrilldownButtonCellTemplate="{StaticResource DrilldownButtonCell}"
-                DrilldownSwitchCellTemplate="{StaticResource DrilldownSwitchCell}" />
+                DrilldownSwitchCellTemplate="{StaticResource DrilldownSwitchCell}"
+                CustomDrilldownCellTemplate="{x:Null}" />
         </ResourceDictionary>
     </Grid.Resources>
 
     <controls:NonScrollableListView
+        x:Name="ListView"
         Margin="0"
         ios:ListView.SeparatorStyle="FullWidth"
         BackgroundColor="Transparent"
+        Header="{x:Null}"
         Footer="{x:Null}"
         HasUnevenRows="False"
-        ItemTemplateSelector="{StaticResource DrilldownCellTemplateSelector}"
         ItemsSource="{Binding ItemsSource, Source={x:Reference Control}, Mode=OneWay}"
+        ItemTemplateSelector="{StaticResource DrilldownCellTemplateSelector}"
         RowHeight="46"
         SeparatorColor="{DynamicResource ListSeparator}"
         SeparatorVisibility="Default"
