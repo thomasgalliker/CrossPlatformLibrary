@@ -8,8 +8,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         bool IsEnabled { get; set; }
 
-        ICommand Command { get; set; }
+        ICommand Command { get; }
 
-        object CommandParameter { get; set; }
+        object CommandParameter { get; }
     }
 }
