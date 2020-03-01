@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:behaviors="clr-namespace:CrossPlatformLibrary.Forms.Behaviors"
     x:Name="Control"
     SelectedBackgroundColor="{DynamicResource DrilldownButton.BackgroundColor.Pressed}">
 
@@ -49,6 +50,12 @@
                 IsEnabled="{Binding IsEnabled, Mode=OneWay}"
                 TintColor="{DynamicResource Theme.Color.TextColor}"
                 VerticalOptions="CenterAndExpand">
+                <!--<controls:CustomSwitch.Behaviors>
+                    <behaviors:EventToCommandBehavior
+                        EventName="Toggled"
+                        Command="{Binding Command, Mode=OneWay}"
+                        CommandParameter="{Binding CommandParameter, Mode=OneWay}" />
+                </controls:CustomSwitch.Behaviors>-->
                 <controls:CustomSwitch.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
                         <On Platform="Android" Value="0, 0, 8, 0" />

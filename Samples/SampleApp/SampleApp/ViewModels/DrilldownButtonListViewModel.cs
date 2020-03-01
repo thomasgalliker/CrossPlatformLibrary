@@ -20,12 +20,12 @@ namespace SampleApp.ViewModels
         {
             this.DrilldownItems = new ObservableCollection<BindableBase>
             {
-                new DrilldownSwitchViewModel{ Title = "DrilldownSwitchView 1", IsToggled = true },
-                new DrilldownSwitchViewModel{ Title = "DrilldownSwitchView 2", IsToggled = false  },
-                new DrilldownButtonViewModel{ Title = "DrilldownButtonView 1", Command = new Command(() => { displayService.DisplayAlert("DrilldownButtonView", "DrilldownButtonView 1 pressed"); })},
-                new DrilldownButtonViewModel{ Title = "DrilldownButtonView 2", Command = new Command(() => { displayService.DisplayAlert("DrilldownButtonView", "DrilldownButtonView 2 pressed"); })},
-                new CustomDrilldownViewModel{ Title = "CustomDrilldownViewModel 1", Command = new Command(() => { displayService.DisplayAlert("CustomDrilldownViewModel", "CustomDrilldownViewModel 1 pressed"); })},
-                new CustomDrilldownViewModel{ Title = "CustomDrilldownViewModel 2", Command = new Command(() => { displayService.DisplayAlert("CustomDrilldownViewModel", "CustomDrilldownViewModel 2 pressed"); }), IsBusy=true},
+                new DrilldownSwitchViewModel(displayService, isToggled: true){ Title = "DrilldownSwitchView 1" },
+                new DrilldownSwitchViewModel(displayService, isToggled: false){ Title = "DrilldownSwitchView 2" },
+                new DrilldownButtonViewModel(displayService){ Title = "DrilldownButtonView 1"},
+                new DrilldownButtonViewModel(displayService){ Title = "DrilldownButtonView 2"},
+                new CustomDrilldownViewModel(displayService){ Title = "CustomDrilldownViewModel 1"},
+                new CustomDrilldownViewModel(displayService){ Title = "CustomDrilldownViewModel 2", IsBusy=true },
             };
         }
 
@@ -64,9 +64,13 @@ namespace SampleApp.ViewModels
         public ObservableCollection<BindableBase> DrilldownItems { get; set; }
     }
 
-    public abstract class TargetViewModel : BindableBase, IDrilldownView
+    public abstract class DrilldownBaseViewModel : BaseViewModel, IDrilldownView
     {
-        public string Title { get; set; }
+        public DrilldownBaseViewModel(IDisplayService displayService)
+        {
+            this.Command = new Command(() => { displayService.DisplayAlert(this.Title, "Command executed"); });
+            this.IsBusy = false;
+        }
 
         public bool IsEnabled { get; set; } = true;
 
@@ -75,23 +79,47 @@ namespace SampleApp.ViewModels
         public object CommandParameter { get; set; }
     }
 
-    public class DrilldownSwitchViewModel : TargetViewModel, IDrilldownSwitchView
+    public class DrilldownSwitchViewModel : DrilldownBaseViewModel, IDrilldownSwitchView
     {
+        private readonly IDisplayService displayService;
         private bool isToggled;
+
+        public DrilldownSwitchViewModel(IDisplayService displayService, bool isToggled) : base(displayService)
+        {
+            this.displayService = displayService;
+            this.isToggled = isToggled;
+        }
 
         public bool IsToggled
         {
             get => this.isToggled;
-            set => this.isToggled = value;
+            set
+            {
+                if (this.SetProperty(ref this.isToggled, value, nameof(this.IsToggled)))
+                {
+                    if(this.IsNotBusy)
+                    {
+                        this.displayService.DisplayAlert(this.Title, $"IsToggled={this.IsToggled}");
+                    }
+                }
+            }
         }
     }
 
-    public class DrilldownButtonViewModel : TargetViewModel, IDrilldownButtonView
+    public class DrilldownButtonViewModel : DrilldownBaseViewModel, IDrilldownButtonView
     {
+        public DrilldownButtonViewModel(IDisplayService displayService) : base(displayService)
+        {
+        }
     }
 
     public class CustomDrilldownViewModel : BaseViewModel
     {
+        public CustomDrilldownViewModel(IDisplayService displayService)
+        {
+            this.Command = new Command(() => { displayService.DisplayAlert(this.Title, "Command executed"); });
+        }
+
         public ICommand Command { get; set; }
     }
 }
