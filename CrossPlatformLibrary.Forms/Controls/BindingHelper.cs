@@ -37,6 +37,11 @@ namespace CrossPlatformLibrary.Forms.Controls
                 template = selector.SelectTemplate(item, container);
             }
 
+            if (template == null)
+            {
+                throw new ArgumentNullException(nameof(template), $"ItemTemplate must not be null");
+            }
+
             var content = template.CreateContent();
 
             View view;
