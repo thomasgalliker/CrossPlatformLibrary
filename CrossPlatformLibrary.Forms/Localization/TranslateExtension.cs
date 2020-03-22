@@ -33,29 +33,28 @@ namespace CrossPlatformLibrary.Forms.Localization
         {
             return this.ProvideValue(serviceProvider);
         }
-    }
 
-    internal class NullTranslationProvider : ITranslationProvider
-    {
-        public string Translate(string key)
+        private class NullTranslationProvider : ITranslationProvider
         {
-            return $"Call {nameof(TranslateExtension)}.{nameof(TranslateExtension.Init)}!";
-        }
-    }
-
-    internal class NullLocalizer : ILocalizer
-    {
-        public CultureInfo GetCurrentCulture()
-        {
-            return CultureInfo.CurrentCulture;
+            public string Translate(string key, CultureInfo cultureInfo)
+            {
+                return $"Call {nameof(TranslateExtension)}.{nameof(Init)}!";
+            }
         }
 
-        public void SetCultureInfo(CultureInfo cultureInfo)
+        private class NullLocalizer : ILocalizer
         {
-            CultureInfo.CurrentCulture = cultureInfo;
-        }
+            public CultureInfo GetCurrentCulture()
+            {
+                return CultureInfo.CurrentCulture;
+            }
 
-        public event EventHandler<CultureInfoChangedEventArgs> CultureInfoChangedEvent;
+            public void SetCultureInfo(CultureInfo cultureInfo)
+            {
+                CultureInfo.CurrentCulture = cultureInfo;
+            }
+
+            public event EventHandler<CultureInfoChangedEventArgs> CultureInfoChangedEvent;
+        }
     }
 }
-
