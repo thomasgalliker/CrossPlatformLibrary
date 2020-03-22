@@ -63,6 +63,24 @@
                     <xControls:StackLayoutZero>
                         <xControls:LabelSection Text="{localization:Translate ListOfSettingsSectionText}" />
                         <xControls:HeaderDivider />
+
+                        <xControls:GridZero Padding="{DynamicResource Theme.Padding.CardViewPadding}" RowSpacing="{DynamicResource Theme.Spacing.Small}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <xControls:StackLayoutZero BackgroundColor="Green">
+                                <Label
+                                    BackgroundColor="Magenta"
+                                    Grid.Row="0"
+                                    LineBreakMode="WordWrap"
+                                    Text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam." />
+                            </xControls:StackLayoutZero>
+
+                        </xControls:GridZero>
+
+                        <xControls:DividerLine />
+
                         <xControls:DrilldownButtonList ItemsSource="{Binding DrilldownItems, Mode=OneWay}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
                             <xControls:DrilldownButtonList.ItemTemplate>
                                 <DataTemplate>
@@ -98,6 +116,7 @@
                         </xControls:GridZero>
 
                         <xControls:DividerLine />
+
                         <xControls:DrilldownButtonList BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
                             <xControls:DrilldownButtonList.ItemsSource>
                                 <objectModel:ObservableCollection x:TypeArguments="BindableObject">
