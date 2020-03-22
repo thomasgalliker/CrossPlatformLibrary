@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Localization
 {
+    [Preserve(AllMembers = true)]
     public class TranslationData : INotifyPropertyChanged, IDisposable
     {
         private readonly string key;

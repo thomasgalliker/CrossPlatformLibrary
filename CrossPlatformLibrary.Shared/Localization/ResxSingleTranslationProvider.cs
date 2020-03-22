@@ -3,9 +3,11 @@ using System.Globalization;
 using System.Reflection;
 using System.Resources;
 using System.Threading;
+using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Localization
 {
+    [Preserve(AllMembers = true)]
     public class ResxSingleTranslationProvider : ITranslationProvider
     {
         static readonly Lazy<ResxSingleTranslationProvider> Implementation = new Lazy<ResxSingleTranslationProvider>(CreateTranslationProvider, LazyThreadSafetyMode.PublicationOnly);

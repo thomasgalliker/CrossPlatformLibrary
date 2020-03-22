@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Globalization;
+using CrossPlatformLibrary.Internals;
 using CrossPlatformLibrary.Localization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace CrossPlatformLibrary.Forms.Localization
 {
+    [Preserve(AllMembers = true)]
     [ContentProperty("Text")]
     public class TranslateExtension : BindableObject, IMarkupExtension<BindingBase>
     {

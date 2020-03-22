@@ -30,6 +30,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StringExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TimeSpanExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TypeExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internals\PreserveAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Tracing\Category.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Tracing\DebugTracer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internals\Tracing\ITracer.cs" />

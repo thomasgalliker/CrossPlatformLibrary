@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading;
+using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Localization
 {
+    [Preserve(AllMembers = true)]
     public class Localizer : ILocalizer
     {
         private static readonly Lazy<ILocalizer> Implementation = new Lazy<ILocalizer>(CreateLocalizer, LazyThreadSafetyMode.PublicationOnly);
