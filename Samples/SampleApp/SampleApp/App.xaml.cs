@@ -19,7 +19,7 @@ namespace SampleApp
         {
             // Initialize localization
             ILocalizer localizer = Localizer.Current;
-            var translationProvider = ResxSingleTranslationProvider.Instance;
+            var translationProvider = ResxSingleTranslationProvider.Current;
             translationProvider.Init(Strings.ResourceManager);
             TranslateExtension.Init(localizer, translationProvider);
             ImageResourceExtension.Init(typeof(App).Assembly);
