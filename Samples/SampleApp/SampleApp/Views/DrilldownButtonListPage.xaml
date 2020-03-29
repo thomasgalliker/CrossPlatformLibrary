@@ -50,6 +50,11 @@
                                         Command="{Binding ToggleSwitchCommand}"
                                         IsEnabled="True"
                                         IsToggled="{Binding IsToggled, Mode=TwoWay}" />
+                                    <xControls:DrilldownSwitchView
+                                        Title="Lorem ipsum dolor sit a b c d e f g h i j k l m o"
+                                        Command="{Binding ToggleSwitchCommand}"
+                                        IsEnabled="True"
+                                        IsToggled="{Binding IsToggled, Mode=TwoWay}" />
                                 </objectModel:ObservableCollection>
                             </xControls:DrilldownButtonList.ItemsSource>
                         </xControls:DrilldownButtonList>

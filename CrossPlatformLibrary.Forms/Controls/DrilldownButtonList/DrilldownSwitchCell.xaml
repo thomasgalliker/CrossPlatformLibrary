@@ -37,8 +37,8 @@
 
                 <controls:CustomButton.Padding>
                     <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="Android" Value="8, 0, 0, 0" />
-                        <On Platform="iOS" Value="16, 0, 0, 0" />
+                        <On Platform="Android" Value="8, 0, 56, 0" />
+                        <On Platform="iOS" Value="16, 0, 56, 0" />
                     </OnPlatform>
                 </controls:CustomButton.Padding>
             </controls:CustomButton>
