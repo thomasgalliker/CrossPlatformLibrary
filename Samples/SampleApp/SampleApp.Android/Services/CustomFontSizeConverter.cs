@@ -19,7 +19,6 @@ namespace SampleApp.Droid.Services
         public CustomFontSizeConverter()
         {
             this.timer = new Timer(this.TickTimer, null, 5000, 5000);
-
         }
 
         private void TickTimer(object state)
@@ -30,7 +29,6 @@ namespace SampleApp.Droid.Services
                 this.FontScalingChanged?.Invoke(this, EventArgs.Empty);
             });
         }
-
 
         public double GetScaledFontSize(double fontSize)
         {
