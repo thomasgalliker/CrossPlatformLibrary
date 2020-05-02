@@ -13,6 +13,11 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         internal static object GetDisplayMember(object item, string displayMemberPath)
         {
+            if (item == null)
+            {
+                return null;
+            }
+
             var type = item.GetType();
             var prop = type.GetRuntimeProperty(displayMemberPath);
             if (prop == null)

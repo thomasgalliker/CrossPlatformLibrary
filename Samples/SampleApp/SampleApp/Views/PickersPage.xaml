@@ -5,8 +5,6 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:xControls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
-    xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
-    xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
     mc:Ignorable="d"
     x:Class="SampleApp.Views.PickersPage"
     BackgroundColor="{DynamicResource WindowBackgroundTable}"
@@ -22,10 +20,17 @@
                         <xControls:StackLayoutZero Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
                             <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatablePicker with strings--&gt;" />
                             <xControls:ValidatablePicker
-                                ItemsSource="{Binding StringValues}"
                                 Placeholder="String Values"
-                                SelectedValue="{Binding SelectedString, Mode=TwoWay}"
-                                ValidationErrors="{Binding Validation.Errors[Account]}" />
+                                ItemsSource="{Binding StringValues}"
+                                SelectedItem="{Binding SelectedString, Mode=TwoWay}" />
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatablePicker with strings, using DisplayMemberPath and NullString--&gt;" />
+                            <xControls:ValidatablePicker
+                                Placeholder="String Values"
+                                ItemsSource="{Binding StringValues}"
+                                DisplayMemberPath="Length"
+                                NullString="NEW"
+                                SelectedItem="{Binding SelectedString, Mode=TwoWay}" />
                         </xControls:StackLayoutZero>
                         <xControls:FooterDivider />
                     </xControls:StackLayoutZero>
