@@ -222,6 +222,12 @@
                                     Command="{Binding NavigateToPageCommand}"
                                     CommandParameter="DrilldownButtonListPage" />
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ValidatablePicker--&gt;" />
+                                <Button
+                                    Text="Validatable Pickers"
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="PickersPage" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo MultiStateToggleButton--&gt;" />
                                 <controls:MultiStateToggleButton>
                                     <controls:MultiStateToggleButton.ItemsSource>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xControls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
+    xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
+    mc:Ignorable="d"
+    x:Class="SampleApp.Views.PickersPage"
+    BackgroundColor="{DynamicResource WindowBackgroundTable}"
+    Title="Drilldown Buttons">
+
+    <xControls:AlwaysScrollView>
+        <xControls:GridZero>
+            <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
+                <xControls:CardView>
+                    <xControls:StackLayoutZero>
+                        <xControls:LabelSection Text="ValidatablePickers" />
+                        <xControls:HeaderDivider />
+                        <xControls:StackLayoutZero Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatablePicker with strings--&gt;" />
+                            <xControls:ValidatablePicker
+                                ItemsSource="{Binding StringValues}"
+                                Placeholder="String Values"
+                                SelectedValue="{Binding SelectedString, Mode=TwoWay}"
+                                ValidationErrors="{Binding Validation.Errors[Account]}" />
+                        </xControls:StackLayoutZero>
+                        <xControls:FooterDivider />
+                    </xControls:StackLayoutZero>
+                </xControls:CardView>
+
+            </StackLayout>
+        </xControls:GridZero>
+    </xControls:AlwaysScrollView>
+</ContentPage>

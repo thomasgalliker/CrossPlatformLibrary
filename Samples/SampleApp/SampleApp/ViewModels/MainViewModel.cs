@@ -161,6 +161,10 @@ namespace SampleApp.ViewModels
                 case nameof(DrilldownButtonListPage):
                     page = new DrilldownButtonListPage { BindingContext = new DrilldownButtonListViewModel(this.displayService) };
                     break;
+                    
+                case nameof(PickersPage):
+                    page = new PickersPage { BindingContext = new PickersViewModel(this.displayService) };
+                    break;
 
                 default:
                     throw new NotSupportedException($"Page is not known");
