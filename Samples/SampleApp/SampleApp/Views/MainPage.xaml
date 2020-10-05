@@ -13,8 +13,8 @@
     xmlns:views="clr-namespace:SampleApp.Views;assembly=SampleApp"
     x:Name="Page"
     Title="CrossPlatformLibrary Sample App"
-    BackgroundColor="SlateGray"
-    effects:SafeAreaPadding.Layout="Top,Bottom">
+    effects:SafeAreaPadding.Layout="Top,Bottom"
+    BackgroundColor="SlateGray">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -206,27 +206,27 @@
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: SegmentedStatusIndicator--&gt;" />
                                 <Button
-                                    Text="SegmentedStatusIndicatorPage"
                                     Command="{Binding NavigateToPageCommand}"
-                                    CommandParameter="SegmentedStatusIndicatorPage" />
+                                    CommandParameter="SegmentedStatusIndicatorPage"
+                                    Text="SegmentedStatusIndicatorPage" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: CardView--&gt;" />
                                 <Button
-                                    Text="CardViewPage"
                                     Command="{Binding NavigateToPageCommand}"
-                                    CommandParameter="CardViewPage" />
+                                    CommandParameter="CardViewPage"
+                                    Text="CardViewPage" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: Drilldown Buttons--&gt;" />
                                 <Button
-                                    Text="Drilldown Buttons"
                                     Command="{Binding NavigateToPageCommand}"
-                                    CommandParameter="DrilldownButtonListPage" />
+                                    CommandParameter="DrilldownButtonListPage"
+                                    Text="Drilldown Buttons" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ValidatablePicker--&gt;" />
                                 <Button
-                                    Text="Validatable Pickers"
                                     Command="{Binding NavigateToPageCommand}"
-                                    CommandParameter="PickersPage" />
+                                    CommandParameter="PickersPage"
+                                    Text="Validatable Pickers" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo MultiStateToggleButton--&gt;" />
                                 <controls:MultiStateToggleButton>
@@ -234,24 +234,24 @@
                                         <objectModel:ObservableCollection x:TypeArguments="BindableObject">
                                             <controls:MultiToggleButtonView
                                                 Title="{localization:Translate OnButtonText}"
-                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
                                                 Command="{Binding MultiToggleCommand}"
+                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
                                                 IsSelected="{Binding IsMultiToggleButtonOn, Mode=TwoWay}" />
                                             <controls:MultiToggleButtonView
                                                 Title="{localization:Translate OffButtonText}"
-                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
                                                 Command="{Binding MultiToggleCommand}"
+                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
                                                 IsSelected="{Binding IsMultiToggleButtonOff, Mode=TwoWay}" />
                                         </objectModel:ObservableCollection>
                                     </controls:MultiStateToggleButton.ItemsSource>
                                 </controls:MultiStateToggleButton>
 
                                 <controls:MultiStateToggleButton
-                                    ButtonBackgroundColor="White"
-                                    SelectedButtonBackgroundColor="BlueViolet"
                                     BorderColor="Black"
+                                    ButtonBackgroundColor="White"
                                     CornerRadius="20"
                                     HeightRequest="60"
+                                    SelectedButtonBackgroundColor="BlueViolet"
                                     Spacing="0">
                                     <controls:MultiStateToggleButton.ItemsSource>
                                         <objectModel:ObservableCollection x:TypeArguments="BindableObject">
@@ -261,13 +261,13 @@
                                                 IsSelected="False" />
                                             <controls:MultiToggleButtonView
                                                 Title="{localization:Translate OnButtonText}"
-                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
                                                 Command="{Binding MultiToggleCommand}"
+                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
                                                 IsSelected="{Binding IsMultiToggleButtonOn, Mode=TwoWay}" />
                                             <controls:MultiToggleButtonView
                                                 Title="{localization:Translate OffButtonText}"
-                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
                                                 Command="{Binding MultiToggleCommand}"
+                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
                                                 IsSelected="{Binding IsMultiToggleButtonOff, Mode=TwoWay}" />
                                         </objectModel:ObservableCollection>
                                     </controls:MultiStateToggleButton.ItemsSource>
@@ -387,25 +387,25 @@
                                 <controls:CustomEntry Placeholder="CustomEntry with TextContentType=&quot;FirstName&quot;" TextContentType="FirstName" />
                                 <controls:CustomEntry Placeholder="CustomEntry with TextContentType=&quot;LastName&quot;" TextContentType="LastName" />
                                 <controls:CustomEntry
-                                    Placeholder="CustomEntry with TextContentType=&quot;Username&quot;"
-                                    TextContentType="Username"
-                                    Keyboard="Email" />
-                                <controls:CustomEntry
-                                    Placeholder="CustomEntry with TextContentType=&quot;EmailAddress&quot;"
                                     Keyboard="Email"
+                                    Placeholder="CustomEntry with TextContentType=&quot;Username&quot;"
+                                    TextContentType="Username" />
+                                <controls:CustomEntry
+                                    Keyboard="Email"
+                                    Placeholder="CustomEntry with TextContentType=&quot;EmailAddress&quot;"
                                     TextContentType="EmailAddress" />
                                 <controls:CustomEntry
-                                    Placeholder="CustomEntry with TextContentType=&quot;PhoneNumber&quot;"
                                     Keyboard="Telephone"
+                                    Placeholder="CustomEntry with TextContentType=&quot;PhoneNumber&quot;"
                                     TextContentType="PhoneNumber" />
                                 <controls:CustomEntry
+                                    IsPassword="True"
                                     Placeholder="CustomEntry with TextContentType=&quot;Password&quot;"
-                                    TextContentType="Password"
-                                    IsPassword="True" />
+                                    TextContentType="Password" />
                                 <controls:CustomEntry
+                                    IsPassword="True"
                                     Placeholder="CustomEntry with TextContentType=&quot;NewPassword&quot;"
-                                    TextContentType="NewPassword"
-                                    IsPassword="True" />
+                                    TextContentType="NewPassword" />
                                 <controls:CustomEntry
                                     Keyboard="Numeric"
                                     Placeholder="CustomEntry with TextContentType=&quot;OneTimeCode&quot;"

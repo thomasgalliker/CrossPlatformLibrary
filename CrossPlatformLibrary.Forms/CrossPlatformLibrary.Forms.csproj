@@ -59,7 +59,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" version="4.7.0.1080" />
+    <PackageReference Include="Xamarin.Forms" version="4.7.0.1179" />
   </ItemGroup>
 
   <ItemGroup>

@@ -33,7 +33,7 @@
     <DocumentationFile>bin\Release\CrossPlatformLibrary.Forms.iOS.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" version="4.7.0.1080" />
+    <PackageReference Include="Xamarin.Forms" version="4.7.0.1179" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -83,6 +83,7 @@
     <Compile Include="Renderers\PageRenderer.cs" />
     <Compile Include="Renderers\ShapeView\ShapeViewRenderer.cs" />
     <Compile Include="Services\FontConverter.cs" />
+    <Compile Include="Services\IOsActivityIndicatorService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CrossPlatformLibrary.Forms\CrossPlatformLibrary.Forms.csproj">
