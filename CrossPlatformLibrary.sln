@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.iOS", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6A8FDA6-FCF8-4934-9875-1B19255DDF2E}"
 	ProjectSection(SolutionItems) = preProject
-		build.yml = build.yml
+		azure-pipelines.yml = azure-pipelines.yml
 		CrossPlatformLibrary.Forms.nuspec = CrossPlatformLibrary.Forms.nuspec
 		CrossPlatformLibrary.nuspec = CrossPlatformLibrary.nuspec
 		README.md = README.md
@@ -760,7 +760,7 @@ Global
 		{9E1E031D-D2BF-4D40-B867-D5439D204326} = {82600A24-8220-4C54-9EE6-EFF590F0104F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {FBB7B9FD-D594-483C-8A6F-7A6101F73C5D}
 		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {FBB7B9FD-D594-483C-8A6F-7A6101F73C5D}
 	EndGlobalSection
 EndGlobal

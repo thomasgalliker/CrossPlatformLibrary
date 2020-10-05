@@ -30,19 +30,25 @@ variables:
   nuspecFileForms: 'CrossPlatformLibrary.Forms.nuspec'
 
 steps:
-- task: bleddynrichards.Assembly-Info-Task.Assembly-Info-Task.Assembly-Info-Task@1
-  displayName: 'Set Assembly Manifest Data'
+- task: Assembly-Info-NetCore@2
+  displayName: 'Update Assembly Info'
   inputs:
-    FileNames: |
-     AssemblyInfo.cs
-     CrossPlatformLibrary.csproj
+    Path: '$(Build.SourcesDirectory)'
+    FileNames: '**/*.csproj'
     InsertAttributes: true
+    FileEncoding: 'auto'
+    WriteBOM: false
+    Company: 'superdev gmbh'
+    Copyright: '(c) $(date:YYYY) superdev gmbh'
     Title: 'CrossPlatformLibrary'
     Description: 'An extensible cross-platform toolkit which provides a basic set of functionality used in most mobile apps.'
-    Company: 'superdev GmbH'
-    Copyright: '(c) $(date:yyyy) superdev GmbH'
     VersionNumber: '$(Build.BuildNumber)'
     FileVersionNumber: '$(Build.BuildNumber)'
+    InformationalVersion: '$(Build.BuildNumber)'
+    PackageVersion: '$(Build.BuildNumber)'
+    LogLevel: 'verbose'
+    FailOnWarning: false
+    DisableTelemetry: false'
 
 - task: NuGetToolInstaller@0
   displayName: 'Use NuGet 5.5.1'
