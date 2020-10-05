@@ -5,7 +5,7 @@ using CrossPlatformLibrary.Forms.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(ShapeView), typeof(ShapeViewRenderer))]
+[assembly: ExportRenderer(typeof(CrossPlatformLibrary.Forms.Controls.ShapeView), typeof(ShapeViewRenderer))]
 namespace CrossPlatformLibrary.Forms.Android.Renderers.ShapeView
 {
     public class ShapeViewRenderer : ViewRenderer<Controls.ShapeView, Shape>

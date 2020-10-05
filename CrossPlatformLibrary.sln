@@ -542,6 +542,7 @@ Global
 		{86A26DB7-22AF-4EE8-8004-D61FE582D3B3}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{86A26DB7-22AF-4EE8-8004-D61FE582D3B3}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{86A26DB7-22AF-4EE8-8004-D61FE582D3B3}.Debug|iPhone.Build.0 = Debug|iPhone
+		{86A26DB7-22AF-4EE8-8004-D61FE582D3B3}.Debug|iPhone.Deploy.0 = Debug|iPhone
 		{86A26DB7-22AF-4EE8-8004-D61FE582D3B3}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{86A26DB7-22AF-4EE8-8004-D61FE582D3B3}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{86A26DB7-22AF-4EE8-8004-D61FE582D3B3}.Debug|x64.ActiveCfg = Debug|iPhone
@@ -759,7 +760,7 @@ Global
 		{9E1E031D-D2BF-4D40-B867-D5439D204326} = {82600A24-8220-4C54-9EE6-EFF590F0104F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {FBB7B9FD-D594-483C-8A6F-7A6101F73C5D}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal

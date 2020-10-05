@@ -7,6 +7,7 @@ using CrossPlatformLibrary.Forms.iOS.Renderers.ShapeView;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using ShapeView = CrossPlatformLibrary.Forms.Controls.ShapeView;
 
 [assembly: ExportRenderer(typeof(ShapeView), typeof(ShapeViewRenderer))]
 namespace CrossPlatformLibrary.Forms.iOS.Renderers.ShapeView

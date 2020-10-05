@@ -7,8 +7,8 @@
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     x:Name="Control"
     BackgroundColor="Transparent"
-    VerticalOptions="StartAndExpand"
-    HorizontalOptions="FillAndExpand">
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="StartAndExpand">
 
     <Grid.Resources>
         <ResourceDictionary>
@@ -75,8 +75,8 @@
                             WidthRequest="24" />
 
                         <ActivityIndicator
-                            Grid.Column="1"
                             x:Name="ActivityIndicator"
+                            Grid.Column="1"
                             Margin="0,0,8,0"
                             HorizontalOptions="EndAndExpand"
                             IsRunning="{Binding IsBusy, Mode=OneWay}"
@@ -110,9 +110,9 @@
 
             <controls:DrilldownCellTemplateSelector
                 x:Key="DrilldownCellTemplateSelector"
+                CustomDrilldownCellTemplate="{x:Null}"
                 DrilldownButtonCellTemplate="{StaticResource DrilldownButtonCell}"
-                DrilldownSwitchCellTemplate="{StaticResource DrilldownSwitchCell}"
-                CustomDrilldownCellTemplate="{x:Null}" />
+                DrilldownSwitchCellTemplate="{StaticResource DrilldownSwitchCell}" />
         </ResourceDictionary>
     </Grid.Resources>
 
@@ -121,11 +121,11 @@
         Margin="0"
         ios:ListView.SeparatorStyle="FullWidth"
         BackgroundColor="Transparent"
-        Header="{x:Null}"
         Footer="{x:Null}"
         HasUnevenRows="False"
-        ItemsSource="{Binding ItemsSource, Source={x:Reference Control}, Mode=OneWay}"
+        Header="{x:Null}"
         ItemTemplateSelector="{StaticResource DrilldownCellTemplateSelector}"
+        ItemsSource="{Binding ItemsSource, Source={x:Reference Control}, Mode=OneWay}"
         RowHeight="46"
         SeparatorColor="{DynamicResource ListSeparator}"
         SeparatorVisibility="Default"
