@@ -4,7 +4,7 @@
 # (c)2020 superdev GmbH
 ####################################################################
 
-name: 4.0.$(date:yy)$(DayOfYear).$(rev:rr)
+name: 4.1.$(date:yy)$(DayOfYear).$(rev:rr)
   
 pool:
   vmImage: 'windows-2019'
@@ -30,6 +30,13 @@ variables:
   nuspecFileForms: 'CrossPlatformLibrary.Forms.nuspec'
 
 steps:
+- task: UseDotNet@2
+  displayName: 'Use .NET Core SDK 3.x'
+  inputs:
+    packageType: sdk
+    version: 3.x
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
 - task: Assembly-Info-NetCore@2
   displayName: 'Update Assembly Info'
   inputs:
