@@ -58,9 +58,9 @@ steps:
     DisableTelemetry: false'
 
 - task: NuGetToolInstaller@0
-  displayName: 'Use NuGet 5.5.1'
+  displayName: 'Use NuGet 5.x'
   inputs:
-    versionSpec: 5.5.1
+    versionSpec: 5.x
 
 - task: NuGetCommand@2
   displayName: 'NuGet restore'
@@ -88,7 +88,7 @@ steps:
     command: test
     projects: '**/*.Tests.csproj'
     nobuild: true
-    arguments: '--filter Category!=SystemTest'
+    arguments: '--no-build --filter Category!=SystemTest'
    
 
 - task: NuGetCommand@2
