@@ -20,6 +20,12 @@ namespace CrossPlatformLibrary.Forms.Android.Services
         private Dialog dialog;
         private bool isInitialized;
         private IActivityIndicatorPage activityIndicatorPage;
+        private readonly Func<Activity> resolveCurrentActivity;
+
+        public AndroidActivityIndicatorService(Func<Activity> resolveCurrentActivity)
+        {
+            this.resolveCurrentActivity = resolveCurrentActivity;
+        }
 
         private static DisplayMetrics GetDisplayMetrics(Context context)
         {
@@ -54,7 +60,7 @@ namespace CrossPlatformLibrary.Forms.Android.Services
                 return;
             }
 
-            var context = global::Android.App.Application.Context;
+            var context = resolveCurrentActivity();
             var displayMetrics = GetDisplayMetrics(context);
 
             var contentPage = (ContentPage)this.activityIndicatorPage;
