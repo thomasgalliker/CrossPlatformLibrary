@@ -3,6 +3,8 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using CrossPlatformLibrary.Forms.Android.Renderers;
+using CrossPlatformLibrary.Forms.Android.Services;
+using SampleApp.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -24,7 +26,9 @@ namespace SampleApp.Droid
             // Use custom IFontConverter implementation in order to scale all font sizes
             //global::CrossPlatformLibrary.Forms.CrossPlatformLibrary.SetFontConverter(new SampleApp.Droid.Services.CustomFontSizeConverter());
 
-            this.LoadApplication(new App());
+            var activityIndicatorService = new AndroidActivityIndicatorService(() => Xamarin.Essentials.Platform.CurrentActivity);
+            activityIndicatorService.Init(new SampleActivityIndicatorPage());
+            this.LoadApplication(new App(activityIndicatorService));
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)

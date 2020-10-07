@@ -25,7 +25,11 @@ namespace SampleApp.iOS
             Forms.Init();
             HyperLinkLabelRenderer.Init();
             CrossPlatformLibrary.Forms.iOS.CrossPlatformLibrary.Init();
-            this.LoadApplication(new App());
+
+            var activityIndicatorService = new iOSActivityIndicatorService();
+            activityIndicatorService.Init(new SampleApp.Controls.SampleActivityIndicatorPage());
+
+            this.LoadApplication(new App(activityIndicatorService));
 
             return base.FinishedLaunching(app, options);
         }

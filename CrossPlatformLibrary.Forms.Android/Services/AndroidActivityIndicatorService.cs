@@ -19,10 +19,10 @@ namespace CrossPlatformLibrary.Forms.Android.Services
         private View nativeView;
         private Dialog dialog;
         private bool isInitialized;
-        private IActivityIndicatorPage activityIndicatorPage;
-        private readonly Func<Activity> resolveCurrentActivity;
+        private ContentPage activityIndicatorPage;
+        private readonly Func<Context> resolveCurrentActivity;
 
-        public AndroidActivityIndicatorService(Func<Activity> resolveCurrentActivity)
+        public AndroidActivityIndicatorService(Func<Context> resolveCurrentActivity)
         {
             this.resolveCurrentActivity = resolveCurrentActivity;
         }
@@ -36,15 +36,15 @@ namespace CrossPlatformLibrary.Forms.Android.Services
             return displayMetrics;
         }
 
-        public void Init<T>(T activityIndicatorPage) where T : ContentPage, IActivityIndicatorPage
+        public void Init(ContentPage activityIndicatorPage)
         {
-            var mainPage = Xamarin.Forms.Application.Current.MainPage;
+            this.activityIndicatorPage = activityIndicatorPage ?? throw new ArgumentException(nameof(activityIndicatorPage));
+
+            var mainPage = Xamarin.Forms.Application.Current?.MainPage;
             if (mainPage == null)
             {
                 return;
             }
-
-            this.activityIndicatorPage = activityIndicatorPage ?? throw new ArgumentException(nameof(activityIndicatorPage));
 
             // build the loading page with native base
             activityIndicatorPage.Parent = mainPage;
@@ -54,7 +54,7 @@ namespace CrossPlatformLibrary.Forms.Android.Services
 
         private void RenderPage()
         {
-            var mainPage = Xamarin.Forms.Application.Current.MainPage;
+            var mainPage = Xamarin.Forms.Application.Current?.MainPage;
             if (mainPage == null)
             {
                 return;
@@ -63,7 +63,7 @@ namespace CrossPlatformLibrary.Forms.Android.Services
             var context = resolveCurrentActivity();
             var displayMetrics = GetDisplayMetrics(context);
 
-            var contentPage = (ContentPage)this.activityIndicatorPage;
+            var contentPage = this.activityIndicatorPage;
             contentPage.Layout(new Rectangle(0, 0, mainPage.Width, mainPage.Height));
 
             var renderer = contentPage.GetOrCreateRenderer(context);
@@ -86,7 +86,7 @@ namespace CrossPlatformLibrary.Forms.Android.Services
             // check if the user has set the page or not
             if (!this.isInitialized)
             {
-                this.Init(new CustomActivityIndicatorPage()); // set the default page
+                this.Init(this.activityIndicatorPage ?? new CustomActivityIndicatorPage()); // set the default page
             }
 
             if (this.nativeView == null)
@@ -95,9 +95,9 @@ namespace CrossPlatformLibrary.Forms.Android.Services
             }
 
             // showing the native loading page
-            if (this.activityIndicatorPage != null)
+            if (this.activityIndicatorPage is IActivityIndicatorPage activityIndicatorPage)
             {
-                this.activityIndicatorPage.SetCaption(text);
+                activityIndicatorPage.SetCaption(text);
             }
 
             if (this.dialog != null && !this.dialog.IsShowing)

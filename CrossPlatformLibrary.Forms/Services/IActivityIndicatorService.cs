@@ -5,7 +5,7 @@ namespace CrossPlatformLibrary.Forms.Services
 {
     public interface IActivityIndicatorService
     {
-        void Init<T>(T activityIndicatorPage) where T : ContentPage, IActivityIndicatorPage;
+        void Init(ContentPage activityIndicatorPage);
 
         void ShowLoadingPage(string text);
 

@@ -228,6 +228,9 @@
                                     CommandParameter="PickersPage"
                                     Text="Validatable Pickers" />
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ActivityIndicatorService--&gt;" />
+                                <Button Command="{Binding ShowActivityIndicatorCommand}" Text="ActivityIndicatorService.Show" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo MultiStateToggleButton--&gt;" />
                                 <controls:MultiStateToggleButton>
                                     <controls:MultiStateToggleButton.ItemsSource>

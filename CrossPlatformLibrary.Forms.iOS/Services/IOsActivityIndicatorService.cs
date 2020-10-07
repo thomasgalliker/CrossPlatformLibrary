@@ -11,17 +11,17 @@ namespace CrossPlatformLibrary.Forms.iOS.Services
     {
         private UIView nativeView;
         private bool isInitialized;
-        private IActivityIndicatorPage activityIndicatorPage;
+        private ContentPage activityIndicatorPage;
 
-        public void Init<T>(T activityIndicatorPage) where T : ContentPage, IActivityIndicatorPage
+        public void Init(ContentPage activityIndicatorPage)
         {
-            var mainPage = Xamarin.Forms.Application.Current.MainPage;
+            this.activityIndicatorPage = activityIndicatorPage ?? throw new ArgumentException(nameof(activityIndicatorPage));
+
+            var mainPage = Xamarin.Forms.Application.Current?.MainPage;
             if (mainPage == null)
             {
                 return;
             }
-
-            this.activityIndicatorPage = activityIndicatorPage ?? throw new ArgumentException(nameof(activityIndicatorPage));
 
             // check if the page parameter is available
             // build the loading page with native base
@@ -33,13 +33,13 @@ namespace CrossPlatformLibrary.Forms.iOS.Services
 
         private void RenderPage()
         {
-            var mainPage = Xamarin.Forms.Application.Current.MainPage;
+            var mainPage = Xamarin.Forms.Application.Current?.MainPage;
             if (mainPage == null)
             {
                 return;
             }
 
-            var contentPage = (ContentPage)this.activityIndicatorPage;
+            var contentPage = this.activityIndicatorPage;
             contentPage.Layout(new Rectangle(0, 0, mainPage.Width, mainPage.Height));
 
             var renderer = contentPage.GetOrCreateRenderer();
@@ -52,7 +52,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Services
             // check if the user has set the page or not
             if (!this.isInitialized)
             {
-                this.Init(new CustomActivityIndicatorPage()); // set the default page
+                this.Init(this.activityIndicatorPage ?? new CustomActivityIndicatorPage()); // set the default page
             }
 
             if (this.nativeView == null)
@@ -61,9 +61,9 @@ namespace CrossPlatformLibrary.Forms.iOS.Services
             }
 
             // showing the native loading page
-            if (this.activityIndicatorPage != null)
+            if (this.activityIndicatorPage is IActivityIndicatorPage activityIndicatorPage)
             {
-                this.activityIndicatorPage.SetCaption(text);
+                activityIndicatorPage.SetCaption(text);
             }
 
             if (this.nativeView != null)

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Forms.Mvvm;
+using CrossPlatformLibrary.Forms.Services;
 using CrossPlatformLibrary.Forms.Validation;
 using SampleApp.Model;
 using SampleApp.Services;
@@ -23,6 +24,7 @@ namespace SampleApp.ViewModels
         private readonly ICountryService countryService;
         private readonly IValidationService validationService;
         private readonly IEmailService emailService;
+        private readonly IActivityIndicatorService activityIndicatorService;
         private CountryViewModel country;
         private string notes;
         private string adminEmailAddress;
@@ -46,19 +48,22 @@ namespace SampleApp.ViewModels
         private bool isMultiToggleButtonOn = true;
         private bool isMultiToggleButtonOff;
         private ICommand navigateToPageCommand;
+        private ICommand showActivityIndicatorCommand;
 
         public MainViewModel(
             INavigationService navigationService,
             IDisplayService displayService,
             ICountryService countryService,
             IValidationService validationService,
-            IEmailService emailService)
+            IEmailService emailService,
+            IActivityIndicatorService activityIndicatorService)
         {
             this.navigationService = navigationService;
             this.displayService = displayService;
             this.countryService = countryService;
             this.validationService = validationService;
             this.emailService = emailService;
+            this.activityIndicatorService = activityIndicatorService;
 
             this.ViewModelError = ViewModelError.None;
             this.User = new UserDto();
@@ -171,6 +176,23 @@ namespace SampleApp.ViewModels
             }
 
             await this.navigationService.PushAsync(page);
+        }
+
+
+        public ICommand ShowActivityIndicatorCommand
+        {
+            get
+            {
+                return this.showActivityIndicatorCommand ??
+                       (this.showActivityIndicatorCommand = new Command(async () => await this.OnShowActivityIndicator()));
+            }
+        }
+
+        private async Task OnShowActivityIndicator()
+        {
+            this.activityIndicatorService.ShowLoadingPage("Loading...");
+            await Task.Delay(3000);
+            this.activityIndicatorService.HideLoadingPage();
         }
 
         public ICommand AutoCompleteSearchCommand
@@ -385,10 +407,12 @@ namespace SampleApp.ViewModels
         {
             this.IsBusy = true;
             this.ViewModelError = ViewModelError.None;
-            await Task.Delay(3000);
 
             try
             {
+                this.activityIndicatorService.ShowLoadingPage("Test loading message...");
+                await Task.Delay(3000);
+
                 this.User = new UserDto
                 {
                     Id = 1,
@@ -431,6 +455,10 @@ namespace SampleApp.ViewModels
             catch (Exception ex)
             {
                 this.ViewModelError = new ViewModelError(ex.Message, this.LoadDataButtonCommand);
+            }
+            finally
+            {
+                this.activityIndicatorService.HideLoadingPage();
             }
 
             this.IsBusy = false;
