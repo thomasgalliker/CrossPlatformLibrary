@@ -14,8 +14,8 @@
     </ContentView.Padding>
     <ContentView.Content>
         <StackLayout
-            HorizontalOptions="FillAndExpand"
             Orientation="Vertical"
+            HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand">
 
             <controls:CustomLabel x:Name="Section" Style="{Binding LabelStyle, Source={x:Reference Control}}" />
