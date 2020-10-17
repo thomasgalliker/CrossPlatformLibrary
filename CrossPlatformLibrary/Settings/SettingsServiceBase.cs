@@ -116,16 +116,13 @@ namespace CrossPlatformLibrary.Settings
                 else
                 {
                     var xmlSerializedObject = (string)this.GetValueOrDefaultFunction<string>(key, null);
-                    if (xmlSerializedObject != null)
-                    {
-                        value = this.DeserializeFromString(targetType, xmlSerializedObject);
-                    }
+                    value = this.DeserializeFromString(targetType, xmlSerializedObject);
+                    return (T)value;
                 }
             }
 
             return (T)this.converterRegistry.TryConvert(value, typeof(string), targetType);
         }
-
 
         public void AddOrUpdateValue<T>(string key, T value)
         {
@@ -176,9 +173,9 @@ namespace CrossPlatformLibrary.Settings
         {
             var sourceType = typeof(string);
 
-            if (this.defaultConverter != null)
+            if (this.defaultConverter is IConvertible defaultConverter)
             {
-                var deserializedValue = this.defaultConverter.Convert(serializedValue, sourceType, targetType);
+                var deserializedValue = defaultConverter.Convert(serializedValue, sourceType, targetType);
                 return deserializedValue;
             }
 
@@ -193,10 +190,10 @@ namespace CrossPlatformLibrary.Settings
             var sourceType = typeof(T);
             var targetType = typeof(string);
 
-            if (this.defaultConverter != null)
+            if (this.defaultConverter is IConvertible defaultConverter)
             {
-                var result = this.defaultConverter.Convert(value, sourceType, targetType);
-                if (result is string str)
+                var serializedValue = defaultConverter.Convert(value, sourceType, targetType);
+                if (serializedValue is string str)
                 {
                     return str;
                 }
