@@ -27,7 +27,7 @@ namespace CrossPlatformLibrary.Settings.Internals
 
         public object TryConvert(object value, Type sourceType, Type targetType)
         {
-            if (sourceType == targetType || value.GetType() == targetType)
+            if (sourceType == targetType || (value != null && value.GetType() == targetType))
             {
                 // No need for conversion if source and target types are the same
                 return value;
