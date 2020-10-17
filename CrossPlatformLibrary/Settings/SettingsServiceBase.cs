@@ -115,8 +115,16 @@ namespace CrossPlatformLibrary.Settings
                 }
                 else
                 {
-                    var xmlSerializedObject = (string)this.GetValueOrDefaultFunction<string>(key, null);
-                    value = this.DeserializeFromString(targetType, xmlSerializedObject);
+                    var serializedValue = this.GetValueOrDefaultFunction<string>(key, null);
+                    if (serializedValue is string str && str != null)
+                    {
+                        value = this.DeserializeFromString(targetType, str);
+                    }
+                    else
+                    {
+                        value = default(T);
+                    }
+
                     return (T)value;
                 }
             }
@@ -150,8 +158,8 @@ namespace CrossPlatformLibrary.Settings
                 }
                 else
                 {
-                    string xmlSerializedObject = this.SerializeToString(value);
-                    this.AddOrUpdateValueFunction(key, xmlSerializedObject);
+                    var serializedValue = this.SerializeToString(value);
+                    this.AddOrUpdateValueFunction(key, serializedValue);
                 }
             }
         }

@@ -91,5 +91,39 @@ namespace CrossPlatformLibrary.Tests.Settings.Internals
             // Assert
             outputValue.Should().BeNull();
         }
+
+        [Fact]
+        public void ShouldGetValueOrDefault_Struct_UsingDefaultConverter_ExistingKey()
+        {
+            // Arrange
+            var settingsSerivce = new TestSettingsService(this.tracer);
+            settingsSerivce.RegisterDefaultConverter(new AppSettingsJsonConverter());
+
+            var key = "testKey";
+            var inputValue = TimeSpan.FromSeconds(60);
+
+            // Act
+            settingsSerivce.AddOrUpdateValue(key, inputValue);
+            var outputValue = settingsSerivce.GetValueOrDefault<TimeSpan>(key);
+
+            // Assert
+            outputValue.Should().Be(inputValue);
+        }
+
+        [Fact]
+        public void ShouldGetValueOrDefault_Struct_UsingDefaultConverter_NonExistingKey()
+        {
+            // Arrange
+            var settingsSerivce = new TestSettingsService(this.tracer);
+            settingsSerivce.RegisterDefaultConverter(new AppSettingsJsonConverter());
+
+            var key = "testKey";
+
+            // Act
+            var outputValue = settingsSerivce.GetValueOrDefault<TimeSpan>(key);
+
+            // Assert
+            outputValue.Should().Be(default(TimeSpan));
+        }
     }
 }
