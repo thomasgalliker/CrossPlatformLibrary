@@ -29,7 +29,9 @@ namespace CrossPlatformLibrary.Settings
             this.converterRegistry.RegisterConverter<string, decimal>(new StringToDecimalConverter(), reverse: true);
             this.converterRegistry.RegisterConverter<string, TimeSpan>(new StringToTimeSpanConverter(), reverse: true);
             this.converterRegistry.RegisterConverter<string, DateTime>(new StringToDateTimeConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, DateTime?>(new StringToNullableDateTimeConverter(), reverse: true);
             this.converterRegistry.RegisterConverter<string, DateTimeOffset>(new StringToDateTimeOffsetConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, DateTimeOffset?>(new StringToNullableDateTimeOffsetConverter(), reverse: true);
         }
 
         protected abstract object GetValueOrDefaultFunction<T>(string key, T defaultValue);
