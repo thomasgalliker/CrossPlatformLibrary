@@ -122,7 +122,7 @@ namespace CrossPlatformLibrary.Settings
                     }
                     else
                     {
-                        value = default(T);
+                        value = defaultValue;
                     }
 
                     return (T)value;

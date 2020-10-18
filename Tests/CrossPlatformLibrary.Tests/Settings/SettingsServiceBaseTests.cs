@@ -56,7 +56,7 @@ namespace CrossPlatformLibrary.Tests.Settings.Internals
         }
 
         [Fact]
-        public void ShouldGetValueOrDefault_ComplexObject_UsingDefaultConverter_ExistingKey()
+        public void ShouldGetValueOrDefault_ComplexObject_ExistingKey()
         {
             // Arrange
             var settingsSerivce = new TestSettingsService(this.tracer);
@@ -77,7 +77,7 @@ namespace CrossPlatformLibrary.Tests.Settings.Internals
         }
 
         [Fact]
-        public void ShouldGetValueOrDefault_ComplexObject_UsingDefaultConverter_NonExistingKey()
+        public void ShouldGetValueOrDefault_ComplexObject_NonExistingKey()
         {
             // Arrange
             var settingsSerivce = new TestSettingsService(this.tracer);
@@ -93,7 +93,7 @@ namespace CrossPlatformLibrary.Tests.Settings.Internals
         }
 
         [Fact]
-        public void ShouldGetValueOrDefault_Struct_UsingDefaultConverter_ExistingKey()
+        public void ShouldGetValueOrDefault_Struct_ExistingKey()
         {
             // Arrange
             var settingsSerivce = new TestSettingsService(this.tracer);
@@ -111,7 +111,7 @@ namespace CrossPlatformLibrary.Tests.Settings.Internals
         }
 
         [Fact]
-        public void ShouldGetValueOrDefault_Struct_UsingDefaultConverter_NonExistingKey()
+        public void ShouldGetValueOrDefault_Struct_NonExistingKey()
         {
             // Arrange
             var settingsSerivce = new TestSettingsService(this.tracer);
@@ -124,6 +124,23 @@ namespace CrossPlatformLibrary.Tests.Settings.Internals
 
             // Assert
             outputValue.Should().Be(default(TimeSpan));
+        }
+
+        [Fact]
+        public void ShouldGetValueOrDefault_Enum_NonExistingKey_WithDefaultValue()
+        {
+            // Arrange
+            var settingsSerivce = new TestSettingsService(this.tracer);
+            settingsSerivce.RegisterDefaultConverter(new AppSettingsJsonConverter());
+
+            var key = "testKey";
+            var defaultValue = MassUnit.KiloGrams;
+
+            // Act
+            var outputValue = settingsSerivce.GetValueOrDefault(key, defaultValue);
+
+            // Assert
+            outputValue.Should().Be(defaultValue);
         }
     }
 }
