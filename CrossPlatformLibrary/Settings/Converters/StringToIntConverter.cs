@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using CrossPlatformLibrary.Extensions;
 
 namespace CrossPlatformLibrary.Settings.Converters
@@ -21,9 +22,9 @@ namespace CrossPlatformLibrary.Settings.Converters
     {
         public virtual object Convert(object value, Type sourceType, Type targetType)
         {
-            if (value is string str)
+            if (value is string str && int.TryParse(str, NumberStyles.Any, CultureInfo.InvariantCulture, out var parsed))
             {
-                return int.Parse(str);
+                return parsed;
             }
 
             if (value is int i)

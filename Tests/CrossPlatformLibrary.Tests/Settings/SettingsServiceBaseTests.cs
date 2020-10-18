@@ -19,10 +19,10 @@ namespace CrossPlatformLibrary.Tests.Settings.Internals
         }
 
         [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        [InlineData("test value")]
-        public void ShouldAddOrUpdateValue_Strings(string inputValue)
+        [InlineData(null, null, null)]
+        [InlineData("", null, "")]
+        [InlineData("test", null, "test")]
+        public void ShouldAddOrUpdateValue_String(string inputValue, string defaultValue, string expectedOutputValue)
         {
             // Arrange
             var settingsSerivce = new TestSettingsService(this.tracer);
@@ -30,14 +30,66 @@ namespace CrossPlatformLibrary.Tests.Settings.Internals
 
             // Act
             settingsSerivce.AddOrUpdateValue(key, inputValue);
-            var outputValue = settingsSerivce.GetValueOrDefault<string>(key);
+            var outputValue = settingsSerivce.GetValueOrDefault(key, defaultValue);
 
             // Assert
-            outputValue.Should().Be(inputValue);
+            outputValue.Should().Be(expectedOutputValue);
+        }
+
+        [Theory]
+        [InlineData(0, 0, 0)]
+        [InlineData(1, 0, 1)]
+        public void ShouldAddOrUpdateValue_Int(int inputValue, int defaultValue, int expectedOutputValue)
+        {
+            // Arrange
+            var settingsSerivce = new TestSettingsService(this.tracer);
+            var key = "testKey";
+
+            // Act
+            settingsSerivce.AddOrUpdateValue(key, inputValue);
+            var outputValue = settingsSerivce.GetValueOrDefault(key, defaultValue);
+
+            // Assert
+            outputValue.Should().Be(expectedOutputValue);
+        }
+
+        [Theory]
+        [InlineData(null, null, null)]
+        [InlineData(null, 0, null)]
+        [InlineData(0, 0, 0)]
+        [InlineData(1, 0, 1)]
+        public void ShouldAddOrUpdateValue_NullableInt(int? inputValue, int? defaultValue, int? expectedOutputValue)
+        {
+            // Arrange
+            var settingsSerivce = new TestSettingsService(this.tracer);
+            var key = "testKey";
+
+            // Act
+            settingsSerivce.AddOrUpdateValue(key, inputValue);
+            var outputValue = settingsSerivce.GetValueOrDefault(key, defaultValue);
+
+            // Assert
+            outputValue.Should().Be(expectedOutputValue);
         }
 
         [Fact]
-        public void ShouldAddOrUpdateValue_ComplexObject_ThrowsExceptionIfNoConverterAvailable()
+        public void ShouldGetValueOrDefault_NullableInt_NonExistingKey()
+        {
+            // Arrange
+            var settingsSerivce = new TestSettingsService(this.tracer);
+            settingsSerivce.RegisterDefaultConverter(new AppSettingsJsonConverter());
+
+            var key = "testKey";
+
+            // Act
+            var outputValue = settingsSerivce.GetValueOrDefault<int?>(key);
+
+            // Assert
+            outputValue.Should().BeNull();
+        }
+
+        [Fact]
+        public void ShouldAddOrUpdateValue_ReferenceType_ThrowsExceptionIfNoConverterAvailable()
         {
             // Arrange
             var settingsSerivce = new TestSettingsService(this.tracer);
@@ -56,7 +108,7 @@ namespace CrossPlatformLibrary.Tests.Settings.Internals
         }
 
         [Fact]
-        public void ShouldGetValueOrDefault_ComplexObject_ExistingKey()
+        public void ShouldGetValueOrDefault_ReferenceType_ExistingKey()
         {
             // Arrange
             var settingsSerivce = new TestSettingsService(this.tracer);
@@ -77,7 +129,7 @@ namespace CrossPlatformLibrary.Tests.Settings.Internals
         }
 
         [Fact]
-        public void ShouldGetValueOrDefault_ComplexObject_NonExistingKey()
+        public void ShouldGetValueOrDefault_ReferenceType_NonExistingKey()
         {
             // Arrange
             var settingsSerivce = new TestSettingsService(this.tracer);
@@ -93,7 +145,7 @@ namespace CrossPlatformLibrary.Tests.Settings.Internals
         }
 
         [Fact]
-        public void ShouldGetValueOrDefault_Struct_ExistingKey()
+        public void ShouldGetValueOrDefault_ValueType_ExistingKey()
         {
             // Arrange
             var settingsSerivce = new TestSettingsService(this.tracer);
@@ -111,7 +163,7 @@ namespace CrossPlatformLibrary.Tests.Settings.Internals
         }
 
         [Fact]
-        public void ShouldGetValueOrDefault_Struct_NonExistingKey()
+        public void ShouldGetValueOrDefault_ValueType_NonExistingKey()
         {
             // Arrange
             var settingsSerivce = new TestSettingsService(this.tracer);
