@@ -20,7 +20,8 @@ namespace CrossPlatformLibrary.Settings
             this.tracer = tracer;
             this.converterRegistry = new ConverterRegistry();
             this.converterRegistry.RegisterConverter<string, bool>(new StringToBoolConverter(), reverse: true);
-            this.converterRegistry.RegisterConverter<string, int>(new StringToIntegerConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, int>(new StringToIntConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, int?>(new StringToNullableIntConverter(), reverse: true);
             this.converterRegistry.RegisterConverter<string, Uri>(new StringToUriConverter(), reverse: true);
             this.converterRegistry.RegisterConverter<string, Guid>(new StringToGuidConverter(), reverse: true);
             this.converterRegistry.RegisterConverter<string, float>(new StringToFloatConverter(), reverse: true);
