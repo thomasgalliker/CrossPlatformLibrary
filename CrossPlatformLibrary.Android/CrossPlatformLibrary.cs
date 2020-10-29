@@ -1,7 +1,7 @@
 ﻿using System;
 using Android.App;
 
-namespace CrossPlatformLibrary.Android
+namespace CrossPlatformLibrary
 {
     public static class CrossPlatformLibrary
     {

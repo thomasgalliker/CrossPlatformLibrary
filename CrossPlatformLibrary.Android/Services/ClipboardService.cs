@@ -7,13 +7,13 @@ namespace CrossPlatformLibrary.Services
     {
         public void SetText(string text)
         {
-            var clipboardManager = (ClipboardManager)Android.App.Application.Context.GetSystemService(Context.ClipboardService);
+            var clipboardManager = (ClipboardManager)global::Android.App.Application.Context.GetSystemService(Context.ClipboardService);
             clipboardManager.Text = text;
         }
 
         public string GetText()
         {
-            var clipboardManager = (ClipboardManager)Android.App.Application.Context.GetSystemService(Context.ClipboardService);
+            var clipboardManager = (ClipboardManager)global::Android.App.Application.Context.GetSystemService(Context.ClipboardService);
             return clipboardManager.Text;
         }
     }
