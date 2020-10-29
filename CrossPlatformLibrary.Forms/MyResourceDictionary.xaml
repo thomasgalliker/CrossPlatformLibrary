@@ -104,8 +104,8 @@
     <!--  CustomButton Base Style  -->
     <Style
         x:Key="CustomButtonStyle"
-        TargetType="controls:CustomButton"
-        BasedOn="{StaticResource ButtonStyle}">
+        BasedOn="{StaticResource ButtonStyle}"
+        TargetType="controls:CustomButton">
         <Setter Property="BackgroundColorPressed" Value="{DynamicResource CustomButtonStyle.BackgroundColor.Pressed}" />
         <Setter Property="BorderColor" Value="{DynamicResource CustomButtonStyle.BorderColor.Enabled}" />
         <Setter Property="BorderColorPressed" Value="{DynamicResource CustomButtonStyle.BorderColor.Pressed}" />
@@ -273,8 +273,8 @@
     <!--  CustomActivityIndicator Default Style  -->
     <Style
         x:Key="CustomActivityIndicatorLabelStyle"
-        TargetType="Label"
-        BasedOn="{StaticResource LabelStyle}">
+        BasedOn="{StaticResource LabelStyle}"
+        TargetType="Label">
         <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Title}" />
         <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Title}" />
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Title}" />
@@ -292,13 +292,13 @@
         <Setter Property="Padding" Value="{DynamicResource Theme.Padding.Large}" />
         <Setter Property="LabelStyle" Value="{StaticResource CustomActivityIndicatorLabelStyle}" />
     </Style>
-    <Style TargetType="controls:CustomActivityIndicator" BasedOn="{StaticResource CustomActivityIndicatorStyle}" />
+    <Style BasedOn="{StaticResource CustomActivityIndicatorStyle}" TargetType="controls:CustomActivityIndicator" />
 
     <!--  ViewModelErrorControl Default Style  -->
     <Style
         x:Key="ViewModelErrorControlLabelStyle"
-        TargetType="Label"
-        BasedOn="{StaticResource LabelStyle}">
+        BasedOn="{StaticResource LabelStyle}"
+        TargetType="Label">
         <Setter Property="FontFamily" Value="{DynamicResource Theme.FontFamily.Title}" />
         <Setter Property="FontSize" Value="{DynamicResource Theme.FontSize.Title}" />
         <Setter Property="FontAttributes" Value="{DynamicResource Theme.FontAttributes.Title}" />
@@ -315,7 +315,7 @@
         <Setter Property="Padding" Value="{DynamicResource Theme.Padding.Large}" />
         <Setter Property="LabelStyle" Value="{StaticResource ViewModelErrorControlLabelStyle}" />
     </Style>
-    <Style TargetType="controls:ViewModelErrorControl" BasedOn="{StaticResource ViewModelErrorControlStyle}" />
+    <Style BasedOn="{StaticResource ViewModelErrorControlStyle}" TargetType="controls:ViewModelErrorControl" />
 
     <Style
         x:Key="CustomListItemDetailTextStyle"
@@ -325,9 +325,12 @@
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColorBright}" />
     </Style>
 
-    <!--<Style TargetType="controls:CustomSwitch">
-        <Setter Property="TintColor" Value="{DynamicResource Primary}" />
-    </Style>-->
+    <Style x:Key="SwitchStyle" TargetType="Switch">
+        <Setter Property="ThumbColor" Value="{DynamicResource Theme.Color.Primary}" />
+        <Setter Property="OnColor" Value="{DynamicResource Theme.Color.PrimaryVariant}" />
+    </Style>
+    <Style BasedOn="{StaticResource SwitchStyle}" TargetType="Switch" />
+    <Style BasedOn="{StaticResource SwitchStyle}" TargetType="controls:CustomSwitch" />
 
     <Style x:Key="EditorStyle" TargetType="Editor">
         <Setter Property="TextColor" Value="{DynamicResource Theme.Color.TextColor}" />
@@ -439,8 +442,8 @@
 
     <Style
         x:Key="SectionLabelTextStyle"
-        TargetType="Label"
-        BasedOn="{StaticResource LabelStyle}">
+        BasedOn="{StaticResource LabelStyle}"
+        TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource CardViewStyle.Header.TextColor}" />
         <Setter Property="FontFamily" Value="{DynamicResource CardViewStyle.Header.FontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource CardViewStyle.Header.FontSize}" />
