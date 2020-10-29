@@ -25,9 +25,9 @@ namespace CrossPlatformLibrary.Settings.Converters
 
         public virtual object Convert(object value, Type sourceType, Type targetType)
         {
-            if (value is string str)
+            if (value is string str && DateTimeOffset.TryParseExact(str, Format, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var result))
             {
-                return DateTimeOffset.ParseExact(str, Format, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
+                return result;
             }
 
             if (value is DateTimeOffset dateTimeOffset)
