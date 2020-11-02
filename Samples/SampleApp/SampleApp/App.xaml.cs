@@ -3,6 +3,7 @@ using CrossPlatformLibrary.Forms.Controls;
 using CrossPlatformLibrary.Forms.Localization;
 using CrossPlatformLibrary.Forms.Services;
 using CrossPlatformLibrary.Localization;
+using CrossPlatformLibrary.Services;
 using SampleApp.Resources;
 using SampleApp.Views;
 using Xamarin.Forms;
@@ -16,7 +17,7 @@ namespace SampleApp
     {
         public static readonly TimeSpan SearchCommandDelay = TimeSpan.FromMilliseconds(500);
 
-        public App(IActivityIndicatorService activityIndicatorService)
+        public App(IActivityIndicatorService activityIndicatorService, IStatusBar statusBar)
         {
             // Initialize localization
             ILocalizer localizer = Localizer.Current;
@@ -30,7 +31,7 @@ namespace SampleApp
             // Initialize CrossPlatformLibrary.Forms
             CrossPlatformLibrary.Forms.CrossPlatformLibrary.Init(this, "SampleApp.Theme");
 
-            this.MainPage = new NavigationPage(new MainPage(activityIndicatorService));
+            this.MainPage = new NavigationPage(new MainPage(activityIndicatorService, statusBar));
         }
 
         protected override void OnStart()

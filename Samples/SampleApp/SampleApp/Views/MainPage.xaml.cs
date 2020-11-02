@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using CrossPlatformLibrary.Forms.Extensions;
 using CrossPlatformLibrary.Forms.Services;
+using CrossPlatformLibrary.Services;
 using SampleApp.Services;
 using SampleApp.Validation;
 using SampleApp.ViewModels;
@@ -10,11 +12,12 @@ namespace SampleApp.Views
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage(IActivityIndicatorService activityIndicatorService)
+        public MainPage(IActivityIndicatorService activityIndicatorService, IStatusBar statusBar)
         {
             try
             {
                 this.InitializeComponent();
+                statusBar.SetColor(Color.Magenta);
 
                 var displayService = new DisplayService((t, m) => this.DisplayAlert(t, m, "OK"));
                 var countryService = new CountryServiceMock();

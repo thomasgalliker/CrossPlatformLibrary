@@ -1,5 +1,6 @@
 ﻿using CrossPlatformLibrary.Forms.iOS.Renderers;
 using CrossPlatformLibrary.Forms.iOS.Services;
+using CrossPlatformLibrary.Services;
 using Foundation;
 using UIKit;
 using Xamarin.Forms;
@@ -29,7 +30,9 @@ namespace SampleApp.iOS
             var activityIndicatorService = new iOSActivityIndicatorService();
             activityIndicatorService.Init(new SampleApp.Controls.SampleActivityIndicatorPage());
 
-            this.LoadApplication(new App(activityIndicatorService));
+            var statusBar = new StatusBar();
+
+            this.LoadApplication(new App(activityIndicatorService, statusBar));
 
             return base.FinishedLaunching(app, options);
         }
