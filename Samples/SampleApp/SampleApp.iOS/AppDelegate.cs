@@ -30,7 +30,7 @@ namespace SampleApp.iOS
             var activityIndicatorService = new iOSActivityIndicatorService();
             activityIndicatorService.Init(new SampleApp.Controls.SampleActivityIndicatorPage());
 
-            var statusBar = new StatusBar();
+            var statusBar = new StatusBarService();
 
             this.LoadApplication(new App(activityIndicatorService, statusBar));
 

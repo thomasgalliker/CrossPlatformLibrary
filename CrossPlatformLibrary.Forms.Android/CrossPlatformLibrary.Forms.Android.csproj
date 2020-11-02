@@ -110,6 +110,10 @@
       <Project>{92e8a8df-7f7b-4978-b5cd-8afb0e13cb49}</Project>
       <Name>CrossPlatformLibrary.Forms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CrossPlatformLibrary\CrossPlatformLibrary.csproj">
+      <Project>{a6fcef44-d2ba-42c7-b3cb-13667bcd7b54}</Project>
+      <Name>CrossPlatformLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

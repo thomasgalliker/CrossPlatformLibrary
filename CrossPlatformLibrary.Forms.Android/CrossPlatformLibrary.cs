@@ -1,5 +1,4 @@
-﻿using System;
-using Android.App;
+﻿using CrossPlatformLibrary.Services;
 
 namespace CrossPlatformLibrary.Forms.Android
 {
@@ -11,6 +10,7 @@ namespace CrossPlatformLibrary.Forms.Android
         public static void Init()
         {
             //global::CrossPlatformLibrary.Forms.CrossPlatformLibrary.SetFontConverter(new FontConverter());
+            Xamarin.Forms.DependencyService.Register<IStatusBarService, StatusBarService>();
         }
     }
 }

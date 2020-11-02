@@ -784,6 +784,8 @@ namespace SampleApp.Droid
 			global::CrossPlatformLibrary.Resource.String.abc_shareactionprovider_share_with = global::SampleApp.Droid.Resource.String.abc_shareactionprovider_share_with;
 			global::CrossPlatformLibrary.Resource.String.abc_shareactionprovider_share_with_application = global::SampleApp.Droid.Resource.String.abc_shareactionprovider_share_with_application;
 			global::CrossPlatformLibrary.Resource.String.abc_toolbar_collapse_description = global::SampleApp.Droid.Resource.String.abc_toolbar_collapse_description;
+			global::CrossPlatformLibrary.Resource.String.app_name = global::SampleApp.Droid.Resource.String.app_name;
+			global::CrossPlatformLibrary.Resource.String.hello = global::SampleApp.Droid.Resource.String.hello;
 			global::CrossPlatformLibrary.Resource.String.search_menu_title = global::SampleApp.Droid.Resource.String.search_menu_title;
 			global::CrossPlatformLibrary.Resource.String.status_bar_notification_info_overflow = global::SampleApp.Droid.Resource.String.status_bar_notification_info_overflow;
 			global::CrossPlatformLibrary.Resource.Style.AlertDialog_AppCompat = global::SampleApp.Droid.Resource.Style.AlertDialog_AppCompat;

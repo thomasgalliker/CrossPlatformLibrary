@@ -54,11 +54,12 @@
     <Compile Include="ExceptionHandling\ExceptionHandler.cs" />
     <Compile Include="Extensions\AndroidExtensions.cs" />
     <Compile Include="Extensions\AnimationExtensions.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppHandler.cs" />
     <Compile Include="Services\ClipboardService.cs" />
-    <Compile Include="Services\StatusBar.cs" />
+    <Compile Include="Services\StatusBarService.cs" />
     <Compile Include="Services\ToastService.cs" />
     <Compile Include="Settings\SettingsService.cs" />
     <Compile Include="Tools\AppSignatureHelper.cs" />

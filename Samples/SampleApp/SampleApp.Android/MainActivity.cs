@@ -31,7 +31,7 @@ namespace SampleApp.Droid
             var activityIndicatorService = new AndroidActivityIndicatorService();
             activityIndicatorService.Init(new SampleActivityIndicatorPage());
 
-            var statusBar = new StatusBar();
+            var statusBar = new StatusBarService();
 
             this.LoadApplication(new App(activityIndicatorService, statusBar));
         }

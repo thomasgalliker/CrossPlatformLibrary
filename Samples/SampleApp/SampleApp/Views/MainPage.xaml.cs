@@ -12,9 +12,9 @@ namespace SampleApp.Views
 {
     public partial class MainPage : ContentPage
     {
-        private readonly IStatusBar statusBar;
+        private readonly IStatusBarService statusBar;
 
-        public MainPage(IActivityIndicatorService activityIndicatorService, IStatusBar statusBar)
+        public MainPage(IActivityIndicatorService activityIndicatorService, IStatusBarService statusBar)
         {
             try
             {
@@ -39,7 +39,17 @@ namespace SampleApp.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            statusBar.SetColor(Color.Magenta);
+
+            statusBar.SetColor(Color.DarkBlue);
+            statusBar.SetStatusBarMode(StatusBarMode.Light);
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnAppearing();
+
+            statusBar.SetColor(Color.LightBlue);
+            statusBar.SetStatusBarMode(StatusBarMode.Dark);
         }
 
         private void AutoCompleteView_OnTextChanged(object sender, TextChangedEventArgs e)

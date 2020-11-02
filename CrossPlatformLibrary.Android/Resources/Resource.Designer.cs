@@ -2442,10 +2442,16 @@ namespace CrossPlatformLibrary
 			public static int abc_toolbar_collapse_description = 2131361820;
 			
 			// aapt resource value: 0x7F0A001D
-			public static int search_menu_title = 2131361821;
+			public static int app_name = 2131361821;
 			
 			// aapt resource value: 0x7F0A001E
-			public static int status_bar_notification_info_overflow = 2131361822;
+			public static int hello = 2131361822;
+			
+			// aapt resource value: 0x7F0A001F
+			public static int search_menu_title = 2131361823;
+			
+			// aapt resource value: 0x7F0A0020
+			public static int status_bar_notification_info_overflow = 2131361824;
 			
 			static String()
 			{

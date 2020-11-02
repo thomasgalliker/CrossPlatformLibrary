@@ -40,5 +40,9 @@
       <string>Fonts/Oswald-Medium.ttf</string>
       <string>Fonts/Oswald-Light.ttf</string>
     </array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleDefault</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

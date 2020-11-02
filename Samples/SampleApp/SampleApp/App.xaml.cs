@@ -17,7 +17,7 @@ namespace SampleApp
     {
         public static readonly TimeSpan SearchCommandDelay = TimeSpan.FromMilliseconds(500);
 
-        public App(IActivityIndicatorService activityIndicatorService, IStatusBar statusBar)
+        public App(IActivityIndicatorService activityIndicatorService, IStatusBarService statusBar)
         {
             // Initialize localization
             ILocalizer localizer = Localizer.Current;
