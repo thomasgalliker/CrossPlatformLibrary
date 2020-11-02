@@ -12,12 +12,13 @@ namespace SampleApp.Views
 {
     public partial class MainPage : ContentPage
     {
+        private readonly IStatusBar statusBar;
+
         public MainPage(IActivityIndicatorService activityIndicatorService, IStatusBar statusBar)
         {
             try
             {
                 this.InitializeComponent();
-                statusBar.SetColor(Color.Magenta);
 
                 var displayService = new DisplayService((t, m) => this.DisplayAlert(t, m, "OK"));
                 var countryService = new CountryServiceMock();
@@ -31,6 +32,14 @@ namespace SampleApp.Views
                 Console.WriteLine(e);
                 throw;
             }
+
+            this.statusBar = statusBar;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            statusBar.SetColor(Color.Magenta);
         }
 
         private void AutoCompleteView_OnTextChanged(object sender, TextChangedEventArgs e)
