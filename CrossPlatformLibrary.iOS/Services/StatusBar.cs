@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Foundation;
 using UIKit;
 
@@ -6,6 +7,15 @@ namespace CrossPlatformLibrary.Services
 {
     public class StatusBar : IStatusBar
     {
+        private static readonly Lazy<IStatusBar> Implementation = new Lazy<IStatusBar>(CreateLocalizer, LazyThreadSafetyMode.PublicationOnly);
+
+        public static IStatusBar Current => Implementation.Value;
+
+        private static IStatusBar CreateLocalizer()
+        {
+            return new StatusBar();
+        }
+
         public string GetColor()
         {
             throw new NotImplementedException();

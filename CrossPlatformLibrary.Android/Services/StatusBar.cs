@@ -1,10 +1,21 @@
-﻿using Android.Graphics;
+﻿using System;
+using System.Threading;
+using Android.Graphics;
 using Android.Views;
 
 namespace CrossPlatformLibrary.Services
 {
     public class StatusBar : IStatusBar
     {
+        private static readonly Lazy<IStatusBar> Implementation = new Lazy<IStatusBar>(CreateLocalizer, LazyThreadSafetyMode.PublicationOnly);
+
+        public static IStatusBar Current => Implementation.Value;
+
+        private static IStatusBar CreateLocalizer()
+        {
+            return new StatusBar();
+        }
+
         public string GetColor()
         {
             var window = CrossPlatformLibrary.CurrentActivity.Window;
