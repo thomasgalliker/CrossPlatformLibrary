@@ -4,7 +4,6 @@ using Android.Graphics;
 using Android.OS;
 using Android.Views;
 using CrossPlatformLibrary.Extensions;
-using CrossPlatformLibrary.Services;
 
 namespace CrossPlatformLibrary.Services
 {
@@ -33,14 +32,11 @@ namespace CrossPlatformLibrary.Services
             window.SetStatusBarColor(color);
         }
 
-        public void SetStatusBarMode(StatusBarMode statusBarMode)
+        public void SetStatusBarMode(StatusBarStyle statusBarStyle)
         {
             var window = CrossPlatformLibrary.CurrentActivity.Window;
-            ToggleSystemBarVisibility(window, windowLightStatusBar: statusBarMode == StatusBarMode.Light);
-        }
+            var windowLightStatusBar = statusBarStyle == StatusBarStyle.Light;
 
-        private static void ToggleSystemBarVisibility(Window window, bool windowLightStatusBar)
-        {
             if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
             {
                 var newUiVisibility = (int)window.DecorView.SystemUiVisibility;

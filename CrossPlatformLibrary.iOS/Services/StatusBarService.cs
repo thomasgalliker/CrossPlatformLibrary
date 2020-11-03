@@ -37,15 +37,15 @@ namespace CrossPlatformLibrary.Services
             }
         }
 
-        public void SetStatusBarMode(StatusBarMode statusBarMode)
+        public void SetStatusBarMode(StatusBarStyle statusBarStyle)
         {
-            switch (statusBarMode)
+            switch (statusBarStyle)
             {
-                case StatusBarMode.Light:
-                    UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.LightContent, false);
-                    break;
-                case StatusBarMode.Dark:
+                case StatusBarStyle.Light:
                     UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.DarkContent, false);
+                    break;
+                case StatusBarStyle.Dark:
+                    UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.LightContent, false);
                     break;
             }
         }

@@ -40,16 +40,16 @@ namespace SampleApp.Views
         {
             base.OnAppearing();
 
-            statusBar.SetColor(Color.DarkBlue);
-            statusBar.SetStatusBarMode(StatusBarMode.Light);
+            statusBar.SetColor(Color.Black);
+            statusBar.SetStatusBarMode(StatusBarStyle.Dark);
         }
 
         protected override void OnDisappearing()
         {
             base.OnAppearing();
 
-            statusBar.SetColor(Color.LightBlue);
-            statusBar.SetStatusBarMode(StatusBarMode.Dark);
+            statusBar.SetColor(Color.White);
+            statusBar.SetStatusBarMode(StatusBarStyle.Light);
         }
 
         private void AutoCompleteView_OnTextChanged(object sender, TextChangedEventArgs e)

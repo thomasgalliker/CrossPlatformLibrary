@@ -4,12 +4,19 @@
     {
         void SetHexColor(string hexColor);
 
-        void SetStatusBarMode(StatusBarMode statusBarMode);
+        void SetStatusBarMode(StatusBarStyle statusBarMode);
     }
 
-    public enum StatusBarMode
+    public enum StatusBarStyle
     {
+        /// <summary>
+        /// Status bar style 'Light' for use with bright status bar colors.
+        /// </summary>
         Light,
+
+        /// <summary>
+        /// Status bar style 'Dark' for use with dark status bar colors.
+        /// </summary>
         Dark
     }
 }
