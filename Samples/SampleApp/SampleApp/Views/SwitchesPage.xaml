@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="SampleApp.Views.PickersPage"
+    x:Class="SampleApp.Views.SwitchesPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -15,22 +15,20 @@
             <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
                 <xControls:CardView>
                     <xControls:StackLayoutZero>
-                        <xControls:LabelSection Text="ValidatablePickers" />
+                        <xControls:LabelSection Text="Switch Control" />
                         <xControls:HeaderDivider />
                         <xControls:StackLayoutZero Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
-                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatablePicker with strings--&gt;" />
-                            <xControls:ValidatablePicker
-                                ItemsSource="{Binding StringValues}"
-                                Placeholder="String Values"
-                                SelectedItem="{Binding SelectedString, Mode=TwoWay}" />
-
-                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatablePicker with strings, using DisplayMemberPath and NullString--&gt;" />
-                            <xControls:ValidatablePicker
-                                DisplayMemberPath="Length"
-                                ItemsSource="{Binding StringValues}"
-                                NullString="NEW"
-                                Placeholder="String Values"
-                                SelectedItem="{Binding SelectedString, Mode=TwoWay}" />
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="Switch without any visual states:" />
+                            <Switch
+                                Grid.Column="1"
+                                IsToggled="True"
+                                HorizontalOptions="Start" />
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="Switch with on/off visual states:" />
+                            <Switch
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                IsToggled="True"
+                                HorizontalOptions="Start" />
                         </xControls:StackLayoutZero>
                         <xControls:FooterDivider />
                     </xControls:StackLayoutZero>

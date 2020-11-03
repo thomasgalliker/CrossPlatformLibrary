@@ -60,6 +60,7 @@
                 CardViewHeaderBackgroundColor="{StaticResource LabelSectionBackground}"
                 CardViewHeaderTextColor="#6D6D72"
                 Error="#ff1744"
+                OnPrimary="#c7a4f4"
                 Primary="#5714AF"
                 PrimaryVariant="#c7a4f4"
                 Secondary="#17C2BC"

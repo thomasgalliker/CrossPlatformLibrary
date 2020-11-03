@@ -327,7 +327,25 @@
 
     <Style x:Key="SwitchStyle" TargetType="Switch">
         <Setter Property="ThumbColor" Value="{DynamicResource Theme.Color.Primary}" />
-        <Setter Property="OnColor" Value="{DynamicResource Theme.Color.PrimaryVariant}" />
+        <Setter Property="OnColor" Value="{DynamicResource Theme.Color.OnPrimary}" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <Setter.Value>
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="On">
+                            <VisualState.Setters>
+                                <Setter Property="ThumbColor" Value="{DynamicResource Theme.Color.Primary}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Off">
+                            <VisualState.Setters>
+                                <Setter Property="ThumbColor" Value="{DynamicResource Theme.Color.TextColor}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter.Value>
+        </Setter>
     </Style>
     <Style BasedOn="{StaticResource SwitchStyle}" TargetType="Switch" />
     <Style BasedOn="{StaticResource SwitchStyle}" TargetType="controls:CustomSwitch" />

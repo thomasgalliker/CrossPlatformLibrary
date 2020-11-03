@@ -34,23 +34,23 @@
                             <Label
                                 Grid.Column="0"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 LineBreakMode="CharacterWrap"
                                 Text="{Binding ResourceType}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                             <Label
                                 Grid.Column="1"
                                 BackgroundColor="{Binding Value}"
                                 FontSize="Small"
-                                HorizontalOptions="FillAndExpand"
                                 Text="{Binding Value, Converter={StaticResource ColorToHexStringConverter}}"
                                 TextColor="{Binding Value, Converter={StaticResource ColorInverter}}"
+                                HorizontalOptions="FillAndExpand"
                                 VerticalOptions="Center" />
                             <Label
                                 Grid.Column="2"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 Text="{Binding Key}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                         </Grid>
                     </ViewCell.View>
@@ -69,24 +69,24 @@
                             <Label
                                 Grid.Column="0"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 LineBreakMode="CharacterWrap"
                                 Text="{Binding ResourceType}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                             <Label
                                 Grid.Column="1"
                                 FontAttributes="{Binding Value.FontAttributes}"
                                 FontFamily="{Binding Value.FontFamily}"
                                 FontSize="{Binding Value.FontSize}"
-                                HorizontalOptions="StartAndExpand"
                                 LineBreakMode="WordWrap"
                                 Text="{Binding Value, Converter={StaticResource FontElementToStringConverter}}"
+                                HorizontalOptions="StartAndExpand"
                                 VerticalOptions="CenterAndExpand" />
                             <Label
                                 Grid.Column="2"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 Text="{Binding Key}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                         </Grid>
                     </ViewCell.View>
@@ -105,22 +105,22 @@
                             <Label
                                 Grid.Column="0"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 LineBreakMode="CharacterWrap"
                                 Text="{Binding ResourceType}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                             <Label
                                 Grid.Column="1"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 LineBreakMode="CharacterWrap"
                                 Text="{Binding Value, Converter={StaticResource ThicknessToStringConverter}}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                             <Label
                                 Grid.Column="2"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 Text="{Binding Key}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                         </Grid>
                     </ViewCell.View>
@@ -139,22 +139,22 @@
                             <Label
                                 Grid.Column="0"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 LineBreakMode="CharacterWrap"
                                 Text="{Binding ResourceType}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                             <Label
                                 Grid.Column="1"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 LineBreakMode="CharacterWrap"
                                 Text="{Binding Value}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                             <Label
                                 Grid.Column="2"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 Text="{Binding Key}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                         </Grid>
                     </ViewCell.View>
@@ -173,9 +173,9 @@
     <controls:GradientStackLayout
         EndColor="LightPink"
         GradientOrientation="Vertical"
-        HorizontalOptions="FillAndExpand"
         Orientation="Vertical"
         StartColor="LightGray"
+        HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand">
 
         <controls:GridZero HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -227,6 +227,12 @@
                                     Command="{Binding NavigateToPageCommand}"
                                     CommandParameter="PickersPage"
                                     Text="Validatable Pickers" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: Switches--&gt;" />
+                                <Button
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="SwitchesPage"
+                                    Text="Switches Page" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ActivityIndicatorService--&gt;" />
                                 <Button Command="{Binding ShowActivityIndicatorCommand}" Text="ActivityIndicatorService.Show" />
@@ -280,10 +286,10 @@
                                 <Label Text="Label" />
                                 <controls:CustomLabel Text="CustomLabel" />
                                 <controls:CustomLabel
-                                    HorizontalOptions="Start"
                                     JustifyText="True"
                                     LineBreakMode="WordWrap"
                                     Text="CustomLabel with JustifyText=&quot;True&quot;: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam."
+                                    HorizontalOptions="Start"
                                     VerticalOptions="Start" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableLabel--&gt;" />
@@ -707,9 +713,9 @@
                                 <controls:CustomEditor
                                     Margin="0"
                                     HideKeyboard="True"
-                                    HorizontalOptions="FillAndExpand"
                                     Keyboard="Text"
                                     Text="{Binding LogContent, Mode=OneWay}"
+                                    HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo HyperLinkLabel--&gt;" />
@@ -1082,10 +1088,10 @@
                         </StackLayout>
 
                         <Label
-                            HorizontalOptions="FillAndExpand"
                             IsVisible="{Binding IsBusy, Mode=OneWay}"
                             Style="{StaticResource DemoLabelStyle}"
                             Text="&lt;!--Demo CustomActivityIndicator--&gt;"
+                            HorizontalOptions="FillAndExpand"
                             VerticalOptions="Start" />
                         <controls:CustomActivityIndicator Caption="{localization:Translate LoadingText}" IsVisible="{Binding IsBusy, Mode=OneWay}" />
                     </Grid>

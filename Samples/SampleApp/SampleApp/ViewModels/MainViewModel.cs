@@ -171,6 +171,10 @@ namespace SampleApp.ViewModels
                     page = new PickersPage { BindingContext = new PickersViewModel(this.displayService) };
                     break;
 
+                case nameof(SwitchesPage):
+                    page = new SwitchesPage { BindingContext = null };
+                    break;
+
                 default:
                     throw new NotSupportedException($"Page is not known");
             }
