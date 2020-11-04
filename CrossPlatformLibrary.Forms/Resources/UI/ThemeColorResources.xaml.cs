@@ -70,8 +70,9 @@ namespace CrossPlatformLibrary.Forms.Resources
         {
             this.TryAddColorResource(ThemeConstants.Color.TextColor, colorConfiguration.TextColor);
             this.TryAddColorResource(ThemeConstants.Color.TextColorBright, colorConfiguration.TextColorBright);
-            this.TryAddColorResource(ThemeConstants.Color.PRIMARY, colorConfiguration.Primary);
-            this.TryAddColorResource(ThemeConstants.Color.PRIMARY_VARIANT, colorConfiguration.PrimaryVariant);
+            this.TryAddColorResource(ThemeConstants.Color.Primary, colorConfiguration.Primary);
+            this.TryAddColorResource(ThemeConstants.Color.PrimaryVariant, colorConfiguration.PrimaryVariant);
+            this.TryAddColorResource(ThemeConstants.Color.PrimaryDisabled, colorConfiguration.PrimaryDisabled);
             this.TryAddColorResource(ThemeConstants.Color.ON_PRIMARY, colorConfiguration.OnPrimary);
             this.TryAddColorResource(ThemeConstants.Color.SECONDARY, colorConfiguration.Secondary);
             this.TryAddColorResource(ThemeConstants.Color.SECONDARY_VARIANT, colorConfiguration.SecondaryVariant);

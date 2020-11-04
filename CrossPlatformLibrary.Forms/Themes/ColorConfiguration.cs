@@ -156,6 +156,13 @@ namespace CrossPlatformLibrary.Forms.Themes
                 typeof(Color),
                 typeof(Color),
                 Color.FromHex("#6200EE"));
+        
+        public static readonly BindableProperty PrimaryDisabledProperty =
+            BindableProperty.Create(
+                nameof(PrimaryDisabled),
+                typeof(Color),
+                typeof(Color),
+                Color.DarkGray);
 
         public static readonly BindableProperty SecondaryProperty =
             BindableProperty.Create(
@@ -218,6 +225,12 @@ namespace CrossPlatformLibrary.Forms.Themes
         {
             get => (Color)this.GetValue(PrimaryVariantProperty);
             set => this.SetValue(PrimaryVariantProperty, value);
+        }
+        
+        public Color PrimaryDisabled
+        {
+            get => (Color)this.GetValue(PrimaryDisabledProperty);
+            set => this.SetValue(PrimaryDisabledProperty, value);
         }
 
         /// <summary>

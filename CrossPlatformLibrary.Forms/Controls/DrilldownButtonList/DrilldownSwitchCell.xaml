@@ -4,7 +4,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
-    xmlns:behaviors="clr-namespace:CrossPlatformLibrary.Forms.Behaviors"
     x:Name="Control"
     SelectedBackgroundColor="{DynamicResource DrilldownButton.BackgroundColor.Pressed}">
 
@@ -23,10 +22,10 @@
                 CornerRadius="0"
                 FontAttributes="None"
                 FontSize="{DynamicResource LargeSize}"
-                HorizontalOptions="FillAndExpand"
                 IsEnabled="{Binding IsEnabled, Mode=OneWay}"
                 Style="{DynamicResource DrilldownButtonStyle}"
                 Text="{Binding Title, Mode=OneWay}"
+                HorizontalOptions="FillAndExpand"
                 VerticalOptions="StartAndExpand">
 
                 <controls:CustomButton.Margin>
@@ -43,26 +42,49 @@
                 </controls:CustomButton.Padding>
             </controls:CustomButton>
 
-            <controls:CustomSwitch
+            <Switch
                 HeightRequest="24"
-                HorizontalOptions="EndAndExpand"
-                IsToggled="{Binding IsToggled, Mode=TwoWay}"
                 IsEnabled="{Binding IsEnabled, Mode=OneWay}"
-                TintColor="{DynamicResource Theme.Color.TextColor}"
+                IsToggled="{Binding IsToggled, Mode=TwoWay}"
+                HorizontalOptions="EndAndExpand"
                 VerticalOptions="CenterAndExpand">
-                <!--<controls:CustomSwitch.Behaviors>
+                <!--<Switch.Behaviors>
                     <behaviors:EventToCommandBehavior
                         EventName="Toggled"
                         Command="{Binding Command, Mode=OneWay}"
                         CommandParameter="{Binding CommandParameter, Mode=OneWay}" />
-                </controls:CustomSwitch.Behaviors>-->
-                <controls:CustomSwitch.Margin>
-                    <OnPlatform x:TypeArguments="Thickness">
-                        <On Platform="Android" Value="0, 0, 8, 0" />
-                        <On Platform="iOS" Value="0, -4, 8, 0" />
-                    </OnPlatform>
-                </controls:CustomSwitch.Margin>
-            </controls:CustomSwitch>
+                </Switch.Behaviors>-->
+
+                <!--
+                    Switch inside DrilldownSwitchCell uses a custom style
+                    in order to perfectly align with Theme.Color.TextColor
+                -->
+                <Switch.Style>
+                    <Style TargetType="Switch">
+                        <Setter Property="Margin" Value="{OnPlatform Android='0, 0, 8, 0', iOS='0, -4, 8, 0'}" />
+                        <Setter Property="VisualStateManager.VisualStateGroups">
+                            <Setter.Value>
+                                <VisualStateGroupList>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="OnColor" Value="{OnPlatform iOS={DynamicResource Theme.Color.TextColor}}" />
+                                                <Setter Property="ThumbColor" Value="{OnPlatform Android={DynamicResource Theme.Color.TextColor}}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <VisualState.Setters>
+                                                <Setter Property="OnColor" Value="{OnPlatform iOS={DynamicResource Theme.Color.PrimaryDisabled}}" />
+                                                <Setter Property="ThumbColor" Value="{OnPlatform Android={DynamicResource Theme.Color.PrimaryDisabled}}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateGroupList>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Switch.Style>
+            </Switch>
 
             <Grid.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding Command, Mode=OneWay}" CommandParameter="{Binding CommandParameter, Mode=OneWay}" />

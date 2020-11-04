@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
+    x:Class="SampleApp.Views.DrilldownButtonListPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:xControls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
-    mc:Ignorable="d"
-    x:Class="SampleApp.Views.DrilldownButtonListPage"
+    xmlns:xControls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    Title="Drilldown Buttons"
     BackgroundColor="{DynamicResource WindowBackgroundTable}"
-    Title="Drilldown Buttons">
+    mc:Ignorable="d">
 
     <xControls:AlwaysScrollView>
         <xControls:GridZero>
@@ -51,9 +51,9 @@
                                         IsEnabled="True"
                                         IsToggled="{Binding IsToggled, Mode=TwoWay}" />
                                     <xControls:DrilldownSwitchView
-                                        Title="Lorem ipsum dolor sit a b c d e f g h i j k l m o"
+                                        Title="Disabled DrilldownSwitchView: Lorem ipsum dolor sit a b c d e f g h i j k l m o"
                                         Command="{Binding ToggleSwitchCommand}"
-                                        IsEnabled="True"
+                                        IsEnabled="False"
                                         IsToggled="{Binding IsToggled, Mode=TwoWay}" />
                                 </objectModel:ObservableCollection>
                             </xControls:DrilldownButtonList.ItemsSource>
@@ -76,8 +76,8 @@
 
                             <xControls:StackLayoutZero BackgroundColor="Green">
                                 <Label
-                                    BackgroundColor="Magenta"
                                     Grid.Row="0"
+                                    BackgroundColor="Magenta"
                                     LineBreakMode="WordWrap"
                                     Text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam." />
                             </xControls:StackLayoutZero>
@@ -86,13 +86,13 @@
 
                         <xControls:DividerLine />
 
-                        <xControls:DrilldownButtonList ItemsSource="{Binding DrilldownItems, Mode=OneWay}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
+                        <xControls:DrilldownButtonList BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}" ItemsSource="{Binding DrilldownItems, Mode=OneWay}">
                             <xControls:DrilldownButtonList.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
                                         <xControls:StackLayoutZero>
                                             <Label Text="Custom ItemTemplate" TextColor="LightBlue" />
-                                            <Label Text="{Binding Title}" BackgroundColor="LightBlue" />
+                                            <Label BackgroundColor="LightBlue" Text="{Binding Title}" />
                                         </xControls:StackLayoutZero>
                                     </ViewCell>
                                 </DataTemplate>

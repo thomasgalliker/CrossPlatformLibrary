@@ -326,20 +326,20 @@
     </Style>
 
     <Style x:Key="SwitchStyle" TargetType="Switch">
-        <Setter Property="ThumbColor" Value="{DynamicResource Theme.Color.Primary}" />
-        <Setter Property="OnColor" Value="{DynamicResource Theme.Color.OnPrimary}" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <Setter.Value>
                 <VisualStateGroupList>
                     <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="On">
+                        <VisualState x:Name="Normal">
                             <VisualState.Setters>
-                                <Setter Property="ThumbColor" Value="{DynamicResource Theme.Color.Primary}" />
+                                <Setter Property="OnColor" Value="{OnPlatform iOS={DynamicResource Theme.Color.Primary}}" />
+                                <Setter Property="ThumbColor" Value="{OnPlatform Android={DynamicResource Theme.Color.Primary}}" />
                             </VisualState.Setters>
                         </VisualState>
-                        <VisualState x:Name="Off">
+                        <VisualState x:Name="Disabled">
                             <VisualState.Setters>
-                                <Setter Property="ThumbColor" Value="{DynamicResource Theme.Color.TextColor}" />
+                                <Setter Property="OnColor" Value="{OnPlatform iOS={DynamicResource Theme.Color.PrimaryDisabled}}" />
+                                <Setter Property="ThumbColor" Value="{OnPlatform Android={DynamicResource Theme.Color.PrimaryDisabled}}" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>

@@ -66,6 +66,11 @@ namespace CrossPlatformLibrary.Forms.Themes
         Color PrimaryVariant { get; set; }
 
         /// <summary>
+        ///     Disabled color of <seealso cref="Primary"/>.
+        /// </summary>
+        Color PrimaryDisabled { get; set; }
+
+        /// <summary>
         ///     Accents select parts of your UI.
         ///     If not provided, use <see cref="Primary" />.
         /// </summary>

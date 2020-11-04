@@ -6,7 +6,7 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:xControls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
-    Title="Drilldown Buttons"
+    Title="Pickers Page"
     BackgroundColor="{DynamicResource WindowBackgroundTable}"
     mc:Ignorable="d">
 
