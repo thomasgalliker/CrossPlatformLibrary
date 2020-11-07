@@ -16,7 +16,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             // Hack: OnPlatform lacks of support for DynamicResource bindings!
             if (Device.RuntimePlatform == Device.Android)
             {
-                this.ActivityIndicator.SetDynamicResource(ActivityIndicator.ColorProperty, ThemeConstants.Color.SECONDARY);
+                this.ActivityIndicator.SetDynamicResource(ActivityIndicator.ColorProperty, ThemeConstants.Color.Secondary);
             }
         }
 

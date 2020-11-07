@@ -12,7 +12,6 @@
 
     <Grid.Resources>
         <ResourceDictionary>
-
             <ControlTemplate x:Key="DrilldownControlTemplate">
                 <controls:GridZero>
                     <Grid.ColumnDefinitions>
@@ -28,10 +27,10 @@
                         CornerRadius="0"
                         FontAttributes="None"
                         FontSize="{DynamicResource LargeSize}"
-                        HorizontalOptions="FillAndExpand"
                         IsEnabled="{Binding IsEnabled, Mode=OneWay}"
                         Style="{DynamicResource DrilldownButtonStyle}"
-                        Text="{Binding ., Mode=OneWay, Converter={StaticResource DebugConverter}}"
+                        Text="{Binding ., Mode=OneWay}"
+                        HorizontalOptions="FillAndExpand"
                         VerticalOptions="StartAndExpand">
 
                         <controls:CustomButton.Margin>
@@ -68,28 +67,27 @@
                             Grid.Column="1"
                             Margin="0,0,8,0"
                             HeightRequest="24"
-                            HorizontalOptions="EndAndExpand"
                             IsVisible="{Binding IsBusy, Mode=OneWay, Converter={StaticResource BoolInverter}}"
                             Source="{Binding ImageSource, Mode=OneWay}"
-                            VerticalOptions="CenterAndExpand"
-                            WidthRequest="24" />
+                            WidthRequest="24"
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="CenterAndExpand" />
 
                         <ActivityIndicator
                             x:Name="ActivityIndicator"
                             Grid.Column="1"
                             Margin="0,0,8,0"
-                            HorizontalOptions="EndAndExpand"
                             IsRunning="{Binding IsBusy, Mode=OneWay}"
                             IsVisible="{Binding IsBusy, Mode=OneWay}"
-                            VerticalOptions="CenterAndExpand"
-                            WidthRequest="24" />
+                            WidthRequest="24"
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="CenterAndExpand" />
                     </controls:GridZero>
 
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding Command, Mode=OneWay}" CommandParameter="{Binding CommandParameter, Mode=OneWay}" />
                     </Grid.GestureRecognizers>
                 </controls:GridZero>
-
             </ControlTemplate>
 
             <DataTemplate x:Key="CustomDrilldownTemplate">
