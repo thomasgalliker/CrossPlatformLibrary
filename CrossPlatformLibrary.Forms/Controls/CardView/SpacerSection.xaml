@@ -5,9 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     BackgroundColor="Transparent">
     <ContentView.HeightRequest>
-        <OnPlatform x:TypeArguments="x:Double">
-            <On Platform="Android" Value="0" />
+        <OnPlatform x:TypeArguments="x:Double" Default="0">
             <On Platform="iOS" Value="16" />
         </OnPlatform>
     </ContentView.HeightRequest>
+    <ContentView.IsVisible>
+        <OnPlatform x:TypeArguments="x:Boolean" Default="False">
+            <On Platform="iOS" Value="True" />
+        </OnPlatform>
+    </ContentView.IsVisible>
 </ContentView>
