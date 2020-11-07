@@ -6,7 +6,7 @@
     BackgroundColor="Transparent">
     <ContentView.HeightRequest>
         <OnPlatform x:TypeArguments="x:Double">
-            <On Platform="Android" Value="8" />
+            <On Platform="Android" Value="0" />
             <On Platform="iOS" Value="16" />
         </OnPlatform>
     </ContentView.HeightRequest>
