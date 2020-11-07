@@ -112,7 +112,6 @@
         <Setter Property="BorderWidth" Value="2" />
         <Setter Property="CornerRadius" Value="20" />
     </Style>
-
     <Style BasedOn="{StaticResource CustomButtonStyle}" TargetType="controls:CustomButton" />
 
     <!--  CustomButton Primary Style  -->

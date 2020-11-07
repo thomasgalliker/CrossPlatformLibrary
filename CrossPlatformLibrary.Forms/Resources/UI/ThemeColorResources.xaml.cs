@@ -30,18 +30,18 @@ namespace CrossPlatformLibrary.Forms.Resources
 
             this[ThemeConstants.CustomButtonPrimaryStyle.TextColor] = colorConfiguration.OnPrimary;
             this[ThemeConstants.CustomButtonPrimaryStyle.BorderColorEnabled] = colorConfiguration.Primary;
-            this[ThemeConstants.CustomButtonPrimaryStyle.BorderColorDisabled] = colorConfiguration.PrimaryVariant;
+            this[ThemeConstants.CustomButtonPrimaryStyle.BorderColorDisabled] = colorConfiguration.PrimaryDisabled;
             this[ThemeConstants.CustomButtonPrimaryStyle.BorderColorPressed] = colorConfiguration.Primary;
             this[ThemeConstants.CustomButtonPrimaryStyle.BackgroundColorEnabled] = colorConfiguration.Primary;
-            this[ThemeConstants.CustomButtonPrimaryStyle.BackgroundColorDisabled] = colorConfiguration.PrimaryVariant;
+            this[ThemeConstants.CustomButtonPrimaryStyle.BackgroundColorDisabled] = colorConfiguration.PrimaryDisabled;
             this[ThemeConstants.CustomButtonPrimaryStyle.BackgroundColorPressed] = colorConfiguration.PrimaryVariant;
 
             this[ThemeConstants.CustomButtonSecondaryStyle.TextColor] = colorConfiguration.Secondary;
             this[ThemeConstants.CustomButtonSecondaryStyle.BorderColorEnabled] = colorConfiguration.Secondary;
-            this[ThemeConstants.CustomButtonSecondaryStyle.BorderColorDisabled] = colorConfiguration.SecondaryVariant;
+            this[ThemeConstants.CustomButtonSecondaryStyle.BorderColorDisabled] = colorConfiguration.SecondaryDisabled;
             this[ThemeConstants.CustomButtonSecondaryStyle.BorderColorPressed] = colorConfiguration.Secondary;
             this[ThemeConstants.CustomButtonSecondaryStyle.BackgroundColorEnabled] = colorConfiguration.OnSecondary;
-            this[ThemeConstants.CustomButtonSecondaryStyle.BackgroundColorDisabled] = colorConfiguration.SecondaryVariant;
+            this[ThemeConstants.CustomButtonSecondaryStyle.BackgroundColorDisabled] = colorConfiguration.SecondaryDisabled;
             this[ThemeConstants.CustomButtonSecondaryStyle.BackgroundColorPressed] = colorConfiguration.SecondaryVariant;
         }
 
@@ -73,10 +73,11 @@ namespace CrossPlatformLibrary.Forms.Resources
             this.TryAddColorResource(ThemeConstants.Color.Primary, colorConfiguration.Primary);
             this.TryAddColorResource(ThemeConstants.Color.PrimaryVariant, colorConfiguration.PrimaryVariant);
             this.TryAddColorResource(ThemeConstants.Color.PrimaryDisabled, colorConfiguration.PrimaryDisabled);
-            this.TryAddColorResource(ThemeConstants.Color.ON_PRIMARY, colorConfiguration.OnPrimary);
-            this.TryAddColorResource(ThemeConstants.Color.SECONDARY, colorConfiguration.Secondary);
-            this.TryAddColorResource(ThemeConstants.Color.SECONDARY_VARIANT, colorConfiguration.SecondaryVariant);
-            this.TryAddColorResource(ThemeConstants.Color.ON_SECONDARY, colorConfiguration.OnSecondary);
+            this.TryAddColorResource(ThemeConstants.Color.OnPrimary, colorConfiguration.OnPrimary);
+            this.TryAddColorResource(ThemeConstants.Color.Secondary, colorConfiguration.Secondary);
+            this.TryAddColorResource(ThemeConstants.Color.SecondaryVariant, colorConfiguration.SecondaryVariant);
+            this.TryAddColorResource(ThemeConstants.Color.SecondaryDisabled, colorConfiguration.SecondaryDisabled);
+            this.TryAddColorResource(ThemeConstants.Color.OnSecondary, colorConfiguration.OnSecondary);
             this.TryAddColorResource(ThemeConstants.Color.BACKGROUND, colorConfiguration.Background);
             this.TryAddColorResource(ThemeConstants.Color.ON_BACKGROUND, colorConfiguration.OnBackground);
             this.TryAddColorResource(ThemeConstants.Color.SURFACE, colorConfiguration.Surface);

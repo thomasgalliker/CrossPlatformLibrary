@@ -82,6 +82,11 @@ namespace CrossPlatformLibrary.Forms.Themes
         Color SecondaryVariant { get; set; }
 
         /// <summary>
+        ///     Disabled color of <seealso cref="Secondary"/>.
+        /// </summary>
+        Color SecondaryDisabled { get; set; }
+
+        /// <summary>
         ///     The color of surfaces such as cards, sheets, menus.
         /// </summary>
         Color Surface { get; set; }
