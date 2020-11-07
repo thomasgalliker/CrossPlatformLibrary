@@ -74,6 +74,9 @@
     <Compile Update="Controls\CardView\FooterSection.xaml.cs">
       <DependentUpon>FooterSection.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Controls\CardView\SpacerSection.xaml.cs">
+      <DependentUpon>SpacerSection.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Controls\DrilldownButtonList\DrilldownSwitchCell.xaml.cs">
       <DependentUpon>DrilldownSwitchCell.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,9 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Controls\CardView\FooterSection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\CardView\SpacerSection.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\DrilldownButtonList\DrilldownSwitchCell.xaml">

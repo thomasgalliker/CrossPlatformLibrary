@@ -22,10 +22,16 @@
                     ImageSource="{xControls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
                     Text="{localization:Translate SingleButtonText}" />
 
-                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo DrilldownButtonList with static ItemsSource--&gt;" />
-                <xControls:CardView Padding="0,0,0,16">
+                <xControls:SpacerSection />
+
+                <xControls:DrilldownButton
+                    Command="{Binding MailNavigateCommand}"
+                    ImageSource="{xControls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
+                    Text="{localization:Translate SingleButtonText}" />
+
+                <xControls:CardView>
                     <xControls:StackLayoutZero>
-                        <xControls:LabelSection Text="{localization:Translate ListOfSettingsSectionText}" />
+                        <xControls:LabelSection Text="&lt;!--Demo DrilldownButtonList with static ItemsSource--&gt;" />
                         <xControls:HeaderDivider />
                         <xControls:DrilldownButtonList BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
                             <xControls:DrilldownButtonList.ItemsSource>
@@ -63,10 +69,9 @@
                     </xControls:StackLayoutZero>
                 </xControls:CardView>
 
-                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo DrilldownButtonList with dynamic ItemsSource--&gt;" />
-                <xControls:CardView Padding="0,0,0,16">
+                <xControls:CardView>
                     <xControls:StackLayoutZero>
-                        <xControls:LabelSection Text="{localization:Translate ListOfSettingsSectionText}" />
+                        <xControls:LabelSection Text="&lt;!--Demo DrilldownButtonList with dynamic ItemsSource--&gt;" />
                         <xControls:HeaderDivider />
 
                         <xControls:GridZero Padding="{DynamicResource Theme.Padding.CardViewPadding}" RowSpacing="{DynamicResource Theme.Spacing.Small}">
@@ -101,7 +106,7 @@
                     </xControls:StackLayoutZero>
                 </xControls:CardView>
 
-                <xControls:CardView Padding="0,0,0,16">
+                <xControls:CardView>
                     <xControls:StackLayoutZero>
                         <xControls:LabelSection Text="{localization:Translate AboutSectionText}" />
                         <xControls:HeaderDivider />
