@@ -141,6 +141,20 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(EntryStyleProperty, value);
         }
 
+        public static readonly BindableProperty ReturnTypeProperty =
+            BindableProperty.Create(
+                nameof(ReturnType),
+                typeof(ReturnType),
+                typeof(ValidatableEntry),
+                default(ReturnType),
+                BindingMode.OneWay);
+
+        public ReturnType ReturnType
+        {
+            get => (ReturnType)this.GetValue(ReturnTypeProperty);
+            set => this.SetValue(ReturnTypeProperty, value);
+        }
+
         public static readonly BindableProperty MaxLengthProperty =
             BindableProperty.Create(
                 nameof(MaxLength),
