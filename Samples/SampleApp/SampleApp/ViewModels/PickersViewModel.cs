@@ -8,8 +8,11 @@ namespace SampleApp.ViewModels
     {
         private readonly IDisplayService displayService;
         private string selectedString;
+        private ObservableCollection<CountryViewModel> countries;
+        private CountryViewModel country;
+        private bool isReadonly;
 
-        public PickersViewModel(IDisplayService displayService)
+        public PickersViewModel(IDisplayService displayService, ObservableCollection<CountryViewModel> countries)
         {
             this.displayService = displayService;
 
@@ -19,6 +22,8 @@ namespace SampleApp.ViewModels
                 "String 1",
                 "String 10"
             };
+
+            this.Countries = countries;
         }
 
         public ObservableCollection<string> StringValues { get; set; }
@@ -28,11 +33,29 @@ namespace SampleApp.ViewModels
             get => this.selectedString;
             set
             {
-                if(this.SetProperty(ref this.selectedString, value))
+                if (this.SetProperty(ref this.selectedString, value))
                 {
                     this.displayService.DisplayAlert("SelectedString", $"value={value}");
                 }
             }
+        }
+
+        public ObservableCollection<CountryViewModel> Countries
+        {
+            get => this.countries;
+            private set => this.SetProperty(ref this.countries, value, nameof(this.Countries));
+        }
+
+        public CountryViewModel Country
+        {
+            get => this.country;
+            set => this.SetProperty(ref this.country, value);
+        }
+
+        public bool IsReadonly
+        {
+            get => this.isReadonly;
+            set => this.SetProperty(ref this.isReadonly, value, nameof(this.IsReadonly));
         }
     }
 }

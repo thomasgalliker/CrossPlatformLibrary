@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:xControls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     Title="Pickers Page"
@@ -31,6 +32,29 @@
                                 NullString="NEW"
                                 Placeholder="String Values"
                                 SelectedItem="{Binding SelectedString, Mode=TwoWay}" />
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatablePicker with CountryViewModels--&gt;" />
+                            <xControls:ValidatablePicker
+                                DisplayMemberPath="Name"
+                                IsReadonly="{Binding IsReadonly, Mode=OneWay}"
+                                ItemsSource="{Binding Countries}"
+                                NullString="&lt;Default Country&gt;"
+                                Placeholder="ValidatablePicker by Country.Name"
+                                ReadonlyText="ReadonlyText"
+                                SelectedItem="{Binding Country, Mode=TwoWay}"
+                                ValidationErrors="{Binding Validation.Errors[Country]}" />
+
+                            <xControls:ValidatablePicker
+                                DisplayMemberPath="Name"
+                                IsReadonly="{Binding IsReadonly, Mode=OneWay}"
+                                ItemsSource="{Binding Countries, Mode=OneWay}"
+                                Placeholder="{localization:Translate PatentOptionLabelText}"
+                                ReadonlyText="ReadonlyText"
+                                SelectedItem="{Binding Country, Mode=TwoWay}"
+                                SelectedValuePath="Id" />
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Toggle IsReadonly--&gt;" />
+                            <Switch IsToggled="{Binding IsReadonly, Mode=TwoWay}" />
                         </xControls:StackLayoutZero>
                         <xControls:FooterDivider />
                     </xControls:StackLayoutZero>

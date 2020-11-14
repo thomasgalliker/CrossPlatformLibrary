@@ -38,7 +38,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             get
             {
-                if (this.Date != null)
+                if (this.Date != null || this.IsReadonly)
                 {
                     return this.Placeholder;
                 }
@@ -123,7 +123,14 @@ namespace CrossPlatformLibrary.Forms.Controls
                 typeof(bool),
                 typeof(ValidatableDateTimePicker),
                 false,
-                BindingMode.OneWay);
+                BindingMode.OneWay,
+                propertyChanged: OnIsReadonlyPropertyChanged);
+
+        private static void OnIsReadonlyPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var picker = (ValidatableDateTimePicker)bindable;
+            picker.OnPropertyChanged(nameof(picker.AnnotationText));
+        }
 
         public bool IsReadonly
         {

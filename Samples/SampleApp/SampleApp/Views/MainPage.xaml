@@ -553,6 +553,9 @@
                                     NullableDate="{Binding Birthdate, Mode=TwoWay}"
                                     Placeholder="ExtendedDatePicker with Birthdate" />
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Toggle IsReadonly--&gt;" />
+                                <Switch IsToggled="{Binding IsReadonly, Mode=TwoWay}" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableDatePicker--&gt;" />
                                 <controls:ValidatableDatePicker
                                     Date="{Binding Birthdate, Mode=TwoWay}"
@@ -566,6 +569,13 @@
                                     IsReadonly="True"
                                     Placeholder="ValidatableDatePicker IsReadonly=&quot;True&quot;"
                                     ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
+                                    ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
+
+                                <controls:ValidatableDatePicker
+                                    Date="{x:Null}"
+                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
+                                    Placeholder="ValidatableDatePicker Date=&quot;null&quot;"
+                                    ReadonlyText="ReadonlyText"
                                     ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
 
                                 <controls:ValidatableDatePicker
@@ -615,6 +625,12 @@
                                     Placeholder="Birthdate with ValidatableDateTimePicker"
                                     ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
                                     ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
+                                <controls:ValidatableDateTimePicker
+                                    Date="{x:Null}"
+                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
+                                    Placeholder="ValidatableDateTimePicker with Date=&quot;null&quot;"
+                                    ReadonlyText="ReadonlyText"
+                                    ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
 
                                 <controls:AlwaysScrollView Orientation="Horizontal">
                                     <controls:GridZero>
@@ -628,12 +644,14 @@
                                         <controls:ValidatableDateTimePicker
                                             BackgroundColor="Aquamarine"
                                             Date="{x:Null}"
+                                            IsReadonly="{Binding IsReadonly, Mode=OneWay}"
                                             Placeholder="ValidatableDateTimePicker"
                                             Time="{x:Null}" />
                                         <controls:ValidatableEntry
                                             Grid.Row="0"
                                             Grid.Column="1"
                                             BackgroundColor="LightGoldenrodYellow"
+                                            IsReadonly="{Binding IsReadonly, Mode=OneWay}"
                                             Placeholder="ValidatableEntry"
                                             Text="" />
                                     </controls:GridZero>

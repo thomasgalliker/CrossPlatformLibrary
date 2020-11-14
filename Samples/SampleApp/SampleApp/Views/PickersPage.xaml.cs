@@ -9,7 +9,7 @@ namespace SampleApp.Views
     {
         public PickersPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

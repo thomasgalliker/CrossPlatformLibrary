@@ -168,7 +168,7 @@ namespace SampleApp.ViewModels
                     break;
                     
                 case nameof(PickersPage):
-                    page = new PickersPage { BindingContext = new PickersViewModel(this.displayService) };
+                    page = new PickersPage { BindingContext = new PickersViewModel(this.displayService, this.Countries) };
                     break;
 
                 case nameof(SwitchesPage):
