@@ -6,9 +6,9 @@
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
+    IsClippedToBounds="True"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="StartAndExpand"
-    IsClippedToBounds="True">
+    VerticalOptions="StartAndExpand">
 
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
@@ -30,11 +30,9 @@
         <controls:BindablePicker
             x:Name="Picker"
             Title="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
-            x:FieldModifier="internal"
             effects:LineColorEffect.ApplyLineColor="True"
             effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
-            VerticalOptions="StartAndExpand"
-            HorizontalOptions="FillAndExpand"
+            x:FieldModifier="internal"
             DisplayMemberPath="{Binding DisplayMemberPath, Source={x:Reference Control}}"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
             ItemsSource="{Binding ItemsSource, Source={x:Reference Control}}"
@@ -43,7 +41,9 @@
             SelectedItem="{Binding SelectedItem, Source={x:Reference Control}, Mode=TwoWay}"
             SelectedValue="{Binding SelectedValue, Source={x:Reference Control}, Mode=TwoWay}"
             SelectedValuePath="{Binding SelectedValuePath, Source={x:Reference Control}}"
-            Style="{Binding PickerStyle, Source={x:Reference Control}, Mode=OneWay}">
+            Style="{Binding PickerStyle, Source={x:Reference Control}, Mode=OneWay}"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="StartAndExpand">
             <Picker.Margin>
                 <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="Android" Value="-4,-10,-4,-6" />
@@ -58,8 +58,8 @@
             Margin="0"
             x:FieldModifier="internal"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
-            Style="{DynamicResource EntryLabelStyle}"
             RemovePadding="True"
+            Style="{DynamicResource EntryLabelStyle}"
             Text="{Binding ReadonlyText, Source={x:Reference Control}, Mode=OneWay}" />
     </controls:GridZero>
 
@@ -67,7 +67,7 @@
     <controls:CustomLabel
         x:Name="ErrorLabel"
         Grid.Row="2"
-        Style="{DynamicResource ValidationLabelStyle}"
         IsVisible="{Binding Text, Source={x:Reference ErrorLabel}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
+        Style="{DynamicResource ValidationLabelStyle}"
         Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}" />
 </controls:GridZero>

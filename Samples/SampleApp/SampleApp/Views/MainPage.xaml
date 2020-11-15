@@ -434,6 +434,7 @@
                                         Grid.Column="0"
                                         IsReadonly="{Binding IsReadonly}"
                                         Placeholder="ValidatableEntry"
+                                        ReturnType="Next"
                                         Text="{Binding UserName, Mode=TwoWay}"
                                         TrailingIcon="{controls:ImageResource SampleApp.Resources.Images.rectangle_magenta_192.png}"
                                         TrailingIconCommand="{Binding CalloutCommand}"
@@ -441,12 +442,18 @@
                                         ValidationErrors="{Binding Validation.Errors[UserName]}">
                                         <controls:ValidatableEntry.Behaviors>
                                             <behaviors:MaxLengthTextBehavior MaxLength="{Binding UserNameMaxLength}" />
+                                            <behaviors:EntryFocusBehavior TargetElementName="ValidatableEntryTest1" />
                                         </controls:ValidatableEntry.Behaviors>
                                     </controls:ValidatableEntry>
                                     <Entry
                                         Grid.Column="1"
                                         Placeholder="Xamarin.Forms.Entry"
-                                        Text="{Binding UserName, Mode=TwoWay}" />
+                                        ReturnType="Go"
+                                        Text="{Binding UserName, Mode=TwoWay}">
+                                        <Entry.Behaviors>
+                                            <behaviors:EntryFocusBehavior TargetElement="{x:Reference UserNameEntry}" />
+                                        </Entry.Behaviors>
+                                    </Entry>
                                 </Grid>
                                 <controls:ValidatableEntry
                                     x:Name="ValidatableEntryTest1"

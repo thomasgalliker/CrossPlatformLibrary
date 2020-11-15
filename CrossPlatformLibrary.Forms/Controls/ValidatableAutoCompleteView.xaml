@@ -6,8 +6,8 @@
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
-    HorizontalOptions="FillAndExpand"
     IsClippedToBounds="True"
+    HorizontalOptions="FillAndExpand"
     VerticalOptions="StartAndExpand">
 
     <Grid.RowDefinitions>
@@ -34,14 +34,14 @@
             effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
             x:FieldModifier="internal"
             Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
-            HorizontalOptions="FillAndExpand"
-            HorizontalTextAlignment="Start"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
             Keyboard="{Binding Keyboard, Source={x:Reference Control}, Mode=OneWay}"
             MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
             Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
             Style="{Binding EntryStyle, Source={x:Reference Control}, Mode=OneWay}"
             Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}"
+            HorizontalOptions="FillAndExpand"
+            HorizontalTextAlignment="Start"
             VerticalOptions="StartAndExpand">
             <Entry.Effects>
                 <effects:EntrySelectAllText />

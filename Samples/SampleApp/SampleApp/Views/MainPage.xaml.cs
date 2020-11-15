@@ -30,7 +30,7 @@ namespace SampleApp.Views
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                 throw;
             }
 
             this.statusBar = statusBar;
