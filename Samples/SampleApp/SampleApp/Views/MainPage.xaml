@@ -204,6 +204,22 @@
                         <StackLayout IsVisible="{Binding IsNotBusy}">
                             <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: TintImageEffect--&gt;" />
+                                <Image
+                                    effects:TintImageEffect.TintColor="{Binding IsReadonly, Converter={StaticResource BoolToBlackAndWhiteConverter}}"
+                                    Aspect="AspectFit"
+                                    HeightRequest="100"
+                                    Source="{controls:ImageResource SampleApp.Resources.Images.rectangle_magenta_192.png}"
+                                    WidthRequest="100">
+
+                                    <Image.Effects>
+                                        <effects:TintImageEffect />
+                                    </Image.Effects>
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ToggleSwitchCommand}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: SegmentedStatusIndicator--&gt;" />
                                 <Button
                                     Command="{Binding NavigateToPageCommand}"

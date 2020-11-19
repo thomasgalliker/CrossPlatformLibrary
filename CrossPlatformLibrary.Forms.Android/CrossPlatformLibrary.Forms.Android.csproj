@@ -64,6 +64,7 @@
     <Compile Include="Effects\LongPressEffect.cs" />
     <Compile Include="Effects\PickerLineColorEffect.cs" />
     <Compile Include="Effects\TimePickerLineColorEffect.cs" />
+    <Compile Include="Effects\TintImageEffect.cs" />
     <Compile Include="Effects\UnderlineTextEffect.cs" />
     <Compile Include="Extensions\AlignmentExtensions.cs" />
     <Compile Include="Extensions\VisualElementExtensions.cs" />

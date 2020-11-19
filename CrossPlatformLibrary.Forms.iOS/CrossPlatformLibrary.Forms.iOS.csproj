@@ -58,6 +58,7 @@
     <Compile Include="Effects\SafeAreaPaddingEffect.cs" />
     <Compile Include="Effects\SafeAreaTopPaddingEffect.cs" />
     <Compile Include="Effects\TimePickerLineColorEffect.cs" />
+    <Compile Include="Effects\TintImageEffect.cs" />
     <Compile Include="Effects\UnderlineTextEffect.cs" />
     <Compile Include="Extensions\TextAlignmentExtensions.cs" />
     <Compile Include="Extensions\LineBreakModeExtensions.cs" />

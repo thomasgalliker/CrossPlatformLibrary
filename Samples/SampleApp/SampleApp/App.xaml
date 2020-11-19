@@ -22,6 +22,10 @@
             <valueConverters:StringIsNotNullOrEmptyConverter x:Key="StringIsNotNullOrEmptyConverter" />
             <valueConverters:DateTimeConverter x:Key="DateTimeConverter" Format="g" />
             <valueConverters:DateTimeConverter x:Key="ShortDateConverter" Format="d" />
+            <valueConverters:BoolToColorConverter
+                x:Key="BoolToBlackAndWhiteConverter"
+                FalseValue="White"
+                TrueValue="Black" />
 
             <!--  Colors  -->
             <Color x:Key="Primary">#ff70fc</Color>
