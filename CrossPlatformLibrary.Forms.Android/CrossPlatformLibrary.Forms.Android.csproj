@@ -16,7 +16,7 @@
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,7 +37,7 @@
     <DocumentationFile>bin\Release\CrossPlatformLibrary.Forms.Android.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" version="4.2.0.848062" />
+    <PackageReference Include="Xamarin.Forms" version="4.7.0.1179" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.3" />
@@ -64,6 +64,7 @@
     <Compile Include="Effects\LongPressEffect.cs" />
     <Compile Include="Effects\PickerLineColorEffect.cs" />
     <Compile Include="Effects\TimePickerLineColorEffect.cs" />
+    <Compile Include="Effects\TintImageEffect.cs" />
     <Compile Include="Effects\UnderlineTextEffect.cs" />
     <Compile Include="Extensions\AlignmentExtensions.cs" />
     <Compile Include="Extensions\VisualElementExtensions.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Renderers\ShapeView\Shape.cs" />
     <Compile Include="Renderers\ShapeView\ShapeViewRenderer.cs" />
     <Compile Include="Renderers\TimePickerRenderer.cs" />
+    <Compile Include="Services\AndroidActivityIndicatorService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -99,7 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
-    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CrossPlatformLibrary.Android\CrossPlatformLibrary.Android.csproj">
@@ -109,6 +110,10 @@
     <ProjectReference Include="..\CrossPlatformLibrary.Forms\CrossPlatformLibrary.Forms.csproj">
       <Project>{92e8a8df-7f7b-4978-b5cd-8afb0e13cb49}</Project>
       <Name>CrossPlatformLibrary.Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CrossPlatformLibrary\CrossPlatformLibrary.csproj">
+      <Project>{a6fcef44-d2ba-42c7-b3cb-13667bcd7b54}</Project>
+      <Name>CrossPlatformLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

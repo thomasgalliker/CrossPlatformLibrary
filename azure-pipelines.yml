@@ -1,10 +1,10 @@
-####################################################################
+##################################################################
 # VSTS Build Configuration, Version 1.3
 #
-# (c)2018 superdev GmbH
+# (c)2020 superdev GmbH
 ####################################################################
 
-name: 4.0.$(date:yy)$(DayOfYear).$(rev:rr)
+name: 4.1.$(date:yy)$(DayOfYear).$(rev:rr)
   
 pool:
   vmImage: 'windows-2019'
@@ -30,24 +30,37 @@ variables:
   nuspecFileForms: 'CrossPlatformLibrary.Forms.nuspec'
 
 steps:
-- task: bleddynrichards.Assembly-Info-Task.Assembly-Info-Task.Assembly-Info-Task@1
-  displayName: 'Set Assembly Manifest Data'
+- task: UseDotNet@2
+  displayName: 'Use .NET Core SDK 3.x'
   inputs:
-    FileNames: |
-     AssemblyInfo.cs
-     CrossPlatformLibrary.csproj
+    packageType: sdk
+    version: 3.x
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- task: Assembly-Info-NetCore@2
+  displayName: 'Update Assembly Info'
+  inputs:
+    Path: '$(Build.SourcesDirectory)'
+    FileNames: '**/*.csproj'
     InsertAttributes: true
+    FileEncoding: 'auto'
+    WriteBOM: false
+    Company: 'superdev gmbh'
+    Copyright: '(c) $(date:YYYY) superdev gmbh'
     Title: 'CrossPlatformLibrary'
     Description: 'An extensible cross-platform toolkit which provides a basic set of functionality used in most mobile apps.'
-    Company: 'superdev GmbH'
-    Copyright: '(c) $(date:yyyy) superdev GmbH'
     VersionNumber: '$(Build.BuildNumber)'
     FileVersionNumber: '$(Build.BuildNumber)'
+    InformationalVersion: '$(Build.BuildNumber)'
+    PackageVersion: '$(Build.BuildNumber)'
+    LogLevel: 'verbose'
+    FailOnWarning: false
+    DisableTelemetry: false'
 
 - task: NuGetToolInstaller@0
-  displayName: 'Use NuGet 4.4.1'
+  displayName: 'Use NuGet 5.x'
   inputs:
-    versionSpec: 4.4.1
+    versionSpec: 5.x
 
 - task: NuGetCommand@2
   displayName: 'NuGet restore'
@@ -75,8 +88,7 @@ steps:
     command: test
     projects: '**/*.Tests.csproj'
     nobuild: true
-    arguments: '--filter Category!=SystemTest'
-   
+    arguments: '--no-build --configuration $(buildConfiguration) --filter Category!=SystemTest'
 
 - task: NuGetCommand@2
   displayName: 'Pack NuGet $(nuspecFile) PreRelease'

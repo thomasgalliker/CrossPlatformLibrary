@@ -66,10 +66,10 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             this.RegisterEvent(this.EventName);
         }
 
-        protected override void OnDetachingFrom(View bindable)
+        protected override void OnDetachingFrom(Xamarin.Forms.View bindable)
         {
-            base.OnDetachingFrom(bindable);
             this.DeregisterEvent(this.EventName);
+            base.OnDetachingFrom(bindable);
         }
 
         private void RegisterEvent(string name)

@@ -12,13 +12,12 @@
             <On Platform="iOS" Value="16, 16, 16, 4" />
         </OnPlatform>
     </ContentView.Padding>
-    <ContentView.Content>
-        <StackLayout
-            HorizontalOptions="FillAndExpand"
-            Orientation="Vertical"
-            VerticalOptions="FillAndExpand">
 
-            <controls:CustomLabel x:Name="Section" Style="{Binding LabelStyle, Source={x:Reference Control}}" />
-        </StackLayout>
-    </ContentView.Content>
+    <StackLayout
+        Orientation="Vertical"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+
+        <controls:CustomLabel x:Name="Section" Style="{Binding LabelStyle, Source={x:Reference Control}}" />
+    </StackLayout>
 </ContentView>

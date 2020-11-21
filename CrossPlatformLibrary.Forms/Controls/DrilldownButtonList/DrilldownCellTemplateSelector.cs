@@ -7,20 +7,22 @@ namespace CrossPlatformLibrary.Forms.Controls
         public DataTemplate DrilldownButtonCellTemplate { get; set; }
 
         public DataTemplate DrilldownSwitchCellTemplate { get; set; }
+        
+        public DataTemplate CustomDrilldownCellTemplate { get; set; }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            if (item is DrilldownButtonView)
+            if (item is IDrilldownButtonView)
             {
                 return this.DrilldownButtonCellTemplate;
             }
 
-            if (item is DrilldownSwitchView)
+            if (item is IDrilldownSwitchView)
             {
                 return this.DrilldownSwitchCellTemplate;
             }
 
-            return null;
+            return this.CustomDrilldownCellTemplate;
         }
     }
 }

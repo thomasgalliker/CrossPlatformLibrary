@@ -20,7 +20,8 @@ namespace CrossPlatformLibrary.Settings
             this.tracer = tracer;
             this.converterRegistry = new ConverterRegistry();
             this.converterRegistry.RegisterConverter<string, bool>(new StringToBoolConverter(), reverse: true);
-            this.converterRegistry.RegisterConverter<string, int>(new StringToIntegerConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, int>(new StringToIntConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, int?>(new StringToNullableIntConverter(), reverse: true);
             this.converterRegistry.RegisterConverter<string, Uri>(new StringToUriConverter(), reverse: true);
             this.converterRegistry.RegisterConverter<string, Guid>(new StringToGuidConverter(), reverse: true);
             this.converterRegistry.RegisterConverter<string, float>(new StringToFloatConverter(), reverse: true);
@@ -28,7 +29,9 @@ namespace CrossPlatformLibrary.Settings
             this.converterRegistry.RegisterConverter<string, decimal>(new StringToDecimalConverter(), reverse: true);
             this.converterRegistry.RegisterConverter<string, TimeSpan>(new StringToTimeSpanConverter(), reverse: true);
             this.converterRegistry.RegisterConverter<string, DateTime>(new StringToDateTimeConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, DateTime?>(new StringToNullableDateTimeConverter(), reverse: true);
             this.converterRegistry.RegisterConverter<string, DateTimeOffset>(new StringToDateTimeOffsetConverter(), reverse: true);
+            this.converterRegistry.RegisterConverter<string, DateTimeOffset?>(new StringToNullableDateTimeOffsetConverter(), reverse: true);
         }
 
         protected abstract object GetValueOrDefaultFunction<T>(string key, T defaultValue);
@@ -115,17 +118,22 @@ namespace CrossPlatformLibrary.Settings
                 }
                 else
                 {
-                    var xmlSerializedObject = (string)this.GetValueOrDefaultFunction<string>(key, null);
-                    if (xmlSerializedObject != null)
+                    var serializedValue = this.GetValueOrDefaultFunction<string>(key, null);
+                    if (serializedValue is string str && str != null)
                     {
-                        value = this.DeserializeFromString(targetType, xmlSerializedObject);
+                        value = this.DeserializeFromString(targetType, str);
                     }
+                    else
+                    {
+                        value = defaultValue;
+                    }
+
+                    return (T)value;
                 }
             }
 
             return (T)this.converterRegistry.TryConvert(value, typeof(string), targetType);
         }
-
 
         public void AddOrUpdateValue<T>(string key, T value)
         {
@@ -153,8 +161,8 @@ namespace CrossPlatformLibrary.Settings
                 }
                 else
                 {
-                    string xmlSerializedObject = this.SerializeToString(value);
-                    this.AddOrUpdateValueFunction(key, xmlSerializedObject);
+                    var serializedValue = this.SerializeToString(value);
+                    this.AddOrUpdateValueFunction(key, serializedValue);
                 }
             }
         }
@@ -176,9 +184,9 @@ namespace CrossPlatformLibrary.Settings
         {
             var sourceType = typeof(string);
 
-            if (this.defaultConverter != null)
+            if (this.defaultConverter is IConvertible defaultConverter)
             {
-                var deserializedValue = this.defaultConverter.Convert(serializedValue, sourceType, targetType);
+                var deserializedValue = defaultConverter.Convert(serializedValue, sourceType, targetType);
                 return deserializedValue;
             }
 
@@ -193,10 +201,10 @@ namespace CrossPlatformLibrary.Settings
             var sourceType = typeof(T);
             var targetType = typeof(string);
 
-            if (this.defaultConverter != null)
+            if (this.defaultConverter is IConvertible defaultConverter)
             {
-                var result = this.defaultConverter.Convert(value, sourceType, targetType);
-                if (result is string str)
+                var serializedValue = defaultConverter.Convert(value, sourceType, targetType);
+                if (serializedValue is string str)
                 {
                     return str;
                 }

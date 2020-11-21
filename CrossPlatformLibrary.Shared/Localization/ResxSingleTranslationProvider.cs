@@ -1,30 +1,33 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Globalization;
+using System.Reflection;
 using System.Resources;
+using System.Threading;
+using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Localization
 {
+    [Preserve(AllMembers = true)]
     public class ResxSingleTranslationProvider : ITranslationProvider
     {
-        private ResourceManager resourceManager;
-        private static ResxSingleTranslationProvider instance;
+        static readonly Lazy<ResxSingleTranslationProvider> Implementation = new Lazy<ResxSingleTranslationProvider>(CreateTranslationProvider, LazyThreadSafetyMode.PublicationOnly);
 
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ResxSingleTranslationProvider" /> class.
-        /// </summary>
-     public static ResxSingleTranslationProvider Instance
+        public static ResxSingleTranslationProvider Current => Implementation.Value;
+
+        private static ResxSingleTranslationProvider CreateTranslationProvider()
         {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new ResxSingleTranslationProvider();
-                }
-                return instance;
-            }
+            return new ResxSingleTranslationProvider();
         }
+
+        private ResourceManager resourceManager;
 
         public void Init(string baseName, Assembly assembly)
         {
+            if (this.resourceManager != null)
+            {
+                throw new InvalidOperationException($"ResxSingleTranslationProvider can only be initialized once.");
+            }
+
             this.resourceManager = new ResourceManager(baseName, assembly);
         }
 
@@ -34,11 +37,11 @@ namespace CrossPlatformLibrary.Localization
         }
 
         /// <summary>
-        ///     See <see cref="ITranslationProvider.Translate" />
+        ///     See <see cref="ITranslationProvider.Translate(string, CultureInfo)" />
         /// </summary>
-        public string Translate(string key)
+        public string Translate(string key, CultureInfo cultureInfo = null)
         {
-            var translatedValue = this.resourceManager.GetString(key);
+            var translatedValue = this.resourceManager.GetString(key, cultureInfo);
             if (translatedValue != null)
             {
                 return translatedValue;

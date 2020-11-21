@@ -66,6 +66,11 @@ namespace CrossPlatformLibrary.Forms.Themes
         Color PrimaryVariant { get; set; }
 
         /// <summary>
+        ///     Disabled color of <seealso cref="Primary"/>.
+        /// </summary>
+        Color PrimaryDisabled { get; set; }
+
+        /// <summary>
         ///     Accents select parts of your UI.
         ///     If not provided, use <see cref="Primary" />.
         /// </summary>
@@ -75,6 +80,11 @@ namespace CrossPlatformLibrary.Forms.Themes
         ///     A tonal variation of <see cref="Secondary" />.
         /// </summary>
         Color SecondaryVariant { get; set; }
+
+        /// <summary>
+        ///     Disabled color of <seealso cref="Secondary"/>.
+        /// </summary>
+        Color SecondaryDisabled { get; set; }
 
         /// <summary>
         ///     The color of surfaces such as cards, sheets, menus.

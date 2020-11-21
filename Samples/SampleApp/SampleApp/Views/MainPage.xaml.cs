@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using CrossPlatformLibrary.Forms.Extensions;
+using CrossPlatformLibrary.Forms.Services;
+using CrossPlatformLibrary.Services;
 using SampleApp.Services;
 using SampleApp.Validation;
 using SampleApp.ViewModels;
@@ -9,7 +12,9 @@ namespace SampleApp.Views
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        private readonly IStatusBarService statusBar;
+
+        public MainPage(IActivityIndicatorService activityIndicatorService, IStatusBarService statusBar)
         {
             try
             {
@@ -20,13 +25,31 @@ namespace SampleApp.Views
                 var validationService = new ValidationService();
                 var emailService = new EmailService();
                 var navigationService = new NavigationService(this);
-                this.BindingContext = new MainViewModel(navigationService, displayService, countryService, validationService, emailService);
+                this.BindingContext = new MainViewModel(navigationService, displayService, countryService, validationService, emailService, activityIndicatorService);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                 throw;
             }
+
+            this.statusBar = statusBar;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            statusBar.SetColor(Color.Black);
+            statusBar.SetStatusBarMode(StatusBarStyle.Dark);
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnAppearing();
+
+            statusBar.SetColor(Color.White);
+            statusBar.SetStatusBarMode(StatusBarStyle.Light);
         }
 
         private void AutoCompleteView_OnTextChanged(object sender, TextChangedEventArgs e)

@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossPlatformLibrary.iOS", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6A8FDA6-FCF8-4934-9875-1B19255DDF2E}"
 	ProjectSection(SolutionItems) = preProject
-		build.yml = build.yml
+		azure-pipelines.yml = azure-pipelines.yml
 		CrossPlatformLibrary.Forms.nuspec = CrossPlatformLibrary.Forms.nuspec
 		CrossPlatformLibrary.nuspec = CrossPlatformLibrary.nuspec
 		README.md = README.md
@@ -49,6 +49,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{651016a2-9700-4f09-a9da-8d4563ac0c7b}*SharedItemsImports = 4
 		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{9061e23b-3329-4ccf-8d69-61faa11bb380}*SharedItemsImports = 13
+		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{a6fcef44-d2ba-42c7-b3cb-13667bcd7b54}*SharedItemsImports = 5
 		CrossPlatformLibrary.Shared\CrossPlatformLibrary.Shared.projitems*{ac987deb-1a08-40bf-b996-360c7fdaebdc}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -541,6 +542,7 @@ Global
 		{86A26DB7-22AF-4EE8-8004-D61FE582D3B3}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{86A26DB7-22AF-4EE8-8004-D61FE582D3B3}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{86A26DB7-22AF-4EE8-8004-D61FE582D3B3}.Debug|iPhone.Build.0 = Debug|iPhone
+		{86A26DB7-22AF-4EE8-8004-D61FE582D3B3}.Debug|iPhone.Deploy.0 = Debug|iPhone
 		{86A26DB7-22AF-4EE8-8004-D61FE582D3B3}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{86A26DB7-22AF-4EE8-8004-D61FE582D3B3}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{86A26DB7-22AF-4EE8-8004-D61FE582D3B3}.Debug|x64.ActiveCfg = Debug|iPhone
@@ -758,7 +760,7 @@ Global
 		{9E1E031D-D2BF-4D40-B867-D5439D204326} = {82600A24-8220-4C54-9EE6-EFF590F0104F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {FBB7B9FD-D594-483C-8A6F-7A6101F73C5D}
 		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {FBB7B9FD-D594-483C-8A6F-7A6101F73C5D}
 	EndGlobalSection
 EndGlobal

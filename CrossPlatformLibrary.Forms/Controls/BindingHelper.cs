@@ -13,6 +13,11 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         internal static object GetDisplayMember(object item, string displayMemberPath)
         {
+            if (item == null)
+            {
+                return null;
+            }
+
             var type = item.GetType();
             var prop = type.GetRuntimeProperty(displayMemberPath);
             if (prop == null)
@@ -35,6 +40,11 @@ namespace CrossPlatformLibrary.Forms.Controls
             if (template is DataTemplateSelector selector)
             {
                 template = selector.SelectTemplate(item, container);
+            }
+
+            if (template == null)
+            {
+                throw new ArgumentNullException(nameof(template), $"ItemTemplate must not be null");
             }
 
             var content = template.CreateContent();

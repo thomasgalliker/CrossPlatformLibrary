@@ -3,6 +3,9 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using CrossPlatformLibrary.Forms.Android.Renderers;
+using CrossPlatformLibrary.Forms.Android.Services;
+using CrossPlatformLibrary.Services;
+using SampleApp.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -18,13 +21,19 @@ namespace SampleApp.Droid
 
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            CrossPlatformLibrary.CrossPlatformLibrary.SetCurrentActivityResolver(() => Xamarin.Essentials.Platform.CurrentActivity);
             HyperLinkLabelRenderer.Init();
             Forms.Init(this, savedInstanceState);
 
             // Use custom IFontConverter implementation in order to scale all font sizes
             //global::CrossPlatformLibrary.Forms.CrossPlatformLibrary.SetFontConverter(new SampleApp.Droid.Services.CustomFontSizeConverter());
 
-            this.LoadApplication(new App());
+            var activityIndicatorService = new AndroidActivityIndicatorService();
+            activityIndicatorService.Init(new SampleActivityIndicatorPage());
+
+            var statusBar = new StatusBarService();
+
+            this.LoadApplication(new App(activityIndicatorService, statusBar));
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)

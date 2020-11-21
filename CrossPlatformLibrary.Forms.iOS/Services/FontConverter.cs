@@ -28,10 +28,16 @@ namespace CrossPlatformLibrary.Forms.iOS.Services
 
         public double GetScaledFontSize(double fontSize)
         {
-            var scaledFontSize = UIFontMetrics.DefaultMetrics.GetScaledValue((nfloat)fontSize);
+            var scaledFontSize = fontSize;
+
+            if (UIDevice.CurrentDevice.CheckSystemVersion(11, 0))
+            {
+                scaledFontSize = UIFontMetrics.DefaultMetrics.GetScaledValue((nfloat)fontSize);
 #if DEBUG
-            Debug.WriteLine($"GetScaledFontSize: {fontSize} -> {scaledFontSize} (scale factor: {(scaledFontSize / fontSize):F2}x)");
+                Debug.WriteLine($"GetScaledFontSize: {fontSize} -> {scaledFontSize} (scale factor: {(scaledFontSize / fontSize):F2}x)");
 #endif
+            }
+
             return scaledFontSize;
         }
 

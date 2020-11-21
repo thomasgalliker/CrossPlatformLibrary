@@ -64,11 +64,18 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
                 .WithDelay(TimeSpan.FromMilliseconds(1000));
 
             // Act
-            var errorsTask1 = delegateValidation.GetErrors();
-            var errorsTask2 = delegateValidation.GetErrors();
-
+            var errorsTask1 = Task.Run(async () =>
+            {
+                await Task.Delay(50);
+                return await delegateValidation.GetErrors();
+            });
+            var errorsTask2 = Task.Run(async () =>
+            {
+                await Task.Delay(100);
+                return await delegateValidation.GetErrors();
+            });
+      
             var errors1 = await errorsTask1;
-            await Task.Delay(200);
             var errors2 = await errorsTask2;
 
             // Assert
@@ -98,11 +105,18 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
                 .WithDelay(TimeSpan.FromMilliseconds(1000));
 
             // Act
-            var errorsTask1 = delegateValidation.GetErrors();
-            var errorsTask2 = delegateValidation.GetErrors();
+            var errorsTask1 = Task.Run(async () =>
+            {
+                await Task.Delay(50);
+                return await delegateValidation.GetErrors();
+            });
+            var errorsTask2 = Task.Run(async () =>
+            {
+                await Task.Delay(100);
+                return await delegateValidation.GetErrors();
+            });
 
             var errors1 = await errorsTask1;
-            await Task.Delay(200);
             Func<Task> action = async () => await errorsTask2;
 
             // Assert

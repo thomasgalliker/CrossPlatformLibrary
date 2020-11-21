@@ -6,9 +6,9 @@
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls"
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
+    IsClippedToBounds="True"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="StartAndExpand"
-    IsClippedToBounds="True">
+    VerticalOptions="StartAndExpand">
 
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
@@ -31,21 +31,22 @@
     <controls:GridZero Grid.Row="1" IsClippedToBounds="True">
         <controls:CustomEntry
             x:Name="Entry"
-            x:FieldModifier="internal"
             effects:LineColorEffect.ApplyLineColor="True"
             effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
-            VerticalOptions="StartAndExpand"
-            HorizontalOptions="FillAndExpand"
-            HorizontalTextAlignment="Start"
+            x:FieldModifier="internal"
             Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
             IsPassword="{Binding IsPassword, Source={x:Reference Control}, Mode=OneWay}"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
             Keyboard="{Binding Keyboard, Source={x:Reference Control}, Mode=OneWay}"
             MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
             Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
+            ReturnType="{Binding ReturnType, Source={x:Reference Control}, Mode=OneWay}"
             Style="{Binding EntryStyle, Source={x:Reference Control}, Mode=OneWay}"
             Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}"
-            TextContentType="{Binding TextContentType, Source={x:Reference Control}, Mode=OneWay}">
+            TextContentType="{Binding TextContentType, Source={x:Reference Control}, Mode=OneWay}"
+            HorizontalOptions="FillAndExpand"
+            HorizontalTextAlignment="Start"
+            VerticalOptions="StartAndExpand">
             <Entry.Margin>
                 <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="Android" Value="-4,-10,-4,-6" />
@@ -56,10 +57,10 @@
 
         <!--  Trailing Icon  -->
         <Image
-            HorizontalOptions="EndAndExpand"
             Source="{Binding TrailingIcon, Source={x:Reference Control}, Mode=OneWay}"
-            VerticalOptions="CenterAndExpand"
-            WidthRequest="24">
+            WidthRequest="24"
+            HorizontalOptions="EndAndExpand"
+            VerticalOptions="CenterAndExpand">
             <Image.Margin>
                 <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="Android" Value="0,0,4,0" />
@@ -75,8 +76,8 @@
         <controls:CustomLabel
             x:Name="ReadonlyLabel"
             x:FieldModifier="internal"
-            RemovePadding="True"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
+            RemovePadding="True"
             Style="{DynamicResource EntryLabelStyle}"
             Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}">
             <Label.Margin>
@@ -92,7 +93,7 @@
     <controls:CustomLabel
         x:Name="ErrorLabel"
         Grid.Row="2"
-        Style="{DynamicResource ValidationLabelStyle}"
         IsVisible="{Binding Text, Source={x:Reference ErrorLabel}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
+        Style="{DynamicResource ValidationLabelStyle}"
         Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}" />
 </controls:GridZero>

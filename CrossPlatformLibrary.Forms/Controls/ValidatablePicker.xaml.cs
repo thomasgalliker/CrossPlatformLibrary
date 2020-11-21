@@ -46,7 +46,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             get
             {
-                if (this.SelectedIndex != SelectedIndexDefaultValue)
+                if (this.SelectedIndex != SelectedIndexDefaultValue || this.IsReadonly)
                 {
                     return this.Placeholder;
                 }
@@ -204,7 +204,14 @@ namespace CrossPlatformLibrary.Forms.Controls
                 typeof(bool),
                 typeof(ValidatablePicker),
                 false,
-                BindingMode.OneWay);
+                BindingMode.OneWay,
+                propertyChanged: OnIsReadonlyPropertyChanged);
+
+        private static void OnIsReadonlyPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var picker = (ValidatablePicker)bindable;
+            picker.OnPropertyChanged(nameof(picker.AnnotationText));
+        }
 
         public bool IsReadonly
         {

@@ -22,11 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="ObjectDumper.NET" Version="2.4.19218.1" />
-    <PackageReference Include="ValueConverters.Forms" Version="2.0.19091.2" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.848062" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="ObjectDumper.NET" Version="3.0.20251.1" />
+    <PackageReference Include="ValueConverters.Forms" Version="2.0.20011.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1179" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +46,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\SwitchesPage.xaml.cs">
+      <DependentUpon>SwitchesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PickersPage.xaml.cs">
+      <DependentUpon>PickersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DrilldownButtonListPage.xaml.cs">
+      <DependentUpon>DrilldownButtonListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\CountryViewCell.xaml.cs">
       <DependentUpon>CountryViewCell.xaml</DependentUpon>
     </Compile>
@@ -60,6 +69,9 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\AddressControl.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\SampleActivityIndicatorPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>

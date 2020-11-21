@@ -6,9 +6,9 @@
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
+    IsClippedToBounds="True"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="StartAndExpand"
-    IsClippedToBounds="True">
+    VerticalOptions="StartAndExpand">
 
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
@@ -28,8 +28,8 @@
 
     <controls:GridZero
         Grid.Row="1"
-        IsClippedToBounds="True"
-        ColumnSpacing="6">
+        ColumnSpacing="6"
+        IsClippedToBounds="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="140" />
             <ColumnDefinition Width="*" />
@@ -37,17 +37,17 @@
         <controls:ExtendedDatePicker
             x:Name="DatePicker"
             Grid.Column="0"
-            x:FieldModifier="internal"
             effects:LineColorEffect.ApplyLineColor="True"
             effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
-            VerticalOptions="StartAndExpand"
-            HorizontalOptions="FillAndExpand"
+            x:FieldModifier="internal"
             Format="{Binding Date, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource NullableDateTimeToFormatConverter}}"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
             NullableDate="{Binding Date, Source={x:Reference Control}, Mode=TwoWay}"
             Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
             Style="{Binding DatePickerStyle, Source={x:Reference Control}, Mode=OneWay}"
-            ValidityRange="{Binding ValidityRange, Source={x:Reference Control}, Mode=OneWay}">
+            ValidityRange="{Binding ValidityRange, Source={x:Reference Control}, Mode=OneWay}"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="StartAndExpand">
             <DatePicker.Margin>
                 <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="Android" Value="-4,-10,-4,-6" />
@@ -58,15 +58,15 @@
         <controls:ExtendedTimePicker
             x:Name="TimePicker"
             Grid.Column="1"
-            x:FieldModifier="internal"
             effects:LineColorEffect.ApplyLineColor="True"
             effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
+            x:FieldModifier="internal"
             Format="{Binding Time, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource NullableDateTimeToFormatConverter}}"
-            VerticalOptions="StartAndExpand"
-            HorizontalOptions="FillAndExpand"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
             NullableTime="{Binding Time, Source={x:Reference Control}, Mode=TwoWay}"
-            Style="{Binding TimePickerStyle, Source={x:Reference Control}, Mode=OneWay}">
+            Style="{Binding TimePickerStyle, Source={x:Reference Control}, Mode=OneWay}"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="StartAndExpand">
             <TimePicker.Margin>
                 <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="Android" Value="-4,-10,-4,-6" />
@@ -83,8 +83,8 @@
             Margin="0"
             x:FieldModifier="internal"
             IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
-            Style="{DynamicResource EntryLabelStyle}"
             RemovePadding="True"
+            Style="{DynamicResource EntryLabelStyle}"
             Text="{Binding ReadonlyText, Source={x:Reference Control}, Mode=OneWay}" />
     </controls:GridZero>
 
@@ -92,7 +92,7 @@
     <controls:CustomLabel
         x:Name="ErrorLabel"
         Grid.Row="2"
-        Style="{DynamicResource ValidationLabelStyle}"
         IsVisible="{Binding Text, Source={x:Reference ErrorLabel}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
+        Style="{DynamicResource ValidationLabelStyle}"
         Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}" />
 </controls:GridZero>

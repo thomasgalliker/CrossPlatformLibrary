@@ -96,21 +96,11 @@
     <file src="CrossPlatformLibrary.iOS\LinkerHelper.cs" target="content\xamarin.ios10\LinkerHelper.cs" />
 
     <!--.Net Framework 4.5-->
-    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.dll" target="lib\net45\CrossPlatformLibrary.dll" />
-    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.pdb" target="lib\net45\CrossPlatformLibrary.pdb" />
-    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.deps.json" target="lib\net45\CrossPlatformLibrary.deps.json" />
-    <file src="CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\net45\CrossPlatformLibrary.xml" />
-
     <file src="CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.dll" target="lib\net45\CrossPlatformLibrary.dll" />
     <file src="CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.pdb" target="lib\net45\CrossPlatformLibrary.pdb" />
     <file src="CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.xml" target="lib\net45\CrossPlatformLibrary.xml" />
 
     <!--Universal Windows Platform-->
-    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.dll" target="lib\uap10.0\CrossPlatformLibrary.dll" />
-    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.pdb" target="lib\uap10.0\CrossPlatformLibrary.pdb" />
-    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.deps.json" target="lib\uap10.0\CrossPlatformLibrary.deps.json" />
-    <file src="CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\uap10.0\CrossPlatformLibrary.xml" />
-
     <file src="CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.dll" target="lib\uap10.0\CrossPlatformLibrary.dll" />
     <file src="CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.pdb" target="lib\uap10.0\CrossPlatformLibrary.pdb" />
     <file src="CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.xml" target="lib\uap10.0\CrossPlatformLibrary.xml" />

@@ -2,7 +2,7 @@
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
-    public class DrilldownSwitchView : DrilldownView
+    public class DrilldownSwitchView : DrilldownView, IDrilldownSwitchView
     {
         public static readonly BindableProperty IsToggledProperty =
             BindableProperty.Create(nameof(IsToggled),
@@ -14,7 +14,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         public bool IsToggled
         {
             get => (bool)this.GetValue(IsToggledProperty);
-            set => this.SetValue(IsToggledProperty, (object)value);
+            set => this.SetValue(IsToggledProperty, value);
         }
     }
 }

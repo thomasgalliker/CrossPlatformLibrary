@@ -5,12 +5,13 @@ namespace CrossPlatformLibrary.Forms.Controls
 {
     public class ExtendedListView : ListView
     {
-        public static readonly BindableProperty ItemTemplateSelectorProperty = BindableProperty.Create(
-            nameof(ItemTemplateSelector),
-            typeof(DataTemplateSelector),
-            typeof(ExtendedListView),
-            null,
-            propertyChanged: OnDataTemplateSelectorChanged);
+        public static readonly BindableProperty ItemTemplateSelectorProperty = 
+            BindableProperty.Create(
+                nameof(ItemTemplateSelector),
+                typeof(DataTemplateSelector),
+                typeof(ExtendedListView),
+                null,
+                propertyChanged: OnDataTemplateSelectorChanged);
 
         private DataTemplateSelector currentItemSelector;
 

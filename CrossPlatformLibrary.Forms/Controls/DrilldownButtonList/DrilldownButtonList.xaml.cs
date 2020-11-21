@@ -27,6 +27,24 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(ItemsSourceProperty, value);
         }
 
+        public static readonly BindableProperty ItemTemplateProperty =
+            BindableProperty.Create(
+                nameof(ItemTemplate),
+                typeof(DataTemplate),
+                typeof(DrilldownButtonList),
+                null,
+                propertyChanged: OnItemTemplateChanged);
+
+        private static void OnItemTemplateChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+        }
+
+        public DataTemplate ItemTemplate
+        {
+            get => (DataTemplate)this.GetValue(ItemTemplateProperty);
+            set => this.SetValue(ItemTemplateProperty, value);
+        }
+
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();

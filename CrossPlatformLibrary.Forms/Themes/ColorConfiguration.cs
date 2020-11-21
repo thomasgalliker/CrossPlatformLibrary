@@ -156,7 +156,14 @@ namespace CrossPlatformLibrary.Forms.Themes
                 typeof(Color),
                 typeof(Color),
                 Color.FromHex("#6200EE"));
-
+        
+        public static readonly BindableProperty PrimaryDisabledProperty =
+            BindableProperty.Create(
+                nameof(PrimaryDisabled),
+                typeof(Color),
+                typeof(Color),
+                Color.DarkGray);
+        
         public static readonly BindableProperty SecondaryProperty =
             BindableProperty.Create(
                 nameof(Secondary),
@@ -170,6 +177,13 @@ namespace CrossPlatformLibrary.Forms.Themes
                 typeof(Color),
                 typeof(Color),
                 Color.FromHex("#0400BA"));
+
+        public static readonly BindableProperty SecondaryDisabledProperty =
+            BindableProperty.Create(
+                nameof(SecondaryDisabled),
+                typeof(Color),
+                typeof(Color),
+                Color.DarkGray);
 
         public static readonly BindableProperty SurfaceProperty =
             BindableProperty.Create(
@@ -219,7 +233,13 @@ namespace CrossPlatformLibrary.Forms.Themes
             get => (Color)this.GetValue(PrimaryVariantProperty);
             set => this.SetValue(PrimaryVariantProperty, value);
         }
-
+        
+        public Color PrimaryDisabled
+        {
+            get => (Color)this.GetValue(PrimaryDisabledProperty);
+            set => this.SetValue(PrimaryDisabledProperty, value);
+        }
+        
         /// <summary>
         ///     Accents select parts of your UI.
         ///     If not provided, use <see cref="Primary" />.
@@ -247,6 +267,12 @@ namespace CrossPlatformLibrary.Forms.Themes
         {
             get => (Color)this.GetValue(SecondaryVariantProperty);
             set => this.SetValue(SecondaryVariantProperty, value);
+        }
+
+        public Color SecondaryDisabled
+        {
+            get => (Color)this.GetValue(SecondaryDisabledProperty);
+            set => this.SetValue(SecondaryDisabledProperty, value);
         }
 
         /// <summary>

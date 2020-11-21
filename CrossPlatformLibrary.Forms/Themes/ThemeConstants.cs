@@ -12,12 +12,14 @@
         {
             public const string TextColor = "Theme.Color.TextColor";
             public const string TextColorBright = "Theme.Color.TextColorBright";
-            public const string PRIMARY = "Theme.Color.Primary";
-            public const string PRIMARY_VARIANT = "Theme.Color.PrimaryVariant";
-            public const string SECONDARY = "Theme.Color.Secondary";
-            public const string SECONDARY_VARIANT = "Theme.Color.SecondaryVariant";
-            public const string ON_PRIMARY = "Theme.Color.OnPrimary";
-            public const string ON_SECONDARY = "Theme.Color.OnSecondary";
+            public const string Primary = "Theme.Color.Primary";
+            public const string PrimaryVariant = "Theme.Color.PrimaryVariant";
+            public const string PrimaryDisabled = "Theme.Color.PrimaryDisabled";
+            public const string Secondary = "Theme.Color.Secondary";
+            public const string SecondaryVariant = "Theme.Color.SecondaryVariant";
+            public const string SecondaryDisabled = "Theme.Color.SecondaryDisabled";
+            public const string OnPrimary = "Theme.Color.OnPrimary";
+            public const string OnSecondary = "Theme.Color.OnSecondary";
             public const string BACKGROUND = "Theme.Color.Background";
             public const string SURFACE = "Theme.Color.Surface";
             public const string ERROR = "Theme.Color.Error";

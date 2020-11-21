@@ -13,8 +13,8 @@
     xmlns:views="clr-namespace:SampleApp.Views;assembly=SampleApp"
     x:Name="Page"
     Title="CrossPlatformLibrary Sample App"
-    BackgroundColor="SlateGray"
-    effects:SafeAreaPadding.Layout="Top,Bottom">
+    effects:SafeAreaPadding.Layout="Top,Bottom"
+    BackgroundColor="SlateGray">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -34,23 +34,23 @@
                             <Label
                                 Grid.Column="0"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 LineBreakMode="CharacterWrap"
                                 Text="{Binding ResourceType}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                             <Label
                                 Grid.Column="1"
                                 BackgroundColor="{Binding Value}"
                                 FontSize="Small"
-                                HorizontalOptions="FillAndExpand"
                                 Text="{Binding Value, Converter={StaticResource ColorToHexStringConverter}}"
                                 TextColor="{Binding Value, Converter={StaticResource ColorInverter}}"
+                                HorizontalOptions="FillAndExpand"
                                 VerticalOptions="Center" />
                             <Label
                                 Grid.Column="2"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 Text="{Binding Key}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                         </Grid>
                     </ViewCell.View>
@@ -69,24 +69,24 @@
                             <Label
                                 Grid.Column="0"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 LineBreakMode="CharacterWrap"
                                 Text="{Binding ResourceType}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                             <Label
                                 Grid.Column="1"
                                 FontAttributes="{Binding Value.FontAttributes}"
                                 FontFamily="{Binding Value.FontFamily}"
                                 FontSize="{Binding Value.FontSize}"
-                                HorizontalOptions="StartAndExpand"
                                 LineBreakMode="WordWrap"
                                 Text="{Binding Value, Converter={StaticResource FontElementToStringConverter}}"
+                                HorizontalOptions="StartAndExpand"
                                 VerticalOptions="CenterAndExpand" />
                             <Label
                                 Grid.Column="2"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 Text="{Binding Key}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                         </Grid>
                     </ViewCell.View>
@@ -105,22 +105,22 @@
                             <Label
                                 Grid.Column="0"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 LineBreakMode="CharacterWrap"
                                 Text="{Binding ResourceType}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                             <Label
                                 Grid.Column="1"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 LineBreakMode="CharacterWrap"
                                 Text="{Binding Value, Converter={StaticResource ThicknessToStringConverter}}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                             <Label
                                 Grid.Column="2"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 Text="{Binding Key}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                         </Grid>
                     </ViewCell.View>
@@ -139,22 +139,22 @@
                             <Label
                                 Grid.Column="0"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 LineBreakMode="CharacterWrap"
                                 Text="{Binding ResourceType}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                             <Label
                                 Grid.Column="1"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 LineBreakMode="CharacterWrap"
                                 Text="{Binding Value}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                             <Label
                                 Grid.Column="2"
                                 FontSize="Small"
-                                HorizontalOptions="Start"
                                 Text="{Binding Key}"
+                                HorizontalOptions="Start"
                                 VerticalOptions="CenterAndExpand" />
                         </Grid>
                     </ViewCell.View>
@@ -173,9 +173,9 @@
     <controls:GradientStackLayout
         EndColor="LightPink"
         GradientOrientation="Vertical"
-        HorizontalOptions="FillAndExpand"
         Orientation="Vertical"
         StartColor="LightGray"
+        HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand">
 
         <controls:GridZero HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -204,17 +204,54 @@
                         <StackLayout IsVisible="{Binding IsNotBusy}">
                             <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: TintImageEffect--&gt;" />
+                                <Image
+                                    effects:TintImageEffect.TintColor="{Binding IsReadonly, Converter={StaticResource BoolToBlackAndWhiteConverter}}"
+                                    Aspect="AspectFit"
+                                    HeightRequest="100"
+                                    Source="{controls:ImageResource SampleApp.Resources.Images.rectangle_magenta_192.png}"
+                                    WidthRequest="100">
+
+                                    <Image.Effects>
+                                        <effects:TintImageEffect />
+                                    </Image.Effects>
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ToggleSwitchCommand}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: SegmentedStatusIndicator--&gt;" />
                                 <Button
-                                    Text="SegmentedStatusIndicatorPage"
                                     Command="{Binding NavigateToPageCommand}"
-                                    CommandParameter="SegmentedStatusIndicatorPage" />
+                                    CommandParameter="SegmentedStatusIndicatorPage"
+                                    Text="SegmentedStatusIndicatorPage" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: CardView--&gt;" />
                                 <Button
-                                    Text="CardViewPage"
                                     Command="{Binding NavigateToPageCommand}"
-                                    CommandParameter="CardViewPage" />
+                                    CommandParameter="CardViewPage"
+                                    Text="CardViewPage" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: Drilldown Buttons--&gt;" />
+                                <Button
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="DrilldownButtonListPage"
+                                    Text="Drilldown Buttons" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ValidatablePicker--&gt;" />
+                                <Button
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="PickersPage"
+                                    Text="Validatable Pickers" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: Switches--&gt;" />
+                                <Button
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="SwitchesPage"
+                                    Text="Switches Page" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ActivityIndicatorService--&gt;" />
+                                <Button Command="{Binding ShowActivityIndicatorCommand}" Text="ActivityIndicatorService.Show" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo MultiStateToggleButton--&gt;" />
                                 <controls:MultiStateToggleButton>
@@ -222,34 +259,40 @@
                                         <objectModel:ObservableCollection x:TypeArguments="BindableObject">
                                             <controls:MultiToggleButtonView
                                                 Title="{localization:Translate OnButtonText}"
-                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
                                                 Command="{Binding MultiToggleCommand}"
+                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
                                                 IsSelected="{Binding IsMultiToggleButtonOn, Mode=TwoWay}" />
                                             <controls:MultiToggleButtonView
                                                 Title="{localization:Translate OffButtonText}"
-                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
                                                 Command="{Binding MultiToggleCommand}"
+                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
                                                 IsSelected="{Binding IsMultiToggleButtonOff, Mode=TwoWay}" />
                                         </objectModel:ObservableCollection>
                                     </controls:MultiStateToggleButton.ItemsSource>
                                 </controls:MultiStateToggleButton>
 
                                 <controls:MultiStateToggleButton
-                                    SelectedButtonBackgroundColor="Black"
-                                    Spacing="0"
-                                    BorderColor="Red">
+                                    BorderColor="Black"
+                                    ButtonBackgroundColor="White"
+                                    CornerRadius="20"
+                                    HeightRequest="60"
+                                    SelectedButtonBackgroundColor="BlueViolet"
+                                    Spacing="0">
                                     <controls:MultiStateToggleButton.ItemsSource>
                                         <objectModel:ObservableCollection x:TypeArguments="BindableObject">
-                                            <controls:MultiToggleButtonView Title="{localization:Translate AutomaticButtonText}" ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}" />
+                                            <controls:MultiToggleButtonView
+                                                Title="{localization:Translate AutomaticButtonText}"
+                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
+                                                IsSelected="False" />
                                             <controls:MultiToggleButtonView
                                                 Title="{localization:Translate OnButtonText}"
-                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
                                                 Command="{Binding MultiToggleCommand}"
+                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
                                                 IsSelected="{Binding IsMultiToggleButtonOn, Mode=TwoWay}" />
                                             <controls:MultiToggleButtonView
                                                 Title="{localization:Translate OffButtonText}"
-                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
                                                 Command="{Binding MultiToggleCommand}"
+                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
                                                 IsSelected="{Binding IsMultiToggleButtonOff, Mode=TwoWay}" />
                                         </objectModel:ObservableCollection>
                                     </controls:MultiStateToggleButton.ItemsSource>
@@ -259,10 +302,10 @@
                                 <Label Text="Label" />
                                 <controls:CustomLabel Text="CustomLabel" />
                                 <controls:CustomLabel
-                                    HorizontalOptions="Start"
                                     JustifyText="True"
                                     LineBreakMode="WordWrap"
                                     Text="CustomLabel with JustifyText=&quot;True&quot;: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam."
+                                    HorizontalOptions="Start"
                                     VerticalOptions="Start" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableLabel--&gt;" />
@@ -369,25 +412,25 @@
                                 <controls:CustomEntry Placeholder="CustomEntry with TextContentType=&quot;FirstName&quot;" TextContentType="FirstName" />
                                 <controls:CustomEntry Placeholder="CustomEntry with TextContentType=&quot;LastName&quot;" TextContentType="LastName" />
                                 <controls:CustomEntry
-                                    Placeholder="CustomEntry with TextContentType=&quot;Username&quot;"
-                                    TextContentType="Username"
-                                    Keyboard="Email" />
-                                <controls:CustomEntry
-                                    Placeholder="CustomEntry with TextContentType=&quot;EmailAddress&quot;"
                                     Keyboard="Email"
+                                    Placeholder="CustomEntry with TextContentType=&quot;Username&quot;"
+                                    TextContentType="Username" />
+                                <controls:CustomEntry
+                                    Keyboard="Email"
+                                    Placeholder="CustomEntry with TextContentType=&quot;EmailAddress&quot;"
                                     TextContentType="EmailAddress" />
                                 <controls:CustomEntry
-                                    Placeholder="CustomEntry with TextContentType=&quot;PhoneNumber&quot;"
                                     Keyboard="Telephone"
+                                    Placeholder="CustomEntry with TextContentType=&quot;PhoneNumber&quot;"
                                     TextContentType="PhoneNumber" />
                                 <controls:CustomEntry
+                                    IsPassword="True"
                                     Placeholder="CustomEntry with TextContentType=&quot;Password&quot;"
-                                    TextContentType="Password"
-                                    IsPassword="True" />
+                                    TextContentType="Password" />
                                 <controls:CustomEntry
+                                    IsPassword="True"
                                     Placeholder="CustomEntry with TextContentType=&quot;NewPassword&quot;"
-                                    TextContentType="NewPassword"
-                                    IsPassword="True" />
+                                    TextContentType="NewPassword" />
                                 <controls:CustomEntry
                                     Keyboard="Numeric"
                                     Placeholder="CustomEntry with TextContentType=&quot;OneTimeCode&quot;"
@@ -405,8 +448,9 @@
                                     <controls:ValidatableEntry
                                         x:Name="UserNameEntry"
                                         Grid.Column="0"
-                                        IsReadonly="{Binding IsToggled}"
+                                        IsReadonly="{Binding IsReadonly}"
                                         Placeholder="ValidatableEntry"
+                                        ReturnType="Next"
                                         Text="{Binding UserName, Mode=TwoWay}"
                                         TrailingIcon="{controls:ImageResource SampleApp.Resources.Images.rectangle_magenta_192.png}"
                                         TrailingIconCommand="{Binding CalloutCommand}"
@@ -414,16 +458,22 @@
                                         ValidationErrors="{Binding Validation.Errors[UserName]}">
                                         <controls:ValidatableEntry.Behaviors>
                                             <behaviors:MaxLengthTextBehavior MaxLength="{Binding UserNameMaxLength}" />
+                                            <behaviors:EntryFocusBehavior TargetElementName="ValidatableEntryTest1" />
                                         </controls:ValidatableEntry.Behaviors>
                                     </controls:ValidatableEntry>
                                     <Entry
                                         Grid.Column="1"
                                         Placeholder="Xamarin.Forms.Entry"
-                                        Text="{Binding UserName, Mode=TwoWay}" />
+                                        ReturnType="Go"
+                                        Text="{Binding UserName, Mode=TwoWay}">
+                                        <Entry.Behaviors>
+                                            <behaviors:EntryFocusBehavior TargetElement="{x:Reference UserNameEntry}" />
+                                        </Entry.Behaviors>
+                                    </Entry>
                                 </Grid>
                                 <controls:ValidatableEntry
                                     x:Name="ValidatableEntryTest1"
-                                    IsReadonly="{Binding IsToggled, Mode=OneWay}"
+                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
                                     Placeholder="{Binding Text, Source={x:Reference ValidatableEntryTest1}}"
                                     Text="ValidatableEntry's Placeholder sizing test" />
                                 <controls:ValidatableEntry
@@ -454,7 +504,7 @@
                                 <controls:ValidatableAutoCompleteView
                                     x:Name="AutoCompleteView"
                                     DisplayMemberPath="Name"
-                                    IsReadonly="{Binding IsToggled, Mode=OneWay}"
+                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
                                     Placeholder="ValidatableAutoCompleteView"
                                     SearchCommand="{Binding AutoCompleteSearchCommand}"
                                     SearchCommandDelay="{x:Static local:App.SearchCommandDelay}"
@@ -500,7 +550,7 @@
                                 <controls:ValidatablePicker
                                     x:Name="ValidatablePickerTest1"
                                     DisplayMemberPath="Name"
-                                    IsReadonly="{Binding IsToggled, Mode=OneWay}"
+                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
                                     ItemsSource="{Binding Countries}"
                                     NullString="&lt;Default Country&gt;"
                                     Placeholder="ValidatablePicker by Country.Name"
@@ -526,10 +576,13 @@
                                     NullableDate="{Binding Birthdate, Mode=TwoWay}"
                                     Placeholder="ExtendedDatePicker with Birthdate" />
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Toggle IsReadonly--&gt;" />
+                                <Switch IsToggled="{Binding IsReadonly, Mode=TwoWay}" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableDatePicker--&gt;" />
                                 <controls:ValidatableDatePicker
                                     Date="{Binding Birthdate, Mode=TwoWay}"
-                                    IsReadonly="{Binding IsToggled, Mode=OneWay}"
+                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
                                     Placeholder="ValidatableDatePicker"
                                     ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
                                     ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
@@ -542,9 +595,16 @@
                                     ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
 
                                 <controls:ValidatableDatePicker
+                                    Date="{x:Null}"
+                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
+                                    Placeholder="ValidatableDatePicker Date=&quot;null&quot;"
+                                    ReadonlyText="ReadonlyText"
+                                    ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
+
+                                <controls:ValidatableDatePicker
                                     x:Name="ValidatableDatePickerTest2"
                                     Date="{Binding Birthdate, Mode=TwoWay}"
-                                    IsReadonly="{Binding IsToggled, Mode=OneWay}"
+                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
                                     Placeholder="ValidatableDatePicker with ValidationErrors"
                                     ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
                                     ValidationErrors="{Binding Source={x:Reference ValidatableDatePickerTest2}, Path=Date, Converter={StaticResource RandomValidationErrorsConverter}}" />
@@ -584,9 +644,15 @@
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableDateTimePicker--&gt;" />
                                 <controls:ValidatableDateTimePicker
                                     Date="{Binding Birthdate, Mode=TwoWay}"
-                                    IsReadonly="{Binding IsToggled, Mode=OneWay}"
+                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
                                     Placeholder="Birthdate with ValidatableDateTimePicker"
                                     ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
+                                    ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
+                                <controls:ValidatableDateTimePicker
+                                    Date="{x:Null}"
+                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
+                                    Placeholder="ValidatableDateTimePicker with Date=&quot;null&quot;"
+                                    ReadonlyText="ReadonlyText"
                                     ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
 
                                 <controls:AlwaysScrollView Orientation="Horizontal">
@@ -601,12 +667,14 @@
                                         <controls:ValidatableDateTimePicker
                                             BackgroundColor="Aquamarine"
                                             Date="{x:Null}"
+                                            IsReadonly="{Binding IsReadonly, Mode=OneWay}"
                                             Placeholder="ValidatableDateTimePicker"
                                             Time="{x:Null}" />
                                         <controls:ValidatableEntry
                                             Grid.Row="0"
                                             Grid.Column="1"
                                             BackgroundColor="LightGoldenrodYellow"
+                                            IsReadonly="{Binding IsReadonly, Mode=OneWay}"
                                             Placeholder="ValidatableEntry"
                                             Text="" />
                                     </controls:GridZero>
@@ -686,9 +754,9 @@
                                 <controls:CustomEditor
                                     Margin="0"
                                     HideKeyboard="True"
-                                    HorizontalOptions="FillAndExpand"
                                     Keyboard="Text"
                                     Text="{Binding LogContent, Mode=OneWay}"
+                                    HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo HyperLinkLabel--&gt;" />
@@ -703,94 +771,8 @@
                                     TextColor="Black"
                                     TintColor="BlueViolet" />
 
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo DrilldownButton--&gt;" />
-                                <controls:DrilldownButton
-                                    Command="{Binding MailNavigateCommand}"
-                                    ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
-                                    Text="{localization:Translate SingleButtonText}" />
-
-
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo DividerLine--&gt;" />
                                 <controls:DividerLine />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo DrilldownButtonList--&gt;" />
-                                <controls:CardView Padding="0,0,0,16" HeightRequest="300">
-                                    <controls:StackLayoutZero>
-                                        <controls:LabelSection Text="{localization:Translate ListOfSettingsSectionText}" />
-                                        <controls:HeaderDivider />
-                                        <controls:DrilldownButtonList BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
-                                            <controls:DrilldownButtonList.ItemsSource>
-                                                <objectModel:ObservableCollection x:TypeArguments="BindableObject">
-                                                    <controls:DrilldownButtonView
-                                                        Title="DrilldownButtonCell (Enabled)"
-                                                        Command="{Binding NavigateToLogCommand}"
-                                                        ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
-                                                        IsEnabled="True" />
-                                                    <controls:DrilldownButtonView
-                                                        Title="DrilldownButtonCell (Disabled)"
-                                                        Command="{Binding NavigateToLogCommand}"
-                                                        ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
-                                                        IsEnabled="False" />
-                                                    <controls:DrilldownButtonView
-                                                        Title="{Binding RefreshButtonText}"
-                                                        Command="{Binding RefreshCommand}"
-                                                        IsBusy="{Binding IsRefreshing, Mode=OneWay}"
-                                                        IsEnabled="{Binding IsRefreshing, Converter={StaticResource BoolInverter}}" />
-                                                    <controls:DrilldownSwitchView
-                                                        Title="{Binding ToggleSwitchButtonText}"
-                                                        Command="{Binding ToggleSwitchCommand}"
-                                                        IsEnabled="True"
-                                                        IsToggled="{Binding IsToggled, Mode=TwoWay}" />
-                                                </objectModel:ObservableCollection>
-                                            </controls:DrilldownButtonList.ItemsSource>
-                                        </controls:DrilldownButtonList>
-                                        <!--  DrilldownButtonList can be closed without a FooterDivider  -->
-                                        <!--<controls:FooterDivider />-->
-                                    </controls:StackLayoutZero>
-                                </controls:CardView>
-
-                                <controls:CardView Padding="0,0,0,16" HeightRequest="280">
-                                    <controls:StackLayoutZero>
-                                        <controls:LabelSection Text="{localization:Translate AboutSectionText}" />
-                                        <controls:HeaderDivider />
-
-                                        <controls:GridZero
-                                            Padding="{DynamicResource Theme.Padding.CardViewPadding}"
-                                            BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}"
-                                            RowSpacing="{DynamicResource Theme.Spacing.Small}">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto" />
-                                            </Grid.RowDefinitions>
-
-                                            <controls:CustomLabel
-                                                Grid.Row="0"
-                                                LineBreakMode="WordWrap"
-                                                Text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam." />
-                                        </controls:GridZero>
-
-                                        <controls:DividerLine />
-                                        <controls:DrilldownButtonList BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
-                                            <controls:DrilldownButtonList.ItemsSource>
-                                                <objectModel:ObservableCollection x:TypeArguments="BindableObject">
-                                                    <controls:DrilldownButtonView
-                                                        Title="{localization:Translate TermsAndConditionsButtonText}"
-                                                        Command="{Binding NavigateToTermsAndConditionsCommand}"
-                                                        ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
-                                                        IsBusy="{Binding IsNavigatingToTermsAndConditions}"
-                                                        IsEnabled="{Binding IsNavigatingToTermsAndConditions, Converter={StaticResource BoolInverter}}" />
-                                                    <controls:DrilldownButtonView
-                                                        Title="{localization:Translate PrivacyPolicyButtonText}"
-                                                        Command="{Binding NavigateToPrivacyPolicyCommand}"
-                                                        ImageSource="{controls:ImageResource SampleApp.Resources.Images.chevron_right_grey_192x192.png}"
-                                                        IsBusy="{Binding IsNavigatingToPrivacyPolicy}"
-                                                        IsEnabled="{Binding IsNavigatingToPrivacyPolicy, Converter={StaticResource BoolInverter}}" />
-                                                </objectModel:ObservableCollection>
-                                            </controls:DrilldownButtonList.ItemsSource>
-                                        </controls:DrilldownButtonList>
-                                        <controls:DividerLine />
-                                        <controls:FooterDivider />
-                                    </controls:StackLayoutZero>
-                                </controls:CardView>
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo StackedList (Horizontal)--&gt;" />
                                 <controls:StackedList
@@ -1147,10 +1129,10 @@
                         </StackLayout>
 
                         <Label
-                            HorizontalOptions="FillAndExpand"
                             IsVisible="{Binding IsBusy, Mode=OneWay}"
                             Style="{StaticResource DemoLabelStyle}"
                             Text="&lt;!--Demo CustomActivityIndicator--&gt;"
+                            HorizontalOptions="FillAndExpand"
                             VerticalOptions="Start" />
                         <controls:CustomActivityIndicator Caption="{localization:Translate LoadingText}" IsVisible="{Binding IsBusy, Mode=OneWay}" />
                     </Grid>

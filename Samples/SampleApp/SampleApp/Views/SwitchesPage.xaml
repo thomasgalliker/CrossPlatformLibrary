@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SampleApp.Views.SwitchesPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xControls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    Title="Switches Page"
+    BackgroundColor="{DynamicResource WindowBackgroundTable}"
+    mc:Ignorable="d">
+
+    <xControls:AlwaysScrollView>
+        <xControls:GridZero>
+            <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
+                <xControls:CardView>
+                    <xControls:StackLayoutZero>
+                        <xControls:LabelSection Text="Switches Demo" />
+                        <xControls:HeaderDivider />
+                        <xControls:StackLayoutZero Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="Switches (enabled):" />
+                            <Switch
+                                IsEnabled="True"
+                                IsToggled="False"
+                                HorizontalOptions="Start" />
+                            <Switch
+                                IsEnabled="True"
+                                IsToggled="True"
+                                HorizontalOptions="Start" />
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="Switches (disabled):" />
+                            <Switch
+                                IsEnabled="False"
+                                IsToggled="False"
+                                HorizontalOptions="Start" />
+                            <Switch
+                                IsEnabled="False"
+                                IsToggled="True"
+                                HorizontalOptions="Start" />
+                        </xControls:StackLayoutZero>
+                        <xControls:FooterDivider />
+                    </xControls:StackLayoutZero>
+                </xControls:CardView>
+
+            </StackLayout>
+        </xControls:GridZero>
+    </xControls:AlwaysScrollView>
+</ContentPage>

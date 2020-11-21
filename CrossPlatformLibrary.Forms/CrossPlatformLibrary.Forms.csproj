@@ -59,7 +59,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" version="4.2.0.848062" />
+    <PackageReference Include="Xamarin.Forms" version="4.7.0.1179" />
   </ItemGroup>
 
   <ItemGroup>
@@ -74,7 +74,10 @@
     <Compile Update="Controls\CardView\FooterSection.xaml.cs">
       <DependentUpon>FooterSection.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Controls\DrilldownSwitchCell.xaml.cs">
+    <Compile Update="Controls\CardView\SpacerSection.xaml.cs">
+      <DependentUpon>SpacerSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\DrilldownButtonList\DrilldownSwitchCell.xaml.cs">
       <DependentUpon>DrilldownSwitchCell.xaml</DependentUpon>
     </Compile>
     <Compile Update="Controls\SegmentedStatusIndicator\SegmentedStatusIndicator.xaml.cs">
@@ -122,13 +125,16 @@
     <EmbeddedResource Update="Controls\CardView\FooterSection.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\DrilldownSwitchCell.xaml">
+    <EmbeddedResource Update="Controls\CardView\SpacerSection.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\DrilldownButtonCell.xaml">
+    <EmbeddedResource Update="Controls\DrilldownButtonList\DrilldownSwitchCell.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\DrilldownButtonList.xaml">
+    <EmbeddedResource Update="Controls\DrilldownButtonList\DrilldownButtonCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\DrilldownButtonList\DrilldownButtonList.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\ValidatableEditor.xaml">
@@ -155,7 +161,7 @@
     <EmbeddedResource Update="Controls\CustomActivityIndicatorPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\DrilldownButton.xaml">
+    <EmbeddedResource Update="Controls\DrilldownButtonList\DrilldownButton.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\CardView\FooterDivider.xaml">

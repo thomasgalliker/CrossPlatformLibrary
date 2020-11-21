@@ -4,10 +4,14 @@ namespace CrossPlatformLibrary.Services
 {
     public class ClipboardService : IClipboardService
     {
-        public void CopyToClipboard(string text)
+        public void SetText(string text)
         {
-            UIPasteboard clipboard = UIPasteboard.General;
-            clipboard.String = text;
+            UIPasteboard.General.String = text;
+        }
+
+        public string GetText()
+        {
+            return UIPasteboard.General.String;
         }
     }
 }

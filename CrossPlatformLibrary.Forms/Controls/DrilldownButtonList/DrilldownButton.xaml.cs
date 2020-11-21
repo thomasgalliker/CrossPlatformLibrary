@@ -1,40 +1,32 @@
-﻿using System;
-using System.Diagnostics;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using CrossPlatformLibrary.Forms.Resources;
 using CrossPlatformLibrary.Forms.Themes;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
-    public partial class DrilldownButtonCell : ExtendedViewCell
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class DrilldownButton : CardView
     {
-        public DrilldownButtonCell()
+        public DrilldownButton()
         {
-            try
-            {
-                this.InitializeComponent();
+            this.InitializeComponent();
 
-                // Hack: OnPlatform lacks of support for DynamicResource bindings!
-                if (Device.RuntimePlatform == Device.Android)
-                {
-                    this.ActivityIndicator.SetDynamicResource(ActivityIndicator.ColorProperty, ThemeConstants.Color.SECONDARY);
-                }
-            }
-            catch (Exception ex)
+            // Hack: OnPlatform lacks of support for DynamicResource bindings!
+            if (Device.RuntimePlatform == Device.Android)
             {
-                Debug.WriteLine(ex);
-                throw;
+                this.ActivityIndicator.SetDynamicResource(ActivityIndicator.ColorProperty, ThemeConstants.Color.Secondary);
             }
         }
 
         public static readonly BindableProperty TextProperty =
-            BindableProperty.Create(
-                nameof(Text),
-                typeof(string),
-                typeof(DrilldownButtonCell),
-                null,
-                BindingMode.OneWay);
+         BindableProperty.Create(
+             nameof(Text),
+             typeof(string),
+             typeof(DrilldownButton),
+             null,
+             BindingMode.OneWay);
 
         public string Text
         {
@@ -43,12 +35,12 @@ namespace CrossPlatformLibrary.Forms.Controls
         }
 
         public static readonly BindableProperty CommandProperty =
-            BindableProperty.Create(
-                nameof(Command),
-                typeof(ICommand),
-                typeof(DrilldownButtonCell),
-                null,
-                BindingMode.OneWay);
+          BindableProperty.Create(
+              nameof(Command),
+              typeof(ICommand),
+              typeof(DrilldownButton),
+              null,
+              BindingMode.OneWay);
 
         public ICommand Command
         {
@@ -60,7 +52,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             BindableProperty.Create(
                 nameof(CommandParameter),
                 typeof(object),
-                typeof(DrilldownButtonCell),
+                typeof(DrilldownButton),
                 null,
                 BindingMode.OneWay);
 
@@ -74,7 +66,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             BindableProperty.Create(
                 nameof(IsEnabled),
                 typeof(bool),
-                typeof(DrilldownButtonCell),
+                typeof(DrilldownButton),
                 true,
                 BindingMode.OneWay);
 
@@ -85,12 +77,12 @@ namespace CrossPlatformLibrary.Forms.Controls
         }
 
         public static readonly BindableProperty ImageSourceProperty =
-            BindableProperty.Create(
-                nameof(ImageSource),
-                typeof(ImageSource),
-                typeof(DrilldownButtonCell),
-                null,
-                BindingMode.OneWay);
+         BindableProperty.Create(
+             nameof(ImageSource),
+             typeof(ImageSource),
+             typeof(DrilldownButton),
+             null,
+             BindingMode.OneWay);
 
         public ImageSource ImageSource
         {
@@ -102,7 +94,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             BindableProperty.Create(
                 nameof(IsBusy),
                 typeof(bool),
-                typeof(DrilldownButtonCell),
+                typeof(DrilldownButton),
                 false,
                 BindingMode.OneWay);
 

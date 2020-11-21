@@ -1,5 +1,6 @@
 ﻿using CrossPlatformLibrary.Forms.iOS.Renderers;
 using CrossPlatformLibrary.Forms.iOS.Services;
+using CrossPlatformLibrary.Services;
 using Foundation;
 using UIKit;
 using Xamarin.Forms;
@@ -25,7 +26,13 @@ namespace SampleApp.iOS
             Forms.Init();
             HyperLinkLabelRenderer.Init();
             CrossPlatformLibrary.Forms.iOS.CrossPlatformLibrary.Init();
-            this.LoadApplication(new App());
+
+            var activityIndicatorService = new iOSActivityIndicatorService();
+            activityIndicatorService.Init(new SampleApp.Controls.SampleActivityIndicatorPage());
+
+            var statusBar = new StatusBarService();
+
+            this.LoadApplication(new App(activityIndicatorService, statusBar));
 
             return base.FinishedLaunching(app, options);
         }
