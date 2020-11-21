@@ -83,6 +83,13 @@
                                 NullableDate="{Binding Birthdate, Mode=TwoWay}"
                                 Placeholder="ExtendedDatePicker with ClearButtonText" />
                             <xControls:ExtendedDatePicker
+                                CancelButtonText="{localization:Translate CancelButtonText}"
+                                ClearButtonText="{localization:Translate ClearButtonText}"
+                                Format="D"
+                                IsEnabled="{Binding IsReadonly, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+                                NullableDate="{Binding Birthdate, Mode=TwoWay}"
+                                Placeholder="ExtendedDatePicker with Clean+Cancel" />
+                            <xControls:ExtendedDatePicker
                                 Format="D"
                                 IsEnabled="{Binding IsReadonly, Mode=OneWay, Converter={StaticResource BoolInverter}}"
                                 NullableDate="{Binding Birthdate, Mode=TwoWay}"

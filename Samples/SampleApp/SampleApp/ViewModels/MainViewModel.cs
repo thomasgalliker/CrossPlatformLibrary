@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using CrossPlatformLibrary.Extensions;
 using CrossPlatformLibrary.Forms.Mvvm;
 using CrossPlatformLibrary.Forms.Services;
 using CrossPlatformLibrary.Forms.Validation;
+using CrossPlatformLibrary.Localization;
 using SampleApp.Model;
 using SampleApp.Services;
 using SampleApp.Validation;
@@ -24,6 +26,7 @@ namespace SampleApp.ViewModels
         private readonly ICountryService countryService;
         private readonly IValidationService validationService;
         private readonly IEmailService emailService;
+        private readonly ILocalizer localizer;
         private readonly IActivityIndicatorService activityIndicatorService;
         private CountryViewModel country;
         private string notes;
@@ -49,6 +52,7 @@ namespace SampleApp.ViewModels
         private bool isMultiToggleButtonOff;
         private ICommand navigateToPageCommand;
         private ICommand showActivityIndicatorCommand;
+        private LanguageViewModel language;
 
         public MainViewModel(
             INavigationService navigationService,
@@ -56,6 +60,7 @@ namespace SampleApp.ViewModels
             ICountryService countryService,
             IValidationService validationService,
             IEmailService emailService,
+            ILocalizer localizer,
             IActivityIndicatorService activityIndicatorService)
         {
             this.navigationService = navigationService;
@@ -63,6 +68,7 @@ namespace SampleApp.ViewModels
             this.countryService = countryService;
             this.validationService = validationService;
             this.emailService = emailService;
+            this.localizer = localizer;
             this.activityIndicatorService = activityIndicatorService;
 
             this.ViewModelError = ViewModelError.None;
@@ -70,7 +76,41 @@ namespace SampleApp.ViewModels
             this.Countries = new ObservableCollection<CountryViewModel>();
             this.SuggestedCountries = new ObservableCollection<CountryViewModel>();
 
+            this.Languages = new ObservableCollection<LanguageViewModel>
+            {
+                new LanguageViewModel(new System.Globalization.CultureInfo("en")),
+                new LanguageViewModel(new System.Globalization.CultureInfo("de")),
+            };
+            this.language = this.Languages.First();
+
             this.LoadData();
+        }
+
+        public ObservableCollection<LanguageViewModel> Languages { get; }
+
+        public LanguageViewModel Language
+        {
+            get
+            {
+                return this.language;
+            }
+            set
+            {
+                this.language = value;
+
+                if (value != null)
+                {
+                    var cultureInfo = value.Dto;
+
+                    this.localizer.SetCultureInfo(cultureInfo);
+
+                    CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+                    CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+                }
+
+                // Update all bindings
+                this.RaisePropertyChanged("");
+            }
         }
 
         private UserDto User
@@ -115,7 +155,7 @@ namespace SampleApp.ViewModels
             get => this.countries;
             private set => this.SetProperty(ref this.countries, value, nameof(this.Countries));
         }
-        
+
         public ObservableCollection<CountryViewModel> SuggestedCountries { get; }
 
         public CountryViewModel Country
@@ -156,7 +196,7 @@ namespace SampleApp.ViewModels
             switch (pageName)
             {
                 case nameof(SegmentedStatusIndicatorPage):
-                    page = new SegmentedStatusIndicatorPage{BindingContext = new SegmentedStatusIndicatorViewModel()};
+                    page = new SegmentedStatusIndicatorPage { BindingContext = new SegmentedStatusIndicatorViewModel() };
                     break;
 
                 case nameof(CardViewPage):
@@ -166,7 +206,7 @@ namespace SampleApp.ViewModels
                 case nameof(DrilldownButtonListPage):
                     page = new DrilldownButtonListPage { BindingContext = new DrilldownButtonListViewModel(this.displayService) };
                     break;
-                    
+
                 case nameof(PickersPage):
                     page = new PickersPage { BindingContext = new PickersViewModel(this.displayService, this.Countries) };
                     break;
@@ -222,7 +262,7 @@ namespace SampleApp.ViewModels
                     .ToList();
                 this.SuggestedCountries.AddRange(filteredViewModels);
 
-                if(!filteredViewModels.Any())
+                if (!filteredViewModels.Any())
                 {
                     this.Validation.AddErrorMessageForProperty(nameof(this.Country), "No results found!");
                 }
@@ -446,7 +486,7 @@ namespace SampleApp.ViewModels
                 // Set countries one after the other
                 this.Countries.Clear();
                 this.Countries.AddRange(countryDtos.Select(c => new CountryViewModel(c)).Prepend(defaultCountryViewModel));
-                
+
                 //this.ThemeResources = Application.Current.Resources.MergedDictionaries.SelectMany(md => md)
                 //    .Select(kvp => new ResourceViewModel(kvp))
                 //    .OrderBy(vm => vm.Key)

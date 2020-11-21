@@ -204,6 +204,13 @@
                         <StackLayout IsVisible="{Binding IsNotBusy}">
                             <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
 
+                                <controls:ValidatablePicker
+                                    DisplayMemberPath="NativeName"
+                                    ItemsSource="{Binding Languages}"
+                                    Placeholder="{localization:Translate LanguageLabelText}"
+                                    SelectedItem="{Binding Path=Language, Mode=TwoWay}"
+                                    SelectedValuePath="DisplayName" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: TintImageEffect--&gt;" />
                                 <Image
                                     effects:TintImageEffect.TintColor="{Binding IsReadonly, Converter={StaticResource BoolToBlackAndWhiteConverter}}"

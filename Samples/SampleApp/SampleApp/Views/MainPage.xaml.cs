@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using CrossPlatformLibrary.Forms.Extensions;
 using CrossPlatformLibrary.Forms.Services;
+using CrossPlatformLibrary.Localization;
 using CrossPlatformLibrary.Services;
 using SampleApp.Services;
 using SampleApp.Validation;
@@ -14,7 +15,7 @@ namespace SampleApp.Views
     {
         private readonly IStatusBarService statusBar;
 
-        public MainPage(IActivityIndicatorService activityIndicatorService, IStatusBarService statusBar)
+        public MainPage(ILocalizer localizer, IActivityIndicatorService activityIndicatorService, IStatusBarService statusBar)
         {
             try
             {
@@ -25,7 +26,7 @@ namespace SampleApp.Views
                 var validationService = new ValidationService();
                 var emailService = new EmailService();
                 var navigationService = new NavigationService(this);
-                this.BindingContext = new MainViewModel(navigationService, displayService, countryService, validationService, emailService, activityIndicatorService);
+                this.BindingContext = new MainViewModel(navigationService, displayService, countryService, validationService, emailService, localizer, activityIndicatorService);
             }
             catch (Exception e)
             {

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="sv" target-language="en" original="SAMPLEAPP/RESOURCES/STRINGS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.6916.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="SAMPLEAPP/RESOURCES/STRINGS.RESX" datatype="resx">
+        <trans-unit id="AutomaticButtonText" translate="yes" xml:space="preserve">
+          <source>Auto</source>
+          <target state="translated">Auto</target>
+        </trans-unit>
+        <trans-unit id="CancelButtonText" translate="yes" xml:space="preserve">
+          <source>Cancel</source>
+          <target state="translated">Cancel</target>
+        </trans-unit>
+        <trans-unit id="ClearButtonText" translate="yes" xml:space="preserve">
+          <source>Clear</source>
+          <target state="translated">Clear</target>
+        </trans-unit>
+        <trans-unit id="CountdownLabelText" translate="yes" xml:space="preserve">
+          <source>Countdown</source>
+          <target state="translated">Countdown</target>
+        </trans-unit>
+        <trans-unit id="LoadingText" translate="yes" xml:space="preserve">
+          <source>Loading...</source>
+          <target state="translated">Loading...</target>
+        </trans-unit>
+        <trans-unit id="OffButtonText" translate="yes" xml:space="preserve">
+          <source>Off</source>
+          <target state="translated">Off</target>
+        </trans-unit>
+        <trans-unit id="OnButtonText" translate="yes" xml:space="preserve">
+          <source>On</source>
+          <target state="translated">On</target>
+        </trans-unit>
+        <trans-unit id="PeriodicTaskCaptionText" translate="yes" xml:space="preserve">
+          <source>PeriodicTaskFactory</source>
+          <target state="translated">PeriodicTaskFactory</target>
+        </trans-unit>
+        <trans-unit id="SaveButtonText" translate="yes" xml:space="preserve">
+          <source>Save</source>
+          <target state="translated">Save</target>
+        </trans-unit>
+        <trans-unit id="TimerLabelText" translate="yes" xml:space="preserve">
+          <source>Timer</source>
+          <target state="translated">Timer</target>
+        </trans-unit>
+        <trans-unit id="UserAddressCountryLabelText" translate="yes" xml:space="preserve">
+          <source>Country</source>
+          <target state="translated">Country</target>
+        </trans-unit>
+        <trans-unit id="UserAddressPlaceLabelText" translate="yes" xml:space="preserve">
+          <source>Place</source>
+          <target state="translated">Place</target>
+        </trans-unit>
+        <trans-unit id="UserAddressPostalCodeLabelText" translate="yes" xml:space="preserve">
+          <source>Postal Code</source>
+          <target state="translated">Postal Code</target>
+        </trans-unit>
+        <trans-unit id="UserAddressStreetLabelText" translate="yes" xml:space="preserve">
+          <source>Street</source>
+          <target state="translated">Street</target>
+        </trans-unit>
+        <trans-unit id="UserProfileAddressCaptionText" translate="yes" xml:space="preserve">
+          <source>Shipping Address</source>
+          <target state="translated">Shipping Address</target>
+        </trans-unit>
+        <trans-unit id="LanguageLabelText" translate="yes" xml:space="preserve">
+          <source>Language</source>
+          <target state="translated">Language</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

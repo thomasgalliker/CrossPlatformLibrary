@@ -120,8 +120,17 @@
   <data name="AutomaticButtonText" xml:space="preserve">
     <value>Auto</value>
   </data>
+  <data name="CancelButtonText" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ClearButtonText" xml:space="preserve">
+    <value>Clear</value>
+  </data>
   <data name="CountdownLabelText" xml:space="preserve">
     <value>Countdown</value>
+  </data>
+  <data name="LanguageLabelText" xml:space="preserve">
+    <value>Language</value>
   </data>
   <data name="LoadingText" xml:space="preserve">
     <value>Loading...</value>
