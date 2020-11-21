@@ -238,11 +238,11 @@
                                     CommandParameter="DrilldownButtonListPage"
                                     Text="Drilldown Buttons" />
 
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ValidatablePicker--&gt;" />
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: Pickers--&gt;" />
                                 <Button
                                     Command="{Binding NavigateToPageCommand}"
                                     CommandParameter="PickersPage"
-                                    Text="Validatable Pickers" />
+                                    Text="Pickers" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: Switches--&gt;" />
                                 <Button
@@ -565,120 +565,6 @@
                                     ValidationErrors="{Binding Source={x:Reference ValidatablePickerTest2}, Path=SelectedItem, Converter={StaticResource RandomValidationErrorsConverter}}" />
 
                                 <Button Command="{Binding SetFantasyLandCommand}" Text="Select non-existing 'Fantasy Land'" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ExtendedDatePicker--&gt;" />
-                                <controls:ExtendedDatePicker
-                                    Format="d"
-                                    NullableDate="{x:Null}"
-                                    Placeholder="ExtendedDatePicker with NullableDate" />
-                                <controls:ExtendedDatePicker
-                                    Format="D"
-                                    NullableDate="{Binding Birthdate, Mode=TwoWay}"
-                                    Placeholder="ExtendedDatePicker with Birthdate" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Toggle IsReadonly--&gt;" />
-                                <Switch IsToggled="{Binding IsReadonly, Mode=TwoWay}" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableDatePicker--&gt;" />
-                                <controls:ValidatableDatePicker
-                                    Date="{Binding Birthdate, Mode=TwoWay}"
-                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                    Placeholder="ValidatableDatePicker"
-                                    ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
-                                    ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
-
-                                <controls:ValidatableDatePicker
-                                    Date="{Binding Birthdate, Mode=TwoWay}"
-                                    IsReadonly="True"
-                                    Placeholder="ValidatableDatePicker IsReadonly=&quot;True&quot;"
-                                    ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
-                                    ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
-
-                                <controls:ValidatableDatePicker
-                                    Date="{x:Null}"
-                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                    Placeholder="ValidatableDatePicker Date=&quot;null&quot;"
-                                    ReadonlyText="ReadonlyText"
-                                    ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
-
-                                <controls:ValidatableDatePicker
-                                    x:Name="ValidatableDatePickerTest2"
-                                    Date="{Binding Birthdate, Mode=TwoWay}"
-                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                    Placeholder="ValidatableDatePicker with ValidationErrors"
-                                    ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
-                                    ValidationErrors="{Binding Source={x:Reference ValidatableDatePickerTest2}, Path=Date, Converter={StaticResource RandomValidationErrorsConverter}}" />
-
-                                <controls:AlwaysScrollView Orientation="Horizontal">
-                                    <controls:GridZero>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <controls:ValidatableDatePicker
-                                            BackgroundColor="Aquamarine"
-                                            Date="{x:Null}"
-                                            Placeholder="ValidatableDatePicker" />
-                                        <controls:ValidatableEntry
-                                            Grid.Row="0"
-                                            Grid.Column="1"
-                                            BackgroundColor="LightGoldenrodYellow"
-                                            Placeholder="ValidatableEntry"
-                                            Text="" />
-                                    </controls:GridZero>
-                                </controls:AlwaysScrollView>
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ExtendedTimePicker--&gt;" />
-                                <controls:ExtendedTimePicker
-                                    Format="t"
-                                    NullableTime="{x:Null}"
-                                    Placeholder="ExtendedTimePicker with ShortTimePattern" />
-                                <controls:ExtendedTimePicker
-                                    Format="T"
-                                    NullableTime="{Binding Birthdate, Mode=TwoWay}"
-                                    Placeholder="ExtendedTimePicker with LongTimePattern" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableDateTimePicker--&gt;" />
-                                <controls:ValidatableDateTimePicker
-                                    Date="{Binding Birthdate, Mode=TwoWay}"
-                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                    Placeholder="Birthdate with ValidatableDateTimePicker"
-                                    ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
-                                    ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
-                                <controls:ValidatableDateTimePicker
-                                    Date="{x:Null}"
-                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                    Placeholder="ValidatableDateTimePicker with Date=&quot;null&quot;"
-                                    ReadonlyText="ReadonlyText"
-                                    ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
-
-                                <controls:AlwaysScrollView Orientation="Horizontal">
-                                    <controls:GridZero>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <controls:ValidatableDateTimePicker
-                                            BackgroundColor="Aquamarine"
-                                            Date="{x:Null}"
-                                            IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                            Placeholder="ValidatableDateTimePicker"
-                                            Time="{x:Null}" />
-                                        <controls:ValidatableEntry
-                                            Grid.Row="0"
-                                            Grid.Column="1"
-                                            BackgroundColor="LightGoldenrodYellow"
-                                            IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                            Placeholder="ValidatableEntry"
-                                            Text="" />
-                                    </controls:GridZero>
-                                </controls:AlwaysScrollView>
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ErrorBox--&gt;" />
                                 <controls:ErrorBox Text="Some error message" />
