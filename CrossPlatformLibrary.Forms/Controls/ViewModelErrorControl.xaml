@@ -1,41 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<controls:StackLayoutZero
+<ContentView
+    x:Class="CrossPlatformLibrary.Forms.Controls.ViewModelErrorControl"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
-    x:Class="CrossPlatformLibrary.Forms.Controls.ViewModelErrorControl" 
-    VerticalOptions="FillAndExpand"
-    HorizontalOptions="FillAndExpand"
     x:Name="Control">
 
-    <StackLayout
+    <controls:StackLayoutZero
+        Spacing="{DynamicResource Theme.Spacing.Medium}"
         Orientation="Vertical"
-        VerticalOptions="CenterAndExpand"
         HorizontalOptions="CenterAndExpand"
-        BackgroundColor="Transparent"
-        Margin="0"
-        Padding="{DynamicResource StandardPadding}">
+        VerticalOptions="CenterAndExpand">
 
         <Image
-            Source="{controls:ImageResource CrossPlatformLibrary.Forms.Resources.Images.reload_192x192.png}" 
             Aspect="AspectFit"
-            WidthRequest="48"
             HeightRequest="48"
             HorizontalOptions="Center"
-            VerticalOptions="End"/>
+            Source="{Binding ImageSource, Source={x:Reference Control}}"
+            VerticalOptions="End"
+            WidthRequest="48" />
 
-        <controls:CustomLabel 
-            Text="{Binding ViewModelError.Text, Source={x:Reference Control}}" 
+        <controls:CustomLabel
+            Style="{Binding LabelStyle, Source={x:Reference Control}}"
             FontSize="{DynamicResource LargeSize}"
-            LineBreakMode="WordWrap"
-            BackgroundColor="Transparent"
-            HorizontalTextAlignment="Center"
-            VerticalTextAlignment="Start"
             HorizontalOptions="StartAndExpand"
-            VerticalOptions="CenterAndExpand"/>
+            HorizontalTextAlignment="Center"
+            LineBreakMode="WordWrap"
+            Text="{Binding ViewModelError.Text, Source={x:Reference Control}}" />
 
         <StackLayout.GestureRecognizers>
             <TapGestureRecognizer Command="{Binding ViewModelError.Command, Source={x:Reference Control}}" />
         </StackLayout.GestureRecognizers>
-    </StackLayout>
-</controls:StackLayoutZero>
+    </controls:StackLayoutZero>
+</ContentView>

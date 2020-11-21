@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:CardView
+    x:Class="CrossPlatformLibrary.Forms.Controls.DrilldownButton"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    x:Name="Control">
+
+    <controls:StackLayoutZero>
+        <controls:HeaderDivider />
+        <controls:GridZero>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <controls:CustomButton
+                HorizontalContentAlignment="Start"
+                VerticalContentAlignment="Center"
+                AllCaps="False"
+                Command="{Binding Command, Source={x:Reference Control}, Mode=OneWay}"
+                CommandParameter="{Binding CommandParameter, Source={x:Reference Control}, Mode=OneWay}"
+                CornerRadius="0"
+                FontAttributes="None"
+                FontSize="{DynamicResource LargeSize}"
+                IsEnabled="{Binding IsEnabled, Source={x:Reference Control}, Mode=OneWay}"
+                Style="{DynamicResource DrilldownButtonStyle}"
+                Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="StartAndExpand">
+
+                <controls:CustomButton.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="-1" />
+                    </OnPlatform>
+                </controls:CustomButton.Margin>
+
+                <controls:CustomButton.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="8, 0, 0, 0" />
+                        <On Platform="iOS" Value="16, 0, 0, 0" />
+                    </OnPlatform>
+                </controls:CustomButton.Padding>
+
+            </controls:CustomButton>
+
+            <Image
+                Margin="0,0,8,0"
+                HeightRequest="24"
+                Source="{Binding ImageSource, Source={x:Reference Control}, Mode=OneWay}"
+                WidthRequest="24"
+                HorizontalOptions="EndAndExpand"
+                VerticalOptions="CenterAndExpand" />
+
+            <ActivityIndicator
+                x:Name="ActivityIndicator"
+                Margin="0,0,8,0"
+                IsRunning="{Binding IsBusy, Source={x:Reference Control}, Mode=OneWay}"
+                IsVisible="{Binding IsBusy, Source={x:Reference Control}, Mode=OneWay}"
+                WidthRequest="24"
+                HorizontalOptions="EndAndExpand"
+                VerticalOptions="CenterAndExpand" />
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Command, Source={x:Reference Control}, Mode=OneWay}" CommandParameter="{Binding CommandParameter, Source={x:Reference Control}, Mode=OneWay}" />
+            </Grid.GestureRecognizers>
+        </controls:GridZero>
+        <controls:FooterDivider />
+    </controls:StackLayoutZero>
+</controls:CardView>

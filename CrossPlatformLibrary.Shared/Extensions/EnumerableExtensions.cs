@@ -7,8 +7,10 @@ using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Extensions
 {
-    public static class EnumerableExtensions
+    public  static partial class EnumerableExtensions
     {
+        private static readonly Random Rng = new Random();
+
         public static IList CreateList(this IEnumerable enumerable)
         {
             var list = new Collection<object>();
@@ -57,7 +59,7 @@ namespace CrossPlatformLibrary.Extensions
         }
 
         /// <summary>
-        /// Adds a collection of <typeparamref name="T"/> to the given list <paramref name="list"/>.
+        ///     Adds a collection of <typeparamref name="T" /> to the given list <paramref name="list" />.
         /// </summary>
         public static void AddRange<T>(this IList<T> list, IEnumerable<T> collection)
         {
@@ -216,15 +218,82 @@ namespace CrossPlatformLibrary.Extensions
         }
 
         /// <summary>
-        /// Returns the number of items in <paramref name="enumerable"/>.
+        ///     Returns the number of items in <paramref name="enumerable" />.
         /// </summary>
         public static int GetCount(this IEnumerable enumerable)
         {
             var enumerator = enumerable.GetEnumerator();
             int num = 0;
             while (enumerator.MoveNext())
+            {
                 ++num;
+            }
+
             return num;
+        }
+
+        public static T RandomElement<T>(this IEnumerable<T> source)
+        {
+            return RandomElement(source, Rng);
+        }
+
+        public static T RandomElement<T>(this IEnumerable<T> source, Random rng)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var current = default(T);
+            var count = 0;
+            foreach (var element in source)
+            {
+                count++;
+                if (rng.Next(count) == 0)
+                {
+                    current = element;
+                }
+            }
+
+            if (count == 0)
+            {
+                throw new InvalidOperationException("Sequence was empty");
+            }
+
+            return current;
+        }
+
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
+        {
+            return Shuffle(source, Rng);
+        }
+
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rng)
+        {
+            var elements = source.ToArray();
+            for (var i = elements.Length - 1; i >= 0; i--)
+            {
+                int swapIndex = rng.Next(i + 1);
+                yield return elements[swapIndex];
+                elements[swapIndex] = elements[i];
+            }
+        }
+
+        /// <summary>
+        /// Finds duplicates in a given collection <seealso cref="source"/>.
+        /// </summary>
+        /// <typeparam name="T">The collection item type.</typeparam>
+        /// <param name="source">The source collection.</param>
+        /// <param name="propertySelector">Property selector.</param>
+        /// <param name="numberOfDuplicates">The least number of duplicates.</param>
+        /// <returns></returns>
+        public static IEnumerable<T> FindDuplicates<T>(this IEnumerable<T> source, Func<T, object> propertySelector, int numberOfDuplicates = 2)
+        {
+            var skip = numberOfDuplicates - 1;
+            return source
+                .GroupBy(propertySelector)
+                .Where(g => g.Skip(skip).Any())
+                .SelectMany(g => g);
         }
     }
 }

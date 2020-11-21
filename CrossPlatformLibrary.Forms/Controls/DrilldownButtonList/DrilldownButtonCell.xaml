@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:ExtendedViewCell
+    x:Class="CrossPlatformLibrary.Forms.Controls.DrilldownButtonCell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    x:Name="Control"
+    SelectedBackgroundColor="{DynamicResource DrilldownButtonStyle.BackgroundColor.Pressed}">
+
+    <ViewCell.View>
+        <controls:GridZero>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <controls:CustomButton
+                HorizontalContentAlignment="Start"
+                VerticalContentAlignment="Center"
+                AllCaps="False"
+                Command="{Binding Command, Mode=OneWay}"
+                CommandParameter="{Binding CommandParameter, Mode=OneWay}"
+                CornerRadius="0"
+                FontAttributes="None"
+                FontSize="{DynamicResource LargeSize}"
+                HorizontalOptions="FillAndExpand"
+                IsEnabled="{Binding IsEnabled, Mode=OneWay}"
+                Style="{DynamicResource DrilldownButtonStyle}"
+                Text="{Binding Title, Mode=OneWay}"
+                VerticalOptions="StartAndExpand">
+
+                <controls:CustomButton.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="-1" />
+                    </OnPlatform>
+                </controls:CustomButton.Margin>
+
+                <controls:CustomButton.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="8, 0, 0, 0" />
+                        <On Platform="iOS" Value="16, 0, 0, 0" />
+                    </OnPlatform>
+                </controls:CustomButton.Padding>
+
+            </controls:CustomButton>
+
+            <Image
+                Margin="0,0,8,0"
+                HeightRequest="24"
+                HorizontalOptions="EndAndExpand"
+                IsVisible="{Binding IsBusy, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+                Source="{Binding ImageSource, Mode=OneWay}"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="24" />
+
+            <ActivityIndicator
+                x:Name="ActivityIndicator"
+                Margin="0,0,8,0"
+                HorizontalOptions="EndAndExpand"
+                IsRunning="{Binding IsBusy, Mode=OneWay}"
+                IsVisible="{Binding IsBusy, Mode=OneWay}"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="24" />
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Command, Mode=OneWay}" CommandParameter="{Binding CommandParameter, Mode=OneWay}" />
+            </Grid.GestureRecognizers>
+        </controls:GridZero>
+    </ViewCell.View>
+</controls:ExtendedViewCell>

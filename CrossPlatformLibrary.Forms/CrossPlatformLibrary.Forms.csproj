@@ -50,6 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="CrossPlatformLibrary.Forms.csproj.DotSettings" />
     <None Remove="Resources\Images\reload_192x192.png" />
   </ItemGroup>
 
@@ -58,7 +59,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" version="3.6.0.344457" />
+    <PackageReference Include="Xamarin.Forms" version="4.7.0.1179" />
   </ItemGroup>
 
   <ItemGroup>
@@ -70,8 +71,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Controls\DrilldownSwitchCell.xaml.cs">
+    <Compile Update="Controls\CardView\FooterSection.xaml.cs">
+      <DependentUpon>FooterSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\CardView\SpacerSection.xaml.cs">
+      <DependentUpon>SpacerSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\DrilldownButtonList\DrilldownSwitchCell.xaml.cs">
       <DependentUpon>DrilldownSwitchCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\SegmentedStatusIndicator\SegmentedStatusIndicator.xaml.cs">
+      <DependentUpon>SegmentedStatusIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\MultiStateToggleButton\MultiStateToggleButton.xaml.cs">
+      <DependentUpon>MultiStateToggleButton.xaml</DependentUpon>
     </Compile>
     <Compile Update="Controls\ValidatableEditor.xaml.cs">
       <DependentUpon>ValidatableEditor.xaml</DependentUpon>
@@ -79,25 +92,49 @@
     <Compile Update="Controls\ValidatableAutoCompleteView.xaml.cs">
       <DependentUpon>ValidatableAutoCompleteView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Controls\DividerLine.xaml.cs">
+      <DependentUpon>DividerLine.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\ErrorBox.xaml.cs">
+      <DependentUpon>ErrorBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\ValidationErrorBox.xaml.cs">
+      <DependentUpon>ValidationErrorBox.xaml</DependentUpon>
+    </Compile>
     <Compile Update="MyResourceDictionary.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="Resources\GoogleColors.xaml.cs">
+    <Compile Update="Resources\UI\GoogleColors.xaml.cs">
       <DependentUpon>GoogleColors.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Resources\NaturalColors.xaml.cs">
+    <Compile Update="Resources\UI\ThemeFontResources.xaml.cs">
+      <DependentUpon>ThemeFontResources.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\UI\ThemeSpacingResources.xaml.cs">
+      <DependentUpon>ThemeSpacingResources.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\UI\ThemeColorResources.xaml.cs">
+      <DependentUpon>ThemeColorResources.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\UI\NaturalColors.xaml.cs">
       <DependentUpon>NaturalColors.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Controls\DrilldownSwitchCell.xaml">
+    <EmbeddedResource Update="Controls\CardView\FooterSection.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\DrilldownButtonCell.xaml">
+    <EmbeddedResource Update="Controls\CardView\SpacerSection.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\DrilldownButtonList.xaml">
+    <EmbeddedResource Update="Controls\DrilldownButtonList\DrilldownSwitchCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\DrilldownButtonList\DrilldownButtonCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\DrilldownButtonList\DrilldownButtonList.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\ValidatableEditor.xaml">
@@ -105,6 +142,12 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\ValidatableAutoCompleteView.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\DividerLine.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\ValidationErrorBox.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="MyResourceDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -118,19 +161,19 @@
     <EmbeddedResource Update="Controls\CustomActivityIndicatorPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\DrilldownButton.xaml">
+    <EmbeddedResource Update="Controls\DrilldownButtonList\DrilldownButton.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\FooterDivider.xaml">
+    <EmbeddedResource Update="Controls\CardView\FooterDivider.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\HeaderDivider.xaml">
+    <EmbeddedResource Update="Controls\CardView\HeaderDivider.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\LabelSection.xaml">
+    <EmbeddedResource Update="Controls\CardView\LabelSection.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\SectionDivider.xaml">
+    <EmbeddedResource Update="Controls\CardView\SectionDivider.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\ValidatableDatePicker.xaml">
@@ -151,10 +194,19 @@
     <EmbeddedResource Update="Controls\ViewModelErrorControl.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\GoogleColors.xaml">
+    <EmbeddedResource Update="Resources\UI\GoogleColors.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\NaturalColors.xaml">
+    <EmbeddedResource Update="Resources\UI\ThemeColorResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\UI\ThemeFontResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\UI\ThemeSpacingResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\UI\NaturalColors.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -166,7 +218,19 @@
     <None Update="Controls\CustomActivityIndicatorPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <None Update="Controls\DividerLine.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Controls\DrilldownButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\DrilldownButtonCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\DrilldownButtonList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\DrilldownSwitchCell.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Controls\FooterDivider.xaml">
@@ -179,6 +243,9 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Controls\SectionDivider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\ValidatableAutoCompleteView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Controls\ValidatableDatePicker.xaml">
@@ -209,6 +276,18 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Resources\NaturalColors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Resources\UI\GoogleColors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Resources\UI\NaturalColors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Resources\UI\ThemeColorResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Resources\UI\ThemeSpacingResources.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>

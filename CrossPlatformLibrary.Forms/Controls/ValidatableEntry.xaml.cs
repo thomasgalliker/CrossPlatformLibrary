@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
@@ -8,11 +9,12 @@ namespace CrossPlatformLibrary.Forms.Controls
     /// Similar solution can be found here:
     /// https://github.com/XamFormsExtended/Xfx.Controls
     /// </summary>
-    public partial class ValidatableEntry : Grid
+    public partial class ValidatableEntry : GridZero
     {
         public ValidatableEntry()
         {
             this.InitializeComponent();
+            this.DebugLayoutBounds();
         }
 
         public new void Focus()
@@ -33,13 +35,20 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Text),
                 typeof(string),
                 typeof(ValidatableEntry),
-                string.Empty,
-                BindingMode.TwoWay);
+                null,
+                BindingMode.TwoWay,
+                propertyChanged: OnTextPropertyChanged);
 
         public string Text
         {
-            get { return (string)this.GetValue(TextProperty); }
-            set { this.SetValue(TextProperty, value); }
+            get => (string)this.GetValue(TextProperty);
+            set => this.SetValue(TextProperty, value);
+        }
+
+        private static void OnTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var entry = (ValidatableEntry)bindable;
+            entry.OnPropertyChanged(nameof(entry.AnnotationText));
         }
 
         public static readonly BindableProperty PlaceholderProperty =
@@ -47,13 +56,33 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Placeholder),
                 typeof(string),
                 typeof(ValidatableEntry),
-                string.Empty,
-                BindingMode.OneWay);
+                null,
+                BindingMode.OneWay,
+                propertyChanged: OnPlaceholderPropertyChanged);
 
         public string Placeholder
         {
-            get { return (string)this.GetValue(PlaceholderProperty); }
-            set { this.SetValue(PlaceholderProperty, value); }
+            get => (string)this.GetValue(PlaceholderProperty);
+            set => this.SetValue(PlaceholderProperty, value);
+        }
+
+        private static void OnPlaceholderPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var entry = (ValidatableEntry)bindable;
+            entry.OnPropertyChanged(nameof(entry.AnnotationText));
+        }
+
+        public string AnnotationText
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.Text))
+                {
+                    return this.Placeholder;
+                }
+
+                return " ";
+            }
         }
 
         public static readonly BindableProperty IsReadonlyProperty =
@@ -80,8 +109,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public Keyboard Keyboard
         {
-            get { return (Keyboard)this.GetValue(KeyboardProperty); }
-            set { this.SetValue(KeyboardProperty, value); }
+            get => (Keyboard)this.GetValue(KeyboardProperty);
+            set => this.SetValue(KeyboardProperty, value);
         }
 
         public static readonly BindableProperty IsPasswordProperty =
@@ -94,8 +123,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public bool IsPassword
         {
-            get { return (bool)this.GetValue(IsPasswordProperty); }
-            set { this.SetValue(IsPasswordProperty, value); }
+            get => (bool)this.GetValue(IsPasswordProperty);
+            set => this.SetValue(IsPasswordProperty, value);
         }
 
         public static readonly BindableProperty EntryStyleProperty =
@@ -108,22 +137,22 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public Style EntryStyle
         {
-            get { return (Style)this.GetValue(EntryStyleProperty); }
-            set { this.SetValue(EntryStyleProperty, value); }
+            get => (Style)this.GetValue(EntryStyleProperty);
+            set => this.SetValue(EntryStyleProperty, value);
         }
 
-        public static readonly BindableProperty FontFamilyProperty =
+        public static readonly BindableProperty ReturnTypeProperty =
             BindableProperty.Create(
-                nameof(FontFamily),
-                typeof(string),
+                nameof(ReturnType),
+                typeof(ReturnType),
                 typeof(ValidatableEntry),
-                default(string),
+                default(ReturnType),
                 BindingMode.OneWay);
 
-        public string FontFamily
+        public ReturnType ReturnType
         {
-            get { return (string)this.GetValue(FontFamilyProperty); }
-            set { this.SetValue(FontFamilyProperty, value); }
+            get => (ReturnType)this.GetValue(ReturnTypeProperty);
+            set => this.SetValue(ReturnTypeProperty, value);
         }
 
         public static readonly BindableProperty MaxLengthProperty =
@@ -136,8 +165,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public int MaxLength
         {
-            get { return (int)this.GetValue(MaxLengthProperty); }
-            set { this.SetValue(MaxLengthProperty, value); }
+            get => (int)this.GetValue(MaxLengthProperty);
+            set => this.SetValue(MaxLengthProperty, value);
         }
 
         public static readonly BindableProperty ValidationErrorsProperty =
@@ -150,35 +179,89 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public IEnumerable<string> ValidationErrors
         {
-            get { return (IEnumerable<string>)this.GetValue(ValidationErrorsProperty); }
-            set { this.SetValue(ValidationErrorsProperty, value); }
+            get => (IEnumerable<string>)this.GetValue(ValidationErrorsProperty);
+            set => this.SetValue(ValidationErrorsProperty, value);
+        }
+
+        public static readonly BindableProperty TrailingIconProperty =
+            BindableProperty.Create(
+                nameof(TrailingIcon),
+                typeof(ImageSource),
+                typeof(ValidatableEntry),
+                null,
+                BindingMode.OneWay);
+
+        public ImageSource TrailingIcon
+        {
+            get => (ImageSource)this.GetValue(TrailingIconProperty);
+            set => this.SetValue(TrailingIconProperty, value);
+        }
+
+        public static readonly BindableProperty TrailingIconCommandProperty =
+            BindableProperty.Create(
+                nameof(TrailingIconCommand),
+                typeof(ICommand),
+                typeof(ValidatableEntry),
+                null,
+                BindingMode.OneWay);
+
+        public ICommand TrailingIconCommand
+        {
+            get => (ICommand)this.GetValue(TrailingIconCommandProperty);
+            set => this.SetValue(TrailingIconCommandProperty, value);
+        }
+
+        public static readonly BindableProperty TrailingIconCommandParameterProperty =
+            BindableProperty.Create(
+                nameof(TrailingIconCommandParameter),
+                typeof(object),
+                typeof(ValidatableEntry),
+                null,
+                BindingMode.OneWay);
+
+        public object TrailingIconCommandParameter
+        {
+            get => this.GetValue(TrailingIconCommandParameterProperty);
+            set => this.SetValue(TrailingIconCommandParameterProperty, value);
+        }
+
+        public static readonly BindableProperty TextContentTypeProperty =
+            BindableProperty.Create(
+                nameof(TextContentType),
+                typeof(TextContentType),
+                typeof(ValidatableEntry),
+                default(TextContentType),
+                BindingMode.OneWay);
+
+        public TextContentType TextContentType
+        {
+            get => (TextContentType)this.GetValue(TextContentTypeProperty);
+            set => this.SetValue(TextContentTypeProperty, value);
         }
 
         public event EventHandler Completed
         {
-            add { this.Entry.Completed += value; }
-            remove { this.Entry.Completed -= value; }
+            add => this.Entry.Completed += value;
+            remove => this.Entry.Completed -= value;
         }
 
         public new event EventHandler<FocusEventArgs> Focused
         {
-            add { this.Entry.Focused += value; }
-            remove { this.Entry.Focused -= value; }
+            add => this.Entry.Focused += value;
+            remove => this.Entry.Focused -= value;
         }
 
         public new event EventHandler<FocusEventArgs> Unfocused
         {
-            add { this.Entry.Unfocused += value; }
-            remove { this.Entry.Unfocused -= value; }
+            add => this.Entry.Unfocused += value;
+            remove => this.Entry.Unfocused -= value;
         }
 
         public event EventHandler<TextChangedEventArgs> TextChanged
         {
-            add { this.Entry.TextChanged += value; }
-            remove { this.Entry.TextChanged -= value; }
+            add => this.Entry.TextChanged += value;
+            remove => this.Entry.TextChanged -= value;
         }
-
-
     }
 }
 

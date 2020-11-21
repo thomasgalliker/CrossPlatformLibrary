@@ -5,11 +5,12 @@ using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
-    public partial class ValidatableDatePicker : Grid
+    public partial class ValidatableDatePicker : GridZero
     {
         public ValidatableDatePicker()
         {
             this.InitializeComponent();
+            this.DebugLayoutBounds();
         }
 
         public static readonly BindableProperty PlaceholderProperty =
@@ -17,10 +18,9 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Placeholder),
                 typeof(string),
                 typeof(ValidatableDatePicker),
-                string.Empty,
-                BindingMode.OneWay,
                 null,
-                OnPlaceholderPropertyChanged);
+                BindingMode.OneWay,
+                propertyChanged: OnPlaceholderPropertyChanged);
 
         private static void OnPlaceholderPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
@@ -30,77 +30,21 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string Placeholder
         {
-            get { return (string)this.GetValue(PlaceholderProperty); }
-            set { this.SetValue(PlaceholderProperty, value); }
+            get => (string)this.GetValue(PlaceholderProperty);
+            set => this.SetValue(PlaceholderProperty, value);
         }
 
         public string AnnotationText
         {
             get
             {
-                if (this.Date != null)
+                if (this.Date != null || this.IsReadonly)
                 {
                     return this.Placeholder;
                 }
 
                 return " ";
             }
-        }
-
-        public new static readonly BindableProperty StyleProperty =
-            BindableProperty.Create(
-                nameof(Style),
-                typeof(Style),
-                typeof(ValidatableDatePicker),
-                default(Style),
-                BindingMode.OneWay);
-
-        public new Style Style
-        {
-            get { return (Style)this.GetValue(StyleProperty); }
-            set { this.SetValue(StyleProperty, value); }
-        }
-
-        public static readonly BindableProperty FontFamilyProperty =
-            BindableProperty.Create(
-                nameof(FontFamily),
-                typeof(string),
-                typeof(ValidatableDatePicker),
-                default(string),
-                BindingMode.OneWay);
-
-        public string FontFamily
-        {
-            get { return (string)this.GetValue(FontFamilyProperty); }
-            set { this.SetValue(FontFamilyProperty, value); }
-        }
-
-        public static readonly BindableProperty FontSizeProperty =
-            BindableProperty.Create(
-                nameof(FontSize),
-                typeof(double),
-                typeof(ValidatableDatePicker),
-                Font.Default.FontSize,
-                BindingMode.OneWay);
-
-        public double FontSize
-        {
-            get { return (double)this.GetValue(FontSizeProperty); }
-            set { this.SetValue(FontSizeProperty, value); }
-        }
-
-        public static readonly BindableProperty FontAttributesProperty =
-            BindableProperty.Create(
-                nameof(FontAttributes),
-                typeof(FontAttributes),
-                typeof(ValidatableDatePicker),
-                FontAttributes.None,
-                BindingMode.OneWay);
-
-        public FontAttributes FontAttributes
-        {
-            get { return (FontAttributes)this.GetValue(FontAttributesProperty); }
-            set { this.SetValue(FontAttributesProperty, (object)value); }
         }
 
         public static readonly BindableProperty DateProperty =
@@ -123,8 +67,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public DateTime? Date
         {
-            get { return (DateTime?)this.GetValue(DateProperty); }
-            set { this.SetValue(DateProperty, value); }
+            get => (DateTime?)this.GetValue(DateProperty);
+            set => this.SetValue(DateProperty, value);
         }
 
         public static readonly BindableProperty ValidityRangeProperty =
@@ -144,8 +88,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public DateRange ValidityRange
         {
-            get { return (DateRange)this.GetValue(ValidityRangeProperty); }
-            set { this.SetValue(ValidityRangeProperty, value); }
+            get => (DateRange)this.GetValue(ValidityRangeProperty);
+            set => this.SetValue(ValidityRangeProperty, value);
         }
 
         public static readonly BindableProperty IsReadonlyProperty =
@@ -154,12 +98,19 @@ namespace CrossPlatformLibrary.Forms.Controls
                 typeof(bool),
                 typeof(ValidatableDatePicker),
                 false,
-                BindingMode.OneWay);
+                BindingMode.OneWay,
+                propertyChanged: OnIsReadonlyPropertyChanged);
+
+        private static void OnIsReadonlyPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var picker = (ValidatableDatePicker)bindable;
+            picker.OnPropertyChanged(nameof(picker.AnnotationText));
+        }
 
         public bool IsReadonly
         {
-            get { return (bool)this.GetValue(IsReadonlyProperty); }
-            set { this.SetValue(IsReadonlyProperty, value); }
+            get => (bool)this.GetValue(IsReadonlyProperty);
+            set => this.SetValue(IsReadonlyProperty, value);
         }
 
         public static readonly BindableProperty ReadonlyTextProperty =
@@ -172,8 +123,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string ReadonlyText
         {
-            get { return (string)this.GetValue(ReadonlyTextProperty); }
-            set { this.SetValue(ReadonlyTextProperty, value); }
+            get => (string)this.GetValue(ReadonlyTextProperty);
+            set => this.SetValue(ReadonlyTextProperty, value);
         }
 
         public static readonly BindableProperty ValidationErrorsProperty =
@@ -186,8 +137,22 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public IEnumerable<string> ValidationErrors
         {
-            get { return (IEnumerable<string>)this.GetValue(ValidationErrorsProperty); }
-            set { this.SetValue(ValidationErrorsProperty, value); }
+            get => (IEnumerable<string>)this.GetValue(ValidationErrorsProperty);
+            set => this.SetValue(ValidationErrorsProperty, value);
+        }
+
+        public static readonly BindableProperty PickerStyleProperty =
+            BindableProperty.Create(
+                nameof(PickerStyle),
+                typeof(Style),
+                typeof(ValidatableDatePicker),
+                default(Style),
+                BindingMode.OneWay);
+
+        public Style PickerStyle
+        {
+            get => (Style)this.GetValue(PickerStyleProperty);
+            set => this.SetValue(PickerStyleProperty, value);
         }
     }
 }

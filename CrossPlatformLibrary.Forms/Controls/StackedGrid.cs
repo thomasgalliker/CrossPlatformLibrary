@@ -44,26 +44,26 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public virtual ICommand SelectedCommand
         {
-            get { return (ICommand)this.GetValue(SelectedCommandProperty); }
-            set { this.SetValue(SelectedCommandProperty, value); }
+            get => (ICommand)this.GetValue(SelectedCommandProperty);
+            set => this.SetValue(SelectedCommandProperty, value);
         }
 
         public virtual IEnumerable ItemsSource
         {
-            get { return (IEnumerable)this.GetValue(ItemsSourceProperty); }
-            set { this.SetValue(ItemsSourceProperty, value); }
+            get => (IEnumerable)this.GetValue(ItemsSourceProperty);
+            set => this.SetValue(ItemsSourceProperty, value);
         }
 
         public virtual object SelectedItem
         {
-            get { return (object)this.GetValue(SelectedItemProperty); }
-            set { this.SetValue(SelectedItemProperty, value); }
+            get => (object)this.GetValue(SelectedItemProperty);
+            set => this.SetValue(SelectedItemProperty, value);
         }
 
         public DataTemplate ItemTemplate
         {
-            get { return (DataTemplate)this.GetValue(ItemTemplateProperty); }
-            set { this.SetValue(ItemTemplateProperty, value); }
+            get => (DataTemplate)this.GetValue(ItemTemplateProperty);
+            set => this.SetValue(ItemTemplateProperty, value);
         }
 
         private static void ItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
@@ -163,21 +163,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         protected virtual View GetItemView(object item)
         {
-            var content = this.ItemTemplate.CreateContent();
-            View view;
-            if (content is ViewCell viewCell)
-            {
-                view = viewCell.View;
-            }
-            else
-            {
-                view = content as View;
-                if (view == null)
-                {
-                    throw new Exception("ItemTemplate must either be a View or a ViewCell");
-                }
-            }
-
+            var view = BindingHelper.CreateContent(this.ItemTemplate, item, this);
             view.BindingContext = item;
 
             var gesture = new TapGestureRecognizer { Command = this.innerSelectedCommand, CommandParameter = view };
@@ -189,7 +175,11 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         private void AddGesture(View view, TapGestureRecognizer gesture)
         {
-            view.GestureRecognizers.Add(gesture);
+            var gestures = view.GestureRecognizers;
+            if (!gestures.Contains(gesture))
+            {
+                view.GestureRecognizers.Add(gesture);
+            }
 
             var layout = view as Layout<View>;
 

@@ -11,12 +11,6 @@ namespace CrossPlatformLibrary.Forms.Controls
     public class ExtendedTimePicker : TimePicker
     {
         /// <summary>
-        /// The font property
-        /// </summary>
-        public static readonly BindableProperty FontProperty =
-            BindableProperty.Create("Font", typeof(Font), typeof(ExtendedTimePicker), new Font());
-
-        /// <summary>
         /// The NullableTime property
         /// </summary>
         public static readonly BindableProperty NullableTimeProperty =
@@ -39,7 +33,12 @@ namespace CrossPlatformLibrary.Forms.Controls
         /// The Placeholder property
         /// </summary>
         public static readonly BindableProperty PlaceholderProperty =
-            BindableProperty.Create("Placeholder", typeof(string), typeof(ExtendedTimePicker), string.Empty, BindingMode.OneWay);
+            BindableProperty.Create(
+                nameof(Placeholder),
+                typeof(string), 
+                typeof(ExtendedTimePicker),
+                null,
+                BindingMode.OneWay);
 
         /// <summary>
         /// The PlaceholderTextColor property
@@ -64,7 +63,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         /// </summary>
         public TimeSpan? NullableTime
         {
-            get { return (TimeSpan?)this.GetValue(NullableTimeProperty); }
+            get => (TimeSpan?)this.GetValue(NullableTimeProperty);
             set
             {
                 if (value != this.NullableTime)
@@ -75,23 +74,13 @@ namespace CrossPlatformLibrary.Forms.Controls
             }
         }
 
-        /// <summary> /// Gets or sets the Font of the text /// </summary> 
-        public Font Font
-        {
-            get { return (Font)this.GetValue(FontProperty); }
-            set
-            {
-                this.SetValue(FontProperty, value);
-            }
-        }
-
         /// <summary>
         /// Gets or sets the X alignment of the text
         /// </summary>
         public TextAlignment XAlign
         {
-            get { return (TextAlignment)this.GetValue(XAlignProperty); }
-            set { this.SetValue(XAlignProperty, value); }
+            get => (TextAlignment)this.GetValue(XAlignProperty);
+            set => this.SetValue(XAlignProperty, value);
         }
 
 
@@ -100,8 +89,8 @@ namespace CrossPlatformLibrary.Forms.Controls
         /// </summary>
         public bool HasBorder
         {
-            get { return (bool)this.GetValue(HasBorderProperty); }
-            set { this.SetValue(HasBorderProperty, value); }
+            get => (bool)this.GetValue(HasBorderProperty);
+            set => this.SetValue(HasBorderProperty, value);
         }
 
         /// <summary>
@@ -109,8 +98,8 @@ namespace CrossPlatformLibrary.Forms.Controls
         /// </summary>
         public string Placeholder
         {
-            get { return (string)this.GetValue(PlaceholderProperty); }
-            set { this.SetValue(PlaceholderProperty, value); }
+            get => (string)this.GetValue(PlaceholderProperty);
+            set => this.SetValue(PlaceholderProperty, value);
         }
 
         /// <summary>
@@ -118,8 +107,8 @@ namespace CrossPlatformLibrary.Forms.Controls
         /// </summary>
         public Color PlaceholderTextColor
         {
-            get { return (Color)this.GetValue(PlaceholderTextColorProperty); }
-            set { this.SetValue(PlaceholderTextColorProperty, value); }
+            get => (Color)this.GetValue(PlaceholderTextColorProperty);
+            set => this.SetValue(PlaceholderTextColorProperty, value);
         }
 
         /// <summary>
@@ -128,9 +117,8 @@ namespace CrossPlatformLibrary.Forms.Controls
         /// <value>The minimum time.</value>
         public TimeSpan MinimumTime
         {
-            get { return (TimeSpan)this.GetValue(MinimumTimeProperty); }
-            set {
-                this.SetValue(MinimumTimeProperty, value); }
+            get => (TimeSpan)this.GetValue(MinimumTimeProperty);
+            set => this.SetValue(MinimumTimeProperty, value);
         }
 
         /// <summary>
@@ -139,9 +127,8 @@ namespace CrossPlatformLibrary.Forms.Controls
         /// <value>The maximum time.</value>
         public TimeSpan MaximumTime
         {
-            get { return (TimeSpan)this.GetValue(MaximumTimeProperty); }
-            set {
-                this.SetValue(MaximumTimeProperty, value); }
+            get => (TimeSpan)this.GetValue(MaximumTimeProperty);
+            set => this.SetValue(MaximumTimeProperty, value);
         }
 
         protected override void OnBindingContextChanged()

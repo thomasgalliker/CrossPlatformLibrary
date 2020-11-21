@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<controls:GridZero
+    x:Class="CrossPlatformLibrary.Forms.Controls.SegmentedStatusIndicator"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:converters="clr-namespace:CrossPlatformLibrary.Forms.Converters"
+    x:Name="Control">
+
+    <Grid.Resources>
+        <ResourceDictionary>
+            <converters:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter" />
+
+            <converters:Part1ToColorConverter
+                x:Key="Part1ToColorConverter"
+                TrueValue="{Binding Source={x:Reference Control}, Path=IndicatorForegroundColor}"
+                FalseValue="{Binding Source={x:Reference Control}, Path=IndicatorBackgroundColor}" />
+            <converters:Part2ToColorConverter
+                x:Key="Part2ToColorConverter"
+                TrueValue="{Binding Source={x:Reference Control}, Path=IndicatorForegroundColor}"
+                FalseValue="{Binding Source={x:Reference Control}, Path=IndicatorBackgroundColor}" />
+            <converters:Part3ToColorConverter
+                x:Key="Part3ToColorConverter"
+                TrueValue="{Binding Source={x:Reference Control}, Path=IndicatorForegroundColor}"
+                FalseValue="{Binding Source={x:Reference Control}, Path=IndicatorBackgroundColor}" />
+
+            <ControlTemplate x:Key="StatusSegmentControlTemplate">
+                <controls:GridZero>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="48" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <controls:GridZero Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <!--  Start Section  -->
+                        <BoxView
+                            Grid.Row="0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Start"
+                            WidthRequest="{Binding Source={x:Reference Control}, Path=LineWidth}"
+                            HeightRequest="{Binding Source={x:Reference Control}, Path=LineLengthPart1}"
+                            Color="{TemplateBinding BindingContext,
+                                                    Converter={StaticResource Part1ToColorConverter}}" />
+
+                        <!--  Middle Section  -->
+                        <BoxView
+                            Grid.Row="1"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            HeightRequest="{Binding Source={x:Reference Control}, Path=PointSize}"
+                            WidthRequest="{Binding Source={x:Reference Control}, Path=PointSize}"
+                            CornerRadius="{Binding Source={x:Reference Control}, Path=PointCornerRadius}"
+                            Color="{TemplateBinding BindingContext,
+                                                    Converter={StaticResource Part2ToColorConverter}}" />
+                        <Image
+                            Grid.Row="1"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            HeightRequest="{Binding Source={x:Reference Control}, Path=PointSize}"
+                            WidthRequest="{Binding Source={x:Reference Control}, Path=PointSize}"
+                            Source="{Binding Payload.ImageSource, Mode=OneWay}"
+                            Aspect="AspectFit"
+                            InputTransparent="True" />
+
+                        <!--  End Section  -->
+                        <BoxView
+                            Grid.Row="2"
+                            HorizontalOptions="Center"
+                            VerticalOptions="FillAndExpand"
+                            WidthRequest="{Binding Source={x:Reference Control}, Path=LineWidth}"
+                            HeightRequest="0"
+                            Color="{TemplateBinding BindingContext,
+                                                    Converter={StaticResource Part3ToColorConverter}}" />
+
+                    </controls:GridZero>
+
+                    <controls:GridZero Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <!--  Content row  -->
+                            <RowDefinition Height="Auto" />
+                            <!--  Spacing row  -->
+                            <RowDefinition Height="{Binding Source={x:Reference Control}, Path=Spacing, Converter={StaticResource DoubleToGridLengthConverter}}" />
+                        </Grid.RowDefinitions>
+
+                        <ContentPresenter Grid.Row="0" />
+                    </controls:GridZero>
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Command, Mode=OneWay}" CommandParameter="{Binding CommandParameter, Mode=OneWay}" />
+                    </Grid.GestureRecognizers>
+                </controls:GridZero>
+            </ControlTemplate>
+
+            <!--
+                This DataTemplate creates a ContentView based on a pre-defined ControlTemplate.
+                The data content of this ControlTemplate is the 'Payload' property of the wrapped status.
+                This 'Payload' property is then passed on to the Control's ItemTemplate.
+            -->
+            <DataTemplate x:Key="StatusSegmentDataTemplate">
+                <ViewCell>
+                    <ContentView ControlTemplate="{StaticResource StatusSegmentControlTemplate}">
+                        <controls:ContentControl BindingContext="{Binding Payload}" ItemTemplate="{Binding Source={x:Reference Control}, Path=ItemTemplate}" />
+                    </ContentView>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Grid.Resources>
+
+    <controls:BindableStackLayout
+        x:Name="BindableStackLayout"
+        Orientation="Vertical"
+        Padding="0"
+        Spacing="0"
+        ItemTemplate="{StaticResource StatusSegmentDataTemplate}" />
+</controls:GridZero>

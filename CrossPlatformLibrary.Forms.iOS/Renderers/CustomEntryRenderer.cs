@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using CrossPlatformLibrary.Forms.Controls;
 using CrossPlatformLibrary.Forms.iOS.Renderers;
+using Foundation;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -24,13 +26,11 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             var uiTextField = this.Control;
             if (uiTextField != null)
             {
-                uiTextField.SpellCheckingType = UITextSpellCheckingType.No; // No Spellchecking
-                uiTextField.AutocorrectionType = UITextAutocorrectionType.No; // No Autocorrection
-
                 if (this.Element is CustomEntry customEntry)
                 {
                     this.UpdateBorder(customEntry);
                     this.AddRemoveReturnKeyToNumericInput(customEntry);
+                    this.UpdateTextContentType(customEntry);
                 }
             }
         }
@@ -39,15 +39,26 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (this.Element is CustomEntry customEntry)
+
+            if (e.PropertyName == CustomEntry.HideBorderProperty.PropertyName)
             {
-                if (e.PropertyName == CustomEntry.HideBorderProperty.PropertyName)
+                if (this.Element is CustomEntry customEntry)
                 {
                     this.UpdateBorder(customEntry);
                 }
-                else if (e.PropertyName == nameof(Entry.Keyboard))
+            }
+            else if (e.PropertyName == nameof(Entry.Keyboard))
+            {
+                if (this.Element is CustomEntry customEntry)
                 {
                     this.AddRemoveReturnKeyToNumericInput(customEntry);
+                }
+            }
+            else if (e.PropertyName == nameof(CustomEntry.TextContentType))
+            {
+                if (this.Element is CustomEntry customEntry)
+                {
+                    this.UpdateTextContentType(customEntry);
                 }
             }
         }
@@ -106,6 +117,72 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             {
                 this.Control.InputAccessoryView = null;
             }
+        }
+
+        private void UpdateTextContentType(CustomEntry customEntry)
+        {
+            if (UIDevice.CurrentDevice.CheckSystemVersion(11, 0))
+            {
+                var (textContentType, keyboardType, autocapitalizationType, autocorrectionType) = MapTextContentType(customEntry.TextContentType);
+                this.Control.TextContentType = textContentType;
+               
+                if (keyboardType != null)
+                {
+                    this.Control.KeyboardType = keyboardType.Value;
+                }
+
+                if (autocapitalizationType != null)
+                {
+                    this.Control.AutocapitalizationType = autocapitalizationType.Value;
+                }
+
+                if (autocorrectionType != null)
+                {
+                    this.Control.AutocorrectionType = autocorrectionType.Value;
+                }
+            }
+        }
+
+        private static (NSString, UIKeyboardType?, UITextAutocapitalizationType?, UITextAutocorrectionType?) MapTextContentType(TextContentType textContentType)
+        {
+            if (textContentType == TextContentType.Default)
+            {
+                return (new NSString(), null, null, null);
+            }
+            else if (textContentType == TextContentType.OneTimeCode)
+            {
+                return (UITextContentType.OneTimeCode, UIKeyboardType.NumberPad, UITextAutocapitalizationType.None, UITextAutocorrectionType.No);
+            }
+            else if (textContentType == TextContentType.FirstName)
+            {
+                return (UITextContentType.GivenName, null, null, null);
+            }
+            else if (textContentType == TextContentType.LastName)
+            {
+                return (UITextContentType.FamilyName, null, null, null);
+            }
+            else if (textContentType == TextContentType.Username)
+            {
+                return (UITextContentType.Username, null, UITextAutocapitalizationType.None, UITextAutocorrectionType.No);
+            }
+            else if (textContentType == TextContentType.EmailAddress)
+            {
+                return (UITextContentType.EmailAddress, null, UITextAutocapitalizationType.None, UITextAutocorrectionType.No);
+            }
+            else if (textContentType == TextContentType.PhoneNumber)
+            {
+                return (UITextContentType.TelephoneNumber, UIKeyboardType.NumberPad, UITextAutocapitalizationType.None, UITextAutocorrectionType.No);
+            }
+            else if (textContentType == TextContentType.Password)
+            {
+                return (UITextContentType.Password, null, UITextAutocapitalizationType.None, UITextAutocorrectionType.No);
+            }
+            else if (textContentType == TextContentType.NewPassword)
+            {
+                return (UITextContentType.NewPassword, null, UITextAutocapitalizationType.None, UITextAutocorrectionType.No);
+            }
+
+            return (null, null, null, null);
         }
     }
 }

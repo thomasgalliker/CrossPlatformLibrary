@@ -16,9 +16,4 @@ namespace CrossPlatformLibrary.Forms.Controls
             this.ActivityIndicator.Caption = text;
         }
     }
-
-    public class CustomActivityIndicatorViewModel
-    {
-
-    }
 }

@@ -31,13 +31,10 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
 
             if (this.Element is ExtendedDatePicker view)
             {
-                this.SetFont(view);
                 this.SetTextAlignment(view);
                 this.SetBorder(view);
                 this.SetNullableText(view);
                 this.SetPlaceholder(view);
-
-                this.ResizeHeight();
             }
         }
 
@@ -47,11 +44,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
 
             var view = (ExtendedDatePicker)this.Element;
 
-            if (e.PropertyName == ExtendedDatePicker.FontProperty.PropertyName)
-            {
-                this.SetFont(view);
-            }
-            else if (e.PropertyName == ExtendedDatePicker.XAlignProperty.PropertyName)
+            if (e.PropertyName == ExtendedDatePicker.XAlignProperty.PropertyName)
             {
                 this.SetTextAlignment(view);
             }
@@ -71,8 +64,6 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             {
                 this.SetPlaceholder(view);
             }
-
-            this.ResizeHeight();
         }
 
         /// <summary>
@@ -92,23 +83,6 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                 case TextAlignment.Start:
                     this.Control.TextAlignment = UITextAlignment.Left;
                     break;
-            }
-        }
-
-        /// <summary>
-        ///     Sets the font.
-        /// </summary>
-        /// <param name="view">The view.</param>
-        private void SetFont(ExtendedDatePicker view)
-        {
-            UIFont uiFont;
-            if (view.Font != Font.Default && (uiFont = view.Font.ToUIFont()) != null)
-            {
-                this.Control.Font = uiFont;
-            }
-            else if (view.Font == Font.Default)
-            {
-                this.Control.Font = UIFont.SystemFontOfSize(17f);
             }
         }
 
@@ -136,23 +110,6 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             {
                 this.Control.Text = string.Empty;
             }
-        }
-
-        /// <summary>
-        ///     Resizes the height.
-        /// </summary>
-        private void ResizeHeight()
-        {
-            if (this.Element.HeightRequest >= 0)
-            {
-                return;
-            }
-
-            var height = Math.Max(this.Bounds.Height, new UITextField { Font = this.Control.Font }.IntrinsicContentSize.Height) * 2;
-
-            this.Control.Frame = new CGRect(0.0f, 0.0f, (nfloat)this.Element.Width, (nfloat)height);
-
-            this.Element.HeightRequest = height;
         }
 
         /// <summary>

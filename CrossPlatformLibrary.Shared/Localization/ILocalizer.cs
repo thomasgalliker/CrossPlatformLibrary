@@ -16,15 +16,16 @@ namespace CrossPlatformLibrary.Localization
     public interface ILocalizer
     {
         /// <summary>
-        ///     This method must evaluate platform-specific locale settings
-        ///     and convert them (when necessary) to a valid .NET locale.
+        ///     Returns platform-specific locale settings.
         /// </summary>
         CultureInfo GetCurrentCulture();
 
         /// <summary>
-        ///     CurrentCulture and CurrentUICulture must be set in the platform project,
-        ///     because the Thread object can't be accessed in a PCL.
+        ///     Sets all relevant culture settings to <paramref name="cultureInfo" />.
         /// </summary>
+        /// <remarks>
+        ///     This method must be run from the UI thread.
+        /// </remarks>
         void SetCultureInfo(CultureInfo cultureInfo);
 
         /// <summary>

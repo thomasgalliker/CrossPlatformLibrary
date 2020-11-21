@@ -1,15 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-
-using CrossPlatformLibrary.Extensions;
-
+﻿using CrossPlatformLibrary.Extensions;
+using CrossPlatformLibrary.Tests.Stubs;
 using FluentAssertions;
-
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Xunit;
 
 namespace CrossPlatformLibrary.Tests.Extensions
 {
-    public class EnumerableExtensionsTests
+    public partial class EnumerableExtensionsTests
     {
         [Fact]
         public void SortExtensionTest()
@@ -82,7 +80,7 @@ namespace CrossPlatformLibrary.Tests.Extensions
             var resultCollection = sourceCollection.Append(99);
 
             // Assert
-            resultCollection.Should().ContainInOrder(new List<int> { 1, 2, 3, 99});
+            resultCollection.Should().ContainInOrder(new List<int> { 1, 2, 3, 99 });
         }
 
         [Fact]
@@ -96,6 +94,48 @@ namespace CrossPlatformLibrary.Tests.Extensions
 
             // Assert
             resultCollection.Should().ContainInOrder(new List<int> { 99, 1, 2, 3 });
+        }
+
+        [Fact]
+        public void ShouldFindDuplicates_AtLeastTwoDuplicates()
+        {
+            // Arrange.
+            var sourceCollection = new List<Person>
+            {
+                new Person { Name = "A" },
+                new Person { Name = "B" },
+                new Person { Name = "B" },
+                new Person { Name = "C" },
+            };
+
+            // Act
+            var duplicates = sourceCollection.FindDuplicates(p => p.Name);
+
+            // Assert
+            duplicates.Should().ContainInOrder(new List<Person>
+            {
+                new Person { Name = "B" },
+                new Person { Name = "B" }
+            });
+        }
+
+        [Fact]
+        public void ShouldFindDuplicates_AtLeastThreeDuplicates()
+        {
+            // Arrange.
+            var sourceCollection = new List<Person>
+            {
+                new Person { Name = "A" },
+                new Person { Name = "B" },
+                new Person { Name = "B" },
+                new Person { Name = "C" },
+            };
+
+            // Act
+            var duplicates = sourceCollection.FindDuplicates(p => p.Name, numberOfDuplicates: 3);
+
+            // Assert
+            duplicates.Should().BeEmpty();
         }
     }
 }

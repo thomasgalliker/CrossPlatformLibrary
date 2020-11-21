@@ -95,6 +95,12 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <BundleResource Include="Resources\Fonts\Oswald-Bold.ttf" />
+    <BundleResource Include="Resources\Fonts\Oswald-ExtraLight.ttf" />
+    <BundleResource Include="Resources\Fonts\Oswald-Light.ttf" />
+    <BundleResource Include="Resources\Fonts\Oswald-Medium.ttf" />
+    <BundleResource Include="Resources\Fonts\Oswald-Regular.ttf" />
+    <BundleResource Include="Resources\Fonts\Oswald-SemiBold.ttf" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -148,7 +154,10 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
+    <PackageReference Include="Xamarin.Essentials">
+      <Version>1.5.3.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1179" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -157,6 +166,10 @@
       <Name>CrossPlatformLibrary.Forms.iOS</Name>
       <IsAppExtension>false</IsAppExtension>
       <IsWatchApp>false</IsWatchApp>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CrossPlatformLibrary.Forms\CrossPlatformLibrary.Forms.csproj">
+      <Project>{92e8a8df-7f7b-4978-b5cd-8afb0e13cb49}</Project>
+      <Name>CrossPlatformLibrary.Forms</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\CrossPlatformLibrary.iOS\CrossPlatformLibrary.iOS.csproj">
       <Project>{e71f3053-056c-4381-9638-048ed73bdff6}</Project>
@@ -173,4 +186,9 @@
       <Name>SampleApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties XamarinHotReloadWrongLinkerErrorInfoBarSampleAppiOSHideInfoBar="True" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

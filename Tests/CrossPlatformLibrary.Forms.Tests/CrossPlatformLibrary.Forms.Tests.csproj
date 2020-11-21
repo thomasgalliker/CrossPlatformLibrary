@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.14.6" />
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="ObjectDumper.NET" Version="3.0.20251.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+    <PackageReference Include="TestFactory" Version="1.0.19011.18" />
+    <PackageReference Include="Xamarin.Forms.Mocks" Version="4.7.0.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CrossPlatformLibrary.Forms\CrossPlatformLibrary.Forms.csproj" />
+    <ProjectReference Include="..\..\CrossPlatformLibrary\CrossPlatformLibrary.csproj" />
+    <ProjectReference Include="..\..\Samples\SampleApp\SampleApp\SampleApp.csproj" />
+  </ItemGroup>
+
+</Project>

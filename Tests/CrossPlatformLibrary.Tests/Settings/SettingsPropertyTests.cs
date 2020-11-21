@@ -63,6 +63,48 @@ namespace CrossPlatformLibrary.Tests.Settings
         }
 
         [Fact]
+        public void ShouldGetValue_DefaultValue()
+        {
+            // Arrange
+            var settingsKeyName = "testKey";
+            var defaultValue = "string value";
+
+            var settingsServiceMock = new Mock<ISettingsService>();
+            settingsServiceMock.Setup(s => s.GetValueOrDefault<string>(settingsKeyName, defaultValue))
+                .Returns((string)null);
+
+            var settingsProperty = new SettingsProperty<string>(settingsServiceMock.Object, settingsKeyName, defaultValue);
+
+            // Act
+            var value = settingsProperty.Value;
+
+            // Assert
+            value.Should().Be((string)null, "the settings service is just mocked here...");
+
+            settingsServiceMock.Verify(s => s.GetValueOrDefault<string>(settingsKeyName, defaultValue), Times.Once);
+        }
+
+        [Fact]
+        public void ShouldGetValue_Value()
+        {
+            // Arrange
+            var settingsKeyName = "testKey";
+            var settingsValue = "string value";
+
+            var settingsServiceMock = new Mock<ISettingsService>();
+            settingsServiceMock.Setup(s => s.GetValueOrDefault<string>(settingsKeyName, null))
+                .Returns(settingsValue);
+
+            var settingsProperty = new SettingsProperty<string>(settingsServiceMock.Object, settingsKeyName);
+
+            // Act
+            var value = settingsProperty.Value;
+
+            // Assert
+            value.Should().Be(settingsValue);
+        }
+
+        [Fact]
         public void PerformanceTest_ShouldWriteProperty()
         {
             // Arrange

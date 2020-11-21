@@ -1,26 +1,39 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading;
+using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Localization
 {
+    [Preserve(AllMembers = true)]
     public class Localizer : ILocalizer
     {
-        static readonly Lazy<ILocalizer> Implementation = new Lazy<ILocalizer>(CreateResourceLoader, LazyThreadSafetyMode.PublicationOnly);
+        private static readonly Lazy<ILocalizer> Implementation = new Lazy<ILocalizer>(CreateLocalizer, LazyThreadSafetyMode.PublicationOnly);
 
         public static ILocalizer Current => Implementation.Value;
 
-        static ILocalizer CreateResourceLoader()
+        private static ILocalizer CreateLocalizer()
         {
             return new Localizer();
         }
 
         public void SetCultureInfo(CultureInfo cultureInfo)
         {
-            Thread.CurrentThread.CurrentCulture = cultureInfo;
-            Thread.CurrentThread.CurrentUICulture = cultureInfo;
+            if (cultureInfo == null)
+            {
+                throw new ArgumentNullException(nameof(cultureInfo));
+            }
 
-            this.OnLocaleChanged(cultureInfo);
+            if (!cultureInfo.Equals(Thread.CurrentThread.CurrentCulture))
+            {
+                CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+                CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+                Thread.CurrentThread.CurrentCulture = cultureInfo;
+                Thread.CurrentThread.CurrentUICulture = cultureInfo;
+
+                this.OnLocaleChanged(cultureInfo);
+            }
         }
 
         public event EventHandler<CultureInfoChangedEventArgs> CultureInfoChangedEvent;

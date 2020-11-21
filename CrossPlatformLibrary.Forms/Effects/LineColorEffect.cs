@@ -112,9 +112,9 @@ namespace CrossPlatformLibrary.Forms.Effects
         public static readonly BindableProperty LineColorProperty =
             BindableProperty.CreateAttached(
                 "LineColor",
-                typeof(Color),
+                typeof(object),
                 typeof(LineColorEffect),
-                Color.DeepPink,
+                Color.Blue,
                 BindingMode.OneWay);
 
         public static Color GetLineColor(BindableObject view)

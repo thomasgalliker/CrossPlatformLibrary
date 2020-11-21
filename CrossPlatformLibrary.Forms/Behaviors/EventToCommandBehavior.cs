@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Input;
+using CrossPlatformLibrary.Extensions;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Behaviors
@@ -9,10 +11,30 @@ namespace CrossPlatformLibrary.Forms.Behaviors
     {
         private Delegate eventHandler;
 
-        public static readonly BindableProperty EventNameProperty = BindableProperty.Create(nameof(EventName), typeof(string), typeof(EventToCommandBehavior), null, propertyChanged: OnEventNameChanged);
-        public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(EventToCommandBehavior), null);
-        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(EventToCommandBehavior), null);
-        public static readonly BindableProperty InputConverterProperty = BindableProperty.Create(nameof(Converter), typeof(IValueConverter), typeof(EventToCommandBehavior), null);
+        public static readonly BindableProperty EventNameProperty = BindableProperty.Create(
+            nameof(EventName),
+            typeof(string),
+            typeof(EventToCommandBehavior),
+            null,
+            propertyChanged: OnEventNameChanged);
+
+        public static readonly BindableProperty CommandProperty = BindableProperty.Create(
+            nameof(Command),
+            typeof(ICommand),
+            typeof(EventToCommandBehavior),
+            null);
+
+        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(
+            nameof(CommandParameter),
+            typeof(object),
+            typeof(EventToCommandBehavior),
+            null);
+
+        public static readonly BindableProperty InputConverterProperty = BindableProperty.Create(
+            nameof(Converter),
+            typeof(IValueConverter),
+            typeof(EventToCommandBehavior),
+            null);
 
         public string EventName
         {
@@ -44,14 +66,16 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             this.RegisterEvent(this.EventName);
         }
 
-        protected override void OnDetachingFrom(View bindable)
+        protected override void OnDetachingFrom(Xamarin.Forms.View bindable)
         {
-            base.OnDetachingFrom(bindable);
             this.DeregisterEvent(this.EventName);
+            base.OnDetachingFrom(bindable);
         }
 
         private void RegisterEvent(string name)
         {
+            Debug.WriteLine($"EventToCommandBehavior.RegisterEvent(name={name})");
+
             if (string.IsNullOrWhiteSpace(name))
             {
                 return;
@@ -63,13 +87,15 @@ namespace CrossPlatformLibrary.Forms.Behaviors
                 throw new ArgumentException($"EventToCommandBehavior: Can't register the '{this.EventName}' event.");
             }
 
-            var methodInfo = typeof(EventToCommandBehavior).GetTypeInfo().GetDeclaredMethod("OnEvent");
+            var methodInfo = typeof(EventToCommandBehavior).GetTypeInfo().GetDeclaredMethod(nameof(this.OnEvent));
             this.eventHandler = methodInfo.CreateDelegate(eventInfo.EventHandlerType, this);
             eventInfo.AddEventHandler(this.AssociatedObject, this.eventHandler);
         }
 
         private void DeregisterEvent(string name)
         {
+            Debug.WriteLine($"EventToCommandBehavior.DeregisterEvent(name={name})");
+
             if (string.IsNullOrWhiteSpace(name))
             {
                 return;
@@ -92,6 +118,8 @@ namespace CrossPlatformLibrary.Forms.Behaviors
 
         void OnEvent(object sender, object eventArgs)
         {
+            Debug.WriteLine($"EventToCommandBehavior.OnEvent(sender={sender?.GetType().GetFormattedName() ?? "<null>"}, eventArgs={eventArgs?.GetType().GetFormattedName() ?? "<null>"})");
+
             if (this.Command == null)
             {
                 return;

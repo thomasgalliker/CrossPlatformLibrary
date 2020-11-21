@@ -30,31 +30,31 @@ namespace CrossPlatformLibrary.Forms.Mvvm
 
         public virtual string Title
         {
-            get { return this.title; }
-            set { this.SetProperty(ref this.title, value, nameof(this.Title)); }
+            get => this.title;
+            set => this.SetProperty(ref this.title, value, nameof(this.Title));
         }
 
         public string Subtitle
         {
-            get { return this.subTitle; }
-            set { this.SetProperty(ref this.subTitle, value, nameof(this.Subtitle)); }
+            get => this.subTitle;
+            set => this.SetProperty(ref this.subTitle, value, nameof(this.Subtitle));
         }
 
         public string Icon
         {
-            get { return this.icon; }
-            set { this.SetProperty(ref this.icon, value, nameof(this.Icon)); }
+            get => this.icon;
+            set => this.SetProperty(ref this.icon, value, nameof(this.Icon));
         }
 
         public bool IsLoadingMore
         {
-            get { return this.isLoadingMore; }
-            set { this.SetProperty(ref this.isLoadingMore, value, nameof(this.IsLoadingMore)); }
+            get => this.isLoadingMore;
+            set => this.SetProperty(ref this.isLoadingMore, value, nameof(this.IsLoadingMore));
         }
 
         public virtual bool IsBusy
         {
-            get { return this.isBusy; }
+            get => this.isBusy;
             set
             {
                 if (this.SetProperty(ref this.isBusy, value, nameof(this.IsBusy)))
@@ -92,13 +92,13 @@ namespace CrossPlatformLibrary.Forms.Mvvm
 
         public bool IsRefreshing
         {
-            get { return this.isRefreshing; }
-            set { this.SetProperty(ref this.isRefreshing, value, nameof(this.IsRefreshing)); }
+            get => this.isRefreshing;
+            set => this.SetProperty(ref this.isRefreshing, value, nameof(this.IsRefreshing));
         }
 
         public virtual ViewModelError ViewModelError
         {
-            get { return this.viewModelError; }
+            get => this.viewModelError;
             set
             {
                 if (this.SetProperty(ref this.viewModelError, value, nameof(this.ViewModelError)))
@@ -123,10 +123,7 @@ namespace CrossPlatformLibrary.Forms.Mvvm
         /// Indicates if the view model has payload data available.
         /// Override this property and return a bool value to indicated if data loading returned any data.
         /// </summary>
-        public virtual bool HasDataAvailable
-        {
-            get => true;
-        }
+        public virtual bool HasDataAvailable => true;
 
         public bool HasNoDataAvailable => !this.HasDataAvailable && this.IsNotBusy && !this.HasViewModelError;
 
@@ -142,6 +139,7 @@ namespace CrossPlatformLibrary.Forms.Mvvm
             if (viewModelValidation != null)
             {
                 this.Validation = viewModelValidation;
+                this.Validation.TrySetContext(this);
             }
         }
 
@@ -156,7 +154,7 @@ namespace CrossPlatformLibrary.Forms.Mvvm
         protected override void OnPropertyChanged(PropertyChangedEventArgs args)
         {
             base.OnPropertyChanged(args);
-            this.Validation?.ValidateProperty(args.PropertyName);
+            this.Validation?.HandlePropertyChange(args.PropertyName);
         }
     }
 }

@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    mc:Ignorable="d"
+    x:Class="SampleApp.Views.SegmentedStatusIndicatorPage"
+    BackgroundColor="{DynamicResource WindowBackgroundTable}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="BusStopDataTemplate">
+                <controls:GridZero>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <controls:CustomLabel
+                        Grid.Row="0"
+                        Text="{Binding Title, Mode=OneWay}"
+                        FontSize="{DynamicResource Theme.FontSize.MidMedium}"
+                        LineBreakMode="WordWrap"
+                        RemovePadding="True" />
+                    <Label
+                        Grid.Row="1"
+                        Text="{Binding Description}"
+                        FontSize="{DynamicResource Theme.FontSize.XSmall}"
+                        IsVisible="{Binding Description, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"
+                        LineBreakMode="WordWrap" />
+                </controls:GridZero>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <controls:AlwaysScrollView>
+        <Grid>
+            <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
+                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo SegmentedStatusIndicator--&gt;" />
+                <controls:SegmentedStatusIndicator
+                    ItemsSource="{Binding BusStops}"
+                    ItemTemplate="{StaticResource BusStopDataTemplate}"
+                    SelectionStart="{Binding FirstStop}"
+                    SelectionEnd="{Binding CurrentStop}"
+                    IndicatorForegroundColor="Black"
+                    IndicatorBackgroundColor="LightGray"
+                    LineWidth="2"
+                    LineLengthPart1="6"
+                    PointSize="16"
+                    PointCornerRadius="8"
+                    Spacing="30" />
+
+                <Label Text="Select FirstStop:" FontSize="Micro" />
+                <controls:GridZero>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="0"
+                        Text="Null"
+                        Command="{Binding SelectFirstStopCommand}"
+                        CommandParameter="Null" />
+                    <Button
+                        Grid.Column="1"
+                        Text="1"
+                        Command="{Binding SelectFirstStopCommand}"
+                        CommandParameter="1" />
+                    <Button
+                        Grid.Column="2"
+                        Text="2"
+                        Command="{Binding SelectFirstStopCommand}"
+                        CommandParameter="2" />
+                    <Button
+                        Grid.Column="3"
+                        Text="3"
+                        Command="{Binding SelectFirstStopCommand}"
+                        CommandParameter="3" />
+                    <Button
+                        Grid.Column="4"
+                        Text="4"
+                        Command="{Binding SelectFirstStopCommand}"
+                        CommandParameter="4" />
+                    <Button
+                        Grid.Column="5"
+                        Text="5"
+                        Command="{Binding SelectFirstStopCommand}"
+                        CommandParameter="5" />
+                </controls:GridZero>
+
+                <Label Text="Select CurrentStop:" FontSize="Micro" />
+                <controls:GridZero>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="0"
+                        Text="Null"
+                        Command="{Binding SelectCurrentStopCommand}"
+                        CommandParameter="Null" />
+                    <Button
+                        Grid.Column="1"
+                        Text="1"
+                        Command="{Binding SelectCurrentStopCommand}"
+                        CommandParameter="1" />
+                    <Button
+                        Grid.Column="2"
+                        Text="2"
+                        Command="{Binding SelectCurrentStopCommand}"
+                        CommandParameter="2" />
+                    <Button
+                        Grid.Column="3"
+                        Text="3"
+                        Command="{Binding SelectCurrentStopCommand}"
+                        CommandParameter="3" />
+                    <Button
+                        Grid.Column="4"
+                        Text="4"
+                        Command="{Binding SelectCurrentStopCommand}"
+                        CommandParameter="4" />
+                    <Button
+                        Grid.Column="5"
+                        Text="5"
+                        Command="{Binding SelectCurrentStopCommand}"
+                        CommandParameter="5" />
+                </controls:GridZero>
+            </StackLayout>
+        </Grid>
+    </controls:AlwaysScrollView>
+</ContentPage>

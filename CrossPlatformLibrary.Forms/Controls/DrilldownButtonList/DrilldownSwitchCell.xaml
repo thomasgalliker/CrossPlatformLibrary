@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:ExtendedViewCell
+    x:Class="CrossPlatformLibrary.Forms.Controls.DrilldownSwitchCell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    x:Name="Control"
+    SelectedBackgroundColor="{DynamicResource DrilldownButton.BackgroundColor.Pressed}">
+
+    <ViewCell.View>
+        <controls:GridZero>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <controls:CustomButton
+                HorizontalContentAlignment="Start"
+                VerticalContentAlignment="Center"
+                AllCaps="False"
+                Command="{Binding Command, Mode=OneWay}"
+                CommandParameter="{Binding CommandParameter, Mode=OneWay}"
+                CornerRadius="0"
+                FontAttributes="None"
+                FontSize="{DynamicResource LargeSize}"
+                IsEnabled="{Binding IsEnabled, Mode=OneWay}"
+                Style="{DynamicResource DrilldownButtonStyle}"
+                Text="{Binding Title, Mode=OneWay}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="StartAndExpand">
+
+                <controls:CustomButton.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="-1" />
+                    </OnPlatform>
+                </controls:CustomButton.Margin>
+
+                <controls:CustomButton.Padding>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android" Value="8, 0, 64, 0" />
+                        <On Platform="iOS" Value="16, 0, 64, 0" />
+                    </OnPlatform>
+                </controls:CustomButton.Padding>
+            </controls:CustomButton>
+
+            <Switch
+                HeightRequest="24"
+                IsEnabled="{Binding IsEnabled, Mode=OneWay}"
+                IsToggled="{Binding IsToggled, Mode=TwoWay}"
+                HorizontalOptions="EndAndExpand"
+                VerticalOptions="CenterAndExpand">
+                <!--<Switch.Behaviors>
+                    <behaviors:EventToCommandBehavior
+                        EventName="Toggled"
+                        Command="{Binding Command, Mode=OneWay}"
+                        CommandParameter="{Binding CommandParameter, Mode=OneWay}" />
+                </Switch.Behaviors>-->
+
+                <!--
+                    Switch inside DrilldownSwitchCell uses a custom style
+                    in order to perfectly align with Theme.Color.TextColor
+                -->
+                <Switch.Style>
+                    <Style TargetType="Switch">
+                        <Setter Property="Margin" Value="{OnPlatform Android='0, 0, 8, 0', iOS='0, -4, 8, 0'}" />
+                        <Setter Property="VisualStateManager.VisualStateGroups">
+                            <Setter.Value>
+                                <VisualStateGroupList>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="OnColor" Value="{OnPlatform iOS={DynamicResource Theme.Color.TextColor}}" />
+                                                <Setter Property="ThumbColor" Value="{OnPlatform Android={DynamicResource Theme.Color.TextColor}}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <VisualState.Setters>
+                                                <Setter Property="OnColor" Value="{OnPlatform iOS={DynamicResource Theme.Color.PrimaryDisabled}}" />
+                                                <Setter Property="ThumbColor" Value="{OnPlatform Android={DynamicResource Theme.Color.PrimaryDisabled}}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateGroupList>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Switch.Style>
+            </Switch>
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Command, Mode=OneWay}" CommandParameter="{Binding CommandParameter, Mode=OneWay}" />
+            </Grid.GestureRecognizers>
+        </controls:GridZero>
+    </ViewCell.View>
+</controls:ExtendedViewCell>

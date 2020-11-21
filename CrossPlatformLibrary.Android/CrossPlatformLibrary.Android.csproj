@@ -49,23 +49,27 @@
     <Compile Include="..\CrossPlatformLibrary.NetFx\Localization\Localizer.cs">
       <Link>Localization\Localizer.cs</Link>
     </Compile>
+    <Compile Include="CrossPlatformLibrary.cs" />
     <Compile Include="Dispatching\DispatcherService.cs" />
     <Compile Include="ExceptionHandling\ExceptionHandler.cs" />
     <Compile Include="Extensions\AndroidExtensions.cs" />
     <Compile Include="Extensions\AnimationExtensions.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppHandler.cs" />
     <Compile Include="Services\ClipboardService.cs" />
+    <Compile Include="Services\StatusBarService.cs" />
     <Compile Include="Services\ToastService.cs" />
     <Compile Include="Settings\SettingsService.cs" />
+    <Compile Include="Tools\AppSignatureHelper.cs" />
     <Compile Include="Tools\PlatformServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\strings.xml" />

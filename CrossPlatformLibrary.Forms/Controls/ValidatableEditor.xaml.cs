@@ -4,15 +4,12 @@ using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
-    /// <summary>
-    /// Similar solution can be found here:
-    /// https://github.com/XamFormsExtended/Xfx.Controls
-    /// </summary>
-    public partial class ValidatableEditor : Grid
+    public partial class ValidatableEditor : GridZero
     {
         public ValidatableEditor()
         {
             this.InitializeComponent();
+            this.DebugLayoutBounds();
         }
 
         public new void Focus()
@@ -33,13 +30,20 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Text),
                 typeof(string),
                 typeof(ValidatableEditor),
-                string.Empty,
-                BindingMode.TwoWay);
+                null,
+                BindingMode.TwoWay,
+                propertyChanged: OnTextPropertyChanged);
 
         public string Text
         {
-            get { return (string)this.GetValue(TextProperty); }
-            set { this.SetValue(TextProperty, value); }
+            get => (string)this.GetValue(TextProperty);
+            set => this.SetValue(TextProperty, value);
+        }
+
+        private static void OnTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var validatableEditor = (ValidatableEditor)bindable;
+            validatableEditor.OnPropertyChanged(nameof(validatableEditor.AnnotationText));
         }
 
         public static readonly BindableProperty PlaceholderProperty =
@@ -47,13 +51,56 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Placeholder),
                 typeof(string),
                 typeof(ValidatableEditor),
-                string.Empty,
-                BindingMode.OneWay);
+                null,
+                BindingMode.OneWay,
+                propertyChanged: OnPlaceholderPropertyChanged);
 
         public string Placeholder
         {
-            get { return (string)this.GetValue(PlaceholderProperty); }
-            set { this.SetValue(PlaceholderProperty, value); }
+            get => (string)this.GetValue(PlaceholderProperty);
+            set => this.SetValue(PlaceholderProperty, value);
+        }
+
+        private static void OnPlaceholderPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var entry = (ValidatableEditor)bindable;
+            entry.OnPropertyChanged(nameof(entry.AnnotationText));
+        }
+
+        public static readonly BindableProperty HidePlaceholderProperty =
+            BindableProperty.Create(
+                nameof(HidePlaceholder),
+                typeof(bool),
+                typeof(ValidatableEditor),
+                true,
+                BindingMode.OneWay,
+                propertyChanged: OnHidePlaceholderPropertyChanged);
+
+        public bool HidePlaceholder
+        {
+            get => (bool)this.GetValue(HidePlaceholderProperty);
+            set => this.SetValue(HidePlaceholderProperty, value);
+        }
+
+        private static void OnHidePlaceholderPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var entry = (ValidatableEditor)bindable;
+            entry.OnPropertyChanged(nameof(entry.AnnotationText));
+        }
+
+        public string AnnotationText
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.Text))
+                {
+                    return this.Placeholder;
+                }
+
+                // If HidePlaceholder is true, the returned AnnotationText is null
+                // which means, the Placeholder label is not visible if Text is empty
+                return this.HidePlaceholder ? null : " ";
+            }
         }
 
         public static readonly BindableProperty KeyboardProperty =
@@ -66,36 +113,21 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public Keyboard Keyboard
         {
-            get { return (Keyboard)this.GetValue(KeyboardProperty); }
-            set { this.SetValue(KeyboardProperty, value); }
+            get => (Keyboard)this.GetValue(KeyboardProperty);
+            set => this.SetValue(KeyboardProperty, value);
         }
 
-        public new static readonly BindableProperty StyleProperty =
+        public static readonly BindableProperty EditorStyleProperty =
             BindableProperty.Create(
-                nameof(Style),
+                nameof(EditorStyle),
                 typeof(Style),
                 typeof(ValidatableEditor),
-                default(Style),
-                BindingMode.OneWay);
+                default(Style));
 
-        public new Style Style
+        public Style EditorStyle
         {
-            get { return (Style)this.GetValue(StyleProperty); }
-            set { this.SetValue(StyleProperty, value); }
-        }
-
-        public static readonly BindableProperty FontFamilyProperty =
-            BindableProperty.Create(
-                nameof(FontFamily),
-                typeof(string),
-                typeof(ValidatableEditor),
-                default(string),
-                BindingMode.OneWay);
-
-        public string FontFamily
-        {
-            get { return (string)this.GetValue(FontFamilyProperty); }
-            set { this.SetValue(FontFamilyProperty, value); }
+            get => (Style)this.GetValue(EditorStyleProperty);
+            set => this.SetValue(EditorStyleProperty, value);
         }
 
         public static readonly BindableProperty MaxLengthProperty =
@@ -108,8 +140,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public int MaxLength
         {
-            get { return (int)this.GetValue(MaxLengthProperty); }
-            set { this.SetValue(MaxLengthProperty, value); }
+            get => (int)this.GetValue(MaxLengthProperty);
+            set => this.SetValue(MaxLengthProperty, value);
         }
 
         public static readonly BindableProperty MaxLinesProperty =
@@ -122,8 +154,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public int MaxLines
         {
-            get { return (int)this.GetValue(MaxLinesProperty); }
-            set { this.SetValue(MaxLinesProperty, value); }
+            get => (int)this.GetValue(MaxLinesProperty);
+            set => this.SetValue(MaxLinesProperty, value);
         }
 
         public static readonly BindableProperty ValidationErrorsProperty =
@@ -136,35 +168,32 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public IEnumerable<string> ValidationErrors
         {
-            get { return (IEnumerable<string>)this.GetValue(ValidationErrorsProperty); }
-            set { this.SetValue(ValidationErrorsProperty, value); }
+            get => (IEnumerable<string>)this.GetValue(ValidationErrorsProperty);
+            set => this.SetValue(ValidationErrorsProperty, value);
         }
 
         public event EventHandler Completed
         {
-            add { this.Editor.Completed += value; }
-            remove { this.Editor.Completed -= value; }
+            add => this.Editor.Completed += value;
+            remove => this.Editor.Completed -= value;
         }
 
         public new event EventHandler<FocusEventArgs> Focused
         {
-            add { this.Editor.Focused += value; }
-            remove { this.Editor.Focused -= value; }
+            add => this.Editor.Focused += value;
+            remove => this.Editor.Focused -= value;
         }
 
         public new event EventHandler<FocusEventArgs> Unfocused
         {
-            add { this.Editor.Unfocused += value; }
-            remove { this.Editor.Unfocused -= value; }
+            add => this.Editor.Unfocused += value;
+            remove => this.Editor.Unfocused -= value;
         }
 
         public event EventHandler<TextChangedEventArgs> TextChanged
         {
-            add { this.Editor.TextChanged += value; }
-            remove { this.Editor.TextChanged -= value; }
+            add => this.Editor.TextChanged += value;
+            remove => this.Editor.TextChanged -= value;
         }
-
-
     }
 }
-

@@ -1,53 +1,99 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<Grid
+<controls:GridZero
     x:Class="CrossPlatformLibrary.Forms.Controls.ValidatableEntry"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls"
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     x:Name="Control"
+    IsClippedToBounds="True"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="Fill"
-    HeightRequest="48"
-    BackgroundColor="Transparent"
-    ColumnSpacing="0"
-    RowSpacing="0">
+    VerticalOptions="StartAndExpand">
 
-    <Entry
-        x:Name="Entry"
-        Grid.Row="0"
-        effects:LineColorEffect.ApplyLineColor="True"
-        effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
-        IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
-        HeightRequest="48"
-        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}"
-        Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
-        Keyboard="{Binding Keyboard, Source={x:Reference Control}, Mode=OneWay}"
-        IsPassword="{Binding IsPassword, Source={x:Reference Control}, Mode=OneWay}"
-        Style="{Binding EntryStyle, Source={x:Reference Control}, Mode=OneWay}"
-        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
-        MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
-        Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
-        BackgroundColor="Transparent" />
-
-    <!--  Readonly Text  -->
-    <Label
-        Grid.Row="0"
-        IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
-        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}"
-        Style="{DynamicResource EntryLabelStyle}" />
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
 
     <!--  Annotation Text  -->
-    <Label
+    <controls:CustomLabel
+        x:Name="AnnotationLabel"
         Grid.Row="0"
-        Text="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
-        IsVisible="{Binding Text, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
+        Margin="0"
+        x:FieldModifier="internal"
+        InputTransparent="True"
+        RemovePadding="True"
         Style="{DynamicResource AnnotationEntryLabelStyle}"
-        BackgroundColor="Transparent"
-        InputTransparent="True" />
+        Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}" />
+
+    <!--  Entry  -->
+    <controls:GridZero Grid.Row="1" IsClippedToBounds="True">
+        <controls:CustomEntry
+            x:Name="Entry"
+            effects:LineColorEffect.ApplyLineColor="True"
+            effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
+            x:FieldModifier="internal"
+            Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
+            IsPassword="{Binding IsPassword, Source={x:Reference Control}, Mode=OneWay}"
+            IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+            Keyboard="{Binding Keyboard, Source={x:Reference Control}, Mode=OneWay}"
+            MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
+            Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
+            ReturnType="{Binding ReturnType, Source={x:Reference Control}, Mode=OneWay}"
+            Style="{Binding EntryStyle, Source={x:Reference Control}, Mode=OneWay}"
+            Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}"
+            TextContentType="{Binding TextContentType, Source={x:Reference Control}, Mode=OneWay}"
+            HorizontalOptions="FillAndExpand"
+            HorizontalTextAlignment="Start"
+            VerticalOptions="StartAndExpand">
+            <Entry.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android" Value="-4,-10,-4,-6" />
+                    <On Platform="iOS" Value="0,-10,0,-6" />
+                </OnPlatform>
+            </Entry.Margin>
+        </controls:CustomEntry>
+
+        <!--  Trailing Icon  -->
+        <Image
+            Source="{Binding TrailingIcon, Source={x:Reference Control}, Mode=OneWay}"
+            WidthRequest="24"
+            HorizontalOptions="EndAndExpand"
+            VerticalOptions="CenterAndExpand">
+            <Image.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android" Value="0,0,4,0" />
+                    <On Platform="iOS" Value="0,0,0,0" />
+                </OnPlatform>
+            </Image.Margin>
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TrailingIconCommand, Source={x:Reference Control}, Mode=OneWay}" CommandParameter="{Binding TrailingIconCommandParameter, Source={x:Reference Control}, Mode=OneWay}" />
+            </Image.GestureRecognizers>
+        </Image>
+
+        <!--  Readonly Text  -->
+        <controls:CustomLabel
+            x:Name="ReadonlyLabel"
+            x:FieldModifier="internal"
+            IsVisible="{Binding IsReadonly, Source={x:Reference Control}, Mode=OneWay}"
+            RemovePadding="True"
+            Style="{DynamicResource EntryLabelStyle}"
+            Text="{Binding Text, Source={x:Reference Control}, Mode=OneWay}">
+            <Label.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android" Value="0,2,0,0" />
+                    <On Platform="iOS" Value="0,0,0,0" />
+                </OnPlatform>
+            </Label.Margin>
+        </controls:CustomLabel>
+    </controls:GridZero>
 
     <!--  Validation Error Text  -->
-    <Label
-        Grid.Row="0"
-        Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}"
-        Style="{DynamicResource ValidationLabelStyle}" />
-</Grid>
+    <controls:CustomLabel
+        x:Name="ErrorLabel"
+        Grid.Row="2"
+        IsVisible="{Binding Text, Source={x:Reference ErrorLabel}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
+        Style="{DynamicResource ValidationLabelStyle}"
+        Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}" />
+</controls:GridZero>

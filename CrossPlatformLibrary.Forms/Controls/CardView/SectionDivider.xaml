@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="CrossPlatformLibrary.Forms.Controls.SectionDivider"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="White">
+    <ContentView.Padding>
+        <OnPlatform
+            x:TypeArguments="Thickness"
+            Android="0"
+            WinPhone="0"
+            iOS="16,0,0,0" />
+    </ContentView.Padding>
+    <ContentView.Content>
+        <BoxView BackgroundColor="{DynamicResource CardViewDividerColor}" HorizontalOptions="FillAndExpand">
+            <BoxView.HeightRequest>
+                <OnPlatform
+                    x:TypeArguments="x:Double"
+                    Android="1"
+                    WinPhone="1"
+                    iOS=".5" />
+            </BoxView.HeightRequest>
+        </BoxView>
+    </ContentView.Content>
+</ContentView>

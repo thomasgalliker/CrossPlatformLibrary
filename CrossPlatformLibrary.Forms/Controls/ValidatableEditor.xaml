@@ -1,49 +1,62 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Grid 
-    xmlns="http://xamarin.com/schemas/2014/forms" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
-    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<controls:GridZero
     x:Class="CrossPlatformLibrary.Forms.Controls.ValidatableEditor"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
+    x:Name="Control"
     HorizontalOptions="FillAndExpand"
-    VerticalOptions="FillAndExpand"
-    BackgroundColor="Transparent"
-    ColumnSpacing="0"
-    RowSpacing="0"
-    x:Name="Control">
+    VerticalOptions="StartAndExpand"
+    IsClippedToBounds="True">
+
     <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
         <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
 
-    <controls:CustomEditor 
+    <!--  Annotation Text  -->
+    <controls:CustomLabel
+        x:Name="AnnotationLabel"
         Grid.Row="0"
-        x:Name="Editor"
-        Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}"
-        Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
-        Keyboard="{Binding Keyboard, Source={x:Reference Control}, Mode=OneWay}"
-        Style="{Binding Style, Source={x:Reference Control}, Mode=OneWay}"
-        FontFamily="{Binding FontFamily, Source={x:Reference Control}, Mode=OneWay}"
-        MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
-        MaxLines="{Binding MaxLines, Source={x:Reference Control}, Mode=OneWay}"
-        effects:LineColorEffect.ApplyLineColor="True"
-        effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
-        Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
-        BackgroundColor="Transparent">
-
-    </controls:CustomEditor>
-
-    <!--Annotation Text-->
-    <Label
-        Grid.Row="0"
-        Text="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
-        IsVisible="{Binding Text, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
+        Margin="0"
+        x:FieldModifier="internal"
+        InputTransparent="True"
+        RemovePadding="True"
         Style="{DynamicResource AnnotationEntryLabelStyle}"
-        BackgroundColor="Transparent"
-        InputTransparent="True"/>
+        IsVisible="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"
+        Text="{Binding AnnotationText, Source={x:Reference Control}, Mode=OneWay}" />
 
-    <!--Validation Error Text-->
-    <Label
-        Grid.Row="0"
-        Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}"
-        Style="{DynamicResource ValidationLabelStyle}"/>
-</Grid>
+    <!--  Editor  -->
+    <controls:GridZero Grid.Row="1" IsClippedToBounds="True">
+        <controls:CustomEditor
+            x:Name="Editor"
+            x:FieldModifier="internal"
+            effects:LineColorEffect.ApplyLineColor="True"
+            effects:LineColorEffect.LineColor="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource PropertyErrorsToColorConverter}}"
+            Behaviors="{Binding Behaviors, Source={x:Reference Control}}"
+            Keyboard="{Binding Keyboard, Source={x:Reference Control}, Mode=OneWay}"
+            MaxLength="{Binding MaxLength, Source={x:Reference Control}, Mode=OneWay}"
+            MaxLines="{Binding MaxLines, Source={x:Reference Control}, Mode=OneWay}"
+            Placeholder="{Binding Placeholder, Source={x:Reference Control}, Mode=OneWay}"
+            Style="{Binding EditorStyle, Source={x:Reference Control}, Mode=OneWay}"
+            Text="{Binding Text, Source={x:Reference Control}, Mode=TwoWay}">
+
+            <controls:CustomEditor.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android" Value="-4,-10,-4,-6" />
+                    <On Platform="iOS" Value="-5,-9,-5,-7" />
+                </OnPlatform>
+            </controls:CustomEditor.Margin>
+        </controls:CustomEditor>
+    </controls:GridZero>
+
+    <!--  Validation Error Text  -->
+    <controls:CustomLabel
+        x:Name="ErrorLabel"
+        Grid.Row="2"
+        Style="{DynamicResource ValidationLabelStyle}"
+        IsVisible="{Binding Text, Source={x:Reference ErrorLabel}, Mode=OneWay, Converter={StaticResource IsNotEmptyConverter}}"
+        Text="{Binding ValidationErrors, Source={x:Reference Control}, Mode=OneWay, Converter={StaticResource FirstErrorConverter}}" />
+</controls:GridZero>

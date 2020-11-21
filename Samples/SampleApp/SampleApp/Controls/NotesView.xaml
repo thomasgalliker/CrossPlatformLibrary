@@ -1,47 +1,44 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
-             xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
-             x:Class="SampleApp.Controls.NotesView">
-  <ContentView.Content>
-        <Frame
-            Padding="0"
-            Margin="0"
-            CornerRadius="10" 
-            BackgroundColor="LightYellow"
-            BorderColor="Yellow">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="SampleApp.Controls.NotesView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms">
 
-            <controls:GridZero Padding="{DynamicResource MediumPadding}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+    <controls:FrameZero
+        BackgroundColor="LightYellow"
+        BorderColor="Yellow"
+        CornerRadius="10">
 
-                <controls:ValidatableEditor
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Placeholder="{localization:Translate ComplexNotesLabelText}"
-                    Text="{Binding Notes, Mode=TwoWay}"
-                    IsEnabled="True"
-                    Keyboard="Chat"
-                    ValidationErrors="{Binding Errors[Notes]}"
-                    MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
-                    MaxLines="3"
-                    HorizontalOptions="FillAndExpand"/>
-                <Label
-                    Grid.Row="1"
-                    Text="{Binding NotesRemainingLength, Mode=OneWay}"
-                    IsVisible="{Binding Notes, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"
-                    FontSize="{DynamicResource LittleSize}"
-                    TextColor="{DynamicResource PrimaryTextColorBright}"
-                    BackgroundColor="Transparent"
-                    HorizontalOptions="EndAndExpand"
-                    HorizontalTextAlignment="End"/>
-            </controls:GridZero>
-        </Frame>
-    </ContentView.Content>
+        <controls:GridZero Padding="{DynamicResource Theme.Padding.Medium}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <controls:ValidatableEditor
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                HorizontalOptions="FillAndExpand"
+                IsEnabled="True"
+                Keyboard="Chat"
+                MaxLength="{Binding NotesMaxLength, Mode=OneWay}"
+                MaxLines="3"
+                Placeholder="Placeholder of ValidatableEditor (inside user control)"
+                Text="{Binding Notes, Mode=TwoWay}"
+                ValidationErrors="{Binding Errors[Notes]}" />
+            <Label
+                Grid.Row="1"
+                BackgroundColor="Transparent"
+                FontSize="{DynamicResource Theme.FontSize.Small}"
+                HorizontalOptions="EndAndExpand"
+                HorizontalTextAlignment="End"
+                IsVisible="{Binding Notes, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"
+                Text="{Binding NotesRemainingLength, Mode=OneWay}"
+                TextColor="{DynamicResource Theme.Color.TextColor}" />
+        </controls:GridZero>
+    </controls:FrameZero>
 </ContentView>

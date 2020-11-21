@@ -1,8 +1,10 @@
 # CrossPlatformLibrary
+[![Version](https://img.shields.io/nuget/v/CrossPlatformLibrary.svg)](https://www.nuget.org/packages/CrossPlatformLibrary)  [![Downloads](https://img.shields.io/nuget/dt/CrossPlatformLibrary.svg)](https://www.nuget.org/packages/CrossPlatformLibrary)
 
+<img src="https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/master/Images/cpl_short.png" alt="CrossPlatformLibrary" align="right" height="100">
 CrossPlatformLibrary is an extensible toolkit which addresses cross-cutting concern. It is a lightweight library which provides a collection of functionality used in most mobile and desktop applications such as bootstrapping, exception handling, tracing and UI dispatching.
 
-#### Supported Platforms
+### Supported Platforms
 
 <table>
   <tr>
@@ -32,7 +34,6 @@ CrossPlatformLibrary is an extensible toolkit which addresses cross-cutting conc
   </tr>
 </table>
 
-
 ### Download and Install CrossPlatformLibrary
 
 This library is available on [NuGet](https://www.nuget.org/packages/CrossPlatformLibrary). Use the following command to install CrossPlatformLibrary using NuGet package manager console:
@@ -43,7 +44,68 @@ The Xamarin.Forms specific library can be installed using following command:
 
 ```PM> Install-Package CrossPlatformLibrary.Forms```
 
-### API Usage
+### Usage
+
+#### User Controls
+The library contains a rich set of customized user controls which extend basic implementations of existing controls. Following screenshots of the SampleApp demonstrate the usege of some of the delivered controls. The coloring is pretty random and mainly used for debugging/development purposes. Since every control uses dynamic styles, you're free to override the default styles.
+<p float="left">
+<img src="https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/develop/Images/Screenshot_SampleApp_Android.jpg" alt="SampleApp Android" height="500">
+<img src="https://raw.githubusercontent.com/thomasgalliker/CrossPlatformLibrary/develop/Images/Screenshot_SampleApp_iOS.png" alt="SampleApp iOS" height="500">
+</p>
+
+##### Getting Started
+In order to use the user controls of CrossPlatformLibrary, the styles used in these controls need to be initialized properly. For this reason, add following line of code just after the line `this.InitializeComponent();` in `App.xaml.cs`:
+
+`
+CrossPlatformLibrary.Forms.CrossPlatformLibrary.Init(this, "InvoiceScanner.Theme");
+`
+
+
+```TODO: to be documented```
+
+##### Known Problems
+- `System.Collections.Generic.KeyNotFoundException: The resource 'Theme.Color.TextColor' is not present in the dictionary.` This error eventually appears if user controls of CrossPlatformLibrary are used without calling the `CrossPlatformLibrary.Forms.Init(..)` method.
+
+#### Input Validation
+The base viewmodel ```BaseViewModel``` implements a pretty sophisiticated and praxisproven user input validation system which allows to run client- and server-based property validation side-by-side.
+There are a few steps to follow to get input validation to work:
+
+- Inherit your viewmodels from ```BaseViewModel``` or implement a similar logic which exposes a ```BaseViewModel.Validation``` property.
+- Override the protected method ```SetupValidation```. This enables your viewmodel to use input validation. The most simple setup just returns an empty  ```ViewModelValidation```.
+- Setup validation rules inside ```SetupValidation```. There are basically two different approaches: Either you validate viewmodel properties locally (validation logic provided by the viewmodel) or you call a backend service which validates a given object (DTO) against some central validation logic.
+- Configure the according view to react on validation errors. This is done in XAML by binding a dependency property to the string list of validation errors for a certain property. The following example binds to validation errors for property 'UserName': ```ValidationErrors="{Binding Validation.Errors[UserName]}"```
+- In order to run the validation, just call ```Validation.IsValidAsync()```. Depending on the result (true/false) we proceed with further actions (e.g. saving the object).
+```
+  var isValid = await this.Validation.IsValidAsync();
+  if (isValid)
+  {
+      // TODO Save...
+  }
+```
+
+Following snippet is an extract of a unit test. It demonstrates some setup variations.
+```
+protected override ViewModelValidation SetupValidation()
+{
+    var viewModelValidation = new ViewModelValidation();
+
+    // Validation function with parameter-less custom error message
+    viewModelValidation.AddValidationFor(nameof(this.UserName))
+        .When(() => string.IsNullOrEmpty(this.UserName))
+        .Show(() => "Username must not be empty");
+
+    // Validation rule with parameter and custom error message
+    viewModelValidation.AddValidationFor(nameof(this.Email))
+        .When(new IsNotNullOrEmptyRule())
+        .Show(p => $"Email address '{p}' must not be empty.");
+
+    // Validation delegated to async service
+    viewModelValidation.AddDelegateValidation(nameof(this.UserName), nameof(this.Email))
+        .Validate(async () => (await this.validationService.ValidatePersonAsync(this.CreatePerson())).Errors);
+
+    return viewModelValidation;
+}
+```
 
 #### Bootstrapping
 
@@ -139,11 +201,9 @@ Dependency injection containers are used to manage dependencies between componen
 
 ```TODO: to be documented```
 
-### Planned features
+### Contribution
 
-* Encapsulate dependency injection containers so that 3rd party framworks such as AutoFac, Unity, etc.. can be used with CrossPlatformLibrary.
-
-* Sample projects to demonstrate features.
+Want to contribute to this project? Feel free to start a discussion in the issues area to see if your idea could fit in.
 
 ### License
 

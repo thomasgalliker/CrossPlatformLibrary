@@ -55,8 +55,9 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers.ShapeView
         protected virtual void HandleShapeDraw(Canvas canvas)
         {
             // We need to account for offsetting the coordinates based on the padding
-            var x = this.GetX() + this.Resize(this.ShapeView.Padding.Left);
-            var y = this.GetY() + this.Resize(this.ShapeView.Padding.Top);
+            var padding = this.ShapeView.Padding;
+            var x = this.GetX() + this.Resize(padding.Left);
+            var y = this.GetY() + this.Resize(padding.Top);
 
             switch (this.ShapeView.ShapeType)
             {

@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
 {
-    public partial class ValidatableAutoCompleteView : Grid
+    public partial class ValidatableAutoCompleteView : GridZero
     {
         private INotifyCollectionChanged sourceCollection;
         private readonly TaskDelayer taskDelayer;
@@ -16,6 +16,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         public ValidatableAutoCompleteView()
         {
             this.InitializeComponent();
+            this.DebugLayoutBounds();
             this.taskDelayer = new TaskDelayer();
         }
 
@@ -37,13 +38,20 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Text),
                 typeof(string),
                 typeof(ValidatableAutoCompleteView),
-                string.Empty,
-                BindingMode.TwoWay);
+                null,
+                BindingMode.TwoWay,
+                propertyChanged: OnTextPropertyChanged);
 
         public string Text
         {
-            get { return (string)this.GetValue(TextProperty); }
-            set { this.SetValue(TextProperty, value); }
+            get => (string)this.GetValue(TextProperty);
+            set => this.SetValue(TextProperty, value);
+        }
+
+        private static void OnTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var validatableAutoCompleteView = (ValidatableAutoCompleteView)bindable;
+            validatableAutoCompleteView.OnPropertyChanged(nameof(validatableAutoCompleteView.AnnotationText));
         }
 
         public static readonly BindableProperty PlaceholderProperty =
@@ -51,13 +59,33 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(Placeholder),
                 typeof(string),
                 typeof(ValidatableAutoCompleteView),
-                string.Empty,
-                BindingMode.OneWay);
+                null,
+                BindingMode.OneWay,
+                propertyChanged: OnPlaceholderPropertyChanged);
 
         public string Placeholder
         {
-            get { return (string)this.GetValue(PlaceholderProperty); }
-            set { this.SetValue(PlaceholderProperty, value); }
+            get => (string)this.GetValue(PlaceholderProperty);
+            set => this.SetValue(PlaceholderProperty, value);
+        }
+
+        private static void OnPlaceholderPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var validatableAutoCompleteView = (ValidatableAutoCompleteView)bindable;
+            validatableAutoCompleteView.OnPropertyChanged(nameof(validatableAutoCompleteView.AnnotationText));
+        }
+
+        public string AnnotationText
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.Text))
+                {
+                    return this.Placeholder;
+                }
+
+                return " ";
+            }
         }
 
         public static readonly BindableProperty IsReadonlyProperty =
@@ -84,36 +112,34 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public Keyboard Keyboard
         {
-            get { return (Keyboard)this.GetValue(KeyboardProperty); }
-            set { this.SetValue(KeyboardProperty, value); }
+            get => (Keyboard)this.GetValue(KeyboardProperty);
+            set => this.SetValue(KeyboardProperty, value);
         }
 
-        public new static readonly BindableProperty StyleProperty =
+        public static readonly BindableProperty EntryStyleProperty =
             BindableProperty.Create(
-                nameof(Style),
+                nameof(EntryStyle),
                 typeof(Style),
                 typeof(ValidatableAutoCompleteView),
-                default(Style),
-                BindingMode.OneWay);
+                default(Style));
 
-        public new Style Style
+        public Style EntryStyle
         {
-            get { return (Style)this.GetValue(StyleProperty); }
-            set { this.SetValue(StyleProperty, value); }
+            get => (Style)this.GetValue(EntryStyleProperty);
+            set => this.SetValue(EntryStyleProperty, value);
         }
 
-        public static readonly BindableProperty FontFamilyProperty =
+        public static readonly BindableProperty SuggestionListStyleProperty =
             BindableProperty.Create(
-                nameof(FontFamily),
-                typeof(string),
+                nameof(SuggestionListStyle),
+                typeof(Style),
                 typeof(ValidatableAutoCompleteView),
-                default(string),
-                BindingMode.OneWay);
+                default(Style));
 
-        public string FontFamily
+        public Style SuggestionListStyle
         {
-            get { return (string)this.GetValue(FontFamilyProperty); }
-            set { this.SetValue(FontFamilyProperty, value); }
+            get => (Style)this.GetValue(SuggestionListStyleProperty);
+            set => this.SetValue(SuggestionListStyleProperty, value);
         }
 
         public static readonly BindableProperty MaxLengthProperty =
@@ -126,8 +152,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public int MaxLength
         {
-            get { return (int)this.GetValue(MaxLengthProperty); }
-            set { this.SetValue(MaxLengthProperty, value); }
+            get => (int)this.GetValue(MaxLengthProperty);
+            set => this.SetValue(MaxLengthProperty, value);
         }
 
         public static readonly BindableProperty ValidationErrorsProperty =
@@ -209,9 +235,10 @@ namespace CrossPlatformLibrary.Forms.Controls
                 }
             }
 
-            if (this.SearchCommand.CanExecute(searchText))
+            var searchCommand = this.SearchCommand;
+            if (searchCommand != null && searchCommand.CanExecute(searchText))
             {
-                this.SearchCommand.Execute(searchText);
+                searchCommand.Execute(searchText);
             }
         }
 
@@ -338,6 +365,18 @@ namespace CrossPlatformLibrary.Forms.Controls
             get => (DataTemplate)this.GetValue(SuggestedItemTemplateProperty);
             set => this.SetValue(SuggestedItemTemplateProperty, value);
         }
+        
+        public static readonly BindableProperty SuggestedItemsSpacingProperty = BindableProperty.Create(
+            nameof(SuggestedItemsSpacing),
+            typeof(double),
+            typeof(ValidatableAutoCompleteView),
+            6.0);
+
+        public double SuggestedItemsSpacing
+        {
+            get => (double)this.GetValue(SuggestedItemsSpacingProperty);
+            set => this.SetValue(SuggestedItemsSpacingProperty, value);
+        }
 
         public static readonly BindableProperty DisplayMemberPathProperty =
             BindableProperty.Create(
@@ -355,26 +394,26 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public event EventHandler Completed
         {
-            add { this.Entry.Completed += value; }
-            remove { this.Entry.Completed -= value; }
+            add => this.Entry.Completed += value;
+            remove => this.Entry.Completed -= value;
         }
 
         public new event EventHandler<FocusEventArgs> Focused
         {
-            add { this.Entry.Focused += value; }
-            remove { this.Entry.Focused -= value; }
+            add => this.Entry.Focused += value;
+            remove => this.Entry.Focused -= value;
         }
 
         public new event EventHandler<FocusEventArgs> Unfocused
         {
-            add { this.Entry.Unfocused += value; }
-            remove { this.Entry.Unfocused -= value; }
+            add => this.Entry.Unfocused += value;
+            remove => this.Entry.Unfocused -= value;
         }
 
         public event EventHandler<TextChangedEventArgs> TextChanged
         {
-            add { this.Entry.TextChanged += value; }
-            remove { this.Entry.TextChanged -= value; }
+            add => this.Entry.TextChanged += value;
+            remove => this.Entry.TextChanged -= value;
         }
     }
 }

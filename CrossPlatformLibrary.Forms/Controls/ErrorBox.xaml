@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Frame
+    x:Class="CrossPlatformLibrary.Forms.Controls.ErrorBox"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    x:Name="Control"
+    Padding="{DynamicResource Theme.Padding.Medium}"
+    IsVisible="{Binding Source={x:Reference Control}, Path=Text, Converter={StaticResource IsNotEmptyConverter}}"
+    CornerRadius="6"
+    HasShadow="False"
+    BackgroundColor="{DynamicResource Theme.Color.ErrorBackground}"
+    BorderColor="{DynamicResource Theme.Color.Error}"
+    mc:Ignorable="d">
+    <controls:StackLayoutZero>
+        <controls:CustomLabel
+            Text="{Binding Source={x:Reference Control}, Path=Text}"
+            LineBreakMode="WordWrap"
+            TextColor="{DynamicResource Theme.Color.Error}" />
+    </controls:StackLayoutZero>
+</Frame>

@@ -1,0 +1,133 @@
+##################################################################
+# VSTS Build Configuration, Version 1.3
+#
+# (c)2020 superdev GmbH
+####################################################################
+
+name: 4.1.$(date:yy)$(DayOfYear).$(rev:rr)
+  
+pool:
+  vmImage: 'windows-2019'
+
+trigger:
+  branches:
+    include:
+    - master
+    - develop
+    - release/*
+    - feature/*
+
+  paths:
+    exclude:
+    - README.md
+
+variables:
+  solution: 'CrossPlatformLibrary.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  buildVersionPostfix: '-pre'
+  nuspecFile: 'CrossPlatformLibrary.nuspec'
+  nuspecFileForms: 'CrossPlatformLibrary.Forms.nuspec'
+
+steps:
+- task: UseDotNet@2
+  displayName: 'Use .NET Core SDK 3.x'
+  inputs:
+    packageType: sdk
+    version: 3.x
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- task: Assembly-Info-NetCore@2
+  displayName: 'Update Assembly Info'
+  inputs:
+    Path: '$(Build.SourcesDirectory)'
+    FileNames: '**/*.csproj'
+    InsertAttributes: true
+    FileEncoding: 'auto'
+    WriteBOM: false
+    Company: 'superdev gmbh'
+    Copyright: '(c) $(date:YYYY) superdev gmbh'
+    Title: 'CrossPlatformLibrary'
+    Description: 'An extensible cross-platform toolkit which provides a basic set of functionality used in most mobile apps.'
+    VersionNumber: '$(Build.BuildNumber)'
+    FileVersionNumber: '$(Build.BuildNumber)'
+    InformationalVersion: '$(Build.BuildNumber)'
+    PackageVersion: '$(Build.BuildNumber)'
+    LogLevel: 'verbose'
+    FailOnWarning: false
+    DisableTelemetry: false'
+
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet 5.x'
+  inputs:
+    versionSpec: 5.x
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
+  inputs:
+    restoreSolution: '$(solution)'
+
+
+- powershell: |
+   Write-Host "##vso[task.setvariable variable=PackageVersion]$(Build.BuildNumber)"
+   Write-Host "##vso[task.setvariable variable=PackageVersionPre]$(Build.BuildNumber)$(BuildVersionPostfix)"
+  displayName: 'Set PackageVersion'
+
+- task: VSBuild@1
+  displayName: 'Build solution'
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: ''
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Run UnitTests'
+  continueOnError: false
+  inputs:
+    command: test
+    projects: '**/*.Tests.csproj'
+    nobuild: true
+    arguments: '--no-build --configuration $(buildConfiguration) --filter Category!=SystemTest'
+
+- task: NuGetCommand@2
+  displayName: 'Pack NuGet $(nuspecFile) PreRelease'
+  inputs:
+    command: custom
+    arguments: pack $(nuspecFile) -Version $(PackageVersionPre) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
+
+- task: NuGetCommand@2
+  displayName: 'Pack NuGet $(nuspecFile)'
+  inputs:
+    command: custom
+    arguments: pack $(nuspecFile) -Version $(PackageVersion) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
+
+
+- task: NuGetCommand@2
+  displayName: 'Pack NuGet $(nuspecFileForms) PreRelease'
+  inputs:
+    command: custom
+    arguments: pack $(nuspecFileForms) -Version $(PackageVersionPre) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
+
+- task: NuGetCommand@2
+  displayName: 'Pack NuGet $(nuspecFileForms)'
+  inputs:
+    command: custom
+    arguments: pack $(nuspecFileForms) -Version $(PackageVersion) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
+
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)'
+
+    Contents: |
+     **\bin\$(buildConfiguration)\**
+     **\bin\*.nupkg
+
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+

@@ -12,7 +12,7 @@ namespace CrossPlatformLibrary.Settings
         {
         }
 
-        public SettingsService() : this(new DebugTracer(nameof(SettingsService)))
+        public SettingsService() : this(Tracer.Current)
         {
         }
 

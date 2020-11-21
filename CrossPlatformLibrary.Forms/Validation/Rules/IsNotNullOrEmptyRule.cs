@@ -1,10 +1,8 @@
 ﻿namespace CrossPlatformLibrary.Forms.Validation.Rules
 {
-    public class IsNotNullOrEmptyRule<T> : IValidationRule<T>
+    public class IsNotNullOrEmptyRule : IValidationRule<object>, IValidationMessage
     {
-        public string ValidationMessage { get; set; }
-
-        public bool Check(T value)
+        public bool IsValid(object value)
         {
             if (value == null)
             {
@@ -14,6 +12,11 @@
             var str = value as string;
 
             return !string.IsNullOrWhiteSpace(str);
+        }
+
+        public string GetErrorMessage()
+        {
+            return "Value must not be null or empty";
         }
     }
 }

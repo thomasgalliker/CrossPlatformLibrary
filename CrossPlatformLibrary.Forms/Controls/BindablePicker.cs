@@ -10,37 +10,6 @@ namespace CrossPlatformLibrary.Forms.Controls
     {
         private bool disableNestedCalls;
 
-        public static readonly BindableProperty FontFamilyProperty =
-            BindableProperty.Create(
-                nameof(FontFamily),
-                typeof(string),
-                typeof(BindablePicker),
-                Font.Default.FontFamily,
-                BindingMode.OneWay);
-
-        public static readonly BindableProperty FontSizeProperty =
-            BindableProperty.Create(
-                nameof(FontSize),
-                typeof(double),
-                typeof(BindablePicker),
-                Font.Default.FontSize,
-                BindingMode.OneWay);
-
-        public static readonly BindableProperty FontAttributesProperty =
-            BindableProperty.Create(
-                nameof(FontAttributes),
-                typeof(FontAttributes),
-                typeof(BindablePicker),
-                FontAttributes.None,
-                BindingMode.OneWay);
-
-        public static readonly BindableProperty PlaceholderTextColorProperty =
-            BindableProperty.Create(
-                nameof(PlaceholderTextColor),
-                typeof(Color),
-                typeof(BindablePicker),
-                Color.Default);
-
         public new static readonly BindableProperty ItemsSourceProperty =
             BindableProperty.Create(
                 nameof(ItemsSource),
@@ -66,39 +35,15 @@ namespace CrossPlatformLibrary.Forms.Controls
                 null, BindingMode.TwoWay,
                 propertyChanged: OnSelectedValueChanged);
 
-        public string FontFamily
-        {
-            get { return (string)this.GetValue(FontFamilyProperty); }
-            set { this.SetValue(FontFamilyProperty, value); }
-        }
-
-        public double FontSize
-        {
-            get { return (double)this.GetValue(FontSizeProperty); }
-            set { this.SetValue(FontSizeProperty, value); }
-        }
-
-        public FontAttributes FontAttributes
-        {
-            get { return (FontAttributes)this.GetValue(FontAttributesProperty); }
-            set { this.SetValue(FontAttributesProperty, (object)value); }
-        }
-
-        public Color PlaceholderTextColor
-        {
-            get { return (Color)this.GetValue(PlaceholderTextColorProperty); }
-            set { this.SetValue(PlaceholderTextColorProperty, value); }
-        }
-
         public IEnumerable ItemsSource
         {
-            get { return (IEnumerable)this.GetValue(ItemsSourceProperty); }
-            set { this.SetValue(ItemsSourceProperty, value); }
+            get => (IEnumerable)this.GetValue(ItemsSourceProperty);
+            set => this.SetValue(ItemsSourceProperty, value);
         }
 
         public object SelectedItem
         {
-            get { return this.GetValue(SelectedItemProperty); }
+            get => this.GetValue(SelectedItemProperty);
             set
             {
                 if (this.SelectedItem != value)
@@ -111,7 +56,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public object SelectedValue
         {
-            get { return this.GetValue(SelectedValueProperty); }
+            get => this.GetValue(SelectedValueProperty);
             set
             {
                 this.SetValue(SelectedValueProperty, value);
@@ -129,8 +74,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string SelectedValuePath
         {
-            get { return (string)this.GetValue(SelectedValuePathProperty); }
-            set { this.SetValue(SelectedValuePathProperty, value); }
+            get => (string)this.GetValue(SelectedValuePathProperty);
+            set => this.SetValue(SelectedValuePathProperty, value);
         }
 
         public static readonly BindableProperty DisplayMemberPathProperty =
@@ -145,8 +90,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         private static void OnDisplayMemberPathChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var bindablePicker = bindable as BindablePicker;
-            if (bindablePicker != null)
+            if (bindable is BindablePicker bindablePicker)
             {
                 bindablePicker.InstanceOnItemsSourceChanged(bindablePicker.ItemsSource, bindablePicker.ItemsSource);
             }
@@ -154,8 +98,21 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string DisplayMemberPath
         {
-            get { return (string)this.GetValue(DisplayMemberPathProperty); }
-            set { this.SetValue(DisplayMemberPathProperty, value); }
+            get => (string)this.GetValue(DisplayMemberPathProperty);
+            set => this.SetValue(DisplayMemberPathProperty, value);
+        }
+
+        public static readonly BindableProperty NullStringProperty =
+            BindableProperty.Create(
+                nameof(NullString),
+                typeof(string),
+                typeof(BindablePicker),
+                "<null>");
+
+        public string NullString
+        {
+            get => (string)this.GetValue(NullStringProperty);
+            set => this.SetValue(NullStringProperty, value);
         }
 
         public BindablePicker()
@@ -187,7 +144,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 
                 foreach (var item in (IEnumerable)newValue)
                 {
-                    object propValue = null;
+                    object propValue;
                     if (hasDisplayMemberPath)
                     {
                         propValue = BindingHelper.GetDisplayMember(item, displayMemberPath);
@@ -197,7 +154,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                         propValue = item;
                     }
 
-                    this.Items.Add(propValue == null ? "<null>" : propValue.ToString());
+                    this.Items.Add(propValue == null ? this.NullString : propValue.ToString());
                 }
 
                 this.SelectedIndex = -1;
@@ -312,15 +269,17 @@ namespace CrossPlatformLibrary.Forms.Controls
             {
                 foreach (var item in e.NewItems)
                 {
+                    object propValue;
                     if (hasDisplayMemberPath)
                     {
-                        var displayMemberString = BindingHelper.GetDisplayMemberString(item, displayMemberPath);
-                        this.Items.Add(displayMemberString);
+                        propValue = BindingHelper.GetDisplayMember(item, displayMemberPath);
                     }
                     else
                     {
-                        this.Items.Add(item.ToString());
+                        propValue = item;
                     }
+
+                    this.Items.Add(propValue == null ? this.NullString : propValue.ToString());
                 }
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)

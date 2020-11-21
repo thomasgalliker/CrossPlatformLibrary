@@ -14,12 +14,14 @@
       CrossPlatformLibrary is an extensible cross-platform toolkit which provides a basic set of functionality used in most mobile apps such as bootstrapping, exception handling, tracing and UI dispatching.
     </description>
     <tags>
-      xamarin pcl CrossPlatformLibrary cross-platform library bootstrapping dispatching tracing exception handling mobile
+      xamarin pcl CrossPlatformLibrary cross-platform library bootstrapping dispatching tracing exception handling mobile usercontrols controls
       windows universal uwp uap android xamarin.forms xamarin.ios ios monoandroid monodroid monotouch
     </tags>
-    <releaseNotes>
-      4.0.0-pre
+    <releaseNotes>4.0.1
       - Support for .Net Standard
+      - New input validation infrastructure
+      - New view model error handling
+      - Improved user controls
 
       3.0.1
       - Refactored for better IoC support
@@ -94,21 +96,11 @@
     <file src="CrossPlatformLibrary.iOS\LinkerHelper.cs" target="content\xamarin.ios10\LinkerHelper.cs" />
 
     <!--.Net Framework 4.5-->
-    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.dll" target="lib\net45\CrossPlatformLibrary.dll" />
-    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.pdb" target="lib\net45\CrossPlatformLibrary.pdb" />
-    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.deps.json" target="lib\net45\CrossPlatformLibrary.deps.json" />
-    <file src="CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\net45\CrossPlatformLibrary.xml" />
-
     <file src="CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.dll" target="lib\net45\CrossPlatformLibrary.dll" />
     <file src="CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.pdb" target="lib\net45\CrossPlatformLibrary.pdb" />
     <file src="CrossPlatformLibrary.NetFx\bin\Release\CrossPlatformLibrary.xml" target="lib\net45\CrossPlatformLibrary.xml" />
 
     <!--Universal Windows Platform-->
-    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.dll" target="lib\uap10.0\CrossPlatformLibrary.dll" />
-    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.pdb" target="lib\uap10.0\CrossPlatformLibrary.pdb" />
-    <file src="CrossPlatformLibrary\bin\Release\netstandard2.0\CrossPlatformLibrary.deps.json" target="lib\uap10.0\CrossPlatformLibrary.deps.json" />
-    <file src="CrossPlatformLibrary\bin\Release\CrossPlatformLibrary.xml" target="lib\uap10.0\CrossPlatformLibrary.xml" />
-
     <file src="CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.dll" target="lib\uap10.0\CrossPlatformLibrary.dll" />
     <file src="CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.pdb" target="lib\uap10.0\CrossPlatformLibrary.pdb" />
     <file src="CrossPlatformLibrary.UWP\bin\Release\CrossPlatformLibrary.xml" target="lib\uap10.0\CrossPlatformLibrary.xml" />

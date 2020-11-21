@@ -1,10 +1,8 @@
 ﻿using CrossPlatformLibrary.Extensions;
-
 using FluentAssertions;
-
 using Xunit;
 
-namespace CrossPlatformLibrary.Tests.Utils
+namespace CrossPlatformLibrary.Tests.Extensions
 {
     public class IntegerExtensionsTests
     {
@@ -12,10 +10,10 @@ namespace CrossPlatformLibrary.Tests.Utils
         public void IntegerIsOddTest()
         {
             // Arrange.
-            const int Value = 1;
+            const int value = 1;
 
             // Act.
-            bool isOdd = Value.IsOdd();
+            bool isOdd = value.IsOdd();
 
             // Assert.
             isOdd.Should().BeTrue();
@@ -25,10 +23,10 @@ namespace CrossPlatformLibrary.Tests.Utils
         public void IntegerIsEvenTest()
         {
             // Arrange.
-            const int Value = 2;
+            const int value = 2;
 
             // Act.
-            bool isOdd = Value.IsOdd();
+            bool isOdd = value.IsOdd();
 
             // Assert.
             isOdd.Should().BeFalse();

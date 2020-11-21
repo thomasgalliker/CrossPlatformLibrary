@@ -50,26 +50,26 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public string Subject
         {
-            get { return (string)this.GetValue(SubjectProperty); }
-            set { this.SetValue(SubjectProperty, value); }
+            get => (string)this.GetValue(SubjectProperty);
+            set => this.SetValue(SubjectProperty, value);
         }
 
         public string NavigateUri
         {
-            get { return (string)this.GetValue(NavigateUriProperty); }
-            set { this.SetValue(NavigateUriProperty, value); }
+            get => (string)this.GetValue(NavigateUriProperty);
+            set => this.SetValue(NavigateUriProperty, value);
         }
 
         public ICommand NavigateCommand
         {
-            get { return (ICommand)this.GetValue(NavigateCommandProperty); }
-            set { this.SetValue(NavigateCommandProperty, value); }
+            get => (ICommand)this.GetValue(NavigateCommandProperty);
+            set => this.SetValue(NavigateCommandProperty, value);
         }
 
         public Color TintColor
         {
-            get { return (Color)this.GetValue(TintColorProperty); }
-            set { this.SetValue(TintColorProperty, value); }
+            get => (Color)this.GetValue(TintColorProperty);
+            set => this.SetValue(TintColorProperty, value);
         }
 
         #region Overrides of BindableObject

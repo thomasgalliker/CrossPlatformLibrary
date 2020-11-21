@@ -3,8 +3,10 @@
     x:Class="SampleApp.App"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:xForms="clr-namespace:CrossPlatformLibrary.Forms;assembly=CrossPlatformLibrary.Forms"
-    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms">
+    xmlns:converters="clr-namespace:SampleApp.Converters;assembly=SampleApp"
+    xmlns:themes="clr-namespace:CrossPlatformLibrary.Forms.Themes;assembly=CrossPlatformLibrary.Forms"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    xmlns:xForms="clr-namespace:CrossPlatformLibrary.Forms;assembly=CrossPlatformLibrary.Forms">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -12,24 +14,111 @@
             </ResourceDictionary.MergedDictionaries>
 
             <!--  Converters  -->
+            <converters:ColorToHexStringConverter x:Key="ColorToHexStringConverter" />
+            <converters:ColorInverter x:Key="ColorInverter" />
+            <converters:FontElementToStringConverter x:Key="FontElementToStringConverter" />
+            <converters:ThicknessToStringConverter x:Key="ThicknessToStringConverter" />
+            <converters:RandomValidationErrorsConverter x:Key="RandomValidationErrorsConverter" />
             <valueConverters:StringIsNotNullOrEmptyConverter x:Key="StringIsNotNullOrEmptyConverter" />
+            <valueConverters:DateTimeConverter x:Key="DateTimeConverter" Format="g" />
+            <valueConverters:DateTimeConverter x:Key="ShortDateConverter" Format="d" />
+            <valueConverters:BoolToColorConverter
+                x:Key="BoolToBlackAndWhiteConverter"
+                FalseValue="White"
+                TrueValue="Black" />
 
             <!--  Colors  -->
-            <Color x:Key="PrimarySuperBright">#a59e39</Color>
-            <Color x:Key="PrimaryBright">#aabf74</Color>
             <Color x:Key="Primary">#ff70fc</Color>
-            <Color x:Key="PrimaryDark">#5e0087</Color>
             <Color x:Key="Accent">#73e5c6</Color>
-            <Color x:Key="PrimaryTextColor">DarkBlue</Color>
+            <Color x:Key="SemiMagenta">#7Fff3399</Color>
+
+            <OnPlatform x:Key="WindowBackgroundTable" x:TypeArguments="Color">
+                <On Platform="Android" Value="#F5F5F5" />
+                <On Platform="iOS" Value="#EFEFF4" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="WindowBackground" x:TypeArguments="Color">
+                <On Platform="Android" Value="#F5F5F5" />
+                <On Platform="iOS" Value="White" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="LabelSectionBackground" x:TypeArguments="Color">
+                <On Platform="Android" Value="White" />
+                <On Platform="iOS" Value="#EFEFF4" />
+            </OnPlatform>
 
             <!--  Styles  -->
             <Style x:Key="DemoLabelStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="Green" />
                 <Setter Property="BackgroundColor" Value="#e6ffe6" />
                 <Setter Property="FontAttributes" Value="Italic" />
-                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="LineBreakMode" Value="CharacterWrap" />
             </Style>
 
+            <themes:ColorConfiguration
+                x:Key="ColorConfiguration"
+                Background="{StaticResource WindowBackground}"
+                CardViewBackgroundColor="{StaticResource WindowBackgroundTable}"
+                CardViewHeaderBackgroundColor="{StaticResource LabelSectionBackground}"
+                CardViewHeaderTextColor="#6D6D72"
+                Error="#ff1744"
+                OnPrimary="#c7a4f4"
+                Primary="#5714AF"
+                PrimaryVariant="#c7a4f4"
+                Secondary="#17C2BC"
+                SecondaryVariant="#a4f4f2"
+                TextColor="DarkBlue"
+                TextColorBright="DarkGray" />
+
+            <themes:SpacingConfiguration x:Key="SpacingConfiguration" />
+
+            <!--  Fonts  -->
+            <OnPlatform x:Key="SampleApp.FontFamily.OswaldLight" x:TypeArguments="x:String">
+                <On Platform="Android" Value="Fonts/Oswald-Light.ttf#Oswald Light" />
+                <On Platform="iOS" Value="Oswald-Light" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="SampleApp.FontFamily.OswaldMedium" x:TypeArguments="x:String">
+                <On Platform="Android" Value="Fonts/Oswald-Medium.ttf#Oswald Medium" />
+                <On Platform="iOS" Value="Oswald-Medium" />
+            </OnPlatform>
+
+            <!--  Sets the default font configuration which serves as fallback for all fonts  -->
+            <themes:FontElement x:Key="DefaultFont" FontFamily="{StaticResource SampleApp.FontFamily.OswaldMedium}" />
+
+            <!--  Overrides the all font-related properties  -->
+            <themes:FontElement
+                x:Key="DebugFont"
+                FontAttributes="Bold,Italic"
+                FontFamily="{StaticResource SampleApp.FontFamily.OswaldLight}"
+                FontSize="99" />
+
+            <!--  Overrides the FontAttributes property only  -->
+            <themes:FontElement x:Key="CustomButtonFont" FontAttributes="Bold" />
+
+            <!--  Create a custom FontSizeConfiguration to adjust the predefined named font sizes  -->
+            <themes:DefaultFontSizeConfiguration x:Key="FontSizeConfiguration">
+                <!--<themes:DefaultFontSizeConfiguration.Medium>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="iOS" Value="28" />
+                        <On Platform="Android" Value="24" />
+                        <On Platform="UWP" Value="24" />
+                    </OnPlatform>
+                </themes:DefaultFontSizeConfiguration.Medium>-->
+            </themes:DefaultFontSizeConfiguration>
+
+            <themes:FontConfiguration
+                x:Key="FontConfiguration"
+                Button="{StaticResource CustomButtonFont}"
+                Default="{StaticResource DefaultFont}"
+                FontSizes="{StaticResource FontSizeConfiguration}" />
+
+            <themes:CrossPlatformLibraryConfiguration
+                x:Key="SampleApp.Theme"
+                ColorConfiguration="{StaticResource ColorConfiguration}"
+                SpacingConfiguration="{StaticResource SpacingConfiguration}" />
 
         </ResourceDictionary>
 

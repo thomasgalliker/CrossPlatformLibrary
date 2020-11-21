@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -10,17 +10,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\camera_outline_black_192.png" />
     <None Remove="Resources\Images\chevron_right_grey_192x192.png" />
+    <None Remove="Resources\Images\rectangle_magenta_192.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\rectangle_magenta_192.png" />
+    <EmbeddedResource Include="Resources\Images\camera_outline_black_192.png" />
     <EmbeddedResource Include="Resources\Images\chevron_right_grey_192x192.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="ValueConverters.Forms" Version="2.0.19091.2" />
-    <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="ObjectDumper.NET" Version="3.0.20251.1" />
+    <PackageReference Include="ValueConverters.Forms" Version="2.0.20011.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1179" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\PeriodicTaskView.xaml.cs">
+      <DependentUpon>PeriodicTaskView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Controls\NotesView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -37,15 +46,64 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\SwitchesPage.xaml.cs">
+      <DependentUpon>SwitchesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PickersPage.xaml.cs">
+      <DependentUpon>PickersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DrilldownButtonListPage.xaml.cs">
+      <DependentUpon>DrilldownButtonListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CountryViewCell.xaml.cs">
+      <DependentUpon>CountryViewCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CardViewPage.xaml.cs">
+      <DependentUpon>CardViewPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Controls\PeriodicTaskView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Controls\AddressControl.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\SampleActivityIndicatorPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\CountryViewCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SegmentedStatusIndicatorPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\AddressControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\NotesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Controls\PeriodicTaskView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\SegmentedStatusIndicator\" />
   </ItemGroup>
 </Project>

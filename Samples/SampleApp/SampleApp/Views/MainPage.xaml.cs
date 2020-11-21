@@ -1,28 +1,55 @@
 ﻿using System;
 using System.Threading.Tasks;
+using CrossPlatformLibrary.Forms.Extensions;
+using CrossPlatformLibrary.Forms.Services;
+using CrossPlatformLibrary.Services;
 using SampleApp.Services;
+using SampleApp.Validation;
 using SampleApp.ViewModels;
 using Xamarin.Forms;
 
-namespace SampleApp
+namespace SampleApp.Views
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        private readonly IStatusBarService statusBar;
+
+        public MainPage(IActivityIndicatorService activityIndicatorService, IStatusBarService statusBar)
         {
             try
             {
                 this.InitializeComponent();
 
                 var displayService = new DisplayService((t, m) => this.DisplayAlert(t, m, "OK"));
-                var countryService = new CountryService();
-                this.BindingContext = new MainViewModel(displayService, countryService);
+                var countryService = new CountryServiceMock();
+                var validationService = new ValidationService();
+                var emailService = new EmailService();
+                var navigationService = new NavigationService(this);
+                this.BindingContext = new MainViewModel(navigationService, displayService, countryService, validationService, emailService, activityIndicatorService);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                 throw;
             }
+
+            this.statusBar = statusBar;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            statusBar.SetColor(Color.Black);
+            statusBar.SetStatusBarMode(StatusBarStyle.Dark);
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnAppearing();
+
+            statusBar.SetColor(Color.White);
+            statusBar.SetStatusBarMode(StatusBarStyle.Light);
         }
 
         private void AutoCompleteView_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -31,21 +58,23 @@ namespace SampleApp
         }
     }
 
-    public class DisplayService : IDisplayService
+    public class NavigationService : INavigationService
     {
-        private readonly Func<string, string, Task> alertAction;
+        private readonly Page currentPage;
 
-        public DisplayService(Func<string, string, Task> alertAction)
+        public NavigationService(Page page)
         {
-            this.alertAction = alertAction;
+            this.currentPage = page;
         }
-        public async Task DisplayAlert(string title, string message)
+
+        public Task PushAsync(Page page)
         {
-            await this.alertAction(title, message);
+            return this.currentPage.Navigation.PushAsync(page);
         }
     }
-    public interface IDisplayService
+
+    public interface INavigationService
     {
-        Task DisplayAlert(string title, string message);
+        Task PushAsync(Page page);
     }
 }

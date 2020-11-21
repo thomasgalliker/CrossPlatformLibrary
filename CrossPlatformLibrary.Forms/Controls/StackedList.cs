@@ -18,7 +18,27 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public StackOrientation ListOrientation { get; set; }
 
-        public double Spacing { get; set; }
+        public static readonly BindableProperty SpacingProperty =
+            BindableProperty.Create(
+                nameof(Spacing),
+                typeof(double),
+                typeof(StackedList),
+                6.0d,
+                BindingMode.OneWay,propertyChanged: OnSpacingPropertyChanged);
+
+        private static void OnSpacingPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
+        {
+            if (bindable is StackedList stackedList && stackedList.itemsStackLayout != null && newvalue is double newValue)
+            {
+                stackedList.itemsStackLayout.Spacing = newValue;
+            }
+        }
+
+        public double Spacing
+        {
+            get => (double)this.GetValue(SpacingProperty);
+            set => this.SetValue(SpacingProperty, value);
+        }
 
         public static readonly BindableProperty SelectedCommandProperty = BindableProperty.Create(
             nameof(SelectedCommand),
@@ -50,26 +70,26 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public ICommand SelectedCommand
         {
-            get { return (ICommand)this.GetValue(SelectedCommandProperty); }
-            set { this.SetValue(SelectedCommandProperty, value); }
+            get => (ICommand)this.GetValue(SelectedCommandProperty);
+            set => this.SetValue(SelectedCommandProperty, value);
         }
 
         public IEnumerable ItemsSource
         {
-            get { return (IEnumerable)this.GetValue(ItemsSourceProperty); }
-            set { this.SetValue(ItemsSourceProperty, value); }
+            get => (IEnumerable)this.GetValue(ItemsSourceProperty);
+            set => this.SetValue(ItemsSourceProperty, value);
         }
 
         public object SelectedItem
         {
-            get { return (object)this.GetValue(SelectedItemProperty); }
-            set { this.SetValue(SelectedItemProperty, value); }
+            get => this.GetValue(SelectedItemProperty);
+            set => this.SetValue(SelectedItemProperty, value);
         }
 
         public DataTemplate ItemTemplate
         {
-            get { return (DataTemplate)this.GetValue(ItemTemplateProperty); }
-            set { this.SetValue(ItemTemplateProperty, value); }
+            get => (DataTemplate)this.GetValue(ItemTemplateProperty);
+            set => this.SetValue(ItemTemplateProperty, value);
         }
 
         private static void ItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
@@ -93,7 +113,6 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public StackedList()
         {
-            this.Spacing = 5;
             this.scrollView = new NoBarsScrollViewer();
             this.itemsStackLayout = new StackLayout
             {
@@ -131,53 +150,48 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         protected virtual void SetItems()
         {
-            this.itemsStackLayout.Children.Clear();
-            this.itemsStackLayout.Spacing = this.Spacing;
+            try
+            {
+                this.itemsStackLayout.Children.Clear();
+                this.itemsStackLayout.Spacing = this.Spacing;
 
-            this.innerSelectedCommand = new Command<View>(
-                view =>
-                {
-                    this.SelectedItem = view.BindingContext;
-
-                    if (this.SelectionMode == SelectionMode.None)
+                this.innerSelectedCommand = new Command<View>(
+                    view =>
                     {
-                        this.SelectedItem = null; // Allowing item second time selection
-                    }
-                });
+                        this.SelectedItem = view.BindingContext;
 
-            this.itemsStackLayout.Orientation = this.ListOrientation;
-            this.scrollView.Orientation = this.ListOrientation == StackOrientation.Horizontal ? ScrollOrientation.Horizontal : ScrollOrientation.Vertical;
+                        if (this.SelectionMode == SelectionMode.None)
+                        {
+                            this.SelectedItem = null; // Allowing item second time selection
+                        }
+                    });
 
-            if (this.ItemsSource == null)
-            {
-                return;
+                var listOrientation = this.ListOrientation;
+                this.itemsStackLayout.Orientation = listOrientation;
+                this.scrollView.Orientation = listOrientation == StackOrientation.Horizontal ? ScrollOrientation.Horizontal : ScrollOrientation.Vertical;
+
+                if (this.ItemsSource == null)
+                {
+                    return;
+                }
+
+                foreach (var item in this.ItemsSource)
+                {
+                    this.itemsStackLayout.Children.Add(this.GetItemView(item));
+                }
+
+                this.SelectedItem = null;
             }
-
-            foreach (var item in this.ItemsSource)
+            catch (Exception ex)
             {
-                this.itemsStackLayout.Children.Add(this.GetItemView(item));
+                Console.WriteLine($"SetItems failed with exception: {ex}");
+                throw;
             }
-
-            this.SelectedItem = null;
         }
 
         protected virtual View GetItemView(object item)
         {
-            var content = this.ItemTemplate.CreateContent();
-            View view;
-            if (content is ViewCell viewCell)
-            {
-                view = viewCell.View;
-            }
-            else
-            {
-                view = content as View;
-                if (view == null)
-                {
-                    throw new Exception("ItemTemplate must either be a View or a ViewCell");
-                }
-            }
-
+            var view = BindingHelper.CreateContent(this.ItemTemplate, item, this);
             view.BindingContext = item;
 
             var gesture = new TapGestureRecognizer { Command = this.innerSelectedCommand, CommandParameter = view };
@@ -189,7 +203,11 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         private void AddGesture(View view, TapGestureRecognizer gesture)
         {
-            view.GestureRecognizers.Add(gesture);
+            var gestures = view.GestureRecognizers;
+            if (!gestures.Contains(gesture))
+            {
+                view.GestureRecognizers.Add(gesture);
+            }
 
             var layout = view as Layout<View>;
 
@@ -203,14 +221,6 @@ namespace CrossPlatformLibrary.Forms.Controls
                 this.AddGesture(child, gesture);
             }
         }
-
-        //protected override void OnPropertyChanged(string propertyName = null)
-        //{
-        //    if (propertyName == StackedList.ItemsSourceProperty.PropertyName)
-        //    {
-        //        this.SetItems();
-        //    }
-        //}
 
         private static void OnSelectedItemChanged(BindableObject bindable, object oldValue, object newValue)
         {

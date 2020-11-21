@@ -1,19 +1,16 @@
-﻿namespace CrossPlatformLibrary.Forms.Validation
+﻿using System.Threading.Tasks;
+
+namespace CrossPlatformLibrary.Forms.Validation
 {
     /// <summary>
-    /// Interface used to validate the object data.
+    ///     Interface used to validate the object data.
     /// </summary>
     public interface IValidatable
     {
         /// <summary>
-        /// Setup the validation rules for client side validations.
-        /// </summary>
-        //void SetupValidationRules();
-
-        /// <summary>
-        /// Validates the data.
+        ///     Validates against the set of validation rules.
         /// </summary>
         /// <returns>True if the data is valid, otherwise false.</returns>
-        bool IsValid();
+        Task<bool> IsValidAsync();
     }
 }
