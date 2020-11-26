@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:SampleApp.Converters;assembly=SampleApp"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:themes="clr-namespace:CrossPlatformLibrary.Forms.Themes;assembly=CrossPlatformLibrary.Forms"
     xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
     xmlns:xForms="clr-namespace:CrossPlatformLibrary.Forms;assembly=CrossPlatformLibrary.Forms">
@@ -48,6 +49,13 @@
             </OnPlatform>
 
             <!--  Styles  -->
+            <Style TargetType="NavigationPage">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="BarBackgroundColor" Value="DarkBlue" />
+                <Setter Property="BarTextColor" Value="LightBlue" />
+                <Setter Property="ios:NavigationPage.HideNavigationBarSeparator" Value="True" />
+            </Style>
+
             <Style x:Key="DemoLabelStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="Green" />
                 <Setter Property="BackgroundColor" Value="#e6ffe6" />

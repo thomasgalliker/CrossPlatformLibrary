@@ -23,6 +23,8 @@ namespace SampleApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            CrossPlatformLibrary.iOS.Appearance.Configure(Color.LightGreen.ToUIColor(), Color.DarkGreen.ToUIColor());
+
             Forms.Init();
             HyperLinkLabelRenderer.Init();
             CrossPlatformLibrary.Forms.iOS.CrossPlatformLibrary.Init();

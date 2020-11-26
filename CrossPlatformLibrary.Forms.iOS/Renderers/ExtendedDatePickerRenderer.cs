@@ -56,7 +56,12 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                                 this.SetNullableText(view);
                             }
                         })
-                        { Tag = CancelButtonTag };
+                        {
+                            Tag = CancelButtonTag,
+                            //TintColor = UIColor.Magenta,
+                        };
+
+                        //cancelButton.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.Purple }, UIControlState.Normal);
                     }
                 }
 
