@@ -7,12 +7,14 @@ using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Extensions
 {
-    public  static partial class EnumerableExtensions
+    public static partial class EnumerableExtensions
     {
         private static readonly Random Rng = new Random();
 
         public static IList CreateList(this IEnumerable enumerable)
         {
+            Guard.ArgumentNotNull(enumerable, nameof(enumerable));
+
             var list = new Collection<object>();
 
             foreach (var item in enumerable)
