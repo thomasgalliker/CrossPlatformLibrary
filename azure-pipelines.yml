@@ -30,6 +30,12 @@ variables:
   nuspecFileForms: 'CrossPlatformLibrary.Forms.nuspec'
 
 steps:
+- task: Bash@3
+  displayName: 'Print all variables'
+  inputs:
+    targetType: 'inline'
+    script: 'env | sort'
+
 - task: UseDotNet@2
   displayName: 'Use .NET Core SDK 3.x'
   inputs:
