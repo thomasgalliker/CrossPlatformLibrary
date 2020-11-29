@@ -45,6 +45,7 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Appearance.cs" />
     <Compile Include="CrossPlatformLibrary.cs" />
     <Compile Include="Effects\BorderEffect.cs" />
     <Compile Include="Effects\DatePickerLineColorEffect.cs" />

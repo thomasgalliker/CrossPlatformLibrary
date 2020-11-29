@@ -23,8 +23,6 @@ namespace SampleApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            CrossPlatformLibrary.iOS.Appearance.Configure(Color.LightGreen.ToUIColor(), Color.DarkGreen.ToUIColor());
-
             Forms.Init();
             HyperLinkLabelRenderer.Init();
             CrossPlatformLibrary.Forms.iOS.CrossPlatformLibrary.Init();
@@ -35,6 +33,8 @@ namespace SampleApp.iOS
             var statusBar = new StatusBarService();
 
             this.LoadApplication(new App(activityIndicatorService, statusBar));
+
+            CrossPlatformLibrary.Forms.iOS.Appearance.Configure(App.Current);
 
             return base.FinishedLaunching(app, options);
         }

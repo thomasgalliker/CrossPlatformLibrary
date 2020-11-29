@@ -4,7 +4,7 @@ namespace CrossPlatformLibrary.iOS
 {
     public static class Appearance
     {
-        public static void Configure(UIColor tintColor, UIColor textColor)
+        public static void SetTintColor(UIColor color)
         {
             //UINavigationBar.Appearance.BarTintColor = tintColor;
             //UINavigationBar.Appearance.TintColor = textColor;
@@ -32,13 +32,15 @@ namespace CrossPlatformLibrary.iOS
             //UIButton.Appearance.SetTitleColor(tintColor, UIControlState.Normal);
 
             //UIPickerView.Appearance.BackgroundColor = UIColor.Blue;
-            UIPickerView.Appearance.TintColor = tintColor;
+            UIPickerView.Appearance.TintColor = color;
+           
+            //UIToolbar.Appearance.BarTintColor = UIColor.Blue;
+            UIToolbar.Appearance.TintColor = color;
 
-            //UIToolbar.Appearance.TintColor = tintColor;
-            //UIBarButtonItem.Appearance.TintColor = tintColor;
+            UIBarButtonItem.AppearanceWhenContainedIn(typeof(UIToolbar)).TintColor = color;
 
-            UIView.AppearanceWhenContainedIn(typeof(UIAlertView)).TintColor = tintColor;
-            UIView.AppearanceWhenContainedIn(typeof(UIAlertController)).TintColor = tintColor;
+            UIView.AppearanceWhenContainedIn(typeof(UIAlertView)).TintColor = color;
+            UIView.AppearanceWhenContainedIn(typeof(UIAlertController)).TintColor = color;
 
             //UISegmentedControl.Appearance.TintColor = tintColor;
         }
