@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using CrossPlatformLibrary.Forms.Controls;
 using CrossPlatformLibrary.Forms.Mvvm;
 using CrossPlatformLibrary.Forms.Validation;
 using SampleApp.Services;
@@ -24,7 +22,7 @@ namespace SampleApp.ViewModels
         protected override ViewModelValidation SetupValidation()
         {
             var viewModelValidation = new ViewModelValidation();
-     
+
             viewModelValidation.AddValidationFor(nameof(this.UserName))
                          .When(() => string.IsNullOrWhiteSpace(this.UserName))
                          .Show(() => $"Username must not be empty");
@@ -36,7 +34,7 @@ namespace SampleApp.ViewModels
         public string UserName
         {
             get => this.userName;
-            set => this.SetProperty(this.userName, value);
+            set => this.SetProperty(ref this.userName, value);
         }
 
         public ICommand CalloutCommand => new Command<string>(this.OnCalloutCommand);
@@ -51,6 +49,5 @@ namespace SampleApp.ViewModels
             get => this.isReadonly;
             set => this.SetProperty(ref this.isReadonly, value, nameof(this.IsReadonly));
         }
-
     }
 }
