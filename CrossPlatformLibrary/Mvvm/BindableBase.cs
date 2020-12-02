@@ -83,7 +83,13 @@ namespace CrossPlatformLibrary.Mvvm
                 sourcePropertyName = propertyName;
             }
 
-            var propertyInfo = typeof(TObject).GetProperty(sourcePropertyName);
+            var sourceType = typeof(TObject);
+            var propertyInfo = sourceType.GetProperty(sourcePropertyName);
+            if (propertyInfo == null)
+            {
+                throw new InvalidOperationException($"SetProperty cannot find property '{sourcePropertyName}' in type {sourceType.Name}");
+            }
+
             var sourceValue = (T)propertyInfo.GetValue(source);
             if (EqualityComparer<T>.Default.Equals(sourceValue, value))
             {
