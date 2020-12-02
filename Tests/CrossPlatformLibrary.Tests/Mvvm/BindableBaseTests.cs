@@ -22,8 +22,9 @@ namespace CrossPlatformLibrary.Tests.Mvvm
             viewModel.UserName = "username";
 
             // Assert
-            propertyChangedCallbacks.Should().HaveCount(1);
+            propertyChangedCallbacks.Should().HaveCount(2);
             propertyChangedCallbacks.ElementAt(0).Should().Be("UserName");
+            propertyChangedCallbacks.ElementAt(1).Should().Be("DependingOnUserName");
         }
 
         [Fact]
@@ -82,9 +83,15 @@ namespace CrossPlatformLibrary.Tests.Mvvm
             public string UserName
             {
                 get => this.userName;
-                set => this.SetProperty(ref this.userName, value);
+                set
+                {
+                    if (this.SetProperty(ref this.userName, value))
+                    {
+                        this.RaisePropertyChanged("DependingOnUserName");
+                    }
+                }
             }
-            
+
             public string UserName2
             {
                 get => this.user?.UserName2;
