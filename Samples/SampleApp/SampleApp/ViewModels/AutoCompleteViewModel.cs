@@ -24,7 +24,7 @@ namespace SampleApp.ViewModels
         public AutoCompleteViewModel(IDisplayService displayService, ObservableCollection<CountryViewModel> countries)
         {
             this.displayService = displayService;
-            this.Countries = countries; 
+            this.Countries = countries;
             this.SuggestedCountries = new ObservableCollection<CountryViewModel>();
         }
 
@@ -75,7 +75,6 @@ namespace SampleApp.ViewModels
             this.Country = new CountryViewModel(new CountryDto { Id = 99, Name = "Fantasy Land" });
             this.Validation.AddErrorMessageForProperty(nameof(this.Country), "Fantasy Land does not exist, it's fiction!");
         }
-
 
         public ICommand AutoCompleteSearchCommand
         {
