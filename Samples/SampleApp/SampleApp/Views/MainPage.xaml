@@ -6,7 +6,6 @@
     xmlns:behaviors="clr-namespace:CrossPlatformLibrary.Forms.Behaviors;assembly=CrossPlatformLibrary.Forms"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
-    xmlns:local="clr-namespace:SampleApp"
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
     xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
     xmlns:userControls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
@@ -257,6 +256,12 @@
                                     CommandParameter="PickersPage"
                                     Text="Pickers" />
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: AutoCompleteView--&gt;" />
+                                <Button
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="AutoCompletePage"
+                                    Text="AutoCompleteView" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: Switches--&gt;" />
                                 <Button
                                     Command="{Binding NavigateToPageCommand}"
@@ -391,72 +396,6 @@
                                     IsEnabled="False"
                                     Placeholder="SearchBar Placeholder (Disabled)"
                                     Text="" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableAutoCompleteView--&gt;" />
-                                <controls:ValidatableAutoCompleteView
-                                    x:Name="AutoCompleteView"
-                                    DisplayMemberPath="Name"
-                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                    Placeholder="ValidatableAutoCompleteView"
-                                    SearchCommand="{Binding AutoCompleteSearchCommand}"
-                                    SearchCommandDelay="{x:Static local:App.SearchCommandDelay}"
-                                    SelectedItem="{Binding Country, Mode=TwoWay}"
-                                    SuggestedItemTemplate="{StaticResource CountryItemTemplate}"
-                                    SuggestedItemsSource="{Binding SuggestedCountries, Mode=OneWay}"
-                                    SuggestedItemsSpacing="{DynamicResource Theme.Spacing.Small}"
-                                    Text="{Binding CountrySearchText, Mode=TwoWay}"
-                                    TextChanged="AutoCompleteView_OnTextChanged"
-                                    ValidationErrors="{Binding Validation.Errors[Country]}" />
-
-                                <controls:GridZero>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <controls:ValidatableAutoCompleteView
-                                        BackgroundColor="Aquamarine"
-                                        DisplayMemberPath="Name"
-                                        Placeholder="ValidatableAutoCompleteView"
-                                        Text="ValidatableAutoCompleteView" />
-                                    <controls:ValidatableEntry
-                                        Grid.Row="0"
-                                        Grid.Column="1"
-                                        BackgroundColor="LightGoldenrodYellow"
-                                        Placeholder="ValidatableEntry"
-                                        Text="ValidatableEntry" />
-                                </controls:GridZero>
-
-                                <controls:ValidatableAutoCompleteView
-                                    x:Name="ValidatableAutoCompleteView"
-                                    DisplayMemberPath="Name"
-                                    Placeholder="ValidatableAutoCompleteView"
-                                    SuggestedItemTemplate="{StaticResource CountryItemTemplate}"
-                                    SuggestedItemsSource="{Binding Countries, Mode=OneWay}"
-                                    Text="ValidatableAutoCompleteView with ValidationErrors"
-                                    ValidationErrors="{Binding Source={x:Reference ValidatableAutoCompleteView}, Path=Text, Converter={StaticResource RandomValidationErrorsConverter}}" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatablePicker--&gt;" />
-                                <controls:ValidatablePicker
-                                    x:Name="ValidatablePickerTest1"
-                                    DisplayMemberPath="Name"
-                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                    ItemsSource="{Binding Countries}"
-                                    NullString="&lt;Default Country&gt;"
-                                    Placeholder="ValidatablePicker by Country.Name"
-                                    SelectedItem="{Binding Country, Mode=TwoWay}"
-                                    ValidationErrors="{Binding Validation.Errors[Country]}" />
-
-                                <controls:ValidatablePicker
-                                    x:Name="ValidatablePickerTest2"
-                                    ItemsSource="{Binding Countries}"
-                                    Placeholder="ValidatablePicker with ValidationErrors"
-                                    SelectedItem="{Binding Country, Mode=TwoWay}"
-                                    ValidationErrors="{Binding Source={x:Reference ValidatablePickerTest2}, Path=SelectedItem, Converter={StaticResource RandomValidationErrorsConverter}}" />
-
-                                <Button Command="{Binding SetFantasyLandCommand}" Text="Select non-existing 'Fantasy Land'" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ErrorBox--&gt;" />
                                 <controls:ErrorBox Text="Some error message" />

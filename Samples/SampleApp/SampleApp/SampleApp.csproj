@@ -53,6 +53,9 @@
 	  <Compile Update="Views\EntryPage.xaml.cs">
 	    <DependentUpon>EntryPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\AutoCompletePage.xaml.cs">
+	    <DependentUpon>AutoCompletePage.xaml</DependentUpon>
+	  </Compile>
     <Compile Update="Views\SwitchesPage.xaml.cs">
       <DependentUpon>SwitchesPage.xaml</DependentUpon>
     </Compile>

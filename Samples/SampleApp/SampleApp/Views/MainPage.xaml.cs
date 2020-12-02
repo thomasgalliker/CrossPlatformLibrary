@@ -52,11 +52,6 @@ namespace SampleApp.Views
             statusBar.SetColor(Color.White);
             statusBar.SetStatusBarMode(StatusBarStyle.Light);
         }
-
-        private void AutoCompleteView_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            this.ScrollView.ScrollToAsync(this.AutoCompleteView, ScrollToPosition.Start, animated: true);
-        }
     }
 
     public class NavigationService : INavigationService

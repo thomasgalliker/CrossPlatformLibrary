@@ -41,8 +41,6 @@ namespace SampleApp.ViewModels
         private bool isReadonly;
         private ICommand longPressCommand;
         private ICommand normalPressCommand;
-        private string countrySearchText;
-        private ICommand autoCompleteSearchCommand;
         private ObservableCollection<CountryViewModel> countries;
         private int userNameMaxLength;
         private DateTime? birthdate;
@@ -74,7 +72,6 @@ namespace SampleApp.ViewModels
             this.ViewModelError = ViewModelError.None;
             this.User = new UserDto();
             this.Countries = new ObservableCollection<CountryViewModel>();
-            this.SuggestedCountries = new ObservableCollection<CountryViewModel>();
 
             this.Languages = new ObservableCollection<LanguageViewModel>
             {
@@ -156,8 +153,6 @@ namespace SampleApp.ViewModels
             private set => this.SetProperty(ref this.countries, value, nameof(this.Countries));
         }
 
-        public ObservableCollection<CountryViewModel> SuggestedCountries { get; }
-
         public CountryViewModel Country
         {
             get => this.country;
@@ -165,19 +160,6 @@ namespace SampleApp.ViewModels
             {
                 this.country = value;
                 this.RaisePropertyChanged(nameof(this.Country));
-            }
-        }
-
-        public string CountrySearchText
-        {
-            get => this.countrySearchText;
-            set
-            {
-                if (this.SetProperty(ref this.countrySearchText, value, nameof(this.CountrySearchText)))
-                {
-                    // Use SearchText property binding to filter local data sources...
-                    Console.WriteLine($"CountrySearchText changed: {value}");
-                }
             }
         }
 
@@ -214,6 +196,10 @@ namespace SampleApp.ViewModels
                 case nameof(PickersPage):
                     page = new PickersPage { BindingContext = new PickersViewModel(this.displayService, this.Countries) };
                     break;
+                    
+                case nameof(AutoCompletePage):
+                    page = new AutoCompletePage { BindingContext = new AutoCompleteViewModel(this.displayService, this.Countries) };
+                    break;
 
                 case nameof(SwitchesPage):
                     page = new SwitchesPage { BindingContext = null };
@@ -241,36 +227,6 @@ namespace SampleApp.ViewModels
             this.activityIndicatorService.ShowLoadingPage("Loading...");
             await Task.Delay(3000);
             this.activityIndicatorService.HideLoadingPage();
-        }
-
-        public ICommand AutoCompleteSearchCommand
-        {
-            get
-            {
-                return this.autoCompleteSearchCommand ??
-                       (this.autoCompleteSearchCommand = new Command<string>(async (s) => await this.OnAutoCompleteSearch(s)));
-            }
-        }
-
-        private async Task OnAutoCompleteSearch(string searchText)
-        {
-            // Use SearchCommand to run sync/async queries against a backend data source, etc...
-
-            this.SuggestedCountries.Clear();
-
-            if (!string.IsNullOrEmpty(searchText))
-            {
-                var filteredViewModels = this.Countries.Where(c => c.Name != null && c.Name.StartsWith(searchText, StringComparison.InvariantCultureIgnoreCase))
-                    .OrderBy(c => c.Name)
-                    .Take(10)
-                    .ToList();
-                this.SuggestedCountries.AddRange(filteredViewModels);
-
-                if (!filteredViewModels.Any())
-                {
-                    this.Validation.AddErrorMessageForProperty(nameof(this.Country), "No results found!");
-                }
-            }
         }
 
         public string Notes
@@ -366,15 +322,6 @@ namespace SampleApp.ViewModels
             await this.displayService.DisplayAlert("SelectCountryCommand", $"country: {parameter.Name ?? "null"}");
         }
 
-        public ICommand SetFantasyLandCommand => new Command(this.OnSetFantasyLand);
-
-        private void OnSetFantasyLand()
-        {
-            // Since none of the Countries are IEquitable<> to "Fantasy Land", the UI controls binding to Country
-            // need to react properly: Bindable Picker switches to state 'nothing selected'.
-            this.Country = new CountryViewModel(new CountryDto { Id = 99, Name = "Fantasy Land" });
-            this.Validation.AddErrorMessageForProperty(nameof(this.Country), "Fantasy Land does not exist, it's fiction!");
-        }
 
         public ObservableCollection<ResourceViewModel> ThemeResources
         {
