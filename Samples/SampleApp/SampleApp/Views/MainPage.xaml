@@ -245,6 +245,12 @@
                                     CommandParameter="DrilldownButtonListPage"
                                     Text="Drilldown Buttons" />
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: CustomEntry--&gt;" />
+                                <Button
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="EntryPage"
+                                    Text="CustomEntry" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: Pickers--&gt;" />
                                 <Button
                                     Command="{Binding NavigateToPageCommand}"
@@ -367,127 +373,6 @@
                                         </Style>
                                     </controls:ValidatableLabel.LabelStyle>
                                 </controls:ValidatableLabel>
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomEntry--&gt;" />
-                                <controls:GridZero>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <controls:CustomEntry
-                                        Grid.Row="0"
-                                        Grid.Column="0"
-                                        Placeholder="CustomEntry"
-                                        Text="CustomEntry" />
-                                    <Entry
-                                        Grid.Row="0"
-                                        Grid.Column="1"
-                                        Placeholder="Xamarin.Forms.Entry"
-                                        Text="Xamarin.Forms.Entry" />
-                                </controls:GridZero>
-
-                                <controls:CustomEntry
-                                    effects:LineColorEffect.ApplyLineColor="True"
-                                    effects:LineColorEffect.LineColor="Black"
-                                    BackgroundColor="LightGoldenrodYellow"
-                                    Placeholder="CustomEntry with LineColorEffect"
-                                    Text="" />
-
-                                <controls:CustomEntry
-                                    Margin="0"
-                                    effects:LineColorEffect.ApplyLineColor="True"
-                                    effects:LineColorEffect.LineColor="Red"
-                                    BackgroundColor="LightGoldenrodYellow"
-                                    FontSize="{DynamicResource Theme.FontSize.H1}"
-                                    Placeholder="CustomEntry with Huge FontSize"
-                                    Text="" />
-
-                                <controls:CustomEntry
-                                    BackgroundColor="LightGoldenrodYellow"
-                                    HideBorder="True"
-                                    Placeholder="CustomEntry with HideBorder=&quot;True&quot;"
-                                    Text="" />
-                                <controls:CustomEntry
-                                    BackgroundColor="LightGoldenrodYellow"
-                                    Placeholder="CustomEntry with RemovePadding=&quot;True&quot;"
-                                    RemovePadding="True"
-                                    Text="" />
-
-                                <controls:CustomEntry Placeholder="CustomEntry with TextContentType=&quot;FirstName&quot;" TextContentType="FirstName" />
-                                <controls:CustomEntry Placeholder="CustomEntry with TextContentType=&quot;LastName&quot;" TextContentType="LastName" />
-                                <controls:CustomEntry
-                                    Keyboard="Email"
-                                    Placeholder="CustomEntry with TextContentType=&quot;Username&quot;"
-                                    TextContentType="Username" />
-                                <controls:CustomEntry
-                                    Keyboard="Email"
-                                    Placeholder="CustomEntry with TextContentType=&quot;EmailAddress&quot;"
-                                    TextContentType="EmailAddress" />
-                                <controls:CustomEntry
-                                    Keyboard="Telephone"
-                                    Placeholder="CustomEntry with TextContentType=&quot;PhoneNumber&quot;"
-                                    TextContentType="PhoneNumber" />
-                                <controls:CustomEntry
-                                    IsPassword="True"
-                                    Placeholder="CustomEntry with TextContentType=&quot;Password&quot;"
-                                    TextContentType="Password" />
-                                <controls:CustomEntry
-                                    IsPassword="True"
-                                    Placeholder="CustomEntry with TextContentType=&quot;NewPassword&quot;"
-                                    TextContentType="NewPassword" />
-                                <controls:CustomEntry
-                                    Keyboard="Numeric"
-                                    Placeholder="CustomEntry with TextContentType=&quot;OneTimeCode&quot;"
-                                    TextContentType="OneTimeCode" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableEntry--&gt;" />
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <controls:ValidatableEntry
-                                        x:Name="UserNameEntry"
-                                        Grid.Column="0"
-                                        IsReadonly="{Binding IsReadonly}"
-                                        Placeholder="ValidatableEntry"
-                                        ReturnType="Next"
-                                        Text="{Binding UserName, Mode=TwoWay}"
-                                        TrailingIcon="{controls:ImageResource SampleApp.Resources.Images.rectangle_magenta_192.png}"
-                                        TrailingIconCommand="{Binding CalloutCommand}"
-                                        TrailingIconCommandParameter="{Binding Text, Source={x:Reference UserNameEntry}}"
-                                        ValidationErrors="{Binding Validation.Errors[UserName]}">
-                                        <controls:ValidatableEntry.Behaviors>
-                                            <behaviors:MaxLengthTextBehavior MaxLength="{Binding UserNameMaxLength}" />
-                                            <behaviors:EntryFocusBehavior TargetElementName="ValidatableEntryTest1" />
-                                        </controls:ValidatableEntry.Behaviors>
-                                    </controls:ValidatableEntry>
-                                    <Entry
-                                        Grid.Column="1"
-                                        Placeholder="Xamarin.Forms.Entry"
-                                        ReturnType="Go"
-                                        Text="{Binding UserName, Mode=TwoWay}">
-                                        <Entry.Behaviors>
-                                            <behaviors:EntryFocusBehavior TargetElement="{x:Reference UserNameEntry}" />
-                                        </Entry.Behaviors>
-                                    </Entry>
-                                </Grid>
-                                <controls:ValidatableEntry
-                                    x:Name="ValidatableEntryTest1"
-                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                    Placeholder="{Binding Text, Source={x:Reference ValidatableEntryTest1}}"
-                                    Text="ValidatableEntry's Placeholder sizing test" />
-                                <controls:ValidatableEntry
-                                    x:Name="ValidatableEntryTest2"
-                                    Placeholder="ValidatableEntry with ValidationErrors"
-                                    Text="ValidatableEntry with ValidationErrors"
-                                    ValidationErrors="{Binding Source={x:Reference ValidatableEntryTest2}, Path=Text, Converter={StaticResource RandomValidationErrorsConverter}}" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo SearchBar--&gt;" />
                                 <SearchBar

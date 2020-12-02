@@ -50,6 +50,9 @@
 		  <AutoGen>True</AutoGen>
 		  <DependentUpon>Strings.resx</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\EntryPage.xaml.cs">
+	    <DependentUpon>EntryPage.xaml</DependentUpon>
+	  </Compile>
     <Compile Update="Views\SwitchesPage.xaml.cs">
       <DependentUpon>SwitchesPage.xaml</DependentUpon>
     </Compile>
