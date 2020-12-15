@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Reflection;
 using System.Windows.Input;
 using CrossPlatformLibrary.Extensions;
@@ -7,7 +8,7 @@ using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Behaviors
 {
-    public class EventToCommandBehavior : BehaviorBase<View>
+    public class EventToCommandBehavior : BehaviorBase<Xamarin.Forms.View>
     {
         private Delegate eventHandler;
 
@@ -60,7 +61,7 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             set => this.SetValue(InputConverterProperty, value);
         }
 
-        protected override void OnAttachedTo(View bindable)
+        protected override void OnAttachedTo(Xamarin.Forms.View bindable)
         {
             base.OnAttachedTo(bindable);
             this.RegisterEvent(this.EventName);
@@ -87,7 +88,14 @@ namespace CrossPlatformLibrary.Forms.Behaviors
                 throw new ArgumentException($"EventToCommandBehavior: Can't register the '{this.EventName}' event.");
             }
 
-            var methodInfo = typeof(EventToCommandBehavior).GetTypeInfo().GetDeclaredMethod(nameof(this.OnEvent));
+            var paramType = eventInfo.EventHandlerType.IsGenericType
+                ? eventInfo.EventHandlerType.GetGenericArguments()
+                : (new[] { typeof(object) });
+
+            var methodInfo = typeof(EventToCommandBehavior).GetTypeInfo()
+                .GetDeclaredMethod(nameof(this.OnEvent))
+                .MakeGenericMethod(paramType);
+
             this.eventHandler = methodInfo.CreateDelegate(eventInfo.EventHandlerType, this);
             eventInfo.AddEventHandler(this.AssociatedObject, this.eventHandler);
         }
@@ -116,32 +124,29 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             this.eventHandler = null;
         }
 
-        void OnEvent(object sender, object eventArgs)
+        void OnEvent<T>(object sender, T eventArgs)
         {
             Debug.WriteLine($"EventToCommandBehavior.OnEvent(sender={sender?.GetType().GetFormattedName() ?? "<null>"}, eventArgs={eventArgs?.GetType().GetFormattedName() ?? "<null>"})");
 
-            if (this.Command == null)
+            if (!(this.Command is ICommand command))
             {
                 return;
             }
 
             object resolvedParameter;
-            if (this.CommandParameter != null)
+
+            if (this.Converter is IValueConverter converter)
             {
-                resolvedParameter = this.CommandParameter;
-            }
-            else if (this.Converter != null)
-            {
-                resolvedParameter = this.Converter.Convert(eventArgs, typeof(object), null, null);
+                resolvedParameter = converter.Convert(eventArgs, typeof(object), this.CommandParameter, CultureInfo.CurrentUICulture);
             }
             else
             {
                 resolvedParameter = eventArgs;
             }
 
-            if (this.Command.CanExecute(resolvedParameter))
+            if (command.CanExecute(resolvedParameter))
             {
-                this.Command.Execute(resolvedParameter);
+                command.Execute(resolvedParameter);
             }
         }
 
