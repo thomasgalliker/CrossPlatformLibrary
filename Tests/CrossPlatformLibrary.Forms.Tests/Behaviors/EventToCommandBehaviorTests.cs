@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using CrossPlatformLibrary.Forms.Behaviors;
+using CrossPlatformLibrary.Forms.Tests.Testdata;
 using FluentAssertions;
 using Xamarin.Forms;
 using Xamarin.Forms.Mocks;
@@ -8,7 +9,7 @@ using Xunit;
 
 namespace CrossPlatformLibrary.Forms.Tests.Behaviors
 {
-    public class EventToCommandBehaviorTests
+    public partial class EventToCommandBehaviorTests
     {
         public EventToCommandBehaviorTests()
         {
@@ -63,15 +64,15 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             var behavior = new EventToCommandBehavior
             {
                 EventName = nameof(TestListView.EventWithEventArgs),
-                Command = new Command<ProcessEventArgs>((e) =>
+                Command = new Command<TestEventArgs>((e) =>
                 {
                     executedCommand = true;
                 })
             };
-            var listView = new TestListView<ProcessEventArgs>();
+            var listView = new TestListView<TestEventArgs>();
             listView.Behaviors.Add(behavior);
 
-            var eventArgs = new ProcessEventArgs();
+            var eventArgs = new TestEventArgs();
 
             // Act
             listView.RaiseEventWithEventArgs(eventArgs);
@@ -159,12 +160,12 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
                 {
                     returnedCommandParameter = e;
                 }),
-                Converter = new ProcessEventArgsConverter(),
+                Converter = new TestEventArgsConverter(),
             };
-            var listView = new TestListView<ProcessEventArgs>();
+            var listView = new TestListView<TestEventArgs>();
             listView.Behaviors.Add(behavior);
 
-            var eventArgs = new ProcessEventArgs
+            var eventArgs = new TestEventArgs
             {
                 Param = "Test"
             };
@@ -189,12 +190,12 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
                     returnedCommandParameter = e;
                 }),
                 CommandParameter = "CommandParameterValue",
-                Converter = new ProcessEventArgsConverter(),
+                Converter = new TestEventArgsConverter(),
             };
-            var listView = new TestListView<ProcessEventArgs>();
+            var listView = new TestListView<TestEventArgs>();
             listView.Behaviors.Add(behavior);
 
-            var eventArgs = new ProcessEventArgs
+            var eventArgs = new TestEventArgs
             {
                 Param = "Test"
             };
@@ -204,45 +205,6 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
 
             // Assert
             returnedCommandParameter.Should().BeEquivalentTo("CommandParameterValue");
-        }
-
-        public class TestListView : TestListView<object>
-        {
-        }
-
-        public class TestListView<T> : ListView
-        {
-            public virtual event EventHandler EventWithoutArgs;
-
-            public void RaiseEventWithoutArgs()
-            {
-                EventWithoutArgs?.Invoke(this, EventArgs.Empty);
-            }
-
-            public event EventHandler<T> EventWithEventArgs;
-
-            public void RaiseEventWithEventArgs(T eventArgs)
-            {
-                EventWithEventArgs?.Invoke(this, eventArgs);
-            }
-        }
-
-        public class ProcessEventArgs : EventArgs
-        {
-            public string Param { get; set; }
-        }
-
-        private class ProcessEventArgsConverter : IValueConverter
-        {
-            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                return (value as ProcessEventArgs)?.Param;
-            }
-
-            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 }
