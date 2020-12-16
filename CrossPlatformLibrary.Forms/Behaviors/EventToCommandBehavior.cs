@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Globalization;
 using System.Reflection;
 using System.Windows.Input;
 using CrossPlatformLibrary.Extensions;
@@ -134,10 +133,13 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             }
 
             object resolvedParameter;
-
-            if (this.Converter is IValueConverter converter)
+            if (this.CommandParameter is object commandParameter)
             {
-                resolvedParameter = converter.Convert(eventArgs, typeof(object), this.CommandParameter, CultureInfo.CurrentUICulture);
+                resolvedParameter = commandParameter;
+            }
+            else if (this.Converter != null)
+            {
+                resolvedParameter = this.Converter.Convert(eventArgs, typeof(object), null, null);
             }
             else
             {

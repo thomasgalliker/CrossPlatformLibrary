@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using CrossPlatformLibrary.Forms.Behaviors;
+using FluentAssertions;
 using Xamarin.Forms;
 using Xamarin.Forms.Mocks;
 using Xunit;
@@ -28,7 +29,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             Action action = () => listView.Behaviors.Add(behavior);
 
             // Assert
-            Assert.Throws<ArgumentException>(action);
+            action.Should().Throw<ArgumentException>();
         }
 
         [Fact]
@@ -51,7 +52,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             listView.RaiseEventWithoutArgs();
 
             // Assert
-            Assert.True(executedCommand);
+            executedCommand.Should().BeTrue();
         }
 
         [Fact]
@@ -76,7 +77,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             listView.RaiseEventWithEventArgs(eventArgs);
 
             // Assert
-            Assert.True(executedCommand);
+            executedCommand.Should().BeTrue();
         }
 
         [Fact]
@@ -101,7 +102,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             listView.RaiseEventWithEventArgs(eventArgs);
 
             // Assert
-            Assert.Equal(eventArgs, returnedCommandParameter);
+            returnedCommandParameter.Should().Be(eventArgs);
         }
 
         [Fact]
@@ -123,7 +124,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             listView.RaiseEventWithoutArgs();
 
             // Assert
-            Assert.False(executedCommand);
+            executedCommand.Should().BeFalse();
         }
 
         [Fact]
@@ -143,7 +144,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             listView.RaiseEventWithoutArgs();
 
             // Assert
-            Assert.False(executedCommand);
+            executedCommand.Should().BeFalse();
         }
 
         [Fact]
@@ -172,22 +173,22 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             listView.RaiseEventWithEventArgs(eventArgs);
 
             // Assert
-            Assert.Equal(eventArgs.Param, returnedCommandParameter);
+            returnedCommandParameter.Should().BeEquivalentTo(eventArgs.Param);
         }
 
         [Fact]
-        public void ShouldExecuteCommand_WithConverterAndCommandParameter()
+        public void ShouldExecuteCommand_WithCommandParameter()
         {
             // Arrange
-            string returnedCommandParameter = null;
+            object returnedCommandParameter = null;
             var behavior = new EventToCommandBehavior
             {
                 EventName = nameof(TestListView.EventWithEventArgs),
-                Command = new Command<string>(execute: (e) =>
+                Command = new Command<object>(execute: (e) =>
                 {
                     returnedCommandParameter = e;
-                }, (e) => e == "Test"),
-                CommandParameter = true,
+                }),
+                CommandParameter = "CommandParameterValue",
                 Converter = new ProcessEventArgsConverter(),
             };
             var listView = new TestListView<ProcessEventArgs>();
@@ -202,7 +203,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             listView.RaiseEventWithEventArgs(eventArgs);
 
             // Assert
-            Assert.Equal(eventArgs.Param, returnedCommandParameter);
+            returnedCommandParameter.Should().BeEquivalentTo("CommandParameterValue");
         }
 
         public class TestListView : TestListView<object>
