@@ -132,7 +132,7 @@
                                     ValidationErrors="{Binding Validation.Errors[UserName]}">
                                     <xControls:ValidatableEntry.Behaviors>
                                         <behaviors:MaxLengthTextBehavior MaxLength="{Binding UserNameMaxLength}" />
-                                        <behaviors:EntryFocusBehavior TargetElementName="ValidatableEntryTest1" />
+                                        <behaviors:EntryFocusBehavior DecorationFlags="TrimEnd" TargetElementName="ValidatableEntryTest1" />
                                     </xControls:ValidatableEntry.Behaviors>
                                 </xControls:ValidatableEntry>
                                 <Entry
@@ -141,7 +141,7 @@
                                     ReturnType="Go"
                                     Text="{Binding UserName, Mode=TwoWay}">
                                     <Entry.Behaviors>
-                                        <behaviors:EntryFocusBehavior TargetElement="{x:Reference UserNameEntry}" />
+                                        <behaviors:EntryFocusBehavior DecorationFlags="All" TargetElement="{x:Reference UserNameEntry}" />
                                     </Entry.Behaviors>
                                 </Entry>
                             </Grid>
