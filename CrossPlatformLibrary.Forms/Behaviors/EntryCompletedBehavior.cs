@@ -15,23 +15,23 @@ namespace CrossPlatformLibrary.Forms.Behaviors
     /// <example>
     /// <Entry Placeholder="Entry 1">
     ///     <Entry.Behaviors>
-    ///         <behaviors:EntryFocusBehavior TargetElement="{x:Reference Entry2}" />
+    ///         <behaviors:EntryCompletedBehavior TargetElement="{x:Reference Entry2}" />
     /// </Entry.Behaviors >
     /// </Entry >
     /// 
     /// <Entry Placeholder="Entry 1">
     ///     <Entry.Behaviors>
-    ///         <behaviors:EntryFocusBehavior TargetElementName="Entry2" />
+    ///         <behaviors:EntryCompletedBehavior TargetElementName="Entry2" />
     /// </Entry.Behaviors >
     /// </Entry >
     /// </example>
-    public class EntryFocusBehavior : BehaviorBase<VisualElement>
+    public class EntryCompletedBehavior : BehaviorBase<VisualElement>
     {
         public static readonly BindableProperty TargetElementProperty =
             BindableProperty.Create(
                 nameof(TargetElement),
                 typeof(VisualElement),
-                typeof(EntryFocusBehavior));
+                typeof(EntryCompletedBehavior));
 
         public VisualElement TargetElement
         {
@@ -45,7 +45,7 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             BindableProperty.Create(
                 nameof(DecorationFlags),
                 typeof(TextDecorationFlags),
-                typeof(EntryFocusBehavior));
+                typeof(EntryCompletedBehavior));
 
         public TextDecorationFlags DecorationFlags
         {
