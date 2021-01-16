@@ -75,6 +75,14 @@ namespace SampleApp.ViewModels
             this.Country = new CountryViewModel(new CountryDto { Id = 99, Name = "Fantasy Land" });
             this.Validation.AddErrorMessageForProperty(nameof(this.Country), "Fantasy Land does not exist, it's fiction!");
         }
+        
+        public ICommand SetCountryCommand => new Command(this.OnSetCountry);
+
+        private void OnSetCountry()
+        {
+            this.Validation.ClearErrorMessages();
+            this.Country = new CountryViewModel(new CountryDto { Id = 4, Name = "French Guiana" });
+        }
 
         public ICommand AutoCompleteSearchCommand
         {

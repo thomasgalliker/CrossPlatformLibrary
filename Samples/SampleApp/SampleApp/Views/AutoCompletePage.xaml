@@ -94,6 +94,8 @@
                                 SelectedItem="{Binding Country, Mode=TwoWay}"
                                 ValidationErrors="{Binding Source={x:Reference ValidatablePickerTest2}, Path=SelectedItem, Converter={StaticResource RandomValidationErrorsConverter}}" />
 
+                            <Button Command="{Binding SetCountryCommand}" Text="Select 'French Guiana'" />
+
                             <Button Command="{Binding SetFantasyLandCommand}" Text="Select non-existing 'Fantasy Land'" />
 
                             <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Toggle IsReadonly--&gt;" />

@@ -11,6 +11,7 @@ namespace CrossPlatformLibrary.Forms.Controls
     public partial class ValidatableAutoCompleteView : GridZero
     {
         private INotifyCollectionChanged sourceCollection;
+        private bool selectedItemChanging;
         private readonly TaskDelayer taskDelayer;
 
         public ValidatableAutoCompleteView()
@@ -48,10 +49,35 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(TextProperty, value);
         }
 
-        private static void OnTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static async void OnTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var validatableAutoCompleteView = (ValidatableAutoCompleteView)bindable;
             validatableAutoCompleteView.OnPropertyChanged(nameof(validatableAutoCompleteView.AnnotationText));
+
+            if (validatableAutoCompleteView.SearchCommand == null)
+            {
+                // In case no search command is specified by the user,
+                // we don't have to do anything here
+                // TODO: Raise exception? This situation should not occur!
+                return;
+            }
+
+            if (validatableAutoCompleteView.selectedItemChanging)
+            {
+                return;
+            }
+
+            var newSearchText = newValue as string;
+
+            var delay = validatableAutoCompleteView.SearchCommandDelay;
+            if (delay == TimeSpan.Zero)
+            {
+                validatableAutoCompleteView.PerformSearchCommand(newSearchText);
+            }
+            else
+            {
+                await validatableAutoCompleteView.taskDelayer.RunWithDelay(delay, () => validatableAutoCompleteView.PerformSearchCommand(newSearchText));
+            }
         }
 
         public static readonly BindableProperty PlaceholderProperty =
@@ -176,9 +202,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 typeof(ICommand),
                 typeof(ValidatableAutoCompleteView),
                 null,
-                BindingMode.OneWay,
-                null,
-                propertyChanged: OnSearchCommandPropertyChanged);
+                BindingMode.OneWay);
 
         public ICommand SearchCommand
         {
@@ -186,54 +210,20 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(SearchCommandProperty, value);
         }
 
-        private static void OnSearchCommandPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
-        {
-            var autoCompleteView = (ValidatableAutoCompleteView)bindable;
-
-            if (newvalue != null)
-            {
-                autoCompleteView.Entry.TextChanged += autoCompleteView.OnEntryTextChanged;
-            }
-            else
-            {
-                autoCompleteView.Entry.TextChanged -= autoCompleteView.OnEntryTextChanged;
-            }
-        }
-
-        private async void OnEntryTextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (this.SearchCommand == null)
-            {
-                // In case no search command is specified by the user,
-                // we don't have to do anything here
-                // TODO: Raise exception? This situation should not occur!
-                return;
-            }
-
-            var delay = this.SearchCommandDelay;
-            if (delay == TimeSpan.Zero)
-            {
-                this.PerformSearchCommand(e.NewTextValue);
-            }
-            else
-            {
-                await this.taskDelayer.RunWithDelay(delay, () => this.PerformSearchCommand(e.NewTextValue));
-            }
-        }
-
         private void PerformSearchCommand(string searchText)
         {
-            var selectedItem = this.SelectedItem;
-            if (selectedItem != null)
-            {
-                var selectedItemString = this.GetDisplayString(selectedItem);
-                if (string.Equals(selectedItemString, searchText))
-                {
-                    // If SelectedItem is set and its textual representation equals to Entry.TextChanged
-                    // we can assume that Entry.Text was set by SelectedItem
-                    return;
-                }
-            }
+            // TODO: This code is possibly not used anymore - test and remove safely
+            ////var selectedItem = this.SelectedItem;
+            ////if (selectedItem != null)
+            ////{
+            ////    var selectedItemString = this.GetDisplayString(selectedItem);
+            ////    if (string.Equals(selectedItemString, searchText))
+            ////    {
+            ////        // If SelectedItem is set and its textual representation equals to Entry.TextChanged
+            ////        // we can assume that Entry.Text was set by SelectedItem
+            ////        return;
+            ////    }
+            ////}
 
             var searchCommand = this.SearchCommand;
             if (searchCommand != null && searchCommand.CanExecute(searchText))
@@ -333,7 +323,9 @@ namespace CrossPlatformLibrary.Forms.Controls
             var autoCompleteView = (ValidatableAutoCompleteView)bindable;
             autoCompleteView.SuggestionList.IsVisible = false;
 
+            autoCompleteView.selectedItemChanging = true;
             autoCompleteView.Entry.Text = autoCompleteView.GetDisplayString(newvalue);
+            autoCompleteView.selectedItemChanging = false;
         }
 
         private string GetDisplayString(object value)
@@ -365,7 +357,7 @@ namespace CrossPlatformLibrary.Forms.Controls
             get => (DataTemplate)this.GetValue(SuggestedItemTemplateProperty);
             set => this.SetValue(SuggestedItemTemplateProperty, value);
         }
-        
+
         public static readonly BindableProperty SuggestedItemsSpacingProperty = BindableProperty.Create(
             nameof(SuggestedItemsSpacing),
             typeof(double),
