@@ -58,7 +58,6 @@ namespace CrossPlatformLibrary.Forms.Controls
             {
                 // In case no search command is specified by the user,
                 // we don't have to do anything here
-                // TODO: Raise exception? This situation should not occur!
                 return;
             }
 
@@ -77,6 +76,28 @@ namespace CrossPlatformLibrary.Forms.Controls
             else
             {
                 await validatableAutoCompleteView.taskDelayer.RunWithDelay(delay, () => validatableAutoCompleteView.PerformSearchCommand(newSearchText));
+            }
+        }
+
+        private void PerformSearchCommand(string searchText)
+        {
+            // TODO: This code is possibly not used anymore - test and remove safely
+            ////var selectedItem = this.SelectedItem;
+            ////if (selectedItem != null)
+            ////{
+            ////    var selectedItemString = this.GetDisplayString(selectedItem);
+            ////    if (string.Equals(selectedItemString, searchText))
+            ////    {
+            ////        // If SelectedItem is set and its textual representation equals to Entry.TextChanged
+            ////        // we can assume that Entry.Text was set by SelectedItem
+            ////        return;
+            ////    }
+            ////}
+
+            var searchCommand = this.SearchCommand;
+            if (searchCommand != null && searchCommand.CanExecute(searchText))
+            {
+                searchCommand.Execute(searchText);
             }
         }
 
@@ -208,28 +229,6 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             get => (ICommand)this.GetValue(SearchCommandProperty);
             set => this.SetValue(SearchCommandProperty, value);
-        }
-
-        private void PerformSearchCommand(string searchText)
-        {
-            // TODO: This code is possibly not used anymore - test and remove safely
-            ////var selectedItem = this.SelectedItem;
-            ////if (selectedItem != null)
-            ////{
-            ////    var selectedItemString = this.GetDisplayString(selectedItem);
-            ////    if (string.Equals(selectedItemString, searchText))
-            ////    {
-            ////        // If SelectedItem is set and its textual representation equals to Entry.TextChanged
-            ////        // we can assume that Entry.Text was set by SelectedItem
-            ////        return;
-            ////    }
-            ////}
-
-            var searchCommand = this.SearchCommand;
-            if (searchCommand != null && searchCommand.CanExecute(searchText))
-            {
-                searchCommand.Execute(searchText);
-            }
         }
 
         public static readonly BindableProperty SearchCommandDelayProperty =
