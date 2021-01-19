@@ -79,6 +79,7 @@
         Margin="0"
         Padding="0"
         ColumnSpacing="0"
+        IsVisible="False"
         ItemTemplate="{Binding SuggestedItemTemplate, Source={x:Reference Control}, Mode=OneWay}"
         ItemsSource="{Binding SuggestedItemsSource, Source={x:Reference Control}, Mode=OneWay}"
         RowSpacing="0"

@@ -30,7 +30,6 @@ namespace CrossPlatformLibrary.Forms.Controls
         public new void Unfocus()
         {
             this.Entry.Unfocus();
-            //this.Entry.SendCompleted();
             base.Unfocus();
         }
 
@@ -51,8 +50,10 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         private static async void OnTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
+            Debug.WriteLine($"OnTextPropertyChanged: oldValue={oldValue}, newValue={newValue}");
+
             var validatableAutoCompleteView = (ValidatableAutoCompleteView)bindable;
-            validatableAutoCompleteView.OnPropertyChanged(nameof(validatableAutoCompleteView.AnnotationText));
+            validatableAutoCompleteView.OnPropertyChanged(nameof(ValidatableAutoCompleteView.AnnotationText));
 
             if (validatableAutoCompleteView.SearchCommand == null)
             {
@@ -81,19 +82,6 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         private void PerformSearchCommand(string searchText)
         {
-            // TODO: This code is possibly not used anymore - test and remove safely
-            ////var selectedItem = this.SelectedItem;
-            ////if (selectedItem != null)
-            ////{
-            ////    var selectedItemString = this.GetDisplayString(selectedItem);
-            ////    if (string.Equals(selectedItemString, searchText))
-            ////    {
-            ////        // If SelectedItem is set and its textual representation equals to Entry.TextChanged
-            ////        // we can assume that Entry.Text was set by SelectedItem
-            ////        return;
-            ////    }
-            ////}
-
             var searchCommand = this.SearchCommand;
             if (searchCommand != null && searchCommand.CanExecute(searchText))
             {
@@ -119,7 +107,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         private static void OnPlaceholderPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var validatableAutoCompleteView = (ValidatableAutoCompleteView)bindable;
-            validatableAutoCompleteView.OnPropertyChanged(nameof(validatableAutoCompleteView.AnnotationText));
+            validatableAutoCompleteView.OnPropertyChanged(nameof(ValidatableAutoCompleteView.AnnotationText));
         }
 
         public string AnnotationText
@@ -284,16 +272,12 @@ namespace CrossPlatformLibrary.Forms.Controls
 
             if (e.NewItems is IList newItems && newItems.Count > 0)
             {
-                //var first = newItems[0];
-                //var selectedItem = this.SuggestionList.SelectedItem;
-                //if (selectedItem == null || !Equals(selectedItem, first))
-                {
-                    this.SuggestionList.IsVisible = true;
-                    return;
-                }
+                this.SuggestionList.IsVisible = true;
             }
-
-            this.SuggestionList.IsVisible = false;
+            else
+            {
+                this.SuggestionList.IsVisible = false;
+            }
         }
 
         public IEnumerable SuggestedItemsSource
@@ -302,13 +286,14 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(SuggestedItemsSourceProperty, value);
         }
 
-        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create(
-            nameof(SelectedItem),
-            typeof(object),
-            typeof(ValidatableAutoCompleteView),
-            null,
-            BindingMode.TwoWay,
-            propertyChanged: OnSelectedItemChanged);
+        public static readonly BindableProperty SelectedItemProperty =
+            BindableProperty.Create(
+                nameof(SelectedItem),
+                typeof(object),
+                typeof(ValidatableAutoCompleteView),
+                null,
+                BindingMode.TwoWay,
+                propertyChanged: OnSelectedItemChanged);
 
         private static void OnSelectedItemChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
@@ -345,11 +330,12 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(SelectedItemProperty, value);
         }
 
-        public static readonly BindableProperty SuggestedItemTemplateProperty = BindableProperty.Create(
-            nameof(SuggestedItemTemplate),
-            typeof(DataTemplate),
-            typeof(ValidatableAutoCompleteView),
-            default(DataTemplate));
+        public static readonly BindableProperty SuggestedItemTemplateProperty =
+            BindableProperty.Create(
+                nameof(SuggestedItemTemplate),
+                typeof(DataTemplate),
+                typeof(ValidatableAutoCompleteView),
+                default(DataTemplate));
 
         public DataTemplate SuggestedItemTemplate
         {
@@ -357,11 +343,12 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(SuggestedItemTemplateProperty, value);
         }
 
-        public static readonly BindableProperty SuggestedItemsSpacingProperty = BindableProperty.Create(
-            nameof(SuggestedItemsSpacing),
-            typeof(double),
-            typeof(ValidatableAutoCompleteView),
-            6.0);
+        public static readonly BindableProperty SuggestedItemsSpacingProperty =
+            BindableProperty.Create(
+                nameof(SuggestedItemsSpacing),
+                typeof(double),
+                typeof(ValidatableAutoCompleteView),
+                6.0);
 
         public double SuggestedItemsSpacing
         {
@@ -374,8 +361,6 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(DisplayMemberPath),
                 typeof(string),
                 typeof(ValidatableAutoCompleteView));
-
-        private bool HasDisplayMemberPath => !string.IsNullOrWhiteSpace(this.DisplayMemberPath);
 
         public string DisplayMemberPath
         {
