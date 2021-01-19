@@ -47,7 +47,7 @@ namespace SampleApp.ViewModels
                 if (this.SetProperty(ref this.countrySearchText, value, nameof(this.CountrySearchText)))
                 {
                     // Use SearchText property binding to filter local data sources...
-                    Console.WriteLine($"CountrySearchText changed: {value}");
+                    Console.WriteLine($"CountrySearchText changed: {value ?? "null"}");
                 }
             }
         }
@@ -81,7 +81,7 @@ namespace SampleApp.ViewModels
         private void OnSetCountry()
         {
             this.Validation.ClearErrorMessages();
-            this.Country = new CountryViewModel(new CountryDto { Id = 4, Name = "French Guiana" });
+            this.Country = this.Countries.First(c => c.Name == "French Guiana");
         }
 
         public ICommand AutoCompleteSearchCommand

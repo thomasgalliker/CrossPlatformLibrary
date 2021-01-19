@@ -28,14 +28,17 @@
                     <xControls:StackLayoutZero>
                         <xControls:LabelSection Text="ValidatablePickers" />
                         <xControls:HeaderDivider />
-                        <xControls:StackLayoutZero Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
+                        <xControls:StackLayoutZero
+                            Padding="{DynamicResource Theme.Padding.CardViewPadding}"
+                            BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}"
+                            Spacing="{DynamicResource Theme.Padding.CardViewSpacing}">
 
                             <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableAutoCompleteView--&gt;" />
                             <xControls:ValidatableAutoCompleteView
                                 x:Name="AutoCompleteView"
                                 DisplayMemberPath="Name"
                                 IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                Placeholder="ValidatableAutoCompleteView"
+                                Placeholder="ValidatableAutoCompleteView1"
                                 SearchCommand="{Binding AutoCompleteSearchCommand}"
                                 SearchCommandDelay="{x:Static local:App.SearchCommandDelay}"
                                 SelectedItem="{Binding Country, Mode=TwoWay}"
@@ -43,7 +46,6 @@
                                 SuggestedItemsSource="{Binding SuggestedCountries, Mode=OneWay}"
                                 SuggestedItemsSpacing="{DynamicResource Theme.Spacing.Small}"
                                 Text="{Binding CountrySearchText, Mode=TwoWay}"
-                                TextChanged="AutoCompleteView_OnTextChanged"
                                 ValidationErrors="{Binding Validation.Errors[Country]}" />
 
                             <xControls:GridZero>
@@ -57,7 +59,7 @@
                                 <xControls:ValidatableAutoCompleteView
                                     BackgroundColor="Aquamarine"
                                     DisplayMemberPath="Name"
-                                    Placeholder="ValidatableAutoCompleteView"
+                                    Placeholder="ValidatableAutoCompleteView2"
                                     Text="ValidatableAutoCompleteView" />
                                 <xControls:ValidatableEntry
                                     Grid.Row="0"
@@ -70,11 +72,21 @@
                             <xControls:ValidatableAutoCompleteView
                                 x:Name="ValidatableAutoCompleteView"
                                 DisplayMemberPath="Name"
-                                Placeholder="ValidatableAutoCompleteView"
+                                Placeholder="ValidatableAutoCompleteView3"
                                 SuggestedItemTemplate="{StaticResource CountryItemTemplate}"
-                                SuggestedItemsSource="{Binding Countries, Mode=OneWay}"
+                                SuggestedItemsSource="{Binding SuggestedCountries, Mode=OneWay}"
                                 Text="ValidatableAutoCompleteView with ValidationErrors"
                                 ValidationErrors="{Binding Source={x:Reference ValidatableAutoCompleteView}, Path=Text, Converter={StaticResource RandomValidationErrorsConverter}}" />
+
+                            <xControls:ValidatableAutoCompleteView
+                                IsReadonly="false"
+                                Placeholder="ValidatableAutoCompleteView4"
+                                SearchCommand="{Binding AutoCompleteSearchCommand}"
+                                SearchCommandDelay="{x:Static local:App.SearchCommandDelay}"
+                                SelectedItem="{Binding Country, Mode=TwoWay}"
+                                SuggestedItemTemplate="{StaticResource CountryItemTemplate}"
+                                SuggestedItemsSource="{Binding SuggestedCountries, Mode=OneWay}"
+                                Text="{Binding CountrySearchText, Mode=TwoWay}" />
 
                             <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatablePicker--&gt;" />
                             <xControls:ValidatablePicker

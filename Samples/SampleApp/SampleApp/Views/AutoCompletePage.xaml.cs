@@ -12,9 +12,11 @@ namespace SampleApp.Views
             this.InitializeComponent();
         }
 
-        private void AutoCompleteView_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            this.ScrollView.ScrollToAsync(this.AutoCompleteView, ScrollToPosition.Start, animated: true);
-        }
+        // Subscribe TextChanged="AutoCompleteView_OnTextChanged"
+        // in order to scroll the AutoCompleteView into view.
+        //private void AutoCompleteView_OnTextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    this.ScrollView.ScrollToAsync(this.AutoCompleteView, ScrollToPosition.Start, animated: true);
+        //}
     }
 }

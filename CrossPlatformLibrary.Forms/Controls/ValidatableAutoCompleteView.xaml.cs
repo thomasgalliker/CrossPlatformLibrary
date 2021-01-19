@@ -10,9 +10,11 @@ namespace CrossPlatformLibrary.Forms.Controls
 {
     public partial class ValidatableAutoCompleteView : GridZero
     {
+        private readonly TaskDelayer taskDelayer;
+
         private INotifyCollectionChanged sourceCollection;
         private bool selectedItemChanging;
-        private readonly TaskDelayer taskDelayer;
+        private bool initialized = false;
 
         public ValidatableAutoCompleteView()
         {
@@ -31,6 +33,12 @@ namespace CrossPlatformLibrary.Forms.Controls
         {
             this.Entry.Unfocus();
             base.Unfocus();
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+            this.initialized = this.BindingContext != null;
         }
 
         public static readonly BindableProperty TextProperty =
@@ -327,7 +335,15 @@ namespace CrossPlatformLibrary.Forms.Controls
         public object SelectedItem
         {
             get => (object)this.GetValue(SelectedItemProperty);
-            set => this.SetValue(SelectedItemProperty, value);
+            set
+            {
+                if (value == null && !this.initialized)
+                {
+                    return;
+                }
+
+                this.SetValue(SelectedItemProperty, value);
+            }
         }
 
         public static readonly BindableProperty SuggestedItemTemplateProperty =
