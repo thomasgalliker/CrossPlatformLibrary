@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using CrossPlatformLibrary.Internals;
 
 namespace CrossPlatformLibrary.Extensions
@@ -294,6 +295,16 @@ namespace CrossPlatformLibrary.Extensions
                 .GroupBy(propertySelector)
                 .Where(g => g.Skip(skip).Any())
                 .SelectMany(g => g);
+        }
+
+        /// <summary>
+        /// Concatenates all <paramref name="parameters"/> into a ampersand-separated string, e.g. param1=value1&param2=value2
+        /// </summary>
+        /// <param name="parameters">List of parameters and values.</param>
+        /// <returns>Ampersand-separated URI parameter string.</returns>
+        public static string ToQueryString(this IEnumerable<KeyValuePair<string, string>> parameters)
+        {
+            return string.Join("&", parameters.Select(p => $"{WebUtility.UrlEncode(p.Key)}={WebUtility.UrlEncode(p.Value)}"));
         }
     }
 }
