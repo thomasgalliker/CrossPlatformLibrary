@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System.Collections;
+using System.Collections.Specialized;
 using CrossPlatformLibrary.Extensions;
 using Xamarin.Forms;
 
@@ -47,7 +48,8 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         private void HandleSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            this.HeightRequest = this.ItemsSource.CreateList().Count * this.RowHeight;
+            var itemsCount = this.ItemsSource is IEnumerable enumerable ? enumerable.GetCount() : 0;
+            this.HeightRequest = itemsCount * this.RowHeight;
         }
     }
 }
