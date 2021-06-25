@@ -7,6 +7,7 @@ using Xamarin.Forms;
 [assembly: XmlnsDefinition("http://superdev.ch/schemas/2020/cpl", "CrossPlatformLibrary.Mvvm")]
 [assembly: XmlnsDefinition("http://superdev.ch/schemas/2020/cpl", "CrossPlatformLibrary.Resources")]
 
+[assembly: XmlnsDefinition("http://superdev.ch/schemas/2020/cpl", "CrossPlatformLibrary.Forms.Localization")]
 [assembly: XmlnsDefinition("http://superdev.ch/schemas/2020/cpl", "CrossPlatformLibrary.Forms.Behaviors")]
 [assembly: XmlnsDefinition("http://superdev.ch/schemas/2020/cpl", "CrossPlatformLibrary.Forms.Controls")]
 [assembly: XmlnsDefinition("http://superdev.ch/schemas/2020/cpl", "CrossPlatformLibrary.Forms.Converters")]
