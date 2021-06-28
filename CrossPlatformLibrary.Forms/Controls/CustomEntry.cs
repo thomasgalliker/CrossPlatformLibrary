@@ -4,6 +4,61 @@ namespace CrossPlatformLibrary.Forms.Controls
 {
     public class CustomEntry : Entry
     {
+        public static BindableProperty CornerRadiusProperty =
+             BindableProperty.Create(
+                 nameof(CornerRadius),
+                 typeof(int),
+                 typeof(CustomEntry),
+                 0);
+
+        public int CornerRadius
+        {
+            get => (int)this.GetValue(CornerRadiusProperty);
+            set => this.SetValue(CornerRadiusProperty, value);
+        }
+
+        public static BindableProperty BorderThicknessProperty =
+            BindableProperty.Create(
+                nameof(BorderThickness),
+                typeof(int),
+                typeof(CustomEntry),
+                0);
+
+        public int BorderThickness
+        {
+            get => (int)this.GetValue(BorderThicknessProperty);
+            set => this.SetValue(BorderThicknessProperty, value);
+        }
+
+        public static BindableProperty BorderColorProperty =
+            BindableProperty.Create(
+                nameof(BorderColor),
+                typeof(Color),
+                typeof(CustomEntry),
+                Color.Transparent);
+
+        public Color BorderColor
+        {
+            get => (Color)this.GetValue(BorderColorProperty);
+            set => this.SetValue(BorderColorProperty, value);
+        }
+
+        public static BindableProperty PaddingProperty =
+            BindableProperty.Create(
+                nameof(Padding),
+                typeof(Thickness),
+                typeof(CustomEntry),
+                default(Thickness));
+
+        /// <remarks>
+        /// This property cannot be changed at runtime in iOS.
+        /// </remarks>
+        public Thickness Padding
+        {
+            get => (Thickness)this.GetValue(PaddingProperty);
+            set => this.SetValue(PaddingProperty, value);
+        }
+
         public static readonly BindableProperty HideBorderProperty =
             BindableProperty.Create(
                 nameof(HideBorder),

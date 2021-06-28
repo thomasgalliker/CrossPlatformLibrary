@@ -1,23 +1,35 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using CrossPlatformLibrary.Forms.Controls;
+using CrossPlatformLibrary.Forms.iOS.Controls;
 using CrossPlatformLibrary.Forms.iOS.Renderers;
 using Foundation;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(Entry), typeof(CustomEntryRenderer))]
+[assembly: ExportRenderer(typeof(CustomEntry), typeof(CustomEntryRenderer))]
 
 namespace CrossPlatformLibrary.Forms.iOS.Renderers
 {
-    public class CustomEntryRenderer : EntryRenderer
+    public partial class CustomEntryRenderer : EntryRenderer
     {
         private bool returnButtonAdded;
         private nfloat? originalBorderWidth;
         private UITextBorderStyle? originalBorderStyle;
+
+        protected override UITextField CreateNativeControl()
+        {
+            var control = new UITextFieldPadding(RectangleF.Empty)
+            {
+                Padding = ((CustomEntry)this.Element).Padding,
+                BorderStyle = UITextBorderStyle.RoundedRect,
+                ClipsToBounds = true
+            };
+
+            return control;
+        }
 
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {
@@ -31,6 +43,10 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                     this.UpdateBorder(customEntry);
                     this.AddRemoveReturnKeyToNumericInput(customEntry);
                     this.UpdateTextContentType(customEntry);
+                    this.UpdatePadding(customEntry);
+                    this.UpdateBorderColor(customEntry);
+                    this.UpdateBorderThickness(customEntry);
+                    this.UpdateCornerRadius(customEntry);
                 }
             }
         }
@@ -61,6 +77,54 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                     this.UpdateTextContentType(customEntry);
                 }
             }
+            else if (e.PropertyName == CustomEntry.PaddingProperty.PropertyName)
+            {
+                if (this.Element is CustomEntry customEntry)
+                {
+                    this.UpdatePadding(customEntry);
+                }
+            }
+            else if (e.PropertyName == CustomEntry.BorderColorProperty.PropertyName)
+            {
+                if (this.Element is CustomEntry customEntry)
+                {
+                    this.UpdateBorderColor(customEntry);
+                }
+            }
+            else if (e.PropertyName == CustomEntry.BorderThicknessProperty.PropertyName)
+            {
+                if (this.Element is CustomEntry customEntry)
+                {
+                    this.UpdateBorderThickness(customEntry);
+                }
+            }
+            else if (e.PropertyName == CustomEntry.CornerRadiusProperty.PropertyName)
+            {
+                if (this.Element is CustomEntry customEntry)
+                {
+                    this.UpdateCornerRadius(customEntry);
+                }
+            }
+        }
+
+        private void UpdatePadding(CustomEntry customEntry)
+        {
+            ((UITextFieldPadding)this.Control).Padding = customEntry.Padding;
+        }
+
+        private void UpdateBorderColor(CustomEntry customEntry)
+        {
+            this.Control.Layer.BorderColor = customEntry.BorderColor.ToCGColor();
+        }
+        
+        private void UpdateBorderThickness(CustomEntry customEntry)
+        {
+            this.Control.Layer.BorderWidth = customEntry.BorderThickness;
+        }
+
+        private void UpdateCornerRadius(CustomEntry customEntry)
+        {
+            this.Control.Layer.CornerRadius = customEntry.CornerRadius;
         }
 
         private void UpdateBorder(CustomEntry customEntry)
@@ -125,7 +189,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
             {
                 var (textContentType, keyboardType, autocapitalizationType, autocorrectionType) = MapTextContentType(customEntry.TextContentType);
                 this.Control.TextContentType = textContentType;
-               
+
                 if (keyboardType != null)
                 {
                     this.Control.KeyboardType = keyboardType.Value;

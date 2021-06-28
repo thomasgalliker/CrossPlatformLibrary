@@ -3,27 +3,21 @@
     x:Class="SampleApp.Views.EntryPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:behaviors="clr-namespace:CrossPlatformLibrary.Forms.Behaviors;assembly=CrossPlatformLibrary.Forms"
-    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
-    xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:xControls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    xmlns:cpl="http://superdev.ch/schemas/2020/cpl"
     Title="Entry Demo Page"
-    BackgroundColor="{DynamicResource WindowBackgroundTable}"
-    mc:Ignorable="d">
+    BackgroundColor="{DynamicResource WindowBackgroundTable}">
 
-    <xControls:AlwaysScrollView>
-        <xControls:GridZero>
+    <cpl:AlwaysScrollView>
+        <cpl:GridZero>
             <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
-                <xControls:CardView>
-                    <xControls:StackLayoutZero>
-                        <xControls:LabelSection Text="CustomEntry" />
-                        <xControls:HeaderDivider />
-                        <xControls:StackLayoutZero Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
+                <cpl:CardView>
+                    <cpl:StackLayoutZero>
+                        <cpl:LabelSection Text="CustomEntry" />
+                        <cpl:HeaderDivider />
+                        <cpl:StackLayoutZero Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
 
                             <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomEntry--&gt;" />
-                            <xControls:GridZero>
+                            <cpl:GridZero>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
@@ -31,7 +25,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <xControls:CustomEntry
+                                <cpl:CustomEntry
                                     Grid.Row="0"
                                     Grid.Column="0"
                                     Placeholder="CustomEntry"
@@ -41,74 +35,83 @@
                                     Grid.Column="1"
                                     Placeholder="Xamarin.Forms.Entry"
                                     Text="Xamarin.Forms.Entry" />
-                            </xControls:GridZero>
+                            </cpl:GridZero>
 
-                            <xControls:CustomEntry
-                                effects:LineColorEffect.ApplyLineColor="True"
-                                effects:LineColorEffect.LineColor="Black"
+                            <cpl:CustomEntry
+                                cpl:LineColorEffect.ApplyLineColor="True"
+                                cpl:LineColorEffect.LineColor="Blue"
                                 BackgroundColor="LightGoldenrodYellow"
                                 Placeholder="CustomEntry with LineColorEffect"
                                 Text="" />
 
-                            <xControls:CustomEntry
+                            <cpl:CustomEntry
                                 Margin="0"
-                                effects:LineColorEffect.ApplyLineColor="True"
-                                effects:LineColorEffect.LineColor="Red"
+                                cpl:LineColorEffect.ApplyLineColor="True"
+                                cpl:LineColorEffect.LineColor="Red"
                                 BackgroundColor="LightGoldenrodYellow"
                                 FontSize="{DynamicResource Theme.FontSize.H1}"
                                 Placeholder="CustomEntry with Huge FontSize"
                                 Text="" />
 
-                            <xControls:CustomEntry
+                            <cpl:CustomEntry
+                                Padding="10,20,30,40"
+                                BackgroundColor="LightSkyBlue"
+                                BorderColor="Green"
+                                BorderThickness="3"
+                                CornerRadius="8"
+                                Placeholder="CustomEntry with BorderColor, BorderThickness and CornerRadius"
+                                Text="" />
+
+                            <cpl:CustomEntry
                                 BackgroundColor="LightGoldenrodYellow"
                                 HideBorder="True"
                                 Placeholder="CustomEntry with HideBorder=&quot;True&quot;"
                                 Text="" />
-                            <xControls:CustomEntry
+                            <cpl:CustomEntry
                                 BackgroundColor="LightGoldenrodYellow"
                                 Placeholder="CustomEntry with RemovePadding=&quot;True&quot;"
                                 RemovePadding="True"
                                 Text="" />
 
-                            <xControls:CustomEntry Placeholder="CustomEntry with TextContentType=&quot;FirstName&quot;" TextContentType="FirstName" />
-                            <xControls:CustomEntry Placeholder="CustomEntry with TextContentType=&quot;LastName&quot;" TextContentType="LastName" />
-                            <xControls:CustomEntry
+                            <cpl:CustomEntry Placeholder="CustomEntry with TextContentType=&quot;FirstName&quot;" TextContentType="FirstName" />
+                            <cpl:CustomEntry Placeholder="CustomEntry with TextContentType=&quot;LastName&quot;" TextContentType="LastName" />
+                            <cpl:CustomEntry
                                 Keyboard="Email"
                                 Placeholder="CustomEntry with TextContentType=&quot;Username&quot;"
                                 TextContentType="Username" />
-                            <xControls:CustomEntry
+                            <cpl:CustomEntry
                                 Keyboard="Email"
                                 Placeholder="CustomEntry with TextContentType=&quot;EmailAddress&quot;"
                                 TextContentType="EmailAddress" />
-                            <xControls:CustomEntry
+                            <cpl:CustomEntry
                                 Keyboard="Telephone"
                                 Placeholder="CustomEntry with TextContentType=&quot;PhoneNumber&quot;"
                                 TextContentType="PhoneNumber" />
-                            <xControls:CustomEntry
+                            <cpl:CustomEntry
                                 IsPassword="True"
                                 Placeholder="CustomEntry with TextContentType=&quot;Password&quot;"
                                 TextContentType="Password" />
-                            <xControls:CustomEntry
+                            <cpl:CustomEntry
                                 IsPassword="True"
                                 Placeholder="CustomEntry with TextContentType=&quot;NewPassword&quot;"
                                 TextContentType="NewPassword" />
-                            <xControls:CustomEntry
+                            <cpl:CustomEntry
                                 Keyboard="Numeric"
                                 Placeholder="CustomEntry with TextContentType=&quot;OneTimeCode&quot;"
                                 TextContentType="OneTimeCode" />
 
                             <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Toggle IsReadonly--&gt;" />
                             <Switch IsToggled="{Binding IsReadonly, Mode=TwoWay}" />
-                        </xControls:StackLayoutZero>
-                        <xControls:FooterDivider />
-                    </xControls:StackLayoutZero>
-                </xControls:CardView>
+                        </cpl:StackLayoutZero>
+                        <cpl:FooterDivider />
+                    </cpl:StackLayoutZero>
+                </cpl:CardView>
 
-                <xControls:CardView>
-                    <xControls:StackLayoutZero>
-                        <xControls:LabelSection Text="ValidatableEntry" />
-                        <xControls:HeaderDivider />
-                        <xControls:StackLayoutZero Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
+                <cpl:CardView>
+                    <cpl:StackLayoutZero>
+                        <cpl:LabelSection Text="ValidatableEntry" />
+                        <cpl:HeaderDivider />
+                        <cpl:StackLayoutZero Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
 
                             <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableEntry--&gt;" />
                             <Grid>
@@ -119,40 +122,40 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <xControls:ValidatableEntry
+                                <cpl:ValidatableEntry
                                     x:Name="UserNameEntry"
                                     Grid.Column="0"
                                     IsReadonly="{Binding IsReadonly}"
                                     Placeholder="ValidatableEntry"
                                     ReturnType="Next"
                                     Text="{Binding UserName, Mode=TwoWay}"
-                                    TrailingIcon="{xControls:ImageResource SampleApp.Resources.Images.rectangle_magenta_192.png}"
+                                    TrailingIcon="{cpl:ImageResource SampleApp.Resources.Images.rectangle_magenta_192.png}"
                                     TrailingIconCommand="{Binding CalloutCommand}"
                                     TrailingIconCommandParameter="{Binding Text, Source={x:Reference UserNameEntry}}"
                                     ValidationErrors="{Binding Validation.Errors[UserName]}">
-                                    <xControls:ValidatableEntry.Behaviors>
-                                        <behaviors:MaxLengthTextBehavior MaxLength="{Binding UserNameMaxLength}" />
-                                        <behaviors:EntryUnfocusedBehavior DecorationFlags="TrimEnd" />
-                                        <behaviors:EntryCompletedBehavior TargetElementName="ValidatableEntryTest1" />
-                                    </xControls:ValidatableEntry.Behaviors>
-                                </xControls:ValidatableEntry>
+                                    <cpl:ValidatableEntry.Behaviors>
+                                        <cpl:MaxLengthTextBehavior MaxLength="{Binding UserNameMaxLength}" />
+                                        <cpl:EntryUnfocusedBehavior DecorationFlags="TrimEnd" />
+                                        <cpl:EntryCompletedBehavior TargetElementName="ValidatableEntryTest1" />
+                                    </cpl:ValidatableEntry.Behaviors>
+                                </cpl:ValidatableEntry>
                                 <Entry
                                     Grid.Column="1"
                                     Placeholder="Xamarin.Forms.Entry"
                                     ReturnType="Go"
                                     Text="{Binding UserName, Mode=TwoWay}">
                                     <Entry.Behaviors>
-                                        <behaviors:EntryUnfocusedBehavior DecorationFlags="All" />
-                                        <behaviors:EntryCompletedBehavior TargetElement="{x:Reference UserNameEntry}" />
+                                        <cpl:EntryUnfocusedBehavior DecorationFlags="All" />
+                                        <cpl:EntryCompletedBehavior TargetElement="{x:Reference UserNameEntry}" />
                                     </Entry.Behaviors>
                                 </Entry>
                             </Grid>
-                            <xControls:ValidatableEntry
+                            <cpl:ValidatableEntry
                                 x:Name="ValidatableEntryTest1"
                                 IsReadonly="{Binding IsReadonly, Mode=OneWay}"
                                 Placeholder="{Binding Text, Source={x:Reference ValidatableEntryTest1}}"
                                 Text="ValidatableEntry's Placeholder sizing test" />
-                            <xControls:ValidatableEntry
+                            <cpl:ValidatableEntry
                                 x:Name="ValidatableEntryTest2"
                                 Placeholder="ValidatableEntry with ValidationErrors"
                                 Text="ValidatableEntry with ValidationErrors"
@@ -160,11 +163,11 @@
 
                             <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Toggle IsReadonly--&gt;" />
                             <Switch IsToggled="{Binding IsReadonly, Mode=TwoWay}" />
-                        </xControls:StackLayoutZero>
-                        <xControls:FooterDivider />
-                    </xControls:StackLayoutZero>
-                </xControls:CardView>
+                        </cpl:StackLayoutZero>
+                        <cpl:FooterDivider />
+                    </cpl:StackLayoutZero>
+                </cpl:CardView>
             </StackLayout>
-        </xControls:GridZero>
-    </xControls:AlwaysScrollView>
+        </cpl:GridZero>
+    </cpl:AlwaysScrollView>
 </ContentPage>

@@ -1,15 +1,19 @@
 ﻿using System.ComponentModel;
 using Android.Content;
+using Android.Content.Res;
+using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Views;
 using CrossPlatformLibrary.Forms.Android.Renderers;
 using CrossPlatformLibrary.Forms.Controls;
+using CrossPlatformLibrary.Forms.Effects;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using Color = Xamarin.Forms.Color;
 using View = Android.Views.View;
 
-[assembly: ExportRenderer(typeof(Entry), typeof(CustomEntryRenderer))]
+[assembly: ExportRenderer(typeof(CustomEntry), typeof(CustomEntryRenderer))]
 
 namespace CrossPlatformLibrary.Forms.Android.Renderers
 {
@@ -30,6 +34,12 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
         public CustomEntryRenderer(Context context) : base(context)
         {
         }
+        protected override FormsEditText CreateNativeControl()
+        {
+            var control = base.CreateNativeControl();
+            this.UpdateBackground(control, this.Element as CustomEntry);
+            return control;
+        }
 
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {
@@ -45,9 +55,11 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
             {
                 if (this.Element is CustomEntry customEntry)
                 {
-                    this.HideBorder(customEntry);
+                    this.UpdateHideBorder(customEntry);
                     this.RemovePadding(customEntry);
                     this.UpdateTextContentType(customEntry);
+                    this.UpdatePadding(customEntry);
+                    this.UpdateBackground(customEntry);
                 }
             }
         }
@@ -60,7 +72,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
             {
                 if (this.Element is CustomEntry customEntry)
                 {
-                    this.HideBorder(customEntry);
+                    this.UpdateHideBorder(customEntry);
                 }
             }
             else if (e.PropertyName == CustomEntry.RemovePaddingProperty.PropertyName)
@@ -70,16 +82,80 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
                     this.RemovePadding(customEntry);
                 }
             }
-            else if (e.PropertyName == nameof(CustomEntry.TextContentTypeProperty.PropertyName))
+            else if (e.PropertyName == CustomEntry.TextContentTypeProperty.PropertyName)
             {
                 if (this.Element is CustomEntry customEntry)
                 {
                     this.UpdateTextContentType(customEntry);
                 }
             }
+            else if (e.PropertyName == CustomEntry.PaddingProperty.PropertyName)
+            {
+                if (this.Element is CustomEntry customEntry)
+                {
+                    this.UpdatePadding(customEntry);
+                }
+            }
+            else if (e.PropertyName == CustomEntry.BackgroundColorProperty.PropertyName ||
+                     e.PropertyName == CustomEntry.BorderColorProperty.PropertyName ||
+                     e.PropertyName == CustomEntry.BorderThicknessProperty.PropertyName ||
+                     e.PropertyName == CustomEntry.CornerRadiusProperty.PropertyName)
+            {
+                if (this.Element is CustomEntry customEntry)
+                {
+                    this.UpdateBackground(customEntry);
+                }
+            }
         }
 
-        private void HideBorder(CustomEntry customEntry)
+        private void UpdatePadding(CustomEntry customEntry)
+        {
+            var padTop = (int)this.Context.ToPixels(customEntry.Padding.Top);
+            var padBottom = (int)this.Context.ToPixels(customEntry.Padding.Bottom);
+            var padLeft = (int)this.Context.ToPixels(customEntry.Padding.Left);
+            var padRight = (int)this.Context.ToPixels(customEntry.Padding.Right);
+
+            this.Control.SetPadding(padLeft, padTop, padRight, padBottom);
+        }
+
+        protected override void UpdateBackgroundColor()
+        {
+            if (this.Control == null)
+            {
+                return;
+            }
+
+            if (this.Element is CustomEntry customEntry)
+            {
+                this.UpdateBackground(customEntry);
+            }
+        }
+
+        private void UpdateBackground(CustomEntry customEntry)
+        {
+            this.UpdateBackground(this.Control, customEntry);
+        }
+
+        private void UpdateBackground(FormsEditText control, CustomEntry customEntry)
+        {
+            // LineColorEffect and GradientDrawable/SetBackground interfere with each other
+            // That's why we just apply a simple background in case LineColorEffect is set
+            var applyLineColor = LineColorEffect.GetApplyLineColor(this.Element);
+            if (applyLineColor == false)
+            {
+                var gradientDrawable = new GradientDrawable();
+                gradientDrawable.SetColor(customEntry.BackgroundColor.ToAndroid());
+                gradientDrawable.SetCornerRadius(this.Context.ToPixels(customEntry.CornerRadius));
+                gradientDrawable.SetStroke((int)this.Context.ToPixels(customEntry.BorderThickness), customEntry.BorderColor.ToAndroid());
+                control.SetBackground(gradientDrawable);
+            }
+            else
+            {
+                base.SetBackgroundColor(customEntry.BackgroundColor.ToAndroid());
+            }
+        }
+
+        private void UpdateHideBorder(CustomEntry customEntry)
         {
             if (customEntry.HideBorder)
             {

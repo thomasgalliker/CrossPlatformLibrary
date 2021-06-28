@@ -3,16 +3,16 @@ using System.ComponentModel;
 using System.Drawing;
 using CoreGraphics;
 using CrossPlatformLibrary.Forms.Controls;
-using CrossPlatformLibrary.Forms.iOS.Renderers.ShapeView;
+using CrossPlatformLibrary.Forms.iOS.Renderers;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using ShapeView = CrossPlatformLibrary.Forms.Controls.ShapeView;
 
 [assembly: ExportRenderer(typeof(ShapeView), typeof(ShapeViewRenderer))]
-namespace CrossPlatformLibrary.Forms.iOS.Renderers.ShapeView
+namespace CrossPlatformLibrary.Forms.iOS.Renderers
 {
-    public class ShapeViewRenderer : VisualElementRenderer<Controls.ShapeView>
+    public class ShapeViewRenderer : VisualElementRenderer<ShapeView>
     {
         private readonly float QuarterTurnCounterClockwise = (float)(-1f * (Math.PI * 0.5f));
 
@@ -24,7 +24,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers.ShapeView
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (e.PropertyName == BoxView.ColorProperty.PropertyName || e.PropertyName == Controls.ShapeView.StrokeColorProperty.PropertyName)
+            if (e.PropertyName == BoxView.ColorProperty.PropertyName || e.PropertyName == ShapeView.StrokeColorProperty.PropertyName)
             {
                 this.SetNeedsDisplay();
             }
