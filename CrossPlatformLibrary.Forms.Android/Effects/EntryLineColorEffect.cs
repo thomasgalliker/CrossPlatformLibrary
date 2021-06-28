@@ -25,6 +25,11 @@ namespace CrossPlatformLibrary.Forms.Android.Effects
             }
         }
 
+        protected override void OnDetached()
+        {
+            // Nothing to do here
+        }
+
         protected override void OnElementPropertyChanged(PropertyChangedEventArgs args)
         {
             if (args.PropertyName == LineColorEffect.LineColorProperty.PropertyName)
