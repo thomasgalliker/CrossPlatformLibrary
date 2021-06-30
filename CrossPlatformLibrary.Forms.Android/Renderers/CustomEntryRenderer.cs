@@ -34,12 +34,6 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
         public CustomEntryRenderer(Context context) : base(context)
         {
         }
-        protected override FormsEditText CreateNativeControl()
-        {
-            var control = base.CreateNativeControl();
-            this.UpdateBackground(control, this.Element as CustomEntry);
-            return control;
-        }
 
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {
@@ -59,7 +53,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
                     this.RemovePadding(customEntry);
                     this.UpdateTextContentType(customEntry);
                     this.UpdatePadding(customEntry);
-                    this.UpdateBackground(customEntry);
+                    this.UpdateBackgroundAndBorder(customEntry);
                 }
             }
         }
@@ -103,35 +97,37 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
             {
                 if (this.Element is CustomEntry customEntry)
                 {
-                    this.UpdateBackground(customEntry);
+                    this.UpdateBackgroundAndBorder(customEntry);
                 }
             }
         }
 
         private void UpdatePadding(CustomEntry customEntry)
         {
-            var padTop = (int)this.Context.ToPixels(customEntry.Padding.Top);
-            var padBottom = (int)this.Context.ToPixels(customEntry.Padding.Bottom);
-            var padLeft = (int)this.Context.ToPixels(customEntry.Padding.Left);
-            var padRight = (int)this.Context.ToPixels(customEntry.Padding.Right);
+            var originalPadLeft = this.Control.PaddingLeft;
+            var originalPadTop = this.Control.PaddingTop;
+            var originalPadRight = this.Control.PaddingRight;
+            var originalPadBottom = this.Control.PaddingBottom;
 
-            this.Control.SetPadding(padLeft, padTop, padRight, padBottom);
+            var propartyValue = customEntry.GetValue(CustomEntry.PaddingProperty);
+            if (propartyValue is Thickness padding)
+            {
+                var padLeft = (int)this.Context.ToPixels(padding.Left);
+                var padTop = (int)this.Context.ToPixels(padding.Top);
+                var padRight = (int)this.Context.ToPixels(padding.Right);
+                var padBottom = (int)this.Context.ToPixels(padding.Bottom);
+
+                System.Diagnostics.Debug.WriteLine($"UpdatePadding: ({originalPadLeft},{originalPadTop},{originalPadRight},{originalPadBottom}) -> ({padLeft},{padTop},{padRight},{padBottom})");
+
+                this.Control.SetPadding(padLeft, padTop, padRight, padBottom);
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine($"UpdatePadding: Keep original Padding ({originalPadLeft},{originalPadTop},{originalPadRight},{originalPadBottom})");
+            }
         }
 
-        protected override void UpdateBackgroundColor()
-        {
-            if (this.Control == null)
-            {
-                return;
-            }
-
-            if (this.Element is CustomEntry customEntry)
-            {
-                this.UpdateBackground(customEntry);
-            }
-        }
-
-        private void UpdateBackground(CustomEntry customEntry)
+        private void UpdateBackgroundAndBorder(CustomEntry customEntry)
         {
             this.UpdateBackground(this.Control, customEntry);
         }
@@ -141,17 +137,15 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
             // LineColorEffect and GradientDrawable/SetBackground interfere with each other
             // That's why we just apply a simple background in case LineColorEffect is set
             var applyLineColor = LineColorEffect.GetApplyLineColor(this.Element);
-            if (applyLineColor == false)
+            if (applyLineColor == false && 
+                customEntry.BackgroundColor != Color.Default && 
+                (customEntry.CornerRadius > 0 || customEntry.BorderColor != Color.Default || customEntry.BorderThickness > 0))
             {
                 var gradientDrawable = new GradientDrawable();
                 gradientDrawable.SetColor(customEntry.BackgroundColor.ToAndroid());
                 gradientDrawable.SetCornerRadius(this.Context.ToPixels(customEntry.CornerRadius));
                 gradientDrawable.SetStroke((int)this.Context.ToPixels(customEntry.BorderThickness), customEntry.BorderColor.ToAndroid());
                 control.SetBackground(gradientDrawable);
-            }
-            else
-            {
-                base.SetBackgroundColor(customEntry.BackgroundColor.ToAndroid());
             }
         }
 

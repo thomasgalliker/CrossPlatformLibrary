@@ -21,12 +21,23 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
 
         protected override UITextField CreateNativeControl()
         {
-            var control = new UITextFieldPadding(RectangleF.Empty)
+            UITextField control;
+
+            var customEntry = (CustomEntry)this.Element;
+            var propartyValue = customEntry.GetValue(CustomEntry.PaddingProperty);
+            if (propartyValue is Thickness padding)
             {
-                Padding = ((CustomEntry)this.Element).Padding,
-                BorderStyle = UITextBorderStyle.RoundedRect,
-                ClipsToBounds = true
-            };
+                control = new UITextFieldPadding(RectangleF.Empty)
+                {
+                    Padding = padding,
+                    BorderStyle = UITextBorderStyle.RoundedRect,
+                    ClipsToBounds = true
+                };
+            }
+            else
+            {
+                control = base.CreateNativeControl();
+            }
 
             return control;
         }
@@ -43,7 +54,7 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                     this.UpdateBorder(customEntry);
                     this.AddRemoveReturnKeyToNumericInput(customEntry);
                     this.UpdateTextContentType(customEntry);
-                    this.UpdatePadding(customEntry);
+                    //this.UpdatePadding(customEntry); // Not supported
                     this.UpdateBorderColor(customEntry);
                     this.UpdateBorderThickness(customEntry);
                     this.UpdateCornerRadius(customEntry);
@@ -77,13 +88,10 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                     this.UpdateTextContentType(customEntry);
                 }
             }
-            else if (e.PropertyName == CustomEntry.PaddingProperty.PropertyName)
-            {
-                if (this.Element is CustomEntry customEntry)
-                {
-                    this.UpdatePadding(customEntry);
-                }
-            }
+            // Not supported
+            //else if (e.PropertyName == CustomEntry.PaddingProperty.PropertyName)
+            //{
+            //}
             else if (e.PropertyName == CustomEntry.BorderColorProperty.PropertyName)
             {
                 if (this.Element is CustomEntry customEntry)
@@ -105,11 +113,6 @@ namespace CrossPlatformLibrary.Forms.iOS.Renderers
                     this.UpdateCornerRadius(customEntry);
                 }
             }
-        }
-
-        private void UpdatePadding(CustomEntry customEntry)
-        {
-            ((UITextFieldPadding)this.Control).Padding = customEntry.Padding;
         }
 
         private void UpdateBorderColor(CustomEntry customEntry)

@@ -35,7 +35,7 @@ namespace CrossPlatformLibrary.Forms.Controls
                 nameof(BorderColor),
                 typeof(Color),
                 typeof(CustomEntry),
-                Color.Transparent);
+                Color.Default);
 
         public Color BorderColor
         {
@@ -46,16 +46,16 @@ namespace CrossPlatformLibrary.Forms.Controls
         public static BindableProperty PaddingProperty =
             BindableProperty.Create(
                 nameof(Padding),
-                typeof(Thickness),
+                typeof(Thickness?),
                 typeof(CustomEntry),
-                default(Thickness));
+                null);
 
         /// <remarks>
         /// This property cannot be changed at runtime in iOS.
         /// </remarks>
         public Thickness Padding
         {
-            get => (Thickness)this.GetValue(PaddingProperty);
+            get => (Thickness)(this.GetValue(PaddingProperty) ?? default);
             set => this.SetValue(PaddingProperty, value);
         }
 
