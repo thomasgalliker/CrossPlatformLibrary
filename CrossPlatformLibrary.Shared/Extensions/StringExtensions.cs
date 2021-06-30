@@ -385,5 +385,18 @@ namespace CrossPlatformLibrary.Extensions
 
             return stringBuilder.ToString().TrimEnd(TrimNewLineChars);
         }
+
+        /// <summary>
+        ///     Catch runs of any kind of whitespace (e.g. tabs, newlines, etc.) and replace them with a single space.
+        /// </summary>
+        public static string TrimWhitespaces(this string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return input;
+            }
+
+            return Regex.Replace(input, @"\s+", " ").Trim();
+        }
     }
 }

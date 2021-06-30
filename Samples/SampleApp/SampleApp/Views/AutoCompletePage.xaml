@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SampleApp.Views.AutoCompletePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:local="clr-namespace:SampleApp"
+    xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:SampleApp.Views"
+    xmlns:xControls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
+    Title="AutoComplete Demo Page"
+    BackgroundColor="{DynamicResource WindowBackgroundTable}"
+    mc:Ignorable="d">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="CountryItemTemplate">
+                <views:CountryViewCell />
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <xControls:AlwaysScrollView x:Name="ScrollView">
+        <xControls:GridZero>
+            <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
+                <xControls:CardView>
+                    <xControls:StackLayoutZero>
+                        <xControls:LabelSection Text="ValidatablePickers" />
+                        <xControls:HeaderDivider />
+                        <xControls:StackLayoutZero
+                            Padding="{DynamicResource Theme.Padding.CardViewPadding}"
+                            BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}"
+                            Spacing="{DynamicResource Theme.Padding.CardViewSpacing}">
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableAutoCompleteView--&gt;" />
+                            <xControls:ValidatableAutoCompleteView
+                                x:Name="AutoCompleteView"
+                                DisplayMemberPath="Name"
+                                IsReadonly="{Binding IsReadonly, Mode=OneWay}"
+                                Placeholder="ValidatableAutoCompleteView1"
+                                SearchCommand="{Binding AutoCompleteSearchCommand}"
+                                SearchCommandDelay="{x:Static local:App.SearchCommandDelay}"
+                                SelectedItem="{Binding Country, Mode=TwoWay}"
+                                SuggestedItemTemplate="{StaticResource CountryItemTemplate}"
+                                SuggestedItemsSource="{Binding SuggestedCountries, Mode=OneWay}"
+                                SuggestedItemsSpacing="{DynamicResource Theme.Spacing.Small}"
+                                Text="{Binding CountrySearchText, Mode=TwoWay}"
+                                ValidationErrors="{Binding Validation.Errors[Country]}" />
+
+                            <xControls:GridZero>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <xControls:ValidatableAutoCompleteView
+                                    BackgroundColor="Aquamarine"
+                                    DisplayMemberPath="Name"
+                                    Placeholder="ValidatableAutoCompleteView2"
+                                    Text="ValidatableAutoCompleteView" />
+                                <xControls:ValidatableEntry
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    BackgroundColor="LightGoldenrodYellow"
+                                    Placeholder="ValidatableEntry"
+                                    Text="ValidatableEntry" />
+                            </xControls:GridZero>
+
+                            <xControls:ValidatableAutoCompleteView
+                                x:Name="ValidatableAutoCompleteView"
+                                DisplayMemberPath="Name"
+                                Placeholder="ValidatableAutoCompleteView3"
+                                SuggestedItemTemplate="{StaticResource CountryItemTemplate}"
+                                SuggestedItemsSource="{Binding SuggestedCountries, Mode=OneWay}"
+                                Text="ValidatableAutoCompleteView with ValidationErrors"
+                                ValidationErrors="{Binding Source={x:Reference ValidatableAutoCompleteView}, Path=Text, Converter={StaticResource RandomValidationErrorsConverter}}" />
+
+                            <xControls:ValidatableAutoCompleteView
+                                IsReadonly="false"
+                                Placeholder="ValidatableAutoCompleteView4"
+                                SearchCommand="{Binding AutoCompleteSearchCommand}"
+                                SearchCommandDelay="{x:Static local:App.SearchCommandDelay}"
+                                SelectedItem="{Binding Country, Mode=TwoWay}"
+                                SuggestedItemTemplate="{StaticResource CountryItemTemplate}"
+                                SuggestedItemsSource="{Binding SuggestedCountries, Mode=OneWay}"
+                                Text="{Binding CountrySearchText, Mode=TwoWay}" />
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatablePicker--&gt;" />
+                            <xControls:ValidatablePicker
+                                x:Name="ValidatablePickerTest1"
+                                DisplayMemberPath="Name"
+                                IsReadonly="{Binding IsReadonly, Mode=OneWay}"
+                                ItemsSource="{Binding Countries}"
+                                NullString="&lt;Default Country&gt;"
+                                Placeholder="ValidatablePicker by Country.Name"
+                                SelectedItem="{Binding Country, Mode=TwoWay}"
+                                ValidationErrors="{Binding Validation.Errors[Country]}" />
+
+                            <xControls:ValidatablePicker
+                                x:Name="ValidatablePickerTest2"
+                                ItemsSource="{Binding Countries}"
+                                Placeholder="ValidatablePicker with ValidationErrors"
+                                SelectedItem="{Binding Country, Mode=TwoWay}"
+                                ValidationErrors="{Binding Source={x:Reference ValidatablePickerTest2}, Path=SelectedItem, Converter={StaticResource RandomValidationErrorsConverter}}" />
+
+                            <Button Command="{Binding SetCountryCommand}" Text="Select 'French Guiana'" />
+
+                            <Button Command="{Binding SetFantasyLandCommand}" Text="Select non-existing 'Fantasy Land'" />
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Toggle IsReadonly--&gt;" />
+                            <Switch IsToggled="{Binding IsReadonly, Mode=TwoWay}" />
+                        </xControls:StackLayoutZero>
+                        <xControls:FooterDivider />
+                    </xControls:StackLayoutZero>
+                </xControls:CardView>
+
+            </StackLayout>
+        </xControls:GridZero>
+    </xControls:AlwaysScrollView>
+</ContentPage>

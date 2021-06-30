@@ -6,7 +6,6 @@
     xmlns:behaviors="clr-namespace:CrossPlatformLibrary.Forms.Behaviors;assembly=CrossPlatformLibrary.Forms"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
-    xmlns:local="clr-namespace:SampleApp"
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
     xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
     xmlns:userControls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
@@ -204,6 +203,13 @@
                         <StackLayout IsVisible="{Binding IsNotBusy}">
                             <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
 
+                                <controls:ValidatablePicker
+                                    DisplayMemberPath="NativeName"
+                                    ItemsSource="{Binding Languages}"
+                                    Placeholder="{localization:Translate LanguageLabelText}"
+                                    SelectedItem="{Binding Path=Language, Mode=TwoWay}"
+                                    SelectedValuePath="DisplayName" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: TintImageEffect--&gt;" />
                                 <Image
                                     effects:TintImageEffect.TintColor="{Binding IsReadonly, Converter={StaticResource BoolToBlackAndWhiteConverter}}"
@@ -238,11 +244,23 @@
                                     CommandParameter="DrilldownButtonListPage"
                                     Text="Drilldown Buttons" />
 
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ValidatablePicker--&gt;" />
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: CustomEntry--&gt;" />
+                                <Button
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="EntryPage"
+                                    Text="CustomEntry" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: Pickers--&gt;" />
                                 <Button
                                     Command="{Binding NavigateToPageCommand}"
                                     CommandParameter="PickersPage"
-                                    Text="Validatable Pickers" />
+                                    Text="Pickers" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: AutoCompleteView--&gt;" />
+                                <Button
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="AutoCompletePage"
+                                    Text="AutoCompleteView" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: Switches--&gt;" />
                                 <Button
@@ -361,127 +379,6 @@
                                     </controls:ValidatableLabel.LabelStyle>
                                 </controls:ValidatableLabel>
 
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomEntry--&gt;" />
-                                <controls:GridZero>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <controls:CustomEntry
-                                        Grid.Row="0"
-                                        Grid.Column="0"
-                                        Placeholder="CustomEntry"
-                                        Text="CustomEntry" />
-                                    <Entry
-                                        Grid.Row="0"
-                                        Grid.Column="1"
-                                        Placeholder="Xamarin.Forms.Entry"
-                                        Text="Xamarin.Forms.Entry" />
-                                </controls:GridZero>
-
-                                <controls:CustomEntry
-                                    effects:LineColorEffect.ApplyLineColor="True"
-                                    effects:LineColorEffect.LineColor="Black"
-                                    BackgroundColor="LightGoldenrodYellow"
-                                    Placeholder="CustomEntry with LineColorEffect"
-                                    Text="" />
-
-                                <controls:CustomEntry
-                                    Margin="0"
-                                    effects:LineColorEffect.ApplyLineColor="True"
-                                    effects:LineColorEffect.LineColor="Red"
-                                    BackgroundColor="LightGoldenrodYellow"
-                                    FontSize="{DynamicResource Theme.FontSize.H1}"
-                                    Placeholder="CustomEntry with Huge FontSize"
-                                    Text="" />
-
-                                <controls:CustomEntry
-                                    BackgroundColor="LightGoldenrodYellow"
-                                    HideBorder="True"
-                                    Placeholder="CustomEntry with HideBorder=&quot;True&quot;"
-                                    Text="" />
-                                <controls:CustomEntry
-                                    BackgroundColor="LightGoldenrodYellow"
-                                    Placeholder="CustomEntry with RemovePadding=&quot;True&quot;"
-                                    RemovePadding="True"
-                                    Text="" />
-
-                                <controls:CustomEntry Placeholder="CustomEntry with TextContentType=&quot;FirstName&quot;" TextContentType="FirstName" />
-                                <controls:CustomEntry Placeholder="CustomEntry with TextContentType=&quot;LastName&quot;" TextContentType="LastName" />
-                                <controls:CustomEntry
-                                    Keyboard="Email"
-                                    Placeholder="CustomEntry with TextContentType=&quot;Username&quot;"
-                                    TextContentType="Username" />
-                                <controls:CustomEntry
-                                    Keyboard="Email"
-                                    Placeholder="CustomEntry with TextContentType=&quot;EmailAddress&quot;"
-                                    TextContentType="EmailAddress" />
-                                <controls:CustomEntry
-                                    Keyboard="Telephone"
-                                    Placeholder="CustomEntry with TextContentType=&quot;PhoneNumber&quot;"
-                                    TextContentType="PhoneNumber" />
-                                <controls:CustomEntry
-                                    IsPassword="True"
-                                    Placeholder="CustomEntry with TextContentType=&quot;Password&quot;"
-                                    TextContentType="Password" />
-                                <controls:CustomEntry
-                                    IsPassword="True"
-                                    Placeholder="CustomEntry with TextContentType=&quot;NewPassword&quot;"
-                                    TextContentType="NewPassword" />
-                                <controls:CustomEntry
-                                    Keyboard="Numeric"
-                                    Placeholder="CustomEntry with TextContentType=&quot;OneTimeCode&quot;"
-                                    TextContentType="OneTimeCode" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableEntry--&gt;" />
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <controls:ValidatableEntry
-                                        x:Name="UserNameEntry"
-                                        Grid.Column="0"
-                                        IsReadonly="{Binding IsReadonly}"
-                                        Placeholder="ValidatableEntry"
-                                        ReturnType="Next"
-                                        Text="{Binding UserName, Mode=TwoWay}"
-                                        TrailingIcon="{controls:ImageResource SampleApp.Resources.Images.rectangle_magenta_192.png}"
-                                        TrailingIconCommand="{Binding CalloutCommand}"
-                                        TrailingIconCommandParameter="{Binding Text, Source={x:Reference UserNameEntry}}"
-                                        ValidationErrors="{Binding Validation.Errors[UserName]}">
-                                        <controls:ValidatableEntry.Behaviors>
-                                            <behaviors:MaxLengthTextBehavior MaxLength="{Binding UserNameMaxLength}" />
-                                            <behaviors:EntryFocusBehavior TargetElementName="ValidatableEntryTest1" />
-                                        </controls:ValidatableEntry.Behaviors>
-                                    </controls:ValidatableEntry>
-                                    <Entry
-                                        Grid.Column="1"
-                                        Placeholder="Xamarin.Forms.Entry"
-                                        ReturnType="Go"
-                                        Text="{Binding UserName, Mode=TwoWay}">
-                                        <Entry.Behaviors>
-                                            <behaviors:EntryFocusBehavior TargetElement="{x:Reference UserNameEntry}" />
-                                        </Entry.Behaviors>
-                                    </Entry>
-                                </Grid>
-                                <controls:ValidatableEntry
-                                    x:Name="ValidatableEntryTest1"
-                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                    Placeholder="{Binding Text, Source={x:Reference ValidatableEntryTest1}}"
-                                    Text="ValidatableEntry's Placeholder sizing test" />
-                                <controls:ValidatableEntry
-                                    x:Name="ValidatableEntryTest2"
-                                    Placeholder="ValidatableEntry with ValidationErrors"
-                                    Text="ValidatableEntry with ValidationErrors"
-                                    ValidationErrors="{Binding Source={x:Reference ValidatableEntryTest2}, Path=Text, Converter={StaticResource RandomValidationErrorsConverter}}" />
-
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo SearchBar--&gt;" />
                                 <SearchBar
                                     IsEnabled="True"
@@ -499,186 +396,6 @@
                                     IsEnabled="False"
                                     Placeholder="SearchBar Placeholder (Disabled)"
                                     Text="" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableAutoCompleteView--&gt;" />
-                                <controls:ValidatableAutoCompleteView
-                                    x:Name="AutoCompleteView"
-                                    DisplayMemberPath="Name"
-                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                    Placeholder="ValidatableAutoCompleteView"
-                                    SearchCommand="{Binding AutoCompleteSearchCommand}"
-                                    SearchCommandDelay="{x:Static local:App.SearchCommandDelay}"
-                                    SelectedItem="{Binding Country, Mode=TwoWay}"
-                                    SuggestedItemTemplate="{StaticResource CountryItemTemplate}"
-                                    SuggestedItemsSource="{Binding SuggestedCountries, Mode=OneWay}"
-                                    SuggestedItemsSpacing="{DynamicResource Theme.Spacing.Small}"
-                                    Text="{Binding CountrySearchText, Mode=TwoWay}"
-                                    TextChanged="AutoCompleteView_OnTextChanged"
-                                    ValidationErrors="{Binding Validation.Errors[Country]}" />
-
-                                <controls:GridZero>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <controls:ValidatableAutoCompleteView
-                                        BackgroundColor="Aquamarine"
-                                        DisplayMemberPath="Name"
-                                        Placeholder="ValidatableAutoCompleteView"
-                                        Text="ValidatableAutoCompleteView" />
-                                    <controls:ValidatableEntry
-                                        Grid.Row="0"
-                                        Grid.Column="1"
-                                        BackgroundColor="LightGoldenrodYellow"
-                                        Placeholder="ValidatableEntry"
-                                        Text="ValidatableEntry" />
-                                </controls:GridZero>
-
-                                <controls:ValidatableAutoCompleteView
-                                    x:Name="ValidatableAutoCompleteView"
-                                    DisplayMemberPath="Name"
-                                    Placeholder="ValidatableAutoCompleteView"
-                                    SuggestedItemTemplate="{StaticResource CountryItemTemplate}"
-                                    SuggestedItemsSource="{Binding Countries, Mode=OneWay}"
-                                    Text="ValidatableAutoCompleteView with ValidationErrors"
-                                    ValidationErrors="{Binding Source={x:Reference ValidatableAutoCompleteView}, Path=Text, Converter={StaticResource RandomValidationErrorsConverter}}" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatablePicker--&gt;" />
-                                <controls:ValidatablePicker
-                                    x:Name="ValidatablePickerTest1"
-                                    DisplayMemberPath="Name"
-                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                    ItemsSource="{Binding Countries}"
-                                    NullString="&lt;Default Country&gt;"
-                                    Placeholder="ValidatablePicker by Country.Name"
-                                    SelectedItem="{Binding Country, Mode=TwoWay}"
-                                    ValidationErrors="{Binding Validation.Errors[Country]}" />
-
-                                <controls:ValidatablePicker
-                                    x:Name="ValidatablePickerTest2"
-                                    ItemsSource="{Binding Countries}"
-                                    Placeholder="ValidatablePicker with ValidationErrors"
-                                    SelectedItem="{Binding Country, Mode=TwoWay}"
-                                    ValidationErrors="{Binding Source={x:Reference ValidatablePickerTest2}, Path=SelectedItem, Converter={StaticResource RandomValidationErrorsConverter}}" />
-
-                                <Button Command="{Binding SetFantasyLandCommand}" Text="Select non-existing 'Fantasy Land'" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ExtendedDatePicker--&gt;" />
-                                <controls:ExtendedDatePicker
-                                    Format="d"
-                                    NullableDate="{x:Null}"
-                                    Placeholder="ExtendedDatePicker with NullableDate" />
-                                <controls:ExtendedDatePicker
-                                    Format="D"
-                                    NullableDate="{Binding Birthdate, Mode=TwoWay}"
-                                    Placeholder="ExtendedDatePicker with Birthdate" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Toggle IsReadonly--&gt;" />
-                                <Switch IsToggled="{Binding IsReadonly, Mode=TwoWay}" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableDatePicker--&gt;" />
-                                <controls:ValidatableDatePicker
-                                    Date="{Binding Birthdate, Mode=TwoWay}"
-                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                    Placeholder="ValidatableDatePicker"
-                                    ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
-                                    ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
-
-                                <controls:ValidatableDatePicker
-                                    Date="{Binding Birthdate, Mode=TwoWay}"
-                                    IsReadonly="True"
-                                    Placeholder="ValidatableDatePicker IsReadonly=&quot;True&quot;"
-                                    ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
-                                    ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
-
-                                <controls:ValidatableDatePicker
-                                    Date="{x:Null}"
-                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                    Placeholder="ValidatableDatePicker Date=&quot;null&quot;"
-                                    ReadonlyText="ReadonlyText"
-                                    ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
-
-                                <controls:ValidatableDatePicker
-                                    x:Name="ValidatableDatePickerTest2"
-                                    Date="{Binding Birthdate, Mode=TwoWay}"
-                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                    Placeholder="ValidatableDatePicker with ValidationErrors"
-                                    ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
-                                    ValidationErrors="{Binding Source={x:Reference ValidatableDatePickerTest2}, Path=Date, Converter={StaticResource RandomValidationErrorsConverter}}" />
-
-                                <controls:AlwaysScrollView Orientation="Horizontal">
-                                    <controls:GridZero>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <controls:ValidatableDatePicker
-                                            BackgroundColor="Aquamarine"
-                                            Date="{x:Null}"
-                                            Placeholder="ValidatableDatePicker" />
-                                        <controls:ValidatableEntry
-                                            Grid.Row="0"
-                                            Grid.Column="1"
-                                            BackgroundColor="LightGoldenrodYellow"
-                                            Placeholder="ValidatableEntry"
-                                            Text="" />
-                                    </controls:GridZero>
-                                </controls:AlwaysScrollView>
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ExtendedTimePicker--&gt;" />
-                                <controls:ExtendedTimePicker
-                                    Format="t"
-                                    NullableTime="{x:Null}"
-                                    Placeholder="ExtendedTimePicker with ShortTimePattern" />
-                                <controls:ExtendedTimePicker
-                                    Format="T"
-                                    NullableTime="{Binding Birthdate, Mode=TwoWay}"
-                                    Placeholder="ExtendedTimePicker with LongTimePattern" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableDateTimePicker--&gt;" />
-                                <controls:ValidatableDateTimePicker
-                                    Date="{Binding Birthdate, Mode=TwoWay}"
-                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                    Placeholder="Birthdate with ValidatableDateTimePicker"
-                                    ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
-                                    ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
-                                <controls:ValidatableDateTimePicker
-                                    Date="{x:Null}"
-                                    IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                    Placeholder="ValidatableDateTimePicker with Date=&quot;null&quot;"
-                                    ReadonlyText="ReadonlyText"
-                                    ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
-
-                                <controls:AlwaysScrollView Orientation="Horizontal">
-                                    <controls:GridZero>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <controls:ValidatableDateTimePicker
-                                            BackgroundColor="Aquamarine"
-                                            Date="{x:Null}"
-                                            IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                            Placeholder="ValidatableDateTimePicker"
-                                            Time="{x:Null}" />
-                                        <controls:ValidatableEntry
-                                            Grid.Row="0"
-                                            Grid.Column="1"
-                                            BackgroundColor="LightGoldenrodYellow"
-                                            IsReadonly="{Binding IsReadonly, Mode=OneWay}"
-                                            Placeholder="ValidatableEntry"
-                                            Text="" />
-                                    </controls:GridZero>
-                                </controls:AlwaysScrollView>
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ErrorBox--&gt;" />
                                 <controls:ErrorBox Text="Some error message" />

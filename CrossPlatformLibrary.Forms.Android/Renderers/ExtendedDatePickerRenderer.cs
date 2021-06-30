@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Android.App;
 using Android.Content;
 using Android.Views;
 using CrossPlatformLibrary.Forms.Android.Renderers;
@@ -16,10 +17,13 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
     ///     Extended DatePicker Renderer for Nullable Values
     ///     Via: https://forums.xamarin.com/discussion/20028/datepicker-possible-to-bind-to-nullable-date-value
     ///     Via: https://github.com/XLabs/Xamarin-Forms-Labs/wiki/ExtendedEntry
+    ///     Via: https://github.com/tcerdaj/PoolGuy/blob/master/PoolGuy.Mobile.Android/CustomRenderer/CustomDatePickerRenderer.cs
     /// </summary>
     [Preserve(AllMembers = true)]
     public class ExtendedDatePickerRenderer : DatePickerRenderer
     {
+        private static readonly int negativeButtonId = (int)DialogButtonType.Negative;
+
         public static new async void Init()
         {
             var now = DateTime.Now;
@@ -29,14 +33,59 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
         {
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<DatePicker> e)
+        protected override DatePickerDialog CreateDatePickerDialog(int year, int month, int day)
+        {
+            var dialog = base.CreateDatePickerDialog(year, month, day);
+            var view = (ExtendedDatePicker)this.Element;
+
+            // Override cancel button functionality.
+            // We don't want to return a value if cancel is pressed.
+            var cancelButtonText = !string.IsNullOrEmpty(view.CancelButtonText)
+                ? view.CancelButtonText 
+                : this.Resources.GetString(global::Android.Resource.String.Cancel);
+
+            dialog.SetButton(negativeButtonId, cancelButtonText, (x, y) =>
+            {
+                if (y.Which == negativeButtonId)
+                {
+                    var isNullDate = view.NullableDate == null;
+                    view.Unfocus();
+                    if (isNullDate)
+                    {
+                        view.NullableDate = null;
+                        this.SetNullableText(view);
+                    }
+                }
+            });
+
+            // Add clear button which resets the currently set value.
+            // If ClearButtonText is null/empty, don't add the clear button.
+            var clearButtonText = view.ClearButtonText;
+            if (!string.IsNullOrEmpty(clearButtonText))
+            {
+                var neutralButtonId = (int)DialogButtonType.Neutral;
+                dialog.SetButton(neutralButtonId, clearButtonText, (x, y) =>
+                {
+                    if (y.Which == neutralButtonId)
+                    {
+                        view.Unfocus();
+
+                        view.NullableDate = null;
+                        this.SetNullableText(view);
+                    }
+                });
+            }
+
+            return dialog;
+        }
+
+        protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.DatePicker> e)
         {
             base.OnElementChanged(e);
 
             if (this.Element is ExtendedDatePicker view)
             {
                 this.SetTextAlignment(view);
-                // SetBorder(view);
                 this.SetNullableText(view);
                 this.SetPlaceholder(view);
                 this.SetPlaceholderTextColor(view);
@@ -49,13 +98,13 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
 
             var view = (ExtendedDatePicker)this.Element;
 
-            if (e.PropertyName == ExtendedDatePicker.XAlignProperty.PropertyName)
+            if (e.PropertyName == ExtendedDatePicker.HorizontalTextAlignmentProperty.PropertyName)
             {
                 this.SetTextAlignment(view);
             }
-            // else if (e.PropertyName == ExtendedDatePicker.HasBorderProperty.PropertyName)
-            //  SetBorder(view);
-            else if (e.PropertyName == ExtendedDatePicker.NullableDateProperty.PropertyName || e.PropertyName == DatePicker.FormatProperty.PropertyName)
+            else if (e.PropertyName == ExtendedDatePicker.NullableDateProperty.PropertyName ||
+               e.PropertyName == DatePicker.DateProperty.PropertyName ||
+               e.PropertyName == DatePicker.FormatProperty.PropertyName)
             {
                 this.SetNullableText(view);
             }
@@ -75,7 +124,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
         /// <param name="view">The view.</param>
         private void SetTextAlignment(ExtendedDatePicker view)
         {
-            switch (view.XAlign)
+            switch (view.HorizontalTextAlignment)
             {
                 case Xamarin.Forms.TextAlignment.Center:
                     this.Control.Gravity = GravityFlags.CenterHorizontal;

@@ -11,6 +11,8 @@ namespace CrossPlatformLibrary.Forms.Controls
     /// </summary>
     public class ExtendedDatePicker : DatePicker
     {
+        private bool isPickerDialogOpen = false;
+
         public static readonly BindableProperty NullableDateProperty =
             BindableProperty.Create(
                 nameof(NullableDate),
@@ -31,6 +33,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         private static void OnValidityRangePropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
+
             Debug.WriteLine($"OnValidityRangePropertyChanged: oldvalue={oldvalue}, newvalue={newvalue}");
 
             if (newvalue is DateRange dateRange)
@@ -50,9 +53,9 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(ValidityRangeProperty, value);
         }
 
-        public static readonly BindableProperty XAlignProperty =
+        public static readonly BindableProperty HorizontalTextAlignmentProperty =
             BindableProperty.Create(
-                nameof(XAlign),
+                nameof(HorizontalTextAlignment),
                 typeof(TextAlignment),
                 typeof(ExtendedDatePicker),
                 TextAlignment.Start);
@@ -79,6 +82,20 @@ namespace CrossPlatformLibrary.Forms.Controls
                 typeof(ExtendedDatePicker),
                 Color.Default);
 
+        public static readonly BindableProperty ClearButtonTextProperty =
+            BindableProperty.Create(
+                nameof(ClearButtonText),
+                typeof(string),
+                typeof(ExtendedDatePicker),
+                null);
+        
+        public static readonly BindableProperty CancelButtonTextProperty =
+            BindableProperty.Create(
+                nameof(CancelButtonText),
+                typeof(string),
+                typeof(ExtendedDatePicker),
+                null);
+
         public DateTime? NullableDate
         {
             get => (DateTime?)this.GetValue(NullableDateProperty);
@@ -92,10 +109,10 @@ namespace CrossPlatformLibrary.Forms.Controls
             }
         }
 
-        public TextAlignment XAlign
+        public TextAlignment HorizontalTextAlignment
         {
-            get => (TextAlignment)this.GetValue(XAlignProperty);
-            set => this.SetValue(XAlignProperty, value);
+            get => (TextAlignment)this.GetValue(HorizontalTextAlignmentProperty);
+            set => this.SetValue(HorizontalTextAlignmentProperty, value);
         }
 
         public bool HasBorder
@@ -116,13 +133,23 @@ namespace CrossPlatformLibrary.Forms.Controls
             set => this.SetValue(PlaceholderTextColorProperty, value);
         }
 
+        public string ClearButtonText
+        {
+            get => (string)this.GetValue(ClearButtonTextProperty);
+            set => this.SetValue(ClearButtonTextProperty, value);
+        }
+        
+        public string CancelButtonText
+        {
+            get => (string)this.GetValue(CancelButtonTextProperty);
+            set => this.SetValue(CancelButtonTextProperty, value);
+        }
+
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
             this.UpdateDate();
         }
-
-        private bool isPickerDialogOpen = false;
 
         protected override void OnPropertyChanged(string propertyName = null)
         {
@@ -166,6 +193,10 @@ namespace CrossPlatformLibrary.Forms.Controls
             {
                 this.Date = this.NullableDate.Value;
             }
+            //else
+            //{
+            //    this.Date = DateTime.MinValue;
+            //}
         }
     }
 }

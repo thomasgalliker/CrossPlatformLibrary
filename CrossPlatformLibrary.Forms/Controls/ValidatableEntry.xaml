@@ -53,6 +53,11 @@
                     <On Platform="iOS" Value="0,-10,0,-6" />
                 </OnPlatform>
             </Entry.Margin>
+            <controls:CustomEntry.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android" Value="4,0,4,0" />
+                </OnPlatform>
+            </controls:CustomEntry.Padding>
         </controls:CustomEntry>
 
         <!--  Trailing Icon  -->

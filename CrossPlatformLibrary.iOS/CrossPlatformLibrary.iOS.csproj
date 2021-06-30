@@ -45,6 +45,7 @@
     <Compile Include="..\CrossPlatformLibrary.NetFx\Localization\Localizer.cs">
       <Link>Localization\Localizer.cs</Link>
     </Compile>
+    <Compile Include="Appearance.cs" />
     <Compile Include="Dispatching\DispatcherService.cs" />
     <Compile Include="ExceptionHandling\ExceptionHandler.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />

@@ -34,6 +34,8 @@ namespace SampleApp.iOS
 
             this.LoadApplication(new App(activityIndicatorService, statusBar));
 
+            CrossPlatformLibrary.Forms.iOS.Appearance.Configure(App.Current);
+
             return base.FinishedLaunching(app, options);
         }
     }

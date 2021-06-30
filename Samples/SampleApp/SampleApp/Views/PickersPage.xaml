@@ -60,6 +60,191 @@
                     </xControls:StackLayoutZero>
                 </xControls:CardView>
 
+                <xControls:CardView>
+                    <xControls:StackLayoutZero>
+                        <xControls:LabelSection Text="ExtendedDatePickers" />
+                        <xControls:HeaderDivider />
+                        <xControls:StackLayoutZero Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ExtendedDatePicker--&gt;" />
+                            <xControls:ExtendedDatePicker
+                                IsEnabled="{Binding IsReadonly, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+                                NullableDate="{x:Null}"
+                                Placeholder="ExtendedDatePicker with NullableDate" />
+                            <xControls:ExtendedDatePicker
+                                Format="D"
+                                IsEnabled="{Binding IsReadonly, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+                                NullableDate="{Binding Birthdate, Mode=TwoWay}"
+                                Placeholder="ExtendedDatePicker with Birthdate" />
+                            <xControls:ExtendedDatePicker
+                                ClearButtonText="Clear"
+                                Format="D"
+                                IsEnabled="{Binding IsReadonly, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+                                NullableDate="{Binding Birthdate, Mode=TwoWay}"
+                                Placeholder="ExtendedDatePicker with ClearButtonText" />
+                            <xControls:ExtendedDatePicker
+                                CancelButtonText="{localization:Translate CancelButtonText}"
+                                ClearButtonText="{localization:Translate ClearButtonText}"
+                                Format="D"
+                                IsEnabled="{Binding IsReadonly, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+                                NullableDate="{Binding Birthdate, Mode=TwoWay}"
+                                Placeholder="ExtendedDatePicker with Clean+Cancel" />
+                            <xControls:ExtendedDatePicker
+                                Format="D"
+                                IsEnabled="{Binding IsReadonly, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+                                NullableDate="{Binding Birthdate, Mode=TwoWay}"
+                                Placeholder="ExtendedDatePicker with ValidityRange"
+                                ValidityRange="{Binding BirthdateValidityRange}" />
+
+                            <Button Command="{Binding ToggleBirthdateCommand}" Text="Toggle Birthdate" />
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Toggle IsEnabled--&gt;" />
+                            <Switch IsToggled="{Binding IsReadonly, Mode=TwoWay}" />
+
+                        </xControls:StackLayoutZero>
+                        <xControls:FooterDivider />
+                    </xControls:StackLayoutZero>
+                </xControls:CardView>
+
+                <xControls:CardView>
+                    <xControls:StackLayoutZero>
+                        <xControls:LabelSection Text="ValidatableDatePickers" />
+                        <xControls:HeaderDivider />
+                        <xControls:StackLayoutZero Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableDatePicker--&gt;" />
+                            <xControls:ValidatableDatePicker
+                                Date="{Binding Birthdate, Mode=TwoWay}"
+                                IsReadonly="{Binding IsReadonly, Mode=OneWay}"
+                                Placeholder="ValidatableDatePicker"
+                                ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
+                                ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
+
+                            <xControls:ValidatableDatePicker
+                                Date="{Binding Birthdate, Mode=TwoWay}"
+                                IsReadonly="True"
+                                Placeholder="ValidatableDatePicker IsReadonly=&quot;True&quot;"
+                                ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
+                                ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
+
+                            <xControls:ValidatableDatePicker
+                                Date="{x:Null}"
+                                IsReadonly="{Binding IsReadonly, Mode=OneWay}"
+                                Placeholder="ValidatableDatePicker Date=&quot;null&quot;"
+                                ReadonlyText="ReadonlyText"
+                                ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
+
+                            <xControls:ValidatableDatePicker
+                                x:Name="ValidatableDatePickerTest2"
+                                Date="{Binding Birthdate, Mode=TwoWay}"
+                                IsReadonly="{Binding IsReadonly, Mode=OneWay}"
+                                Placeholder="ValidatableDatePicker with ValidationErrors"
+                                ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
+                                ValidationErrors="{Binding Source={x:Reference ValidatableDatePickerTest2}, Path=Date, Converter={StaticResource RandomValidationErrorsConverter}}" />
+
+                            <xControls:AlwaysScrollView Orientation="Horizontal">
+                                <xControls:GridZero>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <xControls:ValidatableDatePicker
+                                        BackgroundColor="Aquamarine"
+                                        Date="{x:Null}"
+                                        Placeholder="ValidatableDatePicker" />
+                                    <xControls:ValidatableEntry
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        BackgroundColor="LightGoldenrodYellow"
+                                        Placeholder="ValidatableEntry"
+                                        Text="" />
+                                </xControls:GridZero>
+                            </xControls:AlwaysScrollView>
+                        </xControls:StackLayoutZero>
+                        <xControls:FooterDivider />
+                    </xControls:StackLayoutZero>
+                </xControls:CardView>
+
+                <xControls:CardView>
+                    <xControls:StackLayoutZero>
+                        <xControls:LabelSection Text="ExtendedTimePickers" />
+                        <xControls:HeaderDivider />
+                        <xControls:StackLayoutZero Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ExtendedTimePicker--&gt;" />
+                            <xControls:ExtendedTimePicker
+                                Format="t"
+                                IsEnabled="{Binding IsReadonly, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+                                NullableTime="{x:Null}"
+                                Placeholder="ExtendedTimePicker with ShortTimePattern" />
+                            <xControls:ExtendedTimePicker
+                                Format="T"
+                                IsEnabled="{Binding IsReadonly, Mode=OneWay, Converter={StaticResource BoolInverter}}"
+                                NullableTime="{Binding Birthdate, Mode=TwoWay}"
+                                Placeholder="ExtendedTimePicker with LongTimePattern" />
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Toggle IsEnabled--&gt;" />
+                            <Switch IsToggled="{Binding IsReadonly, Mode=TwoWay}" />
+
+                        </xControls:StackLayoutZero>
+                        <xControls:FooterDivider />
+                    </xControls:StackLayoutZero>
+                </xControls:CardView>
+
+                <xControls:CardView>
+                    <xControls:StackLayoutZero>
+                        <xControls:LabelSection Text="ValidatableDatePickers" />
+                        <xControls:HeaderDivider />
+                        <xControls:StackLayoutZero Padding="{DynamicResource Theme.Padding.CardViewPadding}" BackgroundColor="{DynamicResource CardViewStyle.BackgroundColor}">
+
+
+                            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableDateTimePicker--&gt;" />
+                            <xControls:ValidatableDateTimePicker
+                                Date="{Binding Birthdate, Mode=TwoWay}"
+                                IsReadonly="{Binding IsReadonly, Mode=OneWay}"
+                                Placeholder="Birthdate with ValidatableDateTimePicker"
+                                ReadonlyText="{Binding Birthdate, Mode=OneWay, Converter={StaticResource ShortDateConverter}}"
+                                ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
+                            <xControls:ValidatableDateTimePicker
+                                Date="{x:Null}"
+                                IsReadonly="{Binding IsReadonly, Mode=OneWay}"
+                                Placeholder="ValidatableDateTimePicker with Date=&quot;null&quot;"
+                                ReadonlyText="ReadonlyText"
+                                ValidationErrors="{Binding Validation.Errors[Birthdate]}" />
+
+                            <xControls:AlwaysScrollView Orientation="Horizontal">
+                                <xControls:GridZero>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <xControls:ValidatableDateTimePicker
+                                        BackgroundColor="Aquamarine"
+                                        Date="{x:Null}"
+                                        IsReadonly="{Binding IsReadonly, Mode=OneWay}"
+                                        Placeholder="ValidatableDateTimePicker"
+                                        Time="{x:Null}" />
+                                    <xControls:ValidatableEntry
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        BackgroundColor="LightGoldenrodYellow"
+                                        IsReadonly="{Binding IsReadonly, Mode=OneWay}"
+                                        Placeholder="ValidatableEntry"
+                                        Text="" />
+                                </xControls:GridZero>
+                            </xControls:AlwaysScrollView>
+
+                        </xControls:StackLayoutZero>
+                        <xControls:FooterDivider />
+                    </xControls:StackLayoutZero>
+                </xControls:CardView>
+
             </StackLayout>
         </xControls:GridZero>
     </xControls:AlwaysScrollView>

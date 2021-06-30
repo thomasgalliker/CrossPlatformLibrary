@@ -22,5 +22,10 @@ namespace SampleApp.ViewModels
             get => this.isSelected;
             set => this.SetProperty(ref this.isSelected, value, nameof(this.IsSelected));
         }
+
+        public override string ToString()
+        {
+            return $"{this.Id}) {this.Name}";
+        }
     }
 }

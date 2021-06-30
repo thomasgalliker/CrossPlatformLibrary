@@ -63,10 +63,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CrossPlatformLibrary\CrossPlatformLibrary.csproj" />
   </ItemGroup>
 

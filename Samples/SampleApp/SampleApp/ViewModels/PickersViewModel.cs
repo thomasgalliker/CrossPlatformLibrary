@@ -1,6 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using CrossPlatformLibrary.Forms.Controls;
 using CrossPlatformLibrary.Forms.Mvvm;
+using CrossPlatformLibrary.Forms.Validation;
 using SampleApp.Services;
+using Xamarin.Forms;
 
 namespace SampleApp.ViewModels
 {
@@ -11,6 +16,8 @@ namespace SampleApp.ViewModels
         private ObservableCollection<CountryViewModel> countries;
         private CountryViewModel country;
         private bool isReadonly;
+        private DateTime? birthdate;
+        private ICommand toggleBirthdateCommand;
 
         public PickersViewModel(IDisplayService displayService, ObservableCollection<CountryViewModel> countries)
         {
@@ -24,6 +31,21 @@ namespace SampleApp.ViewModels
             };
 
             this.Countries = countries;
+
+            var referenceDate = DateTime.Now;
+            this.BirthdateValidityRange = new DateRange(start: referenceDate.AddDays(-2), end: referenceDate.AddDays(2));
+            this.Birthdate = referenceDate;
+        }
+
+        protected override ViewModelValidation SetupValidation()
+        {
+            var viewModelValidation = new ViewModelValidation();
+
+            viewModelValidation.AddValidationFor(nameof(this.Birthdate))
+                .When(() => this.Birthdate == null)
+                .Show(() => $"Birthdate must be set");
+
+            return viewModelValidation;
         }
 
         public ObservableCollection<string> StringValues { get; set; }
@@ -56,6 +78,34 @@ namespace SampleApp.ViewModels
         {
             get => this.isReadonly;
             set => this.SetProperty(ref this.isReadonly, value, nameof(this.IsReadonly));
+        }
+
+        public DateTime? Birthdate
+        {
+            get => this.birthdate;
+            set
+            {
+                if(this.SetProperty(ref this.birthdate, value, nameof(this.Birthdate)))
+                {
+                    _ = this.Validation.IsValidAsync();
+                }
+            }
+        }
+
+        public DateRange BirthdateValidityRange { get; }
+
+        public ICommand ToggleBirthdateCommand
+        {
+            get
+            {
+                return this.toggleBirthdateCommand ??
+                       (this.toggleBirthdateCommand = new Command(() => this.ToggleBirthdate()));
+            }
+        }
+
+        private void ToggleBirthdate()
+        {
+            this.Birthdate = this.Birthdate == null ? DateTime.Now : (DateTime?)null;
         }
     }
 }

@@ -114,7 +114,7 @@ namespace CrossPlatformLibrary.Forms.Effects
                 "LineColor",
                 typeof(object),
                 typeof(LineColorEffect),
-                Color.Blue,
+                Color.Default,
                 BindingMode.OneWay);
 
         public static Color GetLineColor(BindableObject view)
