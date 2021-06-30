@@ -24,7 +24,7 @@ namespace CrossPlatformLibrary.Forms.Android.Renderers
         private static readonly string[] AutofillHintLastName = { "lastname", "last-name", "familyname", "family-name", "cc-family-name" };
         private new static readonly string[] AutofillHintUsername = { View.AutofillHintUsername };
         private new static readonly string[] AutofillHintEmailAddress = { View.AutofillHintEmailAddress, "email" };
-        private new static readonly string[] AutofillHintPhone = { View.AutofillHintPhone, "tel" };
+        private new static readonly string[] AutofillHintPhone = { "phoneNumber", View.AutofillHintPhone, "tel" };
         private new static readonly string[] AutofillHintPassword = { View.AutofillHintPassword };
         private static readonly string[] AutofillHintNewPassword = { "new-password" };
 
