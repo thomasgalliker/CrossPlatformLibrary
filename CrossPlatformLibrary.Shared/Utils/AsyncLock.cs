@@ -1,4 +1,4 @@
-﻿#if !NETFX
+﻿#if !(NETFX || NETFX_CORE)
 using System;
 using System.Diagnostics;
 using System.Threading;
