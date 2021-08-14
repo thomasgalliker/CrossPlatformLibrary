@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD1_3_OR_GREATER
+using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -212,3 +213,4 @@ namespace NeoSmart.AsyncLock
         }
     }
 }
+#endif
