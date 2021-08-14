@@ -20,7 +20,7 @@ namespace CrossPlatformLibrary
             return this.RunWithDelay(delay, () =>
             {
                 action();
-#if (NETFX)
+#if NETFX
                 return Task.FromResult(false);
 #else
                 return Task.CompletedTask;

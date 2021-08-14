@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD1_3_OR_GREATER
+﻿#if !NETFX
 using System;
 using System.Diagnostics;
 using System.Threading;
