@@ -1,11 +1,11 @@
-##################################################################
-# VSTS Build Configuration, Version 1.3
+####################################################################
+# VSTS Build Configuration, Version 1.4
 #
-# (c)2020 superdev GmbH
+# (c)2021 superdev GmbH
 ####################################################################
 
-name: 4.1.$(date:yy)$(DayOfYear).$(rev:rr)
-  
+name: $[format('{0}', variables['buildName'])]
+
 pool:
   vmImage: 'windows-2019'
 
@@ -14,20 +14,34 @@ trigger:
     include:
     - master
     - develop
-    - release/*
     - feature/*
+    - bugfix/*
 
   paths:
     exclude:
     - README.md
+    - Images/*
+    - Samples/*
 
 variables:
   solution: 'CrossPlatformLibrary.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  buildVersionPostfix: '-pre'
   nuspecFile: 'CrossPlatformLibrary.nuspec'
   nuspecFileForms: 'CrossPlatformLibrary.Forms.nuspec'
+  majorVersion: 4
+  minorVersion: 2
+  patchVersion: $[counter(format('{0}.{1}', variables.majorVersion, variables.minorVersion), 0)]
+  ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/master') }}:
+    # Versioning: 1.0.0
+    semVersion: $[format('{0}.{1}.{2}', variables.majorVersion, variables.minorVersion, variables.patchVersion)]
+  ${{ if and(ne(variables['Build.SourceBranch'], 'refs/heads/master'), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/'))) }}:
+    # Versioning: 1.0.0-pre
+    semVersion: $[format('{0}.{1}.{2}-pre', variables.majorVersion, variables.minorVersion, variables.patchVersion)]
+  ${{ if startsWith(variables['Build.SourceBranch'], 'refs/pull/') }}:
+    # Versioning: 1.0.0-pr.000000001
+    semVersion: $[format('{0}.{1}.{2}-pr.{3}', variables.majorVersion, variables.minorVersion, variables.patchVersion, variables['System.PullRequest.PullRequestId'])]
+  buildName: $[format('{0}', variables.semVersion)]
 
 steps:
 - task: Bash@3
@@ -35,26 +49,27 @@ steps:
   inputs:
     targetType: 'inline'
     script: 'env | sort'
-
-- task: UseDotNet@2
-  displayName: 'Use .NET Core SDK 3.x'
-  inputs:
-    packageType: sdk
-    version: 3.x
-    installationPath: $(Agent.ToolsDirectory)/dotnet
+   
+#- task: UseDotNet@2
+#  displayName: 'Use .NET Core SDK 3.x'
+#  inputs:
+#    packageType: sdk
+#    version: 3.x
+#    installationPath: $(Agent.ToolsDirectory)/dotnet
 
 - task: Assembly-Info-NetCore@2
   displayName: 'Update Assembly Info'
   inputs:
     Path: '$(Build.SourcesDirectory)'
-    FileNames: '**/*.csproj'
+    FileNames: |
+      **/*.csproj
     InsertAttributes: true
     FileEncoding: 'auto'
     WriteBOM: false
-    Company: 'superdev gmbh'
-    Copyright: '(c) $(date:YYYY) superdev gmbh'
-    Title: 'CrossPlatformLibrary'
-    Description: 'An extensible cross-platform toolkit which provides a basic set of functionality used in most mobile apps.'
+    Product: 'CrossPlatformLibrary'
+    Description: ''
+    Company: 'superdev GmbH'
+    Copyright: '(c) $(date:YYYY) superdev GmbH'
     VersionNumber: '$(Build.BuildNumber)'
     FileVersionNumber: '$(Build.BuildNumber)'
     InformationalVersion: '$(Build.BuildNumber)'
@@ -62,6 +77,7 @@ steps:
     LogLevel: 'verbose'
     FailOnWarning: false
     DisableTelemetry: false'
+
 
 - task: NuGetToolInstaller@0
   displayName: 'Use NuGet 5.x'
@@ -73,12 +89,6 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-
-- powershell: |
-   Write-Host "##vso[task.setvariable variable=PackageVersion]$(Build.BuildNumber)"
-   Write-Host "##vso[task.setvariable variable=PackageVersionPre]$(Build.BuildNumber)$(BuildVersionPostfix)"
-  displayName: 'Set PackageVersion'
-
 - task: VSBuild@1
   displayName: 'Build solution'
   inputs:
@@ -89,38 +99,30 @@ steps:
 
 - task: DotNetCoreCLI@2
   displayName: 'Run UnitTests'
-  continueOnError: false
   inputs:
     command: test
     projects: '**/*.Tests.csproj'
-    nobuild: true
-    arguments: '--no-build --configuration $(buildConfiguration) --filter Category!=SystemTest'
-
-- task: NuGetCommand@2
-  displayName: 'Pack NuGet $(nuspecFile) PreRelease'
+    arguments: '--no-restore --no-build --configuration $(buildConfiguration) /p:CollectCoverage=true /p:Exclude="[Microsoft*]*%2C[Mono*]*%2C[xunit*]*%2C[*.Testdata]*" /p:CoverletOutput=UnitTests.coverage.cobertura.xml /p:MergeWith=$(Build.SourcesDirectory)/Tests/CoverletOutput/coverage.json /p:CoverletOutputFormat=cobertura'
+    
+- task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
+  displayName: 'Create Code Coverage Report'
   inputs:
-    command: custom
-    arguments: pack $(nuspecFile) -Version $(PackageVersionPre) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
-
+    reports: '$(Build.SourcesDirectory)/Tests/**/*.coverage.cobertura.xml'
+    targetdir: '$(Build.SourcesDirectory)/CodeCoverage'
+    reporttypes: 'Cobertura'
+    assemblyfilters: '-xunit*'
+    
 - task: NuGetCommand@2
   displayName: 'Pack NuGet $(nuspecFile)'
   inputs:
     command: custom
-    arguments: pack $(nuspecFile) -Version $(PackageVersion) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
-
-
-- task: NuGetCommand@2
-  displayName: 'Pack NuGet $(nuspecFileForms) PreRelease'
-  inputs:
-    command: custom
-    arguments: pack $(nuspecFileForms) -Version $(PackageVersionPre) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
+    arguments: pack $(nuspecFile) -Version $(semVersion) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
 
 - task: NuGetCommand@2
   displayName: 'Pack NuGet $(nuspecFileForms)'
   inputs:
     command: custom
-    arguments: pack $(nuspecFileForms) -Version $(PackageVersion) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
-
+    arguments: pack $(nuspecFileForms) -Version $(semVersion) -NoPackageAnalysis -outputdirectory $(Build.ArtifactStagingDirectory)\artifacts
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
@@ -132,8 +134,13 @@ steps:
      **\bin\*.nupkg
 
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
+     
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
+    reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
-
