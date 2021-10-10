@@ -10,7 +10,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
     public class DelegateValidationTests
     {
         [Fact]
-        public void ShouldThrowIfNoValidationDelegationIsSetup()
+        public async Task ShouldThrowIfNoValidationDelegationIsSetup()
         {
             // Arrange
             var delegateValidation = new DelegateValidation(new[] { "TestProperty1" });
@@ -19,7 +19,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
             Func<Task> action = async () => await delegateValidation.GetErrors();
 
             // Assert
-            action.Should().Throw<InvalidOperationException>();
+            await action.Should().ThrowAsync<InvalidOperationException>();
         }
 
         [Fact]
@@ -123,7 +123,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
             errors1.Should().NotBeNull();
             errors1.Should().BeEmpty(because: "this task must be cancelled");
 
-            action.Should().Throw<NotSupportedException>().Which.Message.Should().Contain("Validation raised exception for property 'TestProperty1'");
+            (await action.Should().ThrowAsync<NotSupportedException>()).Which.Message.Should().Contain("Validation raised exception for property 'TestProperty1'");
         }
 
         private static async Task<Dictionary<string, List<string>>> ValidateWithExceptionAsync(string propertyName)
