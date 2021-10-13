@@ -57,7 +57,7 @@ The library contains a rich set of customized user controls which extend basic i
 In order to use the user controls of CrossPlatformLibrary, the styles used in these controls need to be initialized properly. For this reason, add following line of code just after the line `this.InitializeComponent();` in `App.xaml.cs`:
 
 `
-CrossPlatformLibrary.Forms.CrossPlatformLibrary.Init(this, "InvoiceScanner.Theme");
+CrossPlatformLibrary.Forms.CrossPlatformLibrary.Init(this, "SampleApp.Theme");
 `
 
 

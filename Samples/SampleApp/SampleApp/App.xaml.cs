@@ -31,7 +31,10 @@ namespace SampleApp
             // Initialize CrossPlatformLibrary.Forms
             CrossPlatformLibrary.Forms.CrossPlatformLibrary.Init(this, "SampleApp.Theme");
 
-            this.MainPage = new NavigationPage(new MainPage(localizer, activityIndicatorService, statusBar));
+            var tabbedMainPage = new TabbedMainPage();
+            tabbedMainPage.Children.Add(new NavigationPage(new MainPage(localizer, activityIndicatorService, statusBar)));
+
+            this.MainPage = tabbedMainPage;
         }
 
         protected override void OnStart()

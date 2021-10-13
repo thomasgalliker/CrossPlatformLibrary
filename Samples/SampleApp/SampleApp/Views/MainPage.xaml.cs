@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CrossPlatformLibrary.Forms.Extensions;
 using CrossPlatformLibrary.Forms.Services;
 using CrossPlatformLibrary.Localization;
 using CrossPlatformLibrary.Services;
@@ -31,7 +30,7 @@ namespace SampleApp.Views
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                 throw;
+                throw;
             }
 
             this.statusBar = statusBar;
@@ -41,16 +40,16 @@ namespace SampleApp.Views
         {
             base.OnAppearing();
 
-            statusBar.SetColor(Color.Black);
-            statusBar.SetStatusBarMode(StatusBarStyle.Dark);
+            this.statusBar.SetColor(Color.Black);
+            this.statusBar.SetStatusBarMode(StatusBarStyle.Dark);
         }
 
         protected override void OnDisappearing()
         {
             base.OnAppearing();
 
-            statusBar.SetColor(Color.White);
-            statusBar.SetStatusBarMode(StatusBarStyle.Light);
+            this.statusBar.SetColor(Color.White);
+            this.statusBar.SetStatusBarMode(StatusBarStyle.Light);
         }
     }
 
