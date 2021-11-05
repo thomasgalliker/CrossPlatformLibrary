@@ -9,14 +9,14 @@ namespace CrossPlatformLibrary.Forms.Controls
 {
     public abstract class TableSectionBase<T> : TableSectionBase, IList<T>, INotifyCollectionChanged where T : BindableObject
     {
-        readonly ObservableCollection<T> _children = new ObservableCollection<T>();
+        private readonly ObservableCollection<T> children = new ObservableCollection<T>();
 
         /// <summary>
         ///     Constructs a Section without an empty header.
         /// </summary>
         protected TableSectionBase()
         {
-            this._children.CollectionChanged += this.OnChildrenChanged;
+            this.children.CollectionChanged += this.OnChildrenChanged;
         }
 
         /// <summary>
@@ -24,36 +24,36 @@ namespace CrossPlatformLibrary.Forms.Controls
         /// </summary>
         protected TableSectionBase(string title) : base(title)
         {
-            this._children.CollectionChanged += this.OnChildrenChanged;
+            this.children.CollectionChanged += this.OnChildrenChanged;
         }
 
         public void Add(T item)
         {
-            this._children.Add(item);
+            this.children.Add(item);
         }
 
         public void Clear()
         {
-            this._children.Clear();
+            this.children.Clear();
         }
 
         public bool Contains(T item)
         {
-            return this._children.Contains(item);
+            return this.children.Contains(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            this._children.CopyTo(array, arrayIndex);
+            this.children.CopyTo(array, arrayIndex);
         }
 
-        public int Count => this._children.Count;
+        public int Count => this.children.Count;
 
         bool ICollection<T>.IsReadOnly => false;
 
         public bool Remove(T item)
         {
-            return this._children.Remove(item);
+            return this.children.Remove(item);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -63,39 +63,39 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         public IEnumerator<T> GetEnumerator()
         {
-            return this._children.GetEnumerator();
+            return this.children.GetEnumerator();
         }
 
         public int IndexOf(T item)
         {
-            return this._children.IndexOf(item);
+            return this.children.IndexOf(item);
         }
 
         public void Insert(int index, T item)
         {
-            this._children.Insert(index, item);
+            this.children.Insert(index, item);
         }
 
         public T this[int index]
         {
-            get => this._children[index];
-            set => this._children[index] = value;
+            get => this.children[index];
+            set => this.children[index] = value;
         }
 
         public void RemoveAt(int index)
         {
-            this._children.RemoveAt(index);
+            this.children.RemoveAt(index);
         }
 
         public event NotifyCollectionChangedEventHandler CollectionChanged
         {
-            add => this._children.CollectionChanged += value;
-            remove => this._children.CollectionChanged -= value;
+            add => this.children.CollectionChanged += value;
+            remove => this.children.CollectionChanged -= value;
         }
 
         public void Add(IEnumerable<T> items)
         {
-            items.ForEach(this._children.Add);
+            items.ForEach(this.children.Add);
         }
 
         protected override void OnBindingContextChanged()
@@ -103,15 +103,20 @@ namespace CrossPlatformLibrary.Forms.Controls
             base.OnBindingContextChanged();
 
             object bc = this.BindingContext;
-            foreach (T child in this._children)
+            foreach (var child in this.children)
+            {
                 SetInheritedBindingContext(child, bc);
+            }
         }
 
         void OnChildrenChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
             // We need to hook up the binding context for new items.
             if (notifyCollectionChangedEventArgs.NewItems == null)
+            {
                 return;
+            }
+
             object bc = this.BindingContext;
             foreach (BindableObject item in notifyCollectionChangedEventArgs.NewItems)
             {
