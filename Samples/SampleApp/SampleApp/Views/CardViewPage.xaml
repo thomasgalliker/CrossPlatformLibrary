@@ -4,13 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:xControls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:controls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
+    xmlns:cpl="http://superdev.ch/schemas/2020/cpl"
     mc:Ignorable="d"
     x:Class="SampleApp.Views.CardViewPage"
     BackgroundColor="{DynamicResource WindowBackgroundTable}">
 
-    <xControls:AlwaysScrollView>
+    <cpl:AlwaysScrollView>
         <Grid>
             <StackLayout Padding="{DynamicResource Theme.Padding.CardPadding}" Spacing="{DynamicResource Theme.Spacing.MediumSpacing}">
                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: AddressControl uses CardView--&gt;" />
@@ -20,5 +20,5 @@
                 <controls:PeriodicTaskView BindingContext="{Binding PeriodicTask}" />
             </StackLayout>
         </Grid>
-    </xControls:AlwaysScrollView>
+    </cpl:AlwaysScrollView>
 </ContentPage>

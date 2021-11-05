@@ -50,6 +50,9 @@
 		  <AutoGen>True</AutoGen>
 		  <DependentUpon>Strings.resx</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\LabelDemoPage.xaml.cs">
+	    <DependentUpon>LabelDemoPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\EntryPage.xaml.cs">
 	    <DependentUpon>EntryPage.xaml</DependentUpon>
 	  </Compile>
@@ -89,10 +92,19 @@
     <EmbeddedResource Update="Views\CountryViewCell.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\LabelDemoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MultiStateToggleButtonDemoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\SegmentedStatusIndicatorPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\TabbedMainPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ToggleViewDemoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

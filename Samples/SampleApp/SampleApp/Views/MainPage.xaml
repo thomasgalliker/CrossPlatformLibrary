@@ -7,7 +7,6 @@
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
-    xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=netstandard"
     xmlns:userControls="clr-namespace:SampleApp.Controls;assembly=SampleApp"
     xmlns:views="clr-namespace:SampleApp.Views;assembly=SampleApp"
     x:Name="Page"
@@ -170,12 +169,12 @@
     </ContentPage.Resources>
 
     <controls:GradientStackLayout
-        EndColor="LightPink"
         GradientOrientation="Vertical"
         Orientation="Vertical"
-        StartColor="LightGray"
         HorizontalOptions="FillAndExpand"
-        VerticalOptions="FillAndExpand">
+        VerticalOptions="FillAndExpand"
+        StartColor="LightGray"
+        EndColor="LightPink">
 
         <controls:GridZero HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
@@ -250,6 +249,12 @@
                                     CommandParameter="EntryPage"
                                     Text="CustomEntry" />
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: CustomLabel--&gt;" />
+                                <Button
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="LabelDemoPage"
+                                    Text="CustomLabel" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: Pickers--&gt;" />
                                 <Button
                                     Command="{Binding NavigateToPageCommand}"
@@ -268,116 +273,20 @@
                                     CommandParameter="SwitchesPage"
                                     Text="Switches Page" />
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ToggleView--&gt;" />
+                                <Button
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="ToggleViewDemoPage"
+                                    Text="ToggleView Demo" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: MultiStateToggleButton--&gt;" />
+                                <Button
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="MultiStateToggleButtonDemoPage"
+                                    Text="MultiStateToggleButton Demo" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ActivityIndicatorService--&gt;" />
                                 <Button Command="{Binding ShowActivityIndicatorCommand}" Text="ActivityIndicatorService.Show" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo MultiStateToggleButton--&gt;" />
-                                <controls:MultiStateToggleButton>
-                                    <controls:MultiStateToggleButton.ItemsSource>
-                                        <objectModel:ObservableCollection x:TypeArguments="BindableObject">
-                                            <controls:MultiToggleButtonView
-                                                Title="{localization:Translate OnButtonText}"
-                                                Command="{Binding MultiToggleCommand}"
-                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
-                                                IsSelected="{Binding IsMultiToggleButtonOn, Mode=TwoWay}" />
-                                            <controls:MultiToggleButtonView
-                                                Title="{localization:Translate OffButtonText}"
-                                                Command="{Binding MultiToggleCommand}"
-                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
-                                                IsSelected="{Binding IsMultiToggleButtonOff, Mode=TwoWay}" />
-                                        </objectModel:ObservableCollection>
-                                    </controls:MultiStateToggleButton.ItemsSource>
-                                </controls:MultiStateToggleButton>
-
-                                <controls:MultiStateToggleButton
-                                    BorderColor="Black"
-                                    ButtonBackgroundColor="White"
-                                    CornerRadius="20"
-                                    HeightRequest="60"
-                                    SelectedButtonBackgroundColor="BlueViolet"
-                                    Spacing="0">
-                                    <controls:MultiStateToggleButton.ItemsSource>
-                                        <objectModel:ObservableCollection x:TypeArguments="BindableObject">
-                                            <controls:MultiToggleButtonView
-                                                Title="{localization:Translate AutomaticButtonText}"
-                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
-                                                IsSelected="False" />
-                                            <controls:MultiToggleButtonView
-                                                Title="{localization:Translate OnButtonText}"
-                                                Command="{Binding MultiToggleCommand}"
-                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
-                                                IsSelected="{Binding IsMultiToggleButtonOn, Mode=TwoWay}" />
-                                            <controls:MultiToggleButtonView
-                                                Title="{localization:Translate OffButtonText}"
-                                                Command="{Binding MultiToggleCommand}"
-                                                ImageSource="{controls:ImageResource SampleApp.Resources.Images.camera_outline_black_192.png}"
-                                                IsSelected="{Binding IsMultiToggleButtonOff, Mode=TwoWay}" />
-                                        </objectModel:ObservableCollection>
-                                    </controls:MultiStateToggleButton.ItemsSource>
-                                </controls:MultiStateToggleButton>
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomLabel--&gt;" />
-                                <Label Text="Label" />
-                                <controls:CustomLabel Text="CustomLabel" />
-                                <controls:CustomLabel
-                                    JustifyText="True"
-                                    LineBreakMode="WordWrap"
-                                    Text="CustomLabel with JustifyText=&quot;True&quot;: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam."
-                                    HorizontalOptions="Start"
-                                    VerticalOptions="Start" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableLabel--&gt;" />
-                                <controls:ValidatableLabel
-                                    BackgroundColor="Transparent"
-                                    Placeholder="ValidatableLabel Placeholder"
-                                    Text="ValidatableLabel Text" />
-
-                                <controls:GridZero>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <controls:ValidatableLabel
-                                        Grid.Row="0"
-                                        Grid.Column="0"
-                                        BackgroundColor="Aquamarine"
-                                        Placeholder="ValidatableLabel"
-                                        Text="ValidatableLabel" />
-                                    <controls:ValidatableEntry
-                                        Grid.Row="0"
-                                        Grid.Column="1"
-                                        BackgroundColor="LightGoldenrodYellow"
-                                        Placeholder="ValidatableEntry"
-                                        Text="ValidatableEntry" />
-                                    <controls:ValidatableLabel
-                                        Grid.Row="1"
-                                        Grid.Column="0"
-                                        BackgroundColor="Aquamarine"
-                                        Placeholder="ValidatableLabel"
-                                        Text="ValidatableLabel" />
-                                    <controls:ValidatableEntry
-                                        Grid.Row="1"
-                                        Grid.Column="1"
-                                        BackgroundColor="LightGoldenrodYellow"
-                                        IsReadonly="True"
-                                        Placeholder="ValidatableEntry"
-                                        Text="ValidatableEntry IsReadonly=&quot;True&quot;" />
-                                </controls:GridZero>
-
-                                <controls:ValidatableLabel
-                                    BackgroundColor="LightBlue"
-                                    Placeholder="ValidatableLabel Placeholder"
-                                    Text="ValidatableLabel with custom LabelStyle which sets LineBreakMode to &quot;WordWrap&quot;&#x0a;Multiple lines of text&#x0a;Line 3: More text">
-                                    <controls:ValidatableLabel.LabelStyle>
-                                        <Style BaseResourceKey="EntryLabelStyle" TargetType="Label">
-                                            <Setter Property="LineBreakMode" Value="WordWrap" />
-                                        </Style>
-                                    </controls:ValidatableLabel.LabelStyle>
-                                </controls:ValidatableLabel>
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo SearchBar--&gt;" />
                                 <SearchBar
@@ -486,7 +395,7 @@
                                     NavigateUri="http://www.thomasgalliker.ch"
                                     Text="Click here to navigate to www.thomasgalliker.ch"
                                     TextColor="Black"
-                                    TintColor="BlueViolet" />
+                                    TintColor="Blue" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo DividerLine--&gt;" />
                                 <controls:DividerLine />

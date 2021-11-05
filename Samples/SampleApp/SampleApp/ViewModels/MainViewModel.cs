@@ -46,8 +46,6 @@ namespace SampleApp.ViewModels
         private DateTime? birthdate;
         private bool isSaving;
         private ObservableCollection<ResourceViewModel> themeResources;
-        private bool isMultiToggleButtonOn = true;
-        private bool isMultiToggleButtonOff;
         private ICommand navigateToPageCommand;
         private ICommand showActivityIndicatorCommand;
         private LanguageViewModel language;
@@ -192,6 +190,10 @@ namespace SampleApp.ViewModels
                 case nameof(EntryPage):
                     page = new EntryPage { BindingContext = new EntryViewModel(this.displayService, this.Countries) };
                     break;
+                    
+                case nameof(LabelDemoPage):
+                    page = new LabelDemoPage { BindingContext = null };
+                    break;
 
                 case nameof(PickersPage):
                     page = new PickersPage { BindingContext = new PickersViewModel(this.displayService, this.Countries) };
@@ -203,6 +205,14 @@ namespace SampleApp.ViewModels
 
                 case nameof(SwitchesPage):
                     page = new SwitchesPage { BindingContext = null };
+                    break;
+
+                case nameof(ToggleViewDemoPage):
+                    page = new ToggleViewDemoPage { BindingContext = new ToggleViewDemoViewModel() };
+                    break;
+                    
+                case nameof(MultiStateToggleButtonDemoPage):
+                    page = new MultiStateToggleButtonDemoPage { BindingContext = new MultiStateToggleButtonDemoViewModel() };
                     break;
 
                 default:
@@ -490,18 +500,6 @@ namespace SampleApp.ViewModels
                 return this.toggleSwitchCommand ??
                        (this.toggleSwitchCommand = new Command(() => { this.IsReadonly = !this.IsReadonly; }));
             }
-        }
-
-        public bool IsMultiToggleButtonOn
-        {
-            get => this.isMultiToggleButtonOn;
-            set => this.SetProperty(ref this.isMultiToggleButtonOn, value, nameof(this.IsMultiToggleButtonOn));
-        }
-
-        public bool IsMultiToggleButtonOff
-        {
-            get => this.isMultiToggleButtonOff;
-            set => this.SetProperty(ref this.isMultiToggleButtonOff, value, nameof(this.IsMultiToggleButtonOff));
         }
     }
 }
