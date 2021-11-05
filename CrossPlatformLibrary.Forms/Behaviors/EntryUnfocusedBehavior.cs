@@ -63,7 +63,7 @@ namespace CrossPlatformLibrary.Forms.Behaviors
                 return;
             }
 
-            if (entry.Text is string value && 
+            if (entry.Text is string value &&
                 this.DecorationFlags is TextDecorationFlags flags && flags != TextDecorationFlags.None)
             {
                 if (flags.HasFlag(TextDecorationFlags.TrimWhitespaces))
