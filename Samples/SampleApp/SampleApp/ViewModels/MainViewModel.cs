@@ -194,6 +194,10 @@ namespace SampleApp.ViewModels
                 case nameof(LabelDemoPage):
                     page = new LabelDemoPage { BindingContext = null };
                     break;
+                    
+                case nameof(ListViewDemoPage):
+                    page = new ListViewDemoPage { BindingContext = new ListViewDemoViewModel(this.displayService, this.Countries) };
+                    break;
 
                 case nameof(PickersPage):
                     page = new PickersPage { BindingContext = new PickersViewModel(this.displayService, this.Countries) };
@@ -324,14 +328,6 @@ namespace SampleApp.ViewModels
         {
             Console.WriteLine("unfocused");
         }
-
-        public ICommand SelectCountryCommand => new Command<CountryViewModel>(this.OnSelectCountry);
-
-        private async void OnSelectCountry(CountryViewModel parameter)
-        {
-            await this.displayService.DisplayAlert("SelectCountryCommand", $"country: {parameter.Name ?? "null"}");
-        }
-
 
         public ObservableCollection<ResourceViewModel> ThemeResources
         {

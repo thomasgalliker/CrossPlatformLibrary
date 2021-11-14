@@ -3,7 +3,6 @@
     x:Class="SampleApp.Views.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:behaviors="clr-namespace:CrossPlatformLibrary.Forms.Behaviors;assembly=CrossPlatformLibrary.Forms"
     xmlns:controls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:effects="clr-namespace:CrossPlatformLibrary.Forms.Effects;assembly=CrossPlatformLibrary.Forms"
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
@@ -255,6 +254,12 @@
                                     CommandParameter="LabelDemoPage"
                                     Text="CustomLabel" />
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: ListView--&gt;" />
+                                <Button
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="ListViewDemoPage"
+                                    Text="ListView" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: Pickers--&gt;" />
                                 <Button
                                     Command="{Binding NavigateToPageCommand}"
@@ -420,28 +425,6 @@
                                     ItemTemplate="{StaticResource CountryItemTemplate}"
                                     ItemsSource="{Binding Countries}"
                                     Orientation="Vertical" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ListView--&gt;" />
-                                <ListView
-                                    x:Name="ListViewCountries"
-                                    BackgroundColor="Transparent"
-                                    CachingStrategy="RetainElement"
-                                    HasUnevenRows="true"
-                                    HeightRequest="150"
-                                    IsPullToRefreshEnabled="true"
-                                    IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
-                                    ItemTemplate="{StaticResource CountryItemTemplate}"
-                                    ItemsSource="{Binding Countries}"
-                                    RefreshCommand="{Binding RefreshCommand}"
-                                    SelectionMode="Single"
-                                    SeparatorVisibility="None">
-                                    <ListView.Behaviors>
-                                        <behaviors:EventToCommandBehavior
-                                            Command="{Binding BindingContext.SelectCountryCommand, Source={x:Reference Page}}"
-                                            CommandParameter="{Binding Source={x:Reference ListViewCountries}, Path=SelectedItem}"
-                                            EventName="ItemTapped" />
-                                    </ListView.Behaviors>
-                                </ListView>
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo NoBarsScrollViewer--&gt;" />
                                 <controls:NoBarsScrollViewer Orientation="Horizontal">
