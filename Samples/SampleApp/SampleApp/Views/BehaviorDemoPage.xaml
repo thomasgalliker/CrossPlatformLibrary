@@ -7,11 +7,15 @@
 
     <cpl:AlwaysScrollView>
         <StackLayout Padding="10" Spacing="10">
-            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo VisualElementVisibilityAnimationBehavior--&gt;" />
+            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo VisualElementBehavior--&gt;" />
             <cpl:CustomButton Command="{Binding ToggleVisibilityCommand}" Text="Toggle Visibility (animated)" />
             <Grid BackgroundColor="Turquoise" HeightRequest="200">
                 <Grid.Behaviors>
-                    <cpl:VisualElementVisibilityAnimationBehavior IsVisible="{Binding IsBoxVisible}" />
+                    <cpl:VisualElementBehavior
+                        AnimationEasing="Easing.CubicInOut"
+                        AnimationLength="1000"
+                        AnimationSteps="16"
+                        IsVisible="{Binding IsBoxVisible}" />
                 </Grid.Behaviors>
                 <Label
                     Text="Content"
