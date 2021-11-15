@@ -1,7 +1,7 @@
 ﻿using CrossPlatformLibrary.Forms.Controls;
 using Xamarin.Forms;
 
-namespace CrossPlatformLibrary.Forms.Behaviors
+namespace CrossPlatformLibrary.Forms.Extensions
 {
     internal static class VisualElementExtensions
     {

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Input;
 using CrossPlatformLibrary.Extensions;
+using CrossPlatformLibrary.Internals;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Behaviors
@@ -74,7 +75,7 @@ namespace CrossPlatformLibrary.Forms.Behaviors
 
         private void RegisterEvent(string name)
         {
-            Debug.WriteLine($"EventToCommandBehavior.RegisterEvent(name={name})");
+            Tracer.Current.Debug($"EventToCommandBehavior.RegisterEvent(name={name})");
 
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -101,7 +102,7 @@ namespace CrossPlatformLibrary.Forms.Behaviors
 
         private void DeregisterEvent(string name)
         {
-            Debug.WriteLine($"EventToCommandBehavior.DeregisterEvent(name={name})");
+            Tracer.Current.Debug($"EventToCommandBehavior.DeregisterEvent(name={name})");
 
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -125,7 +126,7 @@ namespace CrossPlatformLibrary.Forms.Behaviors
 
         void OnEvent<T>(object sender, T eventArgs)
         {
-            Debug.WriteLine($"EventToCommandBehavior.OnEvent(sender={sender?.GetType().GetFormattedName() ?? "<null>"}, eventArgs={eventArgs?.GetType().GetFormattedName() ?? "<null>"})");
+            Tracer.Current.Debug($"EventToCommandBehavior.OnEvent(sender={sender?.GetType().GetFormattedName() ?? "<null>"}, eventArgs={eventArgs?.GetType().GetFormattedName() ?? "<null>"})");
 
             if (!(this.Command is ICommand command))
             {

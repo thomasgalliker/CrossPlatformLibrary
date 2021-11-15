@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
+using CrossPlatformLibrary.Internals;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Behaviors
@@ -108,12 +108,12 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             {
                 try
                 {
-                    Debug.WriteLine($"ListViewScrollBehavior.ScrollToOnMainThread: targetElement={targetElement?.GetType().Name ?? "(null)"}, scrollToPosition={scrollToPositionValue}");
+                    Tracer.Current.Debug($"ListViewScrollBehavior.ScrollToOnMainThread: targetElement={targetElement?.GetType().Name ?? "(null)"}, scrollToPosition={scrollToPositionValue}");
                     this.AssociatedObject.ScrollTo(targetElement, scrollToPositionValue, animated: true);
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"ListViewScrollBehavior.ScrollToOnMainThread failed with exception: {ex}");
+                    Tracer.Current.Debug($"ListViewScrollBehavior.ScrollToOnMainThread failed with exception: {ex}");
                 }
             });
         }

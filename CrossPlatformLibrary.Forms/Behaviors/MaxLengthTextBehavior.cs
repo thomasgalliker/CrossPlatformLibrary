@@ -1,23 +1,24 @@
-﻿using System.Diagnostics;
-using CrossPlatformLibrary.Forms.Controls;
+﻿using CrossPlatformLibrary.Forms.Controls;
+using CrossPlatformLibrary.Internals;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Behaviors
 {
     public class MaxLengthTextBehavior : BehaviorBase<ValidatableEntry>
     {
-        public static readonly BindableProperty MaxLengthProperty = BindableProperty.Create(
-            nameof(MaxLength),
-            typeof(int),
-            typeof(MaxLengthTextBehavior),
-            int.MaxValue,
-            BindingMode.OneWay,
-            null,
-            MaxLengthPropertyChanged);
+        public static readonly BindableProperty MaxLengthProperty =
+            BindableProperty.Create(
+                nameof(MaxLength),
+                typeof(int),
+                typeof(MaxLengthTextBehavior),
+                int.MaxValue,
+                BindingMode.OneWay,
+                null,
+                MaxLengthPropertyChanged);
 
         private static void MaxLengthPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            Debug.WriteLine($"MaxLengthTextBehavior.MaxLength={newvalue}");
+            Tracer.Current.Debug($"MaxLengthTextBehavior.MaxLength={newvalue}");
         }
 
         public int MaxLength

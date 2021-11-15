@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using CrossPlatformLibrary.Internals;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
@@ -33,8 +34,7 @@ namespace CrossPlatformLibrary.Forms.Controls
 
         private static void OnValidityRangePropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-
-            Debug.WriteLine($"OnValidityRangePropertyChanged: oldvalue={oldvalue}, newvalue={newvalue}");
+            Tracer.Current.Debug($"OnValidityRangePropertyChanged: oldvalue={oldvalue}, newvalue={newvalue}");
 
             if (newvalue is DateRange dateRange)
             {

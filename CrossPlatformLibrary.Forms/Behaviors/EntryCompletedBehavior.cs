@@ -1,4 +1,5 @@
 ﻿using System;
+using CrossPlatformLibrary.Forms.Extensions;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Behaviors
