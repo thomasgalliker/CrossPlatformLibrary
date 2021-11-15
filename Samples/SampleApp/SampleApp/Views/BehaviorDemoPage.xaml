@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SampleApp.Views.BehaviorDemoPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cpl="http://superdev.ch/schemas/2020/cpl">
+
+    <cpl:AlwaysScrollView>
+        <StackLayout Padding="10" Spacing="10">
+            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo VisualElementVisibilityAnimationBehavior--&gt;" />
+            <cpl:CustomButton Command="{Binding ToggleVisibilityCommand}" Text="Toggle Visibility (animated)" />
+            <Grid BackgroundColor="Turquoise" HeightRequest="200">
+                <Grid.Behaviors>
+                    <cpl:VisualElementVisibilityAnimationBehavior IsVisible="{Binding IsBoxVisible}" />
+                </Grid.Behaviors>
+                <Label
+                    Text="Content"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+            </Grid>
+        </StackLayout>
+    </cpl:AlwaysScrollView>
+</ContentPage>

@@ -175,6 +175,14 @@ namespace SampleApp.ViewModels
             Page page = null;
             switch (pageName)
             {
+                case nameof(AutoCompletePage):
+                    page = new AutoCompletePage { BindingContext = new AutoCompleteViewModel(this.displayService, this.Countries) };
+                    break;
+
+                case nameof(BehaviorDemoPage):
+                    page = new BehaviorDemoPage { BindingContext = new BehaviorDemoViewModel() };
+                    break;
+
                 case nameof(SegmentedStatusIndicatorPage):
                     page = new SegmentedStatusIndicatorPage { BindingContext = new SegmentedStatusIndicatorViewModel() };
                     break;
@@ -203,10 +211,6 @@ namespace SampleApp.ViewModels
                     page = new PickersPage { BindingContext = new PickersViewModel(this.displayService, this.Countries) };
                     break;
                     
-                case nameof(AutoCompletePage):
-                    page = new AutoCompletePage { BindingContext = new AutoCompleteViewModel(this.displayService, this.Countries) };
-                    break;
-
                 case nameof(SwitchesPage):
                     page = new SwitchesPage { BindingContext = null };
                     break;

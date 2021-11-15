@@ -224,6 +224,18 @@
                                     </Image.GestureRecognizers>
                                 </Image>
 
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: AutoCompleteView--&gt;" />
+                                <Button
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="AutoCompletePage"
+                                    Text="AutoCompleteView" />
+
+                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: Behaviors--&gt;" />
+                                <Button
+                                    Command="{Binding NavigateToPageCommand}"
+                                    CommandParameter="BehaviorDemoPage"
+                                    Text="Behaviors" />
+
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: SegmentedStatusIndicator--&gt;" />
                                 <Button
                                     Command="{Binding NavigateToPageCommand}"
@@ -265,12 +277,6 @@
                                     Command="{Binding NavigateToPageCommand}"
                                     CommandParameter="PickersPage"
                                     Text="Pickers" />
-
-                                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: AutoCompleteView--&gt;" />
-                                <Button
-                                    Command="{Binding NavigateToPageCommand}"
-                                    CommandParameter="AutoCompletePage"
-                                    Text="AutoCompleteView" />
 
                                 <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo: Switches--&gt;" />
                                 <Button
