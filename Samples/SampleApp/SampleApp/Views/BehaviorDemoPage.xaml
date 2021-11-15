@@ -6,22 +6,49 @@
     xmlns:cpl="http://superdev.ch/schemas/2020/cpl">
 
     <cpl:AlwaysScrollView>
-        <StackLayout Padding="10" Spacing="10">
-            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo VisualElementBehavior--&gt;" />
-            <cpl:CustomButton Command="{Binding ToggleVisibilityCommand}" Text="Toggle Visibility (animated)" />
-            <Grid BackgroundColor="Turquoise" HeightRequest="200">
-                <Grid.Behaviors>
-                    <cpl:VisualElementBehavior
-                        AnimationEasing="Easing.CubicInOut"
-                        AnimationLength="1000"
-                        AnimationSteps="16"
-                        IsVisible="{Binding IsBoxVisible}" />
-                </Grid.Behaviors>
-                <Label
-                    Text="Content"
+        <Grid>
+            <StackLayout Padding="10" Spacing="10">
+                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo VisualElementBehavior--&gt;" />
+                <cpl:CustomButton Command="{Binding ToggleVisibilityCommand}" Text="Toggle Visibility (animated)" />
+                <Grid BackgroundColor="Turquoise" HeightRequest="100">
+                    <Grid.Behaviors>
+                        <cpl:VisualElementBehavior
+                            AnimationEasing="Easing.CubicInOut"
+                            AnimationLength="1000"
+                            AnimationSteps="16"
+                            IsVisible="{Binding IsBoxVisible}" />
+                    </Grid.Behaviors>
+                    <Label
+                        Text="Content"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+                </Grid>
+                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ScrollViewBehavior--&gt;" />
+                <Label Text="{Binding IsInScollArea, StringFormat='Button1 IsInScollArea={0}', Source={x:Reference ScrollViewBehavior}}" VerticalOptions="Start" />
+                <ScrollView
+                    BackgroundColor="LightYellow"
+                    HeightRequest="100"
+                    VerticalScrollBarVisibility="Always">
+                    <ScrollView.Behaviors>
+                        <cpl:ScrollViewBehavior
+                            x:Name="ScrollViewBehavior"
+                            Element="{Binding Source={x:Reference Button1}}"
+                            IsInScollArea="{Binding Source={x:Reference Button2}, Path=IsVisible, Converter={StaticResource BoolInverter}}" />
+                    </ScrollView.Behaviors>
+                    <Grid HeightRequest="400">
+                        <cpl:CustomButton
+                            x:Name="Button1"
+                            Text="Button1"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Start" />
+                    </Grid>
+                </ScrollView>
+                <cpl:CustomButton
+                    x:Name="Button2"
+                    Text="Button2"
                     HorizontalOptions="Center"
-                    VerticalOptions="Center" />
-            </Grid>
-        </StackLayout>
+                    VerticalOptions="Start" />
+            </StackLayout>
+        </Grid>
     </cpl:AlwaysScrollView>
 </ContentPage>

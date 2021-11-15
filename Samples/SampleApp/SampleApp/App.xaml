@@ -20,6 +20,7 @@
             <converters:FontElementToStringConverter x:Key="FontElementToStringConverter" />
             <converters:ThicknessToStringConverter x:Key="ThicknessToStringConverter" />
             <converters:RandomValidationErrorsConverter x:Key="RandomValidationErrorsConverter" />
+            <valueConverters:BoolInverter x:Key="BoolInverter" />
             <valueConverters:StringIsNotNullOrEmptyConverter x:Key="StringIsNotNullOrEmptyConverter" />
             <valueConverters:DateTimeConverter x:Key="DateTimeConverter" Format="g" />
             <valueConverters:DateTimeConverter x:Key="ShortDateConverter" Format="d" />
