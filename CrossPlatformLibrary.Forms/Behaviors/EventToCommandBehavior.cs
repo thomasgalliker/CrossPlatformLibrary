@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Reflection;
 using System.Windows.Input;
 using CrossPlatformLibrary.Extensions;
@@ -145,7 +146,7 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             }
             else if (this.Converter != null)
             {
-                resolvedParameter = this.Converter.Convert(eventArgs, typeof(object), null, null);
+                resolvedParameter = this.Converter.Convert(eventArgs, typeof(object), null, CultureInfo.CurrentUICulture);
             }
             else
             {
