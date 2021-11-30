@@ -22,6 +22,5 @@ namespace CrossPlatformLibrary.Forms.Tests.Testdata
         {
             EventWithEventArgs?.Invoke(this, eventArgs);
         }
-
     }
 }

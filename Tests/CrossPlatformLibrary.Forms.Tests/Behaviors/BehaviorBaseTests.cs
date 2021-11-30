@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using CrossPlatformLibrary.Forms.Tests.Testdata;
+﻿using CrossPlatformLibrary.Forms.Tests.Testdata;
+using FluentAssertions;
 using Xamarin.Forms;
 using Xamarin.Forms.Mocks;
 using Xunit;
-using FluentAssertions;
 
 namespace CrossPlatformLibrary.Forms.Tests.Behaviors
 {
@@ -21,17 +18,19 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
         {
             // Arrange
             var behavior = new TestBehavior();
-            var targetControl = new ListView { BindingContext = new object() };
+            var targetControl = new ListView { BindingContext = new TestListViewModel() };
 
             // Act
             targetControl.Behaviors.Add(behavior);
 
             // Assert
             behavior.AssociatedObject.Should().Be(targetControl);
+            behavior.OnAttachedToTimes.Should().Be(1);
+            behavior.OnDetachingFromTimes.Should().Be(0);
         }
 
         [Fact]
-        public void ShouldUpdateBindingContext()
+        public void ShouldSetBindingContext()
         {
             // Arrange
             var behavior = new TestBehavior();
@@ -39,10 +38,29 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             targetControl.Behaviors.Add(behavior);
 
             // Act
-            targetControl.BindingContext = new object();
+            targetControl.BindingContext = new TestListViewModel();
 
             // Assert
             behavior.BindingContext.Should().Be(targetControl.BindingContext);
+            behavior.OnAttachedToTimes.Should().Be(1);
+            behavior.OnDetachingFromTimes.Should().Be(0);
+        }
+
+        [Fact]
+        public void ShouldSetBindingContextNull()
+        {
+            // Arrange
+            var behavior = new TestBehavior();
+            var targetControl = new ListView { BindingContext = new TestListViewModel() };
+            targetControl.Behaviors.Add(behavior);
+
+            // Act
+            targetControl.BindingContext = null;
+
+            // Assert
+            behavior.BindingContext.Should().BeNull();
+            behavior.OnAttachedToTimes.Should().Be(1);
+            behavior.OnDetachingFromTimes.Should().Be(1);
         }
     }
 }

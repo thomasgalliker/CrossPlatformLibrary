@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Input;
 using CrossPlatformLibrary.Extensions;
@@ -124,11 +123,17 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             this.eventHandler = null;
         }
 
-        void OnEvent<T>(object sender, T eventArgs)
+        private void OnEvent<T>(object sender, T eventArgs)
         {
             Tracer.Current.Debug($"EventToCommandBehavior.OnEvent(sender={sender?.GetType().GetFormattedName() ?? "<null>"}, eventArgs={eventArgs?.GetType().GetFormattedName() ?? "<null>"})");
 
             if (!(this.Command is ICommand command))
+            {
+                return;
+            }
+
+            // Don't call the Command in case the binding context is set to null
+            if (this.AssociatedObject?.BindingContext == null)
             {
                 return;
             }

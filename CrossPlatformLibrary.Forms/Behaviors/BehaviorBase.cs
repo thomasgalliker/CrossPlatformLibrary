@@ -29,13 +29,21 @@ namespace CrossPlatformLibrary.Forms.Behaviors
 
         private void OnBindingContextChanged(object sender, EventArgs e)
         {
-            this.OnBindingContextChanged();
-        }
-
-        protected override void OnBindingContextChanged()
-        {
             base.OnBindingContextChanged();
-            this.BindingContext = this.AssociatedObject.BindingContext;
+
+            if (!(sender is BindableObject bindableObject))
+            {
+                return;
+            }
+
+            // Assumption: In case the BindingContext is set to null,
+            //             we detach the object from the behavior.
+            if (bindableObject.BindingContext == null)
+            {
+                this.OnDetachingFrom(bindableObject);
+            }
+
+            this.BindingContext = bindableObject.BindingContext;
         }
     }
 }

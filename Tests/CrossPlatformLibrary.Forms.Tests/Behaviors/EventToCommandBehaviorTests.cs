@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using CrossPlatformLibrary.Forms.Behaviors;
 using CrossPlatformLibrary.Forms.Tests.Testdata;
 using FluentAssertions;
@@ -34,6 +33,52 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
         }
 
         [Fact]
+        public void ShouldSetBindingContext()
+        {
+            // Arrange
+            var behavior = new EventToCommandBehavior
+            {
+                EventName = nameof(TestListView.EventWithoutArgs),
+            };
+            var listView = new TestListView();
+            listView.Behaviors.Add(behavior);
+
+            // Act
+            listView.BindingContext = new TestListViewModel();
+
+            // Assert
+            behavior.BindingContext.Should().BeOfType<TestListViewModel>();
+        }
+
+        [Fact]
+        public void ShouldSetBindingContextNull_DeregisterEvent()
+        {
+            // Arrange
+            var executedCommand = false;
+            var behavior = new EventToCommandBehavior
+            {
+                EventName = nameof(TestListView.EventWithEventArgs),
+                Command = new Command<TestEventArgs>((e) =>
+                {
+                    executedCommand = true;
+                })
+            };
+            var listView = new TestListView<TestEventArgs>();
+            listView.Behaviors.Add(behavior);
+            listView.BindingContext = new TestListViewModel();
+
+            var eventArgs = new TestEventArgs();
+
+            // Act
+            listView.BindingContext = null;
+            listView.RaiseEventWithEventArgs(eventArgs);
+
+            // Assert
+            executedCommand.Should().BeFalse();
+            behavior.BindingContext.Should().BeNull();
+        }
+
+        [Fact]
         public void ShouldExecuteCommand_IfEventWithoutEventArgsIsRaised()
         {
             // Arrange
@@ -48,6 +93,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             };
             var listView = new TestListView();
             listView.Behaviors.Add(behavior);
+            listView.BindingContext = new TestListViewModel();
 
             // Act
             listView.RaiseEventWithoutArgs();
@@ -71,6 +117,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             };
             var listView = new TestListView<TestEventArgs>();
             listView.Behaviors.Add(behavior);
+            listView.BindingContext = new TestListViewModel();
 
             var eventArgs = new TestEventArgs();
 
@@ -96,6 +143,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             };
             var listView = new TestListView();
             listView.Behaviors.Add(behavior);
+            listView.BindingContext = new TestListViewModel();
 
             var eventArgs = 99;
 
@@ -118,6 +166,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             };
             var listView = new TestListView();
             listView.Behaviors.Add(behavior);
+            listView.BindingContext = new TestListViewModel();
 
             behavior.Command = null;
 
@@ -140,6 +189,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             };
             var listView = new TestListView();
             listView.Behaviors.Add(behavior);
+            listView.BindingContext = new TestListViewModel();
 
             // Act
             listView.RaiseEventWithoutArgs();
@@ -164,6 +214,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             };
             var listView = new TestListView<TestEventArgs>();
             listView.Behaviors.Add(behavior);
+            listView.BindingContext = new TestListViewModel();
 
             var eventArgs = new TestEventArgs
             {
@@ -194,6 +245,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
             };
             var listView = new TestListView<TestEventArgs>();
             listView.Behaviors.Add(behavior);
+            listView.BindingContext = new TestListViewModel();
 
             var eventArgs = new TestEventArgs
             {
