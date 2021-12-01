@@ -1,31 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<xControls:ExtendedViewCell
+<ViewCell
     x:Class="SampleApp.Views.CountryViewCell"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:xControls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms"
     xmlns:localization="clr-namespace:CrossPlatformLibrary.Forms.Localization;assembly=CrossPlatformLibrary.Forms"
-    IsSelected="{Binding IsSelected, Mode=TwoWay}"
-    SelectedBackgroundColor="Magenta">
+    xmlns:xControls="clr-namespace:CrossPlatformLibrary.Forms.Controls;assembly=CrossPlatformLibrary.Forms">
 
     <ViewCell.ContextActions>
         <MenuItem
             Command="{Binding DeleteCommand}"
             CommandParameter="{Binding .}"
-            Text="{localization:Translate DeleteButtonText}"
-            IsDestructive="True" />
+            IsDestructive="True"
+            Text="{localization:Translate DeleteButtonText}" />
     </ViewCell.ContextActions>
 
     <ViewCell.View>
         <xControls:StackLayoutZero Padding="0,4,0,4">
             <xControls:StackLayoutZero
+                BackgroundColor="#BEF5F5F5"
                 HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand"
-                BackgroundColor="#BEF5F5F5">
+                VerticalOptions="FillAndExpand">
                 <Label
-                    HorizontalOptions="Start"
                     Style="{DynamicResource EntryLabelStyle}"
                     Text="{Binding Name}"
+                    HorizontalOptions="Start"
                     VerticalOptions="Center" />
                 <BoxView
                     BackgroundColor="{DynamicResource ListSeparator}"
@@ -35,4 +33,4 @@
             </xControls:StackLayoutZero>
         </xControls:StackLayoutZero>
     </ViewCell.View>
-</xControls:ExtendedViewCell>
+</ViewCell>

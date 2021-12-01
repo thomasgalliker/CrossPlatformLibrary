@@ -13,33 +13,6 @@
         </DataTemplate>
     </ContentPage.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <cpl:AlwaysScrollView>
-            <StackLayout BackgroundColor="Black" HeightRequest="150">
-                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ListView--&gt;" />
-                <ListView
-                    x:Name="ListViewCountries"
-                    CachingStrategy="RetainElement"
-                    HasUnevenRows="true"
-                    ItemTemplate="{StaticResource CountryItemTemplate}"
-                    ItemsSource="{Binding Countries}"
-                    SelectionMode="Single"
-                    SeparatorVisibility="None">
-                    <ListView.Behaviors>
-                        <cpl:EventToCommandBehavior
-                            Command="{Binding BindingContext.SelectCountryCommand, Source={x:Reference Page}}"
-                            CommandParameter="{Binding Source={x:Reference ListViewCountries}, Path=SelectedItem}"
-                            EventName="ItemTapped" />
-                        <cpl:ListViewScrollBehavior ScrollToPosition="Start" TargetElement="{Binding ScrollToElement}" />
-                    </ListView.Behaviors>
-                </ListView>
-            </StackLayout>
-        </cpl:AlwaysScrollView>
-    </Grid>
+    <!--  TODO: Currently not used  -->
 
 </ContentPage>

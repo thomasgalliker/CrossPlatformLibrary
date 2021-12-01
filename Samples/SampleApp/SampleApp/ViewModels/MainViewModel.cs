@@ -180,7 +180,7 @@ namespace SampleApp.ViewModels
                     break;
 
                 case nameof(BehaviorDemoPage):
-                    page = new BehaviorDemoPage { BindingContext = new BehaviorDemoViewModel() };
+                    page = new BehaviorDemoPage { BindingContext = new BehaviorDemoViewModel(this.displayService, this.Countries) };
                     break;
 
                 case nameof(SegmentedStatusIndicatorPage):

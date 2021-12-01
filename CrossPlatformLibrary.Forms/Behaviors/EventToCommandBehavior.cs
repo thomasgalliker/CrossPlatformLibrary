@@ -61,6 +61,21 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             set => this.SetValue(InputConverterProperty, value);
         }
 
+        public static readonly BindableProperty EventArgsParameterPathProperty =
+            BindableProperty.Create(
+                nameof(EventArgsParameterPath),
+                typeof(string),
+                typeof(EventToCommandBehavior));
+
+        /// <summary>
+        /// Parameter path to extract property from <see cref="EventArgs"/> instance to pass to <see cref="ICommand.Execute"/>
+        /// </summary>
+        public string EventArgsParameterPath
+        {
+            get => (string)this.GetValue(EventArgsParameterPathProperty);
+            set => this.SetValue(EventArgsParameterPathProperty, value);
+        }
+
         protected override void OnAttachedTo(Xamarin.Forms.View bindable)
         {
             base.OnAttachedTo(bindable);
@@ -139,18 +154,24 @@ namespace CrossPlatformLibrary.Forms.Behaviors
                 return;
             }
 
-            object resolvedParameter;
-            if (this.CommandParameter is object commandParameter)
+            var resolvedParameter = this.CommandParameter;
+            var eventArgsParameterPath = this.EventArgsParameterPath;
+
+            if (resolvedParameter == null)
             {
-                resolvedParameter = commandParameter;
+                if (!string.IsNullOrEmpty(eventArgsParameterPath))
+                {
+                    resolvedParameter = ResolveEventArgsValueFromPath(eventArgs, eventArgsParameterPath);
+                }
+                else
+                {
+                    resolvedParameter = eventArgs;
+                }
             }
-            else if (this.Converter != null)
+
+            if (this.Converter is IValueConverter valueConverter)
             {
-                resolvedParameter = this.Converter.Convert(eventArgs, typeof(object), null, CultureInfo.CurrentUICulture);
-            }
-            else
-            {
-                resolvedParameter = eventArgs;
+                resolvedParameter = valueConverter.Convert(resolvedParameter, typeof(object), null, CultureInfo.CurrentUICulture);
             }
 
             if (command.CanExecute(resolvedParameter))
@@ -172,6 +193,31 @@ namespace CrossPlatformLibrary.Forms.Behaviors
 
             behavior.DeregisterEvent(oldEventName);
             behavior.RegisterEvent(newEventName);
+        }
+
+        private static object ResolveEventArgsValueFromPath<T>(T eventArgs, string eventArgsParameterPath)
+        {
+            object resolvedParameter;
+            var propertyPathParts = eventArgsParameterPath.Split('.');
+            object propertyValue = eventArgs;
+            var propertyType = eventArgs.GetType();
+            foreach (var propertyPathPart in propertyPathParts)
+            {
+                var propInfo = propertyType.GetRuntimeProperty(propertyPathPart);
+                if (propInfo == null)
+                {
+                    throw new MissingMemberException($"ResolveEventArgsValueFromPath could not to find property with name '{eventArgsParameterPath}'");
+                }
+
+                propertyValue = propInfo.GetValue(propertyValue);
+                if (propertyValue == null)
+                {
+                    break;
+                }
+            }
+
+            resolvedParameter = propertyValue;
+            return resolvedParameter;
         }
     }
 }

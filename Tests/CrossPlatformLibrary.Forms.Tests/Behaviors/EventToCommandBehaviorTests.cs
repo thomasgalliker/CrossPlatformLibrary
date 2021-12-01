@@ -1,5 +1,6 @@
 ﻿using System;
 using CrossPlatformLibrary.Forms.Behaviors;
+using CrossPlatformLibrary.Forms.Converters;
 using CrossPlatformLibrary.Forms.Tests.Testdata;
 using FluentAssertions;
 using Xamarin.Forms;
@@ -199,7 +200,38 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
         }
 
         [Fact]
-        public void ShouldExecuteCommand_WithConverter()
+        public void ShouldExecuteCommand_EventArgs_WithoutConverter()
+        {
+            // Arrange
+            object returnedCommandParameter = null;
+            var behavior = new EventToCommandBehavior
+            {
+                EventName = nameof(TestListView.EventWithEventArgs),
+                Command = new Command<object>((e) =>
+                {
+                    returnedCommandParameter = e;
+                }),
+                CommandParameter = null,
+                Converter = null,
+            };
+            var listView = new TestListView<TestEventArgs>();
+            listView.Behaviors.Add(behavior);
+            listView.BindingContext = new TestListViewModel();
+
+            var eventArgs = new TestEventArgs
+            {
+                Param = "Test"
+            };
+
+            // Act
+            listView.RaiseEventWithEventArgs(eventArgs);
+
+            // Assert
+            returnedCommandParameter.Should().BeEquivalentTo(eventArgs);
+        }
+
+        [Fact]
+        public void ShouldExecuteCommand_EventArgs_WithConverter()
         {
             // Arrange
             string returnedCommandParameter = null;
@@ -210,6 +242,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
                 {
                     returnedCommandParameter = e;
                 }),
+                CommandParameter = null,
                 Converter = new TestEventArgsConverter(),
             };
             var listView = new TestListView<TestEventArgs>();
@@ -229,7 +262,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
         }
 
         [Fact]
-        public void ShouldExecuteCommand_WithCommandParameter()
+        public void ShouldExecuteCommand_CommandParameter_WithoutConverter()
         {
             // Arrange
             object returnedCommandParameter = null;
@@ -241,7 +274,38 @@ namespace CrossPlatformLibrary.Forms.Tests.Behaviors
                     returnedCommandParameter = e;
                 }),
                 CommandParameter = "CommandParameterValue",
-                Converter = new TestEventArgsConverter(),
+                //Converter = new TestEventArgsConverter(),
+            };
+            var listView = new TestListView<TestEventArgs>();
+            listView.Behaviors.Add(behavior);
+            listView.BindingContext = new TestListViewModel();
+
+            var eventArgs = new TestEventArgs
+            {
+                Param = "Test"
+            };
+
+            // Act
+            listView.RaiseEventWithEventArgs(eventArgs);
+
+            // Assert
+            returnedCommandParameter.Should().BeEquivalentTo("CommandParameterValue");
+        }
+
+        [Fact]
+        public void ShouldExecuteCommand_CommandParameter_WithConverter()
+        {
+            // Arrange
+            object returnedCommandParameter = null;
+            var behavior = new EventToCommandBehavior
+            {
+                EventName = nameof(TestListView.EventWithEventArgs),
+                Command = new Command<object>(execute: (e) =>
+                {
+                    returnedCommandParameter = e;
+                }),
+                CommandParameter = "CommandParameterValue",
+                Converter = new DebugConverter(),
             };
             var listView = new TestListView<TestEventArgs>();
             listView.Behaviors.Add(behavior);

@@ -3,7 +3,15 @@
     x:Class="SampleApp.Views.BehaviorDemoPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:cpl="http://superdev.ch/schemas/2020/cpl">
+    xmlns:cpl="http://superdev.ch/schemas/2020/cpl"
+    xmlns:views="clr-namespace:SampleApp.Views"
+    x:Name="Page">
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="CountryItemTemplate">
+            <views:CountryViewCell />
+        </DataTemplate>
+    </ContentPage.Resources>
 
     <cpl:AlwaysScrollView>
         <Grid>
@@ -48,6 +56,82 @@
                     Text="Button2"
                     HorizontalOptions="Center"
                     VerticalOptions="Start" />
+
+                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo EventToCommandBehavior w. ListView + CommandParameter--&gt;" />
+                <ListView
+                    x:Name="ListViewCountries1"
+                    CachingStrategy="RetainElement"
+                    HasUnevenRows="true"
+                    HeightRequest="150"
+                    ItemTemplate="{StaticResource CountryItemTemplate}"
+                    ItemsSource="{Binding Countries}"
+                    SelectionMode="Single"
+                    SeparatorVisibility="None"
+                    VerticalScrollBarVisibility="Always">
+                    <ListView.Behaviors>
+                        <cpl:EventToCommandBehavior
+                            Command="{Binding SelectCountryCommand}"
+                            CommandParameter="{Binding Source={x:Reference ListViewCountries1}, Path=SelectedItem}"
+                            Converter="{StaticResource DebugConverter}"
+                            EventName="ItemTapped" />
+                    </ListView.Behaviors>
+                </ListView>
+
+                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo EventToCommandBehavior w. ListView--&gt;" />
+                <ListView
+                    CachingStrategy="RetainElement"
+                    HasUnevenRows="true"
+                    HeightRequest="150"
+                    ItemTemplate="{StaticResource CountryItemTemplate}"
+                    ItemsSource="{Binding Countries}"
+                    SelectionMode="Single"
+                    SeparatorVisibility="None"
+                    VerticalScrollBarVisibility="Always">
+                    <ListView.Behaviors>
+                        <cpl:EventToCommandBehavior
+                            Command="{Binding SelectCountryCommand}"
+                            Converter="{StaticResource DebugConverter}"
+                            EventName="ItemTapped" />
+                    </ListView.Behaviors>
+                </ListView>
+
+                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo EventToCommandBehavior w. ListView + EventArgsParameterPath--&gt;" />
+                <ListView
+                    CachingStrategy="RetainElement"
+                    HasUnevenRows="true"
+                    HeightRequest="150"
+                    ItemTemplate="{StaticResource CountryItemTemplate}"
+                    ItemsSource="{Binding Countries}"
+                    SelectionMode="Single"
+                    SeparatorVisibility="None"
+                    VerticalScrollBarVisibility="Always">
+                    <ListView.Behaviors>
+                        <cpl:EventToCommandBehavior
+                            Command="{Binding SelectCountryCommand}"
+                            Converter="{StaticResource DebugConverter}"
+                            EventArgsParameterPath="Item"
+                            EventName="ItemTapped" />
+                    </ListView.Behaviors>
+                </ListView>
+
+                <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ListViewScrollBehavior--&gt;" />
+                <cpl:CustomButton Command="{Binding ScrollUpCommand}" Text="Scroll to first element" />
+                <cpl:CustomButton Command="{Binding ScrollDownCommand}" Text="Scroll to last element" />
+                <StackLayout BackgroundColor="Orange" HeightRequest="150">
+                    <ListView
+                        x:Name="ListViewCountries"
+                        CachingStrategy="RetainElement"
+                        HasUnevenRows="true"
+                        ItemTemplate="{StaticResource CountryItemTemplate}"
+                        ItemsSource="{Binding Countries}"
+                        SelectionMode="Single"
+                        SeparatorVisibility="None"
+                        VerticalScrollBarVisibility="Always">
+                        <ListView.Behaviors>
+                            <cpl:ListViewScrollBehavior ScrollToPosition="Start" TargetElement="{Binding ScrollToElement}" />
+                        </ListView.Behaviors>
+                    </ListView>
+                </StackLayout>
             </StackLayout>
         </Grid>
     </cpl:AlwaysScrollView>
