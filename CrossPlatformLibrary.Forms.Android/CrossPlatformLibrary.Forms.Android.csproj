@@ -68,6 +68,7 @@
     <Compile Include="Effects\UnderlineTextEffect.cs" />
     <Compile Include="Extensions\AlignmentExtensions.cs" />
     <Compile Include="Extensions\VisualElementExtensions.cs" />
+    <Compile Include="Renderers\CustomScrollViewRenderer.cs" />
     <Compile Include="Renderers\CustomSwitchRenderer.cs" />
     <Compile Include="Renderers\CustomTabbedPageRenderer.cs" />
     <Compile Include="Renderers\ExtendedViewCellRenderer.cs" />
