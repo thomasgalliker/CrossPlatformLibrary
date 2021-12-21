@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using CrossPlatformLibrary.Internals;
 using Xamarin.Forms;
+using CrossPlatformLibrary.Forms.Extensions;
 
 namespace CrossPlatformLibrary.Forms.Behaviors
 {
@@ -70,20 +71,25 @@ namespace CrossPlatformLibrary.Forms.Behaviors
                 return;
             }
 
+            if (!(behavior.AssociatedObject is VisualElement associatedObject))
+            {
+                return;
+            }
+
             if (newValue is bool isVisible)
             {
                 if (isVisible)
                 {
-                    await behavior.ExpandAsync(behavior.AnimationSteps, behavior.AnimationLength, behavior.AnimationEasing);
+                    await behavior.ExpandAsync(associatedObject, behavior.AnimationSteps, behavior.AnimationLength, behavior.AnimationEasing);
                 }
                 else
                 {
-                    await behavior.CollapseAsync(behavior.AnimationSteps, behavior.AnimationLength, behavior.AnimationEasing);
+                    await behavior.CollapseAsync(associatedObject, behavior.AnimationSteps, behavior.AnimationLength, behavior.AnimationEasing);
                 }
             }
         }
 
-        private async Task CollapseAsync(uint animationSteps, uint animationLength, Easing animationEasing)
+        private async Task CollapseAsync(VisualElement associatedObject, uint animationSteps, uint animationLength, Easing animationEasing)
         {
             if (this.isAnimating)
             {
@@ -94,27 +100,27 @@ namespace CrossPlatformLibrary.Forms.Behaviors
 
             if (this.originalHeight == null)
             {
-                this.originalHeight = this.AssociatedObject.Height;
+                this.originalHeight = associatedObject.Height;
             }
 
             Tracer.Current.Debug($"CollapseAsync: {this.originalHeight} -> 0");
 
             if (animationSteps > 0 && animationLength > 0)
             {
-                var animation = new Animation(v => this.AssociatedObject.HeightRequest = v, this.originalHeight.Value, CollapsedHeight);
-                await this.AssociatedObject.AnimateAsync("ResizeHeightAnimation", animation, animationSteps, animationLength, animationEasing);
+                var animation = new Animation(v => associatedObject.HeightRequest = v, this.originalHeight.Value, CollapsedHeight);
+                await associatedObject.AnimateAsync("ResizeHeightAnimation", animation, animationSteps, animationLength, animationEasing);
             }
             else
             {
-                this.AssociatedObject.HeightRequest = CollapsedHeight;
+                associatedObject.HeightRequest = CollapsedHeight;
             }
 
-            this.AssociatedObject.IsVisible = false;
+            associatedObject.IsVisible = false;
 
             this.isAnimating = false;
         }
 
-        private async Task ExpandAsync(uint animationLength, uint animationSteps, Easing animationEasing)
+        private async Task ExpandAsync(VisualElement associatedObject, uint animationLength, uint animationSteps, Easing animationEasing)
         {
             if (this.isAnimating)
             {
@@ -124,30 +130,19 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             this.isAnimating = true;
 
             Tracer.Current.Debug($"ExpandAsync: 0 -> {this.originalHeight}");
-            this.AssociatedObject.IsVisible = true;
+            associatedObject.IsVisible = true;
 
             if (animationSteps > 0 && animationLength > 0)
             {
-                var animation = new Animation(v => this.AssociatedObject.HeightRequest = v, CollapsedHeight, this.originalHeight.Value);
-                await this.AssociatedObject.AnimateAsync("ResizeHeightAnimation", animation, animationLength, animationSteps, animationEasing);
+                var animation = new Animation(v => associatedObject.HeightRequest = v, CollapsedHeight, this.originalHeight.Value);
+                await associatedObject.AnimateAsync("ResizeHeightAnimation", animation, animationLength, animationSteps, animationEasing);
             }
             else
             {
-                this.AssociatedObject.HeightRequest = this.originalHeight.Value;
+                associatedObject.HeightRequest = this.originalHeight.Value;
             }
 
             this.isAnimating = false;
-        }
-    }
-
-    public static class ViewExtensions
-    {
-        public static Task<bool> AnimateAsync(this VisualElement element, string name, Animation animation, uint steps, uint length, Easing easing)
-        {
-            var taskCompletionSource = new TaskCompletionSource<bool>();
-
-            element.Animate(name, animation, steps, length, easing, (v, c) => taskCompletionSource.SetResult(c));
-            return taskCompletionSource.Task;
         }
     }
 }
