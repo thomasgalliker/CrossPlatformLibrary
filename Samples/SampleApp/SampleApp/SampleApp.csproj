@@ -31,8 +31,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="ObjectDumper.NET" Version="3.3.13" />
     <PackageReference Include="ValueConverters.Forms" Version="2.0.20011.1" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2125" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\CrossPlatformLibrary.Forms\CrossPlatformLibrary.Forms.csproj" />
