@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using CrossPlatformLibrary.Extensions;
+using CrossPlatformLibrary.Internals;
 using CrossPlatformLibrary.Mvvm;
 
 namespace CrossPlatformLibrary.Forms.Validation
@@ -102,7 +103,7 @@ namespace CrossPlatformLibrary.Forms.Validation
 
         private async Task ValidateProperty(string propertyName)
         {
-            Debug.WriteLine($"ValidateProperty(propertyName: \"{propertyName}\")");
+            Tracer.Current.Debug($"ValidateProperty(propertyName: \"{propertyName}\")");
 
             if (this.errorMessages.ContainsKey(propertyName))
             {
@@ -127,7 +128,7 @@ namespace CrossPlatformLibrary.Forms.Validation
 
         private async Task PerformValidation(IValidation validation)
         {
-            Debug.WriteLine($"PerformValidation(validation: {validation.GetType().GetFormattedName()})");
+            Tracer.Current.Debug($"PerformValidation(validation: {validation.GetType().GetFormattedName()})");
 
             var getErrorsTask = validation.GetErrors();
             if (getErrorsTask != null)
@@ -224,7 +225,7 @@ namespace CrossPlatformLibrary.Forms.Validation
 
         private void OnErrorsChanged(string propertyName)
         {
-            Debug.WriteLine($"OnErrorsChanged(propertyName: \"{propertyName}\")");
+            Tracer.Current.Debug($"OnErrorsChanged(propertyName: \"{propertyName}\")");
 
             this.RaisePropertyChanged(nameof(this.Errors));
             this.RaisePropertyChanged(nameof(this.HasErrors));

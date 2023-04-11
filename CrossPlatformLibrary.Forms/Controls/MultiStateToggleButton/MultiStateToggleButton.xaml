@@ -58,11 +58,11 @@
                             Margin="8,0,8,0"
                             Aspect="AspectFit"
                             HeightRequest="24"
-                            HorizontalOptions="StartAndExpand"
                             InputTransparent="True"
                             Source="{Binding ImageSource, Mode=OneWay}"
-                            VerticalOptions="CenterAndExpand"
-                            WidthRequest="24" />
+                            WidthRequest="24"
+                            HorizontalOptions="StartAndExpand"
+                            VerticalOptions="CenterAndExpand" />
 
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Command, Mode=OneWay}" CommandParameter="{Binding CommandParameter, Mode=OneWay}" />

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SampleApp.Views.ToggleViewDemoPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cpl="http://superdev.ch/schemas/2020/cpl"
+    Title="ToggleView Demo Page">
+
+    <StackLayout>
+        <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ToggleView--&gt;" />
+        <StackLayout Orientation="Horizontal">
+            <Switch IsToggled="{Binding IsToggled}" />
+            <Label Text="{Binding IsToggled, StringFormat='IsToggled={0}'}" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Switch x:Name="IsTapToToggleEnabledSwitch" />
+            <Label Text="{Binding IsTapToToggleEnabled, Source={x:Reference ToggleView}, StringFormat='IsTapToToggleEnabled={0}'}" />
+        </StackLayout>
+        <cpl:ToggleView
+            x:Name="ToggleView"
+            HeightRequest="200"
+            IsTapToToggleEnabled="{Binding IsToggled, Source={x:Reference IsTapToToggleEnabledSwitch}}"
+            IsToggled="{Binding IsToggled, Mode=TwoWay}"
+            ToggleCommand="{Binding ToggleCommand}">
+            <cpl:ToggleView.TrueView>
+                <Grid BackgroundColor="LightBlue">
+                    <Label
+                        Text="TrueView"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+                </Grid>
+            </cpl:ToggleView.TrueView>
+            <cpl:ToggleView.FalseView>
+                <Grid BackgroundColor="LightGreen">
+                    <Label
+                        Text="FalseView"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+                </Grid>
+            </cpl:ToggleView.FalseView>
+        </cpl:ToggleView>
+    </StackLayout>
+</ContentPage>

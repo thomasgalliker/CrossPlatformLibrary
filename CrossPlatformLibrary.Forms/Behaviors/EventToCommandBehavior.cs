@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Globalization;
 using System.Reflection;
 using System.Windows.Input;
 using CrossPlatformLibrary.Extensions;
+using CrossPlatformLibrary.Internals;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Behaviors
 {
-    public class EventToCommandBehavior : BehaviorBase<View>
+    public class EventToCommandBehavior : BehaviorBase<Xamarin.Forms.View>
     {
         private Delegate eventHandler;
 
@@ -60,7 +61,22 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             set => this.SetValue(InputConverterProperty, value);
         }
 
-        protected override void OnAttachedTo(View bindable)
+        public static readonly BindableProperty EventArgsParameterPathProperty =
+            BindableProperty.Create(
+                nameof(EventArgsParameterPath),
+                typeof(string),
+                typeof(EventToCommandBehavior));
+
+        /// <summary>
+        /// Parameter path to extract property from <see cref="EventArgs"/> instance to pass to <see cref="ICommand.Execute"/>
+        /// </summary>
+        public string EventArgsParameterPath
+        {
+            get => (string)this.GetValue(EventArgsParameterPathProperty);
+            set => this.SetValue(EventArgsParameterPathProperty, value);
+        }
+
+        protected override void OnAttachedTo(Xamarin.Forms.View bindable)
         {
             base.OnAttachedTo(bindable);
             this.RegisterEvent(this.EventName);
@@ -74,7 +90,7 @@ namespace CrossPlatformLibrary.Forms.Behaviors
 
         private void RegisterEvent(string name)
         {
-            Debug.WriteLine($"EventToCommandBehavior.RegisterEvent(name={name})");
+            Tracer.Current.Debug($"EventToCommandBehavior.RegisterEvent(name={name})");
 
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -87,14 +103,21 @@ namespace CrossPlatformLibrary.Forms.Behaviors
                 throw new ArgumentException($"EventToCommandBehavior: Can't register the '{this.EventName}' event.");
             }
 
-            var methodInfo = typeof(EventToCommandBehavior).GetTypeInfo().GetDeclaredMethod(nameof(this.OnEvent));
+            var paramType = eventInfo.EventHandlerType.IsGenericType
+                ? eventInfo.EventHandlerType.GetGenericArguments()
+                : (new[] { typeof(object) });
+
+            var methodInfo = typeof(EventToCommandBehavior).GetTypeInfo()
+                .GetDeclaredMethod(nameof(this.OnEvent))
+                .MakeGenericMethod(paramType);
+
             this.eventHandler = methodInfo.CreateDelegate(eventInfo.EventHandlerType, this);
             eventInfo.AddEventHandler(this.AssociatedObject, this.eventHandler);
         }
 
         private void DeregisterEvent(string name)
         {
-            Debug.WriteLine($"EventToCommandBehavior.DeregisterEvent(name={name})");
+            Tracer.Current.Debug($"EventToCommandBehavior.DeregisterEvent(name={name})");
 
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -116,32 +139,44 @@ namespace CrossPlatformLibrary.Forms.Behaviors
             this.eventHandler = null;
         }
 
-        void OnEvent(object sender, object eventArgs)
+        private void OnEvent<T>(object sender, T eventArgs)
         {
-            Debug.WriteLine($"EventToCommandBehavior.OnEvent(sender={sender?.GetType().GetFormattedName() ?? "<null>"}, eventArgs={eventArgs?.GetType().GetFormattedName() ?? "<null>"})");
+            Tracer.Current.Debug($"EventToCommandBehavior.OnEvent(sender={sender?.GetType().GetFormattedName() ?? "<null>"}, eventArgs={eventArgs?.GetType().GetFormattedName() ?? "<null>"})");
 
-            if (this.Command == null)
+            if (!(this.Command is ICommand command))
             {
                 return;
             }
 
-            object resolvedParameter;
-            if (this.CommandParameter != null)
+            // Don't call the Command in case the binding context is set to null
+            if (this.AssociatedObject?.BindingContext == null)
             {
-                resolvedParameter = this.CommandParameter;
-            }
-            else if (this.Converter != null)
-            {
-                resolvedParameter = this.Converter.Convert(eventArgs, typeof(object), null, null);
-            }
-            else
-            {
-                resolvedParameter = eventArgs;
+                return;
             }
 
-            if (this.Command.CanExecute(resolvedParameter))
+            var resolvedParameter = this.CommandParameter;
+            var eventArgsParameterPath = this.EventArgsParameterPath;
+
+            if (resolvedParameter == null)
             {
-                this.Command.Execute(resolvedParameter);
+                if (!string.IsNullOrEmpty(eventArgsParameterPath))
+                {
+                    resolvedParameter = ResolveEventArgsValueFromPath(eventArgs, eventArgsParameterPath);
+                }
+                else
+                {
+                    resolvedParameter = eventArgs;
+                }
+            }
+
+            if (this.Converter is IValueConverter valueConverter)
+            {
+                resolvedParameter = valueConverter.Convert(resolvedParameter, typeof(object), null, CultureInfo.CurrentUICulture);
+            }
+
+            if (command.CanExecute(resolvedParameter))
+            {
+                command.Execute(resolvedParameter);
             }
         }
 
@@ -158,6 +193,31 @@ namespace CrossPlatformLibrary.Forms.Behaviors
 
             behavior.DeregisterEvent(oldEventName);
             behavior.RegisterEvent(newEventName);
+        }
+
+        private static object ResolveEventArgsValueFromPath<T>(T eventArgs, string eventArgsParameterPath)
+        {
+            object resolvedParameter;
+            var propertyPathParts = eventArgsParameterPath.Split('.');
+            object propertyValue = eventArgs;
+            var propertyType = eventArgs.GetType();
+            foreach (var propertyPathPart in propertyPathParts)
+            {
+                var propInfo = propertyType.GetRuntimeProperty(propertyPathPart);
+                if (propInfo == null)
+                {
+                    throw new MissingMemberException($"ResolveEventArgsValueFromPath could not to find property with name '{eventArgsParameterPath}'");
+                }
+
+                propertyValue = propInfo.GetValue(propertyValue);
+                if (propertyValue == null)
+                {
+                    break;
+                }
+            }
+
+            resolvedParameter = propertyValue;
+            return resolvedParameter;
         }
     }
 }

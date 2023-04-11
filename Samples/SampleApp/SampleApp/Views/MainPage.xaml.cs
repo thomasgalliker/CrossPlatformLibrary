@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CrossPlatformLibrary.Forms.Extensions;
 using CrossPlatformLibrary.Forms.Services;
+using CrossPlatformLibrary.Localization;
 using CrossPlatformLibrary.Services;
 using SampleApp.Services;
 using SampleApp.Validation;
@@ -14,7 +14,7 @@ namespace SampleApp.Views
     {
         private readonly IStatusBarService statusBar;
 
-        public MainPage(IActivityIndicatorService activityIndicatorService, IStatusBarService statusBar)
+        public MainPage(ILocalizer localizer, IActivityIndicatorService activityIndicatorService, IStatusBarService statusBar)
         {
             try
             {
@@ -25,12 +25,12 @@ namespace SampleApp.Views
                 var validationService = new ValidationService();
                 var emailService = new EmailService();
                 var navigationService = new NavigationService(this);
-                this.BindingContext = new MainViewModel(navigationService, displayService, countryService, validationService, emailService, activityIndicatorService);
+                this.BindingContext = new MainViewModel(navigationService, displayService, countryService, validationService, emailService, localizer, activityIndicatorService);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                 throw;
+                throw;
             }
 
             this.statusBar = statusBar;
@@ -40,21 +40,16 @@ namespace SampleApp.Views
         {
             base.OnAppearing();
 
-            statusBar.SetColor(Color.Black);
-            statusBar.SetStatusBarMode(StatusBarStyle.Dark);
+            this.statusBar.SetColor(Color.Black);
+            this.statusBar.SetStatusBarMode(StatusBarStyle.Dark);
         }
 
         protected override void OnDisappearing()
         {
             base.OnAppearing();
 
-            statusBar.SetColor(Color.White);
-            statusBar.SetStatusBarMode(StatusBarStyle.Light);
-        }
-
-        private void AutoCompleteView_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            this.ScrollView.ScrollToAsync(this.AutoCompleteView, ScrollToPosition.Start, animated: true);
+            this.statusBar.SetColor(Color.White);
+            this.statusBar.SetStatusBarMode(StatusBarStyle.Light);
         }
     }
 

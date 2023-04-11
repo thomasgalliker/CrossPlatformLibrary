@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using CrossPlatformLibrary.Internals;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Behaviors
@@ -16,7 +17,7 @@ namespace CrossPlatformLibrary.Forms.Behaviors
 
         private static void MaxLengthPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            Debug.WriteLine($"MaxLengthEditorTextBehavior.MaxLength={newvalue}");
+            Tracer.Current.Debug($"MaxLengthEditorTextBehavior.MaxLength={newvalue}");
         }
 
         public int MaxLength

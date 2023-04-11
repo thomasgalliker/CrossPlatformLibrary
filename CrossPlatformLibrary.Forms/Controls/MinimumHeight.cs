@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using CrossPlatformLibrary.Extensions;
+using CrossPlatformLibrary.Internals;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Controls
@@ -129,7 +130,7 @@ namespace CrossPlatformLibrary.Forms.Controls
         private static void Log(object element, string message)
         {
             var type = element.GetType();
-            Debug.WriteLine($"MinimumHeight for {type.GetFormattedName()}: {message}");
+            Tracer.Current.Debug($"MinimumHeight for {type.GetFormattedName()}: {message}");
         }
     }
 }

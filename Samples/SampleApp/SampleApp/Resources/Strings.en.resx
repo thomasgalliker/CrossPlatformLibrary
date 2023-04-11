@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AutomaticButtonText" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="CancelButtonText" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ClearButtonText" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="CountdownLabelText" xml:space="preserve">
+    <value>Countdown</value>
+  </data>
+  <data name="LoadingText" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="OffButtonText" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="OnButtonText" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="PeriodicTaskCaptionText" xml:space="preserve">
+    <value>PeriodicTaskFactory</value>
+  </data>
+  <data name="SaveButtonText" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="TimerLabelText" xml:space="preserve">
+    <value>Timer</value>
+  </data>
+  <data name="UserAddressCountryLabelText" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="UserAddressPlaceLabelText" xml:space="preserve">
+    <value>Place</value>
+  </data>
+  <data name="UserAddressPostalCodeLabelText" xml:space="preserve">
+    <value>Postal Code</value>
+  </data>
+  <data name="UserAddressStreetLabelText" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="UserProfileAddressCaptionText" xml:space="preserve">
+    <value>Shipping Address</value>
+  </data>
+  <data name="LanguageLabelText" xml:space="preserve">
+    <value>Language</value>
+  </data>
+</root>

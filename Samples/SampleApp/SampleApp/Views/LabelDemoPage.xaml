@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SampleApp.Views.LabelDemoPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cpl="http://superdev.ch/schemas/2020/cpl"
+    Title="CustomLabel Demo">
+
+    <cpl:AlwaysScrollView>
+        <StackLayout VerticalOptions="Start">
+            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo CustomLabel--&gt;" />
+            <Label BackgroundColor="LightGray" Text="Label" />
+            <cpl:CustomLabel BackgroundColor="LightGray" Text="CustomLabel" />
+            <cpl:CustomLabel
+                BackgroundColor="LightCyan"
+                Lines="3"
+                Text="CustomLabel with Lines=&quot;3&quot;" />
+            <cpl:CustomLabel
+                BackgroundColor="LightGreen"
+                RemovePadding="True"
+                Text="CustomLabel with RemovePadding=&quot;True&quot;" />
+            <cpl:CustomLabel
+                BackgroundColor="LightGreen"
+                RemovePadding="False"
+                Text="CustomLabel with RemovePadding=&quot;False&quot;" />
+            <cpl:CustomLabel
+                BackgroundColor="LightGoldenrodYellow"
+                JustifyText="True"
+                LineBreakMode="WordWrap"
+                Text="CustomLabel with JustifyText=&quot;True&quot;: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam."
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="StartAndExpand" />
+            <cpl:CustomLabel
+                BackgroundColor="LightGoldenrodYellow"
+                JustifyText="False"
+                LineBreakMode="WordWrap"
+                Text="CustomLabel with JustifyText=&quot;False&quot;: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam."
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="StartAndExpand" />
+
+
+            <Label Style="{StaticResource DemoLabelStyle}" Text="&lt;!--Demo ValidatableLabel--&gt;" />
+            <cpl:ValidatableLabel
+                BackgroundColor="Transparent"
+                Placeholder="ValidatableLabel Placeholder"
+                Text="ValidatableLabel Text" />
+
+            <cpl:GridZero>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <cpl:ValidatableLabel
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BackgroundColor="Aquamarine"
+                    Placeholder="ValidatableLabel"
+                    Text="ValidatableLabel" />
+                <cpl:ValidatableEntry
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    BackgroundColor="LightGoldenrodYellow"
+                    Placeholder="ValidatableEntry"
+                    Text="ValidatableEntry" />
+                <cpl:ValidatableLabel
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    BackgroundColor="Aquamarine"
+                    Placeholder="ValidatableLabel"
+                    Text="ValidatableLabel" />
+                <cpl:ValidatableEntry
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    BackgroundColor="LightGoldenrodYellow"
+                    IsReadonly="True"
+                    Placeholder="ValidatableEntry"
+                    Text="ValidatableEntry IsReadonly=&quot;True&quot;" />
+            </cpl:GridZero>
+
+            <cpl:ValidatableLabel
+                BackgroundColor="LightBlue"
+                Placeholder="ValidatableLabel Placeholder"
+                Text="ValidatableLabel with custom LabelStyle which sets LineBreakMode to &quot;WordWrap&quot;&#x0a;Multiple lines of text&#x0a;Line 3: More text">
+                <cpl:ValidatableLabel.LabelStyle>
+                    <Style BaseResourceKey="EntryLabelStyle" TargetType="Label">
+                        <Setter Property="LineBreakMode" Value="WordWrap" />
+                    </Style>
+                </cpl:ValidatableLabel.LabelStyle>
+            </cpl:ValidatableLabel>
+        </StackLayout>
+    </cpl:AlwaysScrollView>
+</ContentPage>

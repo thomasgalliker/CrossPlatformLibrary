@@ -1,5 +1,5 @@
 ﻿using System;
-using CrossPlatformLibrary.Forms.Controls;
+using CrossPlatformLibrary.Forms.Extensions;
 using Xamarin.Forms;
 
 namespace CrossPlatformLibrary.Forms.Behaviors
@@ -12,23 +12,23 @@ namespace CrossPlatformLibrary.Forms.Behaviors
     /// <example>
     /// <Entry Placeholder="Entry 1">
     ///     <Entry.Behaviors>
-    ///         <behaviors:EntryFocusBehavior TargetElement="{x:Reference Entry2}" />
+    ///         <behaviors:EntryCompletedBehavior TargetElement="{x:Reference Entry2}" />
     /// </Entry.Behaviors >
     /// </Entry >
     /// 
-    /// <Entry Placeholder="Entry 1">
+    /// <Entry Placeholder="Entry 2">
     ///     <Entry.Behaviors>
-    ///         <behaviors:EntryFocusBehavior TargetElementName="Entry2" />
+    ///         <behaviors:EntryCompletedBehavior TargetElementName="Entry2" />
     /// </Entry.Behaviors >
     /// </Entry >
     /// </example>
-    public class EntryFocusBehavior : BehaviorBase<VisualElement>
+    public class EntryCompletedBehavior : BehaviorBase<VisualElement>
     {
         public static readonly BindableProperty TargetElementProperty =
             BindableProperty.Create(
                 nameof(TargetElement),
                 typeof(VisualElement),
-                typeof(EntryFocusBehavior));
+                typeof(EntryCompletedBehavior));
 
         public VisualElement TargetElement
         {
@@ -88,37 +88,6 @@ namespace CrossPlatformLibrary.Forms.Behaviors
                     }
                 }
             }
-        }
-    }
-
-    internal static class VisualElementExtensions
-    {
-        internal static Entry AsEntry(this VisualElement bindable)
-        {
-            if (bindable is Entry entry)
-            {
-                return entry;
-            }
-            else if (bindable is ValidatableEntry validatableEntry)
-            {
-                return validatableEntry.Entry;
-            }
-
-            return null;
-        }
-
-        internal static VisualElement AsVisualElement(this VisualElement bindable)
-        {
-            if (bindable is VisualElement visualElement)
-            {
-                return visualElement;
-            }
-            else if (bindable is ValidatableEntry validatableEntry)
-            {
-                return validatableEntry.Entry;
-            }
-
-            return null;
         }
     }
 }

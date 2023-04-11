@@ -5,7 +5,7 @@ using Xamarin.Forms.Xaml;
 namespace SampleApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CountryViewCell : ExtendedViewCell
+    public partial class CountryViewCell : ViewCell
     {
         public CountryViewCell()
         {

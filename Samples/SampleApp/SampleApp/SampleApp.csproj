@@ -1,39 +1,43 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup Label="MultilingualAppToolkit">
+    <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
+    <MultilingualFallbackLanguage>sv</MultilingualFallbackLanguage>
+    <TranslationReport Condition="'$(Configuration)' == 'Release'">true</TranslationReport>
+    <SuppressPseudoWarning Condition="'$(Configuration)' == 'Debug'">true</SuppressPseudoWarning>
+  </PropertyGroup>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
-
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\v$(MultilingualAppToolkitVersion)\Microsoft.Multilingual.ResxResources.targets')" />
+  <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" Label="MultilingualAppToolkit">
+    <Warning Text="$(MSBuildProjectFile) is Multilingual build enabled, but the Multilingual App Toolkit is unavailable during the build. If building with Visual Studio, please check to ensure that toolkit is properly installed." />
+  </Target>
   <ItemGroup>
     <None Remove="Resources\Images\camera_outline_black_192.png" />
     <None Remove="Resources\Images\chevron_right_grey_192x192.png" />
     <None Remove="Resources\Images\rectangle_magenta_192.png" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\rectangle_magenta_192.png" />
     <EmbeddedResource Include="Resources\Images\camera_outline_black_192.png" />
     <EmbeddedResource Include="Resources\Images\chevron_right_grey_192x192.png" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="ObjectDumper.NET" Version="3.0.20251.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="ObjectDumper.NET" Version="3.3.13" />
     <PackageReference Include="ValueConverters.Forms" Version="2.0.20011.1" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1179" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\..\CrossPlatformLibrary.Forms\CrossPlatformLibrary.Forms.csproj" />
     <ProjectReference Include="..\..\..\CrossPlatformLibrary\CrossPlatformLibrary.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Controls\PeriodicTaskView.xaml.cs">
       <DependentUpon>PeriodicTaskView.xaml</DependentUpon>
@@ -41,11 +45,20 @@
     <Compile Update="Controls\NotesView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="Resources\Strings.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Strings.resx</DependentUpon>
-    </Compile>
+	  <Compile Update="Resources\Strings.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>Strings.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\LabelDemoPage.xaml.cs">
+	    <DependentUpon>LabelDemoPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\EntryPage.xaml.cs">
+	    <DependentUpon>EntryPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\AutoCompletePage.xaml.cs">
+	    <DependentUpon>AutoCompletePage.xaml</DependentUpon>
+	  </Compile>
     <Compile Update="Views\SwitchesPage.xaml.cs">
       <DependentUpon>SwitchesPage.xaml</DependentUpon>
     </Compile>
@@ -62,7 +75,6 @@
       <DependentUpon>CardViewPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Update="Controls\PeriodicTaskView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -77,14 +89,31 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\BehaviorDemoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\CountryViewCell.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LabelDemoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ListViewDemoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MultiStateToggleButtonDemoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\SegmentedStatusIndicatorPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\TabbedMainPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ToggleViewDemoPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
     <None Update="App.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -101,9 +130,5 @@
     <None Update="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\SegmentedStatusIndicator\" />
   </ItemGroup>
 </Project>

@@ -130,6 +130,29 @@ namespace CrossPlatformLibrary.Tests.Extensions
         }
 
         [Theory]
+        [ClassData(typeof(TrimWhitespacesTestData))]
+        public void ShouldTrimWhitespaces(string input, string expectedOutput)
+        {
+            // Act
+            var output = input.TrimWhitespaces();
+
+            // Assert
+            output.Should().Be(expectedOutput);
+        }
+
+        public class TrimWhitespacesTestData : TheoryData<string, string>
+        {
+            public TrimWhitespacesTestData()
+            {
+                this.Add($"", "");
+                this.Add($" ", "");
+                this.Add($"  ", "");
+                this.Add($"test", "test");
+                this.Add($"  A  and     B   ", "A and B");
+            }
+        }
+
+        [Theory]
         [ClassData(typeof(RemoveEmptyLinesTestData))]
         public void ShouldRemoveEmptyLines(string input, string expectedOutput)
         {

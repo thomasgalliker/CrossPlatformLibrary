@@ -35,7 +35,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
         }
 
         [Fact]
-        public void ShouldThrowIfNoValidationsExist()
+        public async Task ShouldThrowIfNoValidationsExist()
         {
             // Arrange
             var testViewModel = new NoValidationsTestViewModel();
@@ -44,7 +44,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
             Func<Task> action = async () => await testViewModel.Validation.IsValidAsync();
 
             // Assert
-            action.Should().Throw<InvalidOperationException>();
+            await action.Should().ThrowAsync<InvalidOperationException>();
         }
 
         [Fact]
@@ -276,7 +276,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
         }
 
         [Fact]
-        public void ShouldAddDelegateValidation_IsValidThrowsException()
+        public async Task ShouldAddDelegateValidation_IsValidThrowsException()
         {
             // Arrange
             this.validationServiceMock.Setup(v => v.ValidatePersonAsync(It.IsAny<PersonDto>()))
@@ -292,7 +292,7 @@ namespace CrossPlatformLibrary.Forms.Tests.Validation
             Func<Task> action = async () => await testViewModel.Validation.IsValidAsync();
 
             // Assert
-            action.Should().Throw<NotSupportedException>().Which.Message.Should().Contain("Test exception");
+            (await action.Should().ThrowAsync<NotSupportedException>()).Which.Message.Should().Contain("Test exception");
         }
 
         [Fact]

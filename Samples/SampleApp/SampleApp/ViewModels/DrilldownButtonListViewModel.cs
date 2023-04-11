@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using CrossPlatformLibrary.Dispatching;
 using CrossPlatformLibrary.Forms.Controls;
 using CrossPlatformLibrary.Forms.Mvvm;
 using CrossPlatformLibrary.Mvvm;
@@ -97,7 +96,7 @@ namespace SampleApp.ViewModels
             {
                 if (this.SetProperty(ref this.isToggled, value, nameof(this.IsToggled)))
                 {
-                    if(this.IsNotBusy)
+                    if (this.IsNotBusy)
                     {
                         this.displayService.DisplayAlert(this.Title, $"IsToggled={this.IsToggled}");
                     }

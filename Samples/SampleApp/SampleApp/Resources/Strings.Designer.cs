@@ -70,11 +70,38 @@ namespace SampleApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string CancelButtonText {
+            get {
+                return ResourceManager.GetString("CancelButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        internal static string ClearButtonText {
+            get {
+                return ResourceManager.GetString("ClearButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Countdown.
         /// </summary>
         internal static string CountdownLabelText {
             get {
                 return ResourceManager.GetString("CountdownLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        internal static string LanguageLabelText {
+            get {
+                return ResourceManager.GetString("LanguageLabelText", resourceCulture);
             }
         }
         

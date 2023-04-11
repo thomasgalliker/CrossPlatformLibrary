@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using CrossPlatformLibrary.Forms.Effects;
+using CrossPlatformLibrary.Internals;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using EditorLineColorEffect = CrossPlatformLibrary.Forms.Android.Effects.EditorLineColorEffect;
@@ -23,7 +24,7 @@ namespace CrossPlatformLibrary.Forms.Android.Effects
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Tracer.Current.Exception(ex, "EditorLineColorEffect.OnAttached failed with exception");
             }
         }
 
@@ -52,7 +53,7 @@ namespace CrossPlatformLibrary.Forms.Android.Effects
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Tracer.Current.Exception(ex, "UpdateLineColor failed with exception");
             }
         }
     }
