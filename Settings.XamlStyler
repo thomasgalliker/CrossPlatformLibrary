@@ -1,5 +1,11 @@
+/////////////////////////////////////////////////////////////////////
+// XamlStyler Configuration (Updated 2023-04-12)
+//
+// (c)2023 superdev GmbH
+/////////////////////////////////////////////////////////////////////
+
 {
-  "AttributesTolerance": 2,
+  "AttributesTolerance": 1,
   "KeepFirstAttributeOnSameLine": false,
   "MaxAttributeCharactersPerLine": 0,
   "MaxAttributesPerLine": 1,
@@ -39,5 +45,5 @@
   "ThicknessSeparator": 2,
   "ThicknessAttributes": "Margin, Padding, BorderThickness, ThumbnailClipMargin",
   "FormatOnSave": true,
-  "CommentPadding": 2,
+  "CommentPadding": 1
 }
